@@ -126,3 +126,35 @@ body::before{background:radial-gradient(ellipse at 50% 30%,#2a0a22,#07020a 70%)!
 .czframe{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:1;opacity:.95}
 #czWheel .czwbox{position:relative;z-index:2}
 #czWheel .czframe{z-index:0}
+/* v17.1 mobile fixes */
+@media (max-width:620px){
+ .wrap{margin-top:0!important;min-height:0!important}
+ html,body{min-height:100svh}
+ .machine{min-height:100svh;min-height:100dvh;padding-top:env(safe-area-inset-top)!important}
+ .czbar{flex:1 1 auto;justify-content:space-evenly!important;padding-bottom:calc(6px + env(safe-area-inset-bottom))!important}
+ .czbar{position:relative!important}
+ .czbar{display:grid!important;grid-template-columns:auto 1fr;align-content:space-evenly;column-gap:6px}
+ .czbar .czC{grid-column:1/-1}
+ .czbar .czL{position:static!important;width:auto!important}
+ .czbar .czR{padding-left:0!important;width:auto!important}
+ .czbar .czL,.czbar .czR{display:flex}
+}
+@media (max-width:620px) and (min-aspect-ratio:9/17) and (max-aspect-ratio:3/4){}
+/* v17.1 themed portrait fill */
+html{background:var(--czth,#1a0618)}
+@media (max-width:620px){
+ body{background:transparent!important}
+ body::before{position:fixed!important;inset:0!important;background:linear-gradient(rgba(0,0,0,0) 40%,rgba(0,0,0,.25)),var(--czbgp) center/cover no-repeat!important;opacity:1!important;z-index:-2!important;content:""!important;display:block!important}
+ body::after{content:""!important;display:block!important;position:fixed!important;inset:0;z-index:-1!important;pointer-events:none;background:radial-gradient(circle,rgba(255,210,150,.55) 0 1.5px,transparent 2.5px) 0 0/90px 110px,radial-gradient(circle,rgba(255,140,200,.45) 0 1px,transparent 2px) 40px 60px/70px 90px;animation:czamb 22s linear infinite;opacity:.6}
+ .czbar{background:linear-gradient(rgba(10,3,10,.15),rgba(10,3,10,.55))!important}
+ .cznote{background:transparent!important}
+ .machine{background:none!important}
+}
+@media (max-width:620px) and (min-height:700px){
+ .czbar .spin{width:112px!important;height:112px!important}
+ .czbar .controls #minus,.czbar .controls #plus{width:62px!important;height:62px!important}
+ .czm,.czbar .box{height:54px!important}.czm b{font-size:23px}
+ .czbtn,.czbar #max16,.czbar #menuBtn{height:48px;font-size:14px}
+}
+@keyframes czamb{to{background-position:0 -440px,40px -300px}}
+@media (prefers-reduced-motion:reduce){body::after{animation:none!important}}
