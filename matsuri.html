@@ -101,7 +101,7 @@ body[data-skin="obsidian"]{--acc:#ff6a1a;--acc2:#ffb000;--acc3:#ff2a00;--chrome1
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#020207}
 body{min-height:100vh;font-family:"Noto Sans TC","Noto Sans JP","PingFang TC","Microsoft JhengHei",sans-serif;color:#fff;background:#020207;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;padding:max(6px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));-webkit-tap-highlight-color:transparent}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/key.webp?v=178) center top/auto max(100%,1024px) no-repeat,#020207;opacity:.9}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/key.webp?v=179) center top/auto max(100%,1024px) no-repeat,#020207;opacity:.9}
 body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 30%,rgba(0,0,0,.75) 85%),radial-gradient(ellipse at 50% 0%,rgba(var(--glow),.22),transparent 55%)}
 h1{position:relative;margin:2px 0 0;font:900 italic clamp(22px,5.2vw,34px)/1.05 "Arial Black","Noto Sans TC",sans-serif;letter-spacing:2px;transform:skewX(-10deg);color:#fff;background:linear-gradient(180deg,#fff 0%,#fff 42%,var(--acc2) 52%,#ff7a00 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:1px rgba(0,0,0,.4);filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 10px rgba(var(--glow),.7))}
 h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);letter-spacing:1px}
@@ -127,7 +127,7 @@ h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);lette
 .lcd .idle b{font:900 italic clamp(22px,5vw,34px)/1 "Arial Black",sans-serif;transform:skewX(-12deg);letter-spacing:1px;background:linear-gradient(#fff,#fff 45%,var(--acc2) 55%,#ff6a00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 8px rgba(var(--glow),.8))}
 .lcd .idle span{font-size:11px;letter-spacing:4px;color:#9fb0d6}
 .lcd .stage{position:absolute;inset:0;z-index:4;pointer-events:none}
-.lcd .ci{position:absolute;inset:0;background:url(assets/matsuri/cutin.webp?v=178) 20% 30%/cover;transform:translateX(-105%) skewX(-12deg);opacity:0;will-change:transform,opacity}
+.lcd .ci{position:absolute;inset:0;background:url(assets/matsuri/cutin.webp?v=179) 20% 30%/cover;transform:translateX(-105%) skewX(-12deg);opacity:0;will-change:transform,opacity}
 .lcd.reach .ci{animation:ciIn .45s cubic-bezier(.2,1.4,.4,1) forwards}
 @keyframes ciIn{0%{transform:translateX(-105%) skewX(-12deg);opacity:1}100%{transform:translateX(0) skewX(0);opacity:1}}
 .lcd .speed{position:absolute;inset:-20%;background:repeating-conic-gradient(from 0deg at 30% 50%,rgba(255,255,255,.0) 0 3deg,rgba(255,255,255,.35) 3deg 3.6deg,rgba(255,255,255,0) 3.6deg 9deg);opacity:0;will-change:transform,opacity}
@@ -141,7 +141,7 @@ h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);lette
 .kitai.on{opacity:1}
 .kitai i{width:14px;height:14px;border-radius:50%;background:var(--k);box-shadow:0 0 8px var(--k)}
 .kitai.rainbow i{background:conic-gradient(red,orange,yellow,lime,cyan,blue,magenta,red)}
-.lcd .seven{position:absolute;inset:0;z-index:8;background:url(assets/matsuri/bigbonus.webp?v=178) center/cover;opacity:0;transform:scale(1.4);will-change:transform,opacity}
+.lcd .seven{position:absolute;inset:0;z-index:8;background:url(assets/matsuri/bigbonus.webp?v=179) center/cover;opacity:0;transform:scale(1.4);will-change:transform,opacity}
 .lcd.bonus .seven{animation:sevenIn .5s cubic-bezier(.2,1.3,.4,1) forwards}
 @keyframes sevenIn{to{opacity:1;transform:scale(1)}}
 .lcd .navi{position:absolute;left:50%;top:8px;transform:translateX(-50%);z-index:6;font:700 12px sans-serif;letter-spacing:2px;color:#fff;background:linear-gradient(90deg,transparent,rgba(var(--glow),.7),transparent);padding:2px 40px;white-space:nowrap}
@@ -217,7 +217,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .bw{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#000;cursor:pointer;overflow:hidden;contain:strict}
 .bw.show{display:flex;animation:bwIn .25s ease-out}
 @keyframes bwIn{from{opacity:0}}
-.bw .art{position:absolute;inset:0;background:url(assets/matsuri/bigbonus.webp?v=178) center/cover;opacity:.55;transform:scale(1.15);animation:artZoom 6s ease-out forwards;will-change:transform}
+.bw .art{position:absolute;inset:0;background:url(assets/matsuri/bigbonus.webp?v=179) center/cover;opacity:.55;transform:scale(1.15);animation:artZoom 6s ease-out forwards;will-change:transform}
 @keyframes artZoom{to{transform:scale(1)}}
 .bw .rays{display:none;position:absolute;left:50%;top:45%;width:150vmax;height:150vmax;margin:-75vmax 0 0 -75vmax;background:repeating-conic-gradient(rgba(var(--glow),.28) 0 6deg,transparent 6deg 15deg);border-radius:50%;animation:rot 10s linear infinite;will-change:transform;opacity:.8}
 .bw .vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.35) 20%,rgba(0,0,0,.9) 85%)}
@@ -293,7 +293,7 @@ body.fs-mode .lcd .scr{background:radial-gradient(ellipse at 50% 120%,rgba(176,5
 @media (max-width:340px){h1 .jp{display:none}.lcd{height:80px}.spin{width:76px;height:76px}.row2 button{font-size:9.5px}}
 @media (min-width:381px) and (max-width:480px) and (min-height:760px){.lcd{height:120px}.spin{width:100px;height:100px}}
 /* ===== v15 恋する夜のスロット♡ art direction ===== */
-@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff?v=178) format("woff");font-display:swap}
+@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff?v=179) format("woff");font-display:swap}
 :root{--acc:#ff4fa3;--acc2:#ffd27a;--acc3:#ff8fc8;--glow:255,79,163;--gold1:#fff0c2;--gold2:#d9a441;--gold3:#7a5418;--hero-h:clamp(430px,62vh,620px);--hero-top:-4vh;--hero-space:clamp(230px,37vh,320px);--tint:transparent}
 body[data-skin="neon"]{--acc:#6fa8ff;--acc3:#a8c8ff;--glow:111,168,255;--tint:rgba(40,70,200,.28)}
 body[data-skin="jade"]{--acc:#ff9cc8;--acc3:#ffd0e4;--glow:255,156,200;--tint:rgba(255,150,200,.22)}
@@ -302,9 +302,9 @@ body[data-skin="royal"]{--acc:#c07cff;--acc3:#e2c2ff;--glow:192,124,255;--tint:r
 body[data-skin="obsidian"]{--acc:#ff8a4a;--acc3:#ffc49a;--glow:255,138,74;--tint:rgba(255,120,40,.26)}
 html{background:#0a0614}
 body{background:transparent;font-family:"Noto Sans TC","Noto Sans CJK TC",sans-serif}
-body::before{content:"";position:fixed;inset:-30px;z-index:-3;background:url(assets/key_bg.webp?v=178) center 20%/cover no-repeat;opacity:1}
+body::before{content:"";position:fixed;inset:-30px;z-index:-3;background:url(assets/key_bg.webp?v=179) center 20%/cover no-repeat;opacity:1}
 body::after{background:radial-gradient(ellipse at 50% 30%,transparent 35%,rgba(5,2,12,.55) 75%),radial-gradient(circle at 12% 70%,rgba(var(--glow),.18),transparent 22%),radial-gradient(circle at 88% 65%,rgba(255,210,122,.14),transparent 20%);z-index:-1}
-.hero{position:absolute;left:50%;top:var(--hero-top);height:var(--hero-h);aspect-ratio:16/9;transform:translateX(-50%);z-index:-2;background:url(assets/key.webp?v=178) center top/100% 100% no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(#000 70%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent) intersect,linear-gradient(#000 70%,transparent);pointer-events:none}
+.hero{position:absolute;left:50%;top:var(--hero-top);height:var(--hero-h);aspect-ratio:16/9;transform:translateX(-50%);z-index:-2;background:url(assets/key.webp?v=179) center top/100% 100% no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(#000 70%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent) intersect,linear-gradient(#000 70%,transparent);pointer-events:none}
 .hero::after{content:"";position:absolute;inset:0;background:var(--tint);mix-blend-mode:color}
 .bokeh{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 8% 22%,rgba(255,150,200,.35) 0 6px,transparent 7px),radial-gradient(circle at 15% 48%,rgba(255,210,140,.3) 0 4px,transparent 5px),radial-gradient(circle at 90% 18%,rgba(255,150,200,.3) 0 8px,transparent 9px),radial-gradient(circle at 85% 42%,rgba(255,220,160,.28) 0 5px,transparent 6px),radial-gradient(circle at 5% 80%,rgba(255,120,190,.25) 0 10px,transparent 11px),radial-gradient(circle at 95% 78%,rgba(255,200,140,.22) 0 9px,transparent 10px)}
 /* logo */
@@ -326,7 +326,7 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 .lcd{position:absolute;left:-10px;right:-10px;bottom:calc(100% + 12px);height:calc(var(--hero-space) - 30px);margin:0;background:none;box-shadow:none;border-radius:14px;contain:layout paint style;pointer-events:none}
 .lcd .scr,.lcd .grid,.lcd .scan,.lcd .gloss,.lcd .idle{display:none}
 .lcd .navi{top:auto;bottom:4px;opacity:0}
-.lcd .ci{background-image:url(assets/matsuri/cutin.webp?v=178);border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 24px rgba(var(--glow),.8)}
+.lcd .ci{background-image:url(assets/matsuri/cutin.webp?v=179);border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 24px rgba(var(--glow),.8)}
 .lcd .seven{border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 30px rgba(var(--glow),.9)}
 .lcd .speed{border-radius:14px}
 .lcd.reach .speed,.lcd.bonus .speed{opacity:.35}
@@ -368,7 +368,7 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 .badges div small{display:block;font:700 11px sans-serif;letter-spacing:2px;color:var(--gold1);margin-top:3px}
 .badges div::before{content:"♛";display:block;font-size:14px;color:var(--gold2);margin-bottom:2px;font-style:normal}
 /* big win overlay */
-.bw .art{background-image:url(assets/matsuri/bigbonus.webp?v=178);opacity:.75}
+.bw .art{background-image:url(assets/matsuri/bigbonus.webp?v=179);opacity:.75}
 .bw .vig{background:radial-gradient(ellipse at 50% 55%,rgba(40,0,30,.25) 20%,rgba(10,0,10,.85) 85%)}
 .bw .tier{color:#fff;text-shadow:0 4px 0 #d6307e,0 8px 0 #5a0a30,0 0 30px rgba(255,100,180,.95)}
 .bw.mega .tier{color:#ffe9b0;text-shadow:0 4px 0 #c07a10,0 8px 0 #4a2a00,0 0 30px rgba(255,200,100,.95)}
@@ -394,12 +394,12 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 :root{--W:min(100vw,calc((100vh - 64px) * 1280 / 720));--bar:64px}
 html,body{margin:0;padding:0!important;overflow-x:hidden}
 body{background:#050208!important}
-body::before{background:url(assets/matsuri/bg.webp?v=178) center/cover no-repeat!important;inset:0!important;opacity:1!important}
+body::before{background:url(assets/matsuri/bg.webp?v=179) center/cover no-repeat!important;inset:0!important;opacity:1!important}
 body::after{display:none!important}
 .hero,.bokeh,h1.logo,.flav,.badges,.lights,.led,.kbd,.machine::before,.machine::after,.board::after,.info .box small,.lcd .fsc~.scr{display:none!important}
 .wrap{margin:0!important;display:flex;justify-content:center;align-items:flex-start;min-height:100vh}
 .machine{width:var(--W)!important;max-width:none!important;margin:0!important;padding:0 0 var(--bar)!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}
-.inner{position:relative!important;width:var(--W);aspect-ratio:1280/720;padding:0!important;background:url(assets/matsuri/base.webp?v=178) 0 0/100% 100% no-repeat!important;container-type:inline-size;border-radius:0!important}
+.inner{position:relative!important;width:var(--W);aspect-ratio:1280/720;padding:0!important;background:url(assets/matsuri/base.webp?v=179) 0 0/100% 100% no-repeat!important;container-type:inline-size;border-radius:0!important}
 .board{position:absolute!important;left:16.790%;top:38.929%;width:66.790%;height:42.842%;padding:0!important;gap:0!important;display:block!important;background:none!important;box-shadow:none!important;border-radius:0!important;margin:0!important;overflow:visible!important}
 .reel{position:absolute!important;top:0;height:100%!important;--c:8.5597cqw!important;background:#0b0810!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
 .reel:nth-child(1){left:0;width:19.686%}.reel:nth-child(2){left:20.240%;width:19.224%}.reel:nth-child(3){left:40.018%;width:19.501%}.reel:nth-child(4){left:60.074%;width:19.316%}.reel:nth-child(5){left:79.945%;width:20.055%}
@@ -420,7 +420,7 @@ body::after{display:none!important}
 .msg::after{content:" ♡";color:#ff8fc8;margin-left:.3em}
 /* cut-in stage over the heroine */
 .lcd{position:absolute!important;left:18%!important;right:auto!important;top:1.5%!important;bottom:auto!important;width:64%!important;height:36%!important;margin:0!important;z-index:6;pointer-events:none}
-.lcd .ci{background:url(assets/matsuri/cutin.webp?v=178) 50% 35%/cover!important;border-radius:1cqw!important;box-shadow:0 0 0 .2cqw #d9a441,0 0 2cqw rgba(255,79,163,.9)!important}
+.lcd .ci{background:url(assets/matsuri/cutin.webp?v=179) 50% 35%/cover!important;border-radius:1cqw!important;box-shadow:0 0 0 .2cqw #d9a441,0 0 2cqw rgba(255,79,163,.9)!important}
 @keyframes ci16{0%{transform:scale(1.6);opacity:0;filter:brightness(3) saturate(.4)}35%{opacity:1;filter:brightness(1.8) saturate(1.2)}100%{transform:scale(1);opacity:1;filter:none}}
 .lcd.reach .ci{animation:ci16 .5s cubic-bezier(.2,1.2,.4,1) forwards!important}
 .lcd .seven{border-radius:1cqw!important;background-position:50% 30%!important}
@@ -451,7 +451,7 @@ dialog .days li.today,dialog .days li.on{border-color:#ff7ac8!important;box-shad
 dialog button.claim,dialog .claim{background:linear-gradient(#ffb3dc,#ff4fa3 55%,#a3105a)!important;color:#fff!important;border:1px solid #ffd27a!important;box-shadow:0 0 14px rgba(255,79,163,.7)!important;text-shadow:0 1px 0 #6a0030}
 dialog button{border-color:#d9a441!important}
 .bw{background:radial-gradient(ellipse at center,rgba(60,10,40,.55),rgba(10,2,8,.92))!important}
-.bw .art{background:url(assets/matsuri/bigbonus.webp?v=178) 50% 30%/cover!important}
+.bw .art{background:url(assets/matsuri/bigbonus.webp?v=179) 50% 30%/cover!important}
 @keyframes bw16{0%{transform:scale(1.5);filter:brightness(3)}30%{filter:brightness(1.6)}100%{transform:scale(1);filter:none}}
 .bw.on .art,.bw.show .art{animation:bw16 .7s ease-out both}
 /* mobile: art full width, controls below */
@@ -483,8 +483,8 @@ dialog button{border-color:#d9a441!important}
 .info .box:nth-child(3){left:85.938%!important;top:87.222%!important;width:7.031%!important;height:8.889%!important;right:auto!important;bottom:auto!important}
 .msg{left:19.531%!important;top:86.389%!important;width:61.719%!important;height:8.056%!important;right:auto!important;bottom:auto!important}
 .lcd{left:19.531%!important;top:1.111%!important;width:63.281%!important;height:37.778%!important;right:auto!important;bottom:auto!important}
-:root{--cz-acc:#ff5a3c;--ar:1280/720;--czbg:url(assets/matsuri/bg.webp?v=178)}.strip.mb .cell .sym[data-v="fan"]{content:url(assets/matsuri/t_fan_b.webp?v=178)}.strip.mb .cell .sym[data-v="fan2"]{content:url(assets/matsuri/t_fan2_b.webp?v=178)}.strip.mb .cell .sym[data-v="lantern"]{content:url(assets/matsuri/t_lantern_b.webp?v=178)}.strip.mb .cell .sym[data-v="lantern2"]{content:url(assets/matsuri/t_lantern2_b.webp?v=178)}.strip.mb .cell .sym[data-v="bowl"]{content:url(assets/matsuri/t_bowl_b.webp?v=178)}.strip.mb .cell .sym[data-v="daruma"]{content:url(assets/matsuri/t_daruma_b.webp?v=178)}.strip.mb .cell .sym[data-v="kitsune"]{content:url(assets/matsuri/t_kitsune_b.webp?v=178)}.strip.mb .cell .sym[data-v="kitsune2"]{content:url(assets/matsuri/t_kitsune2_b.webp?v=178)}.strip.mb .cell .sym[data-v="fireworks"]{content:url(assets/matsuri/t_fireworks_b.webp?v=178)}.strip.mb .cell .sym[data-v="taiko"]{content:url(assets/matsuri/t_taiko_b.webp?v=178)}.strip.mb .cell .sym[data-v="taiko2"]{content:url(assets/matsuri/t_taiko2_b.webp?v=178)}.strip.mb .cell .sym[data-v="sake"]{content:url(assets/matsuri/t_sake_b.webp?v=178)}.strip.mb .cell .sym[data-v="woman"]{content:url(assets/matsuri/t_woman_b.webp?v=178)}.strip.mb .cell .sym[data-v="wild"]{content:url(assets/matsuri/t_wild_b.webp?v=178)}.strip.mb .cell .sym[data-v="goldfish"]{content:url(assets/matsuri/t_goldfish_b.webp?v=178)}.strip.mb .cell .sym[data-v="scatter"]{content:url(assets/matsuri/t_scatter_b.webp?v=178)}
-</style><link rel="stylesheet" href="casino.css?v=178"><style>:root{--czbgp:url(assets/matsuri/bgp.webp?v=178);--czth:#0a0a22}</style></head><body><div id="czLoad"><div class="czlt">夏祭り恋花火</div><div class="czlbar"><i></i></div><div class="czls">LOADING…</div><div class="cznote2">僅供娛樂・虛擬籌碼・無真實金錢</div></div>
+:root{--cz-acc:#ff5a3c;--ar:1280/720;--czbg:url(assets/matsuri/bg.webp?v=179)}.strip.mb .cell .sym[data-v="fan"]{content:url(assets/matsuri/t_fan_b.webp?v=179)}.strip.mb .cell .sym[data-v="fan2"]{content:url(assets/matsuri/t_fan2_b.webp?v=179)}.strip.mb .cell .sym[data-v="lantern"]{content:url(assets/matsuri/t_lantern_b.webp?v=179)}.strip.mb .cell .sym[data-v="lantern2"]{content:url(assets/matsuri/t_lantern2_b.webp?v=179)}.strip.mb .cell .sym[data-v="bowl"]{content:url(assets/matsuri/t_bowl_b.webp?v=179)}.strip.mb .cell .sym[data-v="daruma"]{content:url(assets/matsuri/t_daruma_b.webp?v=179)}.strip.mb .cell .sym[data-v="kitsune"]{content:url(assets/matsuri/t_kitsune_b.webp?v=179)}.strip.mb .cell .sym[data-v="kitsune2"]{content:url(assets/matsuri/t_kitsune2_b.webp?v=179)}.strip.mb .cell .sym[data-v="fireworks"]{content:url(assets/matsuri/t_fireworks_b.webp?v=179)}.strip.mb .cell .sym[data-v="taiko"]{content:url(assets/matsuri/t_taiko_b.webp?v=179)}.strip.mb .cell .sym[data-v="taiko2"]{content:url(assets/matsuri/t_taiko2_b.webp?v=179)}.strip.mb .cell .sym[data-v="sake"]{content:url(assets/matsuri/t_sake_b.webp?v=179)}.strip.mb .cell .sym[data-v="woman"]{content:url(assets/matsuri/t_woman_b.webp?v=179)}.strip.mb .cell .sym[data-v="wild"]{content:url(assets/matsuri/t_wild_b.webp?v=179)}.strip.mb .cell .sym[data-v="goldfish"]{content:url(assets/matsuri/t_goldfish_b.webp?v=179)}.strip.mb .cell .sym[data-v="scatter"]{content:url(assets/matsuri/t_scatter_b.webp?v=179)}
+</style><link rel="stylesheet" href="casino.css?v=179"><link rel="stylesheet" href="gallery.css?v=179"><style>:root{--czbgp:url(assets/matsuri/bgp.webp?v=179);--czth:#0a0a22}</style></head><body><div id="czLoad"><div class="czlt">夏祭り恋花火</div><div class="czlbar"><i></i></div><div class="czls">LOADING…</div><div class="cznote2">僅供娛樂・虛擬籌碼・無真實金錢</div></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <radialGradient id="gCherry" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#ff8a9a"/><stop offset=".45" stop-color="#e0102f"/><stop offset="1" stop-color="#6d0012"/></radialGradient>
 <radialGradient id="gLemon" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fffbd0"/><stop offset=".5" stop-color="#ffe03a"/><stop offset="1" stop-color="#c99400"/></radialGradient>
@@ -1064,4 +1064,4 @@ const txt='リーチ!!ドキドキ…♡激アツ!!チャンス!BIG BONUS FREE S
 </script><script>(()=>{const $=id=>document.getElementById(id);const mb=$('menuBtn');mb.onclick=e=>{e.stopPropagation();const o=document.body.classList.toggle('menu16');mb.setAttribute('aria-expanded',o)};
 $('max16').onclick=()=>$('maxBtn').click();document.addEventListener('click',e=>{if(document.body.classList.contains('menu16')&&!e.target.closest('#menu16')&&e.target!==mb){document.body.classList.remove('menu16');mb.setAttribute('aria-expanded',false)}});
 $('menu16').addEventListener('click',e=>{if(e.target.closest('button')&&!e.target.closest('#soundBtn')){document.body.classList.remove('menu16');mb.setAttribute('aria-expanded',false)}});
-const fit=el=>{const l=String(el.textContent).length;if(el.dataset.l!=l)el.dataset.l=l};['bal','win'].forEach(id=>{const el=$(id);fit(el);new MutationObserver(()=>fit(el)).observe(el,{childList:true,characterData:true,subtree:true})})})()</script><script>window.CZM={"id": "matsuri", "name": "夏祭り恋花火", "buy": 18, "rtp": 96.06, "buyRtp": 96.88, "fsm": 2}</script><script>CZM.who="夏美";CZM.voice={"yokoku": ["花火、上がりそう…！", "お祭りの予感！"], "reach": ["リーチ！金魚さん、お願い！", "あと一つ！"], "hot": ["大玉花火、来るよ！！", "激アツ！"], "win": ["たまや〜！", "やったぁ！"], "lose": ["次の花火に期待！", "惜しい〜"], "kakutei": ["大当たり花火、確定！！"]}</script><script src="casino.js?v=178"></script><script src="minigame.js?v=178"></script><script src="enshutsu.js?v=178"></script></body></html>
+const fit=el=>{const l=String(el.textContent).length;if(el.dataset.l!=l)el.dataset.l=l};['bal','win'].forEach(id=>{const el=$(id);fit(el);new MutationObserver(()=>fit(el)).observe(el,{childList:true,characterData:true,subtree:true})})})()</script><script>window.CZM={"id": "matsuri", "name": "夏祭り恋花火", "buy": 18, "rtp": 96.06, "buyRtp": 96.88, "fsm": 2}</script><script>CZM.who="夏美";CZM.voice={"yokoku": ["花火、上がりそう…！", "お祭りの予感！"], "reach": ["リーチ！金魚さん、お願い！", "あと一つ！"], "hot": ["大玉花火、来るよ！！", "激アツ！"], "win": ["たまや〜！", "やったぁ！"], "lose": ["次の花火に期待！", "惜しい〜"], "kakutei": ["大当たり花火、確定！！"]}</script><script src="casino.js?v=179"></script><script src="gallery.js?v=179"></script><script src="minigame.js?v=179"></script><script src="enshutsu.js?v=179"></script></body></html>

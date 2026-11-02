@@ -21,7 +21,7 @@ function say(txt,ci,ms=2200){if(!ensure())return;bub.querySelector('b').textCont
  bub.dataset.c=ci>=0?COL[ci][0]:'';bub.classList.remove('on');void bub.offsetWidth;bub.classList.add('on');clearTimeout(bub._t);bub._t=setTimeout(()=>bub.classList.remove('on'),ms)}
 function showGem(i){if(!ensure())return;lvl=i;gem.dataset.c=COL[i][0];gem.querySelector('small').textContent=COL[i][2];gem.classList.remove('on');void gem.offsetWidth;gem.classList.add('on')}
 function ban(txt,cls,ms=1400){if(!ensure())return;banner.className='czban '+cls;banner.textContent=txt;void banner.offsetWidth;banner.classList.add('on');clearTimeout(banner._t);banner._t=setTimeout(()=>banner.classList.remove('on'),ms)}
-function cutin(){if(!ensure()||RMQ)return;const c=layer.querySelector('.czcut');c.style.backgroundImage=`url(assets/${window.CZM.id}/hero.webp?v=178)`;c.classList.remove('on');void c.offsetWidth;c.classList.add('on');CZ.vib&&CZ.vib([20,40,20])}
+function cutin(){if(!ensure()||RMQ)return;const c=layer.querySelector('.czcut');c.style.backgroundImage=`url(assets/${window.CZM.id}/hero.webp?v=179)`;c.classList.remove('on');void c.offsetWidth;c.classList.add('on');CZ.vib&&CZ.vib([20,40,20])}
 function gimmick(){if(!ensure())return;layer.classList.remove('gim');void layer.offsetWidth;layer.classList.add('gim');document.getElementById('machine')?.classList.add('czshake');setTimeout(()=>document.getElementById('machine')?.classList.remove('czshake'),500);CZ.vib&&CZ.vib(60)}
 function wpick(w){let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<w.length;i++){if((r-=w[i])<0)return i}return 0}
 let cur=null;

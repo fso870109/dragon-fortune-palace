@@ -1,0 +1,16 @@
+/* v17.9 gallery */
+dialog#czGal{width:min(96vw,720px);max-height:calc(100dvh - 16px);padding:12px;border-radius:16px;border:2px solid #d9a441;background:linear-gradient(#24101f,#0d0510);color:#fff}
+dialog#czGal::backdrop{background:rgba(0,0,0,.75)}
+#czGal h3{margin:0 0 2px;text-align:center;font:800 20px/1.2 "KleeSub",sans-serif;color:#ffe7a8}#czGal h3 small{color:#ff8fc8;font-size:14px}
+#czGal .gn{margin:0 0 8px;text-align:center;font-size:11px;color:#cbb7c9}
+#czGal .gm{margin:8px 0}#czGal .gm>b{font:700 14px "KleeSub",sans-serif;color:#ffd6ee}#czGal .gm>span{float:right;font-size:11px;color:#bfa9bd}
+#czGal .gr{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:4px}
+#czGal .gi{position:relative;aspect-ratio:3/4;padding:0;border-radius:10px;overflow:hidden;border:1px solid #d9a441;background:#000}
+#czGal .gi img{width:100%;height:100%;object-fit:cover;display:block}
+#czGal .gi.lk img{filter:blur(8px) brightness(.35) grayscale(.6)}
+#czGal .gi i{position:absolute;left:0;right:0;bottom:0;padding:3px 2px;font:600 10px/1.2 sans-serif;font-style:normal;background:rgba(0,0,0,.65);color:#ffe6f4}
+#czGal .gv{position:fixed;inset:0;z-index:5;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center}#czGal .gv[hidden]{display:none}
+#czGal .gv img{max-width:96vw;max-height:92dvh;object-fit:contain;border-radius:8px}
+#czGal .gx{display:block;margin:10px auto 0;height:40px;padding:0 24px;border-radius:20px;border:1px solid #d9a441;background:#2a1024;color:#fff}
+.galbtn{display:flex;align-items:center;gap:10px;width:100%;margin:10px 0 4px;padding:10px 14px;border-radius:14px;border:1.5px solid #d9a441;background:linear-gradient(90deg,#2a0a22,#12060f);color:#ffe6f4;font:700 15px "KleeSub",sans-serif;text-align:left}
+.galbtn b{margin-left:auto;color:#ffd27a}
