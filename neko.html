@@ -88,7 +88,7 @@
 .shmsg{min-height:18px;text-align:center;font-size:13px;margin-top:8px;color:#ffd54f}.shmsg.err{color:#ff8aa0}.shmsg.ok{color:#7dff9a}
 @media (max-width:420px){.skins{grid-template-columns:repeat(2,1fr)}}
 @media (prefers-reduced-motion:reduce){.skin button.cf{animation:none}.machine,.inner,.board,.lights i,.box{transition:none}}
-/* ===== v12 パチスロ restyle ===== */
+/* ===== v12 柏青嫂 restyle ===== */
 :root{--acc:#ff2240;--acc2:#ffc400;--acc3:#2a6bff;--chrome1:#f4f6fb;--chrome2:#8a93a6;--chrome3:#2a2f3a;--cab:#07080f;--glow:255,34,64}
 body[data-skin="neon"]{--acc:#00e5ff;--acc2:#ff3ad8;--acc3:#7a3cff;--glow:0,229,255}
 body[data-skin="jade"]{--acc:#19e08a;--acc2:#ffd54f;--acc3:#0a8f5a;--glow:25,224,138}
@@ -98,7 +98,7 @@ body[data-skin="obsidian"]{--acc:#ff6a1a;--acc2:#ffb000;--acc3:#ff2a00;--chrome1
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#020207}
 body{min-height:100vh;font-family:"Noto Sans TC","Noto Sans JP","PingFang TC","Microsoft JhengHei",sans-serif;color:#fff;background:#020207;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;padding:max(6px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));-webkit-tap-highlight-color:transparent}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/key.webp?v=182) center top/auto max(100%,1024px) no-repeat,#020207;opacity:.9}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/key.webp?v=183) center top/auto max(100%,1024px) no-repeat,#020207;opacity:.9}
 body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 30%,rgba(0,0,0,.75) 85%),radial-gradient(ellipse at 50% 0%,rgba(var(--glow),.22),transparent 55%)}
 h1{position:relative;margin:2px 0 0;font:900 italic clamp(22px,5.2vw,34px)/1.05 "Arial Black","Noto Sans TC",sans-serif;letter-spacing:2px;transform:skewX(-10deg);color:#fff;background:linear-gradient(180deg,#fff 0%,#fff 42%,var(--acc2) 52%,#ff7a00 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:1px rgba(0,0,0,.4);filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 10px rgba(var(--glow),.7))}
 h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);letter-spacing:1px}
@@ -124,7 +124,7 @@ h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);lette
 .lcd .idle b{font:900 italic clamp(22px,5vw,34px)/1 "Arial Black",sans-serif;transform:skewX(-12deg);letter-spacing:1px;background:linear-gradient(#fff,#fff 45%,var(--acc2) 55%,#ff6a00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 8px rgba(var(--glow),.8))}
 .lcd .idle span{font-size:11px;letter-spacing:4px;color:#9fb0d6}
 .lcd .stage{position:absolute;inset:0;z-index:4;pointer-events:none}
-.lcd .ci{position:absolute;inset:0;background:url(assets/neko/cutin.webp?v=182) 20% 30%/cover;transform:translateX(-105%) skewX(-12deg);opacity:0;will-change:transform,opacity}
+.lcd .ci{position:absolute;inset:0;background:url(assets/neko/cutin.webp?v=183) 20% 30%/cover;transform:translateX(-105%) skewX(-12deg);opacity:0;will-change:transform,opacity}
 .lcd.reach .ci{animation:ciIn .45s cubic-bezier(.2,1.4,.4,1) forwards}
 @keyframes ciIn{0%{transform:translateX(-105%) skewX(-12deg);opacity:1}100%{transform:translateX(0) skewX(0);opacity:1}}
 .lcd .speed{position:absolute;inset:-20%;background:repeating-conic-gradient(from 0deg at 30% 50%,rgba(255,255,255,.0) 0 3deg,rgba(255,255,255,.35) 3deg 3.6deg,rgba(255,255,255,0) 3.6deg 9deg);opacity:0;will-change:transform,opacity}
@@ -138,7 +138,7 @@ h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);lette
 .kitai.on{opacity:1}
 .kitai i{width:14px;height:14px;border-radius:50%;background:var(--k);box-shadow:0 0 8px var(--k)}
 .kitai.rainbow i{background:conic-gradient(red,orange,yellow,lime,cyan,blue,magenta,red)}
-.lcd .seven{position:absolute;inset:0;z-index:8;background:url(assets/neko/bigbonus.webp?v=182) center/cover;opacity:0;transform:scale(1.4);will-change:transform,opacity}
+.lcd .seven{position:absolute;inset:0;z-index:8;background:url(assets/neko/bigbonus.webp?v=183) center/cover;opacity:0;transform:scale(1.4);will-change:transform,opacity}
 .lcd.bonus .seven{animation:sevenIn .5s cubic-bezier(.2,1.3,.4,1) forwards}
 @keyframes sevenIn{to{opacity:1;transform:scale(1)}}
 .lcd .navi{position:absolute;left:50%;top:8px;transform:translateX(-50%);z-index:6;font:700 12px sans-serif;letter-spacing:2px;color:#fff;background:linear-gradient(90deg,transparent,rgba(var(--glow),.7),transparent);padding:2px 40px;white-space:nowrap}
@@ -214,7 +214,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .bw{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#000;cursor:pointer;overflow:hidden;contain:strict}
 .bw.show{display:flex;animation:bwIn .25s ease-out}
 @keyframes bwIn{from{opacity:0}}
-.bw .art{position:absolute;inset:0;background:url(assets/neko/bigbonus.webp?v=182) center/cover;opacity:.55;transform:scale(1.15);animation:artZoom 6s ease-out forwards;will-change:transform}
+.bw .art{position:absolute;inset:0;background:url(assets/neko/bigbonus.webp?v=183) center/cover;opacity:.55;transform:scale(1.15);animation:artZoom 6s ease-out forwards;will-change:transform}
 @keyframes artZoom{to{transform:scale(1)}}
 .bw .rays{display:none;position:absolute;left:50%;top:45%;width:150vmax;height:150vmax;margin:-75vmax 0 0 -75vmax;background:repeating-conic-gradient(rgba(var(--glow),.28) 0 6deg,transparent 6deg 15deg);border-radius:50%;animation:rot 10s linear infinite;will-change:transform;opacity:.8}
 .bw .vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.35) 20%,rgba(0,0,0,.9) 85%)}
@@ -285,8 +285,8 @@ body.fs-mode .lcd .scr{background:radial-gradient(ellipse at 50% 120%,rgba(176,5
 @media (max-width:480px) and (max-height:620px){.lcd .navi,.lcd .idle span{display:none}.box small{font-size:8px;letter-spacing:0;white-space:nowrap}body{padding-top:2px;padding-bottom:2px}.machine{padding:5px}.inner{padding:5px}.lcd{height:70px}.reel{--c:clamp(46px,14.5vw,60px)}.spin{width:72px;height:72px;font-size:17px}#minus,#plus{width:42px;height:42px;min-height:42px}.kbd{display:none}h1{font-size:18px}.row2 button{min-height:36px}}
 @media (max-width:340px){h1 .jp{display:none}.lcd{height:80px}.spin{width:76px;height:76px}.row2 button{font-size:9.5px}}
 @media (min-width:381px) and (max-width:480px) and (min-height:760px){.lcd{height:120px}.spin{width:100px;height:100px}}
-/* ===== v15 恋する夜のスロット♡ art direction ===== */
-@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff2?v=182) format("woff2");font-display:swap}
+/* ===== v15 戀夜拉霸♡ art direction ===== */
+@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff2?v=183) format("woff2");font-display:swap}
 :root{--acc:#ff4fa3;--acc2:#ffd27a;--acc3:#ff8fc8;--glow:255,79,163;--gold1:#fff0c2;--gold2:#d9a441;--gold3:#7a5418;--hero-h:clamp(430px,62vh,620px);--hero-top:-4vh;--hero-space:clamp(230px,37vh,320px);--tint:transparent}
 body[data-skin="neon"]{--acc:#6fa8ff;--acc3:#a8c8ff;--glow:111,168,255;--tint:rgba(40,70,200,.28)}
 body[data-skin="jade"]{--acc:#ff9cc8;--acc3:#ffd0e4;--glow:255,156,200;--tint:rgba(255,150,200,.22)}
@@ -295,9 +295,9 @@ body[data-skin="royal"]{--acc:#c07cff;--acc3:#e2c2ff;--glow:192,124,255;--tint:r
 body[data-skin="obsidian"]{--acc:#ff8a4a;--acc3:#ffc49a;--glow:255,138,74;--tint:rgba(255,120,40,.26)}
 html{background:#0a0614}
 body{background:transparent;font-family:"Noto Sans TC","Noto Sans CJK TC",sans-serif}
-body::before{content:"";position:fixed;inset:-30px;z-index:-3;background:url(assets/key_bg.webp?v=182) center 20%/cover no-repeat;opacity:1}
+body::before{content:"";position:fixed;inset:-30px;z-index:-3;background:url(assets/key_bg.webp?v=183) center 20%/cover no-repeat;opacity:1}
 body::after{background:radial-gradient(ellipse at 50% 30%,transparent 35%,rgba(5,2,12,.55) 75%),radial-gradient(circle at 12% 70%,rgba(var(--glow),.18),transparent 22%),radial-gradient(circle at 88% 65%,rgba(255,210,122,.14),transparent 20%);z-index:-1}
-.hero{position:absolute;left:50%;top:var(--hero-top);height:var(--hero-h);aspect-ratio:16/9;transform:translateX(-50%);z-index:-2;background:url(assets/key.webp?v=182) center top/100% 100% no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(#000 70%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent) intersect,linear-gradient(#000 70%,transparent);pointer-events:none}
+.hero{position:absolute;left:50%;top:var(--hero-top);height:var(--hero-h);aspect-ratio:16/9;transform:translateX(-50%);z-index:-2;background:url(assets/key.webp?v=183) center top/100% 100% no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(#000 70%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent) intersect,linear-gradient(#000 70%,transparent);pointer-events:none}
 .hero::after{content:"";position:absolute;inset:0;background:var(--tint);mix-blend-mode:color}
 .bokeh{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 8% 22%,rgba(255,150,200,.35) 0 6px,transparent 7px),radial-gradient(circle at 15% 48%,rgba(255,210,140,.3) 0 4px,transparent 5px),radial-gradient(circle at 90% 18%,rgba(255,150,200,.3) 0 8px,transparent 9px),radial-gradient(circle at 85% 42%,rgba(255,220,160,.28) 0 5px,transparent 6px),radial-gradient(circle at 5% 80%,rgba(255,120,190,.25) 0 10px,transparent 11px),radial-gradient(circle at 95% 78%,rgba(255,200,140,.22) 0 9px,transparent 10px)}
 /* logo */
@@ -319,11 +319,11 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 .lcd{position:absolute;left:-10px;right:-10px;bottom:calc(100% + 12px);height:calc(var(--hero-space) - 30px);margin:0;background:none;box-shadow:none;border-radius:14px;contain:layout paint style;pointer-events:none}
 .lcd .scr,.lcd .grid,.lcd .scan,.lcd .gloss,.lcd .idle{display:none}
 .lcd .navi{top:auto;bottom:4px;opacity:0}
-.lcd .ci{background-image:url(assets/neko/cutin.webp?v=182);border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 24px rgba(var(--glow),.8)}
+.lcd .ci{background-image:url(assets/neko/cutin.webp?v=183);border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 24px rgba(var(--glow),.8)}
 .lcd .seven{border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 30px rgba(var(--glow),.9)}
 .lcd .speed{border-radius:14px}
 .lcd.reach .speed,.lcd.bonus .speed{opacity:.35}
-.slam{font-family:"KleeSub","Arial Black",sans-serif;font-weight:700;-webkit-text-stroke:3px #3a0020}
+.slam{font-family:"KleeSub","Arial Black","Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;font-weight:700;-webkit-text-stroke:3px #3a0020}
 .kitai{bottom:10px;left:14px}
 .fsc{top:6px;right:16px;font-family:"Arial Black",sans-serif;background:linear-gradient(90deg,#ff4fa3,#ffb36b);box-shadow:0 0 14px rgba(var(--glow),.9)}
 /* reels */
@@ -361,12 +361,12 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 .badges div small{display:block;font:700 11px sans-serif;letter-spacing:2px;color:var(--gold1);margin-top:3px}
 .badges div::before{content:"♛";display:block;font-size:14px;color:var(--gold2);margin-bottom:2px;font-style:normal}
 /* big win overlay */
-.bw .art{background-image:url(assets/neko/bigbonus.webp?v=182);opacity:.75}
+.bw .art{background-image:url(assets/neko/bigbonus.webp?v=183);opacity:.75}
 .bw .vig{background:radial-gradient(ellipse at 50% 55%,rgba(40,0,30,.25) 20%,rgba(10,0,10,.85) 85%)}
 .bw .tier{color:#fff;text-shadow:0 4px 0 #d6307e,0 8px 0 #5a0a30,0 0 30px rgba(255,100,180,.95)}
 .bw.mega .tier{color:#ffe9b0;text-shadow:0 4px 0 #c07a10,0 8px 0 #4a2a00,0 0 30px rgba(255,200,100,.95)}
 .bw.epic .tier{color:#fff;text-shadow:0 4px 0 #ff4fa3,0 8px 0 #ffb000,0 12px 0 #3a0020,0 0 40px rgba(255,150,200,.95)}
-.bw .jp{font-family:"KleeSub",sans-serif;text-shadow:0 0 10px var(--acc),0 3px 0 #000}
+.bw .jp{font-family:"KleeSub","Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;text-shadow:0 0 10px var(--acc),0 3px 0 #000}
 .bw .fire{box-shadow:inset 0 0 60px 10px rgba(var(--glow),.6)}
 @media (max-width:980px){.badges,.flav{display:none}}
 @media (max-width:620px) and (orientation:portrait){
@@ -386,12 +386,12 @@ h1.logo{left:8px;top:22px;font-size:22px;transform:rotate(-5deg)}h1.logo .tag{fo
 :root{--W:min(100vw,calc((100vh - 64px) * 1620 / 971));--bar:64px}
 html,body{margin:0;padding:0!important;overflow-x:hidden}
 body{background:#050208!important}
-body::before{background:url(assets/neko/bg.webp?v=182) center/cover no-repeat!important;inset:0!important;opacity:1!important}
+body::before{background:url(assets/neko/bg.webp?v=183) center/cover no-repeat!important;inset:0!important;opacity:1!important}
 body::after{display:none!important}
 .hero,.bokeh,h1.logo,.flav,.badges,.lights,.led,.kbd,.machine::before,.machine::after,.board::after,.info .box small,.lcd .fsc~.scr{display:none!important}
 .wrap{margin:0!important;display:flex;justify-content:center;align-items:flex-start;min-height:100vh}
 .machine{width:var(--W)!important;max-width:none!important;margin:0!important;padding:0 0 var(--bar)!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}
-.inner{position:relative!important;width:var(--W);aspect-ratio:1620/971;padding:0!important;background:url(assets/neko/base.webp?v=182) 0 0/100% 100% no-repeat!important;container-type:inline-size;border-radius:0!important}
+.inner{position:relative!important;width:var(--W);aspect-ratio:1620/971;padding:0!important;background:url(assets/neko/base.webp?v=183) 0 0/100% 100% no-repeat!important;container-type:inline-size;border-radius:0!important}
 .board{position:absolute!important;left:16.790%;top:38.929%;width:66.790%;height:42.842%;padding:0!important;gap:0!important;display:block!important;background:none!important;box-shadow:none!important;border-radius:0!important;margin:0!important;overflow:visible!important}
 .reel{position:absolute!important;top:0;height:100%!important;--c:8.5597cqw!important;background:#0b0810!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
 .reel:nth-child(1){left:0;width:19.686%}.reel:nth-child(2){left:20.240%;width:19.224%}.reel:nth-child(3){left:40.018%;width:19.501%}.reel:nth-child(4){left:60.074%;width:19.316%}.reel:nth-child(5){left:79.945%;width:20.055%}
@@ -408,11 +408,11 @@ body::after{display:none!important}
 .info .box b{font:700 4.1cqw/1 "Times New Roman",Georgia,serif!important;color:#ffd6ee!important;-webkit-text-fill-color:#ffd6ee!important;background:none!important;letter-spacing:.02em;white-space:nowrap;text-shadow:0 0 .3cqw #ff4fa3,0 0 .9cqw #ff2f8f,0 0 1.8cqw rgba(255,47,143,.7)!important;animation:none!important}
 .info .box b[data-l="4"]{font-size:3.4cqw!important}.info .box b[data-l="5"]{font-size:2.8cqw!important}.info .box b[data-l="6"]{font-size:2.3cqw!important}.info .box b[data-l="7"],.info .box b[data-l="8"],.info .box b[data-l="9"]{font-size:1.9cqw!important}
 .info .box:nth-child(2){position:fixed!important;pointer-events:auto}
-.msg{position:absolute!important;left:18.8%;top:84.2%;width:63%;height:7.8%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center;justify-content:center;font:600 2.1cqw/1 "KleeSub",sans-serif!important;color:#ffe6f4!important;text-shadow:0 0 .4cqw #ff4fa3,0 0 1cqw rgba(255,79,163,.8)!important;contain:strict}
+.msg{position:absolute!important;left:18.8%;top:84.2%;width:63%;height:7.8%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center;justify-content:center;font:600 2.1cqw/1 "KleeSub","Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif!important;color:#ffe6f4!important;text-shadow:0 0 .4cqw #ff4fa3,0 0 1cqw rgba(255,79,163,.8)!important;contain:strict}
 .msg::after{content:" ♡";color:#ff8fc8;margin-left:.3em}
 /* cut-in stage over the heroine */
 .lcd{position:absolute!important;left:18%!important;right:auto!important;top:1.5%!important;bottom:auto!important;width:64%!important;height:36%!important;margin:0!important;z-index:6;pointer-events:none}
-.lcd .ci{background:url(assets/neko/cutin.webp?v=182) 50% 35%/cover!important;border-radius:1cqw!important;box-shadow:0 0 0 .2cqw #d9a441,0 0 2cqw rgba(255,79,163,.9)!important}
+.lcd .ci{background:url(assets/neko/cutin.webp?v=183) 50% 35%/cover!important;border-radius:1cqw!important;box-shadow:0 0 0 .2cqw #d9a441,0 0 2cqw rgba(255,79,163,.9)!important}
 @keyframes ci16{0%{transform:scale(1.6);opacity:0;filter:brightness(3) saturate(.4)}35%{opacity:1;filter:brightness(1.8) saturate(1.2)}100%{transform:scale(1);opacity:1;filter:none}}
 .lcd.reach .ci{animation:ci16 .5s cubic-bezier(.2,1.2,.4,1) forwards!important}
 .lcd .seven{border-radius:1cqw!important;background-position:50% 30%!important}
@@ -443,7 +443,7 @@ dialog .days li.today,dialog .days li.on{border-color:#ff7ac8!important;box-shad
 dialog button.claim,dialog .claim{background:linear-gradient(#ffb3dc,#ff4fa3 55%,#a3105a)!important;color:#fff!important;border:1px solid #ffd27a!important;box-shadow:0 0 14px rgba(255,79,163,.7)!important;text-shadow:0 1px 0 #6a0030}
 dialog button{border-color:#d9a441!important}
 .bw{background:radial-gradient(ellipse at center,rgba(60,10,40,.55),rgba(10,2,8,.92))!important}
-.bw .art{background:url(assets/neko/bigbonus.webp?v=182) 50% 30%/cover!important}
+.bw .art{background:url(assets/neko/bigbonus.webp?v=183) 50% 30%/cover!important}
 @keyframes bw16{0%{transform:scale(1.5);filter:brightness(3)}30%{filter:brightness(1.6)}100%{transform:scale(1);filter:none}}
 .bw.on .art,.bw.show .art{animation:bw16 .7s ease-out both}
 /* mobile: art full width, controls below */
@@ -473,8 +473,8 @@ body.menu16 .row2{bottom:auto!important;top:auto!important;left:50%!important;ri
 .info .box:nth-child(3){left:85.556%!important;top:85.479%!important;width:6.420%!important;height:8.239%!important;right:auto!important;bottom:auto!important}
 .msg{left:32.099%!important;top:84.449%!important;width:35.802%!important;height:9.784%!important;right:auto!important;bottom:auto!important}
 .lcd{left:23.457%!important;top:0.000%!important;width:53.086%!important;height:38.105%!important;right:auto!important;bottom:auto!important}
-:root{--cz-acc:#ffcf3a;--ar:1620/971;--czbg:url(assets/neko/bg.webp?v=182)}
-</style><link rel="stylesheet" href="casino.css?v=182"><link rel="stylesheet" href="gallery.css?v=182"><style>:root{--czbgp:url(assets/neko/bgp.webp?v=182);--czth:#2a0808}</style><style id="zhmsg">.msg,.czbar,.czm,.czbtn,#czEn .czbub{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Hiragino Sans",sans-serif!important;font-weight:700}</style></head><body><div id="czLoad"><div class="czlt">招財大作戰</div><div class="czlbar"><i></i></div><div class="czls">LOADING…</div><div class="cznote2">僅供娛樂・虛擬籌碼・無真實金錢</div></div>
+:root{--cz-acc:#ffcf3a;--ar:1620/971;--czbg:url(assets/neko/bg.webp?v=183)}
+</style><link rel="stylesheet" href="casino.css?v=183"><link rel="stylesheet" href="gallery.css?v=183"><style>:root{--czbgp:url(assets/neko/bgp.webp?v=183);--czth:#2a0808}</style><style id="zhmsg">.msg,.czbar,.czm,.czbtn,#czEn .czbub{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Hiragino Sans",sans-serif!important;font-weight:700}</style></head><body><div id="czLoad"><div class="czlt">招財大作戰</div><div class="czlbar"><i></i></div><div class="czls">LOADING…</div><div class="cznote2">僅供娛樂・虛擬籌碼・無真實金錢</div></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <radialGradient id="gCherry" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#ff8a9a"/><stop offset=".45" stop-color="#e0102f"/><stop offset="1" stop-color="#6d0012"/></radialGradient>
 <radialGradient id="gLemon" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fffbd0"/><stop offset=".5" stop-color="#ffe03a"/><stop offset="1" stop-color="#c99400"/></radialGradient>
@@ -496,14 +496,14 @@ body.menu16 .row2{bottom:auto!important;top:auto!important;left:50%!important;ri
 <symbol id="s-bar" viewBox="0 0 100 100"><g filter="url(#fShadow)"><rect x="6" y="28" width="88" height="44" rx="10" fill="url(#gBar)" stroke="url(#gGold)" stroke-width="5"/><text x="50" y="62" text-anchor="middle" font-family="Impact,'Arial Black',sans-serif" font-size="32" font-weight="900" fill="url(#gGold)" stroke="#5a3300" stroke-width="1" letter-spacing="2">BAR</text><rect x="12" y="33" width="76" height="8" rx="4" fill="#fff" opacity=".15"/></g></symbol>
 <symbol id="s-seven" viewBox="0 0 100 100"><g filter="url(#fShadow)"><path d="M18 14 L84 14 L84 28 C66 46 54 66 50 90 L28 90 C32 66 44 46 60 32 L18 32Z" fill="url(#gRed7)" stroke="url(#gGold)" stroke-width="5" stroke-linejoin="round"/><path d="M24 19 L78 19" stroke="#fff" stroke-width="3" opacity=".5" stroke-linecap="round"/></g></symbol>
 </defs></svg>
-<div class="hero" aria-hidden="true"></div><div class="bokeh" aria-hidden="true"></div><h1 class="logo"><span class="sr-only">戀愛之夜老虎機 </span>恋する夜の<span class="l2">スロット<span class="heart">♡</span></span><span class="tag">〜好きが、止まらない〜</span><span class="zh">戀愛之夜・心動老虎機</span></h1><div class="flav" aria-hidden="true">君と過ごす<br>この時間が<br>いちばん好き…♡</div>
+<div class="hero" aria-hidden="true"></div><div class="bokeh" aria-hidden="true"></div><h1 class="logo"><span class="sr-only">戀愛之夜老虎機 </span>戀夜<span class="l2">拉霸<span class="heart">♡</span></span><span class="tag">〜喜歡，停不下來〜</span><span class="zh">戀愛之夜・心動老虎機</span></h1><div class="flav" aria-hidden="true">與你共度<br>這段時光<br>最喜歡你了…♡</div>
 <div class="sub">僅供娛樂・虛擬籌碼・無真實金錢</div>
 <div class="wrap"><div class="led" id="ledL" aria-hidden="true"></div>
 <div class="machine" id="machine"><div class="badges" aria-hidden="true"><div>BONUS<small>FREE SPINS</small></div><div>×2<small>CHANCE</small></div></div><div class="inner">
 <div class="lcd" id="lcd" aria-hidden="true"><div class="fsc" id="fsc">FREE SPIN <b id="fsN">0</b>/<b id="fsT">10</b>・×2</div><div class="scr"></div><div class="grid"></div>
-<div class="idle" id="lcdIdle"><b>FRUITS FEVER</b><span>激アツ演出搭載・目押し不要</span></div>
+<div class="idle" id="lcdIdle"><b>FRUITS FEVER</b><span>搭載超熱演出・無需目押</span></div>
 <div class="stage"><div class="speed"></div><div class="ci"></div></div>
-<div class="navi" id="lcdNavi">PUSH ボタンで遊技開始</div>
+<div class="navi" id="lcdNavi">PUSH 按鈕開始遊戲</div>
 <div class="slam" id="slam"></div><div class="kitai" id="kitai"><i></i><span id="kitaiT">期待度</span></div>
 <div class="seven"></div><div class="scan"></div><div class="gloss"></div></div>
 <div class="lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -529,7 +529,7 @@ body.menu16 .row2{bottom:auto!important;top:auto!important;left:50%!important;ri
 </div></div><div class="led" id="ledR" aria-hidden="true"></div></div>
 <canvas id="fx" aria-hidden="true"></canvas>
 <div class="bw" id="bw" role="dialog" aria-modal="true" aria-labelledby="bwTier" aria-live="assertive"><div class="art"></div><div class="rays"></div><div class="vig"></div><div class="fire"></div>
-<div class="jp" id="bwJp">激アツ!!</div><div class="tier" id="bwTier" data-t="BIG BONUS">BIG BONUS</div><div class="lbl">大當たり・贏得虛擬籌碼</div><div class="amt" id="bwAmt">0</div>
+<div class="jp" id="bwJp">超熱!!</div><div class="tier" id="bwTier" data-t="BIG BONUS">BIG BONUS</div><div class="lbl">大獎・贏得虛擬籌碼</div><div class="amt" id="bwAmt">0</div>
 <button class="collect" id="bwBtn">收下籌碼</button><div class="hint">點擊任意處可跳過</div></div>
 <dialog id="daily" aria-labelledby="dTitle"><h2 id="dTitle">每日簽到</h2>
 <div class="dsub" id="dSub">連續簽到 7 天，第 7 天送 1000 虛擬籌碼！</div>
@@ -723,7 +723,7 @@ const seq=[...res[c]];for(let k=0;k<n;k++)seq.push(rnd(c));seq.push(...grid[c]);
 const dur=(RM?.45:.85)+c*.24+(tease?(c===3?1.1:c===4?2.3:0):0);
 animateReel(r,c,seq,dur,()=>{sfx.stop(c%3);landFX(c);r.classList.remove('tease','land');rAF2(()=>r.classList.add('land'));
 const st=r.firstElementChild;while(st.children.length>3)st.lastElementChild.remove();st.querySelectorAll('img.sym').forEach(i=>{if(i.complete&&!i.naturalWidth){const u=i.getAttribute('src');i.src=u+(u.includes('?')?'':'?r=1')}});
-if(c===2&&tease){r.parentNode.classList.add('teasing');reels[3].classList.add('tease');reels[4].classList.add('tease');$('msg').textContent='リーチ!! ドキドキが止まらない…！（第 4、5 輪）';lcdReach();sfx.suspense(RM?.5:1.4)}
+if(c===2&&tease){r.parentNode.classList.add('teasing');reels[3].classList.add('tease');reels[4].classList.add('tease');$('msg').textContent='聽牌!! 心跳停不下來…！（第 4、5 輪）';lcdReach();sfx.suspense(RM?.5:1.4)}
 if(c===3&&tease){r.classList.remove('tease');sfx.suspense(RM?.4:1.1)}
 if(++done===NR){$('machine').classList.remove('spinning');r.parentNode.classList.remove('teasing');grid=res;settle(bet,free)}});});
 }
@@ -757,7 +757,7 @@ const f=FS;fsTimer=setTimeout(function end(){if(bwState||spinning||window.__hold
 FS=null;fsUI();['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=false);
 $('msg').textContent=`免費旋轉結束！共贏得 ${fmt(f.won)} 虛擬籌碼`;if(f.won>0)bigWin(f.won,f.bet*NL,{tier:['mega','BONUS 終了','FREE SPINS 合計'],lbl:'免費旋轉 總獎金'});else lcdReset()},1300)}
 function fsIntro(re){const bw=$('bw');fsUI();lcdBonusFS();
-bw.className='bw show epic fsi';$('bwTier').textContent='BIG BONUS';$('bwJp').textContent=re?'ありがとう…♡ +10回':'激アツ!! ずっと待ってたよ';
+bw.className='bw show epic fsi';$('bwTier').textContent='BIG BONUS';$('bwJp').textContent=re?'謝謝你…♡ +10次':'超熱!! 一直在等你';
 bw.querySelector('.lbl').textContent=re?'免費旋轉追加':'免費旋轉（獎金 ×2）';$('bwAmt').textContent=(re?'+':'')+FS_N+' 回';$('bwBtn').textContent='開始！';
 bwState={won:0,done:true,fin:true,intro:true};sfx.win(3);lastFlash=0;flash(.45);fountain();megaBorder(2.5);bw.classList.add('ready');setTimeout(()=>$('bwBtn').focus(),50);
 if(window.__fsAuto)setTimeout(bwClose,window.__fsAuto)}
@@ -827,7 +827,7 @@ function drawExtra(p){const u=p.life/p.max;
 if(p.k==='star')drawStar(p);
 else if(p.k==='twink'){const s=p.r*Math.sin(Math.PI*u);cx.save();cx.globalCompositeOperation='lighter';cx.translate(p.x,p.y);cx.fillStyle='#fffbe0';
 cx.beginPath();cx.moveTo(0,-s);cx.lineTo(s*.18,0);cx.lineTo(0,s);cx.lineTo(-s*.18,0);cx.closePath();cx.moveTo(-s,0);cx.lineTo(0,s*.18);cx.lineTo(s,0);cx.lineTo(0,-s*.18);cx.fill();cx.restore()}
-else if(p.k==='puff'){cx.globalAlpha=.45*(1-u);cx.fillStyle='#fff2d0';cx.beginPath();cx.arc(p.x,p.y,p.r*(1+u*1.8),0,7);cx.fill()}
+else if(p.k==='puff'){}
 else if(p.k==='ember'){cx.globalCompositeOperation='lighter';const s=p.r*3;cx.drawImage(SP_EMB,p.x-s,p.y-s,s*2,s*2);cx.globalCompositeOperation='source-over'}}
 let megaT=0;
 function bolt(x1,y1,x2,y2,dsp){const pts=[[x1,y1]];const n=10;for(let i=1;i<n;i++){const t=i/n;pts.push([x1+(x2-x1)*t+(Math.random()-.5)*dsp,y1+(y2-y1)*t+(Math.random()-.5)*dsp])}pts.push([x2,y2]);
@@ -842,8 +842,8 @@ const pts=cellPts().slice(0,10);const per=Math.max(1,Math.floor((RM?10:WIN_PBUDG
 // ===== big-win celebration =====
 let bwState=null;
 const NF=new Intl.NumberFormat('zh-TW');const fmt=n=>NF.format(n);
-function bigWin(won,total,o={}){const bw=$('bw'),x=won/total;$('bwBtn').textContent='收下籌碼';bw.querySelector('.lbl').textContent=o.lbl||'大當たり・贏得虛擬籌碼';
-const tier=o.tier||(x>=80?['epic','EPIC WIN','超激アツ!! 巨額大獎']:x>=30?['mega','MEGA WIN','激アツ!! 超級大獎']:['big','BIG WIN','激アツ!! 大獎']);
+function bigWin(won,total,o={}){const bw=$('bw'),x=won/total;$('bwBtn').textContent='收下籌碼';bw.querySelector('.lbl').textContent=o.lbl||'大獎・贏得虛擬籌碼';
+const tier=o.tier||(x>=80?['epic','EPIC WIN','超激熱!! 巨額大獎']:x>=30?['mega','MEGA WIN','超熱!! 超級大獎']:['big','BIG WIN','超熱!! 大獎']);
 bw.className='bw show '+tier[0];$('bwTier').textContent=tier[1];$('bwTier').dataset.t=tier[1];$('bwJp').textContent=tier[2];$('bwAmt').textContent='0';
 $('machine').classList.remove('shake');
 const dur=RM?600:Math.min(6500,2200+x*45),t0=performance.now();let last=0,lastTick=0,lastTxt=0,bumpT=0;const aEl=$('bwAmt');
@@ -979,12 +979,12 @@ $('invCopy').onclick=invCopy;$('invShare').onclick=invShare;$('invClose').onclic
 invRender();
 // ---- Cosmetic skins shop (virtual chips only; no real-money purchase; cosmetic only) ----
 const SKINS=[
-{id:'gold',name:'恋する夜',desc:'預設・夜粉金',price:0,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff4fa3aa,#0c0618 70%)',sym:'love'},
+{id:'gold',name:'戀夜',desc:'預設・夜粉金',price:0,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff4fa3aa,#0c0618 70%)',sym:'love'},
 {id:'neon',name:'真夜中',desc:'深藍月光',price:2000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#6fa8ffaa,#0c0618 70%)',sym:'ring'},
-{id:'jade',name:'桜色',desc:'櫻花粉',price:3000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff9cc8aa,#0c0618 70%)',sym:'rose'},
-{id:'crystal',name:'月あかり',desc:'銀白冷光',price:5000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#9fd8ffaa,#0c0618 70%)',sym:'perfume'},
-{id:'royal',name:'すみれ',desc:'紫羅蘭',price:8000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#c07cffaa,#0c0618 70%)',sym:'ribbon'},
-{id:'obsidian',name:'夕焼け',desc:'夕陽橘金',price:12000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff8a4aaa,#0c0618 70%)',sym:'letter'}];
+{id:'jade',name:'櫻色',desc:'櫻花粉',price:3000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff9cc8aa,#0c0618 70%)',sym:'rose'},
+{id:'crystal',name:'月光',desc:'銀白冷光',price:5000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#9fd8ffaa,#0c0618 70%)',sym:'perfume'},
+{id:'royal',name:'小堇',desc:'紫羅蘭',price:8000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#c07cffaa,#0c0618 70%)',sym:'ribbon'},
+{id:'obsidian',name:'夕陽',desc:'夕陽橘金',price:12000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff8a4aaa,#0c0618 70%)',sym:'letter'}];
 let shConfirm=null;
 function skGet(){let st;try{st=JSON.parse(localStorage.getItem('fs_skin')||'{}')}catch(e){st={}}
 if(!Array.isArray(st.own))st.own=[];if(!st.own.includes('gold'))st.own.unshift('gold');
@@ -1031,20 +1031,20 @@ function lcdReset(){lcdClear();lcd.classList.remove('reach','bonus');slamEl.clas
 function lcdSpin(x,tease,bon){lcdReset();$('lcdIdle').style.opacity=.25;$('lcdNavi').textContent='回転中…';
 let k=-1;const r=Math.random();
 if(bon||x>=80)k=r<.5?4:3;else if(x>=10)k=r<.6?3:2;else if(x>=3)k=r<.7?2:1;else if(x>0)k=r<.5?1:(r<.8?0:-1);else if(tease)k=r<.6?1:2;else k=r<.22?0:(r<.27?1:-1);
-lcd._k=k;if(k>=0)lcdLater(()=>{setKitai(k);if(k>=2)slam(k>=3?'激アツ!!':'チャンス!','#ff4fa3')},350)}
-function lcdReach(){lcd.classList.add('reach');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='リーチ演出中';$('spinBtn').classList.add('push');const k=Math.max(1,lcd._k|0);slam('リーチ!!','#ff4fa3','ドキドキ…♡');sfx.blip&&sfx.blip(true)}
+lcd._k=k;if(k>=0)lcdLater(()=>{setKitai(k);if(k>=2)slam(k>=3?'超熱!!':'機會!','#ff4fa3')},350)}
+function lcdReach(){lcd.classList.add('reach');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='聽牌演出中';$('spinBtn').classList.add('push');const k=Math.max(1,lcd._k|0);slam('聽牌!!','#ff4fa3','心跳…♡');sfx.blip&&sfx.blip(true)}
 function lcdBonusFS(){lcdClear();lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='FREE SPINS 突入!!';slam('BIG BONUS','#ff4fa3','FREE SPINS ×10');lcdLater(()=>lcd.classList.remove('bonus'),2200)}
 function lcdResult(x,bon){$('spinBtn').classList.remove('push');lcd.classList.remove('reach');if(bon)return;
-if(x>=10){lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='BONUS 確定!!';slam('7',x>=80?'#fff':'#ffc400',x>=30?'SUPER BIG':'BIG WIN');lcdLater(()=>slam(x>=80?'大當たり!!':'BIG WIN','#ff2240','確定'),550)}
+if(x>=10){lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='BONUS 確定!!';slam('7',x>=80?'#fff':'#ffc400',x>=30?'SUPER BIG':'BIG WIN');lcdLater(()=>slam(x>=80?'大獎!!':'BIG WIN','#ff2240','確定'),550)}
 else if(x>=2){slam('REG','#19e08a','總押注 ×'+(Math.round(x*10)/10));$('lcdNavi').textContent='REGULAR 中獎';lcdLater(lcdReset,2600)}
 else if(x>0){slam('WIN','#3a8bff','×'+(Math.round(x*10)/10));$('lcdNavi').textContent='小役 中獎';lcdLater(lcdReset,1800)}
 else{lcdLater(lcdReset,700)}}
 {const mk=(el,a)=>{a.forEach((li,i)=>{const e=document.createElement('b');e.className='pl';e.dataset.l=li;e.textContent=li+1;e.style.setProperty('--lc',COLORS[li]);e.style.setProperty('--i',i);el.appendChild(e)})};mk($('ledL'),[0,1,2,3,4,5,6,7,8,9]);mk($('ledR'),[10,11,12,13,14,15,16,17,18,19])}
 fsUI();{const b=$('setBtn'),p=$('audioPop');const tg=o=>{p.hidden=!o;b.setAttribute('aria-expanded',o)};b.onclick=e=>{e.stopPropagation();sfx.click();tg(p.hidden)};document.addEventListener('click',e=>{if(!p.hidden&&!p.contains(e.target)&&e.target!==b)tg(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!p.hidden){tg(false);b.focus()}})}
 </script><script>addEventListener('load',()=>{const d=document.createElement('div');d.setAttribute('aria-hidden','1');d.style.cssText='position:fixed;left:-9999px;top:0;visibility:hidden;contain:strict;width:10px;height:10px';
-const txt='リーチ!!ドキドキ…♡激アツ!!チャンス!BIG BONUS FREE SPINS×10ずっと待ってたよ'+(typeof LOVE_L!=='undefined'?LOVE_L.join(''):'')+'（第４、５輪）が止まらない！0123456789';
-['"KleeSub",sans-serif','"Arial Black",sans-serif','"Noto Sans TC",sans-serif','sans-serif'].forEach(f=>[400,700,900].forEach(w=>['italic','normal'].forEach(st=>{const s=document.createElement('span');s.style.cssText=`font-family:${f};font-weight:${w};font-style:${st}`;s.textContent=txt;d.appendChild(s)})));document.body.appendChild(d)})
+const txt='聽牌!!心跳…♡超熱!!機會!BIG BONUS FREE SPINS×10一直在等你'+(typeof LOVE_L!=='undefined'?LOVE_L.join(''):'')+'（第４、５輪）停不下來！0123456789';
+['"KleeSub","Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif','"Arial Black",sans-serif','"Noto Sans TC",sans-serif','sans-serif'].forEach(f=>[400,700,900].forEach(w=>['italic','normal'].forEach(st=>{const s=document.createElement('span');s.style.cssText=`font-family:${f};font-weight:${w};font-style:${st}`;s.textContent=txt;d.appendChild(s)})));document.body.appendChild(d)})
 </script><script>(()=>{const $=id=>document.getElementById(id);const mb=$('menuBtn');mb.onclick=e=>{e.stopPropagation();const o=document.body.classList.toggle('menu16');mb.setAttribute('aria-expanded',o)};
 $('max16').onclick=()=>$('maxBtn').click();document.addEventListener('click',e=>{if(document.body.classList.contains('menu16')&&!e.target.closest('#menu16')&&e.target!==mb){document.body.classList.remove('menu16');mb.setAttribute('aria-expanded',false)}});
 $('menu16').addEventListener('click',e=>{if(e.target.closest('button')&&!e.target.closest('#soundBtn')){document.body.classList.remove('menu16');mb.setAttribute('aria-expanded',false)}});
-const fit=el=>{const l=String(el.textContent).length;if(el.dataset.l!=l)el.dataset.l=l};['bal','win'].forEach(id=>{const el=$(id);fit(el);new MutationObserver(()=>fit(el)).observe(el,{childList:true,characterData:true,subtree:true})})})()</script><script>window.CZM={"id": "neko", "name": "招財大作戰", "buy": 18.2, "rtp": 96.09, "buyRtp": 95.85, "fsm": 2}</script><script>CZM.who="招財喵";CZM.voice={"yokoku": ["喵？有好預感～", "鈴鐺響了！"], "reach": ["聽牌喵！", "再一個就好！"], "hot": ["激熱喵！！", "金幣要來了！"], "win": ["喵～發財了！", "好運連連！"], "lose": ["下次一定喵", "別灰心喵～"], "kakutei": ["大獎確定喵！！"]}</script><script src="casino.js?v=182"></script><script src="gallery.js?v=182"></script><script src="minigame.js?v=182"></script><script src="enshutsu.js?v=182"></script></body></html>
+const fit=el=>{const l=String(el.textContent).length;if(el.dataset.l!=l)el.dataset.l=l};['bal','win'].forEach(id=>{const el=$(id);fit(el);new MutationObserver(()=>fit(el)).observe(el,{childList:true,characterData:true,subtree:true})})})()</script><script>window.CZM={"id": "neko", "name": "招財大作戰", "buy": 18.2, "rtp": 96.09, "buyRtp": 95.85, "fsm": 2}</script><script>CZM.who="招財喵";CZM.voice={"yokoku": ["喵？有好預感～", "鈴鐺響了！"], "reach": ["聽牌喵！", "再一個就好！"], "hot": ["激熱喵！！", "金幣要來了！"], "win": ["喵～發財了！", "好運連連！"], "lose": ["下次一定喵", "別灰心喵～"], "kakutei": ["大獎確定喵！！"]}</script><script src="casino.js?v=183"></script><script src="gallery.js?v=183"></script><script src="minigame.js?v=183"></script><script src="enshutsu.js?v=183"></script><script src="czaudio.js?v=183"></script></body></html>

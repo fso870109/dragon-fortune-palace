@@ -97,10 +97,10 @@ body::before{background:radial-gradient(ellipse at 50% 30%,#2a0a22,#07020a 70%)!
 /* 大当り cutscene */
 #czAtari{position:fixed;inset:0;z-index:90;display:block;visibility:hidden;contain:strict;overflow:hidden;background:#05010a;cursor:pointer}
 #czAtari.on{visibility:visible}#czAtari:not(.on) *{animation:none!important}
-#czAtari .ab{position:absolute;inset:0;background:url(assets/lobby/atari_bl.webp?v=182) center/cover}
-#czAtari .ai{position:absolute;inset:0;background:url(assets/lobby/atari.webp?v=182) 55% 40%/cover no-repeat;will-change:transform}
+#czAtari .ab{position:absolute;inset:0;background:url(assets/lobby/atari_bl.webp?v=183) center/cover}
+#czAtari .ai{position:absolute;inset:0;background:url(assets/lobby/atari.webp?v=183) 55% 40%/cover no-repeat;will-change:transform}
 @media (max-aspect-ratio:1/1){#czAtari .ai{background-size:185% auto;background-position:60% 46%;-webkit-mask:linear-gradient(transparent 22%,#000 32%,#000 68%,transparent 78%);mask:linear-gradient(transparent 22%,#000 32%,#000 68%,transparent 78%)}}
-@media (max-width:900px){#czAtari .ai{background-image:url(assets/lobby/atari_s.webp?v=182)}}
+@media (max-width:900px){#czAtari .ai{background-image:url(assets/lobby/atari_s.webp?v=183)}}
 #czAtari.on .ai{animation:atZ 2.3s cubic-bezier(.2,.9,.3,1) both}
 @keyframes atZ{0%{transform:scale(1.35)}100%{transform:scale(1.02)}}
 #czAtari .asw{position:absolute;inset:-20% -60%;background:linear-gradient(105deg,transparent 40%,rgba(255,240,200,.55) 48%,rgba(255,150,210,.35) 52%,transparent 60%);transform:translateX(-60%);will-change:transform}
@@ -221,7 +221,7 @@ dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!i
 #czEn .czban.rain{background:linear-gradient(90deg,#f33,#fb3,#3f6,#3cf,#a4f,#f3a);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0;filter:drop-shadow(0 0 8px #fff)}
 #czEn .czcut{position:absolute;inset:0;background:center 10%/cover no-repeat;opacity:0;transform:translateX(100%) skewX(-12deg);-webkit-mask-image:linear-gradient(transparent,#000 15%,#000 85%,transparent)}
 #czEn .czcut.on{animation:czCut 1.2s cubic-bezier(.2,.9,.2,1) both}
-#czEn.gim::before{content:"";position:absolute;left:50%;top:-30%;width:46%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6c8,#ffcc33 40%,#a86a00 75%,#4a2a00);box-shadow:0 0 30px #ffb000,0 0 0 4px #000;animation:czDrop 1.6s cubic-bezier(.5,0,.6,1.4) both}
+
 .czshake{animation:czShake .45s linear}
 @keyframes czBan{0%{opacity:0;transform:scale(2.2)}15%{opacity:1;transform:scale(1)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.05)}}
 @keyframes czCut{0%{opacity:0;transform:translateX(100%) skewX(-12deg)}20%{opacity:1;transform:translateX(0) skewX(-6deg)}75%{opacity:1;transform:translateX(-4%) skewX(-6deg)}100%{opacity:0;transform:translateX(-100%) skewX(-12deg)}}
@@ -232,15 +232,15 @@ dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!i
 @media (prefers-reduced-motion:reduce){#czEn *,#czEn::before,.czshake{animation:none!important;transition:none!important}#czEn .czban.on{opacity:1;transform:none}}
 .board .sweep:not(.go){visibility:hidden}
 #czEn .czcut{z-index:0}#czEn .czbub,#czEn .czgem,#czEn .czban{z-index:2}
-#czEn.gim::before{width:30%;z-index:1;opacity:.95}
-#czEn.gim::after{content:"激";position:absolute;left:50%;top:-30%;transform:translateX(-50%);z-index:1;font:900 clamp(30px,10vw,60px)/1 serif;color:#7a1200;text-shadow:0 1px 0 #ffe9a0;animation:czDrop2 1.6s cubic-bezier(.5,0,.6,1.4) both}
+
+
 @keyframes czDrop2{0%{top:-50%}35%{top:19%}45%{top:15%}55%{top:19%}85%{top:19%;opacity:1}100%{top:19%;opacity:0}}
 /* v17.8 mini-game */
 #czMG{position:fixed;inset:0;z-index:65;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(60,8,40,.92),rgba(5,1,6,.97));animation:mgIn .3s ease-out both;padding:env(safe-area-inset-top) 10px env(safe-area-inset-bottom)}
 #czMG.out{opacity:0;transition:opacity .3s}
 #czMG .mgbox{width:min(94vw,520px);max-height:calc(100dvh - 20px);overflow:auto;text-align:center;padding:14px 12px 10px;border-radius:18px;border:2px solid #d9a441;background:linear-gradient(#24101f,#0d0510);box-shadow:0 0 30px rgba(255,79,163,.5)}
-#czMG .mgt{font:900 italic clamp(24px,7vw,36px)/1.1 "Arial Black","KleeSub",sans-serif;color:#ffe7a8;text-shadow:0 0 10px #ffb000,0 0 24px #ff4fa3}
-#czMG .mgs{margin:4px 0 10px;color:#ffd6ee;font:600 14px/1.3 "KleeSub",sans-serif}
+#czMG .mgt{font:900 italic clamp(24px,7vw,36px)/1.1 "Arial Black","KleeSub","Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;color:#ffe7a8;text-shadow:0 0 10px #ffb000,0 0 24px #ff4fa3}
+#czMG .mgs{margin:4px 0 10px;color:#ffd6ee;font:600 14px/1.3 "KleeSub","Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif}
 #czMG .mgg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 #czMG .mgc{position:relative;aspect-ratio:3/2;border-radius:12px;border:2px solid #d9a441;padding:0;overflow:hidden;background:#140a14;cursor:pointer;transition:transform .15s}
 #czMG .mgc:active{transform:scale(.95)}
@@ -259,7 +259,7 @@ dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!i
 #czMG .mgok[hidden]{display:none}
 
 @media (max-width:620px) and (orientation:portrait){.bw .art{background:var(--czhero) 50% 8%/cover no-repeat!important;opacity:.85!important}}
-@media (max-width:620px) and (orientation:portrait){#czAtari .ab{background:linear-gradient(rgba(10,2,10,.35),rgba(10,2,10,.55)),var(--czhero,url(assets/lobby/atari_bl.webp?v=182)) 50% 10%/cover no-repeat!important}}
+@media (max-width:620px) and (orientation:portrait){#czAtari .ab{background:linear-gradient(rgba(10,2,10,.35),rgba(10,2,10,.55)),var(--czhero,url(assets/lobby/atari_bl.webp?v=183)) 50% 10%/cover no-repeat!important}}
 /* v18.1 portrait control spacing + menu stacking */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (max-width:620px) and (orientation:portrait){
@@ -288,3 +288,13 @@ body.menu16 #menu16{max-height:calc(100dvh - 120px)!important;overflow:auto!impo
 @media (orientation:landscape){.czauto{min-width:36px;min-height:36px}}
 #czAuStop{display:none}
 body.czau #czAuStop{display:block;position:fixed;z-index:60;border-radius:50%;cursor:pointer}
+
+/* v18.3 premium 激 badge on reel-window top edge */
+#czGeki{position:fixed;left:50%;top:0;width:clamp(84px,24vw,150px);aspect-ratio:1;z-index:72;pointer-events:none;transform:translate(-50%,-50%) scale(0);opacity:0}
+#czGeki img{width:100%;height:100%;display:block;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}
+#czGeki i{position:absolute;inset:0;-webkit-mask:url(assets/lobby/geki.webp?v=183) center/100% no-repeat;mask:url(assets/lobby/geki.webp?v=183) center/100% no-repeat;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.85) 48%,transparent 60%) no-repeat;background-size:250% 100%;background-position:150% 0}
+#czGeki.go{animation:czGk 1.45s cubic-bezier(.2,.9,.3,1) both}
+#czGeki.go i{animation:czGkS .6s .32s ease-out both}
+@keyframes czGk{0%{opacity:0;transform:translate(-50%,-140%) scale(1.9) rotate(-8deg)}14%{opacity:1;transform:translate(-50%,-50%) scale(.92) rotate(0)}20%{transform:translate(-50%,-50%) scale(1.06)}26%,80%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.25)}}
+@keyframes czGkS{from{background-position:150% 0}to{background-position:-60% 0}}
+@media (prefers-reduced-motion:reduce){#czGeki.go{animation:czGkR 1.4s both}#czGeki.go i{animation:none}@keyframes czGkR{0%,90%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}}
