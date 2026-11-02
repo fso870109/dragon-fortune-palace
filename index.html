@@ -2,12 +2,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>戀夜娛樂城 LOVE NIGHT CASINO｜僅供娛樂</title>
 <meta name="description" content="虛擬籌碼的日系柏青嫂風格娛樂城。僅供娛樂・虛擬籌碼・無真實金錢。">
-<link rel="preload" href="assets/lobby/bg.webp?v=171" as="image">
+<link rel="preload" href="assets/lobby/bg.webp?v=173" as="image">
 <style>
-@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff?v=171) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff?v=173) format("woff");font-weight:600;font-display:swap}
 *{box-sizing:border-box}html,body{margin:0;height:100%}
 body{background:#07020a;color:#fbe9f3;font-family:"Noto Sans TC","Noto Sans CJK TC",sans-serif;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/lobby/bg.webp?v=171) center 30%/cover no-repeat}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/lobby/bg.webp?v=173) center 30%/cover no-repeat}
 body::after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,2,10,.55),rgba(7,2,10,.25) 30%,rgba(7,2,10,.7) 70%,rgba(7,2,10,.95))}
 @media (min-width:800px){body::before{background-size:auto 140%;background-position:center 30%;box-shadow:inset 0 0 0 100vmax rgba(0,0,0,0)}body{background:radial-gradient(ellipse at 50% 20%,#2a0a26,#07020a 70%)}}
 button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
@@ -91,12 +91,17 @@ dialog h3{margin:0 0 10px;text-align:center;font:600 22px "KleeSub","Noto Sans T
 @media (prefers-reduced-motion:reduce){.neon,.jpc.g::after{animation:none}.mq div{animation-duration:90s}}
 @media (max-width:420px){.lv i{width:70px}.pill{padding:0 9px}.ib{width:34px;height:34px;font-size:15px}.top{gap:5px}}
 /* v17.1 */
+dialog{max-height:calc(100dvh - 16px)!important;overflow:auto!important}
 html,body{background-color:#1a0618}
 .card img{height:auto!important;aspect-ratio:5/3!important;object-fit:contain!important;background:#0d0510}
-.top{flex-wrap:wrap;row-gap:6px;padding-top:max(8px,env(safe-area-inset-top))}
-.lv{flex:0 1 auto;max-width:42vw;overflow:hidden}.lv b{overflow:hidden;text-overflow:ellipsis;display:block;max-width:100%}
-.mq{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-@media (max-width:420px){.top .sp{flex-basis:100%;order:9;height:0}.top .ib{order:10}.top{justify-content:flex-start}.top .ib:first-of-type{margin-left:auto}.lv i{width:100%;min-width:60px}}
+.top{flex-wrap:nowrap;gap:6px;padding-top:max(8px,env(safe-area-inset-top))}
+.lv{flex:0 1 auto;min-width:0;max-width:34vw;height:34px;padding:0 10px;gap:3px}.lv b{overflow:hidden;text-overflow:ellipsis;display:block;max-width:100%;font-size:11px}
+.lv i{width:100%!important;min-width:56px;height:3px!important;background:#4a1c40!important}.lv u{min-width:3px}
+.mq{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mq div{left:0;animation:mq2 var(--mqd,40s) linear infinite!important;transform:translateX(0)}
+@keyframes mq2{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (max-width:440px){.top{gap:4px}.pill{height:34px;padding:0 9px}.bal b{font-size:16px}.coin{width:17px;height:17px}.ib{width:31px!important;height:31px!important;font-size:14px!important;flex:none}.top .sp{flex:1 1 0;min-width:0}}
+@media (max-width:370px){.ib{width:29px!important;height:29px!important;font-size:13px!important}.lv{max-width:30vw;padding:0 8px}.top{gap:3px}}
 </style></head><body>
 <div id="load"><div class="neon" style="font-size:clamp(26px,8vw,60px)">LOVE <em>NIGHT</em></div><div class="neon2">戀夜娛樂城</div><div class="lb"><i id="lbi"></i></div><button id="enter">點擊進入 ♡ タップしてスタート</button><small>僅供娛樂・虛擬籌碼・無真實金錢</small></div>
 <div class="wrap">
@@ -125,13 +130,13 @@ html,body{background-color:#1a0618}
 <dialog id="dFree"><h3>免費籌碼</h3><div class="row"><div class="x"><b id="fAmt">每 3 小時可領一次</b><small id="fTxt"></small></div><button class="btn hot" id="fClaim">領取</button></div><p class="note">VIP 等級越高，每次可領越多・虛擬籌碼</p><button class="btn close" data-close>關閉</button></dialog>
 <dialog id="dMiss"><h3>今日任務</h3><div id="miss"></div><h3 style="margin-top:14px">成就</h3><div id="ach"></div><button class="btn close" data-close>關閉</button></dialog>
 <dialog id="dLb"><h3>排行榜</h3><span class="warn">⚠ 示範資料：除「你」以外皆為虛構玩家，非真實排名</span><table class="lbt" id="lbt"></table><p class="note">依累積贏得虛擬籌碼排序・僅供娛樂</p><button class="btn close" data-close>關閉</button></dialog>
-<script src="casino.js?v=171"></script>
+<script src="casino.js?v=173"></script>
 <script>
 (()=>{const $=id=>document.getElementById(id),LS=localStorage,fmt=n=>Math.floor(n).toLocaleString('en-US');
 const GAMES=[
- {id:'love',href:'love.html',name:'恋する夜のスロット♡',img:'assets/love/card.webp?v=171',tags:['RTP 96.1%','中波動','FS ×2'],rib:'NEW'},
- {id:'matsuri',href:'matsuri.html',name:'夏祭り恋花火',img:'assets/matsuri/card.webp?v=171',tags:['RTP 96.1%','低波動','FS ×2'],rib:'和風祭典'},
- {id:'caishen',href:'caishen.html',name:'財神降臨',img:'assets/caishen/card.webp?v=171',tags:['RTP 95.9%','高波動','FS ×3'],rib:'東方財神'}];
+ {id:'love',href:'love.html',name:'恋する夜のスロット♡',img:'assets/love/card.webp?v=173',tags:['RTP 96.1%','中波動','FS ×2'],rib:'NEW'},
+ {id:'matsuri',href:'matsuri.html',name:'夏祭り恋花火',img:'assets/matsuri/card.webp?v=173',tags:['RTP 96.1%','低波動','FS ×2'],rib:'和風祭典'},
+ {id:'caishen',href:'caishen.html',name:'財神降臨',img:'assets/caishen/card.webp?v=173',tags:['RTP 95.9%','高波動','FS ×3'],rib:'東方財神'}];
 $('wall').innerHTML=GAMES.map(g=>`<a class="card" href="${g.href}" data-id="${g.id}"><span class="rib">${g.rib}</span><img src="${g.img}" alt="${g.name}" loading="lazy" decoding="async" width="720" height="405"><div class="meta"><div class="t"><b>${g.name}</b><small>${g.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</small></div><span class="play">PLAY</span></div></a>`).join('')+
  `<div class="card lock" aria-hidden="true"><div class="ph">COMING SOON</div><div class="meta"><div class="t"><b>新機台 準備中</b><small><span class="tag">敬請期待</span></small></div></div></div>`;
 // ---- UI refresh ----
@@ -146,7 +151,7 @@ addEventListener('storage',e=>{if(e.key==='cz_jp'||e.key==='fs_bal'){try{tgt=JSO
 let lastT=0;function tick(t){if(t-lastT>100){lastT=t;for(let i=0;i<3;i++){shown[i]+=(tgt[i]-shown[i])*.08+(tgt[i]>shown[i]?.01:0);$('jp'+i).textContent=fmt(Math.min(shown[i],tgt[i]))}}requestAnimationFrame(tick)}requestAnimationFrame(tick);
 // ---- marquee ----
 function mq(){const f=CZ.st.feed.slice(0,5).map(x=>`★ 你的紀錄：<b>${x.t}</b>`);const tips=['歡迎光臨 <b>戀夜娛樂城</b> ♡','每 3 小時可領 <b>免費籌碼</b>','完成 <b>今日任務</b> 拿額外籌碼','任一機台都可能觸發 <b>JACKPOT 轉盤</b>','僅供娛樂・虛擬籌碼・無真實金錢'];
- $('mq').innerHTML=[...tips.slice(0,1),...f,...tips.slice(1)].join('　　　')}mq();
+ {const h=[...tips.slice(0,1),...f,...tips.slice(1)].join('　　　')+'　　　';const m=$('mq');m.innerHTML=h+h;m.style.setProperty('--mqd',Math.max(20,m.textContent.length*0.28)+'s')}}mq();
 // ---- daily (shares format with machines: fs_daily) ----
 const DAILY=[100,150,200,300,400,500,1000],dkey=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
 function dState(){let st;try{st=JSON.parse(LS.getItem('fs_daily')||'{}')}catch(e){st={}}const t=new Date(),y=new Date(t);y.setDate(y.getDate()-1);

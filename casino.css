@@ -55,7 +55,7 @@
 .czls{color:#e9c98a;letter-spacing:6px;font-size:12px}.cznote2{position:absolute;bottom:14px;font-size:11px;color:#bfa9bd}
 dialog#czBuy .czbp{font-size:16px;text-align:center}dialog#czBuy .czbp b{color:#ffd27a;font-size:22px}
 /* ---- mobile portrait ---- */
-@media (max-width:620px){
+@media (max-width:620px) and (orientation:portrait){
  :root{--bar:0px;--W:100vw}
  .czbar{height:auto;flex-direction:column;gap:8px;padding:8px 10px 6px;border-top:0;background:linear-gradient(#12060f,#07030a)}
  .czL{order:3;flex:0 0 auto;width:100%;justify-content:space-between}
@@ -79,19 +79,19 @@ dialog#czBuy .czbp{font-size:16px;text-align:center}dialog#czBuy .czbp b{color:#
  .machine{display:flex;flex-direction:column}
  .wrap{align-items:flex-start!important}
 }
-@media (max-width:620px) and (max-height:600px){.czbar .spin{width:78px!important;height:78px!important}.czm,.czbar .box{height:40px!important}.czbar{gap:6px;padding-top:6px}}
+@media (max-width:620px) and (orientation:portrait) and (max-height:600px){.czbar .spin{width:78px!important;height:78px!important}.czm,.czbar .box{height:40px!important}.czbar{gap:6px;padding-top:6px}}
 /* landscape phones */
-@media (min-width:621px) and (max-height:500px){:root{--bar:70px}.czbar{height:52px;gap:6px;padding:0 6px}.czlv,.czbtn span{display:none}.czbar .spin{height:42px!important;min-width:110px}.czbar .box{height:38px!important;min-width:70px}.czbtn,.czbar #max16,.czbar #menuBtn{height:36px;padding:0 9px;font-size:12px}.cznote{height:18px}}
+@media (orientation:landscape) and (max-height:500px){:root{--bar:70px}.czbar{height:52px;gap:6px;padding:0 6px}.czlv,.czbtn span{display:none}.czbar .spin{height:42px!important;min-width:110px}.czbar .box{height:38px!important;min-width:70px}.czbtn,.czbar #max16,.czbar #menuBtn{height:36px;padding:0 9px;font-size:12px}.cznote{height:18px}}
 @media (min-width:621px) and (max-width:1000px){.czlv{display:none}.czbtn span{display:none}}
 body.menu16 .row2{bottom:calc(var(--bar) + 4px)!important}
-@media (max-width:620px){body.menu16 .row2{bottom:70px!important}}
+@media (max-width:620px) and (orientation:portrait){body.menu16 .row2{bottom:70px!important}}
 
 body::before{background:linear-gradient(rgba(5,2,8,.6),rgba(5,2,8,.6)),var(--czbg) center/cover no-repeat!important}
-@media (max-width:620px){.wrap{align-items:center!important}}
-@media (min-width:621px) and (max-height:500px){.czC{gap:6px}.czbar .controls{gap:6px!important}.czbar .spin{min-width:96px!important;font-size:17px!important}.czbar .spin small{display:none}.czbar .controls #minus,.czbar .controls #plus{width:36px!important;height:36px!important}.czL,.czR{gap:5px}.czbar #max16{font-size:11px}}
+@media (max-width:620px) and (orientation:portrait){.wrap{align-items:center!important}}
+@media (orientation:landscape) and (max-height:500px){.czC{gap:6px}.czbar .controls{gap:6px!important}.czbar .spin{min-width:96px!important;font-size:17px!important}.czbar .spin small{display:none}.czbar .controls #minus,.czbar .controls #plus{width:36px!important;height:36px!important}.czL,.czR{gap:5px}.czbar #max16{font-size:11px}}
 @media (min-width:621px) and (max-width:1000px){.czbar .spin small{display:none}.czbar .spin{min-width:110px!important}}
 body::before{background:radial-gradient(ellipse at 50% 30%,#2a0a22,#07020a 70%)!important}
-@media (min-width:621px){.czbar,.cznote{width:100vw;margin-left:calc((var(--W) - 100vw) / 2);box-sizing:border-box}}
+@media (min-width:621px),(orientation:landscape){.czbar,.cznote{width:100vw;margin-left:calc((var(--W) - 100vw) / 2);box-sizing:border-box}}
 .cznote{position:relative;z-index:3}
 
 /* 大当り cutscene */
@@ -127,22 +127,22 @@ body::before{background:radial-gradient(ellipse at 50% 30%,#2a0a22,#07020a 70%)!
 #czWheel .czwbox{position:relative;z-index:2}
 #czWheel .czframe{z-index:0}
 /* v17.1 mobile fixes */
-@media (max-width:620px){
+@media (max-width:620px) and (orientation:portrait){
  .wrap{margin-top:0!important;min-height:0!important}
  html,body{min-height:100svh}
  .machine{min-height:100svh;min-height:100dvh;padding-top:env(safe-area-inset-top)!important}
  .czbar{flex:1 1 auto;justify-content:space-evenly!important;padding-bottom:calc(6px + env(safe-area-inset-bottom))!important}
  .czbar{position:relative!important}
- .czbar{display:grid!important;grid-template-columns:auto 1fr;align-content:space-evenly;column-gap:6px}
+ .czbar{display:grid!important;grid-template-columns:auto 1fr;align-content:center;row-gap:clamp(10px,2.4svh,24px);column-gap:6px;padding-top:clamp(10px,2.5svh,28px)!important}
  .czbar .czC{grid-column:1/-1}
  .czbar .czL{position:static!important;width:auto!important}
  .czbar .czR{padding-left:0!important;width:auto!important}
  .czbar .czL,.czbar .czR{display:flex}
 }
-@media (max-width:620px) and (min-aspect-ratio:9/17) and (max-aspect-ratio:3/4){}
+@media (max-width:620px) and (orientation:portrait) and (min-aspect-ratio:9/17) and (max-aspect-ratio:3/4){}
 /* v17.1 themed portrait fill */
 html{background:var(--czth,#1a0618)}
-@media (max-width:620px){
+@media (max-width:620px) and (orientation:portrait){
  body{background:transparent!important}
  body::before{position:fixed!important;inset:0!important;background:linear-gradient(rgba(0,0,0,0) 40%,rgba(0,0,0,.25)),var(--czbgp) center/cover no-repeat!important;opacity:1!important;z-index:-2!important;content:""!important;display:block!important}
  body::after{content:""!important;display:block!important;position:fixed!important;inset:0;z-index:-1!important;pointer-events:none;background:radial-gradient(circle,rgba(255,210,150,.55) 0 1.5px,transparent 2.5px) 0 0/90px 110px,radial-gradient(circle,rgba(255,140,200,.45) 0 1px,transparent 2px) 40px 60px/70px 90px;animation:czamb 22s linear infinite;opacity:.6}
@@ -150,7 +150,7 @@ html{background:var(--czth,#1a0618)}
  .cznote{background:transparent!important}
  .machine{background:none!important}
 }
-@media (max-width:620px) and (min-height:700px){
+@media (max-width:620px) and (orientation:portrait) and (min-height:700px){
  .czbar .spin{width:112px!important;height:112px!important}
  .czbar .controls #minus,.czbar .controls #plus{width:62px!important;height:62px!important}
  .czm,.czbar .box{height:54px!important}.czm b{font-size:23px}
@@ -158,3 +158,16 @@ html{background:var(--czth,#1a0618)}
 }
 @keyframes czamb{to{background-position:0 -440px,40px -300px}}
 @media (prefers-reduced-motion:reduce){body::after{animation:none!important}}
+
+@media (max-width:620px) and (orientation:portrait) and (min-height:700px){
+ .czbar .spin{width:clamp(112px,16svh,140px)!important;height:clamp(112px,16svh,140px)!important}
+ .czbar .controls{gap:30px!important}
+}
+@media (orientation:landscape) and (max-height:500px){
+ body{background:transparent!important}
+ body::before{position:fixed!important;inset:0!important;background:linear-gradient(rgba(0,0,0,0) 40%,rgba(0,0,0,.25)),var(--czbgp) center/cover no-repeat!important;opacity:1!important;z-index:-2!important;content:""!important;display:block!important}
+ body::after{content:""!important;display:block!important;position:fixed!important;inset:0;z-index:-1!important;pointer-events:none;background:radial-gradient(circle,rgba(255,210,150,.55) 0 1.5px,transparent 2.5px) 0 0/90px 110px,radial-gradient(circle,rgba(255,140,200,.45) 0 1px,transparent 2px) 40px 60px/70px 90px;animation:czamb 22s linear infinite;opacity:.6}
+ .cznote{background:transparent!important}
+}
+dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!important;-webkit-overflow-scrolling:touch}
+@media (orientation:landscape) and (max-height:500px){body.menu16 .row2{max-height:calc(100dvh - 80px)!important;overflow:auto!important;bottom:62px!important}}
