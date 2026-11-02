@@ -171,3 +171,25 @@ html{background:var(--czth,#1a0618)}
 }
 dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!important;-webkit-overflow-scrolling:touch}
 @media (orientation:landscape) and (max-height:500px){body.menu16 .row2{max-height:calc(100dvh - 80px)!important;overflow:auto!important;bottom:62px!important}}
+/* v17.4 portrait stacked layout */
+#czHero{display:none}
+@media (max-width:620px) and (orientation:portrait){
+ .wrap{overflow:hidden;width:100vw}
+ .machine{width:100vw!important;height:100svh;height:100dvh;min-height:0!important;display:flex!important;flex-direction:column;overflow:hidden;padding-top:0!important}
+ #czHero{display:block;position:relative;flex:1 1 auto;min-height:26svh;overflow:hidden;margin-bottom:-4px;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
+ #czHero .czhi{position:absolute;inset:-3% -3% 0;background:center 2%/cover no-repeat;transform-origin:50% 70%;animation:czBreath 6s ease-in-out infinite;will-change:transform}
+ #czHero .czhs{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,235,250,.16) 48%,transparent 60%) 0 0/250% 100%;animation:czShim 7s ease-in-out infinite;mix-blend-mode:screen;pointer-events:none}
+ #czHero .czhp{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,220,170,.8) 0 1.4px,transparent 2.4px) 0 0/80px 95px,radial-gradient(circle,rgba(255,150,210,.6) 0 1px,transparent 2px) 30px 40px/60px 70px;animation:czRise 14s linear infinite;opacity:.7}
+ #czHero .czhp.b{background-size:110px 130px,90px 120px;animation-duration:20s;opacity:.45}
+ #czHero .czhl{position:absolute;right:max(4px,env(safe-area-inset-right));top:calc(env(safe-area-inset-top) + 6px);width:min(40vw,210px);height:auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6));animation:czLogo 5s ease-in-out infinite}
+ .machine>.inner{flex:none;position:relative;z-index:1}
+ .machine>.inner::before{content:"";position:absolute;left:0;right:0;top:0;height:31%;background:none}
+ .czbar{flex:0 0 auto!important;position:relative;z-index:2;align-content:start!important;padding-top:10px!important;row-gap:10px!important}
+ .cznote{flex:none}
+ .badges{display:none!important}
+}
+@keyframes czBreath{0%,100%{transform:scale(1) translateY(0) skewX(0)}50%{transform:scale(1.025) translateY(-.6%) skewX(-.35deg)}}
+@keyframes czShim{0%,60%{background-position:120% 0}100%{background-position:-120% 0}}
+@keyframes czRise{to{background-position:0 -380px,30px -280px}}
+@keyframes czLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){#czHero *{animation:none!important}}
