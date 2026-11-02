@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#05060c"><meta name="description" content="經典水果老虎機：僅供娛樂的網頁小遊戲，使用虛擬籌碼，無真實金錢。"><meta name="color-scheme" content="dark">
+<title>財神降臨｜東方財神｜戀夜娛樂城</title>
+<style>
+<style>
+.badge{position:relative}
+.badge.dot::after{content:"";position:absolute;top:-4px;right:-4px;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ff3b3b 45%,#a00);box-shadow:0 0 8px #f33;animation:blink 1s infinite}
+#daily{width:min(460px,94vw);background:radial-gradient(ellipse at 50% 0%,#5c0d22,#1a0308 70%);box-shadow:0 0 40px rgba(255,180,0,.35)}
+#daily h2{text-align:center;font-size:26px;letter-spacing:4px;background:linear-gradient(#fff6a0,#ffb400,#c76a00);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #5a2a00)}
+.dsub{text-align:center;font-size:13px;color:#ffe9a8;margin:4px 0 12px}
+.days{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;list-style:none}
+.day{position:relative;border-radius:12px;padding:8px 4px 6px;text-align:center;background:linear-gradient(#2a0a12,#12030a);border:2px solid #5a3a00;box-shadow:inset 0 0 10px rgba(0,0,0,.6)}
+.day:last-child{grid-column:span 2}
+.day .dn{font-size:11px;color:#fc6}
+.day .coin{width:34px;height:34px;margin:4px auto;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6b0,#ffcc33 40%,#d48a00 75%,#8a5200);box-shadow:0 0 0 2px #8a5200,0 2px 6px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;font:900 15px Impact,sans-serif;color:#7a4300}
+.day:last-child .coin{width:44px;height:44px;font-size:20px;box-shadow:0 0 0 2px #8a5200,0 0 16px #ffcc33}
+.day b{font-family:"Courier New",monospace;color:#ffd54f;font-size:15px}
+.day.got{opacity:.55}
+.day.got::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:#3f3;text-shadow:0 0 8px #0f0,0 2px 0 #050}
+.day.today{border-color:#ffd54f;box-shadow:0 0 0 2px #ffd54f,0 0 18px rgba(255,200,0,.7);animation:teaseGlow .6s ease-in-out infinite alternate}
+.dact{text-align:center;margin-top:14px;display:flex;gap:8px;justify-content:center}
+.dact .claim{font-size:18px;padding:12px 30px;border-radius:40px;background:linear-gradient(#ffe57a,#f0a800 60%,#b86e00);color:#3a1d00;box-shadow:0 5px 0 #6a3a00,0 0 20px rgba(255,190,0,.6)}
+
+#ad{width:min(440px,94vw);background:radial-gradient(ellipse at 50% 0%,#0d4a3a,#02130e 70%);box-shadow:0 0 40px rgba(0,230,160,.35)}
+#ad h2{text-align:center;font-size:24px;letter-spacing:3px;background:linear-gradient(#e8fff4,#4dffb8,#00a070);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #003a28)}
+.adsub{text-align:center;font-size:13px;color:#bfffe6;margin:4px 0 10px}
+.adscreen{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:2px solid #2fd39a;background:repeating-linear-gradient(45deg,#06261c 0 14px,#0a3326 14px 28px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}
+.adscreen .tag{position:absolute;top:8px;left:8px;font-size:11px;padding:2px 8px;border-radius:8px;background:#ffd54f;color:#3a1d00;font-weight:700}
+.adscreen .ph{font-size:15px;color:#d9fff0;font-weight:700}.adscreen .ph2{font-size:11px;color:#8fd9bd}
+.ring{width:74px;height:74px;position:relative}.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:8}.ring .bg{stroke:#0f4a37}.ring .fg{stroke:url(#gGold);stroke-linecap:round;stroke-dasharray:201;stroke-dashoffset:201;transition:stroke-dashoffset .25s linear}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 24px Impact,sans-serif;color:#ffd54f;text-shadow:0 0 8px rgba(255,200,0,.6)}
+.adscreen.done{border-color:#ffd54f;box-shadow:0 0 18px rgba(255,210,0,.6)}
+.adpips{display:flex;gap:6px;justify-content:center;margin:10px 0 0}.adpips i{width:14px;height:14px;border-radius:50%;background:#0f4a37;border:1px solid #2fd39a}.adpips i.on{background:radial-gradient(circle at 35% 30%,#fff6b0,#ffcc33 45%,#a86a00);border-color:#ffd54f}
+
+#lb{width:min(480px,94vw);background:radial-gradient(ellipse at 50% 0%,#0d2a5c,#030a1a 70%);box-shadow:0 0 40px rgba(80,160,255,.35)}
+#lb h2{text-align:center;font-size:26px;letter-spacing:4px;background:linear-gradient(#fff6a0,#ffb400,#c76a00);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #5a2a00)}
+.lbname{display:flex;gap:6px;justify-content:center;align-items:center;margin:6px 0 10px;font-size:13px;color:#cfe3ff}
+.lbname input{width:140px;padding:6px 10px;border-radius:10px;border:2px solid #ffd54f;background:#0a1430;color:#fff;font:inherit;font-size:14px}
+.tabs{display:flex;gap:6px;justify-content:center;margin-bottom:10px}
+.tabs button{flex:1;max-width:160px;padding:8px;border-radius:20px;font-size:14px}
+.tabs button[aria-selected="true"]{background:linear-gradient(#ffe57a,#f0a800 60%,#b86e00);color:#3a1d00;box-shadow:0 3px 0 #6a3a00}
+.lbl-list{list-style:none;display:flex;flex-direction:column;gap:6px;max-height:min(46vh,360px);overflow:auto;padding:2px}
+.lbl-list li{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:linear-gradient(90deg,#13234a,#0a1228);border:1px solid #2a4a8a}
+.lbl-list li.new{border-color:#ffd54f;box-shadow:0 0 12px rgba(255,210,0,.6)}
+.rk{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:900 14px Impact,sans-serif;color:#223;background:linear-gradient(#cfd8e6,#7b8aa3);box-shadow:inset 0 -2px 0 rgba(0,0,0,.3)}
+.r1 .rk{background:radial-gradient(circle at 35% 30%,#fff6b0,#ffcc33 45%,#a86a00);box-shadow:0 0 10px #fc3}
+.r2 .rk{background:radial-gradient(circle at 35% 30%,#fff,#c9d2de 45%,#6d7a8c)}
+.r3 .rk{background:radial-gradient(circle at 35% 30%,#ffe0c0,#d9884a 45%,#7a3e10)}
+.lbl-list .who{font-size:13px;color:#cfe3ff;line-height:1.3}.lbl-list .who small{display:block;color:#8aa3c8;font-size:11px}
+.lbl-list .amt2{font:700 18px "Courier New",monospace;color:#ffd54f;text-shadow:0 0 6px rgba(255,200,0,.5)}
+.empty{text-align:center;color:#8aa3c8;padding:24px 0;font-size:14px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stats div{padding:10px;border-radius:12px;background:linear-gradient(#13234a,#0a1228);border:1px solid #2a4a8a;text-align:center}
+.stats small{display:block;font-size:11px;color:#8aa3c8}.stats b{font:700 18px "Courier New",monospace;color:#ffd54f}
+
+#inv{width:min(440px,94vw);background:radial-gradient(ellipse at 50% 0%,#4a1060,#12031c 70%);box-shadow:0 0 40px rgba(200,90,255,.35)}
+#inv h2{text-align:center;font-size:24px;letter-spacing:3px;background:linear-gradient(#fff0ff,#e48bff,#9b30d0);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #2a0040)}
+.invsub{text-align:center;font-size:13px;color:#f0d6ff;margin:4px 0 12px}
+.invcard{position:relative;border-radius:14px;padding:14px 12px 12px;text-align:center;border:2px dashed #e48bff;background:linear-gradient(135deg,#2a0840,#180428);box-shadow:inset 0 0 18px rgba(0,0,0,.5)}
+.invcard .tag{position:absolute;top:8px;left:8px;font-size:11px;padding:2px 8px;border-radius:8px;background:#ffd54f;color:#3a1d00;font-weight:700}
+.invcard small{display:block;font-size:12px;color:#d9b3f0;margin-bottom:4px}
+.invcode{font:900 30px "Courier New",monospace;letter-spacing:4px;color:#ffd54f;text-shadow:0 0 10px rgba(255,200,0,.6),0 2px 0 #5a2a00;user-select:all}
+.invrow{display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+.invrow button{padding:8px 14px;border-radius:20px;font-size:14px}
+.invin{margin-top:14px;padding:12px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid #6a2a8a}
+.invin label{display:block;font-size:13px;color:#f0d6ff;margin-bottom:6px;text-align:center}
+.invin .f{display:flex;gap:6px;justify-content:center}
+.invin input{width:170px;padding:8px 10px;border-radius:10px;border:2px solid #e48bff;background:#1a0628;color:#fff;font:700 16px "Courier New",monospace;letter-spacing:2px;text-transform:uppercase;text-align:center}
+.invin input[aria-invalid="true"]{border-color:#ff5a7a}
+.invmsg{min-height:18px;text-align:center;font-size:13px;margin-top:6px;color:#ffd54f}.invmsg.err{color:#ff8aa0}.invmsg.ok{color:#7dff9a}
+@media (prefers-reduced-motion:reduce){.day.today,.badge.dot::after{animation:none}}
+#shop{width:min(560px,94vw);background:radial-gradient(ellipse at 50% 0%,#4a2a06,#160a02 70%);box-shadow:0 0 40px rgba(255,190,60,.35)}
+#shop h2{text-align:center;font-size:24px;letter-spacing:3px;background:linear-gradient(#fff6a0,#ffb400,#c76a00);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #5a2a00)}
+.shsub{text-align:center;font-size:13px;color:#ffe0a8;margin:4px 0 10px}.shsub b{color:#ffd54f;font-family:"Courier New",monospace;font-size:16px}
+.skins{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;list-style:none;padding:0;margin:0}
+.skin{position:relative;border-radius:14px;padding:8px 6px 10px;text-align:center;background:rgba(0,0,0,.35);border:2px solid #5a3a10;display:flex;flex-direction:column;gap:6px;align-items:center}
+.skin.eq{border-color:#ffd54f;box-shadow:0 0 16px rgba(255,210,80,.5),inset 0 0 12px rgba(255,210,80,.15)}
+.skin .pv{width:100%;height:clamp(66px,17vw,86px);border-radius:12px;padding:6px;box-shadow:0 4px 10px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.7)}
+.skin .pv>div{height:100%;border-radius:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:4px}
+.coin{display:inline-block;width:1em;height:1em;border-radius:50%;vertical-align:-.15em;margin-right:4px;background:radial-gradient(circle at 35% 30%,#fff8c0,#ffd54f 35%,#c78a00 75%,#7a5200);box-shadow:inset 0 0 0 1.5px #8a5a00,0 1px 1px rgba(0,0,0,.4)}
+.skin .pv i{border-radius:4px;background:linear-gradient(90deg,#b8b0a0,#fff 50%,#b8b0a0);display:flex;align-items:center;justify-content:center}
+.skin .pv i{min-height:0;overflow:hidden}.skin .pv i svg{width:85%;height:70%}
+.skin b{font-size:14px;color:#fff}.skin small{font-size:11px;color:#e8c890;min-height:15px}
+.skin button{width:100%;padding:7px 4px;font-size:13px;border-radius:18px}
+.skin button.buy{background:linear-gradient(#ffe57a,#f0a800 60%,#b86e00);color:#3a1d00;box-shadow:0 3px 0 #6a3a00}
+.skin button[aria-disabled="true"]{opacity:.55;filter:grayscale(.4)}
+.skin button.cf{background:linear-gradient(#ff7a7a,#d01030);color:#fff;box-shadow:0 3px 0 #5a0010;animation:breathe 1s infinite}
+.skin button.use{background:linear-gradient(#5fe39a,#109050);box-shadow:0 3px 0 #04381e}
+.skin .eqtag{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:11px;padding:1px 8px;border-radius:8px;background:#ffd54f;color:#3a1d00;font-weight:700;white-space:nowrap}
+.shmsg{min-height:18px;text-align:center;font-size:13px;margin-top:8px;color:#ffd54f}.shmsg.err{color:#ff8aa0}.shmsg.ok{color:#7dff9a}
+@media (max-width:420px){.skins{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){.skin button.cf{animation:none}.machine,.inner,.board,.lights i,.box{transition:none}}
+/* ===== v12 パチスロ restyle ===== */
+:root{--acc:#ff2240;--acc2:#ffc400;--acc3:#2a6bff;--chrome1:#f4f6fb;--chrome2:#8a93a6;--chrome3:#2a2f3a;--cab:#07080f;--glow:255,34,64}
+body[data-skin="neon"]{--acc:#00e5ff;--acc2:#ff3ad8;--acc3:#7a3cff;--glow:0,229,255}
+body[data-skin="jade"]{--acc:#19e08a;--acc2:#ffd54f;--acc3:#0a8f5a;--glow:25,224,138}
+body[data-skin="crystal"]{--acc:#8fd8ff;--acc2:#ffffff;--acc3:#3a7bd5;--chrome2:#a9c6e6;--glow:143,216,255}
+body[data-skin="royal"]{--acc:#b45cff;--acc2:#ffd54f;--acc3:#ff3a9a;--glow:180,92,255}
+body[data-skin="obsidian"]{--acc:#ff6a1a;--acc2:#ffb000;--acc3:#ff2a00;--chrome1:#bdbdbd;--chrome2:#4a4a4a;--chrome3:#111;--glow:255,106,26}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#020207}
+body{min-height:100vh;font-family:"Noto Sans TC","Noto Sans JP","PingFang TC","Microsoft JhengHei",sans-serif;color:#fff;background:#020207;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;padding:max(6px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/key.webp) center top/auto max(100%,1024px) no-repeat,#020207;opacity:.9}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 30%,rgba(0,0,0,.75) 85%),radial-gradient(ellipse at 50% 0%,rgba(var(--glow),.22),transparent 55%)}
+h1{position:relative;margin:2px 0 0;font:900 italic clamp(22px,5.2vw,34px)/1.05 "Arial Black","Noto Sans TC",sans-serif;letter-spacing:2px;transform:skewX(-10deg);color:#fff;background:linear-gradient(180deg,#fff 0%,#fff 42%,var(--acc2) 52%,#ff7a00 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:1px rgba(0,0,0,.4);filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 10px rgba(var(--glow),.7))}
+h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);letter-spacing:1px}
+.sub{font-size:11px;letter-spacing:2px;color:#cfd6e6;opacity:.85;margin:2px 0 6px;padding:1px 10px;border:1px solid rgba(255,255,255,.18);border-radius:3px;background:rgba(0,0,0,.5)}
+.wrap{position:relative;display:flex;align-items:stretch;justify-content:center;gap:10px;width:100%}
+.led{width:34px;flex:none;border-radius:10px;background:linear-gradient(90deg,#0b0c14,#1a1d29 50%,#0b0c14);box-shadow:inset 0 0 0 1px #3a4152,0 0 0 2px #000,0 10px 30px rgba(0,0,0,.7);display:flex;flex-direction:column;justify-content:space-evenly;align-items:center;padding:10px 0;overflow:hidden;position:relative}
+.led i{display:block;width:16px;height:16px;border-radius:3px;background:var(--acc);opacity:.18;transform:scale(.9);animation:ledChase 1.6s linear infinite;animation-delay:calc(var(--i)*-.1s);box-shadow:0 0 8px rgba(var(--glow),.9)}
+.led i:nth-child(3n){background:var(--acc2)}
+@keyframes ledChase{0%,100%{opacity:.15}8%{opacity:1}30%{opacity:.25}}
+.machine.spinning .led i{animation-duration:.8s}
+.win-mode .led i{animation-duration:.5s}
+.led .ltxt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font:900 italic 18px "Arial Black",sans-serif;letter-spacing:6px;color:#fff;text-shadow:0 0 6px var(--acc),0 0 14px var(--acc);pointer-events:none;opacity:.9}
+.machine{position:relative;width:min(540px,100%);padding:10px;border-radius:22px 22px 18px 18px;background:linear-gradient(180deg,var(--chrome1),var(--chrome2) 6%,var(--chrome3) 14%,#05060b 50%,var(--chrome3) 86%,var(--chrome2) 94%,var(--chrome1));box-shadow:0 0 0 2px #000,0 0 0 4px rgba(var(--glow),.55),0 0 28px rgba(var(--glow),.45),0 24px 60px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.9)}
+.inner{position:relative;border-radius:14px;padding:10px;background:linear-gradient(180deg,#0d1020,#05060c 30%,#090b16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 8px 24px rgba(0,0,0,.9)}
+/* LCD */
+.lcd{position:relative;height:clamp(108px,17vh,150px);border-radius:10px;overflow:hidden;background:#000;box-shadow:0 0 0 2px #000,0 0 0 3px #4a5268,0 0 0 5px #000,inset 0 0 30px rgba(0,0,0,.9);margin-bottom:8px;contain:strict;isolation:isolate}
+.lcd .scr{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,rgba(var(--glow),.55),transparent 60%),linear-gradient(180deg,#060a1e,#0a0414);}
+.lcd .grid{position:absolute;inset:-50% -10% 0;background:repeating-linear-gradient(90deg,rgba(var(--glow),.25) 0 1px,transparent 1px 34px),repeating-linear-gradient(0deg,rgba(var(--glow),.25) 0 1px,transparent 1px 34px);transform:perspective(200px) rotateX(55deg);transform-origin:50% 100%;animation:gridRun 1.2s linear infinite;opacity:.6}
+@keyframes gridRun{to{background-position:0 34px,0 34px}}
+.lcd .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);pointer-events:none;z-index:9}
+.lcd .gloss{position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.14),transparent 35%);pointer-events:none;z-index:10}
+.lcd .idle{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;z-index:2}
+.lcd .idle b{font:900 italic clamp(22px,5vw,34px)/1 "Arial Black",sans-serif;transform:skewX(-12deg);letter-spacing:1px;background:linear-gradient(#fff,#fff 45%,var(--acc2) 55%,#ff6a00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 8px rgba(var(--glow),.8))}
+.lcd .idle span{font-size:11px;letter-spacing:4px;color:#9fb0d6}
+.lcd .stage{position:absolute;inset:0;z-index:4;pointer-events:none}
+.lcd .ci{position:absolute;inset:0;background:url(assets/caishen/cutin.webp) 20% 30%/cover;transform:translateX(-105%) skewX(-12deg);opacity:0;will-change:transform,opacity}
+.lcd.reach .ci{animation:ciIn .45s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes ciIn{0%{transform:translateX(-105%) skewX(-12deg);opacity:1}100%{transform:translateX(0) skewX(0);opacity:1}}
+.lcd .speed{position:absolute;inset:-20%;background:repeating-conic-gradient(from 0deg at 30% 50%,rgba(255,255,255,.0) 0 3deg,rgba(255,255,255,.35) 3deg 3.6deg,rgba(255,255,255,0) 3.6deg 9deg);opacity:0;will-change:transform,opacity}
+.lcd.reach .speed,.lcd.bonus .speed{opacity:.55;animation:spd .25s linear infinite}
+@keyframes spd{50%{transform:scale(1.06)}}
+.slam{position:absolute;right:4%;top:50%;z-index:6;font:900 italic clamp(30px,8vw,56px)/1 "Arial Black","Noto Sans JP",sans-serif;letter-spacing:-1px;color:#fff;-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:0 4px 0 #000,0 0 18px var(--k,#ff2240),0 0 4px var(--k,#ff2240);transform:translateY(-50%) scale(3) rotate(-8deg);opacity:0;white-space:nowrap;will-change:transform,opacity}
+.slam.go{animation:slam .38s cubic-bezier(.2,1.6,.4,1) forwards}
+@keyframes slam{0%{transform:translateY(-50%) scale(3) rotate(-8deg);opacity:0}60%{opacity:1}100%{transform:translateY(-50%) scale(1) rotate(-8deg);opacity:1}}
+.slam small{display:block;font-size:.32em;letter-spacing:3px;-webkit-text-stroke:1px #000;text-align:right;margin-top:4px}
+.kitai{position:absolute;left:8px;bottom:8px;z-index:7;display:flex;align-items:center;gap:6px;font:700 11px sans-serif;letter-spacing:1px;color:#fff;background:rgba(0,0,0,.65);padding:3px 8px 3px 4px;border-radius:12px;border:1px solid rgba(255,255,255,.25);opacity:0;transition:opacity .2s}
+.kitai.on{opacity:1}
+.kitai i{width:14px;height:14px;border-radius:50%;background:var(--k);box-shadow:0 0 8px var(--k)}
+.kitai.rainbow i{background:conic-gradient(red,orange,yellow,lime,cyan,blue,magenta,red)}
+.lcd .seven{position:absolute;inset:0;z-index:8;background:url(assets/caishen/bigbonus.webp) center/cover;opacity:0;transform:scale(1.4);will-change:transform,opacity}
+.lcd.bonus .seven{animation:sevenIn .5s cubic-bezier(.2,1.3,.4,1) forwards}
+@keyframes sevenIn{to{opacity:1;transform:scale(1)}}
+.lcd .navi{position:absolute;left:50%;top:8px;transform:translateX(-50%);z-index:6;font:700 12px sans-serif;letter-spacing:2px;color:#fff;background:linear-gradient(90deg,transparent,rgba(var(--glow),.7),transparent);padding:2px 40px;white-space:nowrap}
+/* LED top bar */
+.lights{display:flex;justify-content:space-between;gap:3px;margin:0 2px 8px;height:8px}
+.lights i{flex:1;height:8px;border-radius:2px;background:var(--acc);opacity:.18;box-shadow:0 0 6px rgba(var(--glow),.8);animation:ledChase 1.2s linear infinite;animation-delay:calc(var(--i)*-.075s)}
+.lights i:nth-child(even){background:var(--acc2)}
+.machine.spinning .lights i{animation-duration:.6s}
+/* reels */
+.board{position:relative;overflow:hidden;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px;border-radius:8px;background:#000;box-shadow:0 0 0 2px #000,0 0 0 4px var(--chrome2),0 0 0 6px #000,0 0 18px rgba(var(--glow),.35)}
+.board::after{content:"";position:absolute;inset:6px;pointer-events:none;z-index:2;border-radius:4px;background:linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.08) 20%,transparent 30%,transparent 70%,rgba(0,0,0,.08) 80%,rgba(0,0,0,.72)),linear-gradient(105deg,rgba(255,255,255,.18),transparent 22%,transparent 80%,rgba(255,255,255,.06))}
+.reel{--c:clamp(68px,min(22vw,11vh),100px);height:calc(var(--c)*3);overflow:hidden;position:relative;border-radius:3px;background:linear-gradient(90deg,#8a8378,#f6f1e6 14%,#fffdf6 50%,#f6f1e6 86%,#8a8378);contain:layout paint}
+.reel::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(255,250,220,.0),rgba(60,40,10,.18) 90%);}
+.strip{position:absolute;left:0;right:0;top:0;will-change:transform}
+.cell{height:var(--c);display:flex;align-items:center;justify-content:center;user-select:none;position:relative;border-bottom:1px solid rgba(0,0,0,.06)}
+.cell .sym{width:84%;height:84%;object-fit:contain;display:block;filter:drop-shadow(0 2px 1px rgba(0,0,0,.35));overflow:visible}
+.cell.hit{background:radial-gradient(circle,rgba(var(--glow),.35),transparent 70%)}
+.cell.hit .sym{animation:symWin .6s ease-in-out infinite;will-change:transform}
+@keyframes symWin{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+.cell.hit::before{content:"";position:absolute;inset:3px;border:3px solid var(--acc2);box-shadow:0 0 12px var(--acc2),inset 0 0 12px var(--acc2);border-radius:4px;animation:hitBlink .5s steps(2) infinite;pointer-events:none;z-index:1}
+@keyframes hitBlink{50%{opacity:.35}}
+.reel.tease{box-shadow:0 0 0 3px var(--acc);}
+.reel.tease::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 26px 6px var(--acc);animation:teaseO .4s ease-in-out infinite alternate}
+@keyframes teaseO{from{opacity:.4}to{opacity:1}}
+.board.teasing .reel:not(.tease){opacity:.55;transition:opacity .2s}
+.reel.land{animation:land .22s ease-out}
+@keyframes land{30%{transform:translateY(3px)}100%{transform:none}}
+svg.lines{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);pointer-events:none;z-index:3}
+svg.lines polyline{fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg.lines .glow{stroke-width:16;opacity:.35}
+svg.lines .core{stroke-width:5;stroke-dasharray:600;stroke-dashoffset:600;animation:draw .35s ease-out forwards}
+svg.lines .beam{stroke:#fff;stroke-width:2.5;stroke-dasharray:30 270;animation:beam .8s linear infinite}
+@keyframes beam{to{stroke-dashoffset:-300}}@keyframes draw{to{stroke-dashoffset:0}}
+.board .sweep{position:absolute;inset:0;pointer-events:none;z-index:4;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);transform:translateX(-120%);will-change:transform}
+.board .sweep.go{animation:sweep .7s ease-in-out 1}
+@keyframes sweep{to{transform:translateX(120%)}}
+/* info / 7-seg */
+.info{display:flex;gap:6px;margin:8px 0}
+.box{flex:1;border-radius:6px;padding:4px 6px;text-align:center;background:linear-gradient(#000,#0b0d14);box-shadow:inset 0 0 0 1px #2c3344,inset 0 0 14px rgba(0,0,0,.9)}
+.box small{display:block;font-size:10px;letter-spacing:2px;color:#9aa6c2}
+.box b{display:block;font:700 clamp(17px,4.6vw,24px)/1.1 "DSEG7 Classic","Courier New",monospace;color:#ff3b30;text-shadow:0 0 6px rgba(255,40,30,.8);font-variant-numeric:tabular-nums;letter-spacing:1px}
+.box.win b{color:var(--acc2);text-shadow:0 0 6px var(--acc2)}
+/* controls */
+.controls{display:flex;align-items:center;justify-content:center;gap:12px}
+button{font-family:inherit;cursor:pointer;border:none;border-radius:8px;font-weight:700;color:#e8ecf6;padding:8px 12px;background:linear-gradient(#2a2f3e,#12151f);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px #000,0 3px 0 #000;transition:transform .08s;touch-action:manipulation;min-height:44px;min-width:44px}
+button:active{transform:translateY(2px)}
+button:disabled{opacity:.45;cursor:not-allowed}
+#minus,#plus{width:52px;height:52px;border-radius:50%;font-size:22px;background:radial-gradient(circle at 40% 30%,#59607a,#1a1d29 70%);box-shadow:0 0 0 2px #000,0 0 0 4px var(--chrome2),0 4px 0 4px #000}
+.spin{position:relative;width:clamp(96px,26vw,116px);height:clamp(96px,26vw,116px);border-radius:50%;padding:0;font:900 italic clamp(20px,5vw,26px)/1 "Arial Black",sans-serif;letter-spacing:1px;color:#fff;text-shadow:0 2px 0 #000;background:radial-gradient(circle at 50% 35%,#fff 0%,var(--acc) 30%,#5a0010 85%);box-shadow:0 0 0 3px #000,0 0 0 6px var(--chrome1),0 0 0 8px #000,0 0 24px rgba(var(--glow),.9),0 7px 0 8px #000,inset 0 -8px 16px rgba(0,0,0,.5),inset 0 6px 10px rgba(255,255,255,.55)}
+.spin small{display:block;font:700 11px "Noto Sans TC",sans-serif;letter-spacing:3px;margin-top:3px;font-style:normal}
+.spin::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:3px solid var(--acc);opacity:0;pointer-events:none}
+.spin:not(:disabled)::after{animation:pushRing 1.1s ease-out infinite}
+@keyframes pushRing{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+.spin.push{animation:pushB .5s ease-in-out infinite alternate}
+@keyframes pushB{to{transform:scale(1.06)}}
+.gold{background:linear-gradient(#ffe57a,#f0a800 60%,#b86e00);color:#2a1500}
+.row2{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin-top:10px}
+.row2 button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 1px;font-size:11px;line-height:1.15;border-radius:6px;min-width:0;word-break:keep-all}
+.row2 button .ic{font-size:16px;line-height:1;filter:grayscale(.2)}
+.row2 #maxBtn{background:linear-gradient(#ffe57a,#d99400 60%,#8a5200);color:#2a1500}
+.msg{min-height:22px;text-align:center;margin-top:6px;font-weight:700;font-size:14px;color:var(--acc2);text-shadow:0 0 6px rgba(0,0,0,.9)}
+.kbd{font-size:10px;color:#8892aa;text-align:center;margin-top:3px}
+.audio{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;margin-top:6px;font-size:12px;color:#aab4cc}
+.audio label{display:flex;align-items:center;gap:6px}.audio input[type=range]{width:90px;accent-color:var(--acc)}
+.audio button{min-height:32px;padding:3px 10px;font-size:12px}
+#fx{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:12}
+#flash{position:fixed;inset:0;pointer-events:none;z-index:40;background:#fff;opacity:0;will-change:opacity}
+#flash.go{animation:flash .28s ease-out}
+@keyframes flash{0%{opacity:var(--fo,.5)}100%{opacity:0}}
+.machine.sh1{animation:sh .3s}.machine.sh2{animation:sh .45s;--a:5px}.machine.sh3{animation:sh .6s;--a:8px}.machine.sh4{animation:sh .8s;--a:11px}
+@keyframes sh{10%,50%,90%{transform:translate3d(calc(var(--a,3px)*-1),calc(var(--a,3px)*.4),0)}30%,70%{transform:translate3d(var(--a,3px),calc(var(--a,3px)*-.4),0)}}
+/* BIG BONUS */
+.bw{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#000;cursor:pointer;overflow:hidden;contain:strict}
+.bw.show{display:flex;animation:bwIn .25s ease-out}
+@keyframes bwIn{from{opacity:0}}
+.bw .art{position:absolute;inset:0;background:url(assets/caishen/bigbonus.webp) center/cover;opacity:.55;transform:scale(1.15);animation:artZoom 6s ease-out forwards;will-change:transform}
+@keyframes artZoom{to{transform:scale(1)}}
+.bw .rays{display:none;position:absolute;left:50%;top:45%;width:150vmax;height:150vmax;margin:-75vmax 0 0 -75vmax;background:repeating-conic-gradient(rgba(var(--glow),.28) 0 6deg,transparent 6deg 15deg);border-radius:50%;animation:rot 10s linear infinite;will-change:transform;opacity:.8}
+.bw .vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.35) 20%,rgba(0,0,0,.9) 85%)}
+@keyframes rot{to{transform:rotate(360deg)}}
+.bw .jp{position:relative;font:900 italic clamp(18px,4vw,30px)/1 "Noto Sans JP",sans-serif;letter-spacing:6px;color:#fff;text-shadow:0 0 10px var(--acc),0 3px 0 #000;transform:skewX(-10deg)}
+.bw .tier{position:relative;font:900 italic clamp(50px,13vw,120px)/.95 "Arial Black","Noto Sans JP",sans-serif;letter-spacing:-1px;transform:skewX(-10deg);color:#ffe14d;-webkit-text-stroke:3px #000;paint-order:stroke fill;text-shadow:0 5px 0 #b30000,0 10px 0 #000,0 0 34px rgba(var(--glow),.95);animation:tierSlam .5s cubic-bezier(.2,1.5,.4,1);will-change:transform}
+.bw.mega .tier{color:#bff4ff;text-shadow:0 5px 0 #1a4bd0,0 10px 0 #000,0 0 34px rgba(80,180,255,.95)}
+.bw.epic .tier{color:#fff;text-shadow:0 5px 0 #ff2a6a,0 9px 0 #ffb000,0 13px 0 #000,0 0 40px rgba(255,220,80,.95)}
+@keyframes tierSlam{0%{transform:skewX(-10deg) scale(4);opacity:0}70%{opacity:1}100%{transform:skewX(-10deg) scale(1)}}
+.bw .lbl{position:relative;color:#ffe9a8;font-size:14px;letter-spacing:4px;margin-top:6px}
+.bw .amt{position:relative;font:900 clamp(42px,11vw,92px)/1 "Arial Black",Impact,sans-serif;color:#fff;-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:0 0 14px var(--acc2),0 5px 0 #000;font-variant-numeric:tabular-nums;min-width:5ch;text-align:center;will-change:transform}
+.bw .collect{position:relative;margin-top:10px;font-size:18px;padding:12px 36px;border-radius:40px;background:linear-gradient(#ffe57a,#f0a800 60%,#b86e00);color:#2a1500;box-shadow:0 0 0 2px #000,0 5px 0 2px #000,0 0 22px rgba(255,190,0,.7);opacity:0;transform:translateY(10px);transition:.25s}
+.bw.ready .collect{opacity:1;transform:none}
+.bw .hint{position:relative;font-size:12px;color:#ccc;opacity:.7}
+.bw .fire{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 60px 10px rgba(var(--glow),.7);opacity:0;will-change:opacity}
+.bw.epic .fire{animation:fireO .45s ease-in-out infinite alternate}
+@keyframes fireO{to{opacity:1}}
+/* dialogs: unify dark theme */
+dialog{margin:auto;color:#fff;border:2px solid var(--chrome2);border-radius:12px;padding:16px;width:min(420px,92vw);max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain;background:linear-gradient(180deg,#121526,#05060c)!important;box-shadow:0 0 0 2px #000,0 0 30px rgba(var(--glow),.35)!important}
+dialog::backdrop{background:rgba(0,0,0,.75)}
+dialog h2{font-style:italic;font-weight:900;letter-spacing:2px!important}
+table{width:100%;border-collapse:collapse;margin:10px 0}td,th{padding:6px;border-bottom:1px solid #2a3044;text-align:center}th{color:var(--acc2)}
+.note{font-size:12px;color:#aab;line-height:1.6}
+.pname{display:flex;align-items:center;gap:8px;justify-content:flex-start}.pname .sym{width:34px;height:34px;object-fit:contain}
+:focus{outline:none}:focus-visible{outline:3px solid #7fe3ff;outline-offset:3px}
+.sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+body.bg-paused *,body.bg-paused *::before,body.bg-paused *::after{animation-play-state:paused!important}
+@media (max-width:620px){.led{display:none}.row2{grid-template-columns:repeat(5,1fr)}}
+@media (max-width:480px){.machine{padding:7px;border-radius:16px}.inner{padding:7px}.kbd{display:none}.lcd{height:112px}.row2 button{font-size:10.5px}.controls{gap:10px}}
+@media (min-width:621px) and (max-height:860px){.reel{--c:clamp(62px,9.6vh,92px)}.lcd{height:clamp(90px,13vh,124px)}h1{font-size:28px}.row2{margin-top:7px}.msg{margin-top:4px}}
+@media (prefers-reduced-motion:reduce){.led i,.lights i{animation:none;opacity:.6}.lcd .grid,.lcd .speed,.spin::after,.spin.push,.bw .rays,.bw .art,.bw .fire,.cell.hit .sym,.cell.hit::before,.reel.tease::after,svg.lines .beam,.board .sweep.go,#flash.go,.machine.sh1,.machine.sh2,.machine.sh3,.machine.sh4,.reel.land{animation:none!important}svg.lines .core{stroke-dashoffset:0;animation:none}.lcd.reach .ci,.lcd.bonus .seven,.slam.go,.bw .tier{animation:none!important;opacity:1;transform:none}.slam.go{transform:translateY(-50%) rotate(-8deg)}}
+@media (forced-colors:active){.cell.hit{outline:3px solid Highlight}}
+.skin .pv i{background:linear-gradient(90deg,#8a8378,#fffdf6 50%,#8a8378)}.skin .pv i .sym{width:88%;height:88%;object-fit:contain}
+
+
+/* ===== v13: 5x3 video-slot layout ===== */
+.machine{width:min(740px,100%)}
+.board{grid-template-columns:repeat(5,1fr);gap:4px;padding:5px}
+.board::after{inset:5px}
+svg.lines{inset:5px;width:calc(100% - 10px);height:calc(100% - 10px)}
+.reel{--c:clamp(60px,min(14vw,11vh),100px)}
+.cell .sym{width:86%;height:86%}
+.strip.mb .cell .sym{transform:scaleY(1.12)}
+
+.led{width:30px;padding:6px 0}
+.led .pl{position:relative;display:flex;align-items:center;justify-content:center;width:24px;height:20px;border-radius:4px;font:900 11px/1 "Arial Black",sans-serif;color:#fff;background:#0a0c14;border:1px solid var(--lc);box-shadow:0 0 6px var(--lc);text-shadow:0 0 4px var(--lc);opacity:.75;transition:opacity .15s}
+.led .pl::before{content:"";position:absolute;inset:-1px;border-radius:4px;background:var(--lc);opacity:0;animation:ledChase 1.6s linear infinite;animation-delay:calc(var(--i)*-.12s);z-index:-1}
+.led .pl.on{opacity:1;background:var(--lc);color:#000;text-shadow:none;box-shadow:0 0 14px var(--lc),0 0 3px #fff}
+.machine.spinning .led .pl::before{animation-duration:.8s}
+.cell.sc{background:radial-gradient(circle,rgba(200,120,255,.55),transparent 70%)}
+.cell.sc .sym{animation:symWin .5s ease-in-out infinite}
+.fsc{position:absolute;right:8px;top:8px;z-index:7;font:900 italic 13px "Arial Black",sans-serif;color:#fff;background:linear-gradient(90deg,#7a00ff,#ff2a8a);padding:3px 10px;border-radius:4px;box-shadow:0 0 12px #b03bff;display:none}
+.fs-mode .fsc{display:block}
+body.fs-mode .machine{box-shadow:0 0 0 2px #000,0 0 0 4px #b03bff,0 0 34px rgba(176,59,255,.8),0 24px 60px rgba(0,0,0,.85)}
+body.fs-mode .lcd .scr{background:radial-gradient(ellipse at 50% 120%,rgba(176,59,255,.7),transparent 60%),linear-gradient(180deg,#14062a,#0a0414)}
+.bw.fsi .amt{color:#ffe14d}
+.payfs td{color:#e0b3ff}
+#payTable td{padding:4px}
+@media (max-width:620px){.reel{--c:clamp(50px,16.5vw,74px)}.board{gap:3px;padding:4px}}
+@media (min-width:621px) and (max-height:860px){.reel{--c:clamp(58px,9.4vh,92px)}}
+@media (prefers-reduced-motion:reduce){.led .pl::before,.cell.sc .sym{animation:none}.strip.mb .cell .sym{transform:none}}
+
+/* v14: settings popover + compact mobile */
+.inner{position:relative}
+.row2{grid-template-columns:repeat(10,1fr)}
+.audio{position:absolute;left:10px;right:10px;bottom:64px;z-index:20;margin:0;padding:12px;border-radius:10px;background:linear-gradient(#171a2c,#07080f);border:1px solid var(--chrome2);box-shadow:0 0 0 2px #000,0 10px 30px rgba(0,0,0,.8),0 0 20px rgba(var(--glow),.35)}
+.audio[hidden]{display:none}
+#setBtn[aria-expanded="true"]{background:linear-gradient(#3a4160,#1a1d29);box-shadow:inset 0 0 0 1px var(--acc)}
+@media (max-width:620px){.row2{grid-template-columns:repeat(5,1fr);gap:4px;margin-top:6px}.row2 button{min-height:40px;padding:3px 1px;font-size:10px}.row2 button .ic{font-size:14px}}
+@media (max-width:480px){h1{font-size:20px}.sub{margin:1px 0 4px;font-size:10px}.lcd{height:92px;margin-bottom:5px}.lights{margin-bottom:5px;height:6px}.lights i{height:6px}.info{margin:5px 0}.box b{font-size:16px}.box small{font-size:9px}
+ .spin{width:84px;height:84px;font-size:19px}#minus,#plus{width:46px;height:46px}.controls{gap:14px}.msg{margin-top:3px;min-height:18px;font-size:12px}.audio{bottom:56px}}
+@media (max-width:480px) and (max-height:620px){.lcd .navi,.lcd .idle span{display:none}.box small{font-size:8px;letter-spacing:0;white-space:nowrap}body{padding-top:2px;padding-bottom:2px}.machine{padding:5px}.inner{padding:5px}.lcd{height:70px}.reel{--c:clamp(46px,14.5vw,60px)}.spin{width:72px;height:72px;font-size:17px}#minus,#plus{width:42px;height:42px;min-height:42px}.kbd{display:none}h1{font-size:18px}.row2 button{min-height:36px}}
+@media (max-width:340px){h1 .jp{display:none}.lcd{height:80px}.spin{width:76px;height:76px}.row2 button{font-size:9.5px}}
+@media (min-width:381px) and (max-width:480px) and (min-height:760px){.lcd{height:120px}.spin{width:100px;height:100px}}
+/* ===== v15 恋する夜のスロット♡ art direction ===== */
+@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff) format("woff");font-display:swap}
+:root{--acc:#ff4fa3;--acc2:#ffd27a;--acc3:#ff8fc8;--glow:255,79,163;--gold1:#fff0c2;--gold2:#d9a441;--gold3:#7a5418;--hero-h:clamp(430px,62vh,620px);--hero-top:-4vh;--hero-space:clamp(230px,37vh,320px);--tint:transparent}
+body[data-skin="neon"]{--acc:#6fa8ff;--acc3:#a8c8ff;--glow:111,168,255;--tint:rgba(40,70,200,.28)}
+body[data-skin="jade"]{--acc:#ff9cc8;--acc3:#ffd0e4;--glow:255,156,200;--tint:rgba(255,150,200,.22)}
+body[data-skin="crystal"]{--acc:#9fd8ff;--acc3:#e0f3ff;--glow:159,216,255;--tint:rgba(150,200,255,.22)}
+body[data-skin="royal"]{--acc:#c07cff;--acc3:#e2c2ff;--glow:192,124,255;--tint:rgba(120,40,200,.25)}
+body[data-skin="obsidian"]{--acc:#ff8a4a;--acc3:#ffc49a;--glow:255,138,74;--tint:rgba(255,120,40,.26)}
+html{background:#0a0614}
+body{background:transparent;font-family:"Noto Sans TC","Noto Sans CJK TC",sans-serif}
+body::before{content:"";position:fixed;inset:-30px;z-index:-3;background:url(assets/key_bg.webp) center 20%/cover no-repeat;opacity:1}
+body::after{background:radial-gradient(ellipse at 50% 30%,transparent 35%,rgba(5,2,12,.55) 75%),radial-gradient(circle at 12% 70%,rgba(var(--glow),.18),transparent 22%),radial-gradient(circle at 88% 65%,rgba(255,210,122,.14),transparent 20%);z-index:-1}
+.hero{position:absolute;left:50%;top:var(--hero-top);height:var(--hero-h);aspect-ratio:16/9;transform:translateX(-50%);z-index:-2;background:url(assets/key.webp) center top/100% 100% no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(#000 70%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent) intersect,linear-gradient(#000 70%,transparent);pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background:var(--tint);mix-blend-mode:color}
+.bokeh{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 8% 22%,rgba(255,150,200,.35) 0 6px,transparent 7px),radial-gradient(circle at 15% 48%,rgba(255,210,140,.3) 0 4px,transparent 5px),radial-gradient(circle at 90% 18%,rgba(255,150,200,.3) 0 8px,transparent 9px),radial-gradient(circle at 85% 42%,rgba(255,220,160,.28) 0 5px,transparent 6px),radial-gradient(circle at 5% 80%,rgba(255,120,190,.25) 0 10px,transparent 11px),radial-gradient(circle at 95% 78%,rgba(255,200,140,.22) 0 9px,transparent 10px)}
+/* logo */
+h1.logo{position:absolute;left:max(2vw,calc(50% - 620px));top:18px;margin:0;transform:rotate(-6deg);filter:none;background:none;-webkit-text-fill-color:initial;-webkit-text-stroke:0;font:400 clamp(30px,4.4vw,58px)/1.05 "KleeSub","Klee One",cursive;letter-spacing:1px;color:#fff;text-shadow:0 0 2px #fff,0 0 8px var(--acc),0 0 18px var(--acc),0 0 36px rgba(var(--glow),.8),0 0 60px rgba(var(--glow),.5);z-index:3;text-align:left;pointer-events:none}
+h1.logo .l2{display:block;padding-left:.9em}
+h1.logo .heart{color:var(--acc3);-webkit-text-fill-color:var(--acc3)}
+h1.logo .tag{display:block;margin:.35em 0 0 1.2em;font:400 .32em/1.2 "KleeSub",cursive;letter-spacing:2px;color:#ffe3f0;text-shadow:0 0 6px var(--acc)}
+h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans TC",sans-serif;letter-spacing:4px;color:var(--acc2);text-shadow:0 1px 2px #000,0 0 8px rgba(255,200,100,.6)}
+.sub{position:absolute;left:50%;top:6px;transform:translateX(-50%);z-index:4;margin:0;font-size:11px;color:#ffe9f4;background:rgba(20,6,20,.6);border:1px solid rgba(255,210,122,.5);border-radius:20px;padding:2px 12px;letter-spacing:2px}
+.flav{position:absolute;right:max(2vw,calc(50% - 600px));top:clamp(70px,12vh,110px);z-index:3;font:400 clamp(15px,1.7vw,22px)/1.6 "KleeSub",cursive;color:#fff;text-shadow:0 0 6px var(--acc),0 0 14px rgba(var(--glow),.7);transform:rotate(-4deg);pointer-events:none;text-align:left}
+/* layout */
+.wrap{margin-top:var(--hero-space);align-items:flex-start}
+.machine{position:relative;width:min(800px,100%);padding:7px;border-radius:16px;border:2px solid transparent;background:linear-gradient(180deg,rgba(18,8,24,.9),rgba(8,4,14,.94)) padding-box,linear-gradient(135deg,var(--gold1),var(--gold2) 20%,var(--gold3) 45%,var(--gold1) 55%,var(--gold2) 75%,var(--gold3)) border-box;box-shadow:0 0 0 1px #000,0 0 22px rgba(var(--glow),.45),0 18px 50px rgba(0,0,0,.8)}
+.machine::before,.machine::after{content:"♥";position:absolute;top:-13px;font-size:18px;color:var(--acc);text-shadow:0 0 6px var(--acc),0 0 2px #fff;z-index:5}
+.machine::before{left:18px}.machine::after{right:18px}
+.inner{background:none;box-shadow:none;padding:6px}
+.lights{display:none}
+/* cut-in stage over the heroine */
+.lcd{position:absolute;left:-10px;right:-10px;bottom:calc(100% + 12px);height:calc(var(--hero-space) - 30px);margin:0;background:none;box-shadow:none;border-radius:14px;contain:layout paint style;pointer-events:none}
+.lcd .scr,.lcd .grid,.lcd .scan,.lcd .gloss,.lcd .idle{display:none}
+.lcd .navi{top:auto;bottom:4px;opacity:0}
+.lcd .ci{background-image:url(assets/caishen/cutin.webp);border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 24px rgba(var(--glow),.8)}
+.lcd .seven{border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 30px rgba(var(--glow),.9)}
+.lcd .speed{border-radius:14px}
+.lcd.reach .speed,.lcd.bonus .speed{opacity:.35}
+.slam{font-family:"KleeSub","Arial Black",sans-serif;font-weight:700;-webkit-text-stroke:3px #3a0020}
+.kitai{bottom:10px;left:14px}
+.fsc{top:6px;right:16px;font-family:"Arial Black",sans-serif;background:linear-gradient(90deg,#ff4fa3,#ffb36b);box-shadow:0 0 14px rgba(var(--glow),.9)}
+/* reels */
+.board{gap:5px;padding:5px;border-radius:10px;background:rgba(6,3,12,.85);box-shadow:inset 0 0 0 1px rgba(255,210,122,.35),0 0 0 1px #000}
+.board::after{background:linear-gradient(rgba(0,0,0,.35),transparent 15%,transparent 85%,rgba(0,0,0,.35))}
+.reel{background:linear-gradient(180deg,#141030,#0c0a20 50%,#141030);border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,210,122,.55),inset 0 0 18px rgba(0,0,0,.6)}
+.reel::before{background:none}
+.cell{border-bottom:1px solid rgba(255,210,122,.18)}
+.cell .sym{width:94%;height:94%;}
+.cell[data-s="heroine"] .sym{height:calc(var(--c) * .9);width:auto;max-width:94%;aspect-ratio:1;object-fit:cover;border-radius:6px;box-shadow:0 0 0 2px var(--gold2),0 0 0 3px #000;filter:none}
+.cell.hit{background:radial-gradient(circle,rgba(var(--glow),.45),transparent 72%)}
+.cell.hit::before{border-color:var(--acc);box-shadow:0 0 12px var(--acc),inset 0 0 12px var(--acc)}
+.reel.tease{box-shadow:inset 0 0 0 2px var(--acc),0 0 18px var(--acc)}
+/* side line numbers -> hearts */
+.led{background:linear-gradient(180deg,rgba(18,8,24,.9),rgba(8,4,14,.9)) padding-box,linear-gradient(180deg,var(--gold1),var(--gold3),var(--gold1)) border-box;border:1px solid transparent;box-shadow:0 0 12px rgba(var(--glow),.3);margin-top:44px;height:calc(var(--c-h,300px))}
+.led .pl{border-radius:50%;width:22px;height:22px;font:700 10px/1 sans-serif;background:#1a0a1c}
+/* meters */
+.info{gap:8px;margin:8px 0 6px}
+.box{position:relative;border-radius:0;padding:5px 6px 4px;background:linear-gradient(180deg,#1b0d22,#0a0510) padding-box,linear-gradient(135deg,var(--gold1),var(--gold2) 30%,var(--gold3) 60%,var(--gold1)) border-box;border:2px solid transparent;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%);box-shadow:none}
+.box small{font:700 11px "Times New Roman",serif;letter-spacing:3px;color:var(--gold1)}
+.box b{color:#ff7ec0;text-shadow:0 0 6px #ff3c9a,0 0 14px rgba(255,60,154,.6);font-size:clamp(18px,4.4vw,28px)}
+.box.win b{color:#ff7ec0;text-shadow:0 0 6px #ff3c9a,0 0 14px rgba(255,60,154,.6)}
+/* message bar */
+.msg{position:relative;margin:0 0 8px;padding:7px 12px;min-height:34px;border-radius:6px;font:400 clamp(14px,2vw,19px)/1.3 "KleeSub","Noto Sans TC",sans-serif;color:#fff;text-shadow:0 0 6px var(--acc),0 0 12px rgba(var(--glow),.6);background:linear-gradient(180deg,rgba(10,6,30,.2),rgba(10,6,30,.85)),repeating-linear-gradient(90deg,#120c2a 0 18px,#1b1438 18px 22px,#0f0a24 22px 34px,#22183f 34px 38px);box-shadow:inset 0 0 0 1px rgba(255,210,122,.45),inset 0 -14px 20px rgba(255,170,90,.12)}
+.msg::after{content:" ♡";color:var(--acc3)}
+/* controls */
+.spin{background:radial-gradient(circle at 50% 30%,#fff 0%,#ffb3d6 18%,var(--acc) 45%,#8a0f4e 90%);box-shadow:0 0 0 3px #2a0716,0 0 0 6px var(--gold2),0 0 0 8px #000,0 0 26px rgba(var(--glow),.9),0 7px 0 8px #000,inset 0 -8px 16px rgba(0,0,0,.4),inset 0 6px 10px rgba(255,255,255,.6)}
+.spin::after{border-color:var(--acc3)}
+#minus,#plus{background:radial-gradient(circle at 40% 30%,#4a2a48,#170a18 70%);box-shadow:0 0 0 2px #000,0 0 0 4px var(--gold2),0 4px 0 4px #000;color:var(--gold1)}
+.row2 button{background:linear-gradient(#2a1428,#120812);box-shadow:inset 0 0 0 1px rgba(255,210,122,.45),0 2px 0 #000;color:#ffe9f4}
+.row2 #maxBtn{background:linear-gradient(#ffe7a8,#e0a948 60%,#8a5a18);color:#3a1a00}
+.kbd{color:#c9a8c0}
+.badges{position:absolute;right:calc(100% + 48px);top:30px;display:flex;flex-direction:column;gap:14px;align-items:center}
+.badges div{width:96px;padding:8px 4px;text-align:center;font:900 italic 20px/1 "Times New Roman",serif;color:#fff;text-shadow:0 0 6px var(--acc);border-radius:50% / 40%;background:radial-gradient(circle at 50% 30%,#3a1430,#12060f) padding-box,linear-gradient(135deg,var(--gold1),var(--gold3),var(--gold1)) border-box;border:2px solid transparent;box-shadow:0 0 16px rgba(var(--glow),.5)}
+.badges div small{display:block;font:700 11px sans-serif;letter-spacing:2px;color:var(--gold1);margin-top:3px}
+.badges div::before{content:"♛";display:block;font-size:14px;color:var(--gold2);margin-bottom:2px;font-style:normal}
+/* big win overlay */
+.bw .art{background-image:url(assets/caishen/bigbonus.webp);opacity:.75}
+.bw .vig{background:radial-gradient(ellipse at 50% 55%,rgba(40,0,30,.25) 20%,rgba(10,0,10,.85) 85%)}
+.bw .tier{color:#fff;text-shadow:0 4px 0 #d6307e,0 8px 0 #5a0a30,0 0 30px rgba(255,100,180,.95)}
+.bw.mega .tier{color:#ffe9b0;text-shadow:0 4px 0 #c07a10,0 8px 0 #4a2a00,0 0 30px rgba(255,200,100,.95)}
+.bw.epic .tier{color:#fff;text-shadow:0 4px 0 #ff4fa3,0 8px 0 #ffb000,0 12px 0 #3a0020,0 0 40px rgba(255,150,200,.95)}
+.bw .jp{font-family:"KleeSub",sans-serif;text-shadow:0 0 10px var(--acc),0 3px 0 #000}
+.bw .fire{box-shadow:inset 0 0 60px 10px rgba(var(--glow),.6)}
+@media (max-width:980px){.badges,.flav{display:none}}
+@media (max-width:620px){
+ :root{--hero-h:300px;--hero-space:150px;--hero-top:0px}
+ .hero{-webkit-mask:linear-gradient(#000 60%,transparent);mask:linear-gradient(#000 60%,transparent)}
+ h1.logo{left:8px;top:22px;font-size:22px;transform:rotate(-5deg)}h1.logo .tag{font-size:10px}h1.logo .zh{font-size:9px;letter-spacing:2px}
+ .sub{top:3px;font-size:9.5px;padding:1px 8px;white-space:nowrap}
+ .lcd{left:-6px;right:-6px;height:calc(var(--hero-space) - 22px)}
+ .wrap{margin-top:var(--hero-space)}
+ .msg{font-size:13px;min-height:28px;padding:5px 8px;margin-bottom:5px}
+ .info{margin:5px 0 5px;gap:5px}
+}
+@media (max-width:480px) and (max-height:620px){:root{--hero-h:240px;--hero-space:112px}h1.logo{font-size:18px;top:18px}h1.logo .zh{display:none}.msg{font-size:12px;min-height:24px;padding:3px 6px}}
+@media (min-width:381px) and (max-width:480px) and (min-height:760px){:root{--hero-h:400px;--hero-space:230px}}
+@media (min-width:621px) and (max-height:860px){:root{--hero-space:clamp(200px,30vh,260px)}.reel{--c:clamp(54px,8.4vh,84px)}.row2{margin-top:5px}.info{margin:6px 0 4px}.msg{margin-bottom:5px;min-height:30px;padding:4px 10px}}
+
+/* ===== v16: reference artwork as cabinet ===== */
+:root{--W:min(100vw,calc((100vh - 64px) * 1280 / 720));--bar:64px}
+html,body{margin:0;padding:0!important;overflow-x:hidden}
+body{background:#050208!important}
+body::before{background:url(assets/caishen/bg.webp) center/cover no-repeat!important;inset:0!important;opacity:1!important}
+body::after{display:none!important}
+.hero,.bokeh,h1.logo,.flav,.badges,.lights,.led,.kbd,.machine::before,.machine::after,.board::after,.info .box small,.lcd .fsc~.scr{display:none!important}
+.wrap{margin:0!important;display:flex;justify-content:center;align-items:flex-start;min-height:100vh}
+.machine{width:var(--W)!important;max-width:none!important;margin:0!important;padding:0 0 var(--bar)!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}
+.inner{position:relative!important;width:var(--W);aspect-ratio:1280/720;padding:0!important;background:url(assets/caishen/base.webp) 0 0/100% 100% no-repeat!important;container-type:inline-size;border-radius:0!important}
+.board{position:absolute!important;left:16.790%;top:38.929%;width:66.790%;height:42.842%;padding:0!important;gap:0!important;display:block!important;background:none!important;box-shadow:none!important;border-radius:0!important;margin:0!important;overflow:visible!important}
+.reel{position:absolute!important;top:0;height:100%!important;--c:8.5597cqw!important;background:#0b0810!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
+.reel:nth-child(1){left:0;width:19.686%}.reel:nth-child(2){left:20.240%;width:19.224%}.reel:nth-child(3){left:40.018%;width:19.501%}.reel:nth-child(4){left:60.074%;width:19.316%}.reel:nth-child(5){left:79.945%;width:20.055%}
+.cell{border:0!important;background:none}
+.cell .sym,.cell[data-s] .sym{width:100%!important;height:100%!important;max-width:none!important;aspect-ratio:auto!important;object-fit:fill!important;border-radius:0!important;box-shadow:none!important;filter:none!important;display:block}
+.cell.hit{background:none!important}
+.cell.hit::before{inset:4%!important;border:.25cqw solid #ff7ac8!important;border-radius:.6cqw!important;box-shadow:0 0 1.2cqw #ff4fa3,inset 0 0 1.2cqw #ff4fa3!important}
+@keyframes symWin{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.04);filter:brightness(1.25)}}
+.lines{inset:0!important;width:100%!important;height:100%!important}
+.info{position:absolute!important;inset:0;margin:0!important;display:block!important;pointer-events:none}
+.info .box{position:absolute!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center;justify-content:center;clip-path:none!important;min-width:0!important}
+.info .box:nth-child(1){left:4.94%;top:85.07%;width:8.40%;height:7.62%}
+.info .box:nth-child(3){left:86.17%;top:85.07%;width:9.14%;height:7.62%}
+.info .box b{font:700 4.1cqw/1 "Times New Roman",Georgia,serif!important;color:#ffd6ee!important;-webkit-text-fill-color:#ffd6ee!important;background:none!important;letter-spacing:.02em;white-space:nowrap;text-shadow:0 0 .3cqw #ff4fa3,0 0 .9cqw #ff2f8f,0 0 1.8cqw rgba(255,47,143,.7)!important;animation:none!important}
+.info .box b[data-l="4"]{font-size:3.4cqw!important}.info .box b[data-l="5"]{font-size:2.8cqw!important}.info .box b[data-l="6"]{font-size:2.3cqw!important}.info .box b[data-l="7"],.info .box b[data-l="8"],.info .box b[data-l="9"]{font-size:1.9cqw!important}
+.info .box:nth-child(2){position:fixed!important;pointer-events:auto}
+.msg{position:absolute!important;left:18.8%;top:84.2%;width:63%;height:7.8%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center;justify-content:center;font:600 2.1cqw/1 "KleeSub",sans-serif!important;color:#ffe6f4!important;text-shadow:0 0 .4cqw #ff4fa3,0 0 1cqw rgba(255,79,163,.8)!important;contain:strict}
+.msg::after{content:" ♡";color:#ff8fc8;margin-left:.3em}
+/* cut-in stage over the heroine */
+.lcd{position:absolute!important;left:18%!important;right:auto!important;top:1.5%!important;bottom:auto!important;width:64%!important;height:36%!important;margin:0!important;z-index:6;pointer-events:none}
+.lcd .ci{background:url(assets/caishen/cutin.webp) 50% 35%/cover!important;border-radius:1cqw!important;box-shadow:0 0 0 .2cqw #d9a441,0 0 2cqw rgba(255,79,163,.9)!important}
+@keyframes ci16{0%{transform:scale(1.6);opacity:0;filter:brightness(3) saturate(.4)}35%{opacity:1;filter:brightness(1.8) saturate(1.2)}100%{transform:scale(1);opacity:1;filter:none}}
+.lcd.reach .ci{animation:ci16 .5s cubic-bezier(.2,1.2,.4,1) forwards!important}
+.lcd .seven{border-radius:1cqw!important;background-position:50% 30%!important}
+.lcd .slam{font-size:5.2cqw!important;right:4%!important}
+.lcd .kitai{font-size:1.1cqw}
+.fsc{font-size:1.3cqw!important}
+/* control bar */
+.controls{position:absolute!important;left:0;right:0;top:100%;height:var(--bar);margin:0!important;display:flex!important;align-items:center;justify-content:center;gap:14px!important;z-index:7}
+.controls #minus,.controls #plus{width:42px!important;height:42px!important;font-size:20px!important}
+.spin{width:auto!important;min-width:150px;height:48px!important;border-radius:26px!important;font-size:22px!important;display:flex!important;flex-direction:row!important;gap:8px;align-items:center;justify-content:center}
+.spin small{font-size:12px!important;margin:0!important}
+.machine .info .box:nth-child(2){position:absolute!important;left:calc(50% - 250px);top:calc(100% + 12px);width:120px;height:40px;border:1px solid #d9a441!important;border-radius:8px;background:linear-gradient(#1a0a18,#0a0410)!important;flex-direction:column}
+.machine .info .box:nth-child(2) small{display:block!important;font-size:9px!important;color:#e9c98a;letter-spacing:2px;margin:0!important}
+.machine .info .box:nth-child(2) b{font-size:17px!important}
+.bar16{position:absolute;left:0;right:0;top:100%;height:var(--bar);pointer-events:none;z-index:8}
+.bar16 button{pointer-events:auto;position:absolute;top:12px;height:40px;padding:0 14px;border-radius:20px;border:1px solid #d9a441;background:linear-gradient(#2a1024,#12060f);color:#ffe6f4;font:700 14px "Noto Sans TC",sans-serif;cursor:pointer}
+#menuBtn{right:12px}#max16{left:calc(50% + 160px);background:linear-gradient(#ffe7a8,#d9a441 60%,#8a5a18);color:#2a1300}
+.sub{position:fixed!important;left:10px;bottom:6px;top:auto!important;margin:0!important;padding:2px 8px!important;font-size:10px!important;opacity:.75;z-index:9;background:rgba(10,4,16,.6)!important;border:1px solid rgba(217,164,65,.4)!important;border-radius:10px;transform:none!important}
+.row2{display:none!important}
+body.menu16 .row2{display:grid!important;position:fixed!important;right:10px;bottom:calc(var(--bar) + 6px);top:auto!important;left:auto!important;width:min(360px,94vw)!important;grid-template-columns:repeat(3,1fr)!important;gap:6px!important;padding:10px!important;margin:0!important;background:linear-gradient(#1c0a1a,#0a0410)!important;border:1.5px solid #d9a441;border-radius:14px;box-shadow:0 0 0 1px #000,0 0 24px rgba(255,79,163,.45);z-index:30}
+.row2 button{height:auto!important;padding:8px 4px!important;font-size:12px!important}
+.audio{z-index:31!important}
+/* popups black-gold-pink */
+dialog{background:radial-gradient(ellipse at 50% 0,#3a1030,#14060f 60%,#0a0408)!important;color:#fbe9f3!important;border:2px solid #d9a441!important;border-radius:18px!important;box-shadow:0 0 0 1px #000,0 0 0 4px rgba(255,79,163,.35),0 0 40px rgba(255,79,163,.45)!important}
+dialog h2{font-family:"KleeSub","Noto Sans TC",sans-serif!important;background:linear-gradient(#fff0f8,#ff8fc8 50%,#d9a441)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;text-shadow:none!important;filter:drop-shadow(0 0 6px rgba(255,79,163,.6))}
+dialog .days li,dialog ol li{background:linear-gradient(#24101e,#12060e)!important;border:1px solid rgba(217,164,65,.7)!important;color:#ffe6f4!important}
+dialog .days li.today,dialog .days li.on{border-color:#ff7ac8!important;box-shadow:0 0 12px rgba(255,79,163,.8)!important}
+dialog button.claim,dialog .claim{background:linear-gradient(#ffb3dc,#ff4fa3 55%,#a3105a)!important;color:#fff!important;border:1px solid #ffd27a!important;box-shadow:0 0 14px rgba(255,79,163,.7)!important;text-shadow:0 1px 0 #6a0030}
+dialog button{border-color:#d9a441!important}
+.bw{background:radial-gradient(ellipse at center,rgba(60,10,40,.55),rgba(10,2,8,.92))!important}
+.bw .art{background:url(assets/caishen/bigbonus.webp) 50% 30%/cover!important}
+@keyframes bw16{0%{transform:scale(1.5);filter:brightness(3)}30%{filter:brightness(1.6)}100%{transform:scale(1);filter:none}}
+.bw.on .art,.bw.show .art{animation:bw16 .7s ease-out both}
+/* mobile: art full width, controls below */
+@media (max-width:620px){
+ :root{--W:100vw;--bar:190px}
+ .wrap{align-items:center}
+ .controls{height:110px;top:calc(100% + 44px)}
+ .spin{min-width:0!important;width:96px!important;height:96px!important;border-radius:50%!important;flex-direction:column!important;gap:0;font-size:22px!important}
+ .controls #minus,.controls #plus{width:54px!important;height:54px!important}
+ .controls{gap:22px!important}
+ .machine .info .box:nth-child(2){left:calc(50% - 60px);top:calc(100% + 4px);height:38px}
+ .bar16{top:calc(100% + 150px);height:44px}
+ .bar16 button{top:2px}
+ #menuBtn{right:calc(50% - 130px);width:120px}#max16{left:calc(50% - 130px);width:120px}
+ .msg{font-size:2.6cqw!important}
+ .sub{left:50%;transform:translateX(-50%)!important;bottom:4px;white-space:nowrap}
+ body.menu16 .row2{bottom:auto!important;top:auto!important;left:50%!important;right:auto!important;transform:translateX(-50%);bottom:60px!important}
+}
+
+
+.board{left:20.938%!important;top:47.222%!important;width:60.000%!important;height:38.889%!important}
+.reel{--c:7.2917cqw!important}
+.reel:nth-child(1){left:0.000%!important;width:19.531%!important;transform:none;}
+.reel:nth-child(2){left:20.312%!important;width:19.271%!important;transform:none;}
+.reel:nth-child(3){left:40.365%!important;width:19.271%!important;transform:none;}
+.reel:nth-child(4){left:60.417%!important;width:19.271%!important;transform:none;}
+.reel:nth-child(5){left:80.469%!important;width:19.531%!important;transform:none;}
+.info .box:nth-child(1){left:8.984%!important;top:87.778%!important;width:6.641%!important;height:7.500%!important;right:auto!important;bottom:auto!important}
+.info .box:nth-child(3){left:84.375%!important;top:87.778%!important;width:6.641%!important;height:7.778%!important;right:auto!important;bottom:auto!important}
+.msg{left:20.938%!important;top:88.889%!important;width:59.531%!important;height:6.667%!important;right:auto!important;bottom:auto!important}
+.lcd{left:23.438%!important;top:0.833%!important;width:54.688%!important;height:43.611%!important;right:auto!important;bottom:auto!important}
+:root{--cz-acc:#ffcc33;--ar:1280/720;--czbg:url(assets/caishen/bg.webp)}.strip.mb .cell .sym[data-v="hongbao"]{content:url(assets/caishen/t_hongbao_b.webp)}.strip.mb .cell .sym[data-v="hongbao2"]{content:url(assets/caishen/t_hongbao2_b.webp)}.strip.mb .cell .sym[data-v="hongbao3"]{content:url(assets/caishen/t_hongbao3_b.webp)}.strip.mb .cell .sym[data-v="lanterns"]{content:url(assets/caishen/t_lanterns_b.webp)}.strip.mb .cell .sym[data-v="fu"]{content:url(assets/caishen/t_fu_b.webp)}.strip.mb .cell .sym[data-v="paper"]{content:url(assets/caishen/t_paper_b.webp)}.strip.mb .cell .sym[data-v="ingot"]{content:url(assets/caishen/t_ingot_b.webp)}.strip.mb .cell .sym[data-v="ingot2"]{content:url(assets/caishen/t_ingot2_b.webp)}.strip.mb .cell .sym[data-v="lion"]{content:url(assets/caishen/t_lion_b.webp)}.strip.mb .cell .sym[data-v="jade"]{content:url(assets/caishen/t_jade_b.webp)}.strip.mb .cell .sym[data-v="jade2"]{content:url(assets/caishen/t_jade2_b.webp)}.strip.mb .cell .sym[data-v="dragon"]{content:url(assets/caishen/t_dragon_b.webp)}.strip.mb .cell .sym[data-v="dragon2"]{content:url(assets/caishen/t_dragon2_b.webp)}.strip.mb .cell .sym[data-v="dragon3"]{content:url(assets/caishen/t_dragon3_b.webp)}.strip.mb .cell .sym[data-v="dragon4"]{content:url(assets/caishen/t_dragon4_b.webp)}.strip.mb .cell .sym[data-v="coin"]{content:url(assets/caishen/t_coin_b.webp)}.strip.mb .cell .sym[data-v="heroine"]{content:url(assets/caishen/t_heroine_b.webp)}.strip.mb .cell .sym[data-v="heroine2"]{content:url(assets/caishen/t_heroine2_b.webp)}.strip.mb .cell .sym[data-v="wild"]{content:url(assets/caishen/t_wild_b.webp)}.strip.mb .cell .sym[data-v="scatter"]{content:url(assets/caishen/t_scatter_b.webp)}
+</style><link rel="stylesheet" href="casino.css"></head><body><div id="czLoad"><div class="czlt">財神降臨</div><div class="czlbar"><i></i></div><div class="czls">LOADING…</div><div class="cznote2">僅供娛樂・虛擬籌碼・無真實金錢</div></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<radialGradient id="gCherry" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#ff8a9a"/><stop offset=".45" stop-color="#e0102f"/><stop offset="1" stop-color="#6d0012"/></radialGradient>
+<radialGradient id="gLemon" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fffbd0"/><stop offset=".5" stop-color="#ffe03a"/><stop offset="1" stop-color="#c99400"/></radialGradient>
+<radialGradient id="gOrange" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ffd59a"/><stop offset=".5" stop-color="#ff8a00"/><stop offset="1" stop-color="#b34700"/></radialGradient>
+<radialGradient id="gGrape" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#d9a6ff"/><stop offset=".5" stop-color="#8e2bd6"/><stop offset="1" stop-color="#3b0a6b"/></radialGradient>
+<linearGradient id="gRind" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7be37b"/><stop offset="1" stop-color="#1b6e22"/></linearGradient>
+<linearGradient id="gFlesh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6b7d"/><stop offset="1" stop-color="#d81b3c"/></linearGradient>
+<linearGradient id="gLeaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8ef07a"/><stop offset="1" stop-color="#1f7a1f"/></linearGradient>
+<linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6b0"/><stop offset=".35" stop-color="#ffcc33"/><stop offset=".7" stop-color="#d48a00"/><stop offset="1" stop-color="#8a5200"/></linearGradient>
+<linearGradient id="gRed7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8080"/><stop offset=".45" stop-color="#ff1a1a"/><stop offset="1" stop-color="#8a0000"/></linearGradient>
+<linearGradient id="gBar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a4a"/><stop offset=".5" stop-color="#111118"/><stop offset="1" stop-color="#000"/></linearGradient>
+<filter id="fShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000" flood-opacity=".45"/></filter>
+<symbol id="s-cherry" viewBox="0 0 100 100"><g filter="url(#fShadow)"><path d="M52 14 C46 30 36 44 30 60 M52 14 C58 32 66 46 70 60" stroke="#3d6b16" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M52 14 C64 6 80 10 84 20 C72 24 60 22 52 14Z" fill="url(#gLeaf)"/><circle cx="30" cy="68" r="19" fill="url(#gCherry)"/><circle cx="70" cy="68" r="19" fill="url(#gCherry)"/><ellipse cx="24" cy="61" rx="6" ry="4" fill="#fff" opacity=".7"/><ellipse cx="64" cy="61" rx="6" ry="4" fill="#fff" opacity=".7"/></g></symbol>
+<symbol id="s-lemon" viewBox="0 0 100 100"><g filter="url(#fShadow)"><path d="M10 52 C10 30 30 18 50 18 C70 18 90 30 90 52 C90 74 70 84 50 84 C30 84 10 74 10 52Z" transform="rotate(-18 50 50)" fill="url(#gLemon)"/><path d="M8 58 l-5 4 6 2Z M92 44 l5 -4 -6 -2Z" fill="#c99400"/><ellipse cx="36" cy="38" rx="12" ry="6" transform="rotate(-25 36 38)" fill="#fff" opacity=".65"/><path d="M52 20 C58 10 70 8 76 12 C70 20 60 22 52 20Z" fill="url(#gLeaf)"/></g></symbol>
+<symbol id="s-orange" viewBox="0 0 100 100"><g filter="url(#fShadow)"><circle cx="50" cy="56" r="34" fill="url(#gOrange)"/><g fill="#b34700" opacity=".25"><circle cx="40" cy="70" r="1.6"/><circle cx="60" cy="74" r="1.6"/><circle cx="70" cy="58" r="1.6"/><circle cx="34" cy="54" r="1.6"/><circle cx="52" cy="62" r="1.6"/></g><path d="M50 24 C56 12 70 10 78 14 C72 24 60 26 50 24Z" fill="url(#gLeaf)"/><rect x="47" y="18" width="5" height="9" rx="2" fill="#5a3a10"/><ellipse cx="37" cy="42" rx="10" ry="6" transform="rotate(-30 37 42)" fill="#fff" opacity=".6"/></g></symbol>
+<symbol id="s-grape" viewBox="0 0 100 100"><g filter="url(#fShadow)"><path d="M50 8 L52 22" stroke="#5a3a10" stroke-width="4" stroke-linecap="round"/><path d="M52 16 C62 6 80 8 86 18 C74 24 62 22 52 16Z" fill="url(#gLeaf)"/><g fill="url(#gGrape)"><circle cx="34" cy="32" r="12"/><circle cx="58" cy="30" r="12"/><circle cx="46" cy="44" r="12"/><circle cx="70" cy="44" r="12"/><circle cx="28" cy="52" r="12"/><circle cx="52" cy="60" r="12"/><circle cx="38" cy="72" r="12"/><circle cx="62" cy="76" r="11"/><circle cx="50" cy="88" r="9"/></g><g fill="#fff" opacity=".55"><circle cx="30" cy="28" r="3"/><circle cx="54" cy="26" r="3"/><circle cx="42" cy="40" r="3"/><circle cx="66" cy="40" r="3"/><circle cx="24" cy="48" r="3"/><circle cx="48" cy="56" r="3"/><circle cx="34" cy="68" r="3"/></g></g></symbol>
+<symbol id="s-melon" viewBox="0 0 100 100"><g filter="url(#fShadow)"><path d="M6 40 A44 44 0 0 0 94 40 Z" fill="url(#gRind)"/><path d="M13 40 A37 37 0 0 0 87 40 Z" fill="#e9ffd9"/><path d="M17 40 A33 33 0 0 0 83 40 Z" fill="url(#gFlesh)"/><g fill="#2a0a0a"><ellipse cx="34" cy="50" rx="2.2" ry="3.5"/><ellipse cx="50" cy="58" rx="2.2" ry="3.5"/><ellipse cx="66" cy="50" rx="2.2" ry="3.5"/><ellipse cx="42" cy="64" rx="2.2" ry="3.5"/><ellipse cx="58" cy="64" rx="2.2" ry="3.5"/><ellipse cx="50" cy="46" rx="2.2" ry="3.5"/></g><path d="M20 42 L80 42" stroke="#fff" stroke-width="2" opacity=".4"/></g></symbol>
+<symbol id="s-bell" viewBox="0 0 100 100"><g filter="url(#fShadow)"><circle cx="50" cy="14" r="6" fill="url(#gGold)" stroke="#8a5200" stroke-width="1.5"/><path d="M50 18 C30 18 24 36 24 54 C24 66 18 72 12 78 L88 78 C82 72 76 66 76 54 C76 36 70 18 50 18Z" fill="url(#gGold)" stroke="#8a5200" stroke-width="2"/><rect x="10" y="76" width="80" height="8" rx="4" fill="url(#gGold)" stroke="#8a5200" stroke-width="1.5"/><circle cx="50" cy="88" r="7" fill="url(#gGold)" stroke="#8a5200" stroke-width="1.5"/><path d="M36 30 C32 40 32 52 33 64" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".55" fill="none"/></g></symbol>
+<symbol id="s-bar" viewBox="0 0 100 100"><g filter="url(#fShadow)"><rect x="6" y="28" width="88" height="44" rx="10" fill="url(#gBar)" stroke="url(#gGold)" stroke-width="5"/><text x="50" y="62" text-anchor="middle" font-family="Impact,'Arial Black',sans-serif" font-size="32" font-weight="900" fill="url(#gGold)" stroke="#5a3300" stroke-width="1" letter-spacing="2">BAR</text><rect x="12" y="33" width="76" height="8" rx="4" fill="#fff" opacity=".15"/></g></symbol>
+<symbol id="s-seven" viewBox="0 0 100 100"><g filter="url(#fShadow)"><path d="M18 14 L84 14 L84 28 C66 46 54 66 50 90 L28 90 C32 66 44 46 60 32 L18 32Z" fill="url(#gRed7)" stroke="url(#gGold)" stroke-width="5" stroke-linejoin="round"/><path d="M24 19 L78 19" stroke="#fff" stroke-width="3" opacity=".5" stroke-linecap="round"/></g></symbol>
+</defs></svg>
+<div class="hero" aria-hidden="true"></div><div class="bokeh" aria-hidden="true"></div><h1 class="logo"><span class="sr-only">戀愛之夜老虎機 </span>恋する夜の<span class="l2">スロット<span class="heart">♡</span></span><span class="tag">〜好きが、止まらない〜</span><span class="zh">戀愛之夜・心動老虎機</span></h1><div class="flav" aria-hidden="true">君と過ごす<br>この時間が<br>いちばん好き…♡</div>
+<div class="sub">僅供娛樂・虛擬籌碼・無真實金錢</div>
+<div class="wrap"><div class="led" id="ledL" aria-hidden="true"></div>
+<div class="machine" id="machine"><div class="badges" aria-hidden="true"><div>BONUS<small>FREE SPINS</small></div><div>×2<small>CHANCE</small></div></div><div class="inner">
+<div class="lcd" id="lcd" aria-hidden="true"><div class="fsc" id="fsc">FREE SPIN <b id="fsN">0</b>/<b id="fsT">10</b>・×2</div><div class="scr"></div><div class="grid"></div>
+<div class="idle" id="lcdIdle"><b>FRUITS FEVER</b><span>激アツ演出搭載・目押し不要</span></div>
+<div class="stage"><div class="speed"></div><div class="ci"></div></div>
+<div class="navi" id="lcdNavi">PUSH ボタンで遊技開始</div>
+<div class="slam" id="slam"></div><div class="kitai" id="kitai"><i></i><span id="kitaiT">期待度</span></div>
+<div class="seven"></div><div class="scan"></div><div class="gloss"></div></div>
+<div class="lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="board" id="board" role="img" aria-label="轉輪">
+<div class="reel"><div class="strip"></div></div><div class="reel"><div class="strip"></div></div><div class="reel"><div class="strip"></div></div><div class="reel"><div class="strip"></div></div><div class="reel"><div class="strip"></div></div>
+<svg class="lines" id="lines" viewBox="0 0 500 300" preserveAspectRatio="none"></svg>
+</div>
+<div class="info">
+<div class="box"><small id="balL">CREDIT</small><b id="bal" aria-labelledby="balL bal">0</b></div>
+<div class="box"><small>BET ×20</small><b id="bet">0</b></div>
+<div class="box win"><small>PAYOUT</small><b id="win">0</b></div>
+</div>
+<div class="msg" id="msg" role="status" aria-live="polite">財源滾滾，好運連連！</div>
+<div class="controls">
+<button id="minus" aria-label="降低押注">－</button><button class="spin" id="spinBtn" aria-label="旋轉">PUSH<small>旋轉</small></button><button id="plus" aria-label="提高押注">＋</button>
+</div>
+<div class="bar16"><button id="max16" aria-label="最大押注">MAX BET</button><button id="menuBtn" aria-expanded="false">☰ 選單</button></div>
+<div class="row2" id="menu16">
+<button class="gold" id="maxBtn"><span class="ic" aria-hidden="true">⏫</span><span>最大押注</span></button><button id="payBtn"><span class="ic" aria-hidden="true">📋</span><span>賠率表</span></button><button id="soundBtn" aria-pressed="true"><span class="ic" aria-hidden="true">🔊</span><span>音效：開</span></button><button class="badge" id="dailyBtn"><span class="ic" aria-hidden="true">📅</span><span>每日簽到</span></button><button id="lbBtn"><span class="ic" aria-hidden="true">🏆</span><span>排行榜</span></button><button class="badge" id="adBtn" aria-label="看廣告領籌碼"><span class="ic" aria-hidden="true">🎬</span><span>看廣告</span></button><button class="badge" id="invBtn"><span class="ic" aria-hidden="true">🎁</span><span>邀請好友</span></button><button class="badge" id="shopBtn"><span class="ic" aria-hidden="true">🎨</span><span>機台外觀</span></button><button id="setBtn" aria-expanded="false" aria-controls="audioPop"><span class="ic" aria-hidden="true">⚙️</span><span>音訊設定</span></button><button id="resetBtn"><span class="ic" aria-hidden="true">🔄</span><span>重置籌碼</span></button>
+</div>
+<div class="audio" id="audioPop" role="group" aria-label="音訊設定" hidden><button id="musBtn" aria-pressed="true">🎵 音樂：開</button><label>音樂音量<input type="range" id="mvol" min="0" max="1" step="0.05" aria-label="音樂音量"></label><label>音效音量<input type="range" id="svol" min="0" max="1" step="0.05" aria-label="音效音量"></label></div>
+<div class="kbd">鍵盤：空白鍵 旋轉・＋／－ 調整押注・M 音效</div>
+</div></div><div class="led" id="ledR" aria-hidden="true"></div></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="bw" id="bw" role="dialog" aria-modal="true" aria-labelledby="bwTier" aria-live="assertive"><div class="art"></div><div class="rays"></div><div class="vig"></div><div class="fire"></div>
+<div class="jp" id="bwJp">激アツ!!</div><div class="tier" id="bwTier" data-t="BIG BONUS">BIG BONUS</div><div class="lbl">大當たり・贏得虛擬籌碼</div><div class="amt" id="bwAmt">0</div>
+<button class="collect" id="bwBtn">收下籌碼</button><div class="hint">點擊任意處可跳過</div></div>
+<dialog id="daily" aria-labelledby="dTitle"><h2 id="dTitle">每日簽到</h2>
+<div class="dsub" id="dSub">連續簽到 7 天，第 7 天送 1000 虛擬籌碼！</div>
+<ol class="days" id="days"></ol>
+<div class="dact"><button class="claim" id="dClaim">立即簽到</button><button id="dClose">關閉</button></div>
+<p class="note" style="text-align:center;margin-top:10px">每日一次・中斷即從第 1 天重新開始・僅供娛樂・虛擬籌碼不可兌換</p></dialog>
+<dialog id="lb" aria-labelledby="lbTitle"><h2 id="lbTitle">本機排行榜</h2>
+<div class="lbname"><label for="lbName">玩家暱稱</label><input id="lbName" maxlength="12" autocomplete="off"></div>
+<div class="tabs" role="tablist"><button role="tab" id="tabTop" aria-selected="true" aria-controls="lbPanel">單次最大獎</button><button role="tab" id="tabMe" aria-selected="false" aria-controls="lbPanel">個人紀錄</button></div>
+<div id="lbPanel" role="tabpanel"></div>
+<p class="note" style="text-align:center;margin-top:10px">紀錄只存在本裝置・僅供娛樂・虛擬籌碼不可兌換或轉讓</p>
+<div class="dact"><button id="lbReset">清除紀錄</button><button class="gold" id="lbClose">關閉</button></div></dialog>
+<dialog id="ad" aria-labelledby="adTitle"><h2 id="adTitle">看廣告領籌碼</h2>
+<div class="adsub" id="adSub">看完 15 秒示意廣告，即可領取 200 虛擬籌碼</div>
+<div class="adscreen" id="adScreen" aria-live="polite"><span class="tag">廣告示意</span>
+<div class="ring"><svg viewBox="0 0 80 80" aria-hidden="true"><circle class="bg" cx="40" cy="40" r="32"/><circle class="fg" id="adRing" cx="40" cy="40" r="32"/></svg><b id="adCount">15</b></div>
+<div class="ph" id="adPh">準備播放…</div><div class="ph2">此為示意畫面，尚未接入任何廣告服務</div></div>
+<div class="adpips" id="adPips" aria-label="今日觀看次數"></div>
+<div class="dact"><button class="claim" id="adGo">開始觀看</button><button id="adClose">關閉</button></div>
+<p class="note" style="text-align:center;margin-top:10px">每日最多 5 次・中途關閉不發放・僅供娛樂・虛擬籌碼不可兌換或轉讓</p></dialog>
+<dialog id="inv" aria-labelledby="invTitle"><h2 id="invTitle">邀請好友</h2>
+<div class="invsub">分享你的邀請碼給朋友一起玩（示意功能）</div>
+<div class="invcard"><span class="tag">示意</span><small>我的邀請碼</small><div class="invcode" id="invCode">--------</div>
+<div class="invrow"><button class="gold" id="invCopy">📋 複製邀請碼</button><button id="invShare">📤 分享</button></div></div>
+<div class="invin"><label for="invInput">輸入好友的邀請碼，領取一次 300 虛擬籌碼</label>
+<div class="f"><input id="invInput" maxlength="9" autocomplete="off" spellcheck="false" placeholder="FS-XXXXXX" aria-describedby="invMsg"><button class="claim" id="invRedeem" style="font-size:15px;padding:8px 16px">兌換</button></div>
+<div class="invmsg" id="invMsg" role="status" aria-live="polite"></div></div>
+<div class="dact"><button id="invClose">關閉</button></div>
+<p class="note" style="text-align:center;margin-top:10px">此為示意功能，尚未連線伺服器・每台裝置限兌換一次・籌碼無法轉讓給好友・僅供娛樂・虛擬籌碼不可兌換</p></dialog>
+<dialog id="shop" aria-labelledby="shTitle"><h2 id="shTitle">機台外觀商店</h2>
+<div class="shsub">用遊戲中贏得的虛擬籌碼兌換機台外觀・目前籌碼 <b id="shBal">0</b></div>
+<ul class="skins" id="skins"></ul>
+<div class="shmsg" id="shMsg" role="status" aria-live="polite"></div>
+<div class="dact"><button class="gold" id="shClose">關閉</button></div>
+<p class="note" style="text-align:center;margin-top:10px">外觀僅改變機台樣式，不影響中獎機率・只能用虛擬籌碼兌換，無法以真實金錢購買・僅供娛樂・虛擬籌碼不可兌換或轉讓</p></dialog>
+<dialog id="pay" aria-labelledby="payTitle"><h2 id="payTitle" style="color:#ffd54f;text-align:center">賠率表</h2>
+<table id="payTable"><tr><th>符號</th><th>3 連</th><th>4 連</th><th>5 連</th></tr></table>
+<p class="note">5 輪 × 3 列，共 20 條固定連線（機台兩側數字為連線編號）。<br>連線獎 = 賠率 × 每線押注，須從最左輪開始連續 3／4／5 個相同符號，每條線只算最高獎。總押注 = 每線押注 × 20。<br>WILD（只出現在第 2～4 輪）可代替 SCATTER 以外的所有符號。<br>SCATTER 出現在任意位置 3／4／5 個：獎勵總押注 ×6／×25／×125，並觸發 10 次免費旋轉（免費旋轉中所有獎金 ×3，可再觸發 +10 次）。<br>理論回收率約 95.9%（含彩金池 2.85%，精確計算），中獎率約 33%，結果完全隨機・僅供娛樂・虛擬籌碼。</p>
+<div style="text-align:center"><button class="gold" onclick="pay.close()">關閉</button></div></dialog>
+<script>
+const SYM=[
+ {id:'hongbao',name:'紅包',pay:[12, 37, 110]},
+ {id:'lanterns',name:'燈籠',pay:[12, 37, 122]},
+ {id:'fu',name:'福字',pay:[15, 49, 159]},
+ {id:'paper',name:'金箔',pay:[18, 61, 207]},
+ {id:'ingot',name:'元寶',pay:[24, 85, 305]},
+ {id:'lion',name:'金獅',pay:[37, 122, 427]},
+ {id:'jade',name:'玉龍',pay:[61, 220, 732]},
+ {id:'dragon',name:'金龍',pay:[98, 366, 1220]},
+ {id:'coin',name:'財字金幣',pay:[183, 732, 3050]},
+ {id:'heroine',name:'財神娘娘',pay:[366, 1830, 9760]},
+ {id:'wild',name:'WILD 金冠',pay:[610, 3050, 18300]},
+ {id:'scatter',name:'BONUS 財神娘娘（SCATTER）',pay:[0, 0, 0]}];
+const WI=10,SI=11,NR=5,NL=20,SCATP={3:6,4:25,5:125},FS_N=10,FS_M=3;
+// per-reel symbol weights (RTP 96.05% exact incl. free spins; see math/final.py)
+const REELW=[[24,20,16,12,9,7,5,4,3,2,0,3],[24,20,16,12,9,7,5,4,3,2,1,3],[24,20,16,12,9,7,5,4,3,2,2,3],[24,20,16,12,9,7,5,4,3,2,1,3],[24,20,16,12,9,7,5,4,3,2,0,3]];
+const LINES=[[1,1,1,1,1],[0,0,0,0,0],[2,2,2,2,2],[0,1,2,1,0],[2,1,0,1,2],[0,0,1,2,2],[2,2,1,0,0],[1,0,0,0,1],[1,2,2,2,1],[1,0,1,2,1],[1,2,1,0,1],[0,1,1,1,0],[2,1,1,1,2],[0,1,0,1,0],[2,1,2,1,2],[1,1,0,1,1],[1,1,2,1,1],[0,0,2,0,0],[2,2,0,2,2],[0,2,0,2,0]];
+const COLORS=LINES.map((_,i)=>`hsl(${(i*137)%360},95%,60%)`);
+const BETS=[1,2,5,10,20,50];
+const POOLS=REELW.map(w=>{const p=[];w.forEach((n,i)=>{for(let k=0;k<n;k++)p.push(i)});return p});
+const rnd=(c=0)=>{const p=POOLS[c]||POOLS[0];return p[Math.floor(Math.random()*p.length)]};
+const rndGrid=()=>Array.from({length:NR},(_,c)=>[rnd(c),rnd(c),rnd(c)]);
+function lineWin(s){if(s[0]===SI)return null;let best=null;const cands=s[0]===WI?[...Array(WI+1).keys()]:[s[0]];
+ for(const t of cands){let n=0;for(const x of s){if(x===t||(x===WI&&t!==SI))n++;else break}
+  if(n>=3){const p=SYM[t].pay[n-3];if(!best||p>best.m)best={t,n,m:p}}}return best}
+function evalGrid(g){let line=0;const hits=[];LINES.forEach((ln,li)=>{const w=lineWin(ln.map((r,c)=>g[c][r]));if(w){line+=w.m;hits.push({li,cnt:w.n,m:w.m,t:w.t})}});
+ const scPos=[];g.forEach((col,c)=>col.forEach((v,r)=>{if(v===SI)scPos.push([c,r])}));const sc=scPos.length;
+ return {line,hits,sc,scPos,scPay:sc>=3?SCATP[Math.min(sc,5)]:0}}
+['caishen/bigbonus','caishen/cutin'].forEach(n=>{const i=new Image();i.src=`assets/${n}.webp`;i.decode&&i.decode().catch(()=>{})});const rAF2=f=>requestAnimationFrame(()=>requestAnimationFrame(f));const LOVE_L=["財源滾滾，好運連連！", "恭喜發財，紅包拿來～", "今天也會很幸運喔", "金龍獻瑞，福氣滿滿", "招財進寶，萬事如意"];
+setInterval(()=>{if(spinning||bwState||FS||document.hidden)return;const m=$('msg');if(Date.now()-(m._t||0)<7000)return;m._t=Date.now();m.textContent=LOVE_L[Math.random()*LOVE_L.length|0]},7000);
+let FS=null;const LPTS=LINES.map(ln=>ln.map((r,c)=>`${50+c*100},${50+r*100}`).join(' '));
+const $=id=>document.getElementById(id);
+let bal=+(localStorage.getItem('fs_bal')??1000);if(isNaN(bal))bal=1000;
+let betIdx=+(localStorage.getItem('fs_bet')??1)||0;if(betIdx>=BETS.length)betIdx=0;
+let sound=localStorage.getItem('fs_sound')!=='0',spinning=false,grid=[[4,3,6],[0,5,0],[1,7,4],[2,6,0],[7,7,7]];window.__IQ=["ingot", "paper", "jade2", "hongbao", "lion", "hongbao2", "lanterns", "dragon2", "ingot2", "fu", "jade", "hongbao3", "dragon", "dragon3", "dragon4"];
+const reels=[...document.querySelectorAll('.reel')];
+const icon=(id,sz='')=>`<img class="sym" src="assets/sym_${id}.webp" alt="" draggable="false" decoding="sync" data-f="${id}" ${sz}>`;
+const IMGF=new Set();document.addEventListener('error',e=>{const t=e.target;if(t&&t.tagName==='IMG'&&t.dataset.f){IMGF.add(t.dataset.f);t.outerHTML=`<svg class="sym" aria-hidden="true"><use href="#s-${t.dataset.f}"/></svg>`}},true);
+const IMGS=["hongbao", "hongbao2", "hongbao3", "lanterns", "fu", "paper", "ingot", "ingot2", "lion", "jade", "jade2", "dragon", "dragon2", "dragon3", "dragon4", "coin", "heroine", "heroine2", "wild", "scatter"].flatMap(id=>[id,id+'_b']).map(id=>{const i=new Image();i.src=`assets/caishen/t_${id}.webp`;i.decode&&i.decode().catch(()=>IMGF.add(id));return i});
+const icon2=icon;
+const VAR={"hongbao": ["hongbao", "hongbao2", "hongbao3"], "ingot": ["ingot", "ingot2"], "jade": ["jade", "jade2"], "dragon": ["dragon", "dragon2", "dragon3", "dragon4"]};
+function symHTML(id,sz=''){if(!IMGF.has(id)){let v=id;const IQ=window.__IQ;if(IQ&&IQ.length&&!sz)v=IQ.shift();else if(VAR[id]&&!sz)v=VAR[id][Math.random()*VAR[id].length|0];return `<img class="sym" src="assets/caishen/t_${v}.webp" alt="" draggable="false" decoding="sync" data-f="${id}" data-v="${v}" ${sz}>`}if(id==='heroine'&&!IMGF.has(id)&&!sz){const k=Math.random()*3|0;return `<img class="sym" src="assets/heroine${k}.webp" alt="" draggable="false" data-f="heroine">`}return IMGF.has(id)?`<svg class="sym" ${sz} aria-hidden="true"><use href="#s-${id}"/></svg>`:icon(id,sz)}
+function cellHTML(i){const s=SYM[i];return `<div class="cell" data-s="${s.id}" aria-label="${s.name}">${symHTML(s.id)}</div>`}
+function boardLabel(){const rows=['上排','中排','下排'].map((n,r)=>n+'：'+grid.map(c=>SYM[c[r]].name).join('、'));$('board').setAttribute('aria-label','轉輪結果。'+rows.join('；'))}
+function render(){boardLabel();reels.forEach((r,c)=>{const st=r.firstElementChild;st.style.transition='none';st.style.transform='translateY(0)';st.innerHTML=grid[c].map(cellHTML).join('')})}
+function ui(){$('bal').textContent=bal;$('bet').textContent=BETS[betIdx]+'×'+NL;saveLater();{const b=$('soundBtn');b.firstElementChild.textContent=sound?'🔊':'🔇';b.lastElementChild.textContent=sound?'音效：開':'音效：關';b.setAttribute('aria-pressed',sound)}}
+// deferred storage (keeps localStorage writes off the win frame)
+const ric=window.requestIdleCallback||(f=>setTimeout(f,200));let svQ=0;function saveLater(){if(svQ)return;svQ=1;ric(()=>{svQ=0;try{localStorage.setItem('fs_bal',bal);localStorage.setItem('fs_bet',betIdx)}catch(e){}},{timeout:1500})}
+addEventListener('pagehide',()=>{try{localStorage.setItem('fs_bal',bal);localStorage.setItem('fs_bet',betIdx)}catch(e){}});
+// ===== v11 audio engine (WebAudio synthesis, no files) =====
+let ac,AM=null;const AS={music:localStorage.getItem('fs_music')!=='0',mv:+(localStorage.getItem('fs_mv')??.5),sv:+(localStorage.getItem('fs_sv')??.8)};
+function aInit(){if(AM)return AM;try{ac=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return null}
+ const m=ac.createGain(),comp=ac.createDynamicsCompressor();comp.threshold.value=-14;comp.ratio.value=4;m.connect(comp).connect(ac.destination);
+ const mus=ac.createGain(),sfxG=ac.createGain();mus.connect(m);sfxG.connect(m);
+ const rv=ac.createConvolver(),len=ac.sampleRate*1.8,buf=ac.createBuffer(2,len,ac.sampleRate);
+ for(let ch=0;ch<2;ch++){const d=buf.getChannelData(ch);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6)}rv.buffer=buf;
+ const rvG=ac.createGain();rvG.gain.value=.32;rv.connect(rvG).connect(m);
+ const dl=ac.createDelay(1),fb=ac.createGain(),dlG=ac.createGain();dl.delayTime.value=.23;fb.gain.value=.33;dlG.gain.value=.22;dl.connect(fb).connect(dl);dl.connect(dlG).connect(m);
+ const send=ac.createGain();send.connect(rv);send.connect(dl);sfxG.connect(send);const msend=ac.createGain();msend.gain.value=.35;mus.connect(msend).connect(rv);
+ const nb=ac.createBuffer(1,ac.sampleRate,ac.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+ AM={m,mus,sfxG,noise:nb};aVol();return AM}
+function aVol(){if(!AM)return;const t=ac.currentTime;AM.m.gain.setTargetAtTime(sound?1:0,t,.02);AM.mus.gain.setTargetAtTime(AS.music?AS.mv*.55:0,t,.05);AM.sfxG.gain.setTargetAtTime(AS.sv,t,.02)}
+function aOK(){if(!sound||document.hidden)return false;if(!aInit())return false;if(ac.state==='suspended')ac.resume();return true}
+function osc(f,d,type='square',v=.08,t0=0,o={}){if(!aOK()||!isFinite(f)||!isFinite(t0))return;try{const t=ac.currentTime+t0,O=ac.createOscillator(),g=ac.createGain();O.type=type;O.frequency.setValueAtTime(f,t);
+ if(o.to)O.frequency.exponentialRampToValueAtTime(o.to,t+d);if(o.det)O.detune.value=o.det;const a=o.a||.005;
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+a);g.gain.exponentialRampToValueAtTime(.0008,t+d);
+ let n=O;if(o.lp){const F=ac.createBiquadFilter();F.frequency.value=o.lp;n.connect(F);n=F}n.connect(g).connect(o.bus||AM.sfxG);O.start(t);O.stop(t+d+.05)}catch(e){}}
+function tone(f,d,type='square',v=.08,t0=0){osc(f,d,type,v,t0)}
+function noise(d,v=.1,t0=0,o={}){if(!aOK())return;const t=ac.currentTime+t0,s=ac.createBufferSource(),F=ac.createBiquadFilter(),g=ac.createGain();s.buffer=AM.noise;
+ F.type=o.ft||'bandpass';F.frequency.setValueAtTime(o.f||2000,t);if(o.to)F.frequency.exponentialRampToValueAtTime(o.to,t+d);F.Q.value=o.q||1;
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+(o.a||.005));g.gain.exponentialRampToValueAtTime(.0008,t+d);s.connect(F).connect(g).connect(o.bus||AM.sfxG);s.start(t,Math.random()*.5);s.stop(t+d+.05)}
+const mtof=n=>440*Math.pow(2,(n-69)/12);
+function chord(ns,d,t0=0,type='sawtooth',v=.035){ns.forEach(n=>{osc(mtof(n),d,type,v,t0,{det:-7,lp:3200,a:.02});osc(mtof(n),d,type,v*.7,t0,{det:7,lp:3200,a:.02})})}
+function arp(ns,step,t0=0,type='square',v=.05,d=.16){ns.forEach((n,i)=>{osc(mtof(n),d,type,v,t0+i*step);osc(mtof(n+12),d*.8,'triangle',v*.5,t0+i*step)})}
+function coinClink(t0=0,p=1){osc(2093*p,.18,'square',.03,t0);osc(2637*p,.25,'triangle',.05,t0+.03);osc(3520*p,.12,'sine',.03,t0+.05)}
+function drumRoll(dur,t0=0){for(let t=0;t<dur;t+=.045)noise(.06,.04+.12*(t/dur),t0+t,{f:1800,q:.7});noise(.6,.35,t0+dur,{ft:'lowpass',f:3000,to:200});osc(70,.5,'sine',.5,t0+dur,{to:40})}
+const sfx={
+ click:()=>{osc(1200,.04,'square',.035);noise(.03,.05,0,{f:4000,q:3})},
+ blip:up=>{osc(up?660:520,.09,'square',.05,0,{to:up?990:350});osc(up?1320:700,.06,'triangle',.03,.04)},
+ spinStart:()=>{noise(.55,.22,0,{f:400,to:4000,q:1.2,a:.15});osc(180,.5,'sawtooth',.06,0,{to:720,lp:1500});arp([72,76,79,84],.04,0,'square',.035,.1);noise(.1,.15,0,{ft:'lowpass',f:900})},
+ tick:(c,v)=>{if(!isFinite(v))v=1;const p=.6+Math.min(1.4,v*.35);osc(1400*p+c*120,.025,'square',.022);noise(.02,.04,0,{f:5000*p,q:4})},
+ stop:c=>{const f=[150,130,110][c]||130;osc(f,.25,'triangle',.35,0,{to:f*.55});noise(.12,.25,0,{f:1200+c*500,q:2});osc(f*6.1,.18,'square',.03,.01);osc(f*8.3,.3,'sine',.04,.02)},
+ suspense:dur=>{if(!aOK())return;const t=ac.currentTime,O=ac.createOscillator(),O2=ac.createOscillator(),g=ac.createGain(),L=ac.createOscillator(),Lg=ac.createGain();
+  O.type='sawtooth';O2.type='square';O.frequency.setValueAtTime(220,t);O.frequency.exponentialRampToValueAtTime(880,t+dur);O2.frequency.setValueAtTime(221.5,t);O2.frequency.exponentialRampToValueAtTime(882,t+dur);
+  L.frequency.setValueAtTime(5,t);L.frequency.linearRampToValueAtTime(16,t+dur);Lg.gain.value=.025;L.connect(Lg).connect(g.gain);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05,t+dur*.9);g.gain.linearRampToValueAtTime(0,t+dur+.1);[O,O2].forEach(o=>{o.connect(g);o.start(t);o.stop(t+dur+.15)});L.start(t);L.stop(t+dur+.15);g.connect(AM.sfxG);
+  for(let i=0;i<dur;i+=.25)osc(80,.12,'sine',.25,i,{to:45})},
+ win:tier=>{ // 0 small 1 medium 2 big 3 super 4 mega
+  if(tier===0){arp([72,76,79,84],.07,0,'square',.05);coinClink(.3)}
+  else if(tier===1){arp([72,76,79,84,88,91],.06,0,'square',.05);chord([60,64,67,72],.6,.36);for(let i=0;i<4;i++)coinClink(.4+i*.08,1+i*.05)}
+  else{const base=[0,2,5][tier-2];drumRoll(.9);const r=60+base;
+   [[r,r+4,r+7],[r+5,r+9,r+12],[r+7,r+11,r+14],[r+12,r+16,r+19]].forEach((c,i)=>chord(c,.5+(i===3?1.2:0),1+i*.28,'sawtooth',.04));
+   arp([r+12,r+16,r+19,r+24,r+28,r+31,r+36],.055,1,'square',.04,.2);osc(mtof(r-12),1.8,'sawtooth',.08,1.84,{lp:800});
+   if(tier>=3)arp([r+24,r+28,r+31,r+36,r+31,r+28,r+24,r+28,r+31,r+36],.07,2.1,'triangle',.05);
+   if(tier>=4){for(let i=0;i<6;i++)noise(.3,.12,2.4+i*.35,{ft:'lowpass',f:2500,to:300});osc(55,2,'sine',.4,1.84,{to:30})}}},
+ coin:u=>{coinClink(0,.9+u*.5+Math.random()*.08)},
+ collect:()=>{chord([72,76,79,84],1.2,0,'triangle',.06);arp([84,88,91,96],.05,0,'square',.04);for(let i=0;i<6;i++)coinClink(.1+i*.06,1+Math.random()*.3)},
+ chime:()=>{[76,79,84,88,91].forEach((n,i)=>{osc(mtof(n),1.2,'sine',.08,i*.09);osc(mtof(n)*2.01,.6,'sine',.03,i*.09)});chord([72,76,79],1.4,.45,'triangle',.04)},
+ buy:()=>{noise(.15,.15,0,{f:3000,q:2});osc(1568,.08,'square',.05,.02);osc(2093,.4,'triangle',.07,.1);arp([79,83,86,91],.05,.15,'square',.04);for(let i=0;i<3;i++)coinClink(.2+i*.07)},
+ ad:()=>{arp([67,71,74,79,83,86],.06,0,'triangle',.06,.25);chord([67,71,74,79],1,.38,'sawtooth',.03);coinClink(.5);coinClink(.6,1.2)},
+ lose:()=>{osc(330,.18,'triangle',.05,0,{to:250});osc(247,.3,'triangle',.05,.16,{to:180})},
+ big:()=>sfx.win(2)};
+// background music: lookahead step sequencer, 128bpm, C-Am-F-G
+const MUS={on:false,step:0,next:0,T:null};const PROG=[[48,60,64,67],[45,57,60,64],[41,57,60,65],[43,55,59,62]];
+const MEL=[72,null,76,79,null,76,72,null,74,null,77,81,null,79,76,null];
+function musTick(){if(!AM||!sound||!AS.music||document.hidden||ac.state!=='running')return;const sp=60/128/4;
+ if(MUS.next<ac.currentTime-.1)MUS.next=ac.currentTime+.05;
+ while(MUS.next<ac.currentTime+.12){const s=MUS.step,t=MUS.next-ac.currentTime,ch=PROG[(s>>4)%4],b=AM.mus;
+  if(s%4===0){osc(55,.22,'sine',.5,t,{to:38,bus:b});noise(.04,.06,t,{ft:'lowpass',f:1200,bus:b})}
+  if(s%8===4)noise(.15,.16,t,{f:1800,q:.6,bus:b});
+  if(s%2===1)noise(.03,.05,t,{ft:'highpass',f:8000,bus:b});
+  if(s%2===0)osc(mtof(ch[0]-12+(s%4===2?12:0)),.18,'sawtooth',.09,t,{lp:600,bus:b});
+  osc(mtof(ch[1+(s%3)]+12),.09,'square',.025,t,{bus:b});
+  if(s%16===0)ch.slice(1).forEach(n=>osc(mtof(n),1.7,'triangle',.03,t,{a:.1,bus:b}));
+  const m=MEL[s%16];if(m&&(s>>4)%2===1)osc(mtof(m+((s>>4)%4===3?2:0)),.2,'square',.03,t,{lp:2500,bus:b});
+  MUS.step++;MUS.next+=sp}}
+function musSync(){if(sound&&AS.music&&AM&&!MUS.T){MUS.next=ac.currentTime+.05;MUS.T=setInterval(musTick,30)}else if((!sound||!AS.music)&&MUS.T){clearInterval(MUS.T);MUS.T=null}}
+addEventListener('pointerdown',()=>{if(sound&&aInit()){if(ac.state==='suspended')ac.resume();aVol();musSync()}},{capture:true});
+addEventListener('keydown',()=>{if(sound&&aInit()){aVol();musSync()}},{capture:true});
+
+function clearWin(){$('lines').innerHTML='';document.querySelectorAll('.hit').forEach(e=>e.classList.remove('hit'));$('machine').classList.remove('win-mode')}
+const easeOut=t=>1-Math.pow(1-t,3);
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function teaseCheck(res){ // reach on reels 4-5: big line or scatter bonus still possible after reel 3
+ let sc=0;for(let c=0;c<3;c++)res[c].forEach(v=>{if(v===SI)sc++});if(sc>=2)return true;
+ return LINES.some(ln=>{const s=[0,1,2].map(c=>res[c][ln[c]]);if(s[0]===SI)return false;const t=s[0];return t>=6&&s.every(x=>x===t||x===WI)});}
+function animateReel(r,c,seq,dur,onDone){
+ const st=r.firstElementChild,h=r.clientHeight/3,dist=(seq.length-3)*h;
+ st.innerHTML=seq.map(cellHTML).join('');st.style.transition='none';
+ const wind=RM?0:h*.18,over=RM?0:h*.22,W=RM?0:140,B=RM?0:320,D=dur*1000;
+ const t0=performance.now();let lastY=-dist,lastT=t0,ticked=0;
+ function frame(now){const t=now-t0;let y;
+  if(t<W){y=-dist-wind*Math.sin(Math.PI/2*t/W)}
+  else if(t<W+D){const u=(t-W)/D;y=-dist-wind+(dist+wind+over)*easeOut(u)}
+  else if(t<W+D+B){const u=(t-W-D)/B;y=over*Math.exp(-5*u)*Math.cos(u*Math.PI*2.5)}
+  else{st.style.transform='translate3d(0,0,0)';st._mb=false;st.classList.remove('mb');onDone();return}
+  const v=Math.abs(y-lastY)/Math.max(1,now-lastT);lastY=y;lastT=now;
+  st.style.transform=`translate3d(0,${y.toFixed(1)}px,0)`;{const mb=v>1.1&&!RM;if(mb!==st._mb){st._mb=mb;st.classList.toggle('mb',mb)}}
+  const idx=Math.floor((y+dist)/h);if(idx!==ticked&&t>W&&t<W+D){ticked=idx;const nw=performance.now();if(nw-(r._tk||0)>(v>3?70:25)){r._tk=nw;sfx.tick(c,v)}}
+  requestAnimationFrame(frame)}
+ requestAnimationFrame(frame);}
+function spin(){
+ if(spinning||bwState||window.__hold)return;const free=!!(FS&&FS.left>0);const bet=free?FS.bet:BETS[betIdx],total=bet*NL;
+ if(!free&&bal<total){$('msg').textContent=bal<BETS[0]*NL?(adLeft()>0?'籌碼不足！可「看廣告領籌碼」或按「重置籌碼」':'籌碼不足！請按「重置籌碼」'):'籌碼不足，請降低押注';sfx.lose();return}
+ BRc=null;boardR();spinning=true;if(free){FS.left--;FS.n++;fsUI()}else{bal-=total;window.CZ&&CZ.onBet(total)}ui();clearWin();$('win').textContent=0;$('msg').textContent=free?`免費旋轉 ${FS.n}／${FS.tot}（獎金 ×${FS_M}）`:'旋轉中…';$('board').setAttribute('aria-busy','true');
+ ['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=true);
+ const res=(window.__force&&window.__force.shift())||rndGrid();const tease=teaseCheck(res);
+ const ev=evalGrid(res),mult=free?FS_M:1;
+ sfx.spinStart();$('machine').classList.add('spinning');lcdSpin((ev.line/NL+ev.scPay)*mult,tease,ev.sc>=3);let done=0;
+ reels.forEach((r,c)=>{const ext=tease?(c===3?16:c===4?34:0):0,n=12+c*5+ext;
+  const seq=[...res[c]];for(let k=0;k<n;k++)seq.push(rnd(c));seq.push(...grid[c]);
+  const dur=(RM?.45:.85)+c*.24+(tease?(c===3?1.1:c===4?2.3:0):0);
+  animateReel(r,c,seq,dur,()=>{sfx.stop(c%3);landFX(c);r.classList.remove('tease','land');rAF2(()=>r.classList.add('land'));
+   const st=r.firstElementChild;st.innerHTML=res[c].map(cellHTML).join('');
+   if(c===2&&tease){r.parentNode.classList.add('teasing');reels[3].classList.add('tease');reels[4].classList.add('tease');$('msg').textContent='リーチ!! ドキドキが止まらない…！（第 4、5 輪）';lcdReach();sfx.suspense(RM?.5:1.4)}
+   if(c===3&&tease){r.classList.remove('tease');sfx.suspense(RM?.4:1.1)}
+   if(++done===NR){$('machine').classList.remove('spinning');r.parentNode.classList.remove('teasing');grid=res;settle(bet,free)}});});
+}
+function settle(bet,free){
+ boardLabel();$('board').removeAttribute('aria-busy');const total=bet*NL,mult=free?FS_M:1,ev=evalGrid(grid),hits=ev.hits;
+ const won=(ev.line*bet+ev.scPay*total)*mult,xr=won/total;
+ const svg=$('lines');let sh='';HITC=[];const hset=new Set();document.querySelectorAll('.led .pl.on').forEach(e=>e.classList.remove('on'));
+ hits.forEach((h,hi)=>{const ln=LINES[h.li];const pts=LPTS[h.li];sh+=`<polyline class="glow" stroke="${COLORS[h.li]}" points="${pts}"/><polyline class="core" stroke="${COLORS[h.li]}" points="${pts}"/>`+(hi<5?`<polyline class="beam" points="${pts}"/>`:'');
+  const pl=document.querySelector(`.led .pl[data-l="${h.li}"]`);if(pl)pl.classList.add('on');
+  for(let c=0;c<h.cnt;c++){const k=c*3+ln[c];if(!hset.has(k)){hset.add(k);HITC.push([c,ln[c]])}}});HITC.forEach(([c,r])=>reels[c].firstElementChild.children[r].classList.add('hit'));
+ if(ev.sc>=3)ev.scPos.forEach(([c,r])=>reels[c].firstElementChild.children[r].classList.add('sc'));
+ svg.innerHTML=sh;lcdResult(xr,ev.sc>=3);
+ if(free)FS.won+=won;
+ if(won){bal+=won;$('win').textContent=won;$('machine').classList.add('win-mode');
+  $('msg').textContent=`恭喜！${hits.length} 條連線${ev.sc>=3?'＋SCATTER':''}${free?'（×2）':''}，贏得 ${fmt(won)} 籌碼！`;
+  const big=xr>=(free?30:10)&&ev.sc<3;
+  winFX();winVFX(xr);if(big){setTimeout(()=>bigWin(won,total),1100)}else{sfx.win(winTier(xr));if(xr>=3)rain(1.2,1)}}
+ else{$('msg').textContent=free?`免費旋轉 ${FS.n}／${FS.tot}`:LOVE_L[Math.random()*LOVE_L.length|0];if(!free)sfx.lose()}
+ ric(()=>{const rk=lbRecord(free?0:total,won,bet,total);if(won&&rk===0&&lbGet().wins.length>1)$('msg').textContent+=' 🏆 新紀錄！'},{timeout:2000});
+ ui();spinning=false;window.CZ&&CZ.onSettle({total,won,xr,free,sc:ev.sc,big:xr>=(free?30:10)&&ev.sc<3});
+ if(ev.sc>=3){if(FS){FS.left+=FS_N;FS.tot+=FS_N;fsUI();setTimeout(()=>fsIntro(true),900)}else{FS={left:FS_N,tot:FS_N,n:0,won:0,bet};setTimeout(()=>fsIntro(false),900)}}
+ else fsNext();
+ if(!FS)['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=false);
+}
+// ===== free spins =====
+function fsUI(){document.body.classList.toggle('fs-mode',!!FS);if(FS){$('fsN').textContent=FS.n;$('fsT').textContent=FS.tot}}
+let fsTimer=0;
+function fsNext(){if(!FS)return;clearTimeout(fsTimer);
+ if(FS.left>0){fsTimer=setTimeout(function go(){if(bwState||spinning||window.__hold){fsTimer=setTimeout(go,400);return}spin()},1300);return}
+ const f=FS;fsTimer=setTimeout(function end(){if(bwState||spinning||window.__hold){fsTimer=setTimeout(end,400);return}
+  FS=null;fsUI();['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=false);
+  $('msg').textContent=`免費旋轉結束！共贏得 ${fmt(f.won)} 虛擬籌碼`;if(f.won>0)bigWin(f.won,f.bet*NL,{tier:['mega','BONUS 終了','FREE SPINS 合計'],lbl:'免費旋轉 總獎金'});else lcdReset()},1300)}
+function fsIntro(re){const bw=$('bw');fsUI();lcdBonusFS();
+ bw.className='bw show epic fsi';$('bwTier').textContent='BIG BONUS';$('bwJp').textContent=re?'ありがとう…♡ +10回':'激アツ!! ずっと待ってたよ';
+ bw.querySelector('.lbl').textContent=re?'免費旋轉追加':'免費旋轉（獎金 ×2）';$('bwAmt').textContent=(re?'+':'')+FS_N+' 回';$('bwBtn').textContent='開始！';
+ bwState={won:0,done:true,fin:true,intro:true};sfx.win(3);lastFlash=0;flash(.45);fountain();megaBorder(2.5);bw.classList.add('ready');setTimeout(()=>$('bwBtn').focus(),50);
+ if(window.__fsAuto)setTimeout(bwClose,window.__fsAuto)}
+// ===== particle FX (canvas) =====
+const fx=$('fx'),cx=fx.getContext('2d');let P=[],fxRun=false,DPR=1;
+function fxSize(){DPR=Math.min(2,window.devicePixelRatio||1);fx.width=innerWidth*DPR;fx.height=innerHeight*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
+fxSize();{let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(fxSize,120)},{passive:true})}
+document.addEventListener('visibilitychange',()=>{const h=document.hidden;document.body.classList.toggle('bg-paused',h);if(h){P.length=0;megaT=0;clearInterval(rainT);if(ac&&ac.state==='running')ac.suspend()}else if(ac&&ac.state==='suspended')ac.resume()});
+const CONF=['#ff4fa3','#ffb3d6','#ffd27a','#ffffff','#ff7ec0','#e8b4ff'];
+const PQ=[];const PMAX=matchMedia('(max-width:620px)').matches?160:240;function addP(o){if(PQ.length<600)PQ.push(o)}
+function spr(r,draw){const c=document.createElement('canvas');c.width=c.height=r*2;draw(c.getContext('2d'),r);return c}
+const SP_COIN=spr(32,(g,r)=>{const gr=g.createLinearGradient(0,0,r*2,r*2);gr.addColorStop(0,'#fff6b0');gr.addColorStop(.4,'#ffcc33');gr.addColorStop(1,'#a86400');g.fillStyle=gr;g.beginPath();g.arc(r,r,r-2,0,7);g.fill();g.lineWidth=2.5;g.strokeStyle='#7a4a00';g.stroke();g.strokeStyle='rgba(122,74,0,.6)';g.beginPath();g.arc(r,r,r*.62,0,7);g.stroke();g.fillStyle='rgba(255,255,255,.7)';g.beginPath();g.ellipse(r*.65,r*.55,r*.25,r*.14,-.6,0,7);g.fill()});
+const SP_GLOW=spr(32,(g,r)=>{const gr=g.createRadialGradient(r,r,0,r,r,r);gr.addColorStop(0,'rgba(255,255,240,1)');gr.addColorStop(.25,'rgba(255,210,80,.9)');gr.addColorStop(1,'rgba(255,120,0,0)');g.fillStyle=gr;g.fillRect(0,0,r*2,r*2)});
+const SP_EMB=spr(32,(g,r)=>{const gr=g.createRadialGradient(r,r,0,r,r,r);gr.addColorStop(0,'rgba(255,240,180,1)');gr.addColorStop(.4,'rgba(255,120,0,.8)');gr.addColorStop(1,'rgba(255,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,r*2,r*2)});
+function coinP(x,y,sp){const a=-Math.PI/2+(Math.random()-.5)*2.2,v=sp*(.5+Math.random());
+ addP({k:'coin',x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,r:7+Math.random()*7,rot:Math.random()*6,vr:.15+Math.random()*.25,life:0,max:140+Math.random()*60,g:.32})}
+function sparkP(x,y){const a=Math.random()*Math.PI*2,v=1+Math.random()*5;
+ addP({k:'spark',x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,r:1.5+Math.random()*2.5,life:0,max:40+Math.random()*30,g:.03,c:Math.random()<.5?'#fff6b0':'#ffcc33'})}
+function confP(x,y,sp){const a=-Math.PI/2+(Math.random()-.5)*2.6,v=sp*(.4+Math.random());
+ addP({k:'conf',x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,w:6+Math.random()*6,h:3+Math.random()*4,rot:Math.random()*6,vr:(Math.random()-.5)*.4,life:0,max:180+Math.random()*80,g:.12,c:CONF[Math.random()*CONF.length|0]})}
+function drawCoin(p){const sx=Math.abs(Math.cos(p.rot))*p.r+.8;cx.drawImage(SP_COIN,p.x-sx,p.y-p.r,sx*2,p.r*2)}
+function drawCoinOld(p){const sx=Math.abs(Math.cos(p.rot))*p.r+.8;cx.save();cx.translate(p.x,p.y);
+ const gr=cx.createLinearGradient(-sx,-p.r,sx,p.r);gr.addColorStop(0,'#fff6b0');gr.addColorStop(.4,'#ffcc33');gr.addColorStop(1,'#a86400');
+ cx.fillStyle=gr;cx.beginPath();cx.ellipse(0,0,sx,p.r,0,0,7);cx.fill();cx.strokeStyle='#7a4a00';cx.lineWidth=1.2;cx.stroke();
+ if(sx>p.r*.45){cx.strokeStyle='rgba(122,74,0,.6)';cx.beginPath();cx.ellipse(0,0,sx*.62,p.r*.62,0,0,7);cx.stroke();cx.fillStyle='rgba(255,255,255,.65)';cx.beginPath();cx.ellipse(-sx*.35,-p.r*.4,sx*.22,p.r*.14,-.6,0,7);cx.fill()}
+ cx.restore()}
+function fxLoop(){cx.clearRect(0,0,innerWidth,innerHeight);{let n=Math.min(PQ.length,28,PMAX-P.length);if(n>0)P.push(...PQ.splice(0,n))}
+ for(let i=P.length-1;i>=0;i--){const p=P[i];p.life++;p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;
+  if(p.k==='conf'){p.vx*=.985;p.vy=Math.min(p.vy,2.6);p.x+=Math.sin(p.life*.1+p.rot)*.6}
+  if(p.rot!==undefined)p.rot+=p.vr;
+  if(p.life>p.max||p.y>innerHeight+40){P[i]=P[P.length-1];P.pop();continue}
+  const al=Math.min(1,(p.max-p.life)/25);cx.globalAlpha=al;
+  if(p.k==='coin')drawCoin(p);
+  else if(p.k==='spark'){cx.globalCompositeOperation='lighter';const s=p.r*3.2;cx.drawImage(SP_GLOW,p.x-s,p.y-s,s*2,s*2);cx.globalCompositeOperation='source-over'}
+  else if(p.k==='conf'){cx.save();cx.translate(p.x,p.y);cx.rotate(p.rot);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2*Math.abs(Math.cos(p.rot*1.7)),p.w,p.h*Math.abs(Math.cos(p.rot*1.7))+.5);cx.restore()}else drawExtra(p)}
+ cx.globalAlpha=1;let hk=false;if(!document.hidden)FXH.forEach(f=>{if(f())hk=true});if(P.length||PQ.length||hk)requestAnimationFrame(fxLoop);else{fxRun=false;cx.clearRect(0,0,innerWidth,innerHeight)}}
+function fxStart(){if(!fxRun){fxRun=true;requestAnimationFrame(fxLoop)}}
+function burstAt(el,n){const b=el.getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2;
+ const k=RM?Math.ceil(n/3):n;for(let i=0;i<k;i++)sparkP(x,y);for(let i=0;i<k/3;i++)coinP(x,y,7);fxStart()}
+let HITC=[],BRc=null;addEventListener('resize',()=>BRc=null,{passive:true});addEventListener('scroll',()=>BRc=null,{passive:true});function boardR(){return BRc||(BRc=$('board').getBoundingClientRect())}
+function cellPts(){const b=boardR(),w=(b.width-10)/NR,h=(b.height-10)/3;return HITC.map(([c,r])=>[b.left+5+(c+.5)*w,b.top+5+(r+.5)*h])}
+const WIN_PBUDGET=110;
+function winFX(){const pts=cellPts().slice(0,10);if(!pts.length)return;const per=Math.max(3,Math.floor((RM?30:WIN_PBUDGET*.6)/pts.length));
+ pts.forEach(([x,y],i)=>setTimeout(()=>{for(let k=0;k<per;k++)sparkP(x,y);for(let k=0;k<per/3;k++)coinP(x,y,7);fxStart()},i*28))}
+let rainT=null;
+function rain(sec,dens){clearInterval(rainT);const end=performance.now()+sec*1000;
+ rainT=setInterval(()=>{if(performance.now()>end){clearInterval(rainT);return}
+  const nn=RM?1:Math.max(1,Math.round(dens*Math.min(1,innerWidth/700)));for(let i=0;i<nn;i++){addP({k:'coin',x:Math.random()*innerWidth,y:-20,vx:(Math.random()-.5)*1.5,vy:2+Math.random()*3,r:8+Math.random()*8,rot:Math.random()*6,vr:.15+Math.random()*.2,life:0,max:400,g:.18})}
+  fxStart()},60)}
+function fountain(){const x=innerWidth/2,y=innerHeight*.95;for(let i=0;i<(RM?12:36);i++){coinP(x,y,14);confP(x,y,13)}fxStart()}
+// ===== v11 VFX extras =====
+const FXH=[];let fxHold=0;
+document.querySelectorAll('.lights i').forEach((e,i)=>e.style.setProperty('--i',i));
+{const lt=document.querySelector('.lights');if(lt&&lt.children.length<16)for(let i=lt.children.length;i<16;i++){const e=document.createElement('i');e.style.setProperty('--i',i);lt.appendChild(e)}}
+{const bd=$('board'),sw=document.createElement('div');sw.className='sweep';bd.appendChild(sw);
+if(false){const a=document.createElement('div');a.className='amb';a.setAttribute('aria-hidden','true');for(let i=0;i<12;i++){const b=document.createElement('b');b.style.left=(Math.random()*95)+'%';b.style.top=(20+Math.random()*75)+'%';b.style.animationDelay=(-Math.random()*6)+'s';b.style.animationDuration=(4+Math.random()*4)+'s';a.appendChild(b)}bd.appendChild(a)}
+ const f=document.createElement('div');f.id='flash';f.setAttribute('aria-hidden','true');document.body.appendChild(f)}
+let lastFlash=0;function flash(o){if(RM)return;const nw=performance.now();if(nw-lastFlash<360)return;lastFlash=nw;const f=$('flash');f.style.setProperty('--fo',o);f.classList.remove('go');rAF2(()=>f.classList.add('go'))}
+function sweep(){const s=document.querySelector('.board .sweep');s.classList.remove('go');rAF2(()=>s.classList.add('go'))}
+function shake(l){const m=$('machine');m.classList.remove('sh1','sh2','sh3','sh4','shake');if(RM||!l)return;rAF2(()=>m.classList.add('sh'+l));setTimeout(()=>m.classList.remove('sh'+l),1300)}
+function starP(x,y,sp=6){const a=Math.random()*Math.PI*2,v=sp*(.3+Math.random());addP({k:'star',x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-2,r:4+Math.random()*6,rot:Math.random()*6,vr:(Math.random()-.5)*.3,life:0,max:70+Math.random()*40,g:.08,c:Math.random()<.35?'#ffd27a':(Math.random()<.5?'#ff6fb5':'#ffb3d6')})}
+function twinkP(x,y){addP({k:'twink',x:x+(Math.random()-.5)*60,y:y+(Math.random()-.5)*60,vx:0,vy:-.3,r:6+Math.random()*8,life:0,max:30+Math.random()*20,g:0})}
+function puffP(x,y){for(let i=0;i<(RM?2:7);i++){const a=Math.PI+Math.random()*Math.PI,v=1+Math.random()*2.5;addP({k:'puff',x:x+(Math.random()-.5)*40,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v*.5,r:6+Math.random()*6,life:0,max:30+Math.random()*15,g:-.02})}}
+function emberP(){addP({k:'ember',x:Math.random()*innerWidth,y:innerHeight+5,vx:(Math.random()-.5)*1.2,vy:-(3+Math.random()*4),r:2+Math.random()*4,life:0,max:90+Math.random()*60,g:-.02})}
+function drawStar(p){cx.save();cx.translate(p.x,p.y);cx.rotate(p.rot*.3);const r=p.r;cx.fillStyle=p.c;cx.beginPath();cx.moveTo(0,r*.35);cx.bezierCurveTo(0,0,-r,0,-r,r*.35);cx.bezierCurveTo(-r,r*.85,0,r*1.05,0,r*1.4);cx.bezierCurveTo(0,r*1.05,r,r*.85,r,r*.35);cx.bezierCurveTo(r,0,0,0,0,r*.35);cx.fill();cx.restore()}
+function drawExtra(p){const u=p.life/p.max;
+ if(p.k==='star')drawStar(p);
+ else if(p.k==='twink'){const s=p.r*Math.sin(Math.PI*u);cx.save();cx.globalCompositeOperation='lighter';cx.translate(p.x,p.y);cx.fillStyle='#fffbe0';
+  cx.beginPath();cx.moveTo(0,-s);cx.lineTo(s*.18,0);cx.lineTo(0,s);cx.lineTo(-s*.18,0);cx.closePath();cx.moveTo(-s,0);cx.lineTo(0,s*.18);cx.lineTo(s,0);cx.lineTo(0,-s*.18);cx.fill();cx.restore()}
+ else if(p.k==='puff'){cx.globalAlpha=.45*(1-u);cx.fillStyle='#fff2d0';cx.beginPath();cx.arc(p.x,p.y,p.r*(1+u*1.8),0,7);cx.fill()}
+ else if(p.k==='ember'){cx.globalCompositeOperation='lighter';const s=p.r*3;cx.drawImage(SP_EMB,p.x-s,p.y-s,s*2,s*2);cx.globalCompositeOperation='source-over'}}
+let megaT=0;
+function bolt(x1,y1,x2,y2,dsp){const pts=[[x1,y1]];const n=10;for(let i=1;i<n;i++){const t=i/n;pts.push([x1+(x2-x1)*t+(Math.random()-.5)*dsp,y1+(y2-y1)*t+(Math.random()-.5)*dsp])}pts.push([x2,y2]);
+ cx.save();cx.globalCompositeOperation='lighter';cx.strokeStyle='rgba(160,220,255,.35)';cx.lineWidth=9;cx.beginPath();pts.forEach((p,i)=>i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]));cx.stroke();cx.strokeStyle='rgba(160,220,255,.9)';cx.lineWidth=3;cx.beginPath();pts.forEach((p,i)=>i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]));cx.stroke();cx.strokeStyle='#fff';cx.lineWidth=1.2;cx.stroke();cx.restore()}
+FXH.push(()=>{if(performance.now()<megaT){if(Math.random()<.5)emberP();if(Math.random()<.18){const W=innerWidth,H=innerHeight,e=Math.random()*4|0,d=Math.min(W,H)*.08;
+  if(e===0)bolt(Math.random()*W,0,Math.random()*W,d*1.5,d);else if(e===1)bolt(Math.random()*W,H,Math.random()*W,H-d*1.5,d);else if(e===2)bolt(0,Math.random()*H,d*1.5,Math.random()*H,d);else bolt(W,Math.random()*H,W-d*1.5,Math.random()*H,d)}return true}return false});
+function megaBorder(sec){if(RM)return;megaT=performance.now()+sec*1000;fxStart()}
+function landFX(c){const B=boardR(),w=(B.width-10)/NR,r={left:B.left+5+c*w,width:w,bottom:B.bottom-5};puffP(r.left+r.width/2,r.bottom-6);if(!RM)for(let i=0;i<4;i++)sparkP(r.left+Math.random()*r.width,r.bottom-4);fxStart()}
+function winTier(x){return x>=80?4:x>=30?3:x>=10?2:x>=2?1:0}
+function winVFX(x){const t=winTier(x);flash([.12,.2,.3,.4,.5][t]);sweep();shake([1,1,2,3,4][t]);
+ const pts=cellPts().slice(0,10);const per=Math.max(1,Math.floor((RM?10:WIN_PBUDGET*.4)/Math.max(1,pts.length)/2));pts.forEach(([x,y],i)=>setTimeout(()=>{for(let k=0;k<per;k++){starP(x,y);twinkP(x,y)}fxStart()},40+i*28))}
+
+// ===== big-win celebration =====
+let bwState=null;
+const NF=new Intl.NumberFormat('zh-TW');const fmt=n=>NF.format(n);
+function bigWin(won,total,o={}){const bw=$('bw'),x=won/total;$('bwBtn').textContent='收下籌碼';bw.querySelector('.lbl').textContent=o.lbl||'大當たり・贏得虛擬籌碼';
+ const tier=o.tier||(x>=80?['epic','EPIC WIN','超激アツ!! 巨額大獎']:x>=30?['mega','MEGA WIN','激アツ!! 超級大獎']:['big','BIG WIN','激アツ!! 大獎']);
+ bw.className='bw show '+tier[0];$('bwTier').textContent=tier[1];$('bwTier').dataset.t=tier[1];$('bwJp').textContent=tier[2];$('bwAmt').textContent='0';
+ $('machine').classList.remove('shake');
+ const dur=RM?600:Math.min(6500,2200+x*45),t0=performance.now();let last=0,lastTick=0,lastTxt=0,bumpT=0;const aEl=$('bwAmt');
+ bwState={won,done:false};sfx.win(winTier(x));if(tier[0]==='epic')megaBorder(dur/1000+2);fountain();rain(dur/1000+1.5,tier[0]==='big'?2:4);
+ const fan=setInterval(()=>{if(!bwState||bwState.done){clearInterval(fan);return}fountain()},1400);
+ (function step(now){if(!bwState)return;const u=Math.min(1,(now-t0)/dur),v=bwState.done?won:Math.floor(won*(1-Math.pow(1-u,2.2)));
+  if(v!==last&&now-lastTxt>=48){aEl.textContent=fmt(v);last=v;lastTxt=now;if(now-lastTick>90){lastTick=now;sfx.coin(u);bumpT=now}}
+  {const k=Math.max(0,1-(now-bumpT)/120);aEl.style.transform=RM?'':`scale(${(1+.06*k).toFixed(3)})`}
+  if(u>=1||bwState.done){bwFinish();return}requestAnimationFrame(step)})(t0);
+ setTimeout(()=>$('bwBtn').focus(),50)}
+function bwFinish(){if(!bwState||bwState.fin)return;bwState.done=bwState.fin=true;$('bwAmt').textContent=fmt(bwState.won);$('bw').classList.add('ready');
+ $('bwAmt').style.transform='';sfx.collect();lastFlash=0;flash(.4);for(let i=0;i<(RM?6:24);i++)starP(innerWidth/2,innerHeight/2,9);fxStart()}
+function bwClose(){if(!bwState)return;if(!bwState.fin){bwFinish();return}
+ const wasIntro=bwState.intro;bwState=null;$('bw').className='bw';clearInterval(rainT);if(!FS)lcdReset();$('spinBtn').focus();if(FS)fsNext()}
+$('bw').addEventListener('click',bwClose);
+$('spinBtn').onclick=spin;
+$('minus').onclick=()=>{if(betIdx>0)betIdx--;sfx.blip(false);ui()};
+$('plus').onclick=()=>{if(betIdx<BETS.length-1)betIdx++;sfx.blip(true);ui()};
+$('maxBtn').onclick=()=>{let i=BETS.length-1;while(i>0&&BETS[i]*NL>bal)i--;betIdx=i;sfx.click();ui()};
+$('soundBtn').onclick=()=>{sound=!sound;localStorage.setItem('fs_sound',sound?'1':'0');ui();if(sound)aInit();aVol();musSync();sfx.click()};
+$('resetBtn').onclick=()=>{if(confirm('確定要將籌碼重置為 1000 嗎？')){bal=1000;ui();clearWin();$('win').textContent=0;$('msg').textContent='籌碼已重置為 1000'}};
+$('payBtn').onclick=()=>{sfx.click();$('pay').showModal()};
+document.addEventListener('keydown',e=>{if(bwState&&(e.code==='Space'||e.code==='Enter'||e.code==='Escape')){e.preventDefault();bwClose();return}if(document.querySelector('dialog[open]')||bwState)return;const tg=e.target.tagName;if(tg==='INPUT'||tg==='TEXTAREA')return;
+ if(e.code==='Space'){if(tg==='BUTTON'&&e.target.id!=='spinBtn')return;e.preventDefault();spin()}
+ else if(!spinning&&(e.key==='+'||e.key==='='||e.code==='NumpadAdd'))$('plus').click();
+ else if(!spinning&&(e.key==='-'||e.code==='NumpadSubtract'))$('minus').click();
+ else if((e.key==='m'||e.key==='M')&&!e.ctrlKey&&!e.metaKey)$('soundBtn').click()});
+const pt=$('payTable');[...SYM].reverse().forEach(s=>pt.insertAdjacentHTML('beforeend',s.id==='scatter'?`<tr class="payfs"><td class="pname">${symHTML(s.id,'width="34" height="34"')} SCATTER</td><td>總押注×6</td><td>×25</td><td>×125</td></tr><tr class="payfs"><td colspan="4">3 個以上（任意位置）＝ 10 次免費旋轉・獎金 ×2</td></tr>`:`<tr><td class="pname">${symHTML(s.id,'width="34" height="34"')} ${s.name}</td><td>×${s.pay[0]}</td><td>×${s.pay[1]}</td><td>×${s.pay[2]}</td></tr>`));
+render();ui();
+
+// ---- Daily check-in (play-money only) ----
+const DAILY=[100,150,200,300,400,500,1000];
+const dkey=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+function dState(){let st;try{st=JSON.parse(localStorage.getItem('fs_daily')||'{}')}catch(e){st={}}
+ const today=new Date(),y=new Date(today);y.setDate(y.getDate()-1);
+ const claimed=st.last===dkey(today);let streak=st.streak||0;
+ if(!claimed&&st.last!==dkey(y))streak=0; // missed a day: reset
+ if(!claimed&&streak>=7)streak=0; // completed a cycle
+ return {claimed,streak,idx:claimed?streak-1:streak}}
+function dRender(){const d=dState();$('days').innerHTML=DAILY.map((v,i)=>{const got=i<d.streak,today=!d.claimed&&i===d.streak;
+ return `<li class="day${got?' got':''}${today?' today':''}" aria-label="第 ${i+1} 天 ${v} 籌碼${got?'，已領取':today?'，今日可領':''}"><div class="dn">第 ${i+1} 天</div><div class="coin">$</div><b>+${v}</b></li>`}).join('');
+ $('dClaim').disabled=d.claimed;$('dClaim').textContent=d.claimed?'今日已簽到':'立即簽到 +'+DAILY[d.streak];
+ $('dSub').textContent=d.claimed?`已連續簽到 ${d.streak} 天，明天再來喔！`:`目前連續 ${d.streak} 天・今天可領 ${DAILY[d.streak]} 虛擬籌碼`;
+ $('dailyBtn').classList.toggle('dot',!d.claimed)}
+function dClaim(){const d=dState();if(d.claimed)return;const v=DAILY[d.streak],n=d.streak+1;
+ localStorage.setItem('fs_daily',JSON.stringify({last:dkey(new Date()),streak:n}));bal+=v;ui();
+ sfx.chime();
+ const b=$('dClaim').getBoundingClientRect();for(let i=0;i<(RM?12:40);i++){coinP(b.left+b.width/2,b.top,11);if(i%2)sparkP(b.left+b.width/2,b.top)}fxStart();
+ $('msg').textContent=`簽到成功！獲得 ${v} 虛擬籌碼（連續 ${n} 天）`;dRender()}
+$('dailyBtn').onclick=()=>{sfx.click();dRender();$('daily').showModal()};
+$('dClaim').onclick=dClaim;$('dClose').onclick=()=>$('daily').close();
+dRender();if(!dState().claimed&&!window.__noDaily)setTimeout(()=>{if(!document.querySelector('dialog[open]')&&!bwState)$('daily').showModal()},600);
+
+// ---- Local leaderboard (play-money only, this device) ----
+function lbGet(){let st;try{st=JSON.parse(localStorage.getItem('fs_stats')||'{}')}catch(e){st={}}
+ if(st.v!==13){st={name:typeof st.name==='string'?st.name:'玩家',v:13}} // v13: 5x3 / 20 lines; old 3x3 records are not comparable
+ return Object.assign({name:'玩家',spins:0,bet:0,won:0,peak:bal,big:0,streakBest:0,wins:[]},st)}
+function lbSave(st){st.v=13;localStorage.setItem('fs_stats',JSON.stringify(st))}
+let lbTab='top',lbNew=-1;
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fdate=t=>{const d=new Date(t);return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
+function lbRecord(total,won,bet,tb){tb=tb||total||bet*NL;const st=lbGet();st.spins++;st.bet+=total;st.won+=won;if(bal>st.peak)st.peak=bal;
+ let rank=-1;if(won>0){if(won>=tb*10)st.big++;const e={a:won,x:Math.round(won/tb*10)/10,b:bet,t:Date.now(),n:st.name};
+  st.wins.push(e);st.wins.sort((p,q)=>q.a-p.a||p.t-q.t);st.wins=st.wins.slice(0,10);rank=st.wins.indexOf(e)}
+ lbSave(st);lbNew=rank;return rank}
+function lbRender(){const st=lbGet(),P=$('lbPanel');$('tabTop').setAttribute('aria-selected',lbTab==='top');$('tabMe').setAttribute('aria-selected',lbTab==='me');
+ if(lbTab==='top'){P.innerHTML=st.wins.length?'<ol class="lbl-list">'+st.wins.map((w,i)=>`<li class="r${i+1}${i===lbNew?' new':''}"><span class="rk">${i+1}</span><span class="who">${esc(w.n||st.name)}<small>${fdate(w.t)}・每線 ${w.b}・總押注×${w.x}</small></span><span class="amt2">${fmt(w.a)}</span></li>`).join('')+'</ol>':'<div class="empty">還沒有中獎紀錄，快去轉一把！</div>'}
+ else{const rtp=st.bet?Math.round(st.won/st.bet*100):0;
+  P.innerHTML=`<div class="stats"><div><small>總旋轉次數</small><b>${fmt(st.spins)}</b></div><div><small>最高籌碼</small><b>${fmt(Math.max(st.peak,bal))}</b></div><div><small>單次最大獎</small><b>${fmt(st.wins[0]?.a||0)}</b></div><div><small>大獎次數</small><b>${fmt(st.big)}</b></div><div><small>累計押注</small><b>${fmt(st.bet)}</b></div><div><small>累計贏得</small><b>${fmt(st.won)}</b></div><div style="grid-column:span 2"><small>回收率（贏得 ÷ 押注）</small><b>${rtp}%</b></div></div>`}}
+$('lbBtn').onclick=()=>{sfx.click();const st=lbGet();$('lbName').value=st.name;lbRender();$('lb').showModal()};
+$('lbName').onchange=()=>{const st=lbGet(),v=$('lbName').value.trim().slice(0,12)||'玩家';st.name=v;st.wins.forEach(w=>w.n=v);lbSave(st);$('lbName').value=v;lbRender()};
+$('tabTop').onclick=()=>{lbTab='top';sfx.click();lbRender()};$('tabMe').onclick=()=>{lbTab='me';sfx.click();lbRender()};
+$('lbReset').onclick=()=>{if(confirm('確定清除本機排行榜與統計嗎？')){const n=lbGet().name;lbSave({name:n,peak:bal});lbNew=-1;lbRender()}};
+$('lbClose').onclick=()=>$('lb').close();
+// ---- Rewarded "watch ad" placeholder (no real ad network; play-money only) ----
+const AD_REWARD=200,AD_MAX=5,AD_SEC=window.__adSec||15;
+function adGet(){let st;try{st=JSON.parse(localStorage.getItem('fs_ad')||'{}')}catch(e){st={}}return st.d===dkey(new Date())?st:{d:dkey(new Date()),n:0}}
+const adLeft=()=>AD_MAX-adGet().n;
+let adT=null,adState='idle';
+function adRender(){const left=adLeft(),n=AD_MAX-left;
+ $('adPips').innerHTML=Array.from({length:AD_MAX},(_,i)=>`<i class="${i<n?'on':''}"></i>`).join('');
+ $('adPips').setAttribute('aria-label',`今日已觀看 ${n} / ${AD_MAX} 次`);
+ $('adBtn').classList.toggle('dot',left>0&&bal<BETS[0]*NL);$('adBtn').disabled=false;
+ if(adState==='idle'){$('adScreen').classList.remove('done');$('adRing').style.strokeDashoffset=201;$('adCount').textContent=AD_SEC;
+  $('adPh').textContent=left>0?'準備播放…':'今日次數已用完，明天再來！';
+  $('adGo').textContent=left>0?'開始觀看':'今日已達上限';$('adGo').disabled=left<=0;
+  $('adSub').textContent=`看完 ${AD_SEC} 秒示意廣告，即可領取 ${AD_REWARD} 虛擬籌碼（今日剩 ${left} 次）`}}
+function adStop(){clearInterval(adT);adT=null;adState='idle'}
+function adStart(){if(adLeft()<=0||adState!=='idle')return;adState='play';sfx.click();
+ const t0=performance.now();$('adGo').disabled=true;$('adGo').textContent='播放中…';$('adPh').textContent='示意廣告播放中…';
+ adT=setInterval(()=>{const e=(performance.now()-t0)/1000,r=Math.max(0,AD_SEC-e);
+  $('adCount').textContent=Math.ceil(r);$('adRing').style.strokeDashoffset=201*(r/AD_SEC);
+  if(r<=0){clearInterval(adT);adT=null;adState='done';$('adScreen').classList.add('done');$('adCount').textContent='✓';
+   $('adPh').textContent='觀看完成！';$('adGo').disabled=false;$('adGo').textContent='領取 +'+AD_REWARD;tone(880,.15,'triangle',.07)}},100)}
+function adClaim(){if(adState!=='done')return;const st=adGet();st.n++;localStorage.setItem('fs_ad',JSON.stringify(st));
+ bal+=AD_REWARD;ui();adState='idle';
+ sfx.ad();
+ const b=$('adGo').getBoundingClientRect();for(let i=0;i<(RM?12:36);i++){coinP(b.left+b.width/2,b.top,11);if(i%2)sparkP(b.left+b.width/2,b.top)}fxStart();
+ $('msg').textContent=`獲得 ${AD_REWARD} 虛擬籌碼！（今日剩 ${adLeft()} 次）`;adRender()}
+$('adGo').onclick=()=>adState==='done'?adClaim():adStart();
+$('adBtn').onclick=()=>{sfx.click();adRender();$('ad').showModal()};
+$('adClose').onclick=()=>$('ad').close();
+$('ad').addEventListener('close',()=>{if(adState==='play'){adStop();$('msg').textContent='廣告未看完，未發放籌碼'}adRender()});
+const _ui=ui;ui=function(){_ui();if(typeof adRender==='function'&&$('adPips'))adRender()};
+adRender();
+
+// ---- Invite code placeholder (local only, no server; chips never transfer between players) ----
+const INV_REWARD=300,INV_AL='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+function invGet(){let st;try{st=JSON.parse(localStorage.getItem('fs_inv')||'{}')}catch(e){st={}}
+ if(!/^FS-[A-Z2-9]{6}$/.test(st.code||'')){let c='';const r=new Uint32Array(6);(crypto.getRandomValues?crypto.getRandomValues(r):r.forEach((_,i)=>r[i]=Math.random()*1e9));r.forEach(v=>c+=INV_AL[v%INV_AL.length]);st.code='FS-'+c;localStorage.setItem('fs_inv',JSON.stringify(st))}
+ return st}
+function invMsg(t,k){const m=$('invMsg');m.textContent=t;m.className='invmsg'+(k?' '+k:'')}
+function invRender(){const st=invGet();$('invCode').textContent=st.code;
+ const used=!!st.used;$('invInput').disabled=used;$('invRedeem').disabled=used;$('invRedeem').textContent=used?'已兌換':'兌換';
+ if(used){$('invInput').value=st.used;invMsg(`已使用好友邀請碼 ${st.used}，獲得 ${INV_REWARD} 虛擬籌碼`,'ok')}
+ $('invBtn').classList.toggle('dot',!used)}
+function invNorm(v){v=v.toUpperCase().replace(/[^A-Z0-9]/g,'');if(v.startsWith('FS'))v=v.slice(2);return v?'FS-'+v.slice(0,6):''}
+function invRedeem(){const st=invGet();if(st.used)return;const c=invNorm($('invInput').value);$('invInput').value=c;
+ const bad=t=>{$('invInput').setAttribute('aria-invalid','true');invMsg(t,'err');tone(200,.15,'square',.05)};
+ if(!/^FS-[A-Z0-9]{6}$/.test(c))return bad('邀請碼格式不正確（例：FS-AB23CD）');
+ if(c===st.code)return bad('不能輸入自己的邀請碼喔');
+ $('invInput').removeAttribute('aria-invalid');st.used=c;localStorage.setItem('fs_inv',JSON.stringify(st));bal+=INV_REWARD;ui();
+ [587,740,880,1175].forEach((f,i)=>tone(f,.22,'triangle',.08,i*.08));
+ const b=$('invRedeem').getBoundingClientRect();for(let i=0;i<(RM?12:36);i++){coinP(b.left+b.width/2,b.top,11);if(i%2)sparkP(b.left+b.width/2,b.top)}fxStart();
+ $('msg').textContent=`邀請碼兌換成功！獲得 ${INV_REWARD} 虛擬籌碼`;invRender()}
+async function invCopy(){const c=invGet().code;let ok=false;try{await navigator.clipboard.writeText(c);ok=true}catch(e){}
+ if(!ok){const r=document.createRange();r.selectNodeContents($('invCode'));const se=getSelection();se.removeAllRanges();se.addRange(r);try{ok=document.execCommand('copy')}catch(e){}}
+ invMsg(ok?'已複製邀請碼 '+c:'請長按邀請碼手動複製',ok?'ok':'err');sfx.click()}
+async function invShare(){const c=invGet().code,t=`來玩水果老虎機！輸入我的邀請碼 ${c} 可領 ${INV_REWARD} 虛擬籌碼（僅供娛樂・無真實金錢）`;
+ if(navigator.share){try{await navigator.share({title:'水果老虎機',text:t});return}catch(e){if(e.name==='AbortError')return}}
+ try{await navigator.clipboard.writeText(t);invMsg('已複製分享文字','ok')}catch(e){invMsg('目前裝置不支援分享，請複製邀請碼','err')}}
+$('invBtn').onclick=()=>{sfx.click();invMsg('');invRender();$('inv').showModal()};
+$('invRedeem').onclick=invRedeem;$('invInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();invRedeem()}});
+$('invInput').addEventListener('input',()=>{$('invInput').removeAttribute('aria-invalid');if(!invGet().used)invMsg('')});
+$('invCopy').onclick=invCopy;$('invShare').onclick=invShare;$('invClose').onclick=()=>$('inv').close();
+invRender();
+
+// ---- Cosmetic skins shop (virtual chips only; no real-money purchase; cosmetic only) ----
+const SKINS=[
+ {id:'gold',name:'恋する夜',desc:'預設・夜粉金',price:0,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff4fa3aa,#0c0618 70%)',sym:'love'},
+ {id:'neon',name:'真夜中',desc:'深藍月光',price:2000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#6fa8ffaa,#0c0618 70%)',sym:'ring'},
+ {id:'jade',name:'桜色',desc:'櫻花粉',price:3000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff9cc8aa,#0c0618 70%)',sym:'rose'},
+ {id:'crystal',name:'月あかり',desc:'銀白冷光',price:5000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#9fd8ffaa,#0c0618 70%)',sym:'perfume'},
+ {id:'royal',name:'すみれ',desc:'紫羅蘭',price:8000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#c07cffaa,#0c0618 70%)',sym:'ribbon'},
+ {id:'obsidian',name:'夕焼け',desc:'夕陽橘金',price:12000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff8a4aaa,#0c0618 70%)',sym:'letter'}];
+let shConfirm=null;
+function skGet(){let st;try{st=JSON.parse(localStorage.getItem('fs_skin')||'{}')}catch(e){st={}}
+ if(!Array.isArray(st.own))st.own=[];if(!st.own.includes('gold'))st.own.unshift('gold');
+ st.own=st.own.filter(id=>SKINS.some(k=>k.id===id));if(!st.own.includes(st.eq))st.eq='gold';return st}
+function skSave(st){localStorage.setItem('fs_skin',JSON.stringify(st))}
+function skApply(){const st=skGet();if(st.eq==='gold')delete document.body.dataset.skin;else document.body.dataset.skin=st.eq}
+function shMsg(t,k){const m=$('shMsg');m.textContent=t;m.className='shmsg'+(k?' '+k:'')}
+function shRender(){const st=skGet();$('shBal').textContent=fmt(bal);
+ $('skins').innerHTML=SKINS.map(k=>{const own=st.own.includes(k.id),eq=st.eq===k.id;let btn;
+  if(eq)btn=`<button disabled>使用中</button>`;
+  else if(own)btn=`<button class="use" data-act="use" data-id="${k.id}">套用</button>`;
+  else if(shConfirm===k.id)btn=`<button class="cf" data-act="buy" data-id="${k.id}">確認兌換？</button>`;
+  else btn=`<button class="buy" data-act="ask" data-id="${k.id}" ${bal<k.price?'aria-disabled="true"':''} aria-label="以 ${fmt(k.price)} 虛擬籌碼兌換${k.name}"><span class="coin" aria-hidden="true"></span>${fmt(k.price)}</button>`;
+  return `<li class="skin${eq?' eq':''}">${eq?'<span class="eqtag">使用中</span>':''}<div class="pv" style="background:${k.fr}" aria-hidden="true"><div style="background:${k.in}"><i>${icon(k.sym)}</i><i>${icon('heroine')}</i><i>${icon(k.sym)}</i></div></div><b>${k.name}</b><small>${own&&!eq?'已擁有':k.desc}</small>${btn}</li>`}).join('')}
+function shAct(e){const b=e.target.closest('button[data-act]');if(!b)return;const k=SKINS.find(x=>x.id===b.dataset.id);if(!k)return;const st=skGet();
+ if(b.dataset.act==='use'){st.eq=k.id;skSave(st);skApply();shConfirm=null;sfx.click();shMsg(`已套用「${k.name}」外觀`,'ok');shRender();return}
+ if(b.dataset.act==='ask'){if(spinning){shMsg('請等待本次旋轉結束','err');return}
+  if(bal<k.price){shMsg(`虛擬籌碼不足，還差 ${fmt(k.price-bal)}（可透過遊戲、每日簽到或看廣告取得）`,'err');tone(200,.15,'square',.05);return}
+  shConfirm=k.id;sfx.click();shMsg(`再按一次確認，以 ${fmt(k.price)} 虛擬籌碼兌換「${k.name}」`);shRender();$('skins').querySelector('.cf')?.focus();return}
+ if(b.dataset.act==='buy'){if(spinning||bal<k.price||st.own.includes(k.id)){shConfirm=null;shRender();return}
+  bal-=k.price;st.own.push(k.id);st.eq=k.id;skSave(st);ui();skApply();shConfirm=null;
+  sfx.buy();
+  const r=b.getBoundingClientRect();for(let i=0;i<(RM?10:30);i++){sparkP(r.left+r.width/2,r.top);if(i%3===0)confP(r.left+r.width/2,r.top,9)}fxStart();
+  shMsg(`兌換成功！已套用「${k.name}」`,'ok');$('msg').textContent=`已換上「${k.name}」機台外觀！`;shRender()}}
+$('skins').addEventListener('click',shAct);
+$('shopBtn').onclick=()=>{sfx.click();shConfirm=null;shMsg('');shRender();$('shop').showModal()};
+$('shClose').onclick=()=>$('shop').close();
+$('shop').addEventListener('close',()=>{shConfirm=null;$('shopBtn').classList.toggle('dot',SKINS.some(k=>!skGet().own.includes(k.id)&&bal>=k.price))});
+{const _u=ui;ui=function(){_u();if($('shopBtn'))$('shopBtn').classList.toggle('dot',SKINS.some(k=>!skGet().own.includes(k.id)&&bal>=k.price))}}
+skApply();ui();
+{const mb=$('musBtn'),mr=()=>{mb.textContent=AS.music?'🎵 音樂：開':'🎵 音樂：關';mb.setAttribute('aria-pressed',AS.music)};mr();$('mvol').value=AS.mv;$('svol').value=AS.sv;
+ mb.onclick=()=>{AS.music=!AS.music;localStorage.setItem('fs_music',AS.music?'1':'0');mr();aInit();aVol();musSync();sfx.click()};
+ $('mvol').oninput=e=>{AS.mv=+e.target.value;localStorage.setItem('fs_mv',AS.mv);aVol()};
+ $('svol').oninput=e=>{AS.sv=+e.target.value;localStorage.setItem('fs_sv',AS.sv);aVol()};
+ $('svol').onchange=()=>sfx.click();}
+
+// ===== v12 LCD 演出 (pachislot-style presentation; cosmetic only, outcome already decided) =====
+const KITAI=[['#3a8bff','期待度 青'],['#19e08a','期待度 緑'],['#ff2240','期待度 赤'],['#ffc400','期待度 金'],['#fff','期待度 虹']];
+let lcdT=[];const lcd=$('lcd'),slamEl=$('slam');
+function lcdClear(){lcdT.forEach(clearTimeout);lcdT=[]}
+function lcdLater(f,ms){lcdT.push(setTimeout(f,ms))}
+function slam(t,k,sub){slamEl.style.setProperty('--k',k||'#ff2240');slamEl.innerHTML=t+(sub?`<small>${sub}</small>`:'');slamEl.classList.remove('go');requestAnimationFrame(()=>requestAnimationFrame(()=>slamEl.classList.add('go')))}
+function setKitai(i){const k=$('kitai');if(i<0){k.classList.remove('on');return}k.style.setProperty('--k',KITAI[i][0]);$('kitaiT').textContent=KITAI[i][1];k.classList.toggle('rainbow',i===4);k.classList.add('on')}
+function lcdReset(){lcdClear();lcd.classList.remove('reach','bonus');slamEl.classList.remove('go');setKitai(-1);$('lcdIdle').style.opacity=1;$('lcdNavi').textContent='PUSH';$('spinBtn').classList.remove('push')}
+function lcdSpin(x,tease,bon){lcdReset();$('lcdIdle').style.opacity=.25;$('lcdNavi').textContent='回転中…';
+ let k=-1;const r=Math.random();
+ if(bon||x>=80)k=r<.5?4:3;else if(x>=10)k=r<.6?3:2;else if(x>=3)k=r<.7?2:1;else if(x>0)k=r<.5?1:(r<.8?0:-1);else if(tease)k=r<.6?1:2;else k=r<.22?0:(r<.27?1:-1);
+ lcd._k=k;if(k>=0)lcdLater(()=>{setKitai(k);if(k>=2)slam(k>=3?'激アツ!!':'チャンス!','#ff4fa3')},350)}
+function lcdReach(){lcd.classList.add('reach');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='リーチ演出中';$('spinBtn').classList.add('push');const k=Math.max(1,lcd._k|0);slam('リーチ!!','#ff4fa3','ドキドキ…♡');sfx.blip&&sfx.blip(true)}
+function lcdBonusFS(){lcdClear();lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='FREE SPINS 突入!!';slam('BIG BONUS','#ff4fa3','FREE SPINS ×10');lcdLater(()=>lcd.classList.remove('bonus'),2200)}
+function lcdResult(x,bon){$('spinBtn').classList.remove('push');lcd.classList.remove('reach');if(bon)return;
+ if(x>=10){lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='BONUS 確定!!';slam('7',x>=80?'#fff':'#ffc400',x>=30?'SUPER BIG':'BIG WIN');lcdLater(()=>slam(x>=80?'大當たり!!':'BIG WIN','#ff2240','確定'),550)}
+ else if(x>=2){slam('REG','#19e08a','總押注 ×'+(Math.round(x*10)/10));$('lcdNavi').textContent='REGULAR 中獎';lcdLater(lcdReset,2600)}
+ else if(x>0){slam('WIN','#3a8bff','×'+(Math.round(x*10)/10));$('lcdNavi').textContent='小役 中獎';lcdLater(lcdReset,1800)}
+ else{lcdLater(lcdReset,700)}}
+{const mk=(el,a)=>{a.forEach((li,i)=>{const e=document.createElement('b');e.className='pl';e.dataset.l=li;e.textContent=li+1;e.style.setProperty('--lc',COLORS[li]);e.style.setProperty('--i',i);el.appendChild(e)})};mk($('ledL'),[0,1,2,3,4,5,6,7,8,9]);mk($('ledR'),[10,11,12,13,14,15,16,17,18,19])}
+fsUI();{const b=$('setBtn'),p=$('audioPop');const tg=o=>{p.hidden=!o;b.setAttribute('aria-expanded',o)};b.onclick=e=>{e.stopPropagation();sfx.click();tg(p.hidden)};document.addEventListener('click',e=>{if(!p.hidden&&!p.contains(e.target)&&e.target!==b)tg(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!p.hidden){tg(false);b.focus()}})}
+</script><script>addEventListener('load',()=>{const d=document.createElement('div');d.setAttribute('aria-hidden','1');d.style.cssText='position:fixed;left:-9999px;top:0;visibility:hidden;contain:strict;width:10px;height:10px';
+const txt='リーチ!!ドキドキ…♡激アツ!!チャンス!BIG BONUS FREE SPINS×10ずっと待ってたよ'+(typeof LOVE_L!=='undefined'?LOVE_L.join(''):'')+'（第４、５輪）が止まらない！0123456789';
+['"KleeSub",sans-serif','"Arial Black",sans-serif','"Noto Sans TC",sans-serif','sans-serif'].forEach(f=>[400,700,900].forEach(w=>['italic','normal'].forEach(st=>{const s=document.createElement('span');s.style.cssText=`font-family:${f};font-weight:${w};font-style:${st}`;s.textContent=txt;d.appendChild(s)})));document.body.appendChild(d)})
+</script><script>(()=>{const $=id=>document.getElementById(id);const mb=$('menuBtn');mb.onclick=e=>{e.stopPropagation();const o=document.body.classList.toggle('menu16');mb.setAttribute('aria-expanded',o)};
+$('max16').onclick=()=>$('maxBtn').click();document.addEventListener('click',e=>{if(document.body.classList.contains('menu16')&&!e.target.closest('#menu16')&&e.target!==mb){document.body.classList.remove('menu16');mb.setAttribute('aria-expanded',false)}});
+$('menu16').addEventListener('click',e=>{if(e.target.closest('button')&&!e.target.closest('#soundBtn')){document.body.classList.remove('menu16');mb.setAttribute('aria-expanded',false)}});
+const fit=el=>{const l=String(el.textContent).length;if(el.dataset.l!=l)el.dataset.l=l};['bal','win'].forEach(id=>{const el=$(id);fit(el);new MutationObserver(()=>fit(el)).observe(el,{childList:true,characterData:true,subtree:true})})})()</script><script>window.CZM={"id": "caishen", "name": "財神降臨", "buy": 25, "rtp": 95.91, "buyRtp": 96.21, "fsm": 3}</script><script src="casino.js"></script></body></html>
