@@ -235,3 +235,25 @@ dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!i
 #czEn.gim::before{width:30%;z-index:1;opacity:.95}
 #czEn.gim::after{content:"激";position:absolute;left:50%;top:-30%;transform:translateX(-50%);z-index:1;font:900 clamp(30px,10vw,60px)/1 serif;color:#7a1200;text-shadow:0 1px 0 #ffe9a0;animation:czDrop2 1.6s cubic-bezier(.5,0,.6,1.4) both}
 @keyframes czDrop2{0%{top:-50%}35%{top:19%}45%{top:15%}55%{top:19%}85%{top:19%;opacity:1}100%{top:19%;opacity:0}}
+/* v17.8 mini-game */
+#czMG{position:fixed;inset:0;z-index:65;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(60,8,40,.92),rgba(5,1,6,.97));animation:mgIn .3s ease-out both;padding:env(safe-area-inset-top) 10px env(safe-area-inset-bottom)}
+#czMG.out{opacity:0;transition:opacity .3s}
+#czMG .mgbox{width:min(94vw,520px);max-height:calc(100dvh - 20px);overflow:auto;text-align:center;padding:14px 12px 10px;border-radius:18px;border:2px solid #d9a441;background:linear-gradient(#24101f,#0d0510);box-shadow:0 0 30px rgba(255,79,163,.5)}
+#czMG .mgt{font:900 italic clamp(24px,7vw,36px)/1.1 "Arial Black","KleeSub",sans-serif;color:#ffe7a8;text-shadow:0 0 10px #ffb000,0 0 24px #ff4fa3}
+#czMG .mgs{margin:4px 0 10px;color:#ffd6ee;font:600 14px/1.3 "KleeSub",sans-serif}
+#czMG .mgg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#czMG .mgc{position:relative;aspect-ratio:3/2;border-radius:12px;border:2px solid #d9a441;padding:0;overflow:hidden;background:#140a14;cursor:pointer;transition:transform .15s}
+#czMG .mgc:active{transform:scale(.95)}
+#czMG .mgc img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .3s,transform .3s}
+#czMG .mgc b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 clamp(22px,7vw,34px)/1 "Times New Roman",serif;color:#fff2b0;text-shadow:0 0 8px #ff8a00,0 2px 0 #000;opacity:0;transform:scale(.4);transition:opacity .25s,transform .35s cubic-bezier(.3,1.7,.5,1)}
+#czMG .mgc.open img{filter:brightness(.35) saturate(.6);transform:scale(1.08)}
+#czMG .mgc.open b{opacity:1;transform:none}
+#czMG .mgc.open:not(.rest){border-color:#fff2b0;box-shadow:0 0 18px #ffd24a}
+#czMG .mgc.rest b{color:#bba;text-shadow:none;font-size:clamp(16px,5vw,24px)}
+#czMG .mgr{margin:10px 0 6px;color:#ffe6f4;font:600 15px/1.3 sans-serif}#czMG .mgr b{color:#ffd27a;font-size:20px}
+#czMG .mgok{margin:4px auto 6px;display:block;height:46px;padding:0 26px;border-radius:23px;border:1px solid #ffd27a;background:linear-gradient(#ff7ac8,#c2186b);color:#fff;font:800 16px/1 sans-serif}
+#czMG .mgn{font-size:10.5px;color:#bfa9bd}
+@media (orientation:landscape) and (max-height:500px){#czMG .mgbox{width:min(70vw,560px);padding:8px 10px 6px}#czMG .mgg{grid-template-columns:repeat(9,1fr);gap:5px}#czMG .mgc{aspect-ratio:2/3}#czMG .mgs{margin:2px 0 6px}}
+@keyframes mgIn{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){#czMG,#czMG *{animation:none!important;transition:none!important}}
+#czMG .mgok[hidden]{display:none}

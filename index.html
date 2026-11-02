@@ -2,12 +2,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>戀夜娛樂城 LOVE NIGHT CASINO｜僅供娛樂</title>
 <meta name="description" content="虛擬籌碼的日系柏青嫂風格娛樂城。僅供娛樂・虛擬籌碼・無真實金錢。">
-<link rel="preload" href="assets/lobby/bg.webp?v=177" as="image">
+<link rel="preload" href="assets/lobby/bg.webp?v=178" as="image">
 <style>
-@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff?v=177) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff?v=178) format("woff");font-weight:600;font-display:swap}
 *{box-sizing:border-box}html,body{margin:0;height:100%}
 body{background:#07020a;color:#fbe9f3;font-family:"Noto Sans TC","Noto Sans CJK TC",sans-serif;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/lobby/bg.webp?v=177) center 30%/cover no-repeat}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/lobby/bg.webp?v=178) center 30%/cover no-repeat}
 body::after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,2,10,.55),rgba(7,2,10,.25) 30%,rgba(7,2,10,.7) 70%,rgba(7,2,10,.95))}
 @media (min-width:800px){body::before{background-size:auto 140%;background-position:center 30%;box-shadow:inset 0 0 0 100vmax rgba(0,0,0,0)}body{background:radial-gradient(ellipse at 50% 20%,#2a0a26,#07020a 70%)}}
 button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
@@ -130,18 +130,18 @@ html,body{background-color:#1a0618}
 <dialog id="dFree"><h3>免費籌碼</h3><div class="row"><div class="x"><b id="fAmt">每 3 小時可領一次</b><small id="fTxt"></small></div><button class="btn hot" id="fClaim">領取</button></div><p class="note">VIP 等級越高，每次可領越多・虛擬籌碼</p><button class="btn close" data-close>關閉</button></dialog>
 <dialog id="dMiss"><h3>今日任務</h3><div id="miss"></div><h3 style="margin-top:14px">成就</h3><div id="ach"></div><button class="btn close" data-close>關閉</button></dialog>
 <dialog id="dLb"><h3>排行榜</h3><span class="warn">⚠ 示範資料：除「你」以外皆為虛構玩家，非真實排名</span><table class="lbt" id="lbt"></table><p class="note">依累積贏得虛擬籌碼排序・僅供娛樂</p><button class="btn close" data-close>關閉</button></dialog>
-<script src="casino.js?v=177"></script>
+<script src="casino.js?v=178"></script>
 <script>
 (()=>{const $=id=>document.getElementById(id),LS=localStorage,fmt=n=>Math.floor(n).toLocaleString('en-US');
 const GAMES=[
- {id:'love',href:'love.html',name:'恋する夜のスロット♡',img:'assets/love/card.webp?v=177',tags:['RTP 96.1%','中波動','FS ×2'],rib:'人氣'},
- {id:'matsuri',href:'matsuri.html',name:'夏祭り恋花火',img:'assets/matsuri/card.webp?v=177',tags:['RTP 96.1%','低波動','FS ×2'],rib:'和風祭典'},
- {id:'caishen',href:'caishen.html',name:'財神降臨',img:'assets/caishen/card.webp?v=177',tags:['RTP 95.9%','高波動','FS ×3'],rib:'東方財神'},
- {id:'samurai',href:'samurai.html',name:'天下布武',img:'assets/samurai/card.webp?v=177',tags:['RTP 95.9%','高波動','FS ×3'],rib:'NEW'},
- {id:'pirate',href:'pirate.html',name:'海賊の宝藏',img:'assets/pirate/card.webp?v=177',tags:['RTP 96.1%','中波動','FS ×2'],rib:'NEW'},
- {id:'neko',href:'neko.html',name:'招財大作戰',img:'assets/neko/card.webp?v=177',tags:['RTP 96.1%','低波動','FS ×2'],rib:'NEW'},
- {id:'sakura',href:'sakura.html',name:'桜花斬',img:'assets/sakura/card.webp?v=177',tags:['RTP 95.9%','中波動','FS ×3'],rib:'NEW'},
- {id:'queen',href:'queen.html',name:'女王の逆襲',img:'assets/queen/card.webp?v=177',tags:['RTP 95.9%','低波動','FS ×3'],rib:'NEW'}];
+ {id:'love',href:'love.html',name:'恋する夜のスロット♡',img:'assets/love/card.webp?v=178',tags:['RTP 96.1%','中波動','FS ×2'],rib:'人氣'},
+ {id:'matsuri',href:'matsuri.html',name:'夏祭り恋花火',img:'assets/matsuri/card.webp?v=178',tags:['RTP 96.1%','低波動','FS ×2'],rib:'和風祭典'},
+ {id:'caishen',href:'caishen.html',name:'財神降臨',img:'assets/caishen/card.webp?v=178',tags:['RTP 95.9%','高波動','FS ×3'],rib:'東方財神'},
+ {id:'samurai',href:'samurai.html',name:'天下布武',img:'assets/samurai/card.webp?v=178',tags:['RTP 95.9%','高波動','FS ×3'],rib:'NEW'},
+ {id:'pirate',href:'pirate.html',name:'海賊の宝藏',img:'assets/pirate/card.webp?v=178',tags:['RTP 96.1%','中波動','FS ×2'],rib:'NEW'},
+ {id:'neko',href:'neko.html',name:'招財大作戰',img:'assets/neko/card.webp?v=178',tags:['RTP 96.1%','低波動','FS ×2'],rib:'NEW'},
+ {id:'sakura',href:'sakura.html',name:'桜花斬',img:'assets/sakura/card.webp?v=178',tags:['RTP 95.9%','中波動','FS ×3'],rib:'NEW'},
+ {id:'queen',href:'queen.html',name:'女王の逆襲',img:'assets/queen/card.webp?v=178',tags:['RTP 95.9%','低波動','FS ×3'],rib:'NEW'}];
 $('wall').innerHTML=GAMES.map(g=>`<a class="card" href="${g.href}" data-id="${g.id}"><span class="rib">${g.rib}</span><img src="${g.img}" alt="${g.name}" loading="lazy" decoding="async" width="720" height="405"><div class="meta"><div class="t"><b>${g.name}</b><small>${g.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</small></div><span class="play">PLAY</span></div></a>`).join('')+
  `<div class="card lock" aria-hidden="true"><div class="ph">COMING SOON</div><div class="meta"><div class="t"><b>新機台 準備中</b><small><span class="tag">敬請期待</span></small></div></div></div>`;
 // ---- UI refresh ----
