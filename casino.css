@@ -165,7 +165,7 @@ html{background:var(--czth,#1a0618)}
 }
 @media (orientation:landscape) and (max-height:500px){
  body{background:transparent!important}
- body::before{position:fixed!important;inset:0!important;background:linear-gradient(rgba(0,0,0,0) 40%,rgba(0,0,0,.25)),var(--czbgp) center/cover no-repeat!important;opacity:1!important;z-index:-2!important;content:""!important;display:block!important}
+ body::before{position:fixed!important;inset:0!important;background:linear-gradient(rgba(0,0,0,0) 40%,rgba(0,0,0,.25)),var(--czbg) center/cover no-repeat!important;opacity:1!important;z-index:-2!important;content:""!important;display:block!important}
  body::after{content:""!important;display:block!important;position:fixed!important;inset:0;z-index:-1!important;pointer-events:none;background:radial-gradient(circle,rgba(255,210,150,.55) 0 1.5px,transparent 2.5px) 0 0/90px 110px,radial-gradient(circle,rgba(255,140,200,.45) 0 1px,transparent 2px) 40px 60px/70px 90px;animation:czamb 22s linear infinite;opacity:.6}
  .cznote{background:transparent!important}
 }
@@ -193,3 +193,6 @@ dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!i
 @keyframes czRise{to{background-position:0 -380px,30px -280px}}
 @keyframes czLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @media (prefers-reduced-motion:reduce){#czHero *{animation:none!important}}
+
+.msg{white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:620px) and (orientation:portrait){.msg{font-size:min(3.2cqw,4.6vw)!important}}
