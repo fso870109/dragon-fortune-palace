@@ -97,10 +97,10 @@ body::before{background:radial-gradient(ellipse at 50% 30%,#2a0a22,#07020a 70%)!
 /* 大当り cutscene */
 #czAtari{position:fixed;inset:0;z-index:90;display:block;visibility:hidden;contain:strict;overflow:hidden;background:#05010a;cursor:pointer}
 #czAtari.on{visibility:visible}#czAtari:not(.on) *{animation:none!important}
-#czAtari .ab{position:absolute;inset:0;background:url(assets/lobby/atari_bl.webp) center/cover}
-#czAtari .ai{position:absolute;inset:0;background:url(assets/lobby/atari.webp) 55% 40%/cover no-repeat;will-change:transform}
+#czAtari .ab{position:absolute;inset:0;background:url(assets/lobby/atari_bl.webp?v=180) center/cover}
+#czAtari .ai{position:absolute;inset:0;background:url(assets/lobby/atari.webp?v=180) 55% 40%/cover no-repeat;will-change:transform}
 @media (max-aspect-ratio:1/1){#czAtari .ai{background-size:185% auto;background-position:60% 46%;-webkit-mask:linear-gradient(transparent 22%,#000 32%,#000 68%,transparent 78%);mask:linear-gradient(transparent 22%,#000 32%,#000 68%,transparent 78%)}}
-@media (max-width:900px){#czAtari .ai{background-image:url(assets/lobby/atari_s.webp)}}
+@media (max-width:900px){#czAtari .ai{background-image:url(assets/lobby/atari_s.webp?v=180)}}
 #czAtari.on .ai{animation:atZ 2.3s cubic-bezier(.2,.9,.3,1) both}
 @keyframes atZ{0%{transform:scale(1.35)}100%{transform:scale(1.02)}}
 #czAtari .asw{position:absolute;inset:-20% -60%;background:linear-gradient(105deg,transparent 40%,rgba(255,240,200,.55) 48%,rgba(255,150,210,.35) 52%,transparent 60%);transform:translateX(-60%);will-change:transform}
@@ -257,3 +257,6 @@ dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!i
 @keyframes mgIn{from{opacity:0}}
 @media (prefers-reduced-motion:reduce){#czMG,#czMG *{animation:none!important;transition:none!important}}
 #czMG .mgok[hidden]{display:none}
+
+@media (max-width:620px) and (orientation:portrait){.bw .art{background:var(--czhero) 50% 8%/cover no-repeat!important;opacity:.85!important}}
+@media (max-width:620px) and (orientation:portrait){#czAtari .ab{background:linear-gradient(rgba(10,2,10,.35),rgba(10,2,10,.55)),var(--czhero,url(assets/lobby/atari_bl.webp?v=180)) 50% 10%/cover no-repeat!important}}

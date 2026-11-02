@@ -48,7 +48,7 @@ function waitIdle(f){const k=()=>{if(idle())f();else setTimeout(k,300)};setTimeo
 const SEG=[0,1,0,0,1,0,0,2,0,0,1,0,0,1,0,0,1,0,0,0];// 14 MINI, 5 MAJOR, 1 GRAND (matches 70/25/5)
 function wheelEl(){let w=document.getElementById('czWheel');if(w)return w;w=document.createElement('div');w.id='czWheel';w.setAttribute('role','dialog');w.setAttribute('aria-label','彩金轉盤');
  const cols=['#3a0a2c','#8a1a5c','#d9a441'];const g=SEG.map((s,i)=>`${cols[s]} ${i*18}deg ${(i+1)*18}deg`).join(',');
- w.innerHTML=`<img class="czframe" src="assets/lobby/frame_s.webp?v=179" alt=""><div class="czwbox"><div class="czwt">JACKPOT CHANCE!!</div><div class="czwsub">彩金轉盤</div><div class="czwheel"><div class="czwd" style="background:conic-gradient(${g})">${SEG.map((s,i)=>`<span style="transform:rotate(${i*18+9}deg)"><b class="s${s}">${JP.name[s]}</b></span>`).join('')}</div><div class="czwhub">JP</div><div class="czwptr"></div></div><div class="czwres" aria-live="assertive"></div><button class="czwgo">旋轉轉盤</button></div>`;
+ w.innerHTML=`<img class="czframe" src="assets/lobby/frame_s.webp?v=180" alt=""><div class="czwbox"><div class="czwt">JACKPOT CHANCE!!</div><div class="czwsub">彩金轉盤</div><div class="czwheel"><div class="czwd" style="background:conic-gradient(${g})">${SEG.map((s,i)=>`<span style="transform:rotate(${i*18+9}deg)"><b class="s${s}">${JP.name[s]}</b></span>`).join('')}</div><div class="czwhub">JP</div><div class="czwptr"></div></div><div class="czwres" aria-live="assertive"></div><button class="czwgo">旋轉轉盤</button></div>`;
  document.body.appendChild(w);return w}
 function wheel(total){window.__hold=true;const w=wheelEl(),d=w.querySelector('.czwd'),btn=w.querySelector('.czwgo'),res=w.querySelector('.czwres');
  res.textContent='';d.style.transition='none';d.style.transform='rotate(0deg)';w.classList.add('on');btn.disabled=false;btn.textContent='旋轉轉盤';vib([30,40,30]);
@@ -66,7 +66,7 @@ window.CZ.wheel=wheel;
 function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  // 大当り cutscene (user art) before big wins / bonus / jackpot
  const at=document.createElement('div');at.id='czAtari';at.setAttribute('role','dialog');at.setAttribute('aria-label','大当り');
- at.innerHTML='<div class="ab"></div><div class="ai"></div><div class="asw"></div><div class="apt"></div><img class="afr" src="assets/lobby/frame_s.webp?v=179" alt=""><div class="atx"><b></b><i></i></div><div class="askip">タップでスキップ</div>';
+ at.innerHTML='<div class="ab"></div><div class="ai"></div><div class="asw"></div><div class="apt"></div><img class="afr" src="assets/lobby/frame_s.webp?v=180" alt=""><div class="atx"><b></b><i></i></div><div class="askip">タップでスキップ</div>';
  document.body.appendChild(at);const pt=at.querySelector('.apt');for(let i=0;i<16;i++){const e=document.createElement('u');e.style.left=(Math.random()*100)+'%';e.style.animationDelay=(-Math.random()*2.4)+'s';e.style.animationDuration=(2+Math.random()*1.6)+'s';e.style.setProperty('--dx',(Math.random()*120-60)+'px');pt.appendChild(e)}
  function sting(){try{if(typeof ac==='undefined'||!ac)return;const t=ac.currentTime,g=ac.createGain();g.gain.value=.5;g.connect(ac.destination);
   [[523,0],[659,.08],[784,.16],[1047,.24],[1568,.36]].forEach(([f,d])=>{const o=ac.createOscillator(),e=ac.createGain();o.type='triangle';o.frequency.value=f;e.gain.setValueAtTime(0,t+d);e.gain.linearRampToValueAtTime(.18,t+d+.02);e.gain.exponentialRampToValueAtTime(.001,t+d+.9);o.connect(e).connect(g);o.start(t+d);o.stop(t+d+1)});
@@ -77,13 +77,13 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  function atEnd(){if(!at.classList.contains('on'))return;clearTimeout(atT);at.className='';window.__hold=false;const f=atCb;atCb=null;f&&f()}
  at.addEventListener('pointerdown',atEnd);addEventListener('keydown',e=>{if(at.classList.contains('on')&&(e.key===' '||e.key==='Enter'||e.key==='Escape')){e.preventDefault();e.stopPropagation();atEnd()}},true);
  CZ.atari=atari;
- (window.requestIdleCallback||setTimeout)(()=>{const w=innerWidth>900;['assets/lobby/'+(w?'atari':'atari_s')+'.webp','assets/lobby/atari_bl.webp?v=179','assets/lobby/frame_s.webp?v=179',`assets/${CZM.id}/bigbonus.webp`].forEach(u=>{const i=new Image();i.src=u;i.decode&&i.decode().catch(()=>{})})},{timeout:2500});
+ (window.requestIdleCallback||setTimeout)(()=>{const w=innerWidth>900;['assets/lobby/'+(w?'atari':'atari_s')+'.webp?v=180','assets/lobby/atari_bl.webp?v=180','assets/lobby/frame_s.webp?v=180',`assets/${CZM.id}/bigbonus.webp?v=180`,`assets/${CZM.id}/hero.webp?v=180`,`assets/${CZM.id}/cutin.webp?v=180`].forEach(u=>{const i=new Image();i.src=u;i.decode&&i.decode().catch(()=>{})})},{timeout:2500});
  const _bw=window.bigWin;window.bigWin=function(won,total,o={}){if(o.noStamp)return _bw(won,total,o);const x=won/total;
   atari(x>=80?'EPIC WIN':x>=30?'MEGA WIN':'大当り!!',x>=80?'確定・超激アツ!!':'確定!!',()=>_bw(won,total,o))};
  const _fi=window.fsIntro;window.fsIntro=function(re){if(re)return _fi(re);atari('BONUS!!','FREE SPINS 確定',()=>_fi(re))};
  const _wh=CZ.wheel;CZ.wheel=function(t){atari('JACKPOT','CHANCE 確定!!',()=>_wh(t))};
  // gold-sakura frame on win tiers
- const bwEl=$('bw');if(bwEl){const f=document.createElement('img');f.className='czframe';f.src='assets/lobby/frame_s.webp?v=179';f.alt='';bwEl.appendChild(f)}
+ const bwEl=$('bw');if(bwEl){const f=document.createElement('img');f.className='czframe';f.src='assets/lobby/frame_s.webp?v=180';f.alt='';bwEl.appendChild(f)}
  const sp=$('spinBtn');sp.addEventListener('pointerdown',()=>vib(12),{passive:true});
  // control bar: move existing controls into one flex bar
  const bar=document.createElement('div');bar.className='czbar';
@@ -102,7 +102,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  const lvR=()=>{const v=vipOf(st.lv);const e=$('czLv');e.querySelector('b').textContent=`Lv.${st.lv} ${v[1]}`;e.querySelector('b').style.color=v[2];e.querySelector('u').style.width=Math.min(100,st.xp/need(st.lv)*100)+'%'};lvR();CZ.on(lvR);
  // buy feature dialog
  const dlg=document.createElement('dialog');dlg.id='czBuy';dlg.innerHTML=`<h2>購買免費旋轉</h2><p class="czbp"></p><p class="note">直接進入 BONUS：10 次免費旋轉（獎金 ×${CZM.fsm}，可再觸發）。<br>理論回收率 ${CZM.buyRtp}%・僅使用虛擬籌碼・無真實金錢</p><div class="dact"><button class="claim" id="czBuyOk">確認購買</button><button id="czBuyNo">取消</button></div>`;document.body.appendChild(dlg);
- const price=()=>BETS[betIdx]*NL*CZM.buy;
+ const price=()=>Math.round(BETS[betIdx]*NL*CZM.buy);
  buy.onclick=()=>{if(spinning||FS||bwState||window.__hold)return;dlg.querySelector('.czbp').innerHTML=`價格：<b>${price().toLocaleString()}</b> 籌碼（總押注 ${BETS[betIdx]*NL} × ${CZM.buy}）`;$('czBuyOk').disabled=bal<price();$('czBuyOk').textContent=bal<price()?'籌碼不足':'確認購買';dlg.showModal()};
  $('czBuyNo').onclick=()=>dlg.close();
  $('czBuyOk').onclick=()=>{dlg.close();const p=price();if(bal<p||spinning||FS)return;bal-=p;ui();ach('buy');vib([20,30,20]);
@@ -115,7 +115,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  if(document.readyState==='complete')done();else addEventListener('load',done,{once:true});
 }
 function czHero(){const mach=document.getElementById('machine'),inn=mach&&mach.querySelector('.inner');if(!inn||document.getElementById('czHero'))return;
- const id=(location.pathname.split('/').pop()||'').replace('.html','');const V='?v=179';
+ const id=(location.pathname.split('/').pop()||'').replace('.html','');const V='?v=180';document.documentElement.style.setProperty('--czhero',`url(assets/${id}/hero.webp${V})`);
  const h=document.createElement('div');h.id='czHero';h.setAttribute('aria-hidden','true');
  h.innerHTML=`<div class="czhi" style="background-image:url(assets/${id}/hero.webp${V})"></div><div class="czhs"></div><i class="czhp"></i><i class="czhp b"></i><img class="czhl" src="assets/${id}/logo.webp${V}" alt=""><div class="czhf"></div>`;
  mach.insertBefore(h,inn);let F=null;const mq=matchMedia('(max-width:620px) and (orientation:portrait)');
@@ -127,3 +127,8 @@ function czHero(){const mach=document.getElementById('machine'),inn=mach&&mach.q
 if(IN_M){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',czHero);else czHero()}
 if(IN_M){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',machineUI);else machineUI()}
 })();
+/* v18.0 cross-tab / cross-page credit sync (play-money balance in fs_bal) */
+(function(){const sync=()=>{try{const r=localStorage.getItem('fs_bal');if(r===null||r==='')return;const v=+r;if(!isFinite(v)||v<0)return;
+ if(typeof bal==='number'&&typeof spinning!=='undefined'){if(spinning||(typeof FS!=='undefined'&&FS)||(typeof bwState!=='undefined'&&bwState))return;if(v!==bal){bal=v;typeof ui==='function'&&ui()}}
+ else if(typeof refresh==='function')refresh()}catch(e){}};
+ addEventListener('storage',e=>{if(e.key==='fs_bal'||e.key==='cz_st')sync()});document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});addEventListener('pageshow',sync)})();
