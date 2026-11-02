@@ -196,3 +196,42 @@ dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!i
 
 .msg{white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:620px) and (orientation:portrait){.msg{font-size:min(3.2cqw,4.6vw)!important}}
+/* v17.7 演出 layer */
+#czEn{position:absolute;left:0;right:0;top:0;height:100%;pointer-events:none;z-index:5;overflow:hidden}
+.inner>#czEn{height:38%}
+#czEn .czbub{position:absolute;left:4%;bottom:14%;max-width:62%;padding:8px 12px 9px;border-radius:14px 14px 14px 4px;background:rgba(12,4,14,.82);border:2px solid #d9a441;color:#fff;font:600 clamp(12px,3.6vw,17px)/1.35 "KleeSub","Noto Sans TC",sans-serif;opacity:0;transform:translateY(8px) scale(.9);transition:opacity .2s,transform .25s cubic-bezier(.3,1.6,.5,1);box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.inner>#czEn .czbub{font-size:clamp(11px,1.4cqw,18px);bottom:8%}
+#czEn .czbub b{display:block;font:700 10px/1 sans-serif;letter-spacing:1px;color:#ffd27a;margin-bottom:4px}
+#czEn .czbub.on{opacity:1;transform:none}
+#czEn .czbub[data-c="青"]{border-color:#3fa0ff;box-shadow:0 0 14px #3fa0ff}#czEn .czbub[data-c="緑"]{border-color:#3fdc7a;box-shadow:0 0 14px #3fdc7a}
+#czEn .czbub[data-c="赤"]{border-color:#ff3b4f;box-shadow:0 0 16px #ff3b4f}#czEn .czbub[data-c="金"]{border-color:#ffd24a;box-shadow:0 0 18px #ffd24a}
+#czEn .czbub[data-c="虹"]{border-color:transparent;background:linear-gradient(rgba(12,4,14,.9),rgba(12,4,14,.9)) padding-box,linear-gradient(90deg,#f33,#fb3,#3f6,#3cf,#a4f,#f3a) border-box}
+#czEn .czgem{position:absolute;right:4%;bottom:14%;display:flex;flex-direction:column;align-items:center;gap:3px;opacity:0;transform:scale(.4);transition:opacity .2s,transform .3s cubic-bezier(.3,1.7,.5,1)}
+#czEn .czgem.on{opacity:1;transform:none}
+#czEn .czgem i{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--g) 45%,#000 120%);box-shadow:0 0 0 2px #000,0 0 18px var(--g);animation:czPulse 1s ease-in-out infinite}
+#czEn .czgem small{font:800 11px/1 sans-serif;color:#fff;text-shadow:0 0 4px #000,0 0 8px var(--g);white-space:nowrap}
+#czEn .czgem[data-c="青"]{--g:#3fa0ff}#czEn .czgem[data-c="緑"]{--g:#3fdc7a}#czEn .czgem[data-c="赤"]{--g:#ff3b4f}#czEn .czgem[data-c="金"]{--g:#ffd24a}
+#czEn .czgem[data-c="虹"]{--g:#ff6ad5}#czEn .czgem[data-c="虹"] i{background:conic-gradient(#f33,#fb3,#3f6,#3cf,#a4f,#f3a,#f33);animation:czSpinG 1.2s linear infinite}
+.inner>#czEn .czgem i{width:3.2cqw;height:3.2cqw}
+#czEn .czban{position:absolute;left:0;right:0;top:38%;text-align:center;font:900 italic clamp(26px,9vw,54px)/1 "Arial Black",sans-serif;letter-spacing:2px;color:#fff;opacity:0;transform:scale(2.2);-webkit-text-stroke:2px #000;paint-order:stroke}
+.inner>#czEn .czban{font-size:5cqw}
+#czEn .czban.on{animation:czBan 1.4s ease-out both}
+#czEn .czban.n{color:#fff;text-shadow:0 0 12px #ff4fa3}#czEn .czban.c{color:#ffe2f3;text-shadow:0 0 14px #ff3b4f,0 0 30px #ff3b4f}
+#czEn .czban.g{color:#ffd24a;text-shadow:0 0 14px #ffb000,0 0 32px #ff7a00}
+#czEn .czban.rain{background:linear-gradient(90deg,#f33,#fb3,#3f6,#3cf,#a4f,#f3a);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0;filter:drop-shadow(0 0 8px #fff)}
+#czEn .czcut{position:absolute;inset:0;background:center 10%/cover no-repeat;opacity:0;transform:translateX(100%) skewX(-12deg);-webkit-mask-image:linear-gradient(transparent,#000 15%,#000 85%,transparent)}
+#czEn .czcut.on{animation:czCut 1.2s cubic-bezier(.2,.9,.2,1) both}
+#czEn.gim::before{content:"";position:absolute;left:50%;top:-30%;width:46%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6c8,#ffcc33 40%,#a86a00 75%,#4a2a00);box-shadow:0 0 30px #ffb000,0 0 0 4px #000;animation:czDrop 1.6s cubic-bezier(.5,0,.6,1.4) both}
+.czshake{animation:czShake .45s linear}
+@keyframes czBan{0%{opacity:0;transform:scale(2.2)}15%{opacity:1;transform:scale(1)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.05)}}
+@keyframes czCut{0%{opacity:0;transform:translateX(100%) skewX(-12deg)}20%{opacity:1;transform:translateX(0) skewX(-6deg)}75%{opacity:1;transform:translateX(-4%) skewX(-6deg)}100%{opacity:0;transform:translateX(-100%) skewX(-12deg)}}
+@keyframes czDrop{0%{top:-50%}35%{top:12%}45%{top:8%}55%{top:12%}85%{top:12%;opacity:1}100%{top:12%;opacity:0}}
+@keyframes czShake{0%,100%{transform:none}20%{transform:translate(-4px,2px)}40%{transform:translate(4px,-2px)}60%{transform:translate(-3px,1px)}80%{transform:translate(3px,0)}}
+@keyframes czPulse{50%{transform:scale(1.12)}}
+@keyframes czSpinG{to{transform:rotate(1turn)}}
+@media (prefers-reduced-motion:reduce){#czEn *,#czEn::before,.czshake{animation:none!important;transition:none!important}#czEn .czban.on{opacity:1;transform:none}}
+.board .sweep:not(.go){visibility:hidden}
+#czEn .czcut{z-index:0}#czEn .czbub,#czEn .czgem,#czEn .czban{z-index:2}
+#czEn.gim::before{width:30%;z-index:1;opacity:.95}
+#czEn.gim::after{content:"激";position:absolute;left:50%;top:-30%;transform:translateX(-50%);z-index:1;font:900 clamp(30px,10vw,60px)/1 serif;color:#7a1200;text-shadow:0 1px 0 #ffe9a0;animation:czDrop2 1.6s cubic-bezier(.5,0,.6,1.4) both}
+@keyframes czDrop2{0%{top:-50%}35%{top:19%}45%{top:15%}55%{top:19%}85%{top:19%;opacity:1}100%{top:19%;opacity:0}}
