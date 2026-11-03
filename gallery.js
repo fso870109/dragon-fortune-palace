@@ -7,7 +7,7 @@ requestAnimationFrame(()=>{d.classList.add('on');const i=d.querySelector('.gb i'
 (function(){
 const MS=[['love','戀夜拉霸♡'],['matsuri','夏祭戀花火'],['caishen','財神降臨'],['samurai','天下布武'],['pirate','海賊寶藏'],['neko','招財大作戰'],['sakura','櫻花斬'],['queen','女王逆襲'],['school','青春學園祭'],['jungle','叢林探險']];
 const ART=[['card','機台畫',s=>s.spins>=1,'玩 1 次'],['cutin','演出畫面',s=>s.spins>=50,'玩 50 次'],['hero','主視覺',s=>s.spins>=150,'玩 150 次'],['bigbonus','大獎',s=>s.fs>=1,'觸發 1 次 BONUS']];
-const V='?v=198',K='cz_gal';
+const V='?v=199',K='cz_gal';
 const load=()=>{try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}};const save=g=>localStorage.setItem(K,JSON.stringify(g));
 const st=(g,id)=>g[id]||(g[id]={spins:0,fs:0});
 function count(){const g=load();let n=0;MS.forEach(([id])=>ART.forEach(a=>{if(a[2](st(g,id)))n++}));return n}
