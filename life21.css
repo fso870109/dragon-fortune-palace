@@ -24,3 +24,7 @@ html.l21enter body{animation:l21Enter .55s cubic-bezier(.2,.8,.2,1) both}
 #czLoad .czlbar i{background:linear-gradient(90deg,var(--g3),var(--g1),var(--g3))!important;background-size:200% 100%!important;animation:l21Bar 1s linear infinite}
 @keyframes l21Bar{to{background-position:-200% 0}}
 @media (prefers-reduced-motion:reduce){dialog[open],html.l21leave body,html.l21enter body,#load .neon,#load .neon2,#czLoad .czlt,#load #enter{animation:none!important}}
+/* v21.1 polish */
+#czToast,#czGN{animation:w21Toast .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes w21Toast{0%{opacity:0;translate:0 -14px;scale:.96}100%{opacity:1;translate:0 0;scale:1}}
+button:focus-visible,.card:focus-visible{outline:2px solid #ffd65a;outline-offset:3px}

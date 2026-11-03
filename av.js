@@ -15,7 +15,7 @@ let raf=0;function coins(tier){if(RM)return;const cv=el('avCoin','canvas'),W=cv.
  (function fr(t){x.clearRect(0,0,W,H);let live=0;for(const p of P){p.vy+=.08;p.y+=p.vy;p.x+=p.vx;p.a+=p.va;if(p.y<H+20)live++;const s=Math.abs(Math.cos(p.a));x.save();x.translate(p.x,p.y);x.scale(s,1);x.beginPath();x.arc(0,0,p.r,0,7);x.fillStyle=p.h?'#cfe0ff':'#ffcc33';x.fill();x.lineWidth=1.5;x.strokeStyle=p.h?'#5a6aff':'#a86a00';x.stroke();x.fillStyle='rgba(255,255,255,.7)';x.fillRect(-p.r*.3,-p.r*.5,p.r*.25,p.r*.6);x.restore()}
  if(live&&t-t0<6000)raf=requestAnimationFrame(fr);else x.clearRect(0,0,W,H)})(t0)}
 function small(){coins(-1);window.shake&&shake(1)}window.AVsmall=small;function tierOf(x){return x>=50?2:x>=25?1:0}
-function celebrate(tier){stinger(tier);flash(tier);callout(tier);coins(tier);window.F21&&F21.beams(tier);if(window.shake)try{shake([2,3,4][tier])}catch(e){}}
+function celebrate(tier){stinger(tier);flash(tier);if(window.shake)try{shake([2,3,4][tier])}catch(e){}}
 window.AV={celebrate,stinger,tone};
 const _bw=window.bigWin;if(_bw)window.bigWin=function(won,total,o){const r=_bw.apply(this,arguments);try{if(total>0&&won/total>=10){const tr=tierOf(won/total),t0=Date.now();(function w(){const b=document.getElementById('bw');const vis=b&&getComputedStyle(b).display!=='none'&&+getComputedStyle(b).opacity>.5&&b.getBoundingClientRect().height>0;if(vis||Date.now()-t0>9000)celebrate(tr);else setTimeout(w,120)})()}}catch(e){}return r};
 /* small-win chime layer */
