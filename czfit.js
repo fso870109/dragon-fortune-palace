@@ -30,7 +30,15 @@ function fitBox(el){if(!el.isConnected||!el.clientWidth)return;el.style.removePr
  if(over()&&el.matches('#msg,.msg')){const t=el.textContent;const sp=document.createElement('span');sp.textContent=t;el.__mq=1;el.textContent='';el.appendChild(sp);el.classList.add('czmq');
   const [L,R]=clipBox(el);const d=sp.getBoundingClientRect().width-(R-L)+fs*.8;el.style.setProperty('--mqd',(-Math.max(0,d))+'px');el.style.setProperty('--mqt',Math.max(3,d/28)+'s');
   const sh=sp.getBoundingClientRect().left-L-fs*.3;if(sh)sp.style.marginLeft=(-sh)+'px'}}
-function all(){document.querySelectorAll(BOX).forEach(e=>{if(e.__mq){e.__mq=0;return}try{fitBox(e)}catch(_){}})}
+// v18.8: centre the subtitle glyph ink (not the font line box) vertically: device fonts differ in ascent/descent
+const CV=document.createElement('canvas').getContext('2d');
+function vcenter(el){if(!el.matches('#msg,.msg'))return;el.style.removeProperty('padding-top');el.style.removeProperty('padding-bottom');
+ const cs=getComputedStyle(el);const t=(el.textContent||'').trim()||'財';CV.font=cs.font;const m=CV.measureText(t);
+ const fs=parseFloat(cs.fontSize);let lh=parseFloat(cs.lineHeight);if(!lh)lh=(m.fontBoundingBoxAscent+m.fontBoundingBoxDescent);
+ const fa=m.fontBoundingBoxAscent,fd=m.fontBoundingBoxDescent,base=(lh-(fa+fd))/2+fa,ink=base-(m.actualBoundingBoxAscent-m.actualBoundingBoxDescent)/2,off=ink-lh/2;
+ el.style.setProperty('box-sizing','border-box','important');const p=Math.min(Math.abs(off)*2,fs*.6).toFixed(2)+'px';
+ if(off>.25)el.style.setProperty('padding-bottom',p,'important');else if(off<-.25)el.style.setProperty('padding-top',p,'important');el.dataset.vo=off.toFixed(2)}
+function all(){document.querySelectorAll('#msg,.msg').forEach(e=>{try{vcenter(e)}catch(_){}});document.querySelectorAll(BOX).forEach(e=>{if(e.__mq){e.__mq=0;return}try{fitBox(e)}catch(_){}})}
 let t=0;const sch=()=>{cancelAnimationFrame(t);t=requestAnimationFrame(all)};
 const obs=new MutationObserver(sch);
 function hook(){document.querySelectorAll(BOX).forEach(e=>obs.observe(e,{childList:true,characterData:true,subtree:true}));
