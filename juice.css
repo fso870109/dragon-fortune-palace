@@ -1,0 +1,22 @@
+/* v20.0 motion & juice */
+@keyframes jLand{0%{transform:translateY(-9px) scaleY(1.03)}38%{transform:translateY(7px) scaleY(.955)}62%{transform:translateY(-3px) scaleY(1.015)}82%{transform:translateY(1px)}100%{transform:none}}
+html body .reel.land{animation:jLand .42s cubic-bezier(.2,.8,.3,1.2);transform-origin:50% 100%}
+@keyframes jGlow{0%,100%{box-shadow:inset 0 0 0 2px rgba(255,220,120,.55),0 0 8px rgba(var(--glow,255,200,90),.45)}50%{box-shadow:inset 0 0 0 3px rgba(255,240,180,.95),0 0 18px rgba(var(--glow,255,200,90),.9)}}
+html body .cell.hit{animation:jGlow .9s ease-in-out infinite;border-radius:8px;z-index:2}
+@keyframes jPop{0%{transform:scale(1)}30%{transform:scale(1.22)}55%{transform:scale(.96)}75%{transform:scale(1.08)}100%{transform:scale(1.04)}}
+html body .cell.hit .sym{animation:jPop .55s cubic-bezier(.3,1.6,.5,1) both,symWin .7s .55s ease-in-out infinite}
+@keyframes jDraw{from{stroke-dashoffset:var(--jl,1400)}to{stroke-dashoffset:0}}
+html body svg.lines polyline{stroke-dasharray:var(--jl,1400);animation:jDraw .5s ease-out both}
+html body svg.lines polyline:nth-of-type(n+3){animation-delay:.12s}
+html body svg.lines polyline:nth-of-type(n+5){animation-delay:.24s}
+html body svg.lines polyline:nth-of-type(n+7){animation-delay:.36s}
+/* anticipation frame */
+@keyframes jAnt{0%,100%{box-shadow:0 0 0 2px rgba(255,210,90,.6),0 0 14px rgba(255,120,40,.6),inset 0 0 18px rgba(255,200,80,.35)}50%{box-shadow:0 0 0 3px rgba(255,245,170,1),0 0 30px rgba(255,150,40,.95),inset 0 0 26px rgba(255,220,120,.6)}}
+html body .reel.jant{animation:jAnt .5s ease-in-out infinite;border-radius:6px;position:relative;z-index:3}
+/* ambient */
+#jAmb{position:absolute;inset:0;pointer-events:none;z-index:1}
+#jRays{position:absolute;left:-30%;right:-30%;top:-40%;height:120%;pointer-events:none;z-index:1;opacity:.16;mix-blend-mode:screen;background:repeating-conic-gradient(from 0deg at 50% 0%,rgba(255,240,200,.9) 0deg 3deg,transparent 3deg 14deg);-webkit-mask:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 70%);mask:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 70%);animation:jRay 22s linear infinite alternate}
+@keyframes jRay{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+@keyframes jWinPop{0%{transform:scale(1)}35%{transform:scale(1.28)}100%{transform:scale(1)}}
+html body #czWin.jpop{animation:jWinPop .45s cubic-bezier(.3,1.6,.5,1);color:#fff3b0}
+@media (prefers-reduced-motion:reduce){html body .reel.land,html body .cell.hit,html body .cell.hit .sym,html body svg.lines polyline,html body .reel.jant,#jRays,html body #czHero img.jdrift,html body #czWin.jpop{animation:none!important}#jAmb{display:none}}
