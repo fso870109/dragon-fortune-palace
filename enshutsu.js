@@ -2,7 +2,7 @@
 (function(){
 if(!window.CZM)return;
 const RMQ=matchMedia('(prefers-reduced-motion:reduce)').matches,PM=matchMedia('(max-width:620px) and (orientation:portrait)');
-const COL=[['青','#3fa0ff','期待度 ★'],['緑','#3fdc7a','期待度 ★★'],['赤','#ff3b4f','期待度 ★★★ 超熱!'],['金','#ffd24a','期待度 ★★★★ 超激熱!!'],['虹','rainbow','確定!!']];
+const COL=[['青','#3fa0ff','期待度 ★'],['綠','#3fdc7a','期待度 ★★'],['赤','#ff3b4f','期待度 ★★★ 超熱!'],['金','#ffd24a','期待度 ★★★★ 超激熱!!'],['虹','rainbow','確定!!']];
 const V=(window.CZM.voice)||{};
 const VO={yokoku:V.yokoku||['…吶，好像要來了？','這感覺…難道！','機會來了♡','心跳加速了…'],
  reach:V.reach||['聽牌！拜託，連成線！','就差一個…！','就在這裡決勝負！'],
@@ -21,8 +21,8 @@ function say(txt,ci,ms=2200){if(!ensure())return;bub.querySelector('b').textCont
  bub.dataset.c=ci>=0?COL[ci][0]:'';bub.classList.remove('on');void bub.offsetWidth;bub.classList.add('on');clearTimeout(bub._t);bub._t=setTimeout(()=>bub.classList.remove('on'),ms)}
 function showGem(i){if(!ensure())return;lvl=i;gem.dataset.c=COL[i][0];gem.querySelector('small').textContent=COL[i][2];gem.classList.remove('on');void gem.offsetWidth;gem.classList.add('on')}
 function ban(txt,cls,ms=1400){if(!ensure())return;banner.className='czban '+cls;banner.textContent=txt;void banner.offsetWidth;banner.classList.add('on');clearTimeout(banner._t);banner._t=setTimeout(()=>banner.classList.remove('on'),ms)}
-function cutin(){if(!ensure()||RMQ)return;const c=layer.querySelector('.czcut');c.style.backgroundImage=`url(assets/${window.CZM.id}/${window.CZM.cutImg||"hero"}.webp?v=190)`;c.classList.remove('on');void c.offsetWidth;c.classList.add('on');CZ.vib&&CZ.vib([20,40,20])}
-function gimmick(){if(!ensure())return;{const bd=document.getElementById('board')||document.querySelector('.board');if(bd){let g=document.getElementById('czGeki');if(!g){g=document.createElement('div');g.id='czGeki';g.setAttribute('aria-hidden','true');g.innerHTML='<img src="assets/lobby/geki.webp?v=190" alt="" decoding="async"><i></i>';}if(g.parentNode!==document.body)document.body.appendChild(g);{const r=bd.getBoundingClientRect();g.style.top=r.top+'px';g.style.left=(r.left+r.width/2)+'px'}g.classList.remove('go');void g.offsetWidth;g.classList.add('go');clearTimeout(g._t);g._t=setTimeout(()=>g.classList.remove('go'),1500)}}document.getElementById('machine')?.classList.add('czshake');setTimeout(()=>document.getElementById('machine')?.classList.remove('czshake'),500);CZ.vib&&CZ.vib(60)}
+function cutin(){if(!ensure()||RMQ)return;const c=layer.querySelector('.czcut');c.style.backgroundImage=`url(assets/${window.CZM.id}/${window.CZM.cutImg||"hero"}.webp?v=191)`;c.classList.remove('on');void c.offsetWidth;c.classList.add('on');CZ.vib&&CZ.vib([20,40,20])}
+function gimmick(){if(!ensure())return;{const bd=document.getElementById('board')||document.querySelector('.board');if(bd){let g=document.getElementById('czGeki');if(!g){g=document.createElement('div');g.id='czGeki';g.setAttribute('aria-hidden','true');g.innerHTML='<img src="assets/lobby/geki.webp?v=191" alt="" decoding="async"><i></i>';}if(g.parentNode!==document.body)document.body.appendChild(g);{const r=bd.getBoundingClientRect();g.style.top=r.top+'px';g.style.left=(r.left+r.width/2)+'px'}g.classList.remove('go');void g.offsetWidth;g.classList.add('go');clearTimeout(g._t);g._t=setTimeout(()=>g.classList.remove('go'),1500)}}document.getElementById('machine')?.classList.add('czshake');setTimeout(()=>document.getElementById('machine')?.classList.remove('czshake'),500);CZ.vib&&CZ.vib(60)}
 function wpick(w){let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<w.length;i++){if((r-=w[i])<0)return i}return 0}
 let cur=null;
 const _spin=window.lcdSpin,_reach=window.lcdReach,_res=window.lcdResult;
