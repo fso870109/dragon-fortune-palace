@@ -14,7 +14,7 @@ function mount(){const h=document.getElementById('czHero');if(!h||document.getEl
 const _st=window.settle;
 if(_st)window.settle=function(bet,free){const r=_st.apply(this,arguments);if(!free){meter++;let t=Math.random()<P;if(meter>=M)t=true;if(t){meter=0;pending=true;setTimeout(()=>run(bet),50)}localStorage.setItem(KEY,meter);mUI()}return r};
 function run(bet){if(running)return;if(typeof spinning!=='undefined'&&spinning||typeof bwState!=='undefined'&&bwState||typeof FS!=='undefined'&&FS||document.getElementById('czMG')&&document.getElementById('czMG').offsetParent){setTimeout(()=>run(bet),500);return}
- running=true;pending=false;window.__hold=true;play(bet).then(won=>{running=false;window.__hold=false;
+ running=true;pending=false;window.__hold=true;(window.F21?F21.pre():Promise.resolve()).then(()=>play(bet)).then(won=>{window.F21&&F21.back();running=false;window.__hold=false;
   if(won>0){bal+=won;const w=document.getElementById('win');w.textContent=won;try{ui();saveLater&&saveLater()}catch(e){}const total=bet*NL;if(won/total>=10&&window.bigWin)setTimeout(()=>bigWin(won,total),300);document.getElementById('msg').textContent=`寶珠鎖定重轉結束，贏得 ${NFh.format(won)} 籌碼！`}
   try{['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>{const e=document.getElementById(i);if(e)e.disabled=false})}catch(e){}})}
 function play(bet){return new Promise(res=>{const total=bet*NL;const o=document.createElement('div');o.id='hsBox';o.setAttribute('role','dialog');o.setAttribute('aria-label','寶珠鎖定重轉');
@@ -31,7 +31,7 @@ function play(bet){return new Promise(res=>{const total=bet*NL;const o=document.
    left=nw?3:left-1;document.getElementById('hsL').textContent=left;await sleep(nw?350:250)}
   let won=T();const full=!g.includes(null);if(full){won+=GRAND;o.classList.add('full');B(523,.4,'sine',.08);B(659,.5,'sine',.07);B(784,.7,'sine',.07)}
   const W=won*total;const f=document.createElement('div');f.className='hsEnd';f.innerHTML=`<small>${full?'集滿 15 格！巨獎':'寶珠總獎金'}</small><b>${NFh.format(W)}</b><button type="button">收下</button>`;o.querySelector('.hsIn').appendChild(f);
-  const done=()=>{o.classList.add('out');setTimeout(()=>o.remove(),300);res(W)};f.querySelector('button').onclick=done;setTimeout(()=>{if(o.isConnected)done()},6000)})()})}
+  const done=()=>{o.classList.add('out');setTimeout(()=>o.remove(),480);res(W)};f.querySelector('button').onclick=done;setTimeout(()=>{if(o.isConnected)done()},6000)})()})}
 window.CZHS={meter:()=>meter,force:b=>run(b||((typeof BETS!=='undefined'&&typeof betIdx!=='undefined')?BETS[betIdx]:1)),P,M};
 if(document.readyState==='complete')mount();else addEventListener('load',()=>setTimeout(mount,300));
 })();

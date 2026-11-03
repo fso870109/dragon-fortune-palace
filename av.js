@@ -11,22 +11,22 @@ function el(id,tag){let e=document.getElementById(id);if(!e){e=document.createEl
 const COL=['rgba(255,215,90,.85)','rgba(255,120,210,.85)','rgba(170,200,255,.95)'];
 function flash(tier){const f=el('avFlash');f.style.background=`radial-gradient(circle at 50% 40%,#fff,${COL[tier]} 45%,transparent 80%)`;f.classList.remove('go');void f.offsetWidth;f.classList.add('go')}
 function callout(tier){const c=el('avCall');c.className='t'+(tier+1);c.innerHTML='<b>'+['大獎！','超級大獎！','傳說大獎！'][tier]+'</b>';void c.offsetWidth;c.classList.add('go');setTimeout(()=>c.classList.remove('go'),2000)}
-let raf=0;function coins(tier){if(RM)return;const cv=el('avCoin','canvas'),W=cv.width=innerWidth,H=cv.height=innerHeight,x=cv.getContext('2d');const N=[50,120,220][tier],P=[];for(let i=0;i<N;i++)P.push({x:Math.random()*W,y:-20-Math.random()*H*.8,vy:2+Math.random()*4,vx:(Math.random()-.5)*1.5,r:5+Math.random()*6,a:Math.random()*6,va:.1+Math.random()*.2,h:tier==2&&i%3==0});const t0=performance.now();cancelAnimationFrame(raf);
+let raf=0;function coins(tier){if(RM)return;const cv=el('avCoin','canvas'),W=cv.width=innerWidth,H=cv.height=innerHeight,x=cv.getContext('2d');const N=[12,50,120,220][tier+1],P=[];for(let i=0;i<N;i++)P.push({x:Math.random()*W,y:-20-Math.random()*H*.8,vy:2+Math.random()*4,vx:(Math.random()-.5)*1.5,r:5+Math.random()*6,a:Math.random()*6,va:.1+Math.random()*.2,h:tier==2&&i%3==0});const t0=performance.now();cancelAnimationFrame(raf);
  (function fr(t){x.clearRect(0,0,W,H);let live=0;for(const p of P){p.vy+=.08;p.y+=p.vy;p.x+=p.vx;p.a+=p.va;if(p.y<H+20)live++;const s=Math.abs(Math.cos(p.a));x.save();x.translate(p.x,p.y);x.scale(s,1);x.beginPath();x.arc(0,0,p.r,0,7);x.fillStyle=p.h?'#cfe0ff':'#ffcc33';x.fill();x.lineWidth=1.5;x.strokeStyle=p.h?'#5a6aff':'#a86a00';x.stroke();x.fillStyle='rgba(255,255,255,.7)';x.fillRect(-p.r*.3,-p.r*.5,p.r*.25,p.r*.6);x.restore()}
  if(live&&t-t0<6000)raf=requestAnimationFrame(fr);else x.clearRect(0,0,W,H)})(t0)}
-function tierOf(x){return x>=50?2:x>=25?1:0}
-function celebrate(tier){stinger(tier);flash(tier);callout(tier);coins(tier);if(tier>=1&&window.shake)try{shake()}catch(e){}}
+function small(){coins(-1);window.shake&&shake(1)}window.AVsmall=small;function tierOf(x){return x>=50?2:x>=25?1:0}
+function celebrate(tier){stinger(tier);flash(tier);callout(tier);coins(tier);window.F21&&F21.beams(tier);if(window.shake)try{shake([2,3,4][tier])}catch(e){}}
 window.AV={celebrate,stinger,tone};
 const _bw=window.bigWin;if(_bw)window.bigWin=function(won,total,o){const r=_bw.apply(this,arguments);try{if(total>0&&won/total>=10){const tr=tierOf(won/total),t0=Date.now();(function w(){const b=document.getElementById('bw');const vis=b&&getComputedStyle(b).display!=='none'&&+getComputedStyle(b).opacity>.5&&b.getBoundingClientRect().height>0;if(vis||Date.now()-t0>9000)celebrate(tr);else setTimeout(w,120)})()}}catch(e){}return r};
 /* small-win chime layer */
-const _st=window.settle;if(_st)window.settle=function(bet){const b0=typeof bal!=='undefined'?bal:0;const r=_st.apply(this,arguments);try{const d=bal-b0,tot=bet*(typeof NL!=='undefined'?NL:20);if(d>0&&d<tot*10){const k=d>=tot*3?3:d>=tot?2:1;for(let i=0;i<k+1;i++)tone([784,988,1175,1568][i],i*.07,.25,'sine',.05)}}catch(e){}return r};
+const _st=window.settle;if(_st)window.settle=function(bet){const b0=typeof bal!=='undefined'?bal:0;const r=_st.apply(this,arguments);try{const d=bal-b0,tot=bet*(typeof NL!=='undefined'?NL:20);if(d>0&&d<tot*10){const k=d>=tot*3?3:d>=tot?2:1;small();for(let i=0;i<k+1;i++)tone([784,988,1175,1568][i],i*.07,.25,'sine',.05)}}catch(e){}return r};
 /* hold & spin layer: fanfare, music bed, lock/collect sounds, grand */
 let mus=0,step=0;const BASS=[131,131,175,196],ARP=[523,659,784,659];
 function musOn(){if(mus)return;step=0;mus=setInterval(()=>{if(step%4==0)tone(BASS[(step/4|0)%4]/2,0,.42,'sine',.09);tone(ARP[step%4]*((step/4|0)%4==2?1.335:1),0,.14,'square',.018);if(step%2)noise(0,.04,.02,6000);step++},150)}
 function musOff(){clearInterval(mus);mus=0}
 function fanfare(){[392,523,659,784].forEach((f,i)=>tone(f,i*.11,.3,'square',.04));[523,659,784,1047].forEach(f=>tone(f,.5,1,'sawtooth',.03));noise(.45,.5,.05,2500)}
 const seen=new WeakSet();
-new MutationObserver(ms=>{for(const m of ms){if(m.type==='childList'){m.addedNodes.forEach(n=>{if(n.id==='hsBox'){fanfare();flash(0);setTimeout(musOn,900)}});m.removedNodes.forEach(n=>{if(n.id==='hsBox')musOff()})}
+new MutationObserver(ms=>{for(const m of ms){if(m.type==='childList'){m.addedNodes.forEach(n=>{if(n.id==='hsBox'){fanfare();flash(0);0}});m.removedNodes.forEach(n=>{0})}
  else if(m.type==='attributes'){const t=m.target;if(t.id==='hsBox'&&t.classList.contains('full')&&!seen.has(t)){seen.add(t);celebrate(2)}else if(t.tagName==='I'&&t.closest&&t.closest('#hsBox')){if(t.classList.contains('on')&&!seen.has(t)){seen.add(t);const c=t.classList;if(c.contains('col')){tone(300,0,.5,'sawtooth',.05,1500);noise(0,.4,.05,1500)}else if(c.contains('mini')||c.contains('minor')||c.contains('major')){[880,1175,1568].forEach((f,i)=>tone(f*(c.contains('major')?1.26:1),i*.06,.3,'triangle',.06))}else{tone(220,0,.12,'square',.05,110);tone(1320,0,.18,'sine',.05)}}}}}
 }).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
 /* meter heat */

@@ -1,0 +1,92 @@
+/* v21 unified visual system — one palette, one gold frame, one display type */
+:root{--g1:#fff6cf;--g2:#ffd65a;--g3:#c98a1c;--g4:#5a3200;--ink:#2a1200;--pan1:#2c1240;--pan2:#120620;--glow:255,200,90;--acc:#ff4f9a}
+/* display type: Noto Serif TC Black, slanted, extruded gold */
+.fxIn h2,#hsBox .hsIn h2,#avCall b,.h21 h3,.h21T{font-family:"TCDisp","Noto Serif TC",serif!important;font-weight:900!important;font-style:normal!important;color:#ffe680!important;-webkit-text-stroke:1.5px #3a0800;paint-order:stroke fill;text-shadow:1px 1px 0 #e0a020,2px 2px 0 #c26a00,3px 3px 0 #8a3a00,4px 4px 0 #4a1400,0 0 18px rgba(var(--glow),.75)!important;transform:skewX(-9deg);display:inline-block;letter-spacing:.02em}
+#avCall.t2 b,#avCall.t3 b{color:#fff3b0!important}
+/* shared gold panel */
+.fxIn,#hsBox .hsIn,.h21card{background:radial-gradient(120% 70% at 50% 0%,rgba(var(--glow),.16),transparent 60%),linear-gradient(180deg,var(--pan1),var(--pan2))!important;border:2px solid var(--g2)!important;border-radius:18px!important;box-shadow:inset 0 0 0 4px var(--pan2),inset 0 0 0 5px rgba(255,214,90,.45),0 0 0 1px var(--g4),0 0 30px rgba(var(--glow),.45)!important}
+.fxIn button,#hsBox button,.h21 button{background:linear-gradient(180deg,var(--g1),var(--g2) 45%,var(--g3))!important;color:var(--ink)!important;border:1px solid var(--g4)!important;border-radius:22px!important;font:900 16px/1 "Noto Sans TC",sans-serif!important;padding:9px 30px!important;box-shadow:0 3px 0 var(--g4),0 0 14px rgba(var(--glow),.6)!important}
+/* chips on the machine screen (meter / pot / multiplier) share one look */
+#hsMeter,#twBox,#mxBadge{background:linear-gradient(180deg,rgba(44,18,64,.88),rgba(18,6,32,.88))!important;border:1px solid var(--g2)!important;box-shadow:inset 0 0 0 1px rgba(255,214,90,.25),0 0 10px rgba(var(--glow),.35)!important;border-radius:12px!important;color:#f4d89c!important}
+#mxBadge{color:#ffe680!important;font-family:"Noto Sans TC",sans-serif}
+#hsMeter i{background:linear-gradient(90deg,var(--g3),var(--g1))!important}
+#twBox .tr{background:conic-gradient(var(--g2) calc(var(--p)*1%),rgba(255,255,255,.15) 0)!important}
+#twBox .tr i{color:#ffe680!important}
+/* orbs: one gold rim, gem-tinted cores */
+#hsBox .hsG>i{border:1px solid rgba(255,214,90,.35)!important;background:rgba(255,255,255,.04)!important}
+#hsBox .hsG>i.on{border:2px solid var(--g2)!important;background:radial-gradient(circle at 35% 28%,#fffbe6,#ffd65a 42%,#a8640c 100%)!important;box-shadow:0 0 12px rgba(var(--glow),.75),inset 0 -3px 6px rgba(0,0,0,.35)!important}
+#hsBox .hsG>i.on.mini{background:radial-gradient(circle at 35% 28%,#f0f8ff,#6fb6ff 45%,#173a78)!important}
+#hsBox .hsG>i.on.minor{background:radial-gradient(circle at 35% 28%,#f0fff4,#53d39a 45%,#0f4a36)!important}
+#hsBox .hsG>i.on.major{background:radial-gradient(circle at 35% 28%,#fff0f8,#ff6fae 45%,#6a0f3c)!important}
+#hsBox .hsJp div{border:1px solid var(--g2)!important;background:rgba(0,0,0,.35)!important}
+/* flow: anticipation → in → out */
+#board,#czHero{transition:filter .6s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+body.f21pre #board{filter:brightness(.4) saturate(.6)}
+body.f21pre #czHero{transform:scale(1.06);filter:brightness(1.12)}
+#f21Orb{position:fixed;left:50%;top:50%;width:40vmin;height:40vmin;margin:-20vmin 0 0 -20vmin;border-radius:50%;pointer-events:none;z-index:9989;background:radial-gradient(circle,rgba(255,246,207,.95),rgba(255,214,90,.55) 35%,rgba(255,150,40,0) 70%);opacity:0;transform:scale(.3)}
+body.f21pre #f21Orb{animation:f21Orb .95s ease-in forwards}
+@keyframes f21Orb{60%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+.fxOv,#hsBox{animation:f21In .5s cubic-bezier(.2,.9,.3,1.2) both}
+.fxOv.out,#hsBox.out{animation:f21Out .45s ease-in forwards!important}
+@keyframes f21In{0%{opacity:0;transform:scale(1.12);filter:blur(6px)}100%{opacity:1;transform:none;filter:none}}
+@keyframes f21Out{100%{opacity:0;transform:scale(.94);filter:blur(4px)}}
+/* light beams for win ladder */
+#f21Beam{position:fixed;left:50%;top:40%;width:170vmax;height:170vmax;margin:-85vmax 0 0 -85vmax;pointer-events:none;z-index:9996;border-radius:50%;opacity:0}
+#f21Beam.go{animation:f21Bm 2.6s ease-out forwards,f21Rot 6s linear infinite}
+@keyframes f21Bm{10%{opacity:.75}70%{opacity:.5}100%{opacity:0}}
+@keyframes f21Rot{to{rotate:360deg}}
+/* help cards */
+.h21{position:fixed;inset:0;z-index:10000;background:rgba(6,2,14,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px;box-sizing:border-box;animation:f21In .45s both}
+.h21.out{animation:f21Out .4s forwards}
+.h21T{font-size:clamp(24px,7.2vw,30px);margin:0}
+.h21S{display:flex;width:min(380px,92vw);overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.h21S::-webkit-scrollbar{display:none}
+.h21card{flex:0 0 100%;scroll-snap-align:center;box-sizing:border-box;padding:14px 12px 16px;text-align:center}
+.h21card svg{width:100%;height:auto;max-height:36svh;display:block}
+.h21 h3{font-size:clamp(20px,6vw,25px);margin:8px 0 4px}
+.h21 p{margin:0;font:700 15px/1.5 "Noto Sans TC",sans-serif;color:#f4e2b8}
+.h21D{display:flex;gap:8px}.h21D i{width:9px;height:9px;border-radius:50%;background:rgba(255,214,90,.3)}.h21D i.on{background:var(--g2);box-shadow:0 0 8px var(--g2)}
+.h21N{font:700 11px/1 "Noto Sans TC",sans-serif;color:#cdb98e}
+@media (prefers-reduced-motion:reduce){body.f21pre #czHero{transform:none}#f21Beam.go{animation:f21Bm 2.6s forwards}.fxOv,#hsBox,.h21{animation:none}}
+/* ===== v21 life layer: idle breathing, press feedback, counters, sweeps, sparkles, reactions, attract ===== */
+#spinBtn{animation:l21Br 2.4s ease-in-out infinite}
+@keyframes l21Br{50%{scale:1.035;filter:brightness(1.08) drop-shadow(0 0 10px rgba(var(--glow),.55))}}
+body.l21idle #spinBtn{animation:l21Att 1s ease-in-out infinite}
+@keyframes l21Att{0%,100%{scale:1}40%{scale:1.08;filter:brightness(1.2) drop-shadow(0 0 16px rgba(var(--glow),.9))}60%{scale:.98}}
+button{transition:scale .12s cubic-bezier(.3,1.6,.5,1),filter .12s}
+button:active:not(:disabled){scale:.9;filter:brightness(1.15)}
+#spinBtn:active:not(:disabled){scale:.88;animation:none}
+.czm,.czbar .box.czbet{position:relative;overflow:hidden}
+.czm::before,.czbar .box.czbet::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,240,200,.22) 50%,transparent 65%);translate:-120% 0;animation:l21Sw 5.5s ease-in-out infinite}
+.czbar .box.czbet::before{animation-delay:.35s}.czm.czmW::before{animation-delay:.7s}
+@keyframes l21Sw{0%,70%{translate:-120% 0}100%{translate:120% 0}}
+.l21bump{animation:l21Bump .45s cubic-bezier(.3,1.8,.5,1)}
+@keyframes l21Bump{0%{scale:1}35%{scale:1.18;color:#fff6cf;text-shadow:0 0 12px rgba(var(--glow),1)}100%{scale:1}}
+.l21dn{animation:l21Dn .35s ease-out}@keyframes l21Dn{40%{scale:.92;opacity:.75}}
+.l21fl{position:fixed;z-index:95;pointer-events:none;font:900 18px/1 "Noto Sans TC",sans-serif;color:#ffe680;-webkit-text-stroke:1px #3a0800;paint-order:stroke fill;animation:l21Fl .8s ease-out forwards}
+@keyframes l21Fl{0%{opacity:0;translate:0 6px}20%{opacity:1}100%{opacity:0;translate:0 -28px}}
+#l21Sweep{position:absolute;inset:0;pointer-events:none;z-index:4;overflow:hidden}
+#l21Sweep::before{content:"";position:absolute;top:-20%;bottom:-20%;width:28%;left:0;background:linear-gradient(100deg,transparent,rgba(255,246,207,.28),transparent);translate:-150% 0;rotate:12deg;animation:l21Mq 7s ease-in-out infinite}
+body.l21idle #l21Sweep::before{animation-duration:2.6s}
+@keyframes l21Mq{0%,65%{translate:-150% 0}100%{translate:420% 0}}
+.l21sp{position:absolute;width:8px;height:8px;margin:-4px;pointer-events:none;z-index:3;background:radial-gradient(circle,#fff 0,#ffe39a 30%,transparent 70%);opacity:0;animation:l21Tw 2.8s ease-in-out infinite}
+.l21sp::after{content:"";position:absolute;left:50%;top:-6px;bottom:-6px;width:1px;background:linear-gradient(transparent,#fff,transparent)}
+@keyframes l21Tw{0%,100%{opacity:0;scale:.4}50%{opacity:1;scale:1.2}}
+#czHero .czhi{transition:filter .4s}
+#czHero.l21win .czhi{animation:l21Hop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes l21Hop{30%{translate:0 -6px;scale:1.03;filter:brightness(1.18)}100%{translate:0 0;scale:1}}
+#czHero.l21big .czhi{animation:l21Big 1.6s ease-in-out}
+@keyframes l21Big{20%,60%{scale:1.06;filter:brightness(1.25) saturate(1.2)}100%{scale:1}}
+#czHero.l21lose .czhi{animation:l21Sigh .9s ease-in-out}
+@keyframes l21Sigh{50%{translate:0 2px;filter:brightness(.92)}}
+#czHero .czhi{animation:l21Idle 6s ease-in-out infinite}
+@keyframes l21Idle{50%{scale:1.012;translate:0 -2px}}
+#l21Hint{position:fixed;z-index:96;pointer-events:none;padding:6px 12px;border-radius:14px;background:linear-gradient(180deg,var(--pan1),var(--pan2));border:1px solid var(--g2);font:900 14px/1 "Noto Sans TC",sans-serif;color:#ffe680;white-space:nowrap;box-shadow:0 0 12px rgba(var(--glow),.5);opacity:0;transition:opacity .4s;translate:-50% 0}
+body.l21idle #l21Hint{opacity:1;animation:l21Bob 1s ease-in-out infinite}
+@keyframes l21Bob{50%{translate:-50% -5px}}
+@media (prefers-reduced-motion:reduce){#spinBtn,body.l21idle #spinBtn,.czm::before,.czbar .box.czbet::before,#l21Sweep::before,.l21sp,#czHero .czhi,#czHero.l21win .czhi,#czHero.l21big .czhi,body.l21idle #l21Hint{animation:none!important}}
+/* perf: while a feature overlay is up, freeze what's underneath */
+body.f21ov #machine *,body.f21ov #machine{animation-play-state:paused!important}
+body.f21ov #jAmb,body.f21ov #jRays,body.f21ov .l21sp,body.f21ov #l21Sweep{display:none!important}
+body.f21ov #board,body.f21ov #czHero{filter:none!important}
+body.f21pre #czHero{filter:none}
