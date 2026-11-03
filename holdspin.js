@@ -14,7 +14,7 @@ function mount(){const h=document.getElementById('czHero');if(!h||document.getEl
 const _st=window.settle;
 if(_st)window.settle=function(bet,free){const r=_st.apply(this,arguments);if(!free){meter++;let t=Math.random()<P;if(meter>=M)t=true;if(t){meter=0;pending=true;setTimeout(()=>run(bet),50)}localStorage.setItem(KEY,meter);mUI()}return r};
 function run(bet){if(running)return;if(typeof spinning!=='undefined'&&spinning||typeof bwState!=='undefined'&&bwState||typeof FS!=='undefined'&&FS||document.getElementById('czMG')&&document.getElementById('czMG').offsetParent){setTimeout(()=>run(bet),500);return}
- running=true;pending=false;window.__hold=true;(window.F21?F21.pre():Promise.resolve()).then(()=>play(bet)).then(won=>{window.F21&&F21.back();running=false;window.__hold=false;
+ running=true;pending=false;window.__hold=true;(window.F21?F21.pre('寶珠鎖定重轉'):Promise.resolve()).then(()=>play(bet)).then(won=>{window.F21&&F21.back();running=false;window.__hold=false;
   if(won>0){bal+=won;const w=document.getElementById('win');w.textContent=won;try{ui();saveLater&&saveLater()}catch(e){}const total=bet*NL;if(won/total>=10&&window.bigWin)setTimeout(()=>bigWin(won,total),300);document.getElementById('msg').textContent=`寶珠鎖定重轉結束，贏得 ${NFh.format(won)} 籌碼！`}
   try{['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>{const e=document.getElementById(i);if(e)e.disabled=false})}catch(e){}})}
 function play(bet){return new Promise(res=>{const total=bet*NL;const o=document.createElement('div');o.id='hsBox';o.setAttribute('role','dialog');o.setAttribute('aria-label','寶珠鎖定重轉');
@@ -26,7 +26,7 @@ function play(bet){return new Promise(res=>{const total=bet*NL;const o=document.
  (async()=>{await sleep(500);const first=[...Array(CELLS).keys()].sort(()=>Math.random()-.5).slice(0,START);
   for(const i of first){let c=draw();if(c.k==='c')c={k:'v',v:1};put(i,c);await sleep(160)}
   let left=3;await sleep(500);
-  while(left>0&&g.includes(null)){document.getElementById('hsL').textContent=left;cells.forEach((e,i)=>{if(!g[i])e.className='spin'});B(300,.25,'sawtooth',.02,500);await sleep(750);let nw=false;
+  while(left>0&&g.includes(null)){document.getElementById('hsL').textContent=left;cells.forEach((e,i)=>{if(!g[i])e.className='spin'});B(300,.25,'sawtooth',.02,500);await sleep(left===1?1250:750);let nw=false;
    for(let i=0;i<CELLS;i++){if(g[i])continue;cells[i].className='';if(Math.random()<Q){let c=draw();if(c.k==='c'){const s=g.reduce((a,x)=>a+(x&&!x.n?x.v:0),0);put(i,{k:'v',v:s},true);cells.forEach((e,k)=>{if(g[k]&&!g[k].n&&k!==i)e.classList.add('suck')});B(520,.5,'sine',.07,1560);await sleep(700);cells.forEach(e=>e.classList.remove('suck'))}else put(i,c);nw=true;await sleep(220)}}
    left=nw?3:left-1;document.getElementById('hsL').textContent=left;await sleep(nw?350:250)}
   let won=T();const full=!g.includes(null);if(full){won+=GRAND;o.classList.add('full');B(523,.4,'sine',.08);B(659,.5,'sine',.07);B(784,.7,'sine',.07)}

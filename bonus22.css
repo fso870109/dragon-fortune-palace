@@ -1,0 +1,74 @@
+/* v21.2 bonus stage inside the machine */
+#b22Stage{position:fixed;z-index:9988;pointer-events:none;opacity:0;border-radius:16px;overflow:hidden;visibility:hidden}
+#b22Stage.show{visibility:visible;pointer-events:auto;animation:b22StIn .6s cubic-bezier(.2,.8,.2,1) forwards}
+#b22Stage.out{visibility:visible;animation:b22StOut .6s ease-in forwards}
+@keyframes b22StIn{0%{opacity:0;clip-path:circle(0% at 50% 60%)}100%{opacity:1;clip-path:circle(90% at 50% 60%)}}
+@keyframes b22StOut{0%{opacity:1;filter:none}100%{opacity:0;filter:blur(8px) brightness(1.6)}}
+#b22Stage .b22bg{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 35%,#4a1f5e 0%,#24103a 45%,#0c0418 100%);box-shadow:inset 0 0 0 2px #ffd65a,inset 0 0 0 5px #2a0f3a,inset 0 0 0 6px rgba(255,214,90,.5),inset 0 0 60px rgba(255,190,60,.25)}
+#b22Stage .b22rays{position:absolute;left:50%;top:42%;width:160%;aspect-ratio:1;translate:-50% -50%;background:repeating-conic-gradient(rgba(255,214,90,.10) 0 8deg,transparent 8deg 22deg);-webkit-mask:radial-gradient(circle,#000 15%,transparent 62%);mask:radial-gradient(circle,#000 15%,transparent 62%);animation:b22Rot 24s linear infinite}
+@keyframes b22Rot{to{rotate:360deg}}
+#b22Stage.out .b22rays{animation:none}
+#b22Stage .fxOv,#b22Stage #hsBox{position:absolute!important;inset:0!important;z-index:2!important;background:transparent!important;padding:4px!important;display:flex!important;align-items:center;justify-content:center}
+#b22Stage .fxIn,#b22Stage .hsIn{background:transparent!important;box-shadow:none!important;border:0!important;width:min(392px,100%)!important;max-height:none!important;overflow:visible!important}
+/* board away/back */
+#board.b22away .reel{animation:b22Away .5s cubic-bezier(.6,0,.4,1) forwards}
+#board.b22back .reel{animation:b22Back .7s cubic-bezier(.2,1.3,.4,1) both}
+#board .reel:nth-child(2){animation-delay:.05s!important}#board .reel:nth-child(3){animation-delay:.1s!important}#board .reel:nth-child(4){animation-delay:.15s!important}#board .reel:nth-child(5){animation-delay:.2s!important}
+@keyframes b22Away{to{transform:perspective(500px) rotateX(88deg) translateY(30px);opacity:0;filter:brightness(2)}}
+@keyframes b22Back{0%{transform:perspective(500px) rotateX(-80deg);opacity:0;filter:brightness(2)}100%{transform:none;opacity:1;filter:none}}
+/* dragon swoop + title card */
+.b22drag{position:fixed;left:0;top:32%;z-index:9997;pointer-events:none;width:600px;translate:-110% 0;animation:b22Fly 1.25s cubic-bezier(.4,0,.3,1) forwards;filter:drop-shadow(0 0 12px rgba(255,190,60,.8))}
+.b22drag svg{width:min(150vw,600px);height:auto}
+@keyframes b22Fly{0%{translate:-110% 30px;rotate:-6deg}50%{translate:-10% -10px;rotate:3deg}100%{translate:110vw 40px;rotate:-4deg}}
+.b22title{position:fixed;left:0;right:0;top:38%;z-index:9998;pointer-events:none;text-align:center}
+.b22title b{display:inline-block;max-width:94vw;white-space:nowrap;font-family:"TCDisp","Noto Serif TC",serif;font-weight:900;font-size:clamp(34px,10.5vw,52px);color:#ffe680;-webkit-text-stroke:2.5px #3a0800;paint-order:stroke fill;transform:skewX(-10deg);
+ text-shadow:1px 1px 0 #f6c040,2px 2px 0 #e0a020,3px 3px 0 #c87a10,4px 4px 0 #a85a00,5px 5px 0 #844000,6px 6px 0 #5a2600,7px 7px 0 #3a1400,0 0 30px rgba(255,190,60,.95);animation:b22Slam .55s cubic-bezier(.2,1.7,.4,1) both}
+.b22title.out b{animation:b22TOut .45s ease-in forwards}
+@keyframes b22Slam{0%{scale:2.6;opacity:0;filter:blur(5px) brightness(2.4)}60%{scale:.93;opacity:1;filter:brightness(1.3)}80%{scale:1.04}100%{scale:1;filter:none}}
+@keyframes b22TOut{to{opacity:0;translate:0 -30px;scale:.9}}
+/* build-in */
+#b22Stage #hsBox .hsG>i{animation:b22Cell .45s cubic-bezier(.2,1.6,.4,1) both}
+#b22Stage #hsBox .hsG>i:nth-child(5n+2){animation-delay:.05s}#b22Stage #hsBox .hsG>i:nth-child(5n+3){animation-delay:.1s}#b22Stage #hsBox .hsG>i:nth-child(5n+4){animation-delay:.15s}#b22Stage #hsBox .hsG>i:nth-child(5n){animation-delay:.2s}
+@keyframes b22Cell{0%{scale:0;rotate:-90deg;opacity:0}100%{scale:1;rotate:0deg;opacity:1}}
+#b22Stage #hsBox .hsG>i.on{animation:b22Land .45s cubic-bezier(.2,1.8,.4,1) both!important}
+@keyframes b22Land{0%{scale:1.8;translate:0 -30px;opacity:0;filter:brightness(2.5)}60%{scale:.9;translate:0 0;opacity:1}100%{scale:1;filter:none}}
+#b22Stage #hsBox .hsG>i.spin{animation:b22Spin .3s linear infinite!important}
+@keyframes b22Spin{50%{filter:brightness(1.5) hue-rotate(20deg);scale:.94}}
+#b22Stage #hsBox.tense .hsG>i.spin{animation:b22Spin .55s ease-in-out infinite!important}
+#b22Stage #hsBox.tense .hsIn{box-shadow:none}
+#b22Stage #hsBox.tense~*,#b22Stage:has(#hsBox.tense) .b22bg{animation:b22Tense .9s ease-in-out infinite}
+@keyframes b22Tense{50%{box-shadow:inset 0 0 0 3px #ff6a3a,inset 0 0 50px rgba(255,80,40,.45)}}
+.b22hit{animation:b22Shk .25s ease-out}@keyframes b22Shk{30%{translate:0 3px}60%{translate:0 -1px}}
+#b22Stage .fxIn h2,#b22Stage .hsIn h2{animation:b22Slam .55s cubic-bezier(.2,1.7,.4,1) both}
+/* HUD */
+#hsBox .hsF{gap:8px!important}
+#hsBox .hsF>span{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:7px 8px;border-radius:12px;background:linear-gradient(180deg,rgba(60,24,80,.92),rgba(20,6,30,.95));border:1.5px solid #ffd65a;box-shadow:inset 0 0 0 1px rgba(255,240,200,.25),0 0 12px rgba(255,190,60,.35);font:900 15px/1 "Noto Sans TC",sans-serif!important;color:#f4e2b8!important;white-space:nowrap}
+#hsBox .hsF b{font-size:22px!important;color:#ffe680!important;text-shadow:0 0 10px rgba(255,190,60,.8);display:inline-block}
+.b22bump{animation:b22Bump .4s cubic-bezier(.2,1.8,.4,1)}@keyframes b22Bump{40%{scale:1.35;filter:brightness(1.6)}}
+#hsBox.tense #hsL{color:#ff8a5a!important}
+#hsBox .hsJp b{font:900 14px/1.2 "Noto Sans TC",sans-serif!important;color:#fff}#hsBox .hsJp span{font-size:12px!important;color:#ffe680!important}
+#hsBox .hsG>i span{color:#fff!important;-webkit-text-stroke:3px #3a1600;paint-order:stroke fill;text-shadow:0 1px 3px #000!important;font-size:clamp(12px,3.6vw,15px)!important}
+#hsBox .hsG>i b{color:#fff!important;-webkit-text-stroke:3px #3a0626;paint-order:stroke fill;text-shadow:0 0 6px #000!important}
+#hsBox .hsG>i small{color:#fff3c4!important;-webkit-text-stroke:2px #4a0a00;paint-order:stroke fill}
+.b22hud{display:flex;gap:8px;justify-content:center;margin:2px 0 6px}
+.b22hud span{padding:6px 12px;border-radius:12px;background:linear-gradient(180deg,rgba(60,24,80,.92),rgba(20,6,30,.95));border:1.5px solid #ffd65a;font:900 14px/1 "Noto Sans TC",sans-serif;color:#f4e2b8;white-space:nowrap}
+.b22hud b{color:#ffe680;font-size:18px}
+/* wheel */
+.b22wh{position:relative;width:280px;height:296px;margin:0 auto;animation:b22Rise .7s cubic-bezier(.2,1.2,.4,1) both}
+@keyframes b22Rise{0%{translate:0 120px;opacity:0;scale:.7}100%{translate:0 0;opacity:1;scale:1}}
+.b22wh svg.w{position:absolute;left:0;top:16px}
+.b22ptr{position:absolute;left:50%;top:0;width:44px;margin-left:-22px;z-index:2;transform-origin:50% 12px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.6))}
+.b22ptr.flex{animation:b22Flex .14s ease-out}@keyframes b22Flex{40%{rotate:-14deg}}
+.b22bulb{animation:b22Bulb .5s steps(1) infinite}.b22bulb.o{animation-delay:.25s}
+@keyframes b22Bulb{0%{fill:#fff6cf}50%{fill:#8a5a10}}
+.b22wh.go .b22bulb{animation-duration:.18s}
+/* plinko / tornado canvases rise */
+canvas.b22pl,canvas.b22tw{display:block;margin:0 auto;animation:b22Rise .6s cubic-bezier(.2,1.2,.4,1) both;max-width:100%;height:auto}
+/* multiplier medallion */
+#mxBadge{display:flex!important;align-items:center;gap:8px;padding:4px 10px 4px 4px!important;border-radius:30px!important}
+.b22med{width:40px;height:40px;flex:none;border-radius:50%;display:grid;place-items:center;font:900 17px/1 "Noto Sans TC",sans-serif;font-style:normal;color:#4a2200;
+ background:radial-gradient(circle at 35% 30%,#fffbe6,#ffd65a 45%,#b87810 75%,#ffe39a 100%);box-shadow:inset 0 -3px 5px rgba(90,40,0,.6),inset 0 2px 3px rgba(255,255,255,.8),0 0 0 2px #5a3200,0 0 14px rgba(255,190,60,.9);text-shadow:0 1px 0 rgba(255,255,255,.6);animation:b22Med 2s ease-in-out infinite}
+@keyframes b22Med{50%{rotate:y 180deg}}
+#mxBadge span{display:flex;flex-direction:column;font:900 14px/1.15 "Noto Sans TC",sans-serif;color:#ffe680;text-align:left}#mxBadge span small{font-size:10px;color:#f4d89c}
+@media (prefers-reduced-motion:reduce){#b22Stage.show,#b22Stage.out,.b22drag,.b22title b,#board.b22away .reel,#board.b22back .reel,#b22Stage #hsBox .hsG>i,.b22wh,canvas.b22pl,canvas.b22tw,.b22med,#b22Stage .b22rays{animation:none!important}.b22drag{display:none}#b22Stage.show{opacity:1}#board.b22away .reel{opacity:.2}}
+body.b22on #l21Hint,body.f21pre #l21Hint,body.f21ov #l21Hint{opacity:0!important;animation:none!important}

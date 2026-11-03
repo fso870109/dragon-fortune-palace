@@ -78,5 +78,6 @@ const bwEl=$('bw');if(bwEl)new MutationObserver(()=>{if(bwEl.classList.contains(
 const css=document.createElement('style');css.textContent='#avCall{display:none!important}';document.head.appendChild(css);
 // orbs: burst on lock
 new MutationObserver(ms=>{for(const m of ms){const t=m.target;if(t.tagName==='I'&&t.classList.contains('on')&&!t._w21&&t.closest('#hsBox')){t._w21=1;const r=t.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,10,200)}}}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']});
-window.W21={winOn,winOff,burst,coins,styleOf};
+function trail(x0,y0,x1,y1){const l=Math.hypot(x1-x0,y1-y0)||1;const q={seg:[{x0,y0,x1,y1,l}],acc:[0,l],len:l};add({k:'glow',path:q,x:x0,y:y0,life:.55,s:22,a:1});add({k:'star',path:q,x:x0,y:y0,life:.6,s:28,ph:Math.random()*6})}
+window.W21={winOn,winOff,burst,coins,styleOf,trail};
 })();
