@@ -2,7 +2,7 @@
 (function(){
 if(typeof CZM==='undefined')return;
 const ID=CZM.id,NF=new Intl.NumberFormat('zh-TW'),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const MP={"love": 0.013999, "matsuri": 0.01386, "caishen": 0.015235, "samurai": 0.015248, "pirate": 0.014087, "neko": 0.013868, "sakura": 0.015022, "queen": 0.014767, "school": 0.013999, "jungle": 0.015235};                         // per-machine multiplier trigger prob (from math/m203.json)
+const MP={"matsuri": 0.004588, "samurai": 0.005093, "neko": 0.004590, "sakura": 0.004311};  // v22.2: multiplier now waits for the next WIN (never wasted, never ×0); trigger prob = old×hit-rate keeps the 1.5% share exact                         // per-machine multiplier trigger prob (from math/m203.json)
 const TW_N=60,TW_U=[.5,.75,1,1.25,1.5],TW_R=.02;               // eruption: 2.0% exact
 const PL=[100,25,8,3,2,3,8,25,100],PL_P=0.015/(1524/256);        // plinko: 1.5% exact
 const WH=[[5],[8],[10],[5],[15],[8],[30,'迷你'],[5],[10],[80,'小獎'],[8],[250,'大獎']],WH_P=0.015/(434/12); // wheel 1.5% exact
@@ -74,17 +74,17 @@ async function wheel(bet){const tot=bet*NL,n=WH.length,L=stage('三重彩金輪'
 wheel.t='三重彩金輪';
 /* ---- 狂熱倍數 ---- */
 function mxUI(){const wb=$('win')&&$('win').parentElement;let e=$('mxBadge');if(!armed){e&&e.remove();return}if(!wb)return;if(!e){e=document.createElement('div');e.id='mxBadge';e.className='rmx';wb.appendChild(e)}e.textContent='×'+armed}
-async function mxShow(){const R=armed;const L=stage('狂熱倍數'),W=L.clientWidth,H=L.clientHeight,cw=W/5,ch=H/3;const seq=[];for(let i=0;i<18;i++)seq.push([2,3,5][i%3]);seq.push(R,2,3);
+let mxR=2;async function mxShow(){const R=Math.max(2,armed||mxR);const L=stage('狂熱倍數'),W=L.clientWidth,H=L.clientHeight,cw=W/5,ch=H/3;const seq=[];for(let i=0;i<18;i++)seq.push([2,3,5][i%3]);seq.push(R,2,3);
  L.insertAdjacentHTML('beforeend',`<div class="rmCol" style="left:${2*cw}px;width:${cw}px"><div class="rmStrip">${seq.map(v=>`<i style="height:${ch}px">×${v}</i>`).join('')}</div></div>`);const st=L.querySelector('.rmStrip');await sleep(350);
  const T=RM?0:2000;st.style.transition=`transform ${T}ms cubic-bezier(.15,.6,.15,1)`;await sleep(40);st.style.transform=`translateY(${-(seq.length-3-1+1-1)*ch+0}px)`;
  for(let i=0;i<10;i++)tone(600+i*60,i*T/10000,.04,'square',.03);await sleep(T+100);const tile=st.children[seq.length-3];tile.classList.add('win');L.querySelector('.rmCol').classList.add('exp');tone(660,0,.15,'square',.05);tone(990,.12,.3,'square',.05);
- {const r=tile.getBoundingClientRect();window.W21&&W21.burst(r.left+r.width/2,r.top+r.height/2,18,240)}await sleep(500);mxUI();return finish(L,0,`下一局獎金 ×${R}`,true)}
+ {const r=tile.getBoundingClientRect();window.W21&&W21.burst(r.left+r.width/2,r.top+r.height/2,18,240)}await sleep(500);mxUI();return finish(L,0,`下次中獎 ×${R} 加倍！`,true)}
 mxShow.t='狂熱倍數';
 /* ---- hook settle results ---- */
 let PR=null;addEventListener('load',()=>{const b=$('board');b&&new MutationObserver(()=>{if(b.getAttribute('aria-busy')==='true')PR=(typeof FS!=='undefined'&&FS)?null:{m:Math.random(),p:Math.random(),w:Math.random()}}).observe(b,{attributes:true,attributeFilter:['aria-busy']})});
 const CZo=window.CZ&&CZ.onSettle;if(CZo)CZ.onSettle=function(o){const r=CZo.apply(this,arguments);const Rr=PR||{m:Math.random(),p:Math.random(),w:Math.random()};PR=null;try{if(!o.free){const tot=o.total,bet=tot/NL;
- if(armed){const R=armed;armed=0;mxUI();if(o.won>0){const ex=o.won*(R-1);bal+=ex;$('win').textContent=o.won*R;try{ui();saveLater&&saveLater()}catch(e){}$('msg').textContent=`狂熱倍數 ×${R}！本局共贏得 ${NF.format(o.won*R)} 籌碼！`;window.AV&&AV.celebrate(0)}}
- else if(Rr.m<3*(MP[ID]||0)){tk.m++;if(tk.m>=3){tk.m=0;armed=pick(MX);queue(mxShow,bet)}emitT('mult')}
+ if(armed&&!o.free&&!(o.won>0)){$('msg')&&($('msg').textContent=`狂熱倍數 ×${armed} 保留中・下次中獎就加倍！`)}else if(armed&&o.won>0){const R=armed;armed=0;mxUI();{const ex=o.won*(R-1);bal+=ex;$('win').textContent=o.won*R;try{ui();saveLater&&saveLater()}catch(e){}$('msg').textContent=`狂熱倍數 ×${R}！本局共贏得 ${NF.format(o.won*R)} 籌碼！`;window.AV&&AV.celebrate(0)}}
+ else if(Rr.m<3*(MP[ID]||0)){tk.m++;if(tk.m>=3){tk.m=0;armed=mxR=pick(MX);queue(mxShow,bet)}emitT('mult')}
  tw.n++;tw.pot+=tot*TW_R*TW_U[Math.random()*TW_U.length|0];if(tw.n>=TW_N)queue(erupt(),bet);localStorage.setItem(KEY,JSON.stringify(tw));twUI();
  if(Rr.p<5*PL_P){tk.p++;const full=tk.p>=5;if(full)tk.p=0;emitT('plinko',full);if(full)queue(plinko,bet)}if(Rr.w<12*WH_P){tk.w++;const full=tk.w>=12;if(full)tk.w=0;emitT('wheel',full);if(full)queue(wheel,bet)}saveT();emitT('tick')}}catch(e){console.error(e)}return r};
 /* ---- buy 寶珠鎖定重轉 ---- */
@@ -95,5 +95,5 @@ function buyUI(){const m=$('menu16'),b0=$('czBuyBtn');if(!m||!b0||$('czBuyHS'))r
  $('czBuyHSNo').onclick=()=>d.close();$('czBuyHSOk').onclick=()=>{d.close();const p=price();if(bal<p||!idle())return;bal-=p;try{ui();saveLater&&saveLater()}catch(e){}CZHS.force(BETS[betIdx])}}
 function boot(){twUI();buyUI()}
 if(document.readyState==='complete')setTimeout(boot,300);else addEventListener('load',()=>setTimeout(boot,300));
-window.CZF={tk:()=>tk,emit:()=>emitT('tick'),force:{plinko:()=>queue(plinko,BETS[betIdx]),wheel:()=>queue(wheel,BETS[betIdx]),erupt:()=>{tw.n=TW_N;tw.pot=Math.max(tw.pot,BETS[betIdx]*NL*1.2);queue(erupt(),BETS[betIdx])},mult:()=>{armed=pick(MX);queue(mxShow,BETS[betIdx])}},pending:()=>!!PR&&!armed&&((PR.p<5*PL_P&&tk.p+1>=5)||(PR.w<12*WH_P&&tk.w+1>=12)||(PR.m<3*(MP[ID]||0)&&tk.m+1>=3)||tw.n+1>=TW_N),tw:()=>tw,MP,PL_P,WH_P};
+window.CZF={tk:()=>tk,emit:()=>emitT('tick'),force:{plinko:()=>queue(plinko,BETS[betIdx]),wheel:()=>queue(wheel,BETS[betIdx]),erupt:()=>{tw.n=TW_N;tw.pot=Math.max(tw.pot,BETS[betIdx]*NL*1.2);queue(erupt(),BETS[betIdx])},mult:()=>{armed=mxR=pick(MX);queue(mxShow,BETS[betIdx])}},pending:()=>!!PR&&!armed&&((PR.p<5*PL_P&&tk.p+1>=5)||(PR.w<12*WH_P&&tk.w+1>=12)||(PR.m<3*(MP[ID]||0)&&tk.m+1>=3)||tw.n+1>=TW_N),tw:()=>tw,MP,PL_P,WH_P};
 })();

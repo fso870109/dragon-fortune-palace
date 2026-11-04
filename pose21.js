@@ -1,5 +1,5 @@
 /* v22.0 character pose crossfade over hero art (presentation only, no RTP effect) */
-(function(){if(!window.CZM)return;const id=CZM.id,V='?v=222',RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function(){if(!window.CZM)return;const id=CZM.id,V='?v=223',RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let el=null,t=0,idleT=0,lock=0;
 function host(){const h=document.querySelector('#czHero');if(!h)return null;if(!el){el=document.createElement('div');el.className='czpose';el.setAttribute('aria-hidden','1');const hi=h.querySelector('.czhi');hi?hi.after(el):h.prepend(el)}return el}
 const pre={};function load(p){if(!pre[p]){const i=new Image();i.src='assets/'+id+'/p_'+p+'.webp'+V;pre[p]=i.decode?i.decode().catch(()=>{}):Promise.resolve()}return pre[p]}
