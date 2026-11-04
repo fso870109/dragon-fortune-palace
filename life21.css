@@ -28,3 +28,7 @@ html.l21enter body{animation:l21Enter .55s cubic-bezier(.2,.8,.2,1) both}
 #czToast,#czGN{animation:w21Toast .5s cubic-bezier(.2,1.4,.4,1)}
 @keyframes w21Toast{0%{opacity:0;translate:0 -14px;scale:.96}100%{opacity:1;translate:0 0;scale:1}}
 button:focus-visible,.card:focus-visible{outline:2px solid #ffd65a;outline-offset:3px}
+/* v21.9: no double-tap / pinch zoom and no sideways panning on phones */
+html,body{touch-action:manipulation;overflow-x:clip;max-width:100%;overscroll-behavior-x:none}
+@supports not (overflow-x:clip){html,body{overflow-x:hidden}}
+#machine,.machine{overflow-x:clip}
