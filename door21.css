@@ -1,0 +1,53 @@
+/* v22.8 palace-door transition (vector only, transform/opacity) */
+html.czIn::before{content:'';position:fixed;inset:0;z-index:2147483000;background:linear-gradient(90deg,#2b0408,#6b1017 25%,#3d060b 50%,#6b1017 75%,#2b0408)}
+html.czDoorOn #czLoad{opacity:0!important;transition:none!important}
+html.l21enter body,html.l21leave body{animation:none!important}
+#l21Zoom{display:none!important}
+#czDoor{position:fixed;inset:0;z-index:2147483001;pointer-events:none;overflow:hidden}
+#czDoor.skip{pointer-events:auto}
+#czDoor .d{position:absolute;top:0;bottom:0;width:50.6%;will-change:transform;transition:transform .46s cubic-bezier(.72,0,.28,1);
+ background:radial-gradient(circle at 50% 50%,rgba(255,214,120,.0) 0 0) ,
+  repeating-linear-gradient(0deg,transparent 0 46px,rgba(255,200,90,.16) 46px 48px),
+  linear-gradient(90deg,#2b0408,#6b1017 45%,#3d060b);
+ box-shadow:inset 0 0 0 3px #e9b84f,inset 0 0 0 7px #3a0a00,inset 0 0 0 9px #f6d47a,inset 0 0 60px rgba(0,0,0,.6)}
+#czDoor .d::before{content:'';position:absolute;inset:14% 12%;border:2px solid rgba(246,212,122,.75);border-radius:6px;
+ background:radial-gradient(circle,#ffe7a3 0 2.5px,#b47a1e 3px 3.5px,transparent 4px) 0 0/34px 34px;opacity:.55}
+#czDoor .d::after{content:'';position:absolute;top:50%;width:34px;height:34px;margin-top:-17px;border-radius:50%;
+ border:4px solid #f4cd6a;box-shadow:0 0 0 2px #3a1a00,0 0 14px rgba(255,210,100,.6),inset 0 0 0 2px #3a1a00}
+#czDoor .l{left:0;transform:translateX(-101%)}#czDoor .l::after{right:10px}
+#czDoor .r{right:0;transform:translateX(101%)}#czDoor .r::after{left:10px}
+#czDoor.cls .d{transform:translateX(0)}
+#czDoor .seam{position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;background:linear-gradient(#fff6d2,#f4cd6a,#fff6d2);
+ box-shadow:0 0 18px 6px rgba(255,220,130,.8);opacity:0;transform:scaleY(0);transition:opacity .25s,transform .3s}
+#czDoor.cls.lit .seam{opacity:1;transform:scaleY(1)}
+#czDoor .logo{position:absolute;left:50%;top:50%;width:min(62vw,340px);aspect-ratio:900/420;margin:calc(min(62vw,340px)*-.2333) 0 0 calc(min(62vw,340px)*-.5);
+ background:url(assets/logo21.webp) center/contain no-repeat;opacity:0;transform:scale(.92);transition:opacity .22s,transform .4s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 4px 12px rgba(0,0,0,.7))}
+#czDoor.cls.lit .logo{opacity:1;transform:scale(1)}
+#czDoor .sw{position:absolute;top:-20%;bottom:-20%;left:0;width:38%;background:linear-gradient(100deg,transparent,rgba(255,236,170,.0) 30%,rgba(255,240,190,.55) 50%,rgba(255,236,170,0) 70%,transparent);
+ transform:translateX(-120%) skewX(-12deg);opacity:0}
+#czDoor.lit .sw{animation:czSw .6s cubic-bezier(.4,0,.2,1) .05s both}
+@keyframes czSw{0%{opacity:1;transform:translateX(-120%) skewX(-12deg)}100%{opacity:1;transform:translateX(330%) skewX(-12deg)}}
+#czDoor.opn .logo{opacity:0;transform:scale(1.06);transition:opacity .28s,transform .4s}
+#czDoor.opn .seam{opacity:0}
+/* machine reveal */
+html.czRev #czHero{animation:czHeroIn .7s cubic-bezier(.2,.8,.2,1) .18s both}
+html.czRev #board .reel{animation:czDrop .52s cubic-bezier(.25,1.3,.4,1) both}
+html.czRev #board .reel:nth-child(1){animation-delay:.3s}html.czRev #board .reel:nth-child(2){animation-delay:.37s}html.czRev #board .reel:nth-child(3){animation-delay:.44s}html.czRev #board .reel:nth-child(4){animation-delay:.51s}html.czRev #board .reel:nth-child(5){animation-delay:.58s}
+html.czRev .controls{animation:czRise .5s cubic-bezier(.2,.9,.3,1.15) .62s both}
+html.czRev .card{animation:czRise .5s cubic-bezier(.2,.9,.3,1.1) both;animation-delay:calc(.15s + var(--i,0)*.05s)}
+@keyframes czHeroIn{0%{opacity:0;translate:0 -26px}100%{opacity:1;translate:0 0}}
+@keyframes czDrop{0%{opacity:0;translate:0 -46px}70%{opacity:1}100%{opacity:1;translate:0 0}}
+@keyframes czRise{0%{opacity:0;translate:0 34px}100%{opacity:1;translate:0 0}}
+/* themed accents */
+#czDoor .acc i{position:absolute;left:50%;top:42%;display:block;opacity:0;will-change:transform,opacity}
+#czDoor.opn .acc i{animation:var(--an) var(--du,.9s) cubic-bezier(.15,.7,.3,1) var(--dl,0s) both}
+.acc.matsuri i{width:7px;height:7px;margin:-3.5px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);--an:czFw}
+@keyframes czFw{0%{opacity:1;transform:rotate(var(--a)) translateX(0) scale(1.2)}80%{opacity:1}100%{opacity:0;transform:rotate(var(--a)) translateX(var(--d)) translateY(30px) scale(.4)}}
+.acc.samurai i{left:-10%;top:50%;width:120%;height:3px;background:linear-gradient(90deg,transparent,#fff 45%,#ffe3a0 55%,transparent);box-shadow:0 0 16px 4px rgba(255,240,200,.7);--an:czSl;--du:.5s}
+@keyframes czSl{0%{opacity:0;transform:rotate(-24deg) scaleX(0)}30%{opacity:1}100%{opacity:0;transform:rotate(-24deg) scaleX(1)}}
+.acc.neko i{top:-30px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6b0,#ffcc33 45%,#a86400);box-shadow:0 0 0 1.5px #7a4a00;--an:czCoin;--du:1s}
+@keyframes czCoin{0%{opacity:1;transform:translate(var(--x),0) rotateY(0)}100%{opacity:0;transform:translate(var(--x),calc(100vh + 40px)) rotateY(720deg)}}
+.acc.sakura i{top:-20px;width:12px;height:9px;margin-left:-6px;border-radius:80% 0 80% 0;background:linear-gradient(135deg,#ffe4ef,#ff9cc4);--an:czPet;--du:1.2s}
+@keyframes czPet{0%{opacity:1;transform:translate(var(--x),0) rotate(0)}100%{opacity:0;transform:translate(calc(var(--x) - 80px),85vh) rotate(var(--a))}}
+.acc.lobby i{display:none}
+@media (prefers-reduced-motion:reduce){#czDoor{display:none}html.czRev *{animation:none!important}}

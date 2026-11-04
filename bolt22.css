@@ -3,7 +3,7 @@
 /* v22.2 big-win stamp: clean centred logo (old landscape art was cropped on phones) */
 #czAtari{background:radial-gradient(ellipse at 50% 42%,#7a1410 0,#3a0608 45%,#0a0204 85%)!important}
 #czAtari .ab{background:radial-gradient(circle at 50% 42%,rgba(255,190,80,.35),transparent 60%)!important}
-#czAtari .ai,#czAtari .ai[style]{background:url(assets/lobby/atari_p.webp?v=227) 50% 40%/min(96vw,96vh*0.6,820px) auto no-repeat!important;-webkit-mask:none!important;mask:none!important}
+#czAtari .ai,#czAtari .ai[style]{background:url(assets/lobby/atari_p.webp?v=228) 50% 40%/min(96vw,96vh*0.6,820px) auto no-repeat!important;-webkit-mask:none!important;mask:none!important}
 #czAtari .afr{display:none!important}
 #czAtari .atx{left:0!important;right:0!important;top:auto!important;bottom:calc(14% + env(safe-area-inset-bottom,0px))!important;text-align:center!important;display:flex;flex-direction:column;align-items:center}
 #czAtari .atx b{font-family:"Noto Serif TC","TCDisp",serif!important;font-weight:900!important;font-style:normal!important;letter-spacing:.08em;color:transparent!important;background:linear-gradient(#fff8d8 10%,#ffd65a 45%,#c8861c 70%,#fff0b0 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:0!important;filter:drop-shadow(0 3px 0 #5a1a00) drop-shadow(0 0 14px rgba(255,180,60,.8));text-shadow:none!important;font-size:clamp(44px,14vw,96px)!important}
