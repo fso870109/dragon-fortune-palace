@@ -1,3 +1,9 @@
 #czHero .czpose{position:absolute;inset:-3% -3% 0;background:center 8%/cover no-repeat;opacity:0;transition:opacity .6s ease;pointer-events:none;will-change:opacity}
 #czHero .czpose.on{opacity:1}
 @media(prefers-reduced-motion:reduce){#czHero .czpose{transition:opacity .2s linear}}
+/* v22.2 seamless banner→reel frame: hero runs behind the cabinet top, cabinet art starts at the frame */
+#czHero{-webkit-mask-image:none!important;mask-image:none!important}
+#machine .inner.sm22{-webkit-mask-image:linear-gradient(transparent calc(var(--bt22) - 1px),#000 calc(var(--bt22) - 1px));mask-image:linear-gradient(transparent calc(var(--bt22) - 1px),#000 calc(var(--bt22) - 1px))}
+#czHero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(transparent,rgba(10,3,10,.35));pointer-events:none;z-index:2}
+#czHero{overflow:visible!important;clip-path:inset(0 0 -40px 0)}#czHero .czhi,#czHero .czpose{bottom:-40px!important}#czHero::after{bottom:-40px}
+#machine .inner.sm22::before{content:"";position:absolute;left:0;right:0;top:calc(var(--bt22) - 1px);height:3px;z-index:4;pointer-events:none;background:linear-gradient(90deg,#6b4a16,#f6d88a 20%,#fff2c4 50%,#f6d88a 80%,#6b4a16);box-shadow:0 1px 3px rgba(0,0,0,.6)}
