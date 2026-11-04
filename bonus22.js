@@ -35,7 +35,7 @@ function art(){if(SPR.done)return;SPR.done=1;const S=128;['gold','mini','minor',
  html body #hsBox .hsG>i.on.mini{background-image:url(${SPR.mini})!important}#hsBox .hsG>i.on.minor{background-image:url(${SPR.minor})!important}#hsBox .hsG>i.on.major{background-image:url(${SPR.major})!important}#hsBox .hsG>i.on.col{background-image:url(${SPR.col})!important;box-shadow:0 0 22px rgba(255,140,40,1)!important}
  html body #hsBox .hsJp div{border:10px solid transparent!important;border-image:${frameSVG('#ffd65a','#a8640c')} 14 stretch!important;background:linear-gradient(180deg,rgba(60,24,80,.9),rgba(20,6,30,.95)) padding-box!important;border-radius:0!important}
  html body #hsBox .hsJp .mini{border-image-source:${frameSVG('#6fb6ff','#1f5fb0')}!important}#hsBox .hsJp .minor{border-image-source:${frameSVG('#5be0a6','#178a5c')}!important}#hsBox .hsJp .major{border-image-source:${frameSVG('#ff7ab8','#c2185b')}!important}`;document.body.appendChild(css)}
-window.B22={SPR,art};
+window.B22={SPR,art,swoop:t=>swoop(t)};
 /* ---------- in-machine stage ---------- */
 function stageRect(){const h=$('czHero'),b=$('board');if(!h||!b)return null;const a=h.getBoundingClientRect(),c=b.getBoundingClientRect();return {l:Math.min(a.left,c.left),t:Math.max(0,a.top),r:Math.max(a.right,c.right),b:c.bottom+8}}
 function stage(){let s=$('b22Stage');if(!s){s=document.createElement('div');s.id='b22Stage';s.innerHTML='<div class="b22bg"></div><div class="b22rays"></div>';document.body.appendChild(s)}const r=stageRect();if(r)Object.assign(s.style,{left:r.l+'px',top:r.t+'px',width:(r.r-r.l)+'px',height:(r.b-r.t)+'px'});return s}
@@ -65,7 +65,7 @@ F.back=function(){const s=$('b22Stage');const w=$('czWin');
  _back&&_back()};
 window.F21=F;
 /* free games: dragon + title before the existing intro */
-const _fi=window.fsIntro;if(_fi)window.fsIntro=function(re){if(!re){swoop('免費遊戲')}return _fi.apply(this,arguments)};
+
 /* ---------- hold & spin HUD juice ---------- */
 new MutationObserver(ms=>{for(const m of ms){const t=m.target;
  if(m.type==='childList'||m.type==='characterData'){const el=t.nodeType===3?t.parentNode:t;if(el&&el.id==='hsL'){el.classList.remove('b22bump');void el.offsetWidth;el.classList.add('b22bump');const box=$('hsBox');if(box){const one=el.textContent.trim()==='1';box.classList.toggle('tense',one);if(one){tone(70,0,.25,'sine',.14);tone(70,.32,.25,'sine',.1)}}}

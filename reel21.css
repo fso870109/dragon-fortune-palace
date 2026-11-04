@@ -1,0 +1,75 @@
+/* v21.3 reel-centric layout */
+#hsMeter,#twBox{display:none!important}
+#b23Rail{position:absolute;z-index:40;display:flex;gap:4px;pointer-events:none}
+.b23m{flex:1 1 0;min-width:0;height:42px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:11px;background:linear-gradient(180deg,rgba(44,18,64,.9),rgba(18,6,32,.92));border:1px solid rgba(255,214,90,.75);box-shadow:inset 0 0 0 1px rgba(255,240,200,.15),0 0 8px rgba(255,190,60,.25)}
+.b23m>b{font:900 10px/1 "Noto Sans TC",sans-serif;color:#f4d89c;white-space:nowrap}
+.b23m.hot{border-color:#ffe680;animation:b23Hot 1s ease-in-out infinite}
+@keyframes b23Hot{50%{box-shadow:inset 0 0 0 1px rgba(255,240,200,.4),0 0 14px rgba(255,200,80,.85)}}
+.b23m.b23gain{animation:b23Gain .7s cubic-bezier(.2,1.6,.4,1)}
+@keyframes b23Gain{0%{filter:brightness(1)}25%{filter:brightness(2.2);scale:1.12}55%{scale:.96}100%{filter:none;scale:1}}
+.b23m .dots,.b23m .tray{display:flex;gap:2px}
+.b23m .dots i{width:8px;height:8px;border-radius:50%;background:#2a1440;border:1px solid rgba(255,214,90,.45)}
+.b23m .dots i.on{background:radial-gradient(circle at 35% 30%,#fffbe6,#ffd65a 45%,#a8640c);border-color:#fff3c4;box-shadow:0 0 5px #ffd65a}
+.b23m u{display:block;width:80%;height:3px;border-radius:2px;background:rgba(255,255,255,.15);overflow:hidden;text-decoration:none}.b23m u s{display:block;height:100%;width:0;background:linear-gradient(90deg,#c98a1c,#fff6cf);transition:width .4s;text-decoration:none}
+.b23m .tray{padding:2px 3px;border-radius:7px;background:rgba(0,0,0,.35);border:1px solid rgba(255,214,90,.35)}
+.b23m .tray i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.08)}
+.b23m .tray i.on{background:radial-gradient(circle at 35% 30%,#fff,#fff3d6 40%,#c8a060);box-shadow:0 0 5px #fff3c4;animation:b23Drop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes b23Drop{0%{translate:0 -10px;opacity:0}100%{translate:0 0;opacity:1}}
+.b23m.tw .vx{width:20px;height:20px;border-radius:50%;background:conic-gradient(#ffd65a calc(var(--p)*360deg),rgba(255,255,255,.12) 0);display:grid;place-items:center}
+.b23m.tw .vx i{width:13px;height:13px;border-radius:50%;background:repeating-conic-gradient(#3a1a52 0 30deg,#7a4a9a 30deg 60deg);animation:b23Spin calc(2.4s - var(--p)*1.8s) linear infinite;scale:calc(.7 + var(--p)*.4)}
+@keyframes b23Spin{to{rotate:360deg}}
+.b23m.tw em{font:900 10px/1 "Noto Sans TC",sans-serif;font-style:normal;color:#ffe680;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.b23m.tw.hot .vx{box-shadow:0 0 10px #ffd65a;animation:b23Crack .6s steps(2) infinite}
+@keyframes b23Crack{50%{filter:brightness(1.6) drop-shadow(0 0 4px #fff)}}
+.b23m.wh svg{width:24px;height:24px}.b23m.wh path{fill:#2a1440;stroke:#ffd65a;stroke-width:.6;transition:fill .3s}.b23m.wh path.on{fill:#ffd65a}.b23m.wh path.on:nth-child(3n){fill:#3fc69a}.b23m.wh path.on:nth-child(4n){fill:#ff6fae}.b23m.wh circle{fill:#5a3200;stroke:#ffd65a;stroke-width:.8}
+.b23m.mx .med{position:relative;width:22px;height:22px;border-radius:50%;background:conic-gradient(#ffd65a calc(var(--c)*120deg),rgba(255,255,255,.12) 0);display:grid;place-items:center}
+.b23m.mx .med i{position:absolute;inset:3px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fffbe6,#ffd65a 45%,#a8640c)}
+.b23m.mx .med span{position:relative;font:900 10px/1 "Noto Sans TC",sans-serif;color:#4a2200}
+/* tokens emitted from reel cells */
+.b23tok{position:fixed;z-index:9993;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 35% 30%,#fffbe6,#ffd65a 45%,#a8640c);box-shadow:0 0 16px #ffd65a;animation:b23Glow .26s ease-out both;transition:left .45s cubic-bezier(.5,0,.3,1),top .45s cubic-bezier(.5,0,.3,1),scale .45s}
+.b23tok.pl{background:radial-gradient(circle at 35% 30%,#fff,#fff3d6 40%,#c8a060)}.b23tok.wh{background:conic-gradient(#ffd65a 0 30deg,#2f8f6a 30deg 60deg,#ffd65a 60deg 90deg,#d23a7c 90deg 120deg,#ffd65a 120deg 150deg,#2f6fb0 150deg 180deg,#ffd65a 180deg 210deg,#2f8f6a 210deg 240deg,#ffd65a 240deg 270deg,#d23a7c 270deg 300deg,#ffd65a 300deg 330deg,#2f6fb0 330deg)}
+.b23tok.crack{scale:1.35;filter:brightness(1.8)}.b23tok.go{scale:.45}
+@keyframes b23Glow{0%{scale:0;opacity:0}100%{scale:1;opacity:1}}
+/* sticky charged orbs on the reels */
+#b23Sticky{position:absolute;z-index:5;pointer-events:none}
+#b23Sticky i{position:absolute;width:20%;height:33.333%;background:center/auto 86% no-repeat;filter:drop-shadow(0 0 6px rgba(255,200,90,.9));animation:b23Charge 1.4s ease-in-out infinite}
+#b23Sticky i.new{animation:b23New .9s cubic-bezier(.2,1.5,.4,1) both,b23Charge 1.4s .9s ease-in-out infinite}
+@keyframes b23Charge{50%{filter:drop-shadow(0 0 12px rgba(255,220,120,1)) brightness(1.15)}}
+@keyframes b23New{0%{scale:0;filter:brightness(3)}35%{scale:1.3;filter:brightness(2)}55%{scale:.9}100%{scale:1}}
+#b23Sticky.lock i{animation:b23New .5s both}
+/* scatter lamps on top of the reel frame */
+#b23Lamps{position:absolute;z-index:8;display:flex;gap:6px;translate:-50% 0;pointer-events:none}
+#b23Lamps i{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#5a3a6a,#1a0a24);border:1.5px solid #ffd65a;box-shadow:0 0 4px rgba(0,0,0,.6)}
+#b23Lamps i.on{background:radial-gradient(circle at 35% 30%,#fff0f8,#ff7ab8 45%,#c2185b);box-shadow:0 0 10px #ff7ab8,0 0 18px rgba(255,120,200,.7);animation:b23Lamp .4s cubic-bezier(.2,1.8,.4,1)}
+#b23Lamps.full i{animation:b23LampF .3s ease-in-out 4}
+@keyframes b23Lamp{0%{scale:.4}60%{scale:1.4}100%{scale:1}}@keyframes b23LampF{50%{scale:1.3;filter:brightness(1.6)}}
+#board .reel.b23tease{box-shadow:inset 0 0 0 2px #ffd65a,0 0 16px rgba(255,200,80,.9);animation:b23Tz .5s ease-in-out infinite}
+@keyframes b23Tz{50%{box-shadow:inset 0 0 0 2px #fff3c4,0 0 26px rgba(255,220,120,1)}}
+#board .reel.b23sc{animation:b23Sc .6s ease-out}@keyframes b23Sc{30%{filter:brightness(1.6)}}
+/* hold & spin on the reels */
+#board.b23lock .cell{filter:brightness(.16) saturate(.4)!important;transition:filter .45s}
+body:has(#hsBox.b23) #czHero .czhi{filter:brightness(.4) saturate(.8)!important;transition:filter .5s}
+body:has(#hsBox.b23) #b23Rail,body:has(#hsBox.b23) #mxBadge{opacity:.25}
+#hsBox.b23{position:fixed!important;inset:0!important;background:none!important;display:block!important;pointer-events:none!important;animation:none!important}
+#hsBox.b23 .hsIn{position:static!important;width:auto!important;padding:0!important;background:none!important;box-shadow:none!important;border:0!important;transform:none!important}
+#hsBox.b23 .hsIn>h2{position:fixed;left:var(--bl);width:var(--bw);top:calc(var(--hb) - 112px);margin:0;text-align:center;font-size:clamp(24px,7.5vw,30px)!important}
+#hsBox.b23 .hsJp{position:fixed;left:var(--bl);width:var(--bw);top:calc(var(--hb) - 64px);margin:0!important;box-sizing:border-box;padding:0 4px}
+#hsBox.b23 .hsG{position:fixed;left:var(--bl);top:var(--bt);width:var(--bw);height:var(--bh);grid-template-rows:repeat(3,minmax(0,1fr));gap:2px!important;box-sizing:border-box;padding:2px}
+#hsBox.b23 .hsG>i{aspect-ratio:auto!important;background-size:auto 92%!important;background-position:center!important;border-radius:0!important;box-shadow:none!important}
+#hsBox.b23 .hsG>i.on{border-radius:0!important;box-shadow:none!important;filter:drop-shadow(0 0 8px rgba(255,200,90,.75))}
+#hsBox.b23 .hsF{position:fixed;left:var(--bl);width:var(--bw);top:calc(var(--bt) + var(--bh) + 4px);margin:0!important;box-sizing:border-box;padding:0 4px}
+#hsBox.b23 .hsF>span{padding:5px 8px!important}
+#hsBox.b23 .hsTip{display:none}
+#hsBox.b23 .hsEnd{position:fixed;left:calc(var(--bl) + var(--bw)/2);top:calc(var(--bt) + var(--bh)/2);translate:-50% -50%;width:min(300px,calc(var(--bw) - 20px));box-sizing:border-box;pointer-events:auto;z-index:4;margin:0!important;background:linear-gradient(180deg,rgba(60,24,80,.96),rgba(20,6,30,.97))!important;border:2px solid #ffd65a!important;box-shadow:0 0 30px rgba(255,190,60,.7)!important}
+#hsBox.b23.out{animation:f21Out .45s ease-in forwards!important}
+/* wheel / plinko / vortex play above the reels (reels stay visible) */
+.fxOv.b23fx{position:fixed!important;inset:auto!important;z-index:9989!important;background:radial-gradient(circle at 50% 50%,rgba(10,4,20,.55),rgba(10,4,20,.25))!important;border-radius:14px;padding:0!important;display:flex;align-items:center;justify-content:center;overflow:visible}
+.fxOv.b23fx .fxIn{background:linear-gradient(180deg,rgba(44,18,64,.82),rgba(18,6,32,.86))!important;width:min(392px,100%)!important;max-height:none!important;overflow:visible!important;transform-origin:50% 50%}
+body.b23hero #czHero .czhi{filter:brightness(.35)!important;transition:filter .4s}
+body.b23hero #b23Rail,body.b23hero #mxBadge{opacity:.2}
+.b22title.b23t{top:auto}
+/* free games: same reels, tinted frame/background */
+body.b23fs #czHero .czhi{filter:hue-rotate(-28deg) saturate(1.35) brightness(1.05)}
+body.b23fs #board{box-shadow:0 0 0 2px #ff9ad5,0 0 24px rgba(255,120,200,.65)}
+@media (prefers-reduced-motion:reduce){.b23m.hot,.b23m.b23gain,.b23m.tw .vx i,#b23Sticky i,#b23Lamps i.on,#board .reel.b23tease{animation:none!important}}
+#machine{position:relative}
