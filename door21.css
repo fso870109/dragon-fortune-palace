@@ -1,15 +1,15 @@
 /* v22.8 palace-door transition (vector only, transform/opacity) */
-html.czIn::before{content:'';position:fixed;inset:0;z-index:2147483000;background:url(assets/lobby/door_l.webp?v=230) right center/auto 100% no-repeat,url(assets/lobby/door_r.webp?v=230) left center/auto 100% no-repeat,#5a0d12;background-position:calc(50% - 25vw) center,calc(50% + 25vw) center}
+html.czIn::before{content:'';position:fixed;inset:0;z-index:2147483000;background:url(assets/lobby/door_l.webp?v=231) right center/auto 100% no-repeat,url(assets/lobby/door_r.webp?v=231) left center/auto 100% no-repeat,#5a0d12;background-position:calc(50% - 25vw) center,calc(50% + 25vw) center}
 html.czDoorOn #czLoad{opacity:0!important;transition:none!important}
 html.l21enter body,html.l21leave body{animation:none!important}
 #l21Zoom{display:none!important}
-@font-face{font-family:"TCDisp";src:url(assets/fonts/tcdisp.woff2?v=230) format("woff2");font-weight:900;font-display:block}
+@font-face{font-family:"TCDisp";src:url(assets/fonts/tcdisp.woff2?v=231) format("woff2");font-weight:900;font-display:block}
 #czDoor{position:fixed;inset:0;z-index:2147483001;pointer-events:none;overflow:hidden;perspective:1100px;perspective-origin:50% 45%;background:transparent}
 #czDoor.skip{pointer-events:auto}
 #czDoor .d{position:absolute;top:0;bottom:0;width:50%;will-change:transform;backface-visibility:hidden;
  background-repeat:no-repeat;background-size:auto 100%}
-#czDoor .l{left:0;background-image:url(assets/lobby/door_l.webp?v=230);background-position:right center;transform-origin:0 50%;transform:translateX(-104%) rotateY(32deg)}
-#czDoor .r{right:0;background-image:url(assets/lobby/door_r.webp?v=230);background-position:left center;transform-origin:100% 50%;transform:translateX(104%) rotateY(-32deg)}
+#czDoor .l{left:0;background-image:url(assets/lobby/door_l.webp?v=231);background-position:right center;transform-origin:0 50%;transform:translateX(-104%) rotateY(32deg)}
+#czDoor .r{right:0;background-image:url(assets/lobby/door_r.webp?v=231);background-position:left center;transform-origin:100% 50%;transform:translateX(104%) rotateY(-32deg)}
 #czDoor .d::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0) 40%);opacity:.0;transition:opacity .62s}
 #czDoor .r::after{background:linear-gradient(-90deg,rgba(0,0,0,.55),rgba(0,0,0,0) 40%)}
 #czDoor .l::before,#czDoor .r::before{content:'';position:absolute;top:0;bottom:0;width:14px;z-index:1}
@@ -34,7 +34,7 @@ html.l21enter body,html.l21leave body{animation:none!important}
 #czDoor.opn .gap{animation:czGap 1s ease-out .1s both}
 @keyframes czGap{0%{opacity:.9;transform:scaleX(.03)}35%{opacity:1;transform:scaleX(.6)}100%{opacity:0;transform:scaleX(1.2)}}
 #czDoor .plq{position:absolute;left:50%;top:max(14px,4.5vh);width:min(80vw,380px);aspect-ratio:1168/592;transform:translateX(-50%) translateY(-130%);opacity:0;
- background:url(assets/lobby/plaque.webp?v=230) center/100% 100% no-repeat;filter:drop-shadow(0 8px 14px rgba(0,0,0,.75));transition:transform .5s cubic-bezier(.2,.9,.3,1.1),opacity .3s}
+ background:url(assets/lobby/plaque.webp?v=231) center/100% 100% no-repeat;filter:drop-shadow(0 8px 14px rgba(0,0,0,.75));transition:transform .5s cubic-bezier(.2,.9,.3,1.1),opacity .3s}
 #czDoor .plq b{position:absolute;left:0;right:0;top:57%;transform:translateY(-50%);text-align:center;font:900 min(13vw,62px)/1 "TCDisp","Noto Serif TC",serif;letter-spacing:.06em;
  background:linear-gradient(#fff6d2 10%,#f4cd6a 45%,#b47a1e 60%,#ffe39a 85%);-webkit-background-clip:text;background-clip:text;color:transparent;
  filter:drop-shadow(0 2px 0 #3a1a00) drop-shadow(0 0 6px rgba(255,200,90,.45))}
@@ -53,15 +53,16 @@ html.czRev .card{animation:czRise .5s cubic-bezier(.2,.9,.3,1.1) both;animation-
 @keyframes czDrop{0%{opacity:0;translate:0 -46px}70%{opacity:1}100%{opacity:1;translate:0 0}}
 @keyframes czRise{0%{opacity:0;translate:0 34px}100%{opacity:1;translate:0 0}}
 /* themed accents */
-#czDoor .acc i{position:absolute;left:50%;top:42%;display:block;opacity:0;will-change:transform,opacity}
+#czDoor .acc i{position:absolute;left:50%;top:42%;display:none;opacity:0;will-change:transform,opacity}#czDoor.opn .acc i{display:block}
 #czDoor.opn .acc i{animation:var(--an) var(--du,.9s) cubic-bezier(.15,.7,.3,1) var(--dl,0s) both}
 .acc.matsuri i{width:7px;height:7px;margin:-3.5px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);--an:czFw}
 @keyframes czFw{0%{opacity:1;transform:rotate(var(--a)) translateX(0) scale(1.2)}80%{opacity:1}100%{opacity:0;transform:rotate(var(--a)) translateX(var(--d)) translateY(30px) scale(.4)}}
 .acc.samurai i{left:-10%;top:50%;width:120%;height:3px;background:linear-gradient(90deg,transparent,#fff 45%,#ffe3a0 55%,transparent);box-shadow:0 0 16px 4px rgba(255,240,200,.7);--an:czSl;--du:.5s}
 @keyframes czSl{0%{opacity:0;transform:rotate(-24deg) scaleX(0)}30%{opacity:1}100%{opacity:0;transform:rotate(-24deg) scaleX(1)}}
-.acc.neko i{top:-30px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6b0,#ffcc33 45%,#a86400);box-shadow:0 0 0 1.5px #7a4a00;--an:czCoin;--du:1s}
-@keyframes czCoin{0%{opacity:1;transform:translate(var(--x),0) rotateY(0)}100%{opacity:0;transform:translate(var(--x),calc(100vh + 40px)) rotateY(720deg)}}
-.acc.sakura i{top:-20px;width:12px;height:9px;margin-left:-6px;border-radius:80% 0 80% 0;background:linear-gradient(135deg,#ffe4ef,#ff9cc4);--an:czPet;--du:1.2s}
-@keyframes czPet{0%{opacity:1;transform:translate(var(--x),0) rotate(0)}100%{opacity:0;transform:translate(calc(var(--x) - 80px),85vh) rotate(var(--a))}}
+.acc.neko i{width:18px;height:18px;margin-left:-9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6b0,#ffcc33 45%,#a86400);box-shadow:0 0 0 1.5px #7a4a00;--an:czCoin;--du:1s}
+@keyframes czCoin{0%{opacity:1;transform:translate(0,0) rotateY(0)}100%{opacity:0;transform:translate(var(--x),calc(100vh + 160px)) rotateY(720deg)}}
+.acc.sakura i{width:12px;height:9px;margin-left:-6px;border-radius:80% 0 80% 0;background:linear-gradient(135deg,#ffe4ef,#ff9cc4);--an:czPet;--du:1.2s}
+@keyframes czPet{0%{opacity:0;transform:translate(0,0) rotate(0)}8%{opacity:1;}100%{opacity:0;transform:translate(calc(var(--x) - 60px),95vh) rotate(var(--a))}}
+@keyframes czPetOld{0%{opacity:1;transform:translate(var(--x),0) rotate(0)}100%{opacity:0;transform:translate(calc(var(--x) - 80px),85vh) rotate(var(--a))}}
 .acc.lobby i{display:none}
 @media (prefers-reduced-motion:reduce){#czDoor{display:none}html.czRev *{animation:none!important}}

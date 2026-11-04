@@ -7,7 +7,7 @@ requestAnimationFrame(()=>{d.classList.add('on');const i=d.querySelector('.gb i'
 (function(){
 const MS=[['matsuri','夏祭花火'],['samurai','天下布武'],['neko','招財大作戰'],['sakura','櫻花斬']];
 const ART=[['p_idle','待機',s=>s.spins>=1,'玩 1 次'],['p_anticip','蓄勢',s=>s.spins>=30,'玩 30 次'],['p_victory','勝利',s=>(s.win||0)>=1,'贏 1 次'],['p_special','絕技',s=>s.spins>=100,'玩 100 次'],['p_bonus','BONUS',s=>s.fs>=1,'觸發免費遊戲'],['p_bigwin','大獎',s=>(s.big||0)>=1,'贏 10 倍以上']];
-const V='?v=230',K='cz_gal';
+const V='?v=231',K='cz_gal';
 const load=()=>{try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}};const save=g=>localStorage.setItem(K,JSON.stringify(g));
 const st=(g,id)=>g[id]||(g[id]={spins:0,fs:0});
 function count(){const g=load();let n=0;MS.forEach(([id])=>ART.forEach(a=>{if(a[2](st(g,id)))n++}));return n}
