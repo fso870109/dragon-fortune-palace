@@ -1,7 +1,7 @@
 /* v22.8 palace-door transition */
 (function(){const H=document.documentElement,RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TH=(location.pathname.match(/(matsuri|samurai|neko|sakura)\.html/)||[])[1]||'lobby';
-let D=null,done=null;['door_l','door_r','plaque'].forEach(n=>{const i=new Image();i.src='assets/lobby/'+n+'.webp?v=235'});
+let D=null,done=null;['door_l','door_r','plaque'].forEach(n=>{const i=new Image();i.src='assets/lobby/'+n+'.webp?v=236'});
 function build(cls){if(D)return D;D=document.createElement('div');D.id='czDoor';D.setAttribute('aria-hidden','true');
  let du='';for(let i=0;i<26;i++)du+=`<i style="left:${Math.random()*100}%;--s:${2+Math.random()*4}px;--t:${1.6+Math.random()*1.6}s;--dl:${-Math.random()*2}s;--x:${(Math.random()-.5)*60}px"></i>`;
  D.innerHTML='<div class="gap"></div><div class="d l"></div><div class="d r"></div><div class="shine"></div><div class="dust">'+du+'</div><div class="plq"><b>龍運金殿</b></div><div class="acc '+TH+'"></div>';
