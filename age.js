@@ -24,7 +24,7 @@ var css='html.agOn body{visibility:hidden}html.agOn #ageGate{visibility:visible}
 '#ageGate .agNo{display:none}#ageGate.no .agYes{display:none}#ageGate.no .agNo{display:block}';
 var st=document.createElement('style');st.textContent=css;(document.head||H).appendChild(st);
 function build(){if(document.getElementById('ageGate'))return;var d=document.createElement('dialog');d.id='ageGate';d.setAttribute('role','dialog');d.setAttribute('aria-modal','true');d.setAttribute('aria-label','年齡確認');
-d.innerHTML='<div class="agC"><img src="assets/lobby/logo22.webp?v=2481" alt="龍運金殿"><div class="ag18">18+</div>'+
+d.innerHTML='<div class="agC"><img src="assets/lobby/logo22.webp?v=249" alt="龍運金殿"><div class="ag18">18+</div>'+
 '<div class="agYes"><h2>年齡確認</h2><p>本遊戲內容含模擬賭博，僅適合 <b>18 歲以上</b>玩家。</p>'+
 '<span class="agN">僅供娛樂・虛擬籌碼・無真實金錢</span>'+
 '<p>遊戲中的籌碼皆為虛擬點數，無法儲值、兌換現金或任何獎品。在本遊戲中的表現，不代表在真實賭博中會獲勝。</p>'+
