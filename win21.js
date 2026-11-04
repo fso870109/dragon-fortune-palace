@@ -3,7 +3,7 @@
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,$=i=>document.getElementById(i);
 const tone=(...a)=>window.AV&&AV.tone(...a);
 /* ---------- particle engine (one canvas, additive, sprite-based, capped) ---------- */
-const CAP=220,DPR=Math.min(1.25,devicePixelRatio||1);let cv,cx,W,H,P=[],rays=null,run=false;
+const CAP=innerWidth<620?110:220,DPR=Math.min(innerWidth<620?1:1.25,devicePixelRatio||1);let cv,cx,W,H,P=[],rays=null,run=false;
 function spr(sz,fn){const c=document.createElement('canvas');c.width=c.height=sz;fn(c.getContext('2d'),sz);return c}
 const S={
  glow:spr(64,(x,s)=>{const g=x.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);g.addColorStop(0,'rgba(255,255,240,1)');g.addColorStop(.25,'rgba(255,220,120,.85)');g.addColorStop(1,'rgba(255,150,30,0)');x.fillStyle=g;x.fillRect(0,0,s,s)}),

@@ -3,9 +3,26 @@
 /* v22.2 big-win stamp: clean centred logo (old landscape art was cropped on phones) */
 #czAtari{background:radial-gradient(ellipse at 50% 42%,#7a1410 0,#3a0608 45%,#0a0204 85%)!important}
 #czAtari .ab{background:radial-gradient(circle at 50% 42%,rgba(255,190,80,.35),transparent 60%)!important}
-#czAtari .ai,#czAtari .ai[style]{background:url(assets/lobby/atari_p.webp?v=225) 50% 40%/min(96vw,96vh*0.6,820px) auto no-repeat!important;-webkit-mask:none!important;mask:none!important}
+#czAtari .ai,#czAtari .ai[style]{background:url(assets/lobby/atari_p.webp?v=226) 50% 40%/min(96vw,96vh*0.6,820px) auto no-repeat!important;-webkit-mask:none!important;mask:none!important}
 #czAtari .afr{display:none!important}
 #czAtari .atx{left:0!important;right:0!important;top:auto!important;bottom:calc(14% + env(safe-area-inset-bottom,0px))!important;text-align:center!important;display:flex;flex-direction:column;align-items:center}
 #czAtari .atx b{font-family:"Noto Serif TC","TCDisp",serif!important;font-weight:900!important;font-style:normal!important;letter-spacing:.08em;color:transparent!important;background:linear-gradient(#fff8d8 10%,#ffd65a 45%,#c8861c 70%,#fff0b0 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:0!important;filter:drop-shadow(0 3px 0 #5a1a00) drop-shadow(0 0 14px rgba(255,180,60,.8));text-shadow:none!important;font-size:clamp(44px,14vw,96px)!important}
 #czAtari .atx i{font-family:"Noto Serif TC",serif!important;letter-spacing:.12em;margin-top:10px}
 @media (max-aspect-ratio:1/1){#bw .czframe{display:none!important}}
+/* v22.6 perf: transform/opacity-only beats, pause hidden layers under overlays, softer flash, smooth stamp->result handoff */
+@keyframes w21Beat{40%{scale:1.08}}
+@keyframes l21Br{50%{scale:1.04}}
+@keyframes bw16{0%{transform:scale(1.5);opacity:.2}30%{opacity:1}100%{transform:none;opacity:1}}
+@keyframes atF{0%{opacity:.4}100%{opacity:0}}
+#czAtari.on.out{opacity:0;transition:opacity .26s ease}
+body:has(#bw.show) #czHero *,body:has(#bw.show) #machine *,body:has(#bw.show) .czbar *,body:has(#czAtari.on) #czHero *,body:has(#czAtari.on) #machine *,body:has(#czAtari.on) .czbar *{animation-play-state:paused!important}
+body:has(#bw.show) #jAmb,body:has(#bw.show) #jRays,body:has(#bw.show) #bolt22,body:has(#czAtari.on) #jAmb,body:has(#czAtari.on) #bolt22{visibility:hidden}
+/* v22.6 control row: PUSH exactly centred, −/+ symmetric and centred on PUSH, AUTO in its own right-hand slot */
+.czbar .controls{display:grid!important;grid-template-columns:1fr auto auto auto 1fr!important;align-items:center!important;justify-items:center;column-gap:clamp(12px,4.6vw,22px)!important;gap:0 clamp(12px,4.6vw,22px)!important}
+.czbar .controls>#minus{grid-column:2;grid-row:1}
+.czbar .controls>#spinBtn{grid-column:3;grid-row:1}
+.czbar .controls>#plus{grid-column:4;grid-row:1}
+.czbar .controls>#czAuto{grid-column:5;grid-row:1;justify-self:start;margin-left:clamp(4px,2vw,10px)!important}
+.czbar .controls>*:not(#minus):not(#spinBtn):not(#plus):not(#czAuto){grid-row:1}
+.czbar .controls #minus,.czbar .controls #plus,.czbar .controls #czAuto{margin-top:0!important;margin-bottom:0!important;align-self:center!important;translate:none;top:auto!important;position:relative!important}
+.czbar .controls #minus,.czbar .controls #plus{box-shadow:0 0 0 2px #000,0 0 0 4px var(--gold2,#d9a441),0 2px 6px 2px rgba(0,0,0,.55)!important}

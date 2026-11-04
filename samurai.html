@@ -98,7 +98,7 @@ body[data-skin="obsidian"]{--acc:#ff6a1a;--acc2:#ffb000;--acc3:#ff2a00;--chrome1
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#020207}
 body{min-height:100vh;font-family:"Noto Sans TC","Noto Sans JP","PingFang TC","Microsoft JhengHei",sans-serif;color:#fff;background:#020207;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;padding:max(6px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));-webkit-tap-highlight-color:transparent}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/key.webp?v=225) center top/auto max(100%,1024px) no-repeat,#020207;opacity:.9}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url(assets/key.webp?v=226) center top/auto max(100%,1024px) no-repeat,#020207;opacity:.9}
 body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 30%,rgba(0,0,0,.75) 85%),radial-gradient(ellipse at 50% 0%,rgba(var(--glow),.22),transparent 55%)}
 h1{position:relative;margin:2px 0 0;font:900 italic clamp(22px,5.2vw,34px)/1.05 "Arial Black","Noto Sans TC",sans-serif;letter-spacing:2px;transform:skewX(-10deg);color:#fff;background:linear-gradient(180deg,#fff 0%,#fff 42%,var(--acc2) 52%,#ff7a00 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:1px rgba(0,0,0,.4);filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 10px rgba(var(--glow),.7))}
 h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);letter-spacing:1px}
@@ -124,7 +124,7 @@ h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);lette
 .lcd .idle b{font:900 italic clamp(22px,5vw,34px)/1 "Arial Black",sans-serif;transform:skewX(-12deg);letter-spacing:1px;background:linear-gradient(#fff,#fff 45%,var(--acc2) 55%,#ff6a00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 8px rgba(var(--glow),.8))}
 .lcd .idle span{font-size:11px;letter-spacing:4px;color:#9fb0d6}
 .lcd .stage{position:absolute;inset:0;z-index:4;pointer-events:none}
-.lcd .ci{position:absolute;inset:0;background:url(assets/samurai/cutin.webp?v=225) 20% 30%/cover;transform:translateX(-105%) skewX(-12deg);opacity:0;will-change:transform,opacity}
+.lcd .ci{position:absolute;inset:0;background:url(assets/samurai/cutin.webp?v=226) 20% 30%/cover;transform:translateX(-105%) skewX(-12deg);opacity:0;will-change:transform,opacity}
 .lcd.reach .ci{animation:ciIn .45s cubic-bezier(.2,1.4,.4,1) forwards}
 @keyframes ciIn{0%{transform:translateX(-105%) skewX(-12deg);opacity:1}100%{transform:translateX(0) skewX(0);opacity:1}}
 .lcd .speed{position:absolute;inset:-20%;background:repeating-conic-gradient(from 0deg at 30% 50%,rgba(255,255,255,.0) 0 3deg,rgba(255,255,255,.35) 3deg 3.6deg,rgba(255,255,255,0) 3.6deg 9deg);opacity:0;will-change:transform,opacity}
@@ -138,7 +138,7 @@ h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);lette
 .kitai.on{opacity:1}
 .kitai i{width:14px;height:14px;border-radius:50%;background:var(--k);box-shadow:0 0 8px var(--k)}
 .kitai.rainbow i{background:conic-gradient(red,orange,yellow,lime,cyan,blue,magenta,red)}
-.lcd .seven{position:absolute;inset:0;z-index:8;background:url(assets/samurai/bigbonus.webp?v=225) center/cover;opacity:0;transform:scale(1.4);will-change:transform,opacity}
+.lcd .seven{position:absolute;inset:0;z-index:8;background:url(assets/samurai/bigbonus.webp?v=226) center/cover;opacity:0;transform:scale(1.4);will-change:transform,opacity}
 .lcd.bonus .seven{animation:sevenIn .5s cubic-bezier(.2,1.3,.4,1) forwards}
 @keyframes sevenIn{to{opacity:1;transform:scale(1)}}
 .lcd .navi{position:absolute;left:50%;top:8px;transform:translateX(-50%);z-index:6;font:700 12px sans-serif;letter-spacing:2px;color:#fff;background:linear-gradient(90deg,transparent,rgba(var(--glow),.7),transparent);padding:2px 40px;white-space:nowrap}
@@ -214,7 +214,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .bw{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#000;cursor:pointer;overflow:hidden;contain:strict}
 .bw.show{display:flex;animation:bwIn .25s ease-out}
 @keyframes bwIn{from{opacity:0}}
-.bw .art{position:absolute;inset:0;background:url(assets/samurai/bigbonus.webp?v=225) center/cover;opacity:.55;transform:scale(1.15);animation:artZoom 6s ease-out forwards;will-change:transform}
+.bw .art{position:absolute;inset:0;background:url(assets/samurai/bigbonus.webp?v=226) center/cover;opacity:.55;transform:scale(1.15);animation:artZoom 6s ease-out forwards;will-change:transform}
 @keyframes artZoom{to{transform:scale(1)}}
 .bw .rays{display:none;position:absolute;left:50%;top:45%;width:150vmax;height:150vmax;margin:-75vmax 0 0 -75vmax;background:repeating-conic-gradient(rgba(var(--glow),.28) 0 6deg,transparent 6deg 15deg);border-radius:50%;animation:rot 10s linear infinite;will-change:transform;opacity:.8}
 .bw .vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.35) 20%,rgba(0,0,0,.9) 85%)}
@@ -286,7 +286,7 @@ body.fs-mode .lcd .scr{background:radial-gradient(ellipse at 50% 120%,rgba(176,5
 @media (max-width:340px){h1 .jp{display:none}.lcd{height:80px}.spin{width:76px;height:76px}.row2 button{font-size:9.5px}}
 @media (min-width:381px) and (max-width:480px) and (min-height:760px){.lcd{height:120px}.spin{width:100px;height:100px}}
 /* ===== v15 夜色戀曲♡ art direction ===== */
-@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff2?v=225) format("woff2");font-display:swap}
+@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff2?v=226) format("woff2");font-display:swap}
 :root{--acc:#ff4fa3;--acc2:#ffd27a;--acc3:#ff8fc8;--glow:255,79,163;--gold1:#fff0c2;--gold2:#d9a441;--gold3:#7a5418;--hero-h:clamp(430px,62vh,620px);--hero-top:-4vh;--hero-space:clamp(230px,37vh,320px);--tint:transparent}
 body[data-skin="neon"]{--acc:#6fa8ff;--acc3:#a8c8ff;--glow:111,168,255;--tint:rgba(40,70,200,.28)}
 body[data-skin="jade"]{--acc:#ff9cc8;--acc3:#ffd0e4;--glow:255,156,200;--tint:rgba(255,150,200,.22)}
@@ -295,9 +295,9 @@ body[data-skin="royal"]{--acc:#c07cff;--acc3:#e2c2ff;--glow:192,124,255;--tint:r
 body[data-skin="obsidian"]{--acc:#ff8a4a;--acc3:#ffc49a;--glow:255,138,74;--tint:rgba(255,120,40,.26)}
 html{background:#0a0614}
 body{background:transparent;font-family:"Noto Sans TC","Noto Sans CJK TC",sans-serif}
-body::before{content:"";position:fixed;inset:-30px;z-index:-3;background:url(assets/key_bg.webp?v=225) center 20%/cover no-repeat;opacity:1}
+body::before{content:"";position:fixed;inset:-30px;z-index:-3;background:url(assets/key_bg.webp?v=226) center 20%/cover no-repeat;opacity:1}
 body::after{background:radial-gradient(ellipse at 50% 30%,transparent 35%,rgba(5,2,12,.55) 75%),radial-gradient(circle at 12% 70%,rgba(var(--glow),.18),transparent 22%),radial-gradient(circle at 88% 65%,rgba(255,210,122,.14),transparent 20%);z-index:-1}
-.hero{position:absolute;left:50%;top:var(--hero-top);height:var(--hero-h);aspect-ratio:16/9;transform:translateX(-50%);z-index:-2;background:url(assets/key.webp?v=225) center top/100% 100% no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(#000 70%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent) intersect,linear-gradient(#000 70%,transparent);pointer-events:none}
+.hero{position:absolute;left:50%;top:var(--hero-top);height:var(--hero-h);aspect-ratio:16/9;transform:translateX(-50%);z-index:-2;background:url(assets/key.webp?v=226) center top/100% 100% no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(#000 70%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent) intersect,linear-gradient(#000 70%,transparent);pointer-events:none}
 .hero::after{content:"";position:absolute;inset:0;background:var(--tint);mix-blend-mode:color}
 .bokeh{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 8% 22%,rgba(255,150,200,.35) 0 6px,transparent 7px),radial-gradient(circle at 15% 48%,rgba(255,210,140,.3) 0 4px,transparent 5px),radial-gradient(circle at 90% 18%,rgba(255,150,200,.3) 0 8px,transparent 9px),radial-gradient(circle at 85% 42%,rgba(255,220,160,.28) 0 5px,transparent 6px),radial-gradient(circle at 5% 80%,rgba(255,120,190,.25) 0 10px,transparent 11px),radial-gradient(circle at 95% 78%,rgba(255,200,140,.22) 0 9px,transparent 10px)}
 /* logo */
@@ -319,7 +319,7 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 .lcd{position:absolute;left:-10px;right:-10px;bottom:calc(100% + 12px);height:calc(var(--hero-space) - 30px);margin:0;background:none;box-shadow:none;border-radius:14px;contain:layout paint style;pointer-events:none}
 .lcd .scr,.lcd .grid,.lcd .scan,.lcd .gloss,.lcd .idle{display:none}
 .lcd .navi{top:auto;bottom:4px;opacity:0}
-.lcd .ci{background-image:url(assets/samurai/cutin.webp?v=225);border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 24px rgba(var(--glow),.8)}
+.lcd .ci{background-image:url(assets/samurai/cutin.webp?v=226);border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 24px rgba(var(--glow),.8)}
 .lcd .seven{border-radius:14px;box-shadow:0 0 0 2px var(--gold2),0 0 30px rgba(var(--glow),.9)}
 .lcd .speed{border-radius:14px}
 .lcd.reach .speed,.lcd.bonus .speed{opacity:.35}
@@ -361,7 +361,7 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 .badges div small{display:block;font:700 11px sans-serif;letter-spacing:2px;color:var(--gold1);margin-top:3px}
 .badges div::before{content:"♛";display:block;font-size:14px;color:var(--gold2);margin-bottom:2px;font-style:normal}
 /* big win overlay */
-.bw .art{background-image:url(assets/samurai/bigbonus.webp?v=225);opacity:.75}
+.bw .art{background-image:url(assets/samurai/bigbonus.webp?v=226);opacity:.75}
 .bw .vig{background:radial-gradient(ellipse at 50% 55%,rgba(40,0,30,.25) 20%,rgba(10,0,10,.85) 85%)}
 .bw .tier{color:#fff;text-shadow:0 4px 0 #d6307e,0 8px 0 #5a0a30,0 0 30px rgba(255,100,180,.95)}
 .bw.mega .tier{color:#ffe9b0;text-shadow:0 4px 0 #c07a10,0 8px 0 #4a2a00,0 0 30px rgba(255,200,100,.95)}
@@ -386,12 +386,12 @@ h1.logo{left:8px;top:22px;font-size:22px;transform:rotate(-5deg)}h1.logo .tag{fo
 :root{--W:min(100vw,calc((100vh - 64px) * 1620 / 971));--bar:64px}
 html,body{margin:0;padding:0!important;overflow-x:hidden}
 body{background:#050208!important}
-body::before{background:url(assets/samurai/bg.webp?v=225) center/cover no-repeat!important;inset:0!important;opacity:1!important}
+body::before{background:url(assets/samurai/bg.webp?v=226) center/cover no-repeat!important;inset:0!important;opacity:1!important}
 body::after{display:none!important}
 .hero,.bokeh,h1.logo,.flav,.badges,.lights,.led,.kbd,.machine::before,.machine::after,.board::after,.info .box small,.lcd .fsc~.scr{display:none!important}
 .wrap{margin:0!important;display:flex;justify-content:center;align-items:flex-start;min-height:100vh}
 .machine{width:var(--W)!important;max-width:none!important;margin:0!important;padding:0 0 var(--bar)!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}
-.inner{position:relative!important;width:var(--W);aspect-ratio:1620/971;padding:0!important;background:url(assets/samurai/base.webp?v=225) 0 0/100% 100% no-repeat!important;container-type:inline-size;border-radius:0!important}
+.inner{position:relative!important;width:var(--W);aspect-ratio:1620/971;padding:0!important;background:url(assets/samurai/base.webp?v=226) 0 0/100% 100% no-repeat!important;container-type:inline-size;border-radius:0!important}
 .board{position:absolute!important;left:16.790%;top:38.929%;width:66.790%;height:42.842%;padding:0!important;gap:0!important;display:block!important;background:none!important;box-shadow:none!important;border-radius:0!important;margin:0!important;overflow:visible!important}
 .reel{position:absolute!important;top:0;height:100%!important;--c:8.5597cqw!important;background:#0b0810!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
 .reel:nth-child(1){left:0;width:19.686%}.reel:nth-child(2){left:20.240%;width:19.224%}.reel:nth-child(3){left:40.018%;width:19.501%}.reel:nth-child(4){left:60.074%;width:19.316%}.reel:nth-child(5){left:79.945%;width:20.055%}
@@ -412,7 +412,7 @@ body::after{display:none!important}
 .msg::after{content:" ♡";color:#ff8fc8;margin-left:.3em}
 /* cut-in stage over the heroine */
 .lcd{position:absolute!important;left:18%!important;right:auto!important;top:1.5%!important;bottom:auto!important;width:64%!important;height:36%!important;margin:0!important;z-index:6;pointer-events:none}
-.lcd .ci{background:url(assets/samurai/cutin.webp?v=225) 50% 35%/cover!important;border-radius:1cqw!important;box-shadow:0 0 0 .2cqw #d9a441,0 0 2cqw rgba(255,79,163,.9)!important}
+.lcd .ci{background:url(assets/samurai/cutin.webp?v=226) 50% 35%/cover!important;border-radius:1cqw!important;box-shadow:0 0 0 .2cqw #d9a441,0 0 2cqw rgba(255,79,163,.9)!important}
 @keyframes ci16{0%{transform:scale(1.6);opacity:0;filter:brightness(3) saturate(.4)}35%{opacity:1;filter:brightness(1.8) saturate(1.2)}100%{transform:scale(1);opacity:1;filter:none}}
 .lcd.reach .ci{animation:ci16 .5s cubic-bezier(.2,1.2,.4,1) forwards!important}
 .lcd .seven{border-radius:1cqw!important;background-position:50% 30%!important}
@@ -443,7 +443,7 @@ dialog .days li.today,dialog .days li.on{border-color:#ff7ac8!important;box-shad
 dialog button.claim,dialog .claim{background:linear-gradient(#ffb3dc,#ff4fa3 55%,#a3105a)!important;color:#fff!important;border:1px solid #ffd27a!important;box-shadow:0 0 14px rgba(255,79,163,.7)!important;text-shadow:0 1px 0 #6a0030}
 dialog button{border-color:#d9a441!important}
 .bw{background:radial-gradient(ellipse at center,rgba(60,10,40,.55),rgba(10,2,8,.92))!important}
-.bw .art{background:url(assets/samurai/bigbonus.webp?v=225) 50% 30%/cover!important}
+.bw .art{background:url(assets/samurai/bigbonus.webp?v=226) 50% 30%/cover!important}
 @keyframes bw16{0%{transform:scale(1.5);filter:brightness(3)}30%{filter:brightness(1.6)}100%{transform:scale(1);filter:none}}
 .bw.on .art,.bw.show .art{animation:bw16 .7s ease-out both}
 /* mobile: art full width, controls below */
@@ -473,8 +473,8 @@ body.menu16 .row2{bottom:auto!important;top:auto!important;left:50%!important;ri
 .info .box:nth-child(3){left:85.432%!important;top:85.067%!important;width:6.790%!important;height:8.033%!important;right:auto!important;bottom:auto!important}
 .msg{left:34.568%!important;top:83.934%!important;width:30.864%!important;height:9.990%!important;right:auto!important;bottom:auto!important}
 .lcd{left:23.457%!important;top:0.000%!important;width:53.086%!important;height:38.105%!important;right:auto!important;bottom:auto!important}
-:root{--cz-acc:#ff3b2f;--ar:1620/971;--czbg:url(assets/samurai/bg.webp?v=225)}
-</style><link rel="stylesheet" href="casino.css?v=225"><link rel="stylesheet" href="gallery.css?v=225"><style>:root{--czbgp:url(assets/samurai/bgp.webp?v=225);--czth:#1a0505}
+:root{--cz-acc:#ff3b2f;--ar:1620/971;--czbg:url(assets/samurai/bg.webp?v=226)}
+</style><link rel="stylesheet" href="casino.css?v=226"><link rel="stylesheet" href="gallery.css?v=226"><style>:root{--czbgp:url(assets/samurai/bgp.webp?v=226);--czth:#1a0505}
 /* v18.9 msg band */.machine .inner .msg{left:33.827%!important;top:83.625%!important;width:32.716%!important;height:10.196%!important;right:auto!important;bottom:auto!important;background:none!important;border:0!important;box-shadow:none!important}</style></head><body><div id="czLoad"><div class="czlt">天下布武</div><div class="czlbar"><i></i></div><div class="czls">LOADING…</div><div class="cznote2">僅供娛樂・虛擬籌碼・無真實金錢</div></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <radialGradient id="gCherry" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#ff8a9a"/><stop offset=".45" stop-color="#e0102f"/><stop offset="1" stop-color="#6d0012"/></radialGradient>
@@ -500,8 +500,8 @@ body.menu16 .row2{bottom:auto!important;top:auto!important;left:50%!important;ri
 <div class="hero" aria-hidden="true"></div><div class="bokeh" aria-hidden="true"></div><h1 class="logo"><span class="sr-only">龍運金殿 </span>龍運<span class="l2">金殿<span class="heart">♡</span></span><span class="tag">〜喜歡，停不下來〜</span><span class="zh">龍運金殿・娛樂老虎機</span></h1><div class="flav" aria-hidden="true">與你共度<br>這段時光<br>最喜歡你了…♡</div>
 <div class="sub">僅供娛樂・虛擬籌碼・無真實金錢</div>
 <div class="wrap"><div class="led" id="ledL" aria-hidden="true"></div>
-<div class="machine" id="machine"><div class="badges" aria-hidden="true"><div>BONUS<small>FREE SPINS</small></div><div>×2<small>CHANCE</small></div></div><div class="inner">
-<div class="lcd" id="lcd" aria-hidden="true"><div class="fsc" id="fsc">FREE SPIN <b id="fsN">0</b>/<b id="fsT">10</b>・×2</div><div class="scr"></div><div class="grid"></div>
+<div class="machine" id="machine"><div class="badges" aria-hidden="true"><div>BONUS<small>免費遊戲</small></div><div>×2<small>機會</small></div></div><div class="inner">
+<div class="lcd" id="lcd" aria-hidden="true"><div class="fsc" id="fsc">免費遊戲 <b id="fsN">0</b>/<b id="fsT">10</b>・×2</div><div class="scr"></div><div class="grid"></div>
 <div class="idle" id="lcdIdle"><b>FRUITS FEVER</b><span>搭載超熱演出・無需目押</span></div>
 <div class="stage"><div class="speed"></div><div class="ci"></div></div>
 <div class="navi" id="lcdNavi">PUSH 按鈕開始遊戲</div>
@@ -530,7 +530,7 @@ body.menu16 .row2{bottom:auto!important;top:auto!important;left:50%!important;ri
 </div></div><div class="led" id="ledR" aria-hidden="true"></div></div>
 <canvas id="fx" aria-hidden="true"></canvas>
 <div class="bw" id="bw" role="dialog" aria-modal="true" aria-labelledby="bwTier" aria-live="assertive"><div class="art"></div><div class="rays"></div><div class="vig"></div><div class="fire"></div>
-<div class="jp" id="bwJp">超熱!!</div><div class="tier" id="bwTier" data-t="BIG BONUS">BIG BONUS</div><div class="lbl">大獎・贏得虛擬籌碼</div><div class="amt" id="bwAmt">0</div>
+<div class="jp" id="bwJp">超熱!!</div><div class="tier" id="bwTier" data-t="超級獎勵">超級獎勵</div><div class="lbl">大獎・贏得虛擬籌碼</div><div class="amt" id="bwAmt">0</div>
 <button class="collect" id="bwBtn">收下籌碼</button><div class="hint">點擊任意處可跳過</div></div>
 <dialog id="daily" aria-labelledby="dTitle"><h2 id="dTitle">每日簽到</h2>
 <div class="dsub" id="dSub">連續簽到 7 天，第 7 天送 1000 虛擬籌碼！</div>
@@ -583,7 +583,7 @@ const SYM=[
 {id:'red7',name:'赤紅7',pay:[149, 593, 2468]},
 {id:'hero',name:'武將',pay:[296, 1481, 7900]},
 {id:'wild',name:'WILD 武將',pay:[493, 2468, 14813]},
-{id:'scatter',name:'BONUS 天下人（SCATTER）',pay:[0, 0, 0]}];
+{id:'scatter',name:'免費遊戲 天下人',pay:[0, 0, 0]}];
 const WI=10,SI=11,NR=5,NL=20,SCATP={3:6,4:25,5:125},FS_N=10,FS_M=3;
 // per-reel symbol weights (RTP 94.12% exact incl. free spins + jackpot; see math/final.py)
 const REELW=[[24,20,16,12,9,7,5,4,3,2,0,3],[24,20,16,12,9,7,5,4,3,2,1,3],[24,20,16,12,9,7,5,4,3,2,2,3],[24,20,16,12,9,7,5,4,3,2,1,3],[24,20,16,12,9,7,5,4,3,2,0,3]];
@@ -609,10 +609,10 @@ let sound=localStorage.getItem('fs_sound')!=='0',spinning=false,grid=[[10,3,0],[
 const reels=[...document.querySelectorAll('.reel')];
 const icon=(id,sz='')=>`<img class="sym" src="assets/sym_${id}.webp" alt="" draggable="false" decoding="sync" data-f="${id}" ${sz}>`;
 const IMGF=new Set();document.addEventListener('error',e=>{const t=e.target;if(t&&t.tagName==='IMG'&&t.dataset.f){IMGF.add(t.dataset.f);t.outerHTML=`<svg class="sym" aria-hidden="true"><use href="#s-${t.dataset.f}"/></svg>`}},true);
-const IMGS=["scroll", "fan", "horse", "kamon", "kamon2", "kabuto", "kabuto2", "castle", "katana", "blue7", "blue72", "red7", "hero", "wild", "wild2", "scatter"].flatMap(id=>[id,id+'_b']).map(id=>{const i=new Image();i.src=`assets/samurai/t_${id}.webp?v=225`;i.decode&&i.decode().catch(()=>IMGF.add(id));return i});
+const IMGS=["scroll", "fan", "horse", "kamon", "kamon2", "kabuto", "kabuto2", "castle", "katana", "blue7", "blue72", "red7", "hero", "wild", "wild2", "scatter"].flatMap(id=>[id,id+'_b']).map(id=>{const i=new Image();i.src=`assets/samurai/t_${id}.webp?v=226`;i.decode&&i.decode().catch(()=>IMGF.add(id));return i});
 const icon2=icon;
 const VAR={};
-function symHTML(id,sz=''){if(!IMGF.has(id)){let v=id;const IQ=window.__IQ;if(IQ&&IQ.length&&!sz)v=IQ.shift();else if(VAR[id]&&!sz)v=VAR[id][Math.random()*VAR[id].length|0];return `<img class="sym" src="assets/samurai/t_${v}.webp?v=225" alt="" draggable="false" decoding="sync" data-f="${id}" data-v="${v}" ${sz}>`}if(id==='heroine'&&!IMGF.has(id)&&!sz){const k=Math.random()*3|0;return `<img class="sym" src="assets/heroine${k}.webp" alt="" draggable="false" data-f="heroine">`}return IMGF.has(id)?`<svg class="sym" ${sz} aria-hidden="true"><use href="#s-${id}"/></svg>`:icon(id,sz)}
+function symHTML(id,sz=''){if(!IMGF.has(id)){let v=id;const IQ=window.__IQ;if(IQ&&IQ.length&&!sz)v=IQ.shift();else if(VAR[id]&&!sz)v=VAR[id][Math.random()*VAR[id].length|0];return `<img class="sym" src="assets/samurai/t_${v}.webp?v=226" alt="" draggable="false" decoding="sync" data-f="${id}" data-v="${v}" ${sz}>`}if(id==='heroine'&&!IMGF.has(id)&&!sz){const k=Math.random()*3|0;return `<img class="sym" src="assets/heroine${k}.webp" alt="" draggable="false" data-f="heroine">`}return IMGF.has(id)?`<svg class="sym" ${sz} aria-hidden="true"><use href="#s-${id}"/></svg>`:icon(id,sz)}
 function cellHTML(i){const s=SYM[i];return `<div class="cell" data-s="${s.id}" aria-label="${s.name}">${symHTML(s.id)}</div>`}
 function boardLabel(){const rows=['上排','中排','下排'].map((n,r)=>n+'：'+grid.map(c=>SYM[c[r]].name).join('、'));$('board').setAttribute('aria-label','轉輪結果。'+rows.join('；'))}
 function render(){boardLabel();reels.forEach((r,c)=>{const st=r.firstElementChild;st.style.transition='none';st.style.transform='translateY(0)';st.innerHTML=grid[c].map(cellHTML).join('')})}
@@ -756,19 +756,19 @@ function fsNext(){if(!FS)return;clearTimeout(fsTimer);
 if(FS.left>0){fsTimer=setTimeout(function go(){if(bwState||spinning||window.__hold){fsTimer=setTimeout(go,400);return}spin()},1300);return}
 const f=FS;fsTimer=setTimeout(function end(){if(bwState||spinning||window.__hold){fsTimer=setTimeout(end,400);return}
 FS=null;fsUI();['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=false);
-$('msg').textContent=`免費旋轉結束！共贏得 ${fmt(f.won)} 虛擬籌碼`;if(f.won>0)bigWin(f.won,f.bet*NL,{tier:['mega','BONUS 終了','FREE SPINS 合計'],lbl:'免費旋轉 總獎金'});else lcdReset()},1300)}
+$('msg').textContent=`免費旋轉結束！共贏得 ${fmt(f.won)} 虛擬籌碼`;if(f.won>0)bigWin(f.won,f.bet*NL,{tier:['mega','免費遊戲結束','免費遊戲 合計'],lbl:'免費旋轉 總獎金'});else lcdReset()},1300)}
 function fsIntro(re){const bw=$('bw');fsUI();lcdBonusFS();
-bw.className='bw show epic fsi';$('bwTier').textContent='BIG BONUS';$('bwJp').textContent=re?'謝謝你…♡ +10次':'超熱!! 一直在等你';
+bw.className='bw show epic fsi';$('bwTier').textContent='超級獎勵';$('bwJp').textContent=re?'謝謝你…♡ +10次':'超熱!! 一直在等你';
 bw.querySelector('.lbl').textContent=re?'免費旋轉追加':'免費旋轉（獎金 ×2）';$('bwAmt').textContent=(re?'+':'')+FS_N+' 回';$('bwBtn').textContent='開始！';
 bwState={won:0,done:true,fin:true,intro:true};sfx.win(3);lastFlash=0;flash(.45);fountain();megaBorder(2.5);bw.classList.add('ready');setTimeout(()=>$('bwBtn').focus(),50);
 if(window.__fsAuto)setTimeout(bwClose,window.__fsAuto)}
 // ===== particle FX (canvas) =====
 const fx=$('fx'),cx=fx.getContext('2d');let P=[],fxRun=false,DPR=1;
-function fxSize(){DPR=Math.min(2,window.devicePixelRatio||1);fx.width=innerWidth*DPR;fx.height=innerHeight*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
+function fxSize(){DPR=Math.min(1.25,window.devicePixelRatio||1);fx.width=innerWidth*DPR;fx.height=innerHeight*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
 fxSize();{let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(fxSize,120)},{passive:true})}
 document.addEventListener('visibilitychange',()=>{const h=document.hidden;document.body.classList.toggle('bg-paused',h);if(h){P.length=0;megaT=0;clearInterval(rainT);if(ac&&ac.state==='running')ac.suspend()}else if(ac&&ac.state==='suspended')ac.resume()});
 const CONF=['#ff4fa3','#ffb3d6','#ffd27a','#ffffff','#ff7ec0','#e8b4ff'];
-const PQ=[];const PMAX=matchMedia('(max-width:620px)').matches?160:240;function addP(o){if(PQ.length<600)PQ.push(o)}
+const PQ=[];const PMAX=matchMedia('(max-width:620px)').matches?90:200;function addP(o){if(PQ.length<600)PQ.push(o)}
 function spr(r,draw){const c=document.createElement('canvas');c.width=c.height=r*2;draw(c.getContext('2d'),r);return c}
 const SP_COIN=spr(32,(g,r)=>{const gr=g.createLinearGradient(0,0,r*2,r*2);gr.addColorStop(0,'#fff6b0');gr.addColorStop(.4,'#ffcc33');gr.addColorStop(1,'#a86400');g.fillStyle=gr;g.beginPath();g.arc(r,r,r-2,0,7);g.fill();g.lineWidth=2.5;g.strokeStyle='#7a4a00';g.stroke();g.strokeStyle='rgba(122,74,0,.6)';g.beginPath();g.arc(r,r,r*.62,0,7);g.stroke();g.fillStyle='rgba(255,255,255,.7)';g.beginPath();g.ellipse(r*.65,r*.55,r*.25,r*.14,-.6,0,7);g.fill()});
 const SP_GLOW=spr(32,(g,r)=>{const gr=g.createRadialGradient(r,r,0,r,r,r);gr.addColorStop(0,'rgba(255,255,240,1)');gr.addColorStop(.25,'rgba(255,210,80,.9)');gr.addColorStop(1,'rgba(255,120,0,0)');g.fillStyle=gr;g.fillRect(0,0,r*2,r*2)});
@@ -844,7 +844,7 @@ const pts=cellPts().slice(0,10);const per=Math.max(1,Math.floor((RM?10:WIN_PBUDG
 let bwState=null;
 const NF=new Intl.NumberFormat('zh-TW');const fmt=n=>NF.format(n);
 function bigWin(won,total,o={}){const bw=$('bw'),x=won/total;$('bwBtn').textContent='收下籌碼';bw.querySelector('.lbl').textContent=o.lbl||'大獎・贏得虛擬籌碼';
-const tier=o.tier||(x>=80?['epic','EPIC WIN','超激熱!! 巨額大獎']:x>=30?['mega','MEGA WIN','超熱!! 超級大獎']:['big','BIG WIN','超熱!! 大獎']);
+const tier=o.tier||(x>=80?['epic','傳說大獎','超熱烈!! 巨額大獎']:x>=30?['mega','超級大獎','超熱!! 超級大獎']:['big','大獎','超熱!! 大獎']);
 bw.className='bw show '+tier[0];$('bwTier').textContent=tier[1];$('bwTier').dataset.t=tier[1];$('bwJp').textContent=tier[2];$('bwAmt').textContent='0';
 $('machine').classList.remove('shake');
 const dur=RM?600:Math.min(6500,2200+x*45),t0=performance.now();let last=0,lastTick=0,lastTxt=0,bumpT=0;const aEl=$('bwAmt');
@@ -1029,24 +1029,24 @@ function lcdLater(f,ms){lcdT.push(setTimeout(f,ms))}
 function slam(t,k,sub){slamEl.style.setProperty('--k',k||'#ff2240');slamEl.innerHTML=t+(sub?`<small>${sub}</small>`:'');slamEl.classList.remove('go');requestAnimationFrame(()=>requestAnimationFrame(()=>slamEl.classList.add('go')))}
 function setKitai(i){const k=$('kitai');if(i<0){k.classList.remove('on');return}k.style.setProperty('--k',KITAI[i][0]);$('kitaiT').textContent=KITAI[i][1];k.classList.toggle('rainbow',i===4);k.classList.add('on')}
 function lcdReset(){lcdClear();lcd.classList.remove('reach','bonus');slamEl.classList.remove('go');setKitai(-1);$('lcdIdle').style.opacity=1;$('lcdNavi').textContent='PUSH';$('spinBtn').classList.remove('push')}
-function lcdSpin(x,tease,bon){lcdReset();$('lcdIdle').style.opacity=.25;$('lcdNavi').textContent='回転中…';
+function lcdSpin(x,tease,bon){lcdReset();$('lcdIdle').style.opacity=.25;$('lcdNavi').textContent='旋轉中…';
 let k=-1;const r=Math.random();
 if(bon||x>=80)k=r<.5?4:3;else if(x>=10)k=r<.6?3:2;else if(x>=3)k=r<.7?2:1;else if(x>0)k=r<.5?1:(r<.8?0:-1);else if(tease)k=r<.6?1:2;else k=r<.22?0:(r<.27?1:-1);
 lcd._k=k;if(k>=0)lcdLater(()=>{setKitai(k);if(k>=2)slam(k>=3?'超熱!!':'機會!','#ff4fa3')},350)}
 function lcdReach(){lcd.classList.add('reach');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='大獎機會演出中';$('spinBtn').classList.add('push');const k=Math.max(1,lcd._k|0);slam('機會!!','#ff4fa3','心跳…♡');sfx.blip&&sfx.blip(true)}
-function lcdBonusFS(){lcdClear();lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='FREE SPINS 突入!!';slam('BIG BONUS','#ff4fa3','FREE SPINS ×10');lcdLater(()=>lcd.classList.remove('bonus'),2200)}
+function lcdBonusFS(){lcdClear();lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='免費遊戲 開始!!';slam('超級獎勵','#ff4fa3','免費遊戲 ×10');lcdLater(()=>lcd.classList.remove('bonus'),2200)}
 function lcdResult(x,bon){$('spinBtn').classList.remove('push');lcd.classList.remove('reach');if(bon)return;
-if(x>=10){lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='BONUS 確定!!';slam('7',x>=80?'#fff':'#ffc400',x>=30?'SUPER BIG':'BIG WIN');lcdLater(()=>slam(x>=80?'大獎!!':'BIG WIN','#ff2240','確定'),550)}
-else if(x>=2){slam('REG','#19e08a','總押注 ×'+(Math.round(x*10)/10));$('lcdNavi').textContent='REGULAR 中獎';lcdLater(lcdReset,2600)}
-else if(x>0){slam('WIN','#3a8bff','×'+(Math.round(x*10)/10));$('lcdNavi').textContent='小役 中獎';lcdLater(lcdReset,1800)}
+if(x>=10){lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='獎勵確定!!';slam('7',x>=80?'#fff':'#ffc400',x>=30?'超級大獎':'大獎');lcdLater(()=>slam(x>=80?'大獎!!':'大獎','#ff2240','確定'),550)}
+else if(x>=2){slam('小獎','#19e08a','總押注 ×'+(Math.round(x*10)/10));$('lcdNavi').textContent='REGULAR 中獎';lcdLater(lcdReset,2600)}
+else if(x>0){slam('贏','#3a8bff','×'+(Math.round(x*10)/10));$('lcdNavi').textContent='小役 中獎';lcdLater(lcdReset,1800)}
 else{lcdLater(lcdReset,700)}}
 {const mk=(el,a)=>{a.forEach((li,i)=>{const e=document.createElement('b');e.className='pl';e.dataset.l=li;e.textContent=li+1;e.style.setProperty('--lc',COLORS[li]);e.style.setProperty('--i',i);el.appendChild(e)})};mk($('ledL'),[0,1,2,3,4,5,6,7,8,9]);mk($('ledR'),[10,11,12,13,14,15,16,17,18,19])}
 fsUI();{const b=$('setBtn'),p=$('audioPop');const tg=o=>{p.hidden=!o;b.setAttribute('aria-expanded',o)};b.onclick=e=>{e.stopPropagation();sfx.click();tg(p.hidden)};document.addEventListener('click',e=>{if(!p.hidden&&!p.contains(e.target)&&e.target!==b)tg(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!p.hidden){tg(false);b.focus()}})}
 </script><script>addEventListener('load',()=>{const d=document.createElement('div');d.setAttribute('aria-hidden','1');d.style.cssText='position:fixed;left:-9999px;top:0;visibility:hidden;contain:strict;width:10px;height:10px';
-const txt='大獎機會!!心跳…♡超熱!!BIG BONUS FREE SPINS×10一直在等你'+(typeof LOVE_L!=='undefined'?LOVE_L.join(''):'')+'（第４、５輪）停不下來！0123456789';
+const txt='免費遊戲結束合計開始超級獎勵傳說彩金頭獎轉盤挑選分散大獎機會!!心跳…♡超熱!!BIG BONUS FREE SPINS×10一直在等你'+(typeof LOVE_L!=='undefined'?LOVE_L.join(''):'')+'（第４、５輪）停不下來！0123456789';
 ['"KleeSub","Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif','"Arial Black",sans-serif','"Noto Sans TC",sans-serif','sans-serif'].forEach(f=>[400,700,900].forEach(w=>['italic','normal'].forEach(st=>{const s=document.createElement('span');s.style.cssText=`font-family:${f};font-weight:${w};font-style:${st}`;s.textContent=txt;d.appendChild(s)})));document.body.appendChild(d)})
 </script><script>(()=>{const $=id=>document.getElementById(id);const mb=$('menuBtn');mb.onclick=e=>{e.stopPropagation();const o=document.body.classList.toggle('menu16');mb.setAttribute('aria-expanded',o)};
 $('max16').onclick=()=>$('maxBtn').click();document.addEventListener('click',e=>{if(document.body.classList.contains('menu16')&&!e.target.closest('#menu16')&&e.target!==mb){document.body.classList.remove('menu16');mb.setAttribute('aria-expanded',false)}});
 $('menu16').addEventListener('click',e=>{if(e.target.closest('button')&&!e.target.closest('#soundBtn')){document.body.classList.remove('menu16');mb.setAttribute('aria-expanded',false)}});
-const fit=el=>{const l=String(el.textContent).length;if(el.dataset.l!=l)el.dataset.l=l};['bal','win'].forEach(id=>{const el=$(id);fit(el);new MutationObserver(()=>fit(el)).observe(el,{childList:true,characterData:true,subtree:true})})})()</script><script>window.CZM={"id": "samurai", "name": "天下布武", "buy": 21.3, "rtp": 93.94, "buyRtp": 94.16, "fsm": 3}</script><script>CZM.who="信長";CZM.voice={"yokoku": ["…有種預感", "風向變了"], "reach": ["機會來了！斬開血路！", "再一刀！"], "hot": ["天下就在眼前！！", "超熱！"], "win": ["見事！", "高呼勝利吧！"], "lose": ["尚未結束", "準備下一場戰鬥"], "kakutei": ["天下布武、確定！！"]}</script><script src="casino.js?v=225"></script><script src="gallery.js?v=225"></script><script src="minigame.js?v=225"></script><script src="enshutsu.js?v=225"></script><script src="czaudio.js?v=225"></script><script src="czfit.js?v=225"></script><link rel="stylesheet" href="juice.css?v=225"><script src="juice.js?v=225"></script><link rel="stylesheet" href="holdspin.css?v=225"><script src="holdspin.js?v=225"></script><link rel="stylesheet" href="av.css?v=225"><script src="av.js?v=225"></script><link rel="stylesheet" href="feat.css?v=225"><script src="feat.js?v=225"></script><link rel="stylesheet" href="life21.css?v=225"><link rel="stylesheet" href="ui21.css?v=225"><script src="ui21.js?v=225"></script><link rel="stylesheet" href="win21.css?v=225"><script src="win21.js?v=225"></script><link rel="stylesheet" href="bonus22.css?v=225"><script src="bonus22.js?v=225"></script><link rel="stylesheet" href="reel21.css?v=225"><script src="reel21.js?v=225"></script><link rel="stylesheet" href="pose21.css?v=225"><script src="pose21.js?v=225"></script><link rel="stylesheet" href="bolt22.css?v=225"><script src="bolt22.js?v=225"></script>
+const fit=el=>{const l=String(el.textContent).length;if(el.dataset.l!=l)el.dataset.l=l};['bal','win'].forEach(id=>{const el=$(id);fit(el);new MutationObserver(()=>fit(el)).observe(el,{childList:true,characterData:true,subtree:true})})})()</script><script>window.CZM={"id": "samurai", "name": "天下布武", "buy": 21.3, "rtp": 93.94, "buyRtp": 94.16, "fsm": 3}</script><script>CZM.who="信長";CZM.voice={"yokoku": ["…有種預感", "風向變了"], "reach": ["機會來了！斬開血路！", "再一刀！"], "hot": ["天下就在眼前！！", "超熱！"], "win": ["見事！", "高呼勝利吧！"], "lose": ["尚未結束", "準備下一場戰鬥"], "kakutei": ["天下布武、確定！！"]}</script><script src="casino.js?v=226"></script><script src="gallery.js?v=226"></script><script src="minigame.js?v=226"></script><script src="enshutsu.js?v=226"></script><script src="czaudio.js?v=226"></script><script src="czfit.js?v=226"></script><link rel="stylesheet" href="juice.css?v=226"><script src="juice.js?v=226"></script><link rel="stylesheet" href="holdspin.css?v=226"><script src="holdspin.js?v=226"></script><link rel="stylesheet" href="av.css?v=226"><script src="av.js?v=226"></script><link rel="stylesheet" href="feat.css?v=226"><script src="feat.js?v=226"></script><link rel="stylesheet" href="life21.css?v=226"><link rel="stylesheet" href="ui21.css?v=226"><script src="ui21.js?v=226"></script><link rel="stylesheet" href="win21.css?v=226"><script src="win21.js?v=226"></script><link rel="stylesheet" href="bonus22.css?v=226"><script src="bonus22.js?v=226"></script><link rel="stylesheet" href="reel21.css?v=226"><script src="reel21.js?v=226"></script><link rel="stylesheet" href="pose21.css?v=226"><script src="pose21.js?v=226"></script><link rel="stylesheet" href="bolt22.css?v=226"><script src="bolt22.js?v=226"></script>
 </body></html>

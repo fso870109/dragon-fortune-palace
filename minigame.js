@@ -5,7 +5,7 @@ if(!window.CZM)return;
 const VAL={3:[1,1,1,2,2,2,3,3,3],4:[4,4,4,8,8,8,13,13,13],5:[20,20,20,40,40,40,65,65,65]};
 const TH={love:['戀愛禮物','選三份禮物吧♡','letter'],matsuri:['撈金魚','撈三隻金魚吧！','goldfish'],caishen:['搶紅包','選 3 個紅包！','hongbao'],
  samurai:['軍功獎賞','選三枚家紋！','kamon'],pirate:['寶箱開啟','打開三個寶箱！','chest'],neko:['福袋大作戰','選 3 個福袋喵！','bag'],sakura:['花吹雪','選三朵櫻花','sakura'],queen:['女王的珠寶盒','選三顆寶石吧','diamond'],school:['學園祭攤位抽獎','抽三張抽獎券！','star'],jungle:['遺跡寶箱','打開三個遺跡寶箱！','chest']};
-const id=CZM.id,t=TH[id]||['BONUS PICK','選三個吧','scatter'];
+const id=CZM.id,t=TH[id]||['獎勵挑選','選三個吧','scatter'];
 let pend=null;
 window.CZMG={draw(sc){const k=Math.min(sc,5),v=VAL[k].slice();for(let i=v.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[v[i],v[j]]=[v[j],v[i]]}
   const sum=v[0]+v[1]+v[2];pend={k,v,sum};return{sum}},

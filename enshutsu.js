@@ -2,7 +2,7 @@
 (function(){
 if(!window.CZM)return;
 const RMQ=matchMedia('(prefers-reduced-motion:reduce)').matches,PM=matchMedia('(max-width:620px) and (orientation:portrait)');
-const COL=[['青','#3fa0ff','期待度 ★'],['綠','#3fdc7a','期待度 ★★'],['赤','#ff3b4f','期待度 ★★★ 超熱!'],['金','#ffd24a','期待度 ★★★★ 超激熱!!'],['虹','rainbow','確定!!']];
+const COL=[['青','#3fa0ff','期待度 ★'],['綠','#3fdc7a','期待度 ★★'],['赤','#ff3b4f','期待度 ★★★ 超熱!'],['金','#ffd24a','期待度 ★★★★ 超熱烈!!'],['虹','rainbow','確定!!']];
 const V=(window.CZM.voice)||{};
 const VO={yokoku:V.yokoku||['…吶，好像要來了？','這感覺…難道！','機會來了♡','心跳加速了…'],
  reach:V.reach||['機會來了！拜託，連成線！','就差一個…！','就在這裡決勝負！'],
@@ -33,7 +33,7 @@ if(typeof _spin==='function')window.lcdSpin=function(pay,tease,bonus){_spin.appl
 if(typeof _reach==='function')window.lcdReach=function(){_reach.apply(this,arguments);if(!cur)return;
  let lv=cur.lv;const w=cur.big?[5,15,35,30,15]:[45,35,17,3,0];if(lv<0)lv=wpick(w);lv=Math.max(lv,wpick(w));cur.lv=lv;showGem(lv);
  const v=lv>=3?2:lv>=2?(Math.random()<.6?1:2):lv>=1&&Math.random()<.4?1:0;
- if(v===0){ban('大獎機會','n')}else if(v===1){ban('好運降臨','c');cutin()}else{ban(lv>=4?'全回転…確定!!':'機關發動！','g',1800);gimmick()}
+ if(v===0){ban('大獎機會','n')}else if(v===1){ban('好運降臨','c');cutin()}else{ban(lv>=4?'全轉動…確定!!':'機關發動！','g',1800);gimmick()}
  say(lv>=2?pick(VO.hot):pick(VO.reach),lv,2000)};
 if(typeof _res==='function')window.lcdResult=function(xr,bonus){_res.apply(this,arguments);
  if(xr>=3||bonus)say(pick(VO.win),cur&&cur.lv>=0?cur.lv:-1,2000);else if(cur&&cur.lv>=1&&!xr)say(pick(VO.lose),-1,1800);else if(!xr&&Math.random()<.08)say(pick(VO.lose),-1,1500);

@@ -1,6 +1,6 @@
 /* v22.2 lightning paylines: canvas overlay on #board, jagged gold/white bolts, sparks at symbol nodes, crackle (presentation only) */
 (function(){const B=document.getElementById('board'),SV=document.getElementById('lines');if(!B||!SV)return;
-const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,DPR=Math.min(2,devicePixelRatio||1);
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,DPR=Math.min(1.5,devicePixelRatio||1);
 const cv=document.createElement('canvas');cv.id='bolt22';cv.setAttribute('aria-hidden','1');B.appendChild(cv);const x=cv.getContext('2d');
 let W=0,H=0,raf=0,lines=[],t0=0,cyc=0,last=0,jag=[],sparks=[],endT=0;
 function size(){const r=B.getBoundingClientRect();W=r.width;H=r.height;cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);x.setTransform(DPR,0,0,DPR,0,0)}
