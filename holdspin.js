@@ -11,11 +11,11 @@ function draw(){let x=Math.random()*TOT;for(const[v,w]of VAL){if(x<w)return{k:'v
 const B=(f,d,t,v,f2)=>window.JUICE&&JUICE.blip(f,d,t,v,f2);
 function mUI(){const e=document.getElementById('hsMeter');if(!e)return;const p=Math.min(100,meter/M*100);e.querySelector('i').style.width=p+'%';e.querySelector('em').textContent=Math.floor(p)+'%';e.classList.toggle('hot',p>=80)}
 function mount(){const h=document.getElementById('czHero');if(!h||document.getElementById('hsMeter'))return;const d=document.createElement('div');d.id='hsMeter';d.innerHTML='<b>寶珠能量</b><span><i></i></span><em>0%</em>';d.title='每次押注累積能量，滿格必定觸發「寶珠鎖定重轉」';h.appendChild(d);mUI()}
-const _st=window.settle;
+const _st=window.settle;let PRo=null;addEventListener('load',()=>{const b=document.getElementById('board');b&&new MutationObserver(()=>{if(b.getAttribute('aria-busy')==='true')PRo=(typeof FS!=='undefined'&&FS)?null:Math.random()}).observe(b,{attributes:true,attributeFilter:['aria-busy']})});
 const QO=0.008962293385220414,KO='czHO_'+ID;let orbs=[];try{orbs=JSON.parse(localStorage.getItem(KO))||[]}catch(e){}
 const emit=(added,forced)=>{try{dispatchEvent(new CustomEvent('czhs',{detail:{orbs:orbs.slice(),added,forced,meter,M}}))}catch(e){}};
 if(_st)window.settle=function(bet,free){const r=_st.apply(this,arguments);if(!free&&!running&&!pending){meter++;let added=-1;
- if(Math.random()<QO){const freeC=[...Array(CELLS).keys()].filter(i=>!orbs.includes(i));added=freeC[Math.random()*freeC.length|0];orbs.push(added)}
+ const ro=PRo!=null?PRo:Math.random();PRo=null;if(ro<QO){const freeC=[...Array(CELLS).keys()].filter(i=>!orbs.includes(i));added=freeC[Math.random()*freeC.length|0];orbs.push(added)}
  let forced=false;if(orbs.length<START&&meter>=M){forced=true;while(orbs.length<START){const freeC=[...Array(CELLS).keys()].filter(i=>!orbs.includes(i));orbs.push(freeC[Math.random()*freeC.length|0])}}
  emit(added,forced);
  if(orbs.length>=START){window.__hsStart=orbs.slice(0,START);orbs=[];meter=0;pending=true;setTimeout(()=>run(bet),900)}
@@ -39,6 +39,6 @@ function play(bet){return new Promise(res=>{const total=bet*NL;const o=document.
   let won=T();const full=!g.includes(null);if(full){won+=GRAND;o.classList.add('full');B(523,.4,'sine',.08);B(659,.5,'sine',.07);B(784,.7,'sine',.07)}
   const W=won*total;const f=document.createElement('div');f.className='hsEnd';f.innerHTML=`<small>${full?'集滿 15 格！巨獎':'寶珠總獎金'}</small><b>${NFh.format(W)}</b><button type="button">收下</button>`;o.querySelector('.hsIn').appendChild(f);
   const done=()=>{o.classList.add('out');setTimeout(()=>o.remove(),480);res(W)};f.querySelector('button').onclick=done;setTimeout(()=>{if(o.isConnected)done()},6000)})()})}
-window.CZHS={orbs:()=>orbs.slice(),QO,emit:()=>emit(-1,false),meter:()=>meter,force:b=>run(b||((typeof BETS!=='undefined'&&typeof betIdx!=='undefined')?BETS[betIdx]:1)),P,M};
+window.CZHS={pending:()=>PRo!=null&&!running&&!pending&&((PRo<QO&&orbs.length+1>=START)||(meter+1>=M&&orbs.length<START)),orbs:()=>orbs.slice(),QO,emit:()=>emit(-1,false),meter:()=>meter,force:b=>run(b||((typeof BETS!=='undefined'&&typeof betIdx!=='undefined')?BETS[betIdx]:1)),P,M};
 if(document.readyState==='complete')mount();else addEventListener('load',()=>setTimeout(mount,300));
 })();
