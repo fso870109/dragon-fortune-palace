@@ -16,3 +16,6 @@ dialog#czGal::backdrop{background:rgba(0,0,0,.75)}
 .galbtn b{margin-left:auto;color:#ffd27a}
 
 @media(min-width:600px){#czGal .gr{grid-template-columns:repeat(6,1fr)}}
+#czGal .gi.lk{background:radial-gradient(ellipse at 50% 38%,#2a1a28 0 18%,transparent 19%),radial-gradient(ellipse at 50% 85%,#2a1a28 0 38%,transparent 39%),linear-gradient(#120810,#050205);border-color:#5a4420}
+#czGal .gi.lk i{inset:0;display:grid;place-items:center;background:none;font:800 30px/1 sans-serif;color:rgba(232,190,100,.55);text-shadow:0 0 10px rgba(0,0,0,.8)}
+#czGal .gi:not(.lk){cursor:zoom-in}
