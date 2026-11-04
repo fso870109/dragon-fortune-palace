@@ -105,7 +105,7 @@ html,body{background-color:#1a0618}
 @keyframes mq2{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (max-width:440px){.top{gap:4px}.pill{height:34px;padding:0 9px}.bal b{font-size:16px}.coin{width:17px;height:17px}.ib{width:31px!important;height:31px!important;font-size:14px!important;flex:none}.top .sp{flex:1 1 0;min-width:0}}
 @media (max-width:370px){.ib{width:29px!important;height:29px!important;font-size:13px!important}.lv{max-width:30vw;padding:0 8px}.top{gap:3px}}
-</style><link rel="stylesheet" href="gallery.css?v=256"><style id="tcd184">@font-face{font-family:"TCDisp";src:url(assets/fonts/tcdisp.woff2?v=256) format("woff2");font-weight:900;font-display:swap}
+</style><link rel="stylesheet" href="gallery.css?v=256"><link rel="stylesheet" href="mq257.css?v=257"><style id="tcd184">@font-face{font-family:"TCDisp";src:url(assets/fonts/tcdisp.woff2?v=256) format("woff2");font-weight:900;font-display:swap}
 .neon2{font-family:"TCDisp","Noto Serif TC",serif!important;font-weight:900!important;font-style:italic!important;letter-spacing:.12em!important}
 .card .t b{font:900 italic 19px/1.2 "TCDisp","Noto Serif TC",serif!important;letter-spacing:.02em;background:linear-gradient(#fff8d8,#ffd56a 55%,#d08a1a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(1px 2px 0 #3a0418)}
 </style><style>.foot .pplink{display:inline-block;margin-top:8px;padding:6px 14px;color:#ffd27a;text-decoration:underline;text-underline-offset:3px}</style></head><body>
@@ -122,7 +122,7 @@ html,body{background-color:#1a0618}
 <button class="ib" id="bBgm" aria-label="背景音樂" aria-pressed="true">🎵</button>
 </div>
 <header class="sign"><img class="l21logo l21logoT" src="assets/lobby/logo22.webp?v=256" alt="龍運金殿" width="880" height="529"></header>
-<div class="mq" aria-hidden="true"><div id="mq"></div></div><div class="czno">僅供娛樂・虛擬籌碼・無真實金錢</div>
+<div class="mqf" aria-hidden="true"><i class="mqb t"></i><i class="mqb b"></i><span class="mqc l"></span><div class="mq"><div id="mq"></div><i class="mqsh"></i></div><span class="mqc r"></span><i class="mqfl"></i><span class="mqtag">BIG WIN</span></div><div class="czno">僅供娛樂・虛擬籌碼・無真實金錢</div>
 <section class="jp" aria-label="彩金池">
 <div class="jpc g"><small>頭獎彩金</small><b id="jp2">0</b></div>
 <div class="jpc mi"><small>MINI</small><b id="jp0">0</b></div>
@@ -211,4 +211,4 @@ const go=()=>{$('load').classList.add('out');bgmStart();CZ.vib(10);setTimeout(()
 if(sessionStorage.getItem('cz_in')){$('load').remove();addEventListener('pointerdown',bgmStart,{once:true})}else $('enter').addEventListener('click',()=>sessionStorage.setItem('cz_in','1'));
 refresh();
 })();
-</script><script src="gallery.js?v=256"></script><script>document.getElementById("bGal").onclick=()=>CZGAL.open();document.getElementById("galN").textContent=CZGAL.count()+"/"+CZGAL.total</script><link rel="stylesheet" href="life21.css?v=256"><link rel="stylesheet" href="lobby21.css?v=256"><script src="lobby21.js?v=256"></script><script src="settings.js?v=256"></script><script src="hint.js?v=256"></script><script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})</script></body></html>
+</script><script src="gallery.js?v=256"></script><script src="mq257.js?v=257"></script><script>document.getElementById("bGal").onclick=()=>CZGAL.open();document.getElementById("galN").textContent=CZGAL.count()+"/"+CZGAL.total</script><link rel="stylesheet" href="life21.css?v=256"><link rel="stylesheet" href="lobby21.css?v=256"><script src="lobby21.js?v=256"></script><script src="settings.js?v=256"></script><script src="hint.js?v=256"></script><script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})</script></body></html>
