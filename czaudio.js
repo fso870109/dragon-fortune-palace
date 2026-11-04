@@ -1,7 +1,7 @@
 /* v18.3 pre-rendered BGM/SFX (play-money casino). Falls back to synth until buffers decode. */
 (function(){
-const V='?v=229',LOOP={matsuri:64,samurai:68.571429,neko:65.084739,sakura:61.935465},PRE=.3,MG=1.8,D='assets/audio/';const B={};let ld=false,src=null,want=false,cur=null;
-const NAMES=['click','blip','spin','stop','tick','reach','coin','win0','win1','win2','win3','win4','bonus','collect','chime','buy','lose'];
+const V='?v=230',LOOP={matsuri:64,samurai:68.571429,neko:65.084739,sakura:61.935465},PRE=.3,MG=1.8,D='assets/audio/';const B={};let ld=false,src=null,want=false,cur=null;
+const NAMES=['click','blip','spin','stop','tick','reach','coin','win0','win1','win2','win3','win4','bonus','collect','chime','buy','lose','door_close','door_open'];
 function ctx(){return (typeof aInit==='function'&&aInit())?ac:null}
 function dec(c,buf){return new Promise((ok,no)=>{const p=c.decodeAudioData(buf,ok,no);if(p&&p.then)p.then(ok,no)})}
 function trim(b){const d=b.getChannelData(0);let i=0;while(i<d.length&&Math.abs(d[i])<.002)i++;b.__off=Math.max(0,i-32)/b.sampleRate;return b}
