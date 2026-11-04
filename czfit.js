@@ -5,15 +5,19 @@ function safeW(el){const fr=el.closest('#czWheel,#czAtari,#bw,#czMG');let w=inne
  const f=fr&&fr.querySelector('.czframe,.afr');if(f){const r=f.getBoundingClientRect();if(r.width>0)w=Math.min(w,r.width*.78)}
  return Math.min(w,innerWidth)-28}
 function fit(el){if(!el.offsetParent&&getComputedStyle(el).position!=='fixed')return;
+ if(!el.textContent.trim()||getComputedStyle(el).visibility==='hidden')return; /* v23.9: skip empty/hidden titles (was a fit<->observer loop) */
+ const tf0=el.style.getPropertyValue('transform'),tp0=el.style.getPropertyPriority('transform');el.style.setProperty('transform','none','important'); /* v23.9: measure untransformed (entrance zoom no longer shrinks text) */
+ try{fit0(el)}finally{if(tf0)el.style.setProperty('transform',tf0,tp0);else el.style.removeProperty('transform')}}
+function fit0(el){
  el.style.fontSize='';el.style.whiteSpace='';el.style.maxWidth='';
  const max=safeW(el);el.style.maxWidth=max+'px';el.style.marginLeft='auto';el.style.marginRight='auto';
  let fs=parseFloat(getComputedStyle(el).fontSize),n=0;
  const over=()=>{const g=document.createRange();g.selectNodeContents(el);const r=g.getBoundingClientRect();const pad=Math.max(6,fs*.12);const sk=el.offsetHeight*.2;return r.width+pad*2+sk>max+28||r.left-sk/2<8||r.right+sk/2>innerWidth-8};
  if(over()&&/\s/.test(el.textContent.trim()))el.style.whiteSpace='normal';
  while(over()&&fs>14&&n++<30){fs*=.92;el.style.setProperty('font-size',fs+'px','important')}}
-function fitAll(){document.querySelectorAll(SEL).forEach(e=>{try{fit(e)}catch(_){}})}
+let MO=null;function fitAll(){document.querySelectorAll(SEL).forEach(e=>{try{fit(e)}catch(_){}});if(MO)MO.takeRecords() /* v23.9: drop self-caused style mutations */}
 let t=0;const sch=()=>{cancelAnimationFrame(t);t=requestAnimationFrame(()=>requestAnimationFrame(fitAll))};
-new MutationObserver(m=>{for(const x of m){const n=x.target.nodeType===1?x.target:x.target.parentNode;if(n&&n.closest&&n.closest('#bw,#czWheel,#czAtari,#czMG,#czEn')){sch();return}}}).observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','open','style','hidden']});
+MO=new MutationObserver(m=>{for(const x of m){const n=x.target.nodeType===1?x.target:x.target.parentNode;if(n&&n.closest&&n.closest('#bw,#czWheel,#czAtari,#czMG,#czEn')){sch();return}}});MO.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','open','style','hidden']});
 addEventListener('resize',sch);window.CZFIT=fitAll;
 })();
 /* v18.5b: fit-to-box for subtitle bar, voice bubbles, stats, buttons (shrink, never clip) */
