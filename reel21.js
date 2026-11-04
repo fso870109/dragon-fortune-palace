@@ -17,13 +17,9 @@ const cellsGrid=()=>{const rs=[...document.querySelectorAll('#board .reel')];ret
 function cellRect(i){const b=$('board').getBoundingClientRect(),c=i%5,r=i/5|0;const w=b.width/5,h=b.height/3;return {x:b.left+c*w,y:b.top+r*h,w,h,cx:b.left+(c+.5)*w,cy:b.top+(r+.5)*h}}
 /* v21.4: no meters, no token flights — hidden games stay hidden until they trigger */
 let hs={orbs:[],meter:0,M:1000};
-addEventListener('czhs',e=>{const d=e.detail;hs={orbs:d.orbs,meter:d.meter,M:d.M};stickyUI(d.added)});
+
 /* ---------- sticky charged orbs on the reels ---------- */
-let sticky;function stickyUI(added){const b=$('board');if(!b)return;const par=b.offsetParent;if(!par)return;if(!sticky){sticky=document.createElement('div');sticky.id='b23Sticky';par.appendChild(sticky)}
- Object.assign(sticky.style,{left:b.offsetLeft+'px',top:b.offsetTop+'px',width:b.offsetWidth+'px',height:b.offsetHeight+'px'});
- const S=window.B22&&B22.SPR;window.B22&&B22.art&&B22.art();
- const want=new Set(hs.orbs);[...sticky.children].forEach(c=>{if(!want.has(+c.dataset.i))c.remove()});
- hs.orbs.forEach(i=>{if(sticky.querySelector(`[data-i="${i}"]`))return;const o=document.createElement('i');o.dataset.i=i;o.style.left=(i%5*20)+'%';o.style.top=((i/5|0)*33.333)+'%';if(B22.SPR.gold)o.style.backgroundImage=`url(${B22.SPR.gold})`;if(i===added)o.classList.add('new');sticky.appendChild(o)})}
+let sticky=null;function stickyUI(){document.getElementById('b23Sticky')&&document.getElementById('b23Sticky').remove()}
 /* ---------- reel-stop anticipation: free-game scatters + pending hidden games ---------- */
 let sc=0;const reels=()=>document.querySelectorAll('#board .reel');
 const hiddenPending=()=>{try{return (window.CZF&&CZF.pending&&CZF.pending())||(window.CZHS&&CZHS.pending&&CZHS.pending())}catch(e){return false}};
