@@ -1,6 +1,6 @@
-/* 龍運金殿 service worker — v242 */
-const V='dfp-v246';
-const CORE=['./','index.html','offline.html','privacy.html','rm.js?v=247','age.js?v=247','settings.js?v=247','back.js?v=247','manifest.webmanifest','assets/logo21.webp','assets/icons/icon-192.png','assets/lobby/bg.webp?v=247'];
+/* 龍運金殿 service worker — v248 */
+const V='dfp-v248';
+const CORE=['./','index.html','offline.html','privacy.html','rm.js?v=248','age.js?v=248','settings.js?v=248','back.js?v=248','manifest.webmanifest','assets/logo21.webp','assets/lobby/logo22.webp?v=248','assets/lobby/navbar.webp?v=248','assets/lobby/medal.webp?v=248','assets/icons/icon-192.png','assets/lobby/bg.webp?v=248'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('dfp-')&&k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
