@@ -1,15 +1,15 @@
 /* v22.8 palace-door transition (vector only, transform/opacity) */
-html.czIn::before{content:'';position:fixed;inset:0;z-index:2147483000;background:url(assets/lobby/door_l.webp?v=232) right center/auto 100% no-repeat,url(assets/lobby/door_r.webp?v=232) left center/auto 100% no-repeat,#5a0d12;background-position:calc(50% - 25vw) center,calc(50% + 25vw) center}
+html.czIn::before{content:'';position:fixed;inset:0;z-index:2147483000;background:url(assets/lobby/door_l.webp?v=233) right center/auto 100% no-repeat,url(assets/lobby/door_r.webp?v=233) left center/auto 100% no-repeat,#5a0d12;background-position:calc(50% - 25vw) center,calc(50% + 25vw) center}
 html.czDoorOn #czLoad{opacity:0!important;transition:none!important}
 html.l21enter body,html.l21leave body{animation:none!important}
 #l21Zoom{display:none!important}
-@font-face{font-family:"TCDisp";src:url(assets/fonts/tcdisp.woff2?v=232) format("woff2");font-weight:900;font-display:block}
+@font-face{font-family:"TCDisp";src:url(assets/fonts/tcdisp.woff2?v=233) format("woff2");font-weight:900;font-display:block}
 #czDoor{position:fixed;inset:0;z-index:2147483001;pointer-events:none;overflow:hidden;perspective:1100px;perspective-origin:50% 45%;background:transparent}
 #czDoor.skip{pointer-events:auto}
 #czDoor .d{position:absolute;top:0;bottom:0;width:50%;will-change:transform;backface-visibility:hidden;
  background-repeat:no-repeat;background-size:auto 100%}
-#czDoor .l{left:0;background-image:url(assets/lobby/door_l.webp?v=232);background-position:right center;transform-origin:0 50%;transform:translateX(-104%) rotateY(32deg)}
-#czDoor .r{right:0;background-image:url(assets/lobby/door_r.webp?v=232);background-position:left center;transform-origin:100% 50%;transform:translateX(104%) rotateY(-32deg)}
+#czDoor .l{left:0;background-image:url(assets/lobby/door_l.webp?v=233);background-position:right center;transform-origin:0 50%;transform:translateX(-104%) rotateY(32deg)}
+#czDoor .r{right:0;background-image:url(assets/lobby/door_r.webp?v=233);background-position:left center;transform-origin:100% 50%;transform:translateX(104%) rotateY(-32deg)}
 #czDoor .d::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0) 40%);opacity:.0;transition:opacity .62s}
 #czDoor .r::after{background:linear-gradient(-90deg,rgba(0,0,0,.55),rgba(0,0,0,0) 40%)}
 #czDoor .l::before,#czDoor .r::before{content:'';position:absolute;top:0;bottom:0;width:14px;z-index:1}
@@ -34,7 +34,7 @@ html.l21enter body,html.l21leave body{animation:none!important}
 #czDoor.opn .gap{animation:czGap 1s ease-out .1s both}
 @keyframes czGap{0%{opacity:.9;transform:scaleX(.03)}35%{opacity:1;transform:scaleX(.6)}100%{opacity:0;transform:scaleX(1.2)}}
 #czDoor .plq{position:absolute;left:50%;top:max(14px,4.5vh);width:min(80vw,380px);aspect-ratio:1168/592;transform:translateX(-50%) translateY(-130%);opacity:0;
- background:url(assets/lobby/plaque.webp?v=232) center/100% 100% no-repeat;filter:drop-shadow(0 8px 14px rgba(0,0,0,.75));transition:transform .5s cubic-bezier(.2,.9,.3,1.1),opacity .3s}
+ background:url(assets/lobby/plaque.webp?v=233) center/100% 100% no-repeat;filter:drop-shadow(0 8px 14px rgba(0,0,0,.75));transition:transform .5s cubic-bezier(.2,.9,.3,1.1),opacity .3s}
 #czDoor .plq b{position:absolute;left:0;right:0;top:57%;transform:translateY(-50%);text-align:center;font:900 min(13vw,62px)/1 "TCDisp","Noto Serif TC",serif;letter-spacing:.06em;
  background:linear-gradient(#fff6d2 10%,#f4cd6a 45%,#b47a1e 60%,#ffe39a 85%);-webkit-background-clip:text;background-clip:text;color:transparent;
  filter:drop-shadow(0 2px 0 #3a1a00) drop-shadow(0 0 6px rgba(255,200,90,.45))}
