@@ -31,3 +31,8 @@ new MutationObserver(()=>{if(B.getAttribute('aria-busy')==='true'){stop();return
 new MutationObserver(()=>{if(SV.querySelector('polyline.core'))setTimeout(start,60);else stop()}).observe(SV,{childList:true});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});addEventListener('resize',()=>{if(lines.length)start()});
 window.BOLT22={start,stop};})();
+
+/* v24.4: html.czFxBw / html.czFxAt replace body:has(#bw.show)/(#czAtari.on) — :has() forced whole-document style recalcs on every overlay class change */
+(function(){const H=document.documentElement;function sync(){const bw=document.getElementById('bw'),at=document.getElementById('czAtari');const b=!!(bw&&bw.classList.contains('show')),a=!!(at&&at.classList.contains('on'));if(H.classList.contains('czFxBw')!==b)H.classList.toggle('czFxBw',b);if(H.classList.contains('czFxAt')!==a)H.classList.toggle('czFxAt',a)}
+const seen=new WeakSet(),mo=new MutationObserver(sync);function watch(){['bw','czAtari'].forEach(id=>{const e=document.getElementById(id);if(e&&!seen.has(e)){seen.add(e);mo.observe(e,{attributes:true,attributeFilter:['class']})}});sync()}
+watch();new MutationObserver(watch).observe(document.body,{childList:true})})();

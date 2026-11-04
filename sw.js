@@ -1,6 +1,6 @@
 /* 龍運金殿 service worker — v242 */
-const V='dfp-v243';
-const CORE=['./','index.html','offline.html','privacy.html','age.js?v=242','settings.js?v=242','back.js?v=242','manifest.webmanifest','assets/logo21.webp','assets/icons/icon-192.png','assets/lobby/bg.webp?v=242'];
+const V='dfp-v244';
+const CORE=['./','index.html','offline.html','privacy.html','age.js?v=244','settings.js?v=244','back.js?v=244','manifest.webmanifest','assets/logo21.webp','assets/icons/icon-192.png','assets/lobby/bg.webp?v=244'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('dfp-')&&k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{

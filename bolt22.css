@@ -15,8 +15,8 @@
 @keyframes bw16{0%{transform:scale(1.5);opacity:.2}30%{opacity:1}100%{transform:none;opacity:1}}
 @keyframes atF{0%{opacity:.4}100%{opacity:0}}
 #czAtari.on.out{opacity:0;transition:opacity .26s ease}
-body:has(#bw.show) #czHero *,body:has(#bw.show) #machine *,body:has(#bw.show) .czbar *,body:has(#czAtari.on) #czHero *,body:has(#czAtari.on) #machine *,body:has(#czAtari.on) .czbar *{animation-play-state:paused!important}
-body:has(#bw.show) #jAmb,body:has(#bw.show) #jRays,body:has(#bw.show) #bolt22,body:has(#czAtari.on) #jAmb,body:has(#czAtari.on) #bolt22{visibility:hidden}
+html.czFxBw #czHero *,html.czFxBw #machine *,html.czFxBw .czbar *,html.czFxAt #czHero *,html.czFxAt #machine *,html.czFxAt .czbar *{animation-play-state:paused!important}
+html.czFxBw #jAmb,html.czFxBw #jRays,html.czFxBw #bolt22,html.czFxAt #jAmb,html.czFxAt #bolt22{visibility:hidden}
 /* v22.6 control row: PUSH exactly centred, −/+ symmetric and centred on PUSH, AUTO in its own right-hand slot */
 .czbar .controls{display:grid!important;grid-template-columns:1fr auto auto auto 1fr!important;align-items:center!important;justify-items:center;column-gap:clamp(12px,4.6vw,22px)!important;gap:0 clamp(12px,4.6vw,22px)!important}
 .czbar .controls>#minus{grid-column:2;grid-row:1}
