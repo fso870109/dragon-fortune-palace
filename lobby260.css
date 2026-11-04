@@ -1,0 +1,25 @@
+/* v260 Style A 金殿匾額 jackpot + gallery */
+.jp{gap:10px!important}
+.jpc small,.jpc b,.galbtn{font-family:"TCDisp","Noto Serif TC",serif!important;font-weight:900!important;font-style:normal!important}
+.gold{background:linear-gradient(180deg,#fffbe6 8%,#ffe08a 38%,#f2b53a 62%,#a8650c 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.jpc b,.jpc small,.galbtn .gt,.galbtn b{background:linear-gradient(180deg,#fffbe6 8%,#ffe08a 38%,#f2b53a 62%,#a8650c 92%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;text-shadow:none!important;filter:drop-shadow(0 2px 0 #3a0306) drop-shadow(0 0 6px rgba(255,190,60,.45))}
+.jpc::after{display:none!important}
+.galbtn{position:relative;overflow:visible}
+.jpc{overflow:visible!important}.jpc::before{translate:none!important;animation:none!important;opacity:1!important}
+/* A 金殿匾額 */
+.jpc{border:0!important;border-radius:6px!important;background:linear-gradient(180deg,#8c0f18,#b3141f 30%,#6a0810 70%,#3a0306)!important;
+box-shadow:inset 0 0 0 2px #ffe7a0,inset 0 0 0 4px #b07a1e,inset 0 0 0 5px #3a1a02,inset 0 0 0 7px #d9a441,inset 0 10px 18px rgba(255,220,140,.18),inset 0 -12px 18px rgba(0,0,0,.45),0 4px 0 #5a3a08,0 8px 14px rgba(0,0,0,.6)!important}
+.jpc.g{padding:46px 20px 34px!important;margin-top:4px;background:url(assets/lobby/plaque.webp?v=256) center/100% 100% no-repeat!important;box-shadow:none!important;border-radius:0!important;background-origin:border-box}
+.jpc.g::before{content:"";position:absolute;inset:26% 8% 13%!important;background:radial-gradient(ellipse at 50% 40%,#d01e28,#8a0c14 55%,#3e0306);z-index:-1;box-shadow:inset 0 0 20px rgba(0,0,0,.7)}
+.jpc.g{isolation:isolate}
+.jpc.g small{font-size:17px!important;letter-spacing:.4em!important}
+.jpc.g b{font-size:50px!important}
+.jpc.mi small,.jpc.ma small{font-family:"Times New Roman",serif!important;letter-spacing:.25em!important;font-size:13px!important}
+.jpc.mi,.jpc.ma{padding:14px 10px 12px!important}
+.jpc.mi::before,.jpc.ma::before{content:"";position:absolute;left:50%;top:-7px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 8%,#ffe27a 18%,#e23a28 45%,#7a0610 80%);box-shadow:0 0 0 1.5px #ffd56a,0 0 8px rgba(255,180,60,.8)}
+.galbtn{border:0!important;border-radius:4px!important;padding:12px 18px 16px!important;background:linear-gradient(180deg,#f7d77a,#c8902a 18%,#8a5a12 50%,#c8902a 82%,#f7d77a)!important;box-shadow:inset 0 0 0 1px #fff3c0,inset 0 0 0 3px #6a3a06,inset 0 0 0 4px #ffe08a,0 4px 0 #4a2a04,0 7px 12px rgba(0,0,0,.6)!important;color:#3a0306!important;font-size:17px!important}
+.galbtn::before{content:"";position:absolute;inset:5px;border-radius:2px;background:linear-gradient(180deg,#7a0810,#a3121c 40%,#5a060c);z-index:0}
+.galbtn>*,.galbtn{z-index:1}.galbtn .gt,.galbtn b{position:relative;z-index:2}
+.galbtn::after{content:"";position:absolute;left:14px;right:14px;bottom:8px;height:4px;border-radius:2px;z-index:2;background:linear-gradient(90deg,#ffe08a 0 var(--gp,0%),rgba(60,10,10,.9) 0),#300;box-shadow:0 0 0 1px #a8650c,0 0 6px rgba(255,200,80,.6)}
+.galbtn::after{background:linear-gradient(90deg,#c98a22,#ffe08a var(--gp,0%),rgba(40,6,8,.95) var(--gp,0%))!important}
+@media (max-width:370px){.jpc.g b{font-size:44px!important}.jpc.g{padding:40px 16px 30px!important}}

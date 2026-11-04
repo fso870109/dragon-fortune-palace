@@ -128,7 +128,7 @@ html,body{background-color:#1a0618}
 <div class="jpc mi"><small>MINI</small><b id="jp0">0</b></div>
 <div class="jpc ma"><small>MAJOR</small><b id="jp1">0</b></div>
 </section>
-<button class="galbtn" id="bGal">🖼 角色圖鑑<b id="galN"></b></button>
+<button class="galbtn" id="bGal"><span class="gt">角色圖鑑</span><b id="galN"></b></button>
 <h2 class="sec">機台 MACHINES</h2>
 <section class="wall" id="wall"></section>
 <p class="foot"><b>僅供娛樂・虛擬籌碼・無真實金錢</b><br>本站所有籌碼皆為遊戲內虛擬點數，無法儲值、兌換、轉讓或提領，與任何真實金錢無關。<br>彩金池由所有機台每次押注的 0.8% 累積（僅限本裝置），抽中後回到底注。<br><a class="pplink" href="privacy.html">隱私權政策與使用條款</a></p>
@@ -211,4 +211,4 @@ const go=()=>{$('load').classList.add('out');bgmStart();CZ.vib(10);setTimeout(()
 if(sessionStorage.getItem('cz_in')){$('load').remove();addEventListener('pointerdown',bgmStart,{once:true})}else $('enter').addEventListener('click',()=>sessionStorage.setItem('cz_in','1'));
 refresh();
 })();
-</script><script src="gallery.js?v=256"></script><script src="mq257.js?v=258"></script><script>document.getElementById("bGal").onclick=()=>CZGAL.open();document.getElementById("galN").textContent=CZGAL.count()+"/"+CZGAL.total</script><link rel="stylesheet" href="life21.css?v=256"><link rel="stylesheet" href="lobby21.css?v=256"><script src="lobby21.js?v=256"></script><script src="settings.js?v=259"></script><script src="hint.js?v=256"></script><script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})</script></body></html>
+</script><script src="gallery.js?v=256"></script><script src="mq257.js?v=258"></script><script>document.getElementById("bGal").onclick=()=>CZGAL.open();document.getElementById("galN").textContent=CZGAL.count()+"/"+CZGAL.total;document.getElementById("bGal").style.setProperty("--gp",Math.round(CZGAL.count()/CZGAL.total*100)+"%")</script><link rel="stylesheet" href="life21.css?v=256"><link rel="stylesheet" href="lobby21.css?v=256"><link rel="stylesheet" href="lobby260.css?v=260"><script src="lobby21.js?v=256"></script><script src="settings.js?v=259"></script><script src="hint.js?v=256"></script><script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})</script></body></html>
