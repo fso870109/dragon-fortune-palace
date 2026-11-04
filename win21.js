@@ -28,7 +28,7 @@ function burst(x,y,n,spd,k){for(let i=0;i<n;i++){const a=Math.random()*6.283,v=s
 function coins(n,tier){for(let i=0;i<n;i++){const fromTop=tier>=2&&i%2;add({k:'coin',x:fromTop?Math.random()*W:W/2+(Math.random()-.5)*60,y:fromTop?-30-Math.random()*H*.5:H*.62,vx:fromTop?(Math.random()-.5)*40:(Math.random()-.5)*520,vy:fromTop?80+Math.random()*120:-(520+Math.random()*420),g:fromTop?380:900,drag:.995,life:2.2+Math.random()*1.4,s:20+Math.random()*16,ph:Math.random()*6,sp:6+Math.random()*8,r:(Math.random()-.5)*.5})}}
 function dust(n){for(let i=0;i<n;i++)add({k:i%4?'glow':'star',x:Math.random()*W,y:H*(.2+Math.random()*.6),vx:(Math.random()-.5)*30,vy:-20-Math.random()*40,g:0,drag:1,life:1.4+Math.random()*1.4,s:8+Math.random()*16,a:.8,ph:Math.random()*6})}
 /* ---------- symbol motion styles ---------- */
-const CHAR=/heroine|woman|hero$|oni|parrot|cat|neko|trex|lion|dragon|daruma/,GEM=/gem|jade|emerald|diamond|ring|^love$|crystal/,COIN=/coin|koban|ingot|hongbao|paper|^fu$|kamon/,SHINE=/bar|seven|sevens|7|^red7|^blue7|trophy|crown|car|chest|castle|fireworks|kitsune|city/;
+const CHAR=/heroine|woman|hero$|oni|parrot|(?<!black)cat|neko|trex|lion|dragon|daruma/,GEM=/gem|jade|emerald|diamond|ring|^love$|crystal/,COIN=/coin|koban|ingot|hongbao|paper|^fu$|kamon/,SHINE=/bar|seven|sevens|7|^red7|^blue7|trophy|crown|car|chest|castle|fireworks|kitsune|blackcat|city/;
 function styleOf(id){if(id==='wild')return 'wild';if(id==='scatter')return 'scatter';if(CHAR.test(id))return 'char';if(GEM.test(id))return 'gem';if(COIN.test(id))return 'coin';if(SHINE.test(id))return 'shine';return 'bounce'}
 const HI=new Set();try{SYM.forEach((s,i)=>{if(i>=7)HI.add(s.id)})}catch(e){}
 /* ---------- frame light chase ---------- */
