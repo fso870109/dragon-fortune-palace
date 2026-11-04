@@ -61,6 +61,7 @@ const CZo=window.CZ&&CZ.onSettle;if(CZo)CZ.onSettle=function(o){const r=CZo.appl
 const lf=window.landFX;let landN=0;if(lf)window.landFX=function(c){if(active||document.querySelector('#board.w21on'))winOff();const r=lf.apply(this,arguments);try{const reel=document.querySelectorAll('#board .reel')[c]||null;if(reel){const R=reel.getBoundingClientRect();for(let i=0;i<5;i++)add({k:'glow',x:R.left+Math.random()*R.width,y:R.bottom-4,vx:(Math.random()-.5)*60,vy:-40-Math.random()*60,g:120,drag:.97,life:.45,s:10+Math.random()*8,a:.7})}}catch(e){}return r};
 // spin start ring + clear
 document.addEventListener('pointerdown',e=>{const s=e.target.closest&&e.target.closest('#spinBtn');if(!s||s.disabled)return;const r=document.createElement('span');r.className='w21ring';s.appendChild(r);setTimeout(()=>r.remove(),600);winOff()},true);
+{const b0=document.getElementById('board');b0&&new MutationObserver(()=>{if(b0.getAttribute('aria-busy')==='true')winOff()}).observe(b0,{attributes:true,attributeFilter:['aria-busy']})}
 /* ---------- merged big-win sequence ---------- */
 const _bw=window.bigWin;if(_bw){window.bigWin=function(won,total,o){o=o||{};const x=won/total;
   if(!o.tier){o=Object.assign({},o,{tier:x>=50?['epic','傳說大獎','龍運降臨!! 傳說級獎金']:x>=25?['mega','超級大獎','金殿狂歡!! 超級獎金']:['big','大獎','好運降臨!! 大獎']})}
