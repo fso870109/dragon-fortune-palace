@@ -19,9 +19,10 @@ function open0(){build('cls hold')}
 function open(){build('cls hold');H.classList.remove('czIn');acc();
  const imgs=[...document.querySelectorAll('#machine img,#czHero img,.card img')].slice(0,40);
  H.classList.add('czDoorOn');const ldw=new Promise(r=>{const c=()=>{const l=document.getElementById('czLoad');if(!l||l.classList.contains('out'))r();else setTimeout(c,60)};setTimeout(c,30)});
- const ready=Promise.race([Promise.all([ldw,...imgs.map(i=>i.decode?i.decode().catch(()=>{}):0)]),new Promise(r=>setTimeout(r,2500))]);
+ const ready=Promise.race([Promise.all([ldw,document.fonts?document.fonts.ready.catch(()=>{}):0,...imgs.map(i=>i.decode?i.decode().catch(()=>{}):0)]),new Promise(r=>setTimeout(r,2500))]);
  const t0=performance.now();
- ready.then(()=>{const w=Math.max(0,260-(performance.now()-t0));setTimeout(go,w)});
+ const stable=()=>new Promise(r=>{const B=document.getElementById('board');if(!B){r();return}let last='',n=0,t1=performance.now();const f=()=>{const k=[...B.querySelectorAll('.sym')].slice(0,15).map(e=>{const q=e.getBoundingClientRect();return Math.round(q.x)+','+Math.round(q.y)+','+Math.round(q.width)}).join()+'|'+(B.getBoundingClientRect().top|0);n=k===last?n+1:0;last=k;if(n>=2||performance.now()-t1>700)r();else requestAnimationFrame(f)};requestAnimationFrame(f)});
+ ready.then(stable).then(()=>{const w=Math.max(0,260-(performance.now()-t0));setTimeout(go,w)});
  let gone=false;function go(){if(gone)return;gone=true;H.classList.add('czRev');D.classList.add('opn');D.classList.remove('cls','hold');snd('door_open');
   done=setTimeout(fin,1400)}
  function fin(){clearTimeout(done);H.classList.remove('czRev','czDoorOn');D&&D.remove();D=null}
