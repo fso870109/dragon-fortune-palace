@@ -1,6 +1,6 @@
 /* 龍運金殿 service worker — v257 */
-const V='dfp-v258';
-const CORE=['./','index.html','mq257.css?v=258','mq257.js?v=258','offline.html','privacy.html','store.js?v=256','rm.js?v=256','life.js?v=256','age.js?v=256','settings.js?v=256','hint.js?v=256','back.js?v=256','manifest.webmanifest','assets/logo21.webp','assets/lobby/logo22.webp?v=256','assets/lobby/navbar.webp?v=256','assets/lobby/medal.webp?v=256','assets/icons/icon-192.png','assets/lobby/bg.webp?v=256'];
+const V='dfp-v259';
+const CORE=['./','index.html','mq257.css?v=258','mq257.js?v=258','offline.html','privacy.html','store.js?v=256','rm.js?v=256','life.js?v=256','age.js?v=256','settings.js?v=259','hint.js?v=256','back.js?v=256','manifest.webmanifest','assets/logo21.webp','assets/lobby/logo22.webp?v=256','assets/lobby/navbar.webp?v=256','assets/lobby/medal.webp?v=256','assets/icons/icon-192.png','assets/lobby/bg.webp?v=256'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('dfp-')&&k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
