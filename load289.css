@@ -1,0 +1,9 @@
+/* v28.9 splash: pure top→bottom wipe (no slide/drop); illustrated seal badges, no text */
+#load .ld7g .l21logo{animation:ld9Wipe 1.2s cubic-bezier(.45,.05,.25,1) both,l21Gl 3s 1.2s ease-in-out infinite!important;translate:none!important}
+@keyframes ld9Wipe{0%{opacity:1;clip-path:inset(0 0 100% 0);filter:brightness(1.8)}100%{opacity:1;clip-path:inset(0 0 0 0);filter:brightness(1)}}
+#load .ld7g::before{animation:ld9Halo 1.2s ease-out both!important;translate:none!important}
+@keyframes ld9Halo{0%{opacity:0}100%{opacity:1}}
+#load .ld4b.ld9s{display:flex!important;flex-wrap:nowrap!important;justify-content:center;gap:clamp(18px,6vw,34px)!important;background:none!important;border:0!important;padding:0!important;margin:10px auto 12px!important}
+#load .ld9s .sg9{display:block!important;width:clamp(46px,13vw,60px)!important;height:clamp(46px,13vw,60px)!important;padding:0!important;margin:0!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:50%;filter:drop-shadow(0 3px 5px rgba(0,0,0,.55)) drop-shadow(0 0 8px rgba(255,190,60,.35));flex:0 0 auto!important}
+#load .ld9s .sg9 svg{width:100%;height:100%;display:block}
+@media (prefers-reduced-motion:reduce){#load .ld7g .l21logo,#load .ld7g::before{animation:none!important;clip-path:none!important}}
