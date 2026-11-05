@@ -26,11 +26,11 @@ var st=document.createElement('style');st.textContent=css;(document.head||H).app
 function build(){if(document.getElementById('ageGate'))return;var d=document.createElement('dialog');d.id='ageGate';d.setAttribute('role','dialog');d.setAttribute('aria-modal','true');d.setAttribute('aria-label','年齡確認');
 d.innerHTML='<div class="agC"><img src="assets/lobby/logo22.webp?v=256" alt="龍運金殿"><div class="ag18">18+</div>'+
 '<div class="agYes"><h2>年齡確認</h2><p>本遊戲內容含模擬賭博，僅適合 <b>18 歲以上</b>玩家。</p>'+
-'<span class="agN">僅供娛樂・虛擬籌碼・無真實金錢</span>'+
+'<span class="agN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</span>'+
 '<p>遊戲中的籌碼皆為虛擬點數，無法儲值、兌換現金或任何獎品。在本遊戲中的表現，不代表在真實賭博中會獲勝。</p>'+
 '<div class="agB"><button class="agY" type="button">我已滿 18 歲，進入遊戲</button><button class="agX" type="button">我未滿 18 歲</button></div>'+
 '<p class="agS">進入即表示您同意<a href="privacy.html">隱私權政策與使用條款</a></p></div>'+
-'<div class="agNo"><h2>很抱歉</h2><p>本遊戲僅開放 18 歲以上玩家遊玩。</p><span class="agN">僅供娛樂・虛擬籌碼・無真實金錢</span>'+
+'<div class="agNo"><h2>很抱歉</h2><p>本遊戲僅開放 18 歲以上玩家遊玩。</p><span class="agN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</span>'+
 '<div class="agB"><button class="agX agBack" type="button">返回</button></div></div></div>';
 document.body.appendChild(d);var DP=window.HTMLDialogElement&&HTMLDialogElement.prototype,orig=DP&&DP.showModal,Q=[];if(orig){DP.showModal=function(){if(this!==d&&document.getElementById('ageGate')){if(Q.indexOf(this)<0)Q.push(this);return}return orig.apply(this,arguments)};try{orig.call(d)}catch(e){d.setAttribute('open','')}}else d.setAttribute('open','');d.addEventListener('cancel',function(e){e.preventDefault()});
 d.querySelector('.agY').onclick=function(){try{localStorage.setItem(K,'1')}catch(e){}H.classList.remove('agOn');d.classList.add('out');setTimeout(function(){try{d.close()}catch(e){}d.remove();if(orig){DP.showModal=orig;Q.forEach(function(x){try{if(x.isConnected&&!x.open)orig.call(x)}catch(e){}})}},500)};

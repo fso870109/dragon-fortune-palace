@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.5',DFP_APPV='';
+var DFP_WEBV='28.6',DFP_APPV='';
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
 function vibOn(){return CAN&&g('fs_vib')!=='0'}
@@ -48,7 +48,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '<div class="sR"><span>減少動態效果<small id="sgRmN">減少閃光、震動畫面與開關門動畫，適合低階手機・省電</small></span><button class="tg" id="sgRm" type="button" aria-label="減少動態效果"></button></div>'+
  '<a class="sL" href="privacy.html">隱私權政策與使用條款・清除資料</a>'+
  '<a class="sL" href="privacy.html#wipe" id="sgWipe">清除本裝置遊戲資料</a>'+
- '<p class="sN">僅供娛樂・虛擬籌碼・無真實金錢</p>'+
+ '<p class="sN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>'+
  '<p class="sV" id="sgVer">'+(DFP_APPV?('版本 '+DFP_APPV+'・內容 '+DFP_WEBV):('網頁版 '+DFP_WEBV))+'</p>'+
  '<button class="sX" id="sgClose" type="button">關閉</button></div>';
  document.body.appendChild(d);

@@ -14,7 +14,7 @@ function build(){if(D)return D;
  '#czChipDlg .cNo{color:#f0d6a8;background:rgba(0,0,0,.25);border:1px solid rgba(226,179,79,.55)}'+
  '#czChipDlg small{display:block;margin-top:12px;font-size:11px;color:#c9a978;letter-spacing:.04em}');
  D=document.createElement('dialog');D.id='czChipDlg';D.setAttribute('aria-labelledby','czChipT');
- D.innerHTML='<div class="cC"><div class="cI" aria-hidden="true">🪙</div><h3 id="czChipT"></h3><p id="czChipP"></p><div class="cB"><button type="button" class="cOk" id="czChipOk"></button><button type="button" class="cNo" id="czChipNo"></button></div><small>僅供娛樂・虛擬籌碼・無真實金錢</small></div>';
+ D.innerHTML='<div class="cC"><div class="cI" aria-hidden="true">🪙</div><h3 id="czChipT"></h3><p id="czChipP"></p><div class="cB"><button type="button" class="cOk" id="czChipOk"></button><button type="button" class="cNo" id="czChipNo"></button></div><small>僅供娛樂・虛擬籌碼・純虛擬・無兌現</small></div>';
  document.body.appendChild(D);
  D.querySelector('#czChipOk').onclick=function(){var f=cb;cb=null;D.close();try{f&&f()}catch(e){}};
  D.querySelector('#czChipNo').onclick=function(){cb=null;D.close()};

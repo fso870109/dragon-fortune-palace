@@ -1,4 +1,4 @@
-/* 龍運金殿 shared layer — PLAY MONEY ONLY (僅供娛樂・虛擬籌碼・無真實金錢) */
+/* 龍運金殿 shared layer — PLAY MONEY ONLY (僅供娛樂・虛擬籌碼・純虛擬・無兌現) */
 (()=>{
 const LS=localStorage,J=(k,d)=>{try{const v=JSON.parse(LS.getItem(k));return v==null?d:v}catch(e){return d}},S=(k,v)=>{try{LS.setItem(k,JSON.stringify(v))}catch(e){}};
 const IN_M=!!window.CZM,RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -96,7 +96,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  C.append(mC,betBox,document.querySelector('.controls'),mW);
  const buy=document.createElement('button');buy.id='czBuyBtn';buy.type='button';buy.className='czbuyitem';buy.innerHTML='<span class="ic" aria-hidden="true">💘</span><span class="czbt"><b>✨ 觸發特殊事件 ✨</b><small></small></span>';
  Rr.append($('max16'),$('menuBtn'));{const m16=$('menu16');if(m16)m16.insertBefore(buy,m16.firstChild)}bar.append(L,C,Rr);
- const note=document.querySelector('.sub');const nb=document.createElement('div');nb.className='cznote';nb.textContent=note?note.textContent:'僅供娛樂・虛擬籌碼・無真實金錢';if(note)note.remove();
+ const note=document.querySelector('.sub');const nb=document.createElement('div');nb.className='cznote';nb.textContent=note?note.textContent:'僅供娛樂・虛擬籌碼・純虛擬・無兌現';if(note)note.remove();
  mach.append(bar,nb);
  {// v18.1 AUTO spin (play-money)
  const ab=document.createElement('button');ab.id='czAuto';ab.className='czauto';ab.type='button';ab.setAttribute('aria-label','自動旋轉');ab.innerHTML='<b>自動</b><i></i>';
@@ -125,7 +125,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  $('czBuyOk').onclick=()=>{dlg.close();const p=price();if(bal<p||spinning||FS)return;bal-=p;ui();ach('buy');vib([20,30,20]);
   ['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i)&&($(i).disabled=true));FS={left:FS_N,tot:FS_N,n:0,won:0,bet:BETS[betIdx]};day().fs++;save();setTimeout(()=>fsIntro(false),250)};
  // loading screen
- let ld=document.getElementById('czLoad');if(!ld){ld=document.createElement('div');ld.id='czLoad';ld.innerHTML=`<div class="czlt">${CZM.name}</div><div class="czlbar"><i></i></div><div class="czls">LOADING…</div><div class="cznote2">僅供娛樂・虛擬籌碼・無真實金錢</div>`;document.body.appendChild(ld)}
+ let ld=document.getElementById('czLoad');if(!ld){ld=document.createElement('div');ld.id='czLoad';ld.innerHTML=`<div class="czlt">${CZM.name}</div><div class="czlbar"><i></i></div><div class="czls">LOADING…</div><div class="cznote2">僅供娛樂・虛擬籌碼・純虛擬・無兌現</div>`;document.body.appendChild(ld)}
  const imgs=[...document.images];let n=0;const tot=Math.max(1,imgs.length);const prog=()=>{n=imgs.filter(i=>i.complete).length;ld.querySelector('i').style.width=(20+80*n/tot)+'%'};
  const t0=performance.now();const iv=setInterval(prog,120);
  const done=()=>{clearInterval(iv);ld.querySelector('i').style.width='100%';setTimeout(()=>{ld.classList.add('out');setTimeout(()=>ld.remove(),500)},Math.max(0,450-(performance.now()-t0)))};
