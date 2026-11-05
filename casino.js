@@ -8,7 +8,7 @@ const MACH={love:'夜色戀曲♡',matsuri:'夏祭花火',caishen:'財神降臨'
 const need=l=>Math.round(400*Math.pow(l,1.45));
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
 const MISS=[{id:'spin',t:'今日旋轉 50 次',g:50,r:300},{id:'won',t:'今日累積贏得 2,000 籌碼',g:2000,r:400},{id:'fs',t:'觸發 1 次免費旋轉',g:1,r:500},{id:'mach',t:'今日玩過 2 台不同機台',g:2,r:300},{id:'big',t:'達成 1 次大獎以上',g:1,r:600}];
-const ACH=[{id:'first',t:'初次中獎',d:'第一次贏得籌碼',r:100},{id:'s100',t:'常客',d:'累計旋轉 100 次',r:300},{id:'s1000',t:'夜之常駐',d:'累計旋轉 1,000 次',r:1500},{id:'big',t:'大獎!',d:'首次大獎',r:500},{id:'epic',t:'傳說',d:'單次贏得總押注 80 倍以上',r:2000},{id:'jp',t:'彩金得主',d:'首次抽中彩金',r:1000},{id:'lv10',t:'銀卡晉升',d:'達到 Lv.10',r:1000},{id:'all',t:'全館制霸',d:'三台機台都玩過',r:800},{id:'buy',t:'直通免費遊戲',d:'首次購買免費旋轉',r:200}];
+const ACH=[{id:'first',t:'初次中獎',d:'第一次贏得籌碼',r:100},{id:'s100',t:'常客',d:'累計旋轉 100 次',r:300},{id:'s1000',t:'夜之常駐',d:'累計旋轉 1,000 次',r:1500},{id:'big',t:'大獎!',d:'首次大獎',r:500},{id:'epic',t:'傳說',d:'單次贏得總押注 80 倍以上',r:2000},{id:'jp',t:'彩金得主',d:'首次抽中彩金',r:1000},{id:'lv10',t:'銀卡晉升',d:'達到 Lv.10',r:1000},{id:'all',t:'全館制霸',d:'三台機台都玩過',r:800},{id:'buy',t:'直通免費次數',d:'首次購買免費旋轉',r:200}];
 let st=J('cz_st',null);if(!st||typeof st!=='object')st={xp:0,lv:1,spins:0,won:0,ach:{},mach:{},free:0,feed:[]};
 st.ach=st.ach||{};st.mach=st.mach||{};st.feed=st.feed||[];
 function day(){if(!st.d||st.d.date!==today())st.d={date:today(),spin:0,won:0,fs:0,mach:[],big:0,cl:{}};return st.d}
@@ -80,7 +80,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  (window.requestIdleCallback||setTimeout)(()=>{['assets/'+CZM.id+'/p_bigwin.webp?v=281','assets/'+CZM.id+'/p_bigwin_bl.webp?v=281','assets/lobby/frame_s.webp?v=239',`assets/${CZM.id}/hero.webp?v=239`,`assets/${CZM.id}/cutin.webp?v=239`].forEach(u=>{const i=new Image();i.src=u;i.decode&&i.decode().catch(()=>{})})},{timeout:2500});
  const _bw=window.bigWin;window.bigWin=function(won,total,o={}){if(o.noStamp)return _bw(won,total,o);const x=won/total;
   atari(o.tier?o.tier[1]:x>=50?'傳說大獎':x>=25?'超級大獎':'大獎',o.tier?o.tier[2]:x>=50?'龍運降臨!!':x>=25?'金殿狂歡!!':'好運降臨!!',()=>_bw(won,total,o))};
- const _fi=window.fsIntro;window.fsIntro=function(re){if(re)return _fi(re);atari('免費遊戲!!','免費遊戲 開始',()=>_fi(re))};
+ const _fi=window.fsIntro;window.fsIntro=function(re){if(re)return _fi(re);atari('免費次數!!','免費次數 開始',()=>_fi(re))};
  const _wh=CZ.wheel;CZ.wheel=function(t){atari('彩金','大獎機會!!',()=>_wh(t))};
  // gold-sakura frame on win tiers
  const bwEl=$('bw');if(bwEl){const f=document.createElement('img');f.className='czframe';f.src='assets/lobby/frame_s.webp?v=239';f.alt='';bwEl.appendChild(f)}
@@ -117,7 +117,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  const mir=(a,b)=>{const A=$(a),B=$(b);const f=()=>{B.textContent=A.textContent};f();new MutationObserver(f).observe(A,{childList:true,characterData:true,subtree:true})};mir('bal','czCred');mir('bet','czBet');mir('win','czWin');
  const lvR=()=>{const v=vipOf(st.lv);const e=$('czLv');e.querySelector('b').textContent=`Lv.${st.lv} ${v[1]}`;e.querySelector('b').style.color=v[2];e.querySelector('u').style.width=Math.min(100,st.xp/need(st.lv)*100)+'%'};lvR();CZ.on(lvR);
  // buy feature dialog
- const dlg=document.createElement('dialog');dlg.id='czBuy';dlg.innerHTML=`<h2>✨ 觸發特殊事件 ✨</h2><p class="czbp"></p><p class="note">直接進入免費遊戲：10 次免費旋轉（獎金 ×${CZM.fsm}，可再觸發）。<br>理論回收率 ${CZM.buyRtp}%・僅使用虛擬籌碼・純虛擬・無兌現</p><div class="dact"><button class="claim" id="czBuyOk">確認購買</button><button id="czBuyNo">取消</button></div>`;document.body.appendChild(dlg);
+ const dlg=document.createElement('dialog');dlg.id='czBuy';dlg.innerHTML=`<h2>✨ 觸發特殊事件 ✨</h2><p class="czbp"></p><p class="note">直接進入免費次數：10 次免費旋轉（獎金 ×${CZM.fsm}，可再觸發）。<br>理論回收率 ${CZM.buyRtp}%・僅使用虛擬籌碼・純虛擬・無兌現</p><div class="dact"><button class="claim" id="czBuyOk">確認購買</button><button id="czBuyNo">取消</button></div>`;document.body.appendChild(dlg);
  const price=()=>Math.round(BETS[betIdx]*NL*CZM.buy);
  const buyLab=()=>{buy.querySelector('small').textContent=`花 ${price().toLocaleString()} 籌碼開啟`};buyLab();new MutationObserver(buyLab).observe($('bet'),{childList:true,characterData:true,subtree:true});
  buy.onclick=()=>{if(spinning||FS||bwState||window.__hold)return;dlg.querySelector('.czbp').innerHTML=`價格：<b>${price().toLocaleString()}</b> 籌碼（總押注 ${BETS[betIdx]*NL} × ${CZM.buy}）`;$('czBuyOk').disabled=bal<price();$('czBuyOk').textContent=bal<price()?'籌碼不足':'確認購買';dlg.showModal()};

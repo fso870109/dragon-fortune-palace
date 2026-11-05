@@ -10,7 +10,7 @@ const SYM=[
 {id:'fireworks',name:'花火',pay:[119, 475, 1781]},
 {id:'woman',name:'浴衣美人',pay:[237, 1186, 5935]},
 {id:'wild',name:'WILD 家紋',pay:[297, 1424, 9496]},
-{id:'scatter',name:'免費遊戲 浴衣美人',pay:[0, 0, 0]}];
+{id:'scatter',name:'免費次數 浴衣美人',pay:[0, 0, 0]}];
 const WI=10,SI=11,NR=5,NL=20,SCATP={3:6,4:25,5:125},FS_N=10,FS_M=2;
 // per-reel symbol weights (RTP 93.80% exact incl. free spins + jackpot; see math/final.py)
 const REELW=[[22,20,17,14,11,8,6,4,3,2,0,3],[22,20,17,14,11,8,6,4,3,2,3,3],[22,20,17,14,11,8,6,4,3,2,3,3],[22,20,17,14,11,8,6,4,3,2,3,3],[22,20,17,14,11,8,6,4,3,2,0,3]];
@@ -141,7 +141,7 @@ requestAnimationFrame(frame);}
 function spin(){
 if(spinning||bwState||window.__hold)return;const free=!!(FS&&FS.left>0);const bet=free?FS.bet:BETS[betIdx],total=bet*NL;
 if(!free&&bal<total){if(bal>=BETS[0]*NL){let i=betIdx;while(i>0&&BETS[i]*NL>bal)i--;betIdx=i;ui();const t='籌碼不足，押注已調整為 '+BETS[i]+'×'+NL;$('msg').textContent=t;typeof toast==='function'&&toast(t)}else{$('msg').textContent=adLeft()>0?'籌碼不足！可「看廣告領籌碼」或「重置籌碼」':'籌碼不足！可「重置籌碼」';window.czChipDlg&&czChipDlg('low',()=>$('resetBtn').__doReset())}sfx.lose();return}
-BRc=null;boardR();spinning=true;if(free){FS.left--;FS.n++;fsUI()}else{bal-=total;window.CZ&&CZ.onBet(total)}ui();clearWin();$('win').textContent=0;$('msg').textContent=free?`免費旋轉 ${FS.n}／${FS.tot}（獎金 ×${FS_M}）`:'旋轉中…';$('board').setAttribute('aria-busy','true');
+BRc=null;boardR();spinning=true;if(free){FS.left--;FS.n++;fsUI()}else{bal-=total;window.CZ&&CZ.onBet(total)}ui();clearWin();$('win').textContent=0;$('msg').textContent=free?`免費次數 ${FS.n}／${FS.tot}（獎金 ×${FS_M}）`:'旋轉中…';$('board').setAttribute('aria-busy','true');
 ['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=true);
 const res=(window.__force&&window.__force.shift())||rndGrid();const tease=teaseCheck(res);
 const ev=evalGrid(res),mult=free?FS_M:1;
@@ -169,7 +169,7 @@ if(won){bal+=won;$('win').textContent=won;$('machine').classList.add('win-mode')
 $('msg').textContent=`恭喜！${hits.length} 條連線${ev.sc>=3?'＋分散':''}${free?'（×2）':''}，贏得 ${fmt(won)} 籌碼！`;
 const big=xr>=(free?30:10)&&ev.sc<3;
 winFX();winVFX(xr);if(big){setTimeout(()=>bigWin(won,total),1100)}else{sfx.win(winTier(xr));if(xr>=3)rain(1.2,1)}}
-else{$('msg').textContent=free?`免費旋轉 ${FS.n}／${FS.tot}`:LOVE_L[Math.random()*LOVE_L.length|0];if(!free)sfx.lose()}
+else{$('msg').textContent=free?`免費次數 ${FS.n}／${FS.tot}`:LOVE_L[Math.random()*LOVE_L.length|0];if(!free)sfx.lose()}
 ric(()=>{const rk=lbRecord(free?0:total,won,bet,total);if(won&&rk===0&&lbGet().wins.length>1)$('msg').textContent+=' 🏆 新紀錄！'},{timeout:2000});
 ui();spinning=false;window.CZ&&CZ.onSettle({total,won,xr,free,sc:ev.sc,big:xr>=(free?30:10)&&ev.sc<3});
 if(ev.sc>=3){if(FS){FS.left+=FS_N;FS.tot+=FS_N;fsUI();setTimeout(()=>fsIntro(true),900)}else{FS={left:FS_N,tot:FS_N,n:0,won:0,bet};setTimeout(()=>fsIntro(false),900)}}
@@ -183,10 +183,10 @@ function fsNext(){if(!FS)return;clearTimeout(fsTimer);
 if(FS.left>0){fsTimer=setTimeout(function go(){if(bwState||spinning||window.__hold){fsTimer=setTimeout(go,400);return}spin()},1300);return}
 const f=FS;fsTimer=setTimeout(function end(){if(bwState||spinning||window.__hold){fsTimer=setTimeout(end,400);return}
 FS=null;fsUI();['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=false);
-$('msg').textContent=`免費旋轉結束！共贏得 ${fmt(f.won)} 虛擬籌碼`;if(f.won>0)bigWin(f.won,f.bet*NL,{tier:['mega','免費遊戲結束','免費遊戲 合計'],lbl:'免費旋轉 總獎金'});else lcdReset()},1300)}
+$('msg').textContent=`免費次數結束！共贏得 ${fmt(f.won)} 虛擬籌碼`;if(f.won>0)bigWin(f.won,f.bet*NL,{tier:['mega','免費次數結束','合計獎金'],lbl:'合計獎金'});else lcdReset()},1300)}
 function fsIntro(re){const bw=$('bw');fsUI();lcdBonusFS();
 bw.className='bw show epic fsi';$('bwTier').textContent='超級獎勵';$('bwJp').textContent=re?'謝謝你…♡ +10次':'超熱!! 一直在等你';
-bw.querySelector('.lbl').textContent=re?'免費旋轉追加':'免費旋轉（獎金 ×2）';$('bwAmt').textContent=(re?'+':'')+FS_N+' 回';$('bwBtn').textContent='開始！';
+bw.querySelector('.lbl').textContent=re?'免費次數追加':'免費次數（獎金 ×2）';$('bwAmt').textContent=(re?'+':'')+FS_N+' 回';$('bwBtn').textContent='開始！';
 bwState={won:0,done:true,fin:true,intro:true};sfx.win(3);lastFlash=0;flash(.45);fountain();megaBorder(2.5);bw.classList.add('ready');setTimeout(()=>$('bwBtn').focus(),50);
 if(window.__fsAuto)setTimeout(bwClose,window.__fsAuto)}
 // ===== particle FX (canvas) =====
@@ -461,7 +461,7 @@ let k=-1;const r=Math.random();
 if(bon||x>=80)k=r<.5?4:3;else if(x>=10)k=r<.6?3:2;else if(x>=3)k=r<.7?2:1;else if(x>0)k=r<.5?1:(r<.8?0:-1);else if(tease)k=r<.6?1:2;else k=r<.22?0:(r<.27?1:-1);
 lcd._k=k;if(k>=0)lcdLater(()=>{setKitai(k);if(k>=2)slam(k>=3?'超熱!!':'機會!','#ff4fa3')},350)}
 function lcdReach(){lcd.classList.add('reach');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='大獎機會演出中';$('spinBtn').classList.add('push');const k=Math.max(1,lcd._k|0);slam('機會!!','#ff4fa3','心跳…♡');sfx.blip&&sfx.blip(true)}
-function lcdBonusFS(){lcdClear();lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='免費遊戲 開始!!';slam('超級獎勵','#ff4fa3','免費遊戲 ×10');lcdLater(()=>lcd.classList.remove('bonus'),2200)}
+function lcdBonusFS(){lcdClear();lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='免費次數 開始!!';slam('超級獎勵','#ff4fa3','免費次數 ×10');lcdLater(()=>lcd.classList.remove('bonus'),2200)}
 function lcdResult(x,bon){$('spinBtn').classList.remove('push');lcd.classList.remove('reach');if(bon)return;
 if(x>=10){lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='獎勵確定!!';slam('7',x>=80?'#fff':'#ffc400',x>=30?'超級大獎':'大獎');lcdLater(()=>slam(x>=80?'大獎!!':'大獎','#ff2240','確定'),550)}
 else if(x>=2){slam('小獎','#19e08a','總押注 ×'+(Math.round(x*10)/10));$('lcdNavi').textContent='一般中獎';lcdLater(lcdReset,2600)}
