@@ -8,7 +8,15 @@ h2{font-size:17px;color:#ffd27a;border-bottom:1px solid rgba(217,164,65,.45);pad
 ul{padding-left:1.3em;margin:6px 0}li{margin:3px 0}code{background:rgba(255,210,122,.12);padding:0 4px;border-radius:4px;font-size:13px}
 nav{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 0}nav a{color:#ffd27a}
 .back{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));padding:11px 26px;border-radius:24px;border:1px solid #d9a441;background:linear-gradient(#5a1010,#2a0606);color:#ffe9b0;text-decoration:none;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.6)}
-button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441;background:#2a0606;color:#ffe9b0}</style></head>
+button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441;background:#2a0606;color:#ffe9b0}
+.wipeRow{text-align:center;margin:12px 0 4px}#wipe{padding:10px 22px;border-radius:22px;border:1px solid #e2b34f;background:linear-gradient(180deg,#6a1414,#2a0606);color:#ffe9b0;font-weight:700;box-shadow:0 0 0 1px #6b4410 inset,0 3px 10px rgba(0,0,0,.55);cursor:pointer}
+#wipeMsg{min-height:1.2em;margin:6px 0 0;text-align:center;font-size:14px}#wipeMsg.ok{color:#ffd77a}#wipeMsg a{color:#ffe9b0;font-weight:700;margin-left:4px}
+#wipeDlg{border:0;padding:0;background:transparent;max-width:none;color:#ffeccb}#wipeDlg::backdrop{background:rgba(6,2,2,.74)}
+#wipeDlg .wC{width:min(90vw,340px);box-sizing:border-box;padding:18px 16px 14px;border-radius:18px;background:linear-gradient(180deg,#3a0a0a,#1a0404);border:2px solid #e2b34f;box-shadow:0 0 0 1px #6b4410 inset,0 0 0 4px rgba(226,179,79,.16),0 16px 44px rgba(0,0,0,.75),0 0 34px rgba(255,190,70,.22)}
+#wipeDlg h3{margin:0 0 8px;text-align:center;font-size:18px;letter-spacing:.12em;color:#ffd77a}#wipeDlg p{margin:4px 0;font-size:14.5px}#wipeDlg ul{font-size:13.5px;color:#e8cfa4;margin:6px 0}
+#wipeDlg .wW{color:#ff9d7a;font-weight:700;text-align:center}#wipeDlg .wB{display:flex;gap:10px;margin-top:12px}#wipeDlg .wB button{flex:1;padding:10px 4px;border-radius:22px;font-weight:800;cursor:pointer}
+#wipeNo{background:#2a0d0d;border:1px solid #c99a3a;color:#ffe9b0}#wipeYes{border:0!important;color:#2a0505!important;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f)!important;box-shadow:0 3px 0 #6b420c}
+@media (prefers-reduced-motion:no-preference){#wipeDlg[open] .wC{animation:wIn .22s cubic-bezier(.2,.8,.3,1)}@keyframes wIn{from{opacity:0;transform:translateY(10px) scale(.96)}}}</style></head>
 <body><main>
 <header><img src="assets/lobby/logo22.webp?v=256" alt="龍運金殿" width="880" height="529"><h1>隱私權政策與使用條款</h1><div class="upd">最後更新：2026 年 11 月 4 日</div>
 <nav><a href="#privacy">隱私權政策</a><a href="#terms">使用條款</a><a href="#data">資料刪除</a></nav></header>
@@ -37,11 +45,17 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 
 <h2 id="data">三、資料刪除</h2>
 <p>因為所有資料只存在你的裝置上，你可以隨時自行刪除：清除本網站的瀏覽器資料，或解除安裝 App，即會移除全部遊戲進度。你也可以直接按下方按鈕清除本裝置上的遊戲資料。</p>
-<p><button id="wipe" type="button">清除本裝置的遊戲資料</button> <span id="wipeMsg" role="status"></span></p>
+<p class="wipeRow"><button id="wipe" type="button">清除本裝置的遊戲資料</button></p><p id="wipeMsg" role="status"></p>
+<dialog id="wipeDlg" aria-labelledby="wipeT"><div class="wC"><h3 id="wipeT">清除遊戲資料</h3><p>確定要清除本裝置上的所有遊戲進度嗎？</p><ul><li>虛擬籌碼將重設為 1,000</li><li>等級、簽到、任務與角色圖鑑收集紀錄會刪除</li><li>音效、音樂與震動等設定恢復預設</li></ul><p class="wW">此動作無法復原。</p><div class="wB"><button type="button" id="wipeNo">取消</button><button type="button" id="wipeYes">確定清除</button></div></div></dialog>
 
 <h2>四、政策更新與聯絡</h2>
 <p>本政策若有修改，將更新於本頁並調整上方的「最後更新」日期。如有任何問題，請透過本遊戲在應用程式商店頁面上列出的開發者聯絡方式與我們聯繫。</p>
 </main>
 <a class="back" href="index.html">返回大廳</a>
-<script>document.getElementById('wipe').onclick=function(){if(!confirm('確定要清除本裝置上所有遊戲進度與虛擬籌碼嗎？此動作無法復原。'))return;try{localStorage.clear();sessionStorage.clear()}catch(e){}document.getElementById('wipeMsg').textContent='已清除。';};</script>
+<script>(function(){var d=document.getElementById('wipeDlg'),m=document.getElementById('wipeMsg');
+document.getElementById('wipe').onclick=function(){try{d.showModal()}catch(e){d.setAttribute('open','')}document.getElementById('wipeNo').focus()};
+document.getElementById('wipeNo').onclick=function(){d.close()};
+d.addEventListener('click',function(e){if(e.target===d)d.close()});
+document.getElementById('wipeYes').onclick=function(){try{localStorage.clear();sessionStorage.clear()}catch(e){}d.close();
+m.innerHTML='已清除本裝置的遊戲資料。<a href="index.html">返回大廳重新開始</a>（將重新確認年齡）';m.className='ok'};})();</script>
 <script src="back.js?v=256"></script></body></html>
