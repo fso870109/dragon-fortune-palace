@@ -29,6 +29,7 @@ function watch(){const bd=document.body,bw=document.getElementById('bw');if(!bd)
  new MutationObserver(()=>setFs(bd.classList.contains('fs-mode'))).observe(bd,{attributes:true,attributeFilter:['class']});
  if(bw){let was=false;new MutationObserver(()=>{const on=bw.classList.contains('show');if(on&&!was&&!bw.classList.contains('fsi'))sting();if(on&&!was&&bw.classList.contains('fsi'))setFs(true);was=on}).observe(bw,{attributes:true,attributeFilter:['class']})}}
 watch();
+addEventListener('pagehide',()=>{try{mus(false)}catch(e){}});
 window.CZA={play,mus,load,setFs,sting,_s:()=>({base:src&&+src.__g.gain.value.toFixed(2),fs:fsSrc&&+fsSrc.__g.gain.value.toFixed(2),duck:duck&&+duck.gain.value.toFixed(2)})};
 function hook(){if(typeof sfx==='undefined'||typeof musSync!=='function')return setTimeout(hook,200);
  const O=Object.assign({},sfx),has=n=>B['sfx_'+n] instanceof AudioBuffer;
