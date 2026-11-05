@@ -32,9 +32,10 @@
 @keyframes b22Cell{0%{scale:0;rotate:-90deg;opacity:0}100%{scale:1;rotate:0deg;opacity:1}}
 #b22Stage #hsBox .hsG>i.on{animation:b22Land .45s cubic-bezier(.2,1.8,.4,1) both!important}
 @keyframes b22Land{0%{scale:1.8;translate:0 -30px;opacity:0;filter:brightness(2.5)}60%{scale:.9;translate:0 0;opacity:1}100%{scale:1;filter:none}}
-#b22Stage #hsBox .hsG>i.spin{animation:b22Spin .3s linear infinite!important}
+#b22Stage #hsBox .hsG>i.spin{animation:b22Reel .22s linear infinite!important}
 @keyframes b22Spin{50%{filter:brightness(1.5) hue-rotate(20deg);scale:.94}}
-#b22Stage #hsBox.tense .hsG>i.spin{animation:b22Spin .55s ease-in-out infinite!important}
+@keyframes b22Reel{to{background-position:center 256px}}
+#b22Stage #hsBox.tense .hsG>i.spin{animation:b22Reel .32s linear infinite!important}
 #b22Stage #hsBox.tense .hsIn{box-shadow:none}
 #b22Stage #hsBox.tense~*,#b22Stage:has(#hsBox.tense) .b22bg{animation:b22Tense .9s ease-in-out infinite}
 @keyframes b22Tense{50%{box-shadow:inset 0 0 0 3px #ff6a3a,inset 0 0 50px rgba(255,80,40,.45)}}

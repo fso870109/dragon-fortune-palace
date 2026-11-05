@@ -1,4 +1,4 @@
-/* v20.1 寶珠鎖定重轉 */
+/* v28.13 寶珠鎖定重轉 — base; visuals overridden by bonus22 art + holdspin2813.css */
 #hsMeter{position:absolute;left:8px;bottom:8px;z-index:5;display:flex;align-items:center;gap:6px;padding:4px 8px;border-radius:10px;background:rgba(10,4,14,.72);border:1px solid rgba(232,190,100,.7);font:800 11px/1 "Noto Sans TC",sans-serif;color:#f4d89c;pointer-events:auto}
 #hsMeter span{width:70px;height:6px;border-radius:4px;background:rgba(255,255,255,.15);overflow:hidden}
 #hsMeter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c98a22,#ffe39a);transition:width .4s}
@@ -14,8 +14,8 @@
 .hsJp b{display:block;font:900 13px/1.2 "Noto Sans TC",sans-serif}.hsJp span{display:block;font:800 11px/1.3 "Noto Sans TC",sans-serif;color:#ffe9b0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
 .hsJp .mini{border-color:#7fd0ff}.hsJp .minor{border-color:#8dff9a}.hsJp .major{border-color:#ff8ad0}.hsJp .grand{border-color:#ffd65a;box-shadow:0 0 10px rgba(255,210,90,.5)}
 .hsG{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
-.hsG i{aspect-ratio:1/1;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(232,190,100,.35);display:grid;place-items:center;font-style:normal;overflow:hidden;min-width:0}
-.hsG i.spin{animation:hsSpin .25s linear infinite;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,220,140,.15),rgba(255,255,255,.02));background-size:100% 200%}
+.hsG i{aspect-ratio:1/1;border-radius:12px;background:radial-gradient(circle at 50% 40%,#3a1d52,#12061e 70%);border:1.5px solid rgba(232,190,100,.55);box-shadow:inset 0 0 0 1px rgba(255,214,90,.2),inset 0 6px 10px rgba(0,0,0,.55);display:grid;place-items:center;font-style:normal;overflow:hidden;min-width:0;position:relative}
+.hsG i.spin{animation:hsSpin .22s linear infinite;background:linear-gradient(180deg,#2a1038,#5a3060 35%,#ffd65a55 50%,#5a3060 65%,#2a1038);background-size:100% 220%;box-shadow:inset 0 0 0 2px rgba(255,214,90,.5)}
 @keyframes hsSpin{to{background-position:0 200%}}
 .hsG i.on{background:radial-gradient(circle at 35% 30%,#fff6cf,#f0b43a 45%,#8a4a0c 100%);border-color:#ffe39a;box-shadow:0 0 12px rgba(255,200,90,.7),inset 0 -3px 6px rgba(0,0,0,.35);animation:hsPop .4s cubic-bezier(.3,1.7,.5,1)}
 @keyframes hsPop{0%{transform:scale(.2)}100%{transform:scale(1)}}
@@ -23,7 +23,7 @@
 .hsG i b{font:900 clamp(12px,3.6vw,15px)/1 "Noto Sans TC",sans-serif;color:#fff;text-shadow:0 1px 2px #000}
 .hsG i.mini{background:radial-gradient(circle at 35% 30%,#e8f7ff,#3aa6e8 50%,#0b3a70)}.hsG i.minor{background:radial-gradient(circle at 35% 30%,#efffe9,#3fc65a 50%,#0d4a1c)}.hsG i.major{background:radial-gradient(circle at 35% 30%,#ffe9f6,#e8479f 50%,#5a0a38)}
 .hsG i.col{background:radial-gradient(circle at 35% 30%,#fff,#ffd65a 40%,#c23a00);box-shadow:0 0 20px rgba(255,180,60,1)}.hsG i.col small{display:block;font:900 10px/1 "Noto Sans TC",sans-serif;color:#5a1000;margin-bottom:2px}
-.hsG i.suck{animation:hsSuck .7s ease-in}@keyframes hsSuck{50%{transform:scale(.8);filter:brightness(1.8)}}
+.hsG i.miss{filter:brightness(1.5)}.hsG i.suck{animation:hsSuck .7s ease-in}@keyframes hsSuck{50%{transform:scale(.8);filter:brightness(1.8)}}
 .hsF{display:flex;justify-content:space-between;margin-top:10px;font:800 14px/1 "Noto Sans TC",sans-serif;color:#f4d89c}.hsF b{color:#fff;font-size:18px;font-variant-numeric:tabular-nums}
 .hsTip{margin:8px 0 0;font:500 11px/1.4 "Noto Sans TC",sans-serif;color:rgba(255,255,255,.7)}
 .hsEnd{margin-top:12px;padding:10px;border-radius:12px;border:1px solid #ffd65a;background:rgba(0,0,0,.5);animation:hsPop .45s cubic-bezier(.3,1.7,.5,1)}
