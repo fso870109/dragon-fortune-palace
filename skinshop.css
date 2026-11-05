@@ -1,4 +1,4 @@
-/* v28.34 skin shop 2.0 */
+/* v28.35 skin shop 2.0 + bezel 2.0 */
 dialog#shop{width:min(600px,96vw);max-height:92vh;overflow:auto;padding:16px 12px 14px;border-radius:18px;border:2px solid transparent;background:radial-gradient(ellipse at 50% -10%,rgba(255,200,90,.22),transparent 55%) padding-box,linear-gradient(180deg,#2a0c0e,#14060a 60%,#0c0406) padding-box,linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 62%,#b8862e) border-box;box-shadow:0 0 0 1px #000,0 0 40px rgba(255,190,80,.3),inset 0 0 30px rgba(0,0,0,.6);color:#f6e6c8;box-sizing:border-box}
 #shop .shk{text-align:center;font:600 11px "Noto Serif TC",serif;letter-spacing:4px;color:#c9a35a}
 #shop h2{font-family:"Noto Serif TC",serif!important;font-weight:900;font-size:24px;letter-spacing:6px;margin:2px 0 4px;text-align:center;background:linear-gradient(#fff6d0,#f3c766 50%,#a8701c);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #3a1400)}
@@ -96,3 +96,28 @@ body[data-skin] .board{outline:0}
 body[data-skin] #skFx{box-shadow:inset 0 0 0 3px var(--a),inset 0 0 28px 6px rgba(var(--g),.85)}
 @keyframes skBreath{50%{box-shadow:inset 0 0 0 4px var(--a),inset 0 0 44px 12px rgba(var(--g),1)}}
 #skFx .plq{font-size:10px;padding:1px 10px;top:-1px;opacity:.92}#skTry{bottom:auto;top:10px}
+/* v28.35 bezel 2.0 — frame wraps the cabinet outside the reels, lacquer+gold bevel */
+#skFx{inset:-9px max(-6px,calc(-1 * var(--skx,6px))) -9px;border-radius:12px;--bw:7px}
+body[data-skt="l"] #skFx,body[data-skt="m"] #skFx{--bw:9px;inset:-11px -6px}
+body[data-skin] #skFx{box-shadow:0 0 18px 2px rgba(var(--g),.55),0 6px 14px rgba(0,0,0,.7)!important}
+#skFx::before,#skFx::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;display:none}
+body[data-skin] #skFx::before,body[data-skin] #skFx::after{display:block}
+/* bevel ring: gradient metal masked to a band */
+#skFx::before{border:0;--lq:color-mix(in srgb,var(--a) 22%,#120406);box-shadow:0 0 0 1px rgba(0,0,0,.85),inset 0 0 0 1.5px #fffbe8,inset 0 2px 0 2.5px var(--a),inset 0 -2px 0 3.5px color-mix(in srgb,var(--a) 50%,#2a1004),inset 0 0 0 6px var(--lq),inset 0 0 0 7.5px var(--a),inset 0 0 0 9px rgba(0,0,0,.8)}
+body[data-skt="l"] #skFx::before,body[data-skt="m"] #skFx::before{box-shadow:0 0 0 1px rgba(0,0,0,.85),0 0 0 3px var(--a),inset 0 0 0 1.5px #fffbe8,inset 0 2px 0 3px var(--a),inset 0 -2px 0 4px color-mix(in srgb,var(--a) 50%,#2a1004),inset 0 0 0 7.5px var(--lq),inset 0 0 0 9px var(--a),inset 0 0 0 10.5px #fff4cc,inset 0 0 0 11.5px rgba(0,0,0,.85)}
+/* inner lip: dark lacquer groove + top highlight, glow spills onto reels lightly */
+#skFx::after{inset:var(--bw);border-radius:6px;box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.75),inset 0 0 0 2.5px rgba(255,240,200,.35),inset 0 0 16px rgba(var(--g),.45),0 0 0 1px rgba(255,250,230,.55)}
+body[data-skt="l"] #skFx::after,body[data-skt="m"] #skFx::after{box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.75),inset 0 0 0 2.5px rgba(255,240,200,.45),inset 0 0 24px rgba(var(--g),.6),0 0 0 1px rgba(255,250,230,.7)}
+/* glint sweep along bezel */
+@media (prefers-reduced-motion:no-preference){body[data-skin] #skFx::before{background-size:100% 100%,auto}body[data-skt="l"] #skFx,body[data-skt="m"] #skFx{animation:skBreath35 2.8s ease-in-out infinite}}
+@keyframes skBreath{0%,100%{}}
+@keyframes skBreath35{50%{box-shadow:0 0 30px 6px rgba(var(--g),.85),0 6px 14px rgba(0,0,0,.7)}}
+/* mythic: dual ring (inner hairline of accent) */
+body[data-skt="m"] #skFx::after{outline:1.5px solid var(--a);outline-offset:-5px}
+/* corner ornaments sit on the bezel corners */
+#skFx i{width:20px;height:20px;border:0;border-radius:50%;z-index:2;background:radial-gradient(circle at 35% 30%,#fff 0 12%,var(--a) 30%,color-mix(in srgb,var(--a) 40%,#000) 75%);box-shadow:0 0 8px rgba(var(--g),1),0 1px 2px #000}
+#skFx .c1{top:-6px;left:-6px}#skFx .c2{top:-6px;right:-6px}#skFx .c3{bottom:-6px;left:-6px}#skFx .c4{bottom:-6px;right:-6px}
+body[data-skt="m"] #skFx i{width:24px;height:24px;border-radius:4px;transform:rotate(45deg)}
+/* plaque: hung on the lower bezel (top area is under the hero LCD layer) so it never covers symbols */
+#skFx .plq{top:auto;bottom:-7px;z-index:3;opacity:1;font:900 10px/13px "Noto Serif TC",serif;letter-spacing:2px;padding:1px 14px;border-radius:9px;color:#2a0a00;background:linear-gradient(#fffbe6,var(--a) 45%,color-mix(in srgb,var(--a) 55%,#3a1a04));border:1px solid rgba(255,255,255,.6);box-shadow:0 0 12px rgba(var(--g),.9),0 2px 3px rgba(0,0,0,.6),inset 0 -2px 0 rgba(0,0,0,.25);text-shadow:0 1px 0 rgba(255,255,255,.5)}
+#skFx .pt em{z-index:1}
