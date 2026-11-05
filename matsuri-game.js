@@ -166,7 +166,7 @@ if(ev.sc>=3)ev.scPos.forEach(([c,r])=>reels[c].firstElementChild.children[r].cla
 svg.innerHTML=sh;lcdResult(xr,ev.sc>=3);
 if(free)FS.won+=won;
 if(won){bal+=won;$('win').textContent=won;$('machine').classList.add('win-mode');
-$('msg').textContent=`恭喜！${hits.length} 條連線${ev.sc>=3?'＋SCATTER':''}${free?'（×2）':''}，贏得 ${fmt(won)} 籌碼！`;
+$('msg').textContent=`恭喜！${hits.length} 條連線${ev.sc>=3?'＋分散':''}${free?'（×2）':''}，贏得 ${fmt(won)} 籌碼！`;
 const big=xr>=(free?30:10)&&ev.sc<3;
 winFX();winVFX(xr);if(big){setTimeout(()=>bigWin(won,total),1100)}else{sfx.win(winTier(xr));if(xr>=3)rain(1.2,1)}}
 else{$('msg').textContent=free?`免費旋轉 ${FS.n}／${FS.tot}`:LOVE_L[Math.random()*LOVE_L.length|0];if(!free)sfx.lose()}
@@ -299,7 +299,7 @@ if(e.code==='Space'){if(tg==='BUTTON'&&e.target.id!=='spinBtn')return;e.preventD
 else if(!spinning&&(e.key==='+'||e.key==='='||e.code==='NumpadAdd'))$('plus').click();
 else if(!spinning&&(e.key==='-'||e.code==='NumpadSubtract'))$('minus').click();
 else if((e.key==='m'||e.key==='M')&&!e.ctrlKey&&!e.metaKey)$('soundBtn').click()});
-const pt=$('payTable');[...SYM].reverse().forEach(s=>pt.insertAdjacentHTML('beforeend',s.id==='scatter'?`<tr class="payfs"><td class="pname">${symHTML(s.id,'width="34" height="34"')} SCATTER</td><td>總押注×6</td><td>×25</td><td>×125</td></tr><tr class="payfs"><td colspan="4">3 個以上（任意位置）＝ 10 次免費旋轉・獎金 ×2</td></tr>`:`<tr><td class="pname">${symHTML(s.id,'width="34" height="34"')} ${s.name}</td><td>×${s.pay[0]}</td><td>×${s.pay[1]}</td><td>×${s.pay[2]}</td></tr>`));
+const pt=$('payTable');[...SYM].reverse().forEach(s=>pt.insertAdjacentHTML('beforeend',s.id==='scatter'?`<tr class="payfs"><td class="pname">${symHTML(s.id,'width="34" height="34"')} 分散</td><td>總押注×6</td><td>×25</td><td>×125</td></tr><tr class="payfs"><td colspan="4">3 個以上（任意位置）＝ 10 次免費旋轉・獎金 ×2</td></tr>`:`<tr><td class="pname">${symHTML(s.id,'width="34" height="34"')} ${s.name}</td><td>×${s.pay[0]}</td><td>×${s.pay[1]}</td><td>×${s.pay[2]}</td></tr>`));
 render();ui();
 // ---- Daily check-in (play-money only) ----
 const DAILY=[100,150,200,300,400,500,1000];
@@ -464,7 +464,7 @@ function lcdReach(){lcd.classList.add('reach');$('lcdIdle').style.opacity=0;$('l
 function lcdBonusFS(){lcdClear();lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='免費遊戲 開始!!';slam('超級獎勵','#ff4fa3','免費遊戲 ×10');lcdLater(()=>lcd.classList.remove('bonus'),2200)}
 function lcdResult(x,bon){$('spinBtn').classList.remove('push');lcd.classList.remove('reach');if(bon)return;
 if(x>=10){lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='獎勵確定!!';slam('7',x>=80?'#fff':'#ffc400',x>=30?'超級大獎':'大獎');lcdLater(()=>slam(x>=80?'大獎!!':'大獎','#ff2240','確定'),550)}
-else if(x>=2){slam('小獎','#19e08a','總押注 ×'+(Math.round(x*10)/10));$('lcdNavi').textContent='REGULAR 中獎';lcdLater(lcdReset,2600)}
+else if(x>=2){slam('小獎','#19e08a','總押注 ×'+(Math.round(x*10)/10));$('lcdNavi').textContent='一般中獎';lcdLater(lcdReset,2600)}
 else if(x>0){slam('贏','#3a8bff','×'+(Math.round(x*10)/10));$('lcdNavi').textContent='小役 中獎';lcdLater(lcdReset,1800)}
 else{lcdLater(lcdReset,700)}}
 {const mk=(el,a)=>{a.forEach((li,i)=>{const e=document.createElement('b');e.className='pl';e.dataset.l=li;e.textContent=li+1;e.style.setProperty('--lc',COLORS[li]);e.style.setProperty('--i',i);el.appendChild(e)})};mk($('ledL'),[0,1,2,3,4,5,6,7,8,9]);mk($('ledR'),[10,11,12,13,14,15,16,17,18,19])}
