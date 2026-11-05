@@ -361,3 +361,7 @@ html body .czm b,html body .czbar .box b{font-family:"Noto Sans TC",Arial,sans-s
 #czToast{top:calc(env(safe-area-inset-top,0px) + 10px)}
 .cznote{box-sizing:content-box!important;padding-bottom:env(safe-area-inset-bottom,0px)}
 #czLoad .cznote2{bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+/* v28.3 unified character dialogue bubble size (all themes, never fit-shrunk) */
+#czEn .czbub,.inner>#czEn .czbub{font-size:18px!important;line-height:1.35!important;max-width:72%!important}
+#czEn .czbub span{font-size:18px!important;line-height:1.35!important;white-space:normal!important;overflow-wrap:anywhere}
+#czEn .czbub b{font-size:12px!important;line-height:1!important}

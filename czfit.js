@@ -22,7 +22,7 @@ addEventListener('resize',sch);window.CZFIT=fitAll;
 })();
 /* v18.5b: fit-to-box for subtitle bar, voice bubbles, stats, buttons (shrink, never clip) */
 (function(){
-const BOX='#msg,.msg,#czEn .czbub span,.czm b,.czbar .box b,.czbtn:not(#czLobby) span,#max16,#czBuyBtn span,.czlv b';
+const BOX='#msg,.msg,.czm b,.czbar .box b,.czbtn:not(#czLobby) span,#max16,#czBuyBtn span,.czlv b';
 function clipBox(el){let b=el.getBoundingClientRect(),L=b.left,R=b.right,c=el.parentElement;
  while(c&&c!==document.body){const cs=getComputedStyle(c);if(cs.overflow!=='visible'||cs.clipPath!=='none'){const q=c.getBoundingClientRect();L=Math.max(L,q.left);R=Math.min(R,q.right);break}c=c.parentElement}
  return [Math.max(L,0),Math.min(R,innerWidth)]}
