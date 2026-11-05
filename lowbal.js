@@ -1,4 +1,4 @@
-/* 龍運金殿 v252: 籌碼不足 / 重置籌碼 luxury dialog (replaces native confirm(); offered when chips < minimum bet) */
+/* 龍運金殿 v28.19: 籌碼不足 / 重置籌碼 / 清除排行榜 luxury dialog (replaces native confirm(); offered when chips < minimum bet) */
 (function(){var D,cb;
 function css(t){var e=document.createElement('style');e.textContent=t;document.head.appendChild(e)}
 function build(){if(D)return D;
@@ -21,10 +21,10 @@ function build(){if(D)return D;
  D.addEventListener('click',function(e){if(e.target===D){cb=null;D.close()}});
  return D}
 window.czChipDlg=function(mode,onOk){var d=build();if(d.open)return;cb=onOk;
- var low=mode==='low';
- d.querySelector('#czChipT').textContent=low?'籌碼不足':'重置籌碼';
- d.querySelector('#czChipP').textContent=low?'目前的虛擬籌碼不夠最低押注。可以免費重置為 1,000 籌碼繼續遊戲，也可以回大廳領取每日簽到。':'確定要將籌碼重置為 1,000 嗎？目前的籌碼數量會被取代。';
- d.querySelector('#czChipOk').textContent=low?'免費重置為 1,000 籌碼':'確定重置';
- d.querySelector('#czChipNo').textContent=low?'稍後再說':'取消';
+ var low=mode==='low',lb=mode==='lbclear';
+ d.querySelector('#czChipT').textContent=lb?'清除排行榜':(low?'籌碼不足':'重置籌碼');
+ d.querySelector('#czChipP').textContent=lb?'確定要清除本機排行榜與統計嗎？暱稱會保留，紀錄會重設。':(low?'目前的虛擬籌碼不夠最低押注。可以免費重置為 1,000 籌碼繼續遊戲，也可以回大廳領取每日簽到。':'確定要將籌碼重置為 1,000 嗎？目前的籌碼數量會被取代。');
+ d.querySelector('#czChipOk').textContent=lb?'確定清除':(low?'免費重置為 1,000 籌碼':'確定重置');
+ d.querySelector('#czChipNo').textContent=lb?'取消':(low?'稍後再說':'取消');
  try{d.showModal()}catch(e){d.setAttribute('open','')}};
 })();

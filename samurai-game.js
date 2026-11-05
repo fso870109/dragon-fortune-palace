@@ -342,7 +342,7 @@ P.innerHTML=`<div class="stats"><div><small>總旋轉次數</small><b>${fmt(st.s
 $('lbBtn').onclick=()=>{sfx.click();const st=lbGet();$('lbName').value=st.name;lbRender();$('lb').showModal()};
 $('lbName').onchange=()=>{const st=lbGet(),v=$('lbName').value.trim().slice(0,12)||'玩家';st.name=v;st.wins.forEach(w=>w.n=v);lbSave(st);$('lbName').value=v;lbRender()};
 $('tabTop').onclick=()=>{lbTab='top';sfx.click();lbRender()};$('tabMe').onclick=()=>{lbTab='me';sfx.click();lbRender()};
-$('lbReset').onclick=()=>{if(confirm('確定清除本機排行榜與統計嗎？')){const n=lbGet().name;lbSave({name:n,peak:bal});lbNew=-1;lbRender()}};
+$('lbReset').onclick=()=>{const f=()=>{const n=lbGet().name;lbSave({name:n,peak:bal});lbNew=-1;lbRender()};if(window.czChipDlg)czChipDlg('lbclear',f);else if(confirm('確定清除本機排行榜與統計嗎？'))f()};
 $('lbClose').onclick=()=>$('lb').close();
 // ---- Rewarded "watch ad" placeholder (no real ad network; play-money only) ----
 const AD_REWARD=200,AD_MAX=5,AD_SEC=window.__adSec||15;
