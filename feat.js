@@ -1,4 +1,4 @@
-/* v20.3 extra events: 旋風聚寶 / 幸運彈珠 / 三重彩金輪 / 狂熱倍數 / 購買寶珠鎖定重轉 — play money only */
+/* v20.3 extra events: 旋風聚寶 / 幸運彈珠 / 三重彩金輪 / 狂熱倍數 / 購買寶珠對碰 — play money only */
 (function(){
 if(typeof CZM==='undefined')return;
 const ID=CZM.id,NF=new Intl.NumberFormat('zh-TW'),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -87,10 +87,10 @@ const CZo=window.CZ&&CZ.onSettle;if(CZo)CZ.onSettle=function(o){const r=CZo.appl
  else if(Rr.m<3*(MP[ID]||0)){tk.m++;if(tk.m>=3){tk.m=0;armed=mxR=pick(MX);queue(mxShow,bet)}emitT('mult')}
  tw.n++;tw.pot+=tot*TW_R*TW_U[Math.random()*TW_U.length|0];if(tw.n>=TW_N)queue(erupt(),bet);localStorage.setItem(KEY,JSON.stringify(tw));twUI();
  if(Rr.p<5*PL_P){tk.p++;const full=tk.p>=5;if(full)tk.p=0;emitT('plinko',full);if(full)queue(plinko,bet)}if(Rr.w<12*WH_P){tk.w++;const full=tk.w>=12;if(full)tk.w=0;emitT('wheel',full);if(full)queue(wheel,bet)}saveT();emitT('tick')}}catch(e){console.error(e)}return r};
-/* ---- buy 寶珠鎖定重轉 ---- */
-function buyUI(){const m=$('menu16'),b0=$('czBuyBtn');if(!m||!b0||$('czBuyHS'))return;const b=document.createElement('button');b.id='czBuyHS';b.type='button';b.className='czbuyitem';b.innerHTML='<span class="ic" aria-hidden="true">🔮</span><span class="czbt"><b>寶珠鎖定重轉</b><small></small></span>';b0.after(b);
+/* ---- buy 寶珠對碰 ---- */
+function buyUI(){const m=$('menu16'),b0=$('czBuyBtn');if(!m||!b0||$('czBuyHS'))return;const b=document.createElement('button');b.id='czBuyHS';b.type='button';b.className='czbuyitem';b.innerHTML='<span class="ic" aria-hidden="true">🔮</span><span class="czbt"><b>寶珠對碰</b><small></small></span>';b0.after(b);
  const price=()=>Math.round(BETS[betIdx]*NL*HS_BUY);const lab=()=>{b.querySelector('small').textContent=`花 ${price().toLocaleString()} 籌碼開啟`};lab();new MutationObserver(lab).observe($('bet'),{childList:true,characterData:true,subtree:true});
- const d=document.createElement('dialog');d.id='czBuyHSd';d.innerHTML=`<h2>寶珠鎖定重轉</h2><p class="czbp"></p><p class="note">直接進入寶珠鎖定重轉（6 顆寶珠起始、3 次重轉）。<br>理論回收率約 94%（模擬）・僅使用虛擬籌碼・純虛擬・無兌現</p><div class="dact"><button class="claim" id="czBuyHSOk">確認購買</button><button id="czBuyHSNo">取消</button></div>`;document.body.appendChild(d);
+ const d=document.createElement('dialog');d.id='czBuyHSd';d.innerHTML=`<h2>寶珠對碰</h2><p class="czbp"></p><p class="note">直接進入寶珠對碰（6 顆寶珠起始、3 次重轉）。<br>理論回收率約 94%（模擬）・僅使用虛擬籌碼・純虛擬・無兌現</p><div class="dact"><button class="claim" id="czBuyHSOk">確認購買</button><button id="czBuyHSNo">取消</button></div>`;document.body.appendChild(d);
  b.onclick=()=>{if(!idle()||!window.CZHS)return;d.querySelector('.czbp').innerHTML=`價格：<b>${price().toLocaleString()}</b> 籌碼（總押注 ${BETS[betIdx]*NL} × ${HS_BUY}）`;$('czBuyHSOk').disabled=bal<price();$('czBuyHSOk').textContent=bal<price()?'籌碼不足':'確認購買';try{$('menu16').classList.remove('open')}catch(e){}d.showModal()};
  $('czBuyHSNo').onclick=()=>d.close();$('czBuyHSOk').onclick=()=>{d.close();const p=price();if(bal<p||!idle())return;bal-=p;try{ui();saveLater&&saveLater()}catch(e){}CZHS.force(BETS[betIdx])}}
 function boot(){twUI();buyUI()}

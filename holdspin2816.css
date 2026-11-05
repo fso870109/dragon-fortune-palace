@@ -1,4 +1,4 @@
-/* v28.16 Hold&Win: fuller orbs, miss = theme symbol, last-spin FX */
+/* v28.16 寶珠對碰: fuller orbs, miss = theme symbol, last-spin FX */
 /* (1) orbs fill the cell: gold plaque fills whole cell + orb at full short side */
 html body #hsBox .hsG>i.on:not(#z),html body #b22Stage #hsBox .hsG>i.on:not(#z){
   background-size:auto 112%,100% 100%!important;background-position:center,center!important;background-repeat:no-repeat!important;

@@ -1,4 +1,4 @@
-/* v28.13 Hold&Win: premium pits/orbs + staggered reel feel (loaded after ui21/bonus22/reel21) */
+/* v28.13 寶珠對碰: premium pits/orbs + staggered reel feel (loaded after ui21/bonus22/reel21) */
 #hsBox .hsG>i.spin .hsReel{display:block;position:absolute;inset:8%;border-radius:50%;overflow:hidden;pointer-events:none;
  background:repeating-linear-gradient(180deg,#fff6cf 0 6px,#ffd65a 6px 12px,#c98a1c 12px 18px,#5a3200 18px 24px,#ffd65a 24px 30px);
  background-size:100% 30px;animation:hs2813Reel .18s linear infinite;opacity:.85;mix-blend-mode:screen;

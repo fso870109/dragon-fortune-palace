@@ -1,4 +1,4 @@
-/* v28.17 Hold&Win: fuller 3D orbs, last-spin = status-bar only, end flash without filter (b23-safe) */
+/* v28.17 寶珠對碰: fuller 3D orbs, last-spin = status-bar only, end flash without filter (b23-safe) */
 /* (1) orbs fill the cell: gold plaque + orb on short side; overflow clipped */
 html body #hsBox .hsG>i.on:not(#z),html body #b22Stage #hsBox .hsG>i.on:not(#z),html body #hsBox.b23 .hsG>i.on:not(#z){
   background-size:auto 100%,100% 100%!important;background-position:center,center!important;background-repeat:no-repeat!important;

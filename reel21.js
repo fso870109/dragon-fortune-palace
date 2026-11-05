@@ -40,9 +40,9 @@ async function crackCells(ids){const L=inBoard('r24c','');ids.forEach((i,k)=>{co
  ids.forEach(i=>{const r=cellRect(i);window.W21&&W21.burst(r.cx,r.cy,10,200)});tone(140,0,.3,'square',.06);await sleep(260);L.remove()}
 const F=window.F21||{};const bedOn=F.bedOn,bedOff=F.bedOff;
 F.pre=async function(title){const b=$('board');let ids;
- if(title==='寶珠鎖定重轉'){ids=(window.__hsStart||[]).slice();if(!ids.length)ids=[6,7,8]}else{const all=[...Array(15).keys()];ids=[];while(ids.length<3){const k=all.splice(Math.random()*all.length|0,1)[0];ids.push(k)}}
+ if(title==='寶珠對碰'){ids=(window.__hsStart||[]).slice();if(!ids.length)ids=[6,7,8]}else{const all=[...Array(15).keys()];ids=[];while(ids.length<3){const k=all.splice(Math.random()*all.length|0,1)[0];ids.push(k)}}
  const fr=$('w21F');if(fr)fr.className='go t2';await crackCells(ids);
- if(title==='寶珠鎖定重轉'){b.classList.add('b23lock');if(sticky)sticky.classList.add('lock')}
+ if(title==='寶珠對碰'){b.classList.add('b23lock');if(sticky)sticky.classList.add('lock')}
  slam(title||'隱藏遊戲');bedOn&&bedOn();await sleep(RM?60:950);if(sticky)sticky.classList.remove('lock')};
 F.back=function(){const b=$('board'),w=$('czWin');if(w&&window.W21){const c=w.getBoundingClientRect(),r=b.getBoundingClientRect();for(let i=0;i<12;i++)setTimeout(()=>W21.trail(r.left+Math.random()*r.width,r.top+Math.random()*r.height,c.left+c.width/2,c.top+c.height/2),i*30)}
  b.classList.remove('b23lock');const fr=$('w21F');if(fr)fr.className='';bedOff&&bedOff();stickyUI(-1)};

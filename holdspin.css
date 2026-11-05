@@ -1,4 +1,4 @@
-/* v28.13 寶珠鎖定重轉 — base; visuals overridden by bonus22 art + holdspin2813.css */
+/* v28.13 寶珠對碰 — base; visuals overridden by bonus22 art + holdspin2813.css */
 #hsMeter{position:absolute;left:8px;bottom:8px;z-index:5;display:flex;align-items:center;gap:6px;padding:4px 8px;border-radius:10px;background:rgba(10,4,14,.72);border:1px solid rgba(232,190,100,.7);font:800 11px/1 "Noto Sans TC",sans-serif;color:#f4d89c;pointer-events:auto}
 #hsMeter span{width:70px;height:6px;border-radius:4px;background:rgba(255,255,255,.15);overflow:hidden}
 #hsMeter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c98a22,#ffe39a);transition:width .4s}
