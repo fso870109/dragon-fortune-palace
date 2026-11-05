@@ -11,7 +11,7 @@ const V='?v=256',K='cz_gal';
 const load=()=>{try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}};const save=g=>localStorage.setItem(K,JSON.stringify(g));
 const st=(g,id)=>g[id]||(g[id]={spins:0,fs:0});
 function count(){const g=load();let n=0;MS.forEach(([id])=>ART.forEach(a=>{if(a[2](st(g,id)))n++}));return n}
-window.CZGAL={count,total:MS.length*ART.length,open};
+window.CZGAL={count,total:MS.length*ART.length,open,got(){const g=load(),r=[];MS.forEach(([id])=>ART.forEach(a=>{if(a[2](st(g,id)))r.push('assets/'+id+'/'+a[0]+'.webp')}));return r}};
 if(window.CZM&&window.CZ&&CZ.onSettle){const _s=CZ.onSettle.bind(CZ);CZ.onSettle=function(o){const r=_s(o);try{const g=load(),s=st(g,CZM.id),b=count();if(!o.free)s.spins++;if(o.sc>=3)s.fs++;if(o.won>0)s.win=(s.win||0)+1;if((o.xr||0)>=10)s.big=(s.big||0)+1;save(g);const a=count();
   if(a>b&&window.CZEN)CZEN.say('圖鑑新增了一張插圖喔♡',3,2600);if(a>b){galNote(a,MS.length*ART.length)}}catch(e){}return r}}
 function open(){const g=load();let d=document.getElementById('czGal');if(d)d.remove();d=document.createElement('dialog');d.id='czGal';

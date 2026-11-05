@@ -131,7 +131,6 @@ h+='<i class="lgp'+(s>5?' st':'')+'" style="--x:'+(R()*100).toFixed(1)+'%;--y:'+
 </section>
 <h2 class="sec">機台 MACHINES</h2>
 <section class="wall" id="wall"></section>
-<button class="galbtn" id="bGal"><span class="gt">角色圖鑑</span><b id="galN"></b></button>
 <p class="foot"><b>僅供娛樂・虛擬籌碼・無真實金錢</b><br>本站所有籌碼皆為遊戲內虛擬點數，無法儲值、兌換、轉讓或提領，與任何真實金錢無關。<br>彩金池由所有機台每次押注的 0.8% 累積（僅限本裝置），抽中後回到底注。<br><a class="pplink" href="privacy.html">隱私權政策與使用條款</a></p>
 </div>
 <dialog id="dDaily"><h3>每日簽到</h3><div class="days" id="days"></div><button class="btn hot close" id="dClaim">簽到</button><p class="note">連續簽到 7 天・中斷從第 1 天開始・虛擬籌碼</p><button class="btn close" data-close>關閉</button></dialog>
@@ -212,4 +211,8 @@ const go=()=>{$('load').classList.add('out');bgmStart();CZ.vib(10);setTimeout(()
 if(sessionStorage.getItem('cz_in')){$('load').remove();addEventListener('pointerdown',bgmStart,{once:true})}else $('enter').addEventListener('click',()=>sessionStorage.setItem('cz_in','1'));
 refresh();
 })();
-</script><script src="gallery.js?v=256"></script><script src="mq257.js?v=258"></script><script>document.getElementById("bGal").onclick=()=>CZGAL.open();document.getElementById("galN").textContent=CZGAL.count()+"/"+CZGAL.total;document.getElementById("bGal").style.setProperty("--gp",Math.round(CZGAL.count()/CZGAL.total*100)+"%")</script><link rel="stylesheet" href="life21.css?v=256"><link rel="stylesheet" href="lobby21.css?v=256"><link rel="stylesheet" href="lobby260.css?v=261"><link rel="stylesheet" href="logo262.css?v=264"><script src="lobby21.js?v=256"></script><script src="settings.js?v=259"></script><script src="hint.js?v=256"></script><script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})</script></body></html>
+</script><script src="gallery.js?v=265"></script><script src="mq257.js?v=258"></script><script>(function(){var w=document.getElementById("wall");if(!w||!window.CZGAL)return;var n=CZGAL.count(),T=CZGAL.total,g=CZGAL.got(),S=["matsuri","samurai","neko","sakura"],ph="";
+for(var i=0;i<4;i++){ph+=g[i]?'<div style="background-image:url('+g[i]+'?v=256)"></div>':'<div class="sil" style="background-image:url(assets/'+S[i]+'/p_idle.webp?v=256)"></div>'}
+var c=document.createElement("a");c.className="card galcard";c.id="bGal";c.href="#";c.setAttribute("aria-label","角色圖鑑");c.style.setProperty("--i",w.children.length);
+c.innerHTML='<span class="rib">角色收藏</span><div class="gph">'+ph+'</div><div class="meta"><div class="t"><b>角色圖鑑</b><small><span class="tag">已收集 '+n+' / '+T+'</span></small><div class="gbar"><i style="width:'+Math.round(n/T*100)+'%"></i></div></div><span class="play">查看</span></div>';
+c.onclick=function(e){e.preventDefault();CZGAL.open()};var l=w.querySelector(".card.lock");w.insertBefore(c,l)})()</script><link rel="stylesheet" href="life21.css?v=256"><link rel="stylesheet" href="lobby21.css?v=256"><link rel="stylesheet" href="lobby260.css?v=265"><link rel="stylesheet" href="logo262.css?v=264"><script src="lobby21.js?v=256"></script><script src="settings.js?v=259"></script><script src="hint.js?v=256"></script><script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})</script></body></html>
