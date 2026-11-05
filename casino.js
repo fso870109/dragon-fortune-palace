@@ -77,7 +77,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  function atEnd(){if(!at.classList.contains('on')||at.classList.contains('out'))return;clearTimeout(atT);window.__hold=false;const f=atCb;atCb=null;f&&f();setTimeout(()=>{at.classList.add('out');setTimeout(()=>{at.className=''},280)},420)}
  at.addEventListener('pointerdown',atEnd);addEventListener('keydown',e=>{if(at.classList.contains('on')&&(e.key===' '||e.key==='Enter'||e.key==='Escape')){e.preventDefault();e.stopPropagation();atEnd()}},true);
  CZ.atari=atari;
- (window.requestIdleCallback||setTimeout)(()=>{const w=innerWidth>900;['assets/lobby/'+(w?'atari':'atari_s')+'.webp?v=239','assets/lobby/atari_bl.webp?v=239','assets/lobby/frame_s.webp?v=239',`assets/${CZM.id}/bigbonus.webp?v=239`,`assets/${CZM.id}/hero.webp?v=239`,`assets/${CZM.id}/cutin.webp?v=239`].forEach(u=>{const i=new Image();i.src=u;i.decode&&i.decode().catch(()=>{})})},{timeout:2500});
+ (window.requestIdleCallback||setTimeout)(()=>{['assets/'+CZM.id+'/p_bigwin.webp?v=281','assets/'+CZM.id+'/p_bigwin_bl.webp?v=281','assets/lobby/frame_s.webp?v=239',`assets/${CZM.id}/hero.webp?v=239`,`assets/${CZM.id}/cutin.webp?v=239`].forEach(u=>{const i=new Image();i.src=u;i.decode&&i.decode().catch(()=>{})})},{timeout:2500});
  const _bw=window.bigWin;window.bigWin=function(won,total,o={}){if(o.noStamp)return _bw(won,total,o);const x=won/total;
   atari(o.tier?o.tier[1]:x>=50?'傳說大獎':x>=25?'超級大獎':'大獎',o.tier?o.tier[2]:x>=50?'龍運降臨!!':x>=25?'金殿狂歡!!':'好運降臨!!',()=>_bw(won,total,o))};
  const _fi=window.fsIntro;window.fsIntro=function(re){if(re)return _fi(re);atari('免費遊戲!!','免費遊戲 開始',()=>_fi(re))};
@@ -136,7 +136,7 @@ if(IN_M)addEventListener('load',czPreSym);
 function czMenuFix(){const m=document.getElementById('menu16');if(m&&m.parentNode!==document.body)document.body.appendChild(m);const b=document.querySelector('.czbar');const set=()=>b&&document.documentElement.style.setProperty('--czbarH',Math.round(b.getBoundingClientRect().height)+'px');requestAnimationFrame(set);/* v246 */addEventListener('resize',set);document.getElementById('menuBtn')?.addEventListener('click',set)}
 if(IN_M)addEventListener('load',czMenuFix);
 function czHero(){const mach=document.getElementById('machine'),inn=mach&&mach.querySelector('.inner');if(!inn||document.getElementById('czHero'))return;
- const id=(location.pathname.split('/').pop()||'').replace('.html','');const V='?v=239';document.documentElement.style.setProperty('--czhero',`url(assets/${id}/hero.webp${V})`);
+ const id=(location.pathname.split('/').pop()||'').replace('.html','');const V='?v=239';document.documentElement.style.setProperty('--czhero',`url(assets/${id}/hero.webp${V})`);document.documentElement.style.setProperty('--czbw',`url(assets/${id}/p_bigwin.webp?v=281)`);document.documentElement.style.setProperty('--czbwbl',`url(assets/${id}/p_bigwin_bl.webp?v=281)`);
  const h=document.createElement('div');h.id='czHero';h.setAttribute('aria-hidden','true');
  h.innerHTML=`<div class="czhi" style="background-image:url(assets/${id}/hero.webp${V})"></div><div class="czhs"></div><i class="czhp"></i><i class="czhp b"></i><img class="czhl" src="assets/${id}/logo.webp${V}" alt=""><div class="czhf"></div>`;
  mach.insertBefore(h,inn);let F=null;const mq=matchMedia('(max-width:620px) and (orientation:portrait)');

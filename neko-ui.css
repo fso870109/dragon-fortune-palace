@@ -209,7 +209,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .bw{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#000;cursor:pointer;overflow:hidden;contain:strict}
 .bw.show{display:flex;animation:bwIn .25s ease-out}
 @keyframes bwIn{from{opacity:0}}
-.bw .art{position:absolute;inset:0;background:url(assets/neko/bigbonus.webp?v=256) center/cover;opacity:.55;transform:scale(1.15);animation:artZoom 6s ease-out forwards;will-change:transform}
+.bw .art{position:absolute;inset:0;background:url(assets/neko/p_bigwin.webp?v=281) center/cover;opacity:.55;transform:scale(1.15);animation:artZoom 6s ease-out forwards;will-change:transform}
 @keyframes artZoom{to{transform:scale(1)}}
 .bw .rays{display:none;position:absolute;left:50%;top:45%;width:150vmax;height:150vmax;margin:-75vmax 0 0 -75vmax;background:repeating-conic-gradient(rgba(var(--glow),.28) 0 6deg,transparent 6deg 15deg);border-radius:50%;animation:rot 10s linear infinite;will-change:transform;opacity:.8}
 .bw .vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.35) 20%,rgba(0,0,0,.9) 85%)}
@@ -356,7 +356,7 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 .badges div small{display:block;font:700 11px sans-serif;letter-spacing:2px;color:var(--gold1);margin-top:3px}
 .badges div::before{content:"♛";display:block;font-size:14px;color:var(--gold2);margin-bottom:2px;font-style:normal}
 /* big win overlay */
-.bw .art{background-image:url(assets/neko/bigbonus.webp?v=256);opacity:.75}
+.bw .art{background-image:url(assets/neko/p_bigwin.webp?v=281);opacity:.75}
 .bw .vig{background:radial-gradient(ellipse at 50% 55%,rgba(40,0,30,.25) 20%,rgba(10,0,10,.85) 85%)}
 .bw .tier{color:#fff;text-shadow:0 4px 0 #d6307e,0 8px 0 #5a0a30,0 0 30px rgba(255,100,180,.95)}
 .bw.mega .tier{color:#ffe9b0;text-shadow:0 4px 0 #c07a10,0 8px 0 #4a2a00,0 0 30px rgba(255,200,100,.95)}
@@ -438,7 +438,7 @@ dialog .days li.today,dialog .days li.on{border-color:#ff7ac8!important;box-shad
 dialog button.claim,dialog .claim{background:linear-gradient(#ffb3dc,#ff4fa3 55%,#a3105a)!important;color:#fff!important;border:1px solid #ffd27a!important;box-shadow:0 0 14px rgba(255,79,163,.7)!important;text-shadow:0 1px 0 #6a0030}
 dialog button{border-color:#d9a441!important}
 .bw{background:radial-gradient(ellipse at center,rgba(60,10,40,.55),rgba(10,2,8,.92))!important}
-.bw .art{background:url(assets/neko/bigbonus.webp?v=256) 50% 30%/cover!important}
+.bw .art{background:url(assets/neko/p_bigwin.webp?v=281) 50% 30%/cover!important}
 @keyframes bw16{0%{transform:scale(1.5);filter:brightness(3)}30%{filter:brightness(1.6)}100%{transform:scale(1);filter:none}}
 .bw.on .art,.bw.show .art{animation:bw16 .7s ease-out both}
 /* mobile: art full width, controls below */
