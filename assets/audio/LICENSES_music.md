@@ -18,3 +18,10 @@ Original compositions made for 龍運金殿 (84 BPM light swing; Fmaj7–Em7–D
 - Voxengo free reverb impulse response “French 18th Century Salon” — Voxengo IR license, free for commercial use.
 - Vinyl crackle/hiss synthesized procedurally (no third-party samples).
 - Rendered with TinySoundFont (MIT) and pretty_midi (MIT).
+
+# 櫻花斬 (sakura) BGM, Free-Spin BGM & sting — 和風抒情／柔和弦樂 (v28.2)
+Original compositions made for 龍運金殿 (76 BPM, D minor; violin section melody, harp arpeggios, string pad, cello, soft piano, flute, koto accents, soft taiko). Instrument sources:
+- VSCO 2 Community Edition (Versilian Studios) violin section, harp, flute — CC0 1.0 (public domain).
+- GeneralUser GS SoundFont by S. Christian Collins — GeneralUser GS License (free use in music, incl. commercial): string pad, piano, cello, koto, drum kit.
+- Voxengo free reverb impulse response “French 18th Century Salon” — Voxengo IR license, free for commercial use.
+- Rendered with TinySoundFont (MIT) and pretty_midi (MIT).

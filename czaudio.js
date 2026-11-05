@@ -1,6 +1,6 @@
 /* v18.3 pre-rendered BGM/SFX (play-money casino). Falls back to synth until buffers decode. */
 (function(){
-const V='?v=279',LOOP={matsuri:64,samurai:60,neko:68.571429,sakura:61.935465},PRE=.3,INTRO={matsuri:12,samurai:7.5,neko:5.714286},MG=1.8,D='assets/audio/';const B={};let ld=false,src=null,want=false,cur=null;
+const V='?v=282',LOOP={matsuri:64,samurai:60,neko:68.571429,sakura:63.157895},PRE=.3,INTRO={matsuri:12,samurai:7.5,neko:5.714286,sakura:6.315789},MG=1.8,D='assets/audio/';const B={};let ld=false,src=null,want=false,cur=null;
 const NAMES=['click','blip','spin','stop','tick','reach','coin','win0','win1','win2','win3','win4','bonus','collect','chime','buy','lose','door_close','door_open'];
 function ctx(){return (typeof aInit==='function'&&aInit())?ac:null}
 function dec(c,buf){return new Promise((ok,no)=>{const p=c.decodeAudioData(buf,ok,no);if(p&&p.then)p.then(ok,no)})}
