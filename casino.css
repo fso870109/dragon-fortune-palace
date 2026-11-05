@@ -357,3 +357,8 @@ html body .czm b,html body .czbar .box b{font:800 22px/1.05 "Noto Sans TC",Arial
 html body .czbar .box.czbet b{font-size:19px}
 html body .czm,html body .czbar .box{height:clamp(46px,6.4svh,58px)!important;min-width:0;overflow:hidden}
 html body .czm b,html body .czbar .box b{font-family:"Noto Sans TC",Arial,sans-serif!important;font-weight:800!important;font-variant-numeric:tabular-nums lining-nums!important}
+
+/* v27.1 Android 15+/16 edge-to-edge: keep top toasts clear of the camera cutout and the bottom notice / loader note above the gesture bar */
+#czToast{top:calc(env(safe-area-inset-top,0px) + 10px)}
+.cznote{box-sizing:content-box!important;padding-bottom:env(safe-area-inset-bottom,0px)}
+#czLoad .cznote2{bottom:calc(14px + env(safe-area-inset-bottom,0px))}
