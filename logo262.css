@@ -1,0 +1,16 @@
+/* v262 logo background A 金箔光幕 */
+.sign .lgbg{position:absolute;left:-16px;right:-16px;top:-6px;bottom:-4px;z-index:-1;pointer-events:none;border-radius:18px;overflow:hidden;contain:strict;
+background:radial-gradient(ellipse at 50% 60%,#5a0a1e,#2a0618 55%,#14020c 85%);
+-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,#000 55%,transparent 100%)}
+.lgbg .lgg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 50% 52%,rgba(255,206,110,.55),rgba(214,120,40,.22) 45%,transparent 72%);will-change:opacity;animation:lgG 5s ease-in-out infinite}
+.lgbg .lgs{position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(105deg,transparent 20%,rgba(255,236,170,.24) 50%,transparent 80%);transform:translateX(-100%);will-change:transform;animation:lgS 9s ease-in-out infinite}
+.lgbg .lgf1,.lgbg .lgf2{position:absolute;left:0;right:0;top:0;bottom:-60px;will-change:transform}
+.lgbg .lgf1{background:radial-gradient(circle,#fff3c0 0 1.2px,transparent 2px) 7px 12px/37px 41px,radial-gradient(circle,rgba(255,230,150,.8) 0 .9px,transparent 1.6px) 3px 5px/41px 41px;opacity:.75;animation:lgF1 11s linear infinite}
+.lgbg .lgf2{background:radial-gradient(circle,#ffd56a 0 1.6px,transparent 2.4px) 21px 30px/53px 47px;opacity:.55;animation:lgF2 15s linear infinite}
+@keyframes lgF1{to{transform:translateY(-41px)}}
+@keyframes lgF2{to{transform:translateY(-47px)}}
+@keyframes lgG{50%{opacity:.72}}
+@keyframes lgS{0%,40%{transform:translateX(-100%)}100%{transform:translateX(230%)}}
+@media (prefers-reduced-motion:reduce){.lgbg .lgg,.lgbg .lgs,.lgbg .lgf1,.lgbg .lgf2{animation:none!important}.lgbg .lgs{transform:translateX(60%)}}
+html.dfpRM .lgbg .lgg,html.dfpRM .lgbg .lgs,html.dfpRM .lgbg .lgf1,html.dfpRM .lgbg .lgf2{animation:none!important}
+html.dfpRM .lgbg .lgs{transform:translateX(60%)}
