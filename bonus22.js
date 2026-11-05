@@ -80,6 +80,7 @@ function art(){if(SPR.done)return;SPR.done=1;const S=128;['gold','mini','minor',
  html body #hsBox .hsG>i.on.minor{background-image:url(${SPR.minor})!important}
  html body #hsBox .hsG>i.on.major{background-image:url(${SPR.major})!important}
  html body #hsBox .hsG>i.on.col{background-image:url(${SPR.col})!important}
+ html body #hsBox .hsG>i.on{--orb:url(${SPR.gold})}html body #hsBox .hsG>i.on.mini{--orb:url(${SPR.mini})}html body #hsBox .hsG>i.on.minor{--orb:url(${SPR.minor})}html body #hsBox .hsG>i.on.major{--orb:url(${SPR.major})}html body #hsBox .hsG>i.on.col{--orb:url(${SPR.col})}
  html body #hsBox .hsG>i.spin,html body #b22Stage #hsBox .hsG>i.spin,html body #hsBox.b23 .hsG>i.spin{background:#0a0414!important;background-image:none!important;animation:none!important;border-radius:6%!important;box-shadow:inset 0 0 0 1.5px rgba(255,214,90,.45),inset 0 8px 12px rgba(0,0,0,.55),inset 0 -8px 12px rgba(0,0,0,.45)!important;filter:none!important;overflow:hidden!important}
  html body #hsBox .hsG>i.miss{background:url(${SPR.sock}) center/94% no-repeat!important;filter:brightness(1.55)!important;box-shadow:inset 0 0 0 2px rgba(255,214,90,.7)!important;transition:filter .12s}
  html body #hsBox .hsG>i.land{filter:brightness(1.35)!important}
