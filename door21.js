@@ -12,7 +12,7 @@ function acc(){const a=D.querySelector('.acc');let h='';const C=['#ffd27a','#ff6
   TH==='samurai'?'--dl:.05s':`left:${3+Math.random()*94}%;top:${-30-Math.random()*120}px;--x:${(Math.random()-.5)*40}px;--a:${200+Math.random()*300}deg;--dl:${.15+Math.random()*.45}s`;h+=`<i style="${s}"></i>`}a.innerHTML=h}
 function prefetch(url){fetch(url,{credentials:'same-origin'}).then(r=>r.text()).then(t=>{const s=new Set();(t.match(/assets\/[a-z0-9_\/-]+\.(webp|png|jpg)/g)||[]).slice(0,40).forEach(u=>{if(s.has(u))return;s.add(u);const i=new Image();i.decoding='async';i.src=u})}).catch(()=>{})}
 // close doors, then cb
-function close(cb,href){if(RM){cb();return}build();H.classList.add('czDoorOn');D.className='';void D.offsetWidth;D.className='cls anim';snd('door_close');setTimeout(()=>D&&D.classList.add('lit'),560);if(href)prefetch(href);setTimeout(cb,820)}
+function close(cb,href){if(RM){cb();return}build();H.classList.add('czDoorOn');D.className='';void D.offsetWidth;D.className='cls anim';snd('door_close');setTimeout(()=>D&&D.classList.add('lit'),560);if(href)prefetch(href);setTimeout(cb,820);setTimeout(function(){if(D&&H.classList.contains('czDoorOn')&&!document.hidden){D.remove();D=null;H.classList.remove('czDoorOn')}},6000)}
 function snd(n){try{if(TH!=='lobby'&&window.CZA&&typeof sound!=='undefined'&&sound)CZA.play(n,1.1)}catch(e){}}
 // opening on arrival
 function open0(){build('cls hold')}

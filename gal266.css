@@ -1,0 +1,19 @@
+/* v266 gallery gold scroll unfurl */
+#czGal[open]{transform-origin:50% 50%;animation:galUn .32s cubic-bezier(.2,.9,.25,1.05) both;
+box-shadow:0 0 0 1px #3a1a02,0 0 0 3px #d9a441,0 0 24px rgba(255,190,70,.35),0 18px 40px rgba(0,0,0,.7)}
+#czGal[open]::backdrop{animation:galBd .32s ease-out both}
+#czGal.out{animation:galOut .26s cubic-bezier(.55,0,.75,.2) both!important}
+#czGal.out::backdrop{animation:galBdO .26s ease-in both}
+#czGal .galrod{position:sticky;display:block;left:0;right:0;height:10px;margin:-12px -12px 8px;z-index:4;pointer-events:none;
+background:linear-gradient(180deg,#fff3c0,#e8b54a 35%,#8a5a12 70%,#4a2a04);box-shadow:0 2px 4px rgba(0,0,0,.6),inset 0 1px 0 #fffbe6;overflow:hidden;border-radius:6px}
+#czGal .galrod.t{top:-12px}
+#czGal .galrod::after{content:"";position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,240,.85),transparent);transform:translateX(-120%);animation:galSh .9s .18s cubic-bezier(.45,.05,.35,1) both}
+@keyframes galUn{0%{opacity:.2;transform:scale(.92,.04)}55%{opacity:1;transform:scale(1.01,.7)}100%{opacity:1;transform:none}}
+@keyframes galOut{0%{opacity:1;transform:none}100%{opacity:0;transform:scale(.92,.04)}}
+@keyframes galBd{from{opacity:0}to{opacity:1}}
+@keyframes galBdO{from{opacity:1}to{opacity:0}}
+@keyframes galSh{to{transform:translateX(320%)}}
+html.dfpRM #czGal[open]{animation:galBd .12s linear both}
+html.dfpRM #czGal.out{animation:galBdO .12s linear both!important}
+html.dfpRM #czGal .galrod::after{animation:none}
+@media (prefers-reduced-motion:reduce){#czGal[open]{animation:galBd .12s linear both}#czGal.out{animation:galBdO .12s linear both!important}#czGal .galrod::after{animation:none}}
