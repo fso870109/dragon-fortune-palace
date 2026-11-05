@@ -23,3 +23,4 @@ box-shadow:inset 0 0 0 2px #ffe7a0,inset 0 0 0 4px #b07a1e,inset 0 0 0 5px #3a1a
 .galbtn::after{content:"";position:absolute;left:14px;right:14px;bottom:8px;height:4px;border-radius:2px;z-index:2;background:linear-gradient(90deg,#ffe08a 0 var(--gp,0%),rgba(60,10,10,.9) 0),#300;box-shadow:0 0 0 1px #a8650c,0 0 6px rgba(255,200,80,.6)}
 .galbtn::after{background:linear-gradient(90deg,#c98a22,#ffe08a var(--gp,0%),rgba(40,6,8,.95) var(--gp,0%))!important}
 @media (max-width:370px){.jpc.g b{font-size:44px!important}.jpc.g{padding:40px 16px 30px!important}}
+.wall+.galbtn{margin:14px 0 8px}
