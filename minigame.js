@@ -11,13 +11,13 @@ window.CZMG={draw(sc){const k=Math.min(sc,5),v=VAL[k].slice();for(let i=v.length
   const sum=v[0]+v[1]+v[2];pend={k,v,sum};return{sum}},
  play(total,cb){const p=pend;pend=null;if(!p){cb();return}
   const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;const o=document.createElement('div');o.id='czMG';
-  o.innerHTML=`<div class="mgbox"><div class="mgt">${t[0]}</div><div class="mgs">${t[1]}</div><div class="mgg">${Array.from({length:9},(_,i)=>`<button class="mgc" data-i="${i}" aria-label="選擇 ${i+1}"><img src="assets/${id}/t_${t[2]}.webp?v=219" alt=""><b></b></button>`).join('')}</div><div class="mgr">已選 <b id="mgN">0</b>/3　合計 <b id="mgS">×0</b></div><button class="mgok" hidden>進入免費旋轉</button><div class="mgn">僅供娛樂・虛擬籌碼</div></div>`;
+  o.innerHTML=`<div class="mgbox"><div class="mgt">${t[0]}</div><div class="mgs">${t[1]}</div><div class="mgg">${Array.from({length:9},(_,i)=>`<button class="mgc" data-i="${i}" aria-label="選擇 ${i+1}"><img src="assets/${id}/t_${t[2]}.webp?v=219" alt=""><b></b></button>`).join('')}</div><div class="mgr">已選 <b id="mgN">0</b>/3　合計 <b id="mgS">—</b></div><button class="mgok" hidden>進入免費旋轉</button><div class="mgn">僅供娛樂・虛擬籌碼・純虛擬・無兌現</div></div>`;
   document.body.appendChild(o);let n=0,s=0,done=false;const cards=[...o.querySelectorAll('.mgc')],order=[];
   const fin=()=>{if(done)return;done=true;let r=3;cards.forEach(c=>{if(!c.classList.contains('open')){c.classList.add('open','rest');c.querySelector('b').textContent='×'+p.v[r++]}});
    o.querySelector('.mgr').innerHTML=`獲得 <b>×${p.sum}</b> ＝ <b>${(p.sum*total).toLocaleString()}</b> 虛擬籌碼`;const ok=o.querySelector('.mgok');ok.hidden=false;ok.onclick=close;auto=setTimeout(close,4000)};
   const close=()=>{clearTimeout(auto);o.classList.add('out');setTimeout(()=>{o.remove();cb()},RM?0:300)};
   const pickC=c=>{if(done||c.classList.contains('open'))return;const val=p.v[n];n++;s+=val;c.classList.add('open');c.querySelector('b').textContent='×'+val;
-   window.sfx&&sfx.win&&sfx.win(1);CZ.vib&&CZ.vib(25);o.querySelector('#mgN').textContent=n;o.querySelector('#mgS').textContent='×'+s;if(n>=3)setTimeout(fin,RM?0:600)};
+   window.sfx&&sfx.win&&sfx.win(1);CZ.vib&&CZ.vib(25);o.querySelector('#mgN').textContent=n;o.querySelector('#mgS').textContent=s>0?('×'+s):'—';if(n>=3)setTimeout(fin,RM?0:600)};
   cards.forEach(c=>c.onclick=()=>{clearTimeout(auto);auto=setTimeout(autoPick,7000);pickC(c)});
   const autoPick=()=>{const c=cards.find(c=>!c.classList.contains('open'));if(c&&!done){pickC(c);auto=setTimeout(autoPick,700)}};
   let auto=setTimeout(autoPick,9000);}
