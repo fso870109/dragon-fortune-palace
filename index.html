@@ -56,7 +56,7 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba
 .card .t small{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
 .tag{font-size:10.5px;padding:2px 7px;border-radius:10px;border:1px solid rgba(217,164,65,.6);color:#e9c98a}
 .play{flex:0 0 auto;height:40px;padding:0 18px;border-radius:20px;border:1px solid #ffd27a;background:linear-gradient(#ff8fc8,#c21f6e 60%,#5a0a30);color:#fff;font-weight:900;letter-spacing:1px;box-shadow:0 0 12px rgba(255,79,163,.6)}
-.card .rib{position:absolute;left:10px;top:10px;padding:3px 10px;border-radius:10px;font:900 italic 11px/1.4 "Arial Black",sans-serif;background:linear-gradient(#ffe7a8,#d9a441);color:#3a1a00;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.card .rib{position:absolute;z-index:2;left:10px;top:10px;padding:3px 10px;border-radius:10px;font:900 italic 11px/1.4 "Arial Black",sans-serif;background:linear-gradient(#ffe7a8,#d9a441);color:#3a1a00;box-shadow:0 2px 6px rgba(0,0,0,.5)}
 .card.lock{pointer-events:none;filter:saturate(.3) brightness(.6)}.card.lock .ph{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font:900 italic 22px "Arial Black",sans-serif;color:#d9a441;background:repeating-linear-gradient(45deg,#14060f 0 14px,#1d0a17 14px 28px)}
 /* panels */
 dialog{max-width:min(520px,94vw);width:100%;padding:18px;color:#fbe9f3;background:radial-gradient(ellipse at 50% 0,#3a1030,#14060f 60%,#0a0408);border:2px solid #d9a441;border-radius:18px;box-shadow:0 0 0 1px #000,0 0 0 4px rgba(255,79,163,.35),0 0 40px rgba(255,79,163,.45)}
@@ -142,9 +142,9 @@ h+='<i class="lgp'+(s>5?' st':'')+'" style="--x:'+(R()*100).toFixed(1)+'%;--y:'+
 (()=>{const $=id=>document.getElementById(id),LS=localStorage,fmt=n=>Math.floor(n).toLocaleString('en-US');
 const GAMES=[
 {id:'matsuri',href:'matsuri.html',name:'夏祭花火',img:'assets/matsuri/card.webp?v=256',tags:['RTP 94.0%','低波動','免費遊戲 ×2倍'],rib:'和風祭典'},
-{id:'samurai',href:'samurai.html',name:'天下布武',img:'assets/samurai/card.webp?v=256',tags:['RTP 93.9%','高波動','免費遊戲 ×3倍'],rib:'NEW'},
-{id:'neko',href:'neko.html',name:'招財大作戰',img:'assets/neko/card.webp?v=256',tags:['RTP 94.0%','低波動','免費遊戲 ×2倍'],rib:'NEW'},
-{id:'sakura',href:'sakura.html',name:'櫻花斬',img:'assets/sakura/card.webp?v=256',tags:['RTP 94.1%','中波動','免費遊戲 ×3倍'],rib:'NEW'}];
+{id:'samurai',href:'samurai.html',name:'天下布武',img:'assets/samurai/card.webp?v=256',tags:['RTP 93.9%','高波動','免費遊戲 ×3倍'],rib:'戰國武士'},
+{id:'neko',href:'neko.html',name:'招財大作戰',img:'assets/neko/card.webp?v=256',tags:['RTP 94.0%','低波動','免費遊戲 ×2倍'],rib:'招財萌貓'},
+{id:'sakura',href:'sakura.html',name:'櫻花斬',img:'assets/sakura/card.webp?v=256',tags:['RTP 94.1%','中波動','免費遊戲 ×3倍'],rib:'櫻花劍舞'}];
 $('wall').innerHTML=GAMES.map(g=>`<a class="card" href="${g.href}" data-id="${g.id}"><span class="rib">${g.rib}</span><img src="${g.img}" alt="${g.name}" loading="lazy" decoding="async" width="720" height="405"><div class="meta"><div class="t"><b>${g.name}</b><small>${g.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</small></div><span class="play">開始</span></div></a>`).join('')+
 `<div class="card lock" aria-hidden="true"><div class="ph">即將推出</div><div class="meta"><div class="t"><b>新機台 準備中</b><small><span class="tag">敬請期待</span></small></div></div></div>`;
 // ---- UI refresh ----
@@ -221,4 +221,4 @@ refresh();
 for(var i=0;i<4;i++){ph+=g[i]?'<div style="background-image:url('+g[i]+'?v=256)"></div>':'<div class="sil" style="background-image:url(assets/'+S[i]+'/p_idle.webp?v=256)"></div>'}
 var c=document.createElement("a");c.className="card galcard";c.id="bGal";c.setAttribute("role","button");c.tabIndex=0;c.style.cursor="pointer";c.setAttribute("aria-label","角色圖鑑");c.style.setProperty("--i",w.children.length);
 c.innerHTML='<span class="rib">角色收藏</span><div class="gph">'+ph+'</div><div class="meta"><div class="t"><b>角色圖鑑</b><small><span class="tag">已收集 '+n+' / '+T+'</span></small><div class="gbar"><i style="width:'+Math.round(n/T*100)+'%"></i></div></div><span class="play">查看</span></div>';
-c.onclick=function(e){e.preventDefault();e.stopPropagation();CZGAL.open()};c.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();CZGAL.open()}};var l=w.querySelector(".card.lock");w.insertBefore(c,l)})()</script><link rel="stylesheet" href="life21.css?v=256"><link rel="stylesheet" href="lobby21.css?v=256"><link rel="stylesheet" href="lobby260.css?v=265"><link rel="stylesheet" href="logo262.css?v=264"><script src="lobby21.js?v=266"></script><link rel="stylesheet" href="tap272.css?v=272"><script src="settings.js?v=2820"></script><script src="hint.js?v=256"></script><script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})</script></body></html>
+c.onclick=function(e){e.preventDefault();e.stopPropagation();CZGAL.open()};c.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();CZGAL.open()}};var l=w.querySelector(".card.lock");w.insertBefore(c,l)})()</script><link rel="stylesheet" href="life21.css?v=256"><link rel="stylesheet" href="lobby21.css?v=256"><link rel="stylesheet" href="lobby260.css?v=265"><link rel="stylesheet" href="logo262.css?v=264"><script src="lobby21.js?v=266"></script><link rel="stylesheet" href="tap272.css?v=272"><script src="settings.js?v=2821"></script><script src="hint.js?v=256"></script><script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})</script></body></html>
