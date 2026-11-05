@@ -1,4 +1,4 @@
-/* v28.13 寶珠鎖定重轉 (hold & respin) + 寶珠能量 meter — RTP slice 7% (see math/hs.py, hsim.py); staggered cell reveal */
+/* v28.14 寶珠鎖定重轉 — staggered reveal with theme symbol reels; RTP slice 7% (math/hs.py) */
 (function(){
 const P=0.0009453061745544524,M=1000,Q=0.075,START=6,CELLS=15,GRAND=400;
 const VAL=[[1,30],[2,22],[3,15],[5,10],[8,6],[10,4],[15,2.5]],JP=[['迷你',15,2.0,'mini'],['小獎',40,.6,'minor'],['大獎',120,.15,'major']],COL=1.2;
@@ -7,6 +7,13 @@ const RMh=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ID=(window.CZM&&CZM.id)||(location.pathname.split('/').pop()||'').replace('.html','');
 const KEY='czHS_'+ID;let meter=+(localStorage.getItem(KEY)||0),pending=false,running=false;
 const NFh=new Intl.NumberFormat('zh-TW');
+const TH=ID||'matsuri';
+function symIds(){try{if(typeof SYM!=='undefined'&&SYM.length)return SYM.map(s=>s.id).filter(id=>id!=='scatter')}catch(e){}
+ const F={matsuri:['fan','lantern','sake','taiko','goldfish','kitsune','daruma','bowl','fireworks','woman','wild'],neko:['fan','coins','koi','drum','bag','koban','blackcat','orangecat','seven','goldneko','wild'],sakura:['bell','sakura','fan','lantern','samuraig','samurai','oni','castle','sevens','heroine','wild'],samurai:['scroll','fan','horse','kamon','kabuto','castle','katana','blue7','red7','hero','wild']};
+ return F[TH]||F.matsuri}
+function spinHTML(){const ids=symIds().slice();for(let i=ids.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;const t=ids[i];ids[i]=ids[j];ids[j]=t}
+ const picks=[];while(picks.length<8)picks.push(...ids);const row=picks.slice(0,8).map(id=>`<img src="assets/${TH}/t_${id}.webp?v=2814" alt="" draggable="false" decoding="async">`).join('');
+ return `<u class="hsReel" aria-hidden="true"><b class="hsStrip">${row}${row}</b></u>`}
 function draw(){let x=Math.random()*TOT;for(const[v,w]of VAL){if(x<w)return{k:'v',v};x-=w}for(const j of JP){if(x<j[2])return{k:'j',v:j[1],n:j[0],c:j[3]};x-=j[2]}return{k:'c',v:0}}
 const B=(f,d,t,v,f2)=>window.JUICE&&JUICE.blip(f,d,t,v,f2);
 function mUI(){const e=document.getElementById('hsMeter');if(!e)return;const p=Math.min(100,meter/M*100);e.querySelector('i').style.width=p+'%';e.querySelector('em').textContent=Math.floor(p)+'%';e.classList.toggle('hot',p>=80)}
@@ -35,7 +42,7 @@ function play(bet){return new Promise(res=>{const total=bet*NL;const o=document.
   let left=3;await sleep(500);
   while(left>0&&g.includes(null)){document.getElementById('hsL').textContent=left;
    const empties=[];for(let i=0;i<CELLS;i++)if(!g[i])empties.push(i);
-   empties.forEach(i=>{cells[i].className='spin';cells[i].innerHTML='<u class="hsReel" aria-hidden="true"></u>'});
+   empties.forEach(i=>{cells[i].className='spin';cells[i].innerHTML=spinHTML()});
    B(300,.25,'sawtooth',.02,500);
    /* Fisher–Yates: 邊轉邊逐格開出（機率仍每格獨立 Q） */
    for(let i=empties.length-1;i>0;i--){const j=Math.random()*(i+1)|0;const t=empties[i];empties[i]=empties[j];empties[j]=t}

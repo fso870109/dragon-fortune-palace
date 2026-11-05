@@ -77,7 +77,7 @@ button:focus-visible{outline:2px solid #ffd65a;outline-offset:3px;box-shadow:0 0
 #czToast,#czGN{animation:w21Toast .5s cubic-bezier(.2,1.4,.4,1)}
 @keyframes w21Toast{0%{opacity:0;translate:0 -14px;scale:.96}100%{opacity:1;translate:0 0;scale:1}}
 #hsBox .hsG>i.on{animation:w21Orb .5s cubic-bezier(.2,1.7,.4,1)!important}
-@keyframes w21Orb{0%{scale:.3;filter:brightness(2.5)}60%{scale:1.12}100%{scale:1;filter:none}}
+@keyframes w21Orb{0%{scale:.72;filter:brightness(1.55)}60%{scale:1.04}100%{scale:1;filter:none}}
 .fxRes b,.hsEnd b{animation:w21Imp .6s cubic-bezier(.2,1.7,.4,1);display:inline-block}
 @media (prefers-reduced-motion:reduce){#w21F.go,#w21Bloom.on,.w21sh::before,#board .cell.w21a .sym,#machine.w21punch,#w21TS::before,.bw .tier.w21imp,.bw .tier.w21beat{animation:none!important}#w21F.go{opacity:1}}
 #czAtari .atx b{font-family:"TCDisp","Noto Serif TC",serif!important;font-weight:900!important;font-style:normal!important;color:#ffe680!important;-webkit-text-stroke:2.5px #3a0800!important;paint-order:stroke fill;display:inline-block;transform:skewX(-10deg);white-space:nowrap;
