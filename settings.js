@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='27.9',DFP_APPV='';
+var DFP_WEBV='28.0',DFP_APPV='';
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
 function vibOn(){return CAN&&g('fs_vib')!=='0'}
@@ -36,7 +36,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '#setDlg .tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#bba 60%,#776);transition:transform .25s cubic-bezier(.4,0,.2,1)}'+
  '#setDlg .tg[aria-pressed="true"]{background:linear-gradient(180deg,#f7d36e,#b8801f)}#setDlg .tg[aria-pressed="true"]::after{transform:translateX(24px);background:radial-gradient(circle at 35% 30%,#fff8de,#ffe08a 55%,#c08a22)}'+
  '#setDlg .tg:disabled{opacity:.4;cursor:default}'+
- '#setDlg .sL{display:block;margin:12px 0 4px;text-align:center;font-size:13px;color:#ffd77a}'+
+ '#setDlg .sL{display:block;margin:12px 0 4px;text-align:center;font-size:13px;color:#ffd77a}#setDlg .sL+#sgWipe{margin-top:2px;font-size:12.5px;color:#ffe9b0;text-decoration:underline;text-underline-offset:2px}'+
  '#setDlg .sN{margin:10px 0 0;text-align:center;font-size:11.5px;color:#d9b98a}'+
  '#setDlg .sV{margin:8px 0 0;text-align:center;font-size:11px;letter-spacing:.06em;color:rgba(217,185,138,.72);font-variant-numeric:tabular-nums}'+
  '#setDlg .sX{display:block;width:100%;margin-top:12px;font:inherit;font-weight:800;font-size:15px;padding:10px;border-radius:24px;border:0;color:#2a0505;cursor:pointer;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f);box-shadow:0 3px 0 #6b420c}');
@@ -47,6 +47,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '<div class="sR"><span>震動回饋<small>'+(CAN?'旋轉、停輪與中獎時輕微震動':'此裝置不支援震動')+'</small></span><button class="tg" id="sgVib" type="button" aria-label="震動回饋"></button></div>'+
  '<div class="sR"><span>減少動態效果<small id="sgRmN">減少閃光、震動畫面與開關門動畫，適合低階手機・省電</small></span><button class="tg" id="sgRm" type="button" aria-label="減少動態效果"></button></div>'+
  '<a class="sL" href="privacy.html">隱私權政策與使用條款・清除資料</a>'+
+ '<a class="sL" href="privacy.html#wipe" id="sgWipe">清除本裝置遊戲資料</a>'+
  '<p class="sN">僅供娛樂・虛擬籌碼・無真實金錢</p>'+
  '<p class="sV" id="sgVer">'+(DFP_APPV?('版本 '+DFP_APPV+'・內容 '+DFP_WEBV):('網頁版 '+DFP_WEBV))+'</p>'+
  '<button class="sX" id="sgClose" type="button">關閉</button></div>';

@@ -53,9 +53,14 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 </main>
 <a class="back" href="index.html">返回大廳</a>
 <script>(function(){var d=document.getElementById('wipeDlg'),m=document.getElementById('wipeMsg');
-document.getElementById('wipe').onclick=function(){try{d.showModal()}catch(e){d.setAttribute('open','')}document.getElementById('wipeNo').focus()};
+function openWipe(){try{d.showModal()}catch(e){d.setAttribute('open','')}document.getElementById('wipeNo').focus()}
+document.getElementById('wipe').onclick=openWipe;
 document.getElementById('wipeNo').onclick=function(){d.close()};
 d.addEventListener('click',function(e){if(e.target===d)d.close()});
 document.getElementById('wipeYes').onclick=function(){try{localStorage.clear();sessionStorage.clear()}catch(e){}d.close();
-m.innerHTML='已清除本裝置的遊戲資料。<a href="index.html">返回大廳重新開始</a>（將重新確認年齡）';m.className='ok'};})();</script>
+m.innerHTML='已清除本裝置的遊戲資料。<a href="index.html">返回大廳重新開始</a>（將重新確認年齡）';m.className='ok'};
+function maybeWipe(){if(location.hash==='#wipe'||/[?&]wipe=1(?:&|$)/.test(location.search))openWipe()}
+if(document.readyState==='complete')maybeWipe();else addEventListener('load',maybeWipe);
+addEventListener('hashchange',maybeWipe);
+})();</script>
 <script src="back.js?v=256"></script></body></html>

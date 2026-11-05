@@ -397,8 +397,8 @@ $('msg').textContent=`邀請碼兌換成功！獲得 ${INV_REWARD} 虛擬籌碼`
 async function invCopy(){const c=invGet().code;let ok=false;try{await navigator.clipboard.writeText(c);ok=true}catch(e){}
 if(!ok){const r=document.createRange();r.selectNodeContents($('invCode'));const se=getSelection();se.removeAllRanges();se.addRange(r);try{ok=document.execCommand('copy')}catch(e){}}
 invMsg(ok?'已複製邀請碼 '+c:'請長按邀請碼手動複製',ok?'ok':'err');sfx.click()}
-async function invShare(){const c=invGet().code,t=`來玩水果老虎機！輸入我的邀請碼 ${c} 可領 ${INV_REWARD} 虛擬籌碼（僅供娛樂・無真實金錢）`;
-if(navigator.share){try{await navigator.share({title:'水果老虎機',text:t});return}catch(e){if(e.name==='AbortError')return}}
+async function invShare(){const c=invGet().code,t=`來玩龍運金殿！輸入我的邀請碼 ${c} 可領 ${INV_REWARD} 虛擬籌碼（僅供娛樂・虛擬籌碼・無真實金錢）`;
+if(navigator.share){try{await navigator.share({title:'龍運金殿',text:t});return}catch(e){if(e.name==='AbortError')return}}
 try{await navigator.clipboard.writeText(t);invMsg('已複製分享文字','ok')}catch(e){invMsg('目前裝置不支援分享，請複製邀請碼','err')}}
 $('invBtn').onclick=()=>{sfx.click();invMsg('');invRender();$('inv').showModal()};
 $('invRedeem').onclick=invRedeem;$('invInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();invRedeem()}});
