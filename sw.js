@@ -1,6 +1,6 @@
-/* 龍運金殿 service worker — v276 */
-const V='dfp-v276';
-const CORE=['./','index.html','dsfx.js?v=269','gal266.css?v=266','gal266.js?v=267','logo262.css?v=264','lobby260.css?v=265','mq257.css?v=258','mq257.js?v=258','offline.html','privacy.html','store.js?v=256','rm.js?v=256','life.js?v=256','age.js?v=256','settings.js?v=276','tap272.css?v=272','hint.js?v=256','back.js?v=256','manifest.webmanifest','assets/logo21.webp','assets/lobby/logo22.webp?v=256','assets/lobby/navbar.webp?v=256','assets/lobby/medal.webp?v=256','assets/icons/icon-192.png','assets/lobby/bg.webp?v=256','matsuri-ui.css?v=276','samurai-ui.css?v=276','neko-ui.css?v=276','sakura-ui.css?v=276'];
+/* 龍運金殿 service worker — v277 */
+const V='dfp-v277';
+const CORE=['./','index.html','dsfx.js?v=269','gal266.css?v=266','gal266.js?v=267','logo262.css?v=264','lobby260.css?v=265','mq257.css?v=258','mq257.js?v=258','offline.html','privacy.html','store.js?v=256','rm.js?v=256','life.js?v=256','age.js?v=256','settings.js?v=277','tap272.css?v=272','hint.js?v=256','back.js?v=256','manifest.webmanifest','assets/logo21.webp','assets/lobby/logo22.webp?v=256','assets/lobby/navbar.webp?v=256','assets/lobby/medal.webp?v=256','assets/icons/icon-192.png','assets/lobby/bg.webp?v=256','matsuri-ui.css?v=276','samurai-ui.css?v=276','neko-ui.css?v=276','sakura-ui.css?v=276','matsuri-game.js?v=277','samurai-game.js?v=277','neko-game.js?v=277','sakura-game.js?v=277'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('dfp-')&&k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
