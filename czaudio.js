@@ -1,6 +1,6 @@
 /* v18.3 pre-rendered BGM/SFX (play-money casino). Falls back to synth until buffers decode. */
 (function(){
-const V='?v=269',LOOP={matsuri:64,samurai:68.571429,neko:65.084739,sakura:61.935465},PRE=.3,MG=1.8,D='assets/audio/';const B={};let ld=false,src=null,want=false,cur=null;
+const V='?v=275',LOOP={matsuri:64,samurai:68.571429,neko:65.084739,sakura:61.935465},PRE=.3,INTRO={matsuri:12},MG=1.8,D='assets/audio/';const B={};let ld=false,src=null,want=false,cur=null;
 const NAMES=['click','blip','spin','stop','tick','reach','coin','win0','win1','win2','win3','win4','bonus','collect','chime','buy','lose','door_close','door_open'];
 function ctx(){return (typeof aInit==='function'&&aInit())?ac:null}
 function dec(c,buf){return new Promise((ok,no)=>{const p=c.decodeAudioData(buf,ok,no);if(p&&p.then)p.then(ok,no)})}
@@ -13,9 +13,9 @@ addEventListener('pointerdown',boot,{capture:true});addEventListener('keydown',b
 function play(n,g=1,o={}){const c=ctx(),b=B['sfx_'+n];if(!c||!b||!(b instanceof AudioBuffer)||!AM)return null;if(c.state==='suspended')c.resume();
  const s=c.createBufferSource();s.buffer=b;if(o.rate)s.playbackRate.value=o.rate;const G=c.createGain();G.gain.value=g;s.connect(G).connect(AM.sfxG);s.start(c.currentTime+(o.t||0),b.__off||0);return {s,G}}
 let fsSrc=null,t0=0,fsOn=false,duck=null;
-function mk(c,b,g0){const s=c.createBufferSource();s.buffer=b;s.loop=true;const L=LOOP[CID()];if(L){s.loopStart=PRE;s.loopEnd=PRE+L}else{s.loopStart=0;s.loopEnd=b.duration}const g=c.createGain();g.gain.value=0;s.connect(g).connect(duck);s.__g=g;s.__L=L;return s}
+function mk(c,b,g0){const s=c.createBufferSource();s.buffer=b;s.loop=true;const L=LOOP[CID()];if(L){const I=INTRO[CID()]||0;s.loopStart=PRE+I;s.loopEnd=PRE+I+L}else{s.loopStart=0;s.loopEnd=b.duration}const g=c.createGain();g.gain.value=0;s.connect(g).connect(duck);s.__g=g;s.__L=L;return s}
 function CID(){return (window.CZM&&CZM.id)||'love'}
-function pos(c,L){return L?PRE+((c.currentTime-t0)%L+L)%L:0}
+function pos(c,L){if(!L)return 0;const I=INTRO[CID()]||0,e=Math.max(0,c.currentTime-t0);return e<I?PRE+e:PRE+I+((e-I)%L)}
 function startFs(c){const b=B['bgm_'+CID()+'_fs'];if(!src||fsSrc||!(b instanceof AudioBuffer))return;fsSrc=mk(c,b);fsSrc.start(c.currentTime+.02,pos(c,fsSrc.__L)+.02);xf(c,.01)}
 function xf(c,tc){if(!src)return;const t=c.currentTime,fs=fsOn&&fsSrc;src.__g.gain.setTargetAtTime(fs?0:MG,t,tc);if(fsSrc)fsSrc.__g.gain.setTargetAtTime(fs?MG:0,t,tc)}
 function mus(on){want=on;const c=ctx();if(!c||!AM)return;const id=CID(),b=B['bgm_'+id];
