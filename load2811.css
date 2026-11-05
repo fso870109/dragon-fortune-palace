@@ -1,0 +1,14 @@
+/* v28.11 splash: premium gold-trim lacquer enter button */
+#load #enter{position:relative;overflow:hidden;isolation:isolate;height:58px!important;min-width:220px;margin-top:16px;padding:0 46px!important;border-radius:6px!important;border:0!important;
+background:linear-gradient(180deg,#b4261a 0%,#7a0e09 48%,#4a0604 52%,#6a0c08 100%) padding-box,linear-gradient(180deg,#fff4c2,#e8b040 30%,#8a5414 55%,#f6d27a 80%,#9a6418) border-box!important;
+border:2.5px solid transparent!important;color:#fff0bf!important;font:900 20px/1 "Noto Serif TC","PingFang TC",serif!important;letter-spacing:.42em;text-indent:.42em;
+text-shadow:0 1px 0 #3a0300,0 -1px 0 rgba(255,230,160,.35),0 0 10px rgba(255,200,90,.45);
+box-shadow:inset 0 1px 0 rgba(255,236,180,.55),inset 0 -2px 4px rgba(0,0,0,.55),inset 0 0 0 4px rgba(74,6,4,.85),inset 0 0 0 5px rgba(232,176,64,.6),0 0 0 1px #3a2205,0 6px 14px rgba(0,0,0,.6),0 0 22px rgba(255,190,60,.35)!important;
+transition:opacity .3s,transform .15s,box-shadow .2s}
+#load #enter::before,#load #enter::after{content:"◆";position:absolute;top:50%;transform:translateY(-50%);font-size:9px;color:#f6d27a;text-shadow:0 0 4px rgba(255,210,120,.8);letter-spacing:0;text-indent:0}
+#load #enter::before{left:16px}#load #enter::after{right:16px}
+#load #enter span.sh11{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,240,200,.38) 50%,transparent 65%);transform:translateX(-120%);animation:sh11 3.6s ease-in-out 1.2s infinite}
+@keyframes sh11{0%,60%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+#load #enter:hover{box-shadow:inset 0 1px 0 rgba(255,236,180,.6),inset 0 -2px 4px rgba(0,0,0,.55),inset 0 0 0 4px rgba(74,6,4,.85),inset 0 0 0 5px rgba(246,210,122,.8),0 0 0 1px #3a2205,0 6px 16px rgba(0,0,0,.6),0 0 30px rgba(255,200,80,.55)!important}
+#load #enter:active{transform:translateY(1px) scale(.985)}
+@media (prefers-reduced-motion:reduce){#load #enter span.sh11{animation:none;display:none}}
