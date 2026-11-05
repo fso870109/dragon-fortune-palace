@@ -1,4 +1,4 @@
-/* v28.17 bonus presentation: richer 3D metallic jewels, contained fill; theme-symbol spins — play money only */
+/* v28.18 bonus presentation: palace jewel plaques (faceted gem, dragon scales) + idle motion, contained fill; theme-symbol spins — play money only */
 (function(){
 const $=i=>document.getElementById(i),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const tone=(...a)=>window.AV&&AV.tone(...a);
@@ -6,69 +6,58 @@ const sleep=ms=>new Promise(r=>setTimeout(r,RM?Math.min(ms,60):ms));
 /* ---------- art: procedural sprites ---------- */
 function cnv(w,h,fn){const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);return c}
 const PAL={gold:['#fffbe6','#ffd65a','#c98a1c','#5a3200'],mini:['#eef8ff','#6fb6ff','#1f5fb0','#0a1f4a'],minor:['#effff6','#5be0a6','#178a5c','#06301f'],major:['#fff0f8','#ff7ab8','#c2185b','#4a0626'],col:['#fff6e0','#ffb347','#d2380e','#4a0a00'],jade:['#e8fff4','#6fd6a8','#1d7a58','#06281c']};
-function jewel(k,S){const p=PAL[k];return cnv(S,S,(x,w)=>{
- const c=w/2,R=c*.94; /* fill cell short side; CSS clips overflow */
- // deep contact shadow (in-canvas, no CSS bleed)
- x.fillStyle='rgba(0,0,0,.55)';x.beginPath();x.ellipse(c,c+R*.78,R*.78,R*.2,0,0,7);x.fill();
- // ----- outer metal rim (thickness) -----
- let g=x.createLinearGradient(0,c-R,0,c+R);
- g.addColorStop(0,'#fff8d6');g.addColorStop(.12,'#ffe9a0');g.addColorStop(.28,'#e8b840');
- g.addColorStop(.42,'#8a4a0c');g.addColorStop(.55,'#3a1800');g.addColorStop(.7,'#d4a028');
- g.addColorStop(.88,'#fff0b8');g.addColorStop(1,'#c98a1c');
- x.fillStyle=g;x.beginPath();x.arc(c,c,R,0,7);x.fill();
- x.lineWidth=Math.max(2,w*.028);x.strokeStyle='#1a0800';x.stroke();
- // milled coin edge
- x.save();x.strokeStyle='rgba(60,25,0,.65)';x.lineWidth=w*.012;
- for(let i=0;i<36;i++){const a=i*Math.PI/18,r0=R*.91,r1=R*.995;x.beginPath();x.moveTo(c+Math.cos(a)*r0,c+Math.sin(a)*r0);x.lineTo(c+Math.cos(a)*r1,c+Math.sin(a)*r1);x.stroke()}
- x.restore();
- // inner step (depth ledge)
- const R2=R*.86;
- g=x.createLinearGradient(0,c-R2,0,c+R2);
- g.addColorStop(0,'#3a1800');g.addColorStop(.35,'#e8c060');g.addColorStop(.5,'#fff6cf');g.addColorStop(.65,'#a8640c');g.addColorStop(1,'#2a1000');
- x.fillStyle=g;x.beginPath();x.arc(c,c,R2,0,7);x.fill();
- // enamel / theme ring
- const rr=R*.78;
- g=x.createLinearGradient(0,c-rr,0,c+rr);g.addColorStop(0,p[0]);g.addColorStop(.45,p[1]);g.addColorStop(1,p[2]);
- x.fillStyle=g;x.beginPath();x.arc(c,c,rr,0,7);x.fill();
- x.lineWidth=w*.014;x.strokeStyle='rgba(255,248,210,.55)';x.beginPath();x.arc(c,c,rr-w*.006,Math.PI*1.15,Math.PI*1.85);x.stroke();
- x.strokeStyle='rgba(0,0,0,.45)';x.beginPath();x.arc(c,c,rr-w*.006,Math.PI*.15,Math.PI*.85);x.stroke();
- // ----- gem sphere (strong 3D) -----
- const rg=rr*.9;
- g=x.createRadialGradient(c-rg*.4,c-rg*.45,rg*.04,c+rg*.05,c+rg*.12,rg);
- g.addColorStop(0,p[0]);g.addColorStop(.22,p[1]);g.addColorStop(.55,p[2]);g.addColorStop(.82,p[3]);g.addColorStop(1,'#000');
- x.fillStyle=g;x.beginPath();x.arc(c,c,rg,0,7);x.fill();
- // faceted spokes (clipped)
- x.save();x.beginPath();x.arc(c,c,rg,0,7);x.clip();
- x.globalAlpha=.28;x.strokeStyle='#fff';x.lineWidth=w*.01;
- for(let i=0;i<10;i++){const a=i*Math.PI/5+.12;x.beginPath();x.moveTo(c,c);x.lineTo(c+Math.cos(a)*rg,c+Math.sin(a)*rg);x.stroke()}
- x.globalAlpha=.4;x.beginPath();x.arc(c,c,rg*.42,0,7);x.stroke();
- // ambient occlusion at bottom of gem
- g=x.createRadialGradient(c,c+rg*.35,0,c,c+rg*.35,rg*.7);g.addColorStop(0,'rgba(0,0,0,.35)');g.addColorStop(1,'rgba(0,0,0,0)');
- x.globalAlpha=1;x.fillStyle=g;x.fillRect(0,0,w,w);
- // embossed 龍 — soft so number overlay stays readable
- const fs=rg*1.02;x.font=`900 ${fs}px "TCDisp","Noto Serif TC",serif`;x.textAlign='center';x.textBaseline='middle';
- x.fillStyle='rgba(0,0,0,.5)';x.fillText('龍',c+w*.014,c+w*.04);
- x.fillStyle='rgba(255,248,210,.32)';x.fillText('龍',c-w*.008,c+w*.006);
- // warm under-glow
- g=x.createRadialGradient(c,c+rg*.2,0,c,c+rg*.2,rg*.55);g.addColorStop(0,'rgba(255,230,140,.45)');g.addColorStop(1,'rgba(255,230,140,0)');
- x.fillStyle=g;x.fillRect(0,0,w,w);x.restore();
- // 8 rivet studs on bezel
- for(let i=0;i<8;i++){const a=i*Math.PI/4-Math.PI/2,sx=c+Math.cos(a)*(R+R2)*.5,sy=c+Math.sin(a)*(R+R2)*.5,sr=w*.036;
-  g=x.createRadialGradient(sx-sr*.4,sy-sr*.4,0,sx,sy,sr);g.addColorStop(0,'#fffce8');g.addColorStop(.4,'#ffd65a');g.addColorStop(.75,'#a8640c');g.addColorStop(1,'#2a1000');
-  x.fillStyle=g;x.beginPath();x.arc(sx,sy,sr,0,7);x.fill();
-  x.fillStyle='rgba(255,255,255,.7)';x.beginPath();x.arc(sx-sr*.25,sy-sr*.3,sr*.28,0,7);x.fill()}
- // primary specular (glass/metal) — strong palace highlight
- g=x.createLinearGradient(0,c-rg*.95,0,c-rg*.1);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.35,'rgba(255,255,255,.7)');g.addColorStop(.7,'rgba(255,248,220,.2)');g.addColorStop(1,'rgba(255,255,255,0)');
- x.fillStyle=g;x.beginPath();x.ellipse(c-rg*.1,c-rg*.48,rg*.55,rg*.3,-.3,0,7);x.fill();
- x.fillStyle='#fff';x.beginPath();x.arc(c-rg*.4,c-rg*.5,rg*.14,0,7);x.fill();
- x.fillStyle='rgba(255,255,255,.55)';x.beginPath();x.ellipse(c+rg*.22,c-rg*.2,rg*.12,rg*.06,.5,0,7);x.fill();
- // metal rim catch-light (top arc)
- x.strokeStyle='rgba(255,250,220,.85)';x.lineWidth=w*.03;x.beginPath();x.arc(c,c,R*.97,Math.PI*1.2,Math.PI*1.8);x.stroke();
- // secondary rim light (right-bottom)
- x.strokeStyle='rgba(255,220,120,.65)';x.lineWidth=w*.022;x.beginPath();x.arc(c,c,rg*.97,Math.PI*.05,Math.PI*.55);x.stroke();
- // outer bevel shade for thickness
- x.strokeStyle='rgba(0,0,0,.4)';x.lineWidth=w*.018;x.beginPath();x.arc(c,c,R*.99,Math.PI*.15,Math.PI*.85);x.stroke();
- if(k==='col'){x.fillStyle='#fff6cf';[[c+rg*.5,c-rg*.2],[c-rg*.52,c+rg*.1],[c+rg*.2,c+rg*.5]].forEach(([px,py],i)=>{x.save();x.translate(px,py);x.rotate(i*.7);x.fillRect(-w*.012,-w*.045,w*.024,w*.09);x.fillRect(-w*.045,-w*.012,w*.09,w*.024);x.restore()})}
+function jewel(k,S){const p=k==='gold'?['#fff3c0','#ffa21a','#b8460a','#3a0e00']:PAL[k];const W=Math.round(S*1.6),H=S;return cnv(W,H,(x,w,h)=>{
+ /* v28.18 palace jewel plaque: wide (fills cell), thick gold frame, tier enamel w/ dragon scales, faceted cushion gem */
+ const rr=(X,Y,ww,hh,r)=>{x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+ww,Y,X+ww,Y+hh,r);x.arcTo(X+ww,Y+hh,X,Y+hh,r);x.arcTo(X,Y+hh,X,Y,r);x.arcTo(X,Y,X+ww,Y,r);x.closePath()};
+ const u=h/100;let g;
+ // outer gold frame (thick bevel)
+ g=x.createLinearGradient(0,0,0,h);[['#fffbe0',0],['#ffd65a',.14],['#b8740e',.38],['#5a2c02',.52],['#e2a632',.7],['#fff0b0',.86],['#9a5a08',1]].forEach(([c,o])=>g.addColorStop(o,c));
+ x.fillStyle=g;rr(0,0,w,h,14*u);x.fill();x.lineWidth=2.2*u;x.strokeStyle='#2a1000';x.stroke();
+ g=x.createLinearGradient(0,0,w,0);g.addColorStop(0,'rgba(0,0,0,.35)');g.addColorStop(.2,'rgba(0,0,0,0)');g.addColorStop(.8,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.35)');x.fillStyle=g;rr(0,0,w,h,14*u);x.fill();
+ x.strokeStyle='rgba(255,252,225,.9)';x.lineWidth=1.6*u;rr(3*u,3*u,w-6*u,h-6*u,11*u);x.stroke();
+ // inner groove
+ const fi=9*u;x.fillStyle='#2a1000';rr(fi-1.5*u,fi-1.5*u,w-2*fi+3*u,h-2*fi+3*u,9*u);x.fill();
+ // tier enamel field
+ g=x.createLinearGradient(0,fi,0,h-fi);g.addColorStop(0,p[1]);g.addColorStop(.5,p[2]);g.addColorStop(1,p[3]);
+ x.fillStyle=g;rr(fi,fi,w-2*fi,h-2*fi,8*u);x.fill();
+ // dragon-scale pattern on enamel
+ x.save();rr(fi,fi,w-2*fi,h-2*fi,8*u);x.clip();x.lineWidth=1.3*u;
+ for(let row=0,y=fi;y<h;row++,y+=7*u)for(let X=fi+(row%2?5*u:0)-10*u;X<w;X+=10*u){x.strokeStyle='rgba(255,236,170,.32)';x.beginPath();x.arc(X,y,5*u,0,Math.PI);x.stroke();x.strokeStyle='rgba(0,0,0,.25)';x.beginPath();x.arc(X,y+1*u,5*u,.2,Math.PI-.2);x.stroke()}
+ g=x.createRadialGradient(w/2,h/2,0,w/2,h/2,w*.5);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.45)');x.fillStyle=g;x.fillRect(0,0,w,h);x.restore();
+ // corner cloud scrolls + diamond studs
+ [[fi+7*u,fi+7*u,1,1],[w-fi-7*u,fi+7*u,-1,1],[fi+7*u,h-fi-7*u,1,-1],[w-fi-7*u,h-fi-7*u,-1,-1]].forEach(([cx,cy,sx,sy])=>{
+  x.save();x.translate(cx,cy);x.scale(sx,sy);x.strokeStyle='#ffe9a0';x.lineWidth=2.2*u;x.lineCap='round';
+  x.beginPath();x.arc(4*u,4*u,4*u,Math.PI,Math.PI*2.4);x.stroke();x.beginPath();x.moveTo(-3*u,-3*u);x.lineTo(14*u,-3*u);x.moveTo(-3*u,-3*u);x.lineTo(-3*u,14*u);x.stroke();
+  g=x.createRadialGradient(-1*u,-1*u,0,0,0,4*u);g.addColorStop(0,'#fff');g.addColorStop(.5,'#ffd65a');g.addColorStop(1,'#7a3e04');x.fillStyle=g;
+  x.beginPath();x.moveTo(-3*u,-7.5*u);x.lineTo(1.5*u,-3*u);x.lineTo(-3*u,1.5*u);x.lineTo(-7.5*u,-3*u);x.closePath();x.fill();x.restore()});
+ // central faceted cushion gem
+ const cx=w/2,cy=h/2,gw=w*.36,gh=h*.36,n=16,pts=[];
+ for(let i=0;i<n;i++){const a=i/n*Math.PI*2-Math.PI/2+Math.PI/n,c=Math.cos(a),s=Math.sin(a),k2=Math.pow(Math.abs(c),.7)*Math.sign(c),s2=Math.pow(Math.abs(s),.7)*Math.sign(s);pts.push([cx+k2*gw,cy+s2*gh])}
+ // gold bezel setting
+ x.save();x.shadowColor='rgba(0,0,0,.6)';x.shadowBlur=6*u;x.shadowOffsetY=3*u;
+ g=x.createLinearGradient(0,cy-gh,0,cy+gh);g.addColorStop(0,'#fff6cf');g.addColorStop(.4,'#e0a028');g.addColorStop(.7,'#6a3404');g.addColorStop(1,'#ffd65a');x.fillStyle=g;
+ x.beginPath();pts.forEach(([X,Y],i)=>{const dx=X-cx,dy=Y-cy;x[i?'lineTo':'moveTo'](cx+dx*1.13,cy+dy*1.17)});x.closePath();x.fill();x.restore();
+ // prongs
+ for(let i=0;i<n;i+=2){const [X,Y]=pts[i],dx=X-cx,dy=Y-cy;x.fillStyle='#fff3c4';x.beginPath();x.arc(cx+dx*1.08,cy+dy*1.1,2.2*u,0,7);x.fill()}
+ // gem body
+ g=x.createRadialGradient(cx-gw*.3,cy-gh*.45,gh*.05,cx,cy+gh*.1,gw);g.addColorStop(0,p[0]);g.addColorStop(.3,p[1]);g.addColorStop(.7,p[2]);g.addColorStop(1,p[3]);
+ x.fillStyle=g;x.beginPath();pts.forEach(([X,Y],i)=>x[i?'lineTo':'moveTo'](X,Y));x.closePath();x.fill();
+ // facets: crown triangles alternating light/dark, table octagon
+ const tb=pts.map(([X,Y])=>[cx+(X-cx)*.55,cy+(Y-cy)*.55]);
+ for(let i=0;i<n;i++){const a=pts[i],b=pts[(i+1)%n],c=tb[i],d=tb[(i+1)%n];const lit=Math.sin((i/n)*Math.PI*2-2.2);
+  x.fillStyle=lit>0?`rgba(255,255,255,${.08+lit*.3})`:`rgba(0,0,0,${-lit*.32})`;x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.lineTo(d[0],d[1]);x.lineTo(c[0],c[1]);x.closePath();x.fill();
+  x.strokeStyle='rgba(255,255,255,.28)';x.lineWidth=.9*u;x.stroke()}
+ g=x.createLinearGradient(0,cy-gh*.55,0,cy+gh*.55);g.addColorStop(0,'rgba(255,255,255,.35)');g.addColorStop(.5,'rgba(255,255,255,.05)');g.addColorStop(1,'rgba(0,0,0,.2)');
+ x.fillStyle=g;x.beginPath();tb.forEach(([X,Y],i)=>x[i?'lineTo':'moveTo'](X,Y));x.closePath();x.fill();
+ // faint 龍 seal in table (kept soft for number)
+ x.font=`900 ${gh*1.15}px "TCDisp","Noto Serif TC",serif`;x.textAlign='center';x.textBaseline='middle';x.fillStyle='rgba(255,248,210,.13)';x.fillText('龍',cx,cy+gh*.06);
+ // specular star + highlight
+ x.fillStyle='rgba(255,255,255,.75)';x.beginPath();x.ellipse(cx-gw*.42,cy-gh*.5,gw*.2,gh*.1,-.35,0,7);x.fill();
+ const st=(X,Y,r)=>{x.fillStyle='#fff';x.beginPath();for(let i=0;i<8;i++){const a=i*Math.PI/4,rad=i%2?r*.22:r;x.lineTo(X+Math.cos(a)*rad,Y+Math.sin(a)*rad)}x.closePath();x.fill()};
+ st(cx-gw*.56,cy-gh*.58,7*u);st(cx+gw*.62,cy+gh*.42,4*u);
+ // top frame catch-light
+ x.strokeStyle='rgba(255,255,240,.8)';x.lineWidth=2*u;x.beginPath();x.moveTo(16*u,2.8*u);x.lineTo(w-16*u,2.8*u);x.stroke();
+ if(k==='col'){x.fillStyle='#fff6cf';[[cx+gw*1.25,cy-gh*.6],[cx-gw*1.25,cy+gh*.55]].forEach(([X,Y])=>st(X,Y,8*u))}
 })}
 function socket(S){return cnv(S,S,(x,w)=>{const c=w/2,R=c*.94;
  let g=x.createLinearGradient(0,c-R,0,c+R);g.addColorStop(0,'#fff8d6');g.addColorStop(.2,'#ffd65a');g.addColorStop(.45,'#8a5410');g.addColorStop(.7,'#e0a028');g.addColorStop(1,'#fff0b8');
