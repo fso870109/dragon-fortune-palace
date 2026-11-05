@@ -1,4 +1,4 @@
-/* v28.16: miss→theme symbol (no empty orb), fuller orbs, last-spin FX. v28.14 寶珠鎖定重轉 — staggered reveal with theme symbol reels; RTP slice 7% (math/hs.py) */
+/* v28.17: last-spin = status-bar only (no center tag); end flash without filter (keeps b23 fixed layout). RTP slice 7% (math/hs.py) */
 (function(){
 const P=0.0009453061745544524,M=1000,Q=0.075,START=6,CELLS=15,GRAND=400;
 const VAL=[[1,30],[2,22],[3,15],[5,10],[8,6],[10,4],[15,2.5]],JP=[['迷你',15,2.0,'mini'],['小獎',40,.6,'minor'],['大獎',120,.15,'major']],COL=1.2;
@@ -42,7 +42,7 @@ function play(bet){return new Promise(res=>{const total=bet*NL;const o=document.
   for(const i of first){let c=draw();if(c.k==='c')c={k:'v',v:1};put(i,c);await sleep(160)}
   let left=3;await sleep(500);
   while(left>0&&g.includes(null)){document.getElementById('hsL').textContent=left;
-   o.classList.toggle('hsLast',left===1);if(left===1&&!o._lastShown){o._lastShown=1;const lb=document.createElement('div');lb.className='hsLastTag';lb.innerHTML='<b>最後一轉</b>';o.querySelector('.hsIn').appendChild(lb);setTimeout(()=>lb.remove(),1500);B(392,.3,'sine',.06);B(523,.4,'sine',.05);await sleep(650)}else if(left>1)o._lastShown=0;
+   o.classList.toggle('hsLast',left===1);if(left===1&&!o._lastShown){o._lastShown=1;B(392,.3,'sine',.06);B(523,.4,'sine',.05);await sleep(220)}else if(left>1)o._lastShown=0;
    const empties=[];for(let i=0;i<CELLS;i++)if(!g[i])empties.push(i);
    empties.forEach(i=>{cells[i].className='spin';cells[i].innerHTML=spinHTML()});
    B(300,.25,'sawtooth',.02,500);
