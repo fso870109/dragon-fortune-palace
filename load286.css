@@ -1,0 +1,6 @@
+/* v28.6 splash: roomy badges, spaced badges */
+#load .ld5f,#load .ld5p,#load .ld5n{display:none!important}
+#load .ld4b{gap:14px!important;margin:24px 0 20px!important;flex-wrap:wrap!important;align-items:stretch}
+#load .ld4b span{height:32px!important;padding:0 12px!important;gap:7px!important}
+#load .ld4b em{font-style:normal;display:block;line-height:1.3;text-align:left}
+@media (max-width:370px){#load .ld4b{gap:9px!important}#load .ld4b span{padding:5px 10px!important}}
