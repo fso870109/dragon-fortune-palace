@@ -2,7 +2,7 @@
 (()=>{
 const LS=localStorage,J=(k,d)=>{try{const v=JSON.parse(LS.getItem(k));return v==null?d:v}catch(e){return d}},S=(k,v)=>{try{LS.setItem(k,JSON.stringify(v))}catch(e){}};
 const IN_M=!!window.CZM,RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const JP={seed:[500,5000,50000],name:['MINI','MAJOR','GRAND'],c:0.008,split:[.3,.3,.4],w:[.70,.25,.05],d:200000};
+const JP={seed:[500,5000,50000],name:['小獎','大獎','頭獎'],c:0.008,split:[.3,.3,.4],w:[.70,.25,.05],d:200000};
 const VIP=[[1,'一般會員','#c9c3d6'],[5,'銅卡會員','#e0915a'],[10,'銀卡會員','#dfe6f2'],[20,'金卡會員','#ffd27a'],[35,'白金會員','#bff4ff'],[50,'鑽石會員','#ff9de0']];
 const MACH={love:'夜色戀曲♡',matsuri:'夏祭花火',caishen:'財神降臨'};
 const need=l=>Math.round(400*Math.pow(l,1.45));
@@ -48,7 +48,7 @@ function waitIdle(f){const k=()=>{if(idle())f();else setTimeout(k,300)};setTimeo
 const SEG=[0,1,0,0,1,0,0,2,0,0,1,0,0,1,0,0,1,0,0,0];// 14 MINI, 5 MAJOR, 1 GRAND (matches 70/25/5)
 function wheelEl(){let w=document.getElementById('czWheel');if(w)return w;w=document.createElement('div');w.id='czWheel';w.setAttribute('role','dialog');w.setAttribute('aria-label','彩金轉盤');
  const cols=['#3a0a2c','#8a1a5c','#d9a441'];const g=SEG.map((s,i)=>`${cols[s]} ${i*18}deg ${(i+1)*18}deg`).join(',');
- w.innerHTML=`<img class="czframe" src="assets/lobby/frame_s.webp?v=239" alt=""><div class="czwbox"><div class="czwt">彩金機會!!</div><div class="czwsub">彩金轉盤</div><div class="czwheel"><div class="czwd" style="background:conic-gradient(${g})">${SEG.map((s,i)=>`<span style="transform:rotate(${i*18+9}deg)"><b class="s${s}">${JP.name[s]}</b></span>`).join('')}</div><div class="czwhub">JP</div><div class="czwptr"></div></div><div class="czwres" aria-live="assertive"></div><button class="czwgo">旋轉轉盤</button></div>`;
+ w.innerHTML=`<img class="czframe" src="assets/lobby/frame_s.webp?v=239" alt=""><div class="czwbox"><div class="czwt">彩金機會!!</div><div class="czwsub">彩金轉盤</div><div class="czwheel"><div class="czwd" style="background:conic-gradient(${g})">${SEG.map((s,i)=>`<span style="transform:rotate(${i*18+9}deg)"><b class="s${s}">${JP.name[s]}</b></span>`).join('')}</div><div class="czwhub">彩金</div><div class="czwptr"></div></div><div class="czwres" aria-live="assertive"></div><button class="czwgo">旋轉轉盤</button></div>`;
  document.body.appendChild(w);return w}
 function wheel(total){window.__hold=true;const w=wheelEl(),d=w.querySelector('.czwd'),btn=w.querySelector('.czwgo'),res=w.querySelector('.czwres');
  res.textContent='';d.style.transition='none';d.style.transform='rotate(0deg)';w.classList.add('on');btn.disabled=false;btn.textContent='旋轉轉盤';vib([30,40,30]);
@@ -57,10 +57,10 @@ function wheel(total){window.__hold=true;const w=wheelEl(),d=w.querySelector('.c
   const idx=SEG.map((s,i)=>s===k?i:-1).filter(i=>i>=0);const i=idx[Math.random()*idx.length|0];
   const rot=(RM?360:360*6)+(360-(i*18+9))+(Math.random()*10-5);
   requestAnimationFrame(()=>{d.style.transition=`transform ${RM?.6:4.6}s cubic-bezier(.12,.7,.1,1)`;d.style.transform=`rotate(${rot}deg)`});
-  setTimeout(()=>{const amt=Math.floor(P[k]);P[k]=JP.seed[k];S('cz_jp',P);res.innerHTML=`<b>${JP.name[k]} 彩金</b> ＋${amt.toLocaleString()}`;vib([80,50,80,50,200]);
-   ach('jp');feed(`${JP.name[k]} 彩金 ${amt.toLocaleString()}`);
+  setTimeout(()=>{const amt=Math.floor(P[k]);P[k]=JP.seed[k];S('cz_jp',P);res.innerHTML=`<b>${JP.name[k]}彩金</b> ＋${amt.toLocaleString()}`;vib([80,50,80,50,200]);
+   ach('jp');feed(`${JP.name[k]}彩金 ${amt.toLocaleString()}`);
    setTimeout(()=>{w.classList.remove('on');bal+=amt;ui();$('win').textContent=amt;window.__hold=false;
-    bigWin(amt,total,{tier:['epic',JP.name[k]+' 彩金','彩金大獎!! 恭喜'],lbl:'彩金池・虛擬籌碼',noStamp:1});emit()},1400)},RM?700:4800)}}
+    bigWin(amt,total,{tier:['epic',JP.name[k]+'彩金','彩金大獎!! 恭喜'],lbl:'彩金池・虛擬籌碼',noStamp:1});emit()},1400)},RM?700:4800)}}
 window.CZ.wheel=wheel;
 // ===== machine-only UI =====
 function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
@@ -125,7 +125,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  $('czBuyOk').onclick=()=>{dlg.close();const p=price();if(bal<p||spinning||FS)return;bal-=p;ui();ach('buy');vib([20,30,20]);
   ['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i)&&($(i).disabled=true));FS={left:FS_N,tot:FS_N,n:0,won:0,bet:BETS[betIdx]};day().fs++;save();setTimeout(()=>fsIntro(false),250)};
  // loading screen
- let ld=document.getElementById('czLoad');if(!ld){ld=document.createElement('div');ld.id='czLoad';ld.innerHTML=`<div class="czlt">${CZM.name}</div><div class="czlbar"><i></i></div><div class="czls">LOADING…</div><div class="cznote2">僅供娛樂・虛擬籌碼・純虛擬・無兌現</div>`;document.body.appendChild(ld)}
+ let ld=document.getElementById('czLoad');if(!ld){ld=document.createElement('div');ld.id='czLoad';ld.innerHTML=`<div class="czlt">${CZM.name}</div><div class="czlbar"><i></i></div><div class="czls">載入中…</div><div class="cznote2">僅供娛樂・虛擬籌碼・純虛擬・無兌現</div>`;document.body.appendChild(ld)}
  const imgs=[...document.images];let n=0;const tot=Math.max(1,imgs.length);const prog=()=>{n=imgs.filter(i=>i.complete).length;ld.querySelector('i').style.width=(20+80*n/tot)+'%'};
  const t0=performance.now();const iv=setInterval(prog,120);
  const done=()=>{clearInterval(iv);ld.querySelector('i').style.width='100%';setTimeout(()=>{ld.classList.add('out');setTimeout(()=>ld.remove(),500)},Math.max(0,450-(performance.now()-t0)))};
