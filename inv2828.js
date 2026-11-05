@@ -1,6 +1,6 @@
-/* 龍運金殿 v28.28: 分段邀請獎勵（每日分享邀請 1／3／5 次階梯；純虛擬・無兌現） */
+/* 龍運金殿 v28.30: 邀請階梯紅包加大（每日分享邀請 1／3／5 次階梯；純虛擬・無兌現） */
 (function(){if(!window.CZ)return;var LS=localStorage,K='dfp_iv',$=function(i){return document.getElementById(i)};
-var AL='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',TI=[{n:1,r:50},{n:3,r:100},{n:5,r:150}],CD=15000;
+var AL='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',TI=[{n:1,r:150},{n:3,r:300},{n:5,r:500}],CD=15000;
 function dk(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function code(){var s;try{s=JSON.parse(LS.getItem('fs_inv')||'{}')}catch(e){s={}}if(!/^FS-[A-Z2-9]{6}$/.test(s.code||'')){var c='',r=new Uint32Array(6);try{crypto.getRandomValues(r)}catch(e){for(var i=0;i<6;i++)r[i]=Math.random()*1e9}for(var j=0;j<6;j++)c+=AL[r[j]%AL.length];s.code='FS-'+c;try{LS.setItem('fs_inv',JSON.stringify(s))}catch(e){}}return s.code}
 function st(){var s;try{s=JSON.parse(LS.getItem(K)||'{}')}catch(e){s={}}if(!s||s.d!==dk())s={d:dk(),n:0,c:[],t:0};if(!Array.isArray(s.c))s.c=[];return s}
