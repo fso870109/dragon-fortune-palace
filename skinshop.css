@@ -125,4 +125,9 @@ body[data-skt="m"] #skFx i{width:24px;height:24px;border-radius:4px;transform:ro
 /* v28.38: plaque stays removed — no plate, shadow, or pseudo on the explanation under the reels */
 #skFx .plq,body[data-skin] #skFx .plq{display:none!important;visibility:hidden!important;background:none!important;box-shadow:none!important;border:0!important}
 #skFx .plq::before,#skFx .plq::after{content:none!important;display:none!important}
-@media (max-width:620px) and (orientation:portrait){body[data-skin] .inner>.msg{z-index:70}}
+/* portrait: keep the bezel's lower glow and corner tips off the explanation panel; jewels sit on the frame */
+@media (max-width:620px) and (orientation:portrait){
+ body[data-skin] #skFx{clip-path:inset(-32px -20px -1px -20px)}
+ body[data-skin] #skFx .c3,body[data-skin] #skFx .c4{bottom:4px}
+ body[data-skin] .board .reel{--c:var(--skin-c)!important}
+}
