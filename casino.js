@@ -140,11 +140,16 @@ function czHero(){const mach=document.getElementById('machine'),inn=mach&&mach.q
  const h=document.createElement('div');h.id='czHero';h.setAttribute('aria-hidden','true');
  h.innerHTML=`<div class="czhi" style="background-image:url(assets/${id}/hero.webp${V})"></div><div class="czhs"></div><i class="czhp"></i><i class="czhp b"></i><img class="czhl" src="assets/${id}/logo.webp${V}" alt=""><div class="czhf"></div>`;
  mach.insertBefore(h,inn);let F=null;const mq=matchMedia('(max-width:620px) and (orientation:portrait)');
- const fit=()=>{const R=document.documentElement.style;if(!mq.matches){R.removeProperty('--W');inn.style.cssText='';return}
-  if(!F){const i=inn.getBoundingClientRect(),b=document.getElementById('board').getBoundingClientRect(),m=document.getElementById('msg').getBoundingClientRect();if(!i.width)return;F={l:(b.left-i.left)/i.width,w:b.width/i.width,t:(b.top-i.top)/i.height,bt:(m.bottom-i.top)/i.height,ar:i.height/i.width}}
-  const vw=innerWidth,W=Math.round(vw*.97/F.w),H=W*F.ar,top=Math.max(0,F.t*H-W*.022),bot=Math.max(0,H-(F.bt*H+W*.008));R.setProperty('--W',W+'px');
-  inn.style.cssText=`margin-left:${Math.round(vw*.015-F.l*W)}px!important;margin-top:${-Math.round(top)}px!important;margin-bottom:${-Math.round(bot)}px!important;clip-path:inset(${Math.round(top)}px 0 ${Math.round(bot)}px 0)`};
- requestAnimationFrame(()=>requestAnimationFrame(fit));addEventListener('resize',()=>{fit()});mq.addEventListener&&mq.addEventListener('change',()=>{F=null;R0();fit()});function R0(){document.documentElement.style.removeProperty('--W');inn.style.cssText=''}}
+ const fit=()=>{const R=document.documentElement.style,msg=document.getElementById('msg');if(!mq.matches){R.removeProperty('--W');inn.style.cssText='';if(msg)msg.style.removeProperty('transform');return}
+  if(!F){if(msg)msg.style.removeProperty('transform');const i=inn.getBoundingClientRect(),b=document.getElementById('board').getBoundingClientRect(),m=msg.getBoundingClientRect();if(!i.width)return;F={l:(b.left-i.left)/i.width,w:b.width/i.width,t:(b.top-i.top)/i.height,bt:(m.bottom-i.top)/i.height,mt:(m.top-i.top)/i.height,bb:(b.bottom-i.top)/i.height,ar:i.height/i.width}}
+  const vw=innerWidth,W=Math.round(vw*.97/F.w),H=W*F.ar,top=Math.max(0,F.t*H-W*.022),bot=Math.max(0,H-(F.bt*H+W*.008));
+  /* v28.38: mythic bezel hangs 11px past the reels and the glow reaches further. Drop the explanation below that band; 0 with no skin. */
+  const drop=document.body.dataset.skin?Math.max(0,Math.round(36-(F.mt-F.bb)*H)):0;
+  R.setProperty('--W',W+'px');
+  inn.style.cssText=`margin-left:${Math.round(vw*.015-F.l*W)}px!important;margin-top:${-Math.round(top)}px!important;margin-bottom:${Math.round(-bot+drop)}px!important;clip-path:inset(${Math.round(top)}px 0 ${Math.round(bot-drop)}px 0)`;
+  if(msg){if(drop)msg.style.setProperty('transform','translateY('+drop+'px)','important');else msg.style.removeProperty('transform')}};
+ requestAnimationFrame(()=>requestAnimationFrame(fit));addEventListener('resize',()=>{fit()});mq.addEventListener&&mq.addEventListener('change',()=>{F=null;R0();fit()});function R0(){document.documentElement.style.removeProperty('--W');inn.style.cssText='';const m=document.getElementById('msg');if(m)m.style.removeProperty('transform')}
+ window.czRefit=fit}
 if(IN_M){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',czHero);else czHero()}
 if(IN_M){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',machineUI);else machineUI()}
 })();

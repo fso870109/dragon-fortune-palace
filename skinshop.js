@@ -28,4 +28,6 @@ tryT=setTimeout(()=>endTry(),15000)},true);
 $('shopBtn').addEventListener('click',()=>endTry(),true);
 const t=document.getElementById('shTitle');if(t)t.insertAdjacentHTML('beforebegin','<div class="shk">龍運金殿・御用工房</div>');
 const s=document.querySelector('#shop .shsub');if(s)s.innerHTML='挑一台屬於你的機台・可先試穿 15 秒<span class="chip"><span class="coin" aria-hidden="true"></span><b id="shBal">0</b></span><em>外觀只改變樣式，不影響機率・純虛擬・無兌現</em>';
-skApply();})();
+skApply();
+new MutationObserver(()=>{if(window.czRefit)window.czRefit()}).observe(B,{attributes:true,attributeFilter:['data-skin']});
+})();
