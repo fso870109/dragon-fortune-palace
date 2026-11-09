@@ -1,9 +1,9 @@
-/* v28.34 機台外觀商店 2.0 — cosmetic only, virtual chips only, odds untouched */
+/* v28.39 frame previews; v28.34 機台外觀商店 2.0 — cosmetic only, virtual chips only, odds untouched */
 (()=>{if(typeof SKINS==='undefined')return;
-const X={gold:{tier:'常見',t:'c',name:'金殿',tag:'御用金漆',fx:'金箔浮雕框・暖金招牌',copy:'龍運金殿的原廠金漆機台，一切傳奇的起點。'},
-neon:{tier:'稀有',t:'r',name:'真夜中',tag:'深藍夜行',fx:'霓藍流光邊框・中獎藍閃',copy:'午夜霓虹在漆框上流動，深夜開台的人專屬的冷冽氣場。'},
+const X={gold:{tier:'常見',t:'c',name:'金殿',tag:'御用金漆',fx:'金漆宮簷繪框・雙鳳、蓮花寶石、粉燈',copy:'宮簷金漆收住輪盤與說明，雙鳳與蓮花寶石停在框冠，一切傳奇的起點。'},
+neon:{tier:'稀有',t:'r',name:'真夜中',tag:'深藍夜行',fx:'深藍銀雲繪框・新月星鑽、藍燈、銀雲',copy:'新月與星鑽升在框冠，銀雲與藍燈守在兩側，深夜開台的冷冽氣場。'},
 jade:{tier:'稀有',t:'r',name:'花火夜祭',tag:'櫻扇鳥居',fx:'紺青金繪框・菊紋、雙扇、紅燈、鳥居',copy:'紺青與金線收住輪盤和中獎說明，櫻、扇、紅燈與鳥居都停在框上。'},
-crystal:{tier:'傳說',t:'l',name:'月光',tag:'銀月水晶',fx:'銀白水晶框・月暈脈動',copy:'以月光鍛成的水晶機殼，冷光在邊框緩緩呼吸。'},
+crystal:{tier:'傳說',t:'l',name:'月光',tag:'銀月水晶',fx:'銀白珠光繪框・滿月玉兔、白梅、水晶',copy:'以月光鍛成的珠光機殼，滿月玉兔與白梅停在框冠，冷光繞著輪盤。'},
 royal:{tier:'傳說',t:'l',name:'極夜霓虹',tag:'粉藍霓虹',fx:'粉青霓虹繪框・扇面、紫藍燈、鳥居',copy:'極夜的粉與青沿著同一套框位流動，說明文字留在框內。'},
 obsidian:{tier:'史詩',t:'m',name:'金龍祭典',tag:'赤漆金龍',fx:'赤漆金繪框・金龍、玉、紅燈、浪',copy:'赤漆金框把輪盤和中獎說明收在同一面祭典裡，龍與玉停在框冠。'}};
 SKINS.forEach(k=>Object.assign(k,X[k.id]||{}));
@@ -12,7 +12,8 @@ const B=document.body;let tryT=0,tryId=null,prevSkin;
 function fxLayer(){const inn=document.querySelector('.board')||document.querySelector('.inner');if(!inn||document.getElementById('skFx'))return;const d=document.createElement('div');d.id='skFx';d.setAttribute('aria-hidden','true');
 d.innerHTML='<i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><b class="plq"></b><span class="pt">'+'<em></em>'.repeat(12)+'</span>';inn.appendChild(d)}
 const _ap=skApply;skApply=function(){_ap();fxLayer();const k=SKINS.find(s=>s.id===(B.dataset.skin||'gold'));const p=document.querySelector('#skFx .plq');if(p&&k)p.textContent=k.name+'・'+k.tag;B.dataset.skt=k?k.t:'c'};
-function pv(k){return `<div class="pv2 s-${k.id}" aria-hidden="true"><div class="cab"><div class="crest"></div><div class="mq">${k.name}</div><div class="rl"><i></i><i></i><i></i><i></i><i></i></div><div class="base"></div></div><div class="sp"><em></em><em></em><em></em></div></div>`}
+const FRM={gold:'gold',neon:'midnight',jade:'hanabi',crystal:'moon',royal:'neon',obsidian:'dragon'},THM=(location.pathname.split('/').pop()||'').replace('.html','');
+function pv(k){const f=FRM[k.id];if(f&&/^(neko|sakura|samurai|matsuri)$/.test(THM))return `<div class="pv2 pvimg s-${k.id}" aria-hidden="true" style="background-image:url(assets/skins/shop/${THM}-${f}.webp?v=2839)"></div>`;return `<div class="pv2 s-${k.id}" aria-hidden="true"><div class="cab"><div class="crest"></div><div class="mq">${k.name}</div><div class="rl"><i></i><i></i><i></i><i></i><i></i></div><div class="base"></div></div><div class="sp"><em></em><em></em><em></em></div></div>`}
 shRender=function(){const st=skGet();$('shBal').textContent=fmt(bal);
 $('skins').innerHTML=SKINS.map(k=>{const own=st.own.includes(k.id),eq=st.eq===k.id;let btn,state;
 if(eq){btn=`<button disabled>✓ 使用中</button>`;state='使用中'}

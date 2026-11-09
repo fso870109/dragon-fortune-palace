@@ -207,3 +207,51 @@ body[data-skin="royal"] #cabFrame .sk.c{left:50%;top:6px;transform:translateX(-5
 #shop .s-royal .cab{background:#1a0618;border:3px solid #ff4ad4;box-shadow:0 0 10px #22e6ff,inset 0 0 0 1px #22e6ff}
 #shop .s-royal .crest{background:url(assets/skins/fan-blue.png?v=2838) center/contain no-repeat;border-radius:0;box-shadow:none}
 #shop .s-royal .crest::after{content:none}
+
+/* v28.39 illustrated cabinet frames: one 9-slice image per skin fills crown, rails and base;
+   the hollow is exactly the reel + message window, the centrepiece may rise above the crown. */
+@media (max-width:620px) and (orientation:portrait){
+body.cab-on:is(:not([data-skin]),[data-skin="gold"]) #cabFrame>*,body.cab-on[data-skin="neon"] #cabFrame>*,body.cab-on[data-skin="jade"] #cabFrame>*,body.cab-on[data-skin="crystal"] #cabFrame>*,body.cab-on[data-skin="royal"] #cabFrame>*,body.cab-on[data-skin="obsidian"] #cabFrame>*{display:none!important}
+body.cab-on:is(:not([data-skin]),[data-skin="gold"]) #cabFrame,body.cab-on[data-skin="neon"] #cabFrame,body.cab-on[data-skin="jade"] #cabFrame,body.cab-on[data-skin="crystal"] #cabFrame,body.cab-on[data-skin="royal"] #cabFrame,body.cab-on[data-skin="obsidian"] #cabFrame{overflow:visible}
+body.cab-on:is(:not([data-skin]),[data-skin="gold"]) #cabFrame::before,body.cab-on[data-skin="neon"] #cabFrame::before,body.cab-on[data-skin="jade"] #cabFrame::before,body.cab-on[data-skin="crystal"] #cabFrame::before,body.cab-on[data-skin="royal"] #cabFrame::before,body.cab-on[data-skin="obsidian"] #cabFrame::before{content:'';position:absolute;left:0;right:0;bottom:0;top:calc(-1 * var(--ovh,0px));box-sizing:border-box;border-style:solid;border-color:transparent;border-width:calc(var(--frame-crown) + var(--ovh,0px)) var(--frame-rail) var(--frame-base) var(--frame-rail);pointer-events:none}
+/* gold → 金殿 */
+body.cab-on:is(:not([data-skin]),[data-skin="gold"]) #cabStage{background:#2a0c18}
+body.cab-on:is(:not([data-skin]),[data-skin="gold"]) #cabBand{background:linear-gradient(#4a1426,#20060f)}
+body.cab-on:is(:not([data-skin]),[data-skin="gold"]) #cabFrame{--ovh:calc(var(--frame-crown) * 0.9027)}
+body.cab-on:is(:not([data-skin]),[data-skin="gold"]) #cabFrame::before{border-image:url(assets/skins/frame-gold.webp?v=2839) 211 81 84 81 stretch}
+body.cab-on:is(:not([data-skin]),[data-skin="gold"]) #cabBand #msg{color:#fff8e8!important;text-shadow:0 1px 2px #000,0 0 8px rgba(0,0,0,.75)!important}
+/* neon → 真夜中 */
+body.cab-on[data-skin="neon"] #cabStage{background:#081228}
+body.cab-on[data-skin="neon"] #cabBand{background:linear-gradient(#142a56,#081430)}
+body.cab-on[data-skin="neon"] #cabFrame{--ovh:calc(var(--frame-crown) * 1.1351)}
+body.cab-on[data-skin="neon"] #cabFrame::before{border-image:url(assets/skins/frame-midnight.webp?v=2839) 237 81 84 81 stretch}
+body.cab-on[data-skin="neon"] #cabBand #msg{color:#fff8e8!important;text-shadow:0 1px 2px #000,0 0 8px rgba(0,0,0,.75)!important}
+/* jade → 花火夜祭 */
+body.cab-on[data-skin="jade"] #cabStage{background:#07122c}
+body.cab-on[data-skin="jade"] #cabBand{background:linear-gradient(#16305c,#0a1838)}
+body.cab-on[data-skin="jade"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.4243)}
+body.cab-on[data-skin="jade"] #cabFrame::before{border-image:url(assets/skins/frame-hanabi.webp?v=2839) 158 81 84 81 stretch}
+body.cab-on[data-skin="jade"] #cabBand #msg{color:#fff8e8!important;text-shadow:0 1px 2px #000,0 0 8px rgba(0,0,0,.75)!important}
+/* crystal → 月光 */
+body.cab-on[data-skin="crystal"] #cabStage{background:#1a2236}
+body.cab-on[data-skin="crystal"] #cabBand{background:linear-gradient(#2a3654,#141a2c)}
+body.cab-on[data-skin="crystal"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.9459)}
+body.cab-on[data-skin="crystal"] #cabFrame::before{border-image:url(assets/skins/frame-moon.webp?v=2839) 216 81 84 81 stretch}
+body.cab-on[data-skin="crystal"] #cabBand #msg{color:#fff8e8!important;text-shadow:0 1px 2px #000,0 0 8px rgba(0,0,0,.75)!important}
+/* royal → 極夜霓虹 */
+body.cab-on[data-skin="royal"] #cabStage{background:#140816}
+body.cab-on[data-skin="royal"] #cabBand{background:linear-gradient(#241028,#100816)}
+body.cab-on[data-skin="royal"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.7081)}
+body.cab-on[data-skin="royal"] #cabFrame::before{border-image:url(assets/skins/frame-neon.webp?v=2839) 190 81 84 81 stretch}
+body.cab-on[data-skin="royal"] #cabBand #msg{color:#fff8e8!important;text-shadow:0 1px 2px #000,0 0 8px rgba(0,0,0,.75)!important}
+/* obsidian → 金龍祭典 */
+body.cab-on[data-skin="obsidian"] #cabStage{background:#3a0c10}
+body.cab-on[data-skin="obsidian"] #cabBand{background:linear-gradient(#5a1216,#2a070b)}
+body.cab-on[data-skin="obsidian"] #cabFrame{--ovh:calc(var(--frame-crown) * 1.1351)}
+body.cab-on[data-skin="obsidian"] #cabFrame::before{border-image:url(assets/skins/frame-dragon.webp?v=2839) 237 81 84 81 stretch}
+body.cab-on[data-skin="obsidian"] #cabBand #msg{color:#fff8e8!important;text-shadow:0 1px 2px #000,0 0 8px rgba(0,0,0,.75)!important}
+body.cab-on[data-skin="royal"] #cabFrame::before{filter:drop-shadow(0 0 3px rgba(255,60,200,.85)) drop-shadow(0 0 7px rgba(40,220,255,.5))}
+}
+/* shop cards: preview of the real frame on this theme */
+#shop .pv2.pvimg{display:block;aspect-ratio:var(--par,1.4);background:#0c0608 center/contain no-repeat;border-radius:10px;overflow:hidden}
+#shop .pv2.pvimg>*{display:none!important}
