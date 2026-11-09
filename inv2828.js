@@ -7,7 +7,7 @@ function st(){var s;try{s=JSON.parse(LS.getItem(K)||'{}')}catch(e){s={}}if(!s||s
 function sv(s){try{LS.setItem(K,JSON.stringify(s))}catch(e){}}
 function snd(n){try{window.sfx&&window.sfx(n)}catch(e){}}
 var wk=document.querySelector('.wk'),top=document.querySelector('.top');if(!wk&&!top)return;
-var bn=document.createElement('button');bn.className='ivb';bn.id='ivB';bn.innerHTML='<span class="ive" aria-hidden="true">🎁</span><span class="ivt"><b>邀請階梯</b><small id="ivBs"></small></span><span class="ivg">前往</span>';
+var bn=document.createElement('button');bn.className='ivb';bn.id='ivB';bn.innerHTML='<span class="ive" aria-hidden="true"><img src="assets/lx/ev_gift.webp?v=2848" alt="" width="128" height="128"></span><span class="ivt"><b>邀請階梯</b><small id="ivBs"></small></span><span class="ivg">前往</span>';
 if(wk)wk.parentNode.insertBefore(bn,wk.nextSibling);else top.parentNode.insertBefore(bn,top.nextSibling);
 var d=document.createElement('dialog');d.id='dIv';d.setAttribute('aria-labelledby','ivT');
 d.innerHTML='<h3 id="ivT">邀請階梯</h3><div class="ivc"><small>我的邀請碼</small><b id="ivCode"></b><div class="iva"><button class="btn hot" id="ivShare">分享邀請</button><button class="btn" id="ivCopy">複製邀請碼</button></div><p class="ivm" id="ivM" role="status"></p></div>'+
@@ -25,6 +25,6 @@ $('ivShare').onclick=async function(){snd(1);var t='來玩龍運金殿！輸入�
  if(navigator.share){try{await navigator.share({title:'龍運金殿',text:t});count();return}catch(e){if(e.name==='AbortError')return}}
  try{await navigator.clipboard.writeText(t);msg('已複製分享文字，貼給好友吧');count()}catch(e){msg('目前裝置不支援分享，請複製邀請碼')}};
 $('ivCopy').onclick=async function(){snd(1);try{await navigator.clipboard.writeText(code());msg('已複製邀請碼 '+code())}catch(e){msg('請長按邀請碼手動複製')}};
-$('ivL').onclick=function(e){var b=e.target.closest('[data-iv]');if(!b||b.disabled)return;var i=+b.getAttribute('data-iv'),s=st(),t=TI[i];if(s.c.indexOf(i)>=0||s.n<t.n)return;s.c.push(i);sv(s);CZ.addChips(t.r);CZ.vib(20);CZ.toast('🎁 邀請階梯紅包 ＋'+t.r);snd(2);render()};
+$('ivL').onclick=function(e){var b=e.target.closest('[data-iv]');if(!b||b.disabled)return;var i=+b.getAttribute('data-iv'),s=st(),t=TI[i];if(s.c.indexOf(i)>=0||s.n<t.n)return;s.c.push(i);sv(s);CZ.addChips(t.r);CZ.vib(20);CZ.toast('邀請階梯紅包 ＋'+t.r,'assets/lx/ev_gift.webp?v=2848');snd(2);render()};
 bn.onclick=function(){snd(1);CZ.vib(8);render();d.showModal()};$('ivX').onclick=function(){snd(1);d.close()};
 render();window.DFPiv={render:render}})();

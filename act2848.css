@@ -1,0 +1,55 @@
+/* v28.48 活動中心：繪製主題圖示＋金盤底（取代 emoji；不改版面文案與經濟） */
+.lxSak{background-image:url(assets/lx/ev_sakura.webp?v=2848)!important}
+
+#lx .ivb .ive,
+.ivb .ive{
+  flex:none;width:42px;height:42px;min-width:42px;padding:0;font-size:0;line-height:0;
+  display:grid;place-items:center;border-radius:50%;overflow:visible;filter:none;
+  background:radial-gradient(circle at 32% 28%,#fff6d0 0%,#f0c64a 36%,#c48a1c 72%,#6b3d08 100%);
+  box-shadow:inset 0 1px 0 rgba(255,246,208,.9),inset 0 -2px 3px rgba(80,30,0,.4),0 0 0 1.5px #7a4a10,0 0 0 2.5px rgba(255,214,110,.35),0 2px 6px rgba(0,0,0,.45);
+}
+#lx .ivb .ive img,
+.ivb .ive img{width:70%;height:70%;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
+
+.wkc span,.wki span{
+  width:22px;height:22px;font-size:0!important;line-height:0;
+  display:grid;place-items:center;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#fff6d0,#e8b83a 55%,#8a5310);
+  box-shadow:inset 0 1px 0 rgba(255,246,208,.85),0 0 0 1px #6a3c06;
+}
+.wkc span img,.wki span img{width:72%;height:72%;object-fit:contain;display:block}
+#dWk .wke{
+  font-size:0;width:48px;height:48px;flex:none;
+  display:grid;place-items:center;border-radius:50%;filter:none;
+  background:radial-gradient(circle at 32% 28%,#fff6d0,#e8b83a 55%,#8a5310);
+  box-shadow:inset 0 1px 0 rgba(255,246,208,.85),0 0 0 1.5px #6a3c06,0 2px 8px rgba(0,0,0,.35);
+}
+#dWk .wke img{width:72%;height:72%;object-fit:contain;display:block}
+
+#dFr .gb{font-size:0;width:36px;height:36px;display:grid;place-items:center;flex:none;filter:none}
+#dFr .gb img{width:34px;height:34px;object-fit:contain;display:block}
+#dFr .fav{font-size:0;overflow:hidden}
+#dFr .fav img{width:26px;height:26px;object-fit:contain;display:block}
+
+#dRd .rdsh{display:inline-flex;align-items:center;gap:5px}
+#dRd .rdsh img{width:16px;height:16px;object-fit:contain;flex:none}
+.rdp .rdpi{
+  font-size:0;width:32px;height:32px;flex:none;
+  display:grid;place-items:center;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#fff6d0,#e8b83a 55%,#8a5310);
+  box-shadow:inset 0 1px 0 rgba(255,246,208,.85),0 0 0 1px #6a3c06;
+}
+.rdp .rdpi img{width:72%;height:72%;object-fit:contain;display:block}
+
+#dGd .gdk{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:800 11px/1 "Noto Sans TC",sans-serif;color:#5a2a00;background:rgba(255,246,208,.12)}
+#dGd .gdk.rk1{background:radial-gradient(circle at 32% 28%,#fff6d0,#e8b83a 55%,#8a5310);color:#5a2a00}
+#dGd .gdk.rk2{background:radial-gradient(circle at 32% 28%,#fff,#c8c8d0 55%,#6a6a78);color:#2a2a32}
+#dGd .gdk.rk3{background:radial-gradient(circle at 32% 28%,#ffe0c0,#c87a3a 55%,#6a3410);color:#3a1800}
+
+.czt.hasI{display:flex;align-items:center;gap:8px}
+.czt.hasI img{width:22px;height:22px;object-fit:contain;flex:none}
+
+@media (max-width:380px){
+  #lx .ivb .ive,.ivb .ive{width:38px;height:38px;min-width:38px}
+  .wkc span,.wki span{width:20px;height:20px}
+}

@@ -20,8 +20,8 @@ function addChips(v){if(typeof bal==='number'){bal+=v;ui()}else S('fs_bal',getBa
 const vipOf=l=>{let r=VIP[0];for(const v of VIP)if(l>=v[0])r=v;return r};
 const ls=new Set();function emit(){ls.forEach(f=>{try{f()}catch(e){}})}
 const vib=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
-function toast(t){let w=document.getElementById('czToast');if(!w){w=document.createElement('div');w.id='czToast';w.setAttribute('role','status');document.body.appendChild(w)}
- const e=document.createElement('div');e.className='czt';e.textContent=t;w.appendChild(e);setTimeout(()=>e.remove(),3200)}
+function toast(t,ic){let w=document.getElementById('czToast');if(!w){w=document.createElement('div');w.id='czToast';w.setAttribute('role','status');document.body.appendChild(w)}
+ const e=document.createElement('div');e.className=ic?'czt hasI':'czt';if(ic){const im=document.createElement('img');im.src=ic;im.alt='';im.width=28;im.height=28;e.appendChild(im)}e.appendChild(document.createTextNode(t));w.appendChild(e);setTimeout(()=>e.remove(),3200)}
 function feed(t){st.feed.unshift({t,ts:Date.now()});st.feed.length=Math.min(st.feed.length,12);save()}
 function ach(id){if(st.ach[id])return;const a=ACH.find(x=>x.id===id);if(!a)return;st.ach[id]=Date.now();addChips(a.r);toast(`🏆 成就達成「${a.t}」＋${a.r} 籌碼`);feed(`成就「${a.t}」`);save()}
 function addXP(x){st.xp+=x;let up=0;while(st.xp>=need(st.lv)){st.xp-=need(st.lv);st.lv++;up++;const r=100*st.lv;addChips(r);toast(`⬆️ 升級！Lv.${st.lv}（${vipOf(st.lv)[1]}）＋${r} 籌碼`);vib([20,40,20])}

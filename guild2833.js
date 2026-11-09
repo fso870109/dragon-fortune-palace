@@ -13,7 +13,7 @@ function mine(s){return Math.max(0,spins()-s.b)}
 function demo(r){return Math.floor(Math.min(hrs(),168)*r*.5)}
 function total(s){var t=mine(s);MB.forEach(function(m){t+=demo(m[1])});return t}
 var anc=$('rdB')||$('ivB')||document.querySelector('.wk')||document.querySelector('.top');if(!anc)return;
-var bn=document.createElement('button');bn.className='ivb gdb';bn.id='gdB';bn.innerHTML='<span class="ive" aria-hidden="true">🏯</span><span class="ivt"><b>公會任務</b><small id="gdBs"></small></span><span class="ivg">共闖</span>';
+var bn=document.createElement('button');bn.className='ivb gdb';bn.id='gdB';bn.innerHTML='<span class="ive" aria-hidden="true"><img src="assets/lx/ev_castle.webp?v=2848" alt="" width="128" height="128"></span><span class="ivt"><b>公會任務</b><small id="gdBs"></small></span><span class="ivg">共闖</span>';
 anc.parentNode.insertBefore(bn,anc.nextSibling);
 var d=document.createElement('dialog');d.id='dGd';d.setAttribute('aria-labelledby','gdT');
 d.innerHTML='<h3 id="gdT">公會・'+GN+'</h3><p class="gdx">示範公會：本機示範，連線公會準備中</p>'+
@@ -26,11 +26,11 @@ function render(){var s=st(),t=total(s),me=mine(s),can=0;
  $('gdR').innerHTML=GOAL.map(function(g,i){var ok=t>=g,got=s.c[i];if(ok&&!got)can++;return '<button class="btn'+(ok&&!got?' hot':'')+'" data-cl="'+i+'"'+(ok&&!got?'':' disabled')+'><small>'+g+' 轉</small>'+(got?'已領取':'＋'+RW[i])+'</button>'}).join('');
  var rows;if(!tab){rows=MB.map(function(m){return [m[0],demo(m[1]),0]});rows.push(['我',me,1])}else{rows=OG.map(function(g){return [g[0],Math.floor(Math.min(hrs(),168)*g[1]*3),0]});rows.push([GN,t,1])}
  rows.sort(function(a,b){return b[1]-a[1]});
- $('gdL').innerHTML=rows.map(function(r,i){return '<li class="'+(r[2]?'me':'')+'"><span class="gdk">'+(i<3?['🥇','🥈','🥉'][i]:(i+1))+'</span><b>'+r[0]+'</b><span>'+r[1]+' 轉</span></li>'}).join('');
+ $('gdL').innerHTML=rows.map(function(r,i){return '<li class="'+(r[2]?'me':'')+'"><span class="gdk'+(i<3?' rk'+(i+1):'')+'">'+(i+1)+'</span><b>'+r[0]+'</b><span>'+r[1]+' 轉</span></li>'}).join('');
  d.querySelectorAll('[data-tb]').forEach(function(b){b.classList.toggle('hot',+b.getAttribute('data-tb')===tab)});
  $('gdBs').textContent=can?('共同任務達標，'+can+' 份獎勵可領！'):('全會 '+Math.min(t,GOAL[2])+'／'+GOAL[2]+' 轉・我貢獻 '+me);
  bn.classList.toggle('has',can>0)}
-$('gdR').onclick=function(e){var b=e.target.closest('[data-cl]');if(!b||b.disabled)return;var s=st(),i=+b.getAttribute('data-cl');if(s.c[i]||total(s)<GOAL[i])return;s.c[i]=1;sv(s);CZ.addChips(RW[i]);CZ.vib(25);snd(2);$('gdM').textContent='🏯 公會任務 '+GOAL[i]+' 轉達標！＋'+RW[i];CZ.toast('🏯 公會獎勵 ＋'+RW[i]);render()};
+$('gdR').onclick=function(e){var b=e.target.closest('[data-cl]');if(!b||b.disabled)return;var s=st(),i=+b.getAttribute('data-cl');if(s.c[i]||total(s)<GOAL[i])return;s.c[i]=1;sv(s);CZ.addChips(RW[i]);CZ.vib(25);snd(2);$('gdM').textContent='公會任務 '+GOAL[i]+' 轉達標！＋'+RW[i];CZ.toast('公會獎勵 ＋'+RW[i],'assets/lx/ev_castle.webp?v=2848');render()};
 d.querySelector('.gdtab').onclick=function(e){var b=e.target.closest('[data-tb]');if(!b)return;tab=+b.getAttribute('data-tb');snd(1);render()};
 bn.onclick=function(){snd(1);CZ.vib(8);render();d.showModal()};$('gdX').onclick=function(){snd(1);d.close()};
 $('gdP').onclick=function(){var m=['matsuri','samurai','neko','sakura'];location.href=(m[(new Date().getDay()+3)%4])+'.html'};

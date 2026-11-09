@@ -4,7 +4,7 @@
 if(!window.CZ||document.getElementById('lx'))return;
 var $=function(i){return document.getElementById(i)},D=document,LS=localStorage,SS=sessionStorage;
 var fmt=function(n){return Math.floor(n).toLocaleString('en-US')};
-var V='?v=2840';
+var V='?v=2848';
 function el(tag,cls,html){var e=D.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
 function snd(n){try{window.sfx&&window.sfx(n)}catch(e){}}
 function tap(){snd(1);try{CZ.vib(8)}catch(e){}}
@@ -72,7 +72,7 @@ mv(D.querySelector('.mqf'),ev);mv(D.querySelector('.wk'),ev);mv($('ivB'),ev);mv(
 var fr=$('bFr');
 function proxyRow(slot,id,ico,t,s,go,target){var b=el('button','ivb lxRow');b.type='button';b.id=id;b.innerHTML='<span class="ive" aria-hidden="true">'+ico+'</span><span class="ivt"><b>'+t+'</b><small>'+s+'</small></span><span class="ivg">'+go+'</span>';
  b.onclick=function(){var x=typeof target==='function'?null:$(target);if(typeof target==='function')target();else if(x)x.click()};slot.appendChild(b);return b}
-if(fr){proxyRow(ev,'lxFr','👥','好友互送','每天互送紅包・全回送再加碼','前往','bFr');fr.hidden=true;D.body.appendChild(fr)}
+if(fr){proxyRow(ev,'lxFr','<img src="assets/lx/ev_friends.webp'+V+'" alt="" width="128" height="128">','好友互送','每天互送紅包・全回送再加碼','前往','bFr');fr.hidden=true;D.body.appendChild(fr)}
 /* collect tab */
 var col=$('lxColSlot');
 var shopRow=el('div','lxShop');
