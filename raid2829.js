@@ -30,4 +30,10 @@ pu.onclick=function(){pu.classList.remove('on');render();d.open||d.showModal()};
 $('rdL').onclick=function(e){var b=e.target.closest('[data-at]');if(!b||b.disabled)return;var s=st();if(s.a>=AT)return;var f=FR[+b.getAttribute('data-at')],r=pick(RW);s.a++;sv(s);CZ.addChips(r);CZ.vib(25);snd(2);$('rdM').textContent='⚔️ 掠奪 '+f+' 的金殿成功！搶回 ＋'+r+'（對方有護盾，不會損失）';CZ.toast('⚔️ 掠奪成功 ＋'+r);render()};
 $('rdI').onclick=function(e){var b=e.target.closest('[data-rv]');if(!b||b.disabled)return;var s=st(),x=s.h[+b.getAttribute('data-rv')];if(!x||x.r)return;x.r=1;sv(s);CZ.addChips(RV);CZ.vib(25);snd(2);$('rdM').textContent='🔥 回擊 '+x.f+' 成功！＋'+RV;CZ.toast('🔥 回擊成功 ＋'+RV);render()};
 bn.onclick=function(){snd(1);CZ.vib(8);render();d.showModal()};$('rdX').onclick=function(){snd(1);d.close()};
-incoming();render();(function w(n){var l=document.getElementById('load');if((!l||l.classList.contains('out'))&&!document.querySelector('dialog[open]')){setTimeout(push,1500);return}if(n<90)setTimeout(function(){w(n+1)},800)})(0);window.DFPrd={render:render,push:push,incoming:incoming}})();
+incoming();render();
+/* v28.43: only after the player is on the lobby main screen (splash/door/age gate gone, no dialog), then a slim pill above the nav */
+function rdy(){if(document.getElementById('load')||document.getElementById('czDoor')&&document.getElementById('czDoor').offsetParent)return false;if(document.querySelector('dialog[open],.agOn,#h21'))return false;var H=document.documentElement;if(H.classList.contains('lx')){var lx=document.getElementById('lx');if(!lx||lx.getAttribute('data-cur')&&lx.getAttribute('data-cur')!=='home')return false}if(document.hidden)return false;return true}
+var _push=push;push=function(){if(!rdy()){setTimeout(function(){w2(0)},1500);return}var bb=document.querySelector('#lx .lxBot');pu.style.bottom=bb&&bb.offsetParent?(Math.ceil(innerHeight-bb.getBoundingClientRect().top)+4)+'px':'';_push();clearTimeout(pu._t);pu._t=setTimeout(function(){pu.classList.remove('on')},4200)};
+function w2(n){var ok=rdy();if(ok){setTimeout(function(){rdy()?_ok():w2(n+1)},1500);return}if(n<300)setTimeout(function(){w2(n+1)},800)}
+function _ok(){push()}
+w2(0);window.DFPrd={render:render,push:push,incoming:incoming}})();

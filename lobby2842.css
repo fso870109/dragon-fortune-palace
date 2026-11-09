@@ -4,3 +4,14 @@
 .lxS.s-samurai .hk{background-position:0% 14%}.lxS.s-neko .hk{background-position:0% 20%}.lxS.s-sakura .hk{background-position:0% 4%}
 .lxS::before{display:none}
 .lxS .rt{z-index:1}
+/* v28.43: raid push toast was parked (translate -140%) over the function row because html.lx moved its top; hide it fully when not shown */
+html.lx .rdp:not(.on){visibility:hidden;opacity:0;transition:transform .45s,opacity .25s,visibility 0s .45s}
+html.lx .rdp.on{visibility:visible;opacity:1}
+/* v28.43: raid push = slim pill above the bottom nav, lobby only */
+html.lx .rdp{top:auto;bottom:calc(96px + env(safe-area-inset-bottom));width:max-content;max-width:min(88vw,340px);padding:5px 6px 5px 10px;gap:6px;border-radius:999px;border:1px solid rgba(255,200,110,.75);background:linear-gradient(90deg,rgba(120,10,22,.94),rgba(60,6,14,.94));box-shadow:0 4px 14px rgba(0,0,0,.55),0 0 10px rgba(255,120,60,.3);transform:translate(-50%,14px)}
+html.lx .rdp.on{transform:translate(-50%,0)}
+html.lx .rdp .rdpi{font-size:15px;animation:none}
+html.lx .rdp .rdpt{display:flex;align-items:center;min-width:0}
+html.lx .rdp b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#ffe7a6}
+html.lx .rdp small{display:none}
+html.lx .rdp::after{content:"回擊 ›";flex:none;padding:3px 9px;border-radius:999px;font:900 12px/1.2 var(--lxf,inherit);color:#3a1200;background:linear-gradient(180deg,#fff2c0,#f2c457 55%,#d5962a)}
