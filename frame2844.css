@@ -1,0 +1,19 @@
+/* v28.44: message rides on the cabinet's bottom rail as one slim line; the old message row is gone and its height goes back to the reels */
+@media (max-width:620px) and (orientation:portrait){
+#cabStage{grid-template-rows:var(--frame-crown) auto var(--frame-base)!important}
+html body.cab-on #cabBand{grid-row:auto!important;position:absolute!important;left:var(--frame-rail);right:var(--frame-rail);bottom:0;height:var(--frame-base);min-height:0!important;padding:0 4px!important;z-index:5;background:none!important;display:flex;align-items:center;justify-content:center;pointer-events:none;overflow:hidden}
+html body.cab-on #cabBand #msg{display:block!important;width:auto!important;max-width:100%!important;height:auto!important;
+ padding:1px 11px!important;border-radius:999px;box-sizing:border-box;
+ background:rgba(12,4,8,.72)!important;box-shadow:inset 0 0 0 1px rgba(255,226,160,.45),0 1px 4px rgba(0,0,0,.6);
+ white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+ font-size:clamp(11px,3vw,12.5px)!important;line-height:1.35!important;font-weight:700!important;
+ color:#fff8e8!important;text-shadow:0 1px 2px #000!important;text-align:center!important}
+html body.cab-on #cabBand #msg.cbmq{text-overflow:clip!important;text-align:left!important;animation:cbmq var(--mqt,6s) linear 1s infinite alternate}
+}
+@media (max-width:620px) and (orientation:portrait) and (max-height:680px){
+html body.cab-on #cabBand #msg{font-size:11px!important;line-height:1.3!important;padding:0 9px!important}
+}
+@keyframes cbmq{0%,12%{text-indent:0}88%,100%{text-indent:var(--mqd,0px)}}
+@media (prefers-reduced-motion:reduce){html body.cab-on #cabBand #msg.cbmq{animation:none;text-overflow:ellipsis!important;text-align:center!important}}
+/* 寶珠對碰 shows its own 剩餘重轉／累計 bar on the bottom rail: hide the message line while it runs */
+body:has(#hsBox) #cabBand{visibility:hidden!important}

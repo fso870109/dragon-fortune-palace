@@ -153,15 +153,22 @@ function czHero(){const mach=document.getElementById('machine'),inn=mach&&mach.q
  const px=n=>{probe.style.width='var('+n+')';return probe.offsetWidth||0};
  function unwrapMsg(){if(msg&&msgHome&&msg.parentNode!==msgHome)msgHome.appendChild(msg)}
  function parkMsg(){if(!msg)return;if(msg.classList.contains('czmq')){const t=msg.textContent;msg.classList.remove('czmq');msg.textContent=t;msg.style.cssText=''}if(msg.parentNode!==band)band.appendChild(msg)}
+ /* v28.44: the message now rides on the base rail, so the reels take back the old message-row height (cells closer to their natural aspect) */
+ function grow(on){const bd=document.getElementById('board');if(!bd)return;const rs=[...bd.querySelectorAll('.reel')];bd.style.removeProperty('height');rs.forEach(r=>r.style.removeProperty('--c'));if(!on||!rs.length)return;
+  const i0=inn.getBoundingClientRect(),b0=bd.getBoundingClientRect(),c=rs[0].querySelector('.cell');if(!i0.width||!b0.height||!c)return;
+  const ch0=c.getBoundingClientRect().height,rows=Math.max(1,Math.round(b0.height/ch0)),ex=px('--frame-msg')*b0.width/Math.max(140,innerWidth-2*(px('--frame-rail')||26));
+  const cw=b0.width/rs.length,ch1=Math.min(cw*.96,ch0+ex/rows);if(!(ch1>ch0+.5))return;const k=i0.width/100;
+  bd.style.setProperty('height',(b0.height*ch1/ch0/k).toFixed(3)+'cqw','important');rs.forEach(r=>r.style.setProperty('--c',(ch1/k).toFixed(3)+'cqw','important'))}
  const fit=()=>{const R=document.documentElement.style;
-  if(!mq.matches){document.body.classList.remove('cab-on');unwrapMsg();R.removeProperty('--W');inn.style.cssText='';well.style.height='';return}
+  if(!mq.matches){document.body.classList.remove('cab-on');unwrapMsg();R.removeProperty('--W');inn.style.cssText='';well.style.height='';grow(0);return}
   document.body.classList.add('cab-on');parkMsg();
-  if(!F){const i=inn.getBoundingClientRect(),b=document.getElementById('board').getBoundingClientRect();if(!i.width||!b.width)return;F={l:(b.left-i.left)/i.width,w:b.width/i.width,t:(b.top-i.top)/i.height,h:b.height/i.height,ar:i.height/i.width}}
+  if(!F){grow(1);const i=inn.getBoundingClientRect(),b=document.getElementById('board').getBoundingClientRect();if(!i.width||!b.width)return;F={l:(b.left-i.left)/i.width,w:b.width/i.width,t:(b.top-i.top)/i.height,h:b.height/i.height,ar:i.height/i.width}}
   const rail=px('--frame-rail')||26,lip=1,vw=innerWidth,boardW=Math.max(140,vw-2*rail);
   const W=boardW/F.w,H=W*F.ar,boardTop=F.t*H,boardH=F.h*H,top=Math.max(0,boardTop-lip);
   const vis=Math.max(1,Math.round(boardTop+boardH+lip-top)),ml=Math.round(rail-F.l*W);
   R.setProperty('--W',Math.round(W)+'px');well.style.height=vis+'px';
   inn.style.cssText=`margin-left:${ml}px!important;margin-top:${-Math.round(top)}px!important;margin-bottom:0!important;clip-path:none!important`};
+ if(msg){let mt=0;const mchk=()=>{msg.classList.remove('cbmq');if(!document.body.classList.contains('cab-on'))return;const d=msg.scrollWidth-msg.clientWidth;if(d>1){msg.style.setProperty('--mqd',(-(d+10))+'px');msg.style.setProperty('--mqt',Math.max(3,(d+10)/26).toFixed(1)+'s');msg.classList.add('cbmq')}};new MutationObserver(()=>{cancelAnimationFrame(mt);mt=requestAnimationFrame(mchk)}).observe(msg,{childList:true,characterData:true,subtree:true});addEventListener('resize',()=>requestAnimationFrame(mchk));setTimeout(mchk,600)}
  requestAnimationFrame(()=>requestAnimationFrame(fit));addEventListener('resize',()=>{fit()});addEventListener('load',()=>{F=null;fit()});mq.addEventListener&&mq.addEventListener('change',()=>{F=null;fit()})}
 if(IN_M){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',czHero);else czHero()}
 if(IN_M){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',machineUI);else machineUI()}
