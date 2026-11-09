@@ -139,12 +139,30 @@ function czHero(){const mach=document.getElementById('machine'),inn=mach&&mach.q
  const id=(location.pathname.split('/').pop()||'').replace('.html','');const V='?v=239';document.documentElement.style.setProperty('--czhero',`url(assets/${id}/hero.webp${V})`);document.documentElement.style.setProperty('--czbw',`url(assets/${id}/p_bigwin.webp?v=281)`);document.documentElement.style.setProperty('--czbwbl',`url(assets/${id}/p_bigwin_bl.webp?v=281)`);
  const h=document.createElement('div');h.id='czHero';h.setAttribute('aria-hidden','true');
  h.innerHTML=`<div class="czhi" style="background-image:url(assets/${id}/hero.webp${V})"></div><div class="czhs"></div><i class="czhp"></i><i class="czhp b"></i><img class="czhl" src="assets/${id}/logo.webp${V}" alt=""><div class="czhf"></div>`;
- mach.insertBefore(h,inn);let F=null;const mq=matchMedia('(max-width:620px) and (orientation:portrait)');
- const fit=()=>{const R=document.documentElement.style;if(!mq.matches){R.removeProperty('--W');inn.style.cssText='';return}
-  if(!F){const i=inn.getBoundingClientRect(),b=document.getElementById('board').getBoundingClientRect(),m=document.getElementById('msg').getBoundingClientRect();if(!i.width)return;F={l:(b.left-i.left)/i.width,w:b.width/i.width,t:(b.top-i.top)/i.height,bt:(m.bottom-i.top)/i.height,ar:i.height/i.width}}
-  const vw=innerWidth,W=Math.round(vw*.97/F.w),H=W*F.ar,top=Math.max(0,F.t*H-W*.022),bot=Math.max(0,H-(F.bt*H+W*.008));R.setProperty('--W',W+'px');
-  inn.style.cssText=`margin-left:${Math.round(vw*.015-F.l*W)}px!important;margin-top:${-Math.round(top)}px!important;margin-bottom:${-Math.round(bot)}px!important;clip-path:inset(${Math.round(top)}px 0 ${Math.round(bot)}px 0)`};
- requestAnimationFrame(()=>requestAnimationFrame(fit));addEventListener('resize',()=>{fit()});mq.addEventListener&&mq.addEventListener('change',()=>{F=null;R0();fit()});function R0(){document.documentElement.style.removeProperty('--W');inn.style.cssText=''}}
+ mach.insertBefore(h,inn);
+ /* v28.38 shared cabinet frame: crown / side rails / message band / base. Skins only swap art. */
+ const stage=document.createElement('div');stage.id='cabStage';
+ const well=document.createElement('div');well.id='cabWell';
+ const frame=document.createElement('div');frame.id='cabFrame';frame.setAttribute('aria-hidden','true');
+ frame.innerHTML='<i class="crown"></i><i class="rail l"></i><i class="rail r"></i><i class="base"></i><b class="lip"></b><i class="orn dragon"></i><i class="orn gem"></i><i class="orn crest"></i><i class="orn fanl"></i><i class="orn fanr"></i><i class="orn fanc"></i><i class="orn ll"></i><i class="orn lr"></i><i class="orn torii"></i><i class="orn wave"></i><i class="orn cld l"></i><i class="orn cld r"></i><i class="orn sk a"></i><i class="orn sk b"></i><i class="orn sk c"></i>';
+ const band=document.createElement('div');band.id='cabBand';
+ inn.parentNode.insertBefore(stage,inn);well.appendChild(inn);stage.append(well,band,frame);
+ const msg=document.getElementById('msg'),msgHome=msg&&msg.parentNode;
+ let F=null;const mq=matchMedia('(max-width:620px) and (orientation:portrait)');
+ const probe=document.createElement('i');probe.setAttribute('aria-hidden','true');probe.style.cssText='position:absolute;left:0;top:0;height:0;visibility:hidden;pointer-events:none';document.documentElement.appendChild(probe);
+ const px=n=>{probe.style.width='var('+n+')';return probe.offsetWidth||0};
+ function unwrapMsg(){if(msg&&msgHome&&msg.parentNode!==msgHome)msgHome.appendChild(msg)}
+ function parkMsg(){if(!msg)return;if(msg.classList.contains('czmq')){const t=msg.textContent;msg.classList.remove('czmq');msg.textContent=t;msg.style.cssText=''}if(msg.parentNode!==band)band.appendChild(msg)}
+ const fit=()=>{const R=document.documentElement.style;
+  if(!mq.matches){document.body.classList.remove('cab-on');unwrapMsg();R.removeProperty('--W');inn.style.cssText='';well.style.height='';return}
+  document.body.classList.add('cab-on');parkMsg();
+  if(!F){const i=inn.getBoundingClientRect(),b=document.getElementById('board').getBoundingClientRect();if(!i.width||!b.width)return;F={l:(b.left-i.left)/i.width,w:b.width/i.width,t:(b.top-i.top)/i.height,h:b.height/i.height,ar:i.height/i.width}}
+  const rail=px('--frame-rail')||26,lip=1,vw=innerWidth,boardW=Math.max(140,vw-2*rail);
+  const W=boardW/F.w,H=W*F.ar,boardTop=F.t*H,boardH=F.h*H,top=Math.max(0,boardTop-lip);
+  const vis=Math.max(1,Math.round(boardTop+boardH+lip-top)),ml=Math.round(rail-F.l*W);
+  R.setProperty('--W',Math.round(W)+'px');well.style.height=vis+'px';
+  inn.style.cssText=`margin-left:${ml}px!important;margin-top:${-Math.round(top)}px!important;margin-bottom:0!important;clip-path:none!important`};
+ requestAnimationFrame(()=>requestAnimationFrame(fit));addEventListener('resize',()=>{fit()});addEventListener('load',()=>{F=null;fit()});mq.addEventListener&&mq.addEventListener('change',()=>{F=null;fit()})}
 if(IN_M){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',czHero);else czHero()}
 if(IN_M){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',machineUI);else machineUI()}
 })();

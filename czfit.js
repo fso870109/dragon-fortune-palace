@@ -26,7 +26,7 @@ const BOX='#msg,.msg,.czm b,.czbar .box b,.czbtn:not(#czLobby) span,#max16,#czBu
 function clipBox(el){let b=el.getBoundingClientRect(),L=b.left,R=b.right,c=el.parentElement;
  while(c&&c!==document.body){const cs=getComputedStyle(c);if(cs.overflow!=='visible'||cs.clipPath!=='none'){const q=c.getBoundingClientRect();L=Math.max(L,q.left);R=Math.min(R,q.right);break}c=c.parentElement}
  return [Math.max(L,0),Math.min(R,innerWidth)]}
-function fitBox(el){if(!el.isConnected||!el.clientWidth)return;el.style.removeProperty('font-size');
+function fitBox(el){if(document.body.classList.contains('cab-on')&&el.matches('#msg,.msg'))return;if(!el.isConnected||!el.clientWidth)return;el.style.removeProperty('font-size');
  let fs=parseFloat(getComputedStyle(el).fontSize),n=0;const min=Math.max(9,fs*.62);el.classList.remove('czmq');
  const over=()=>{const g=document.createRange();g.selectNodeContents(el);const r=g.getBoundingClientRect();if(!r.width)return false;const [L,R]=clipBox(el);const sk=fs*.2;
   return el.scrollWidth>el.clientWidth+1||r.left<L+2||r.right+sk>R-2};
@@ -36,7 +36,7 @@ function fitBox(el){if(!el.isConnected||!el.clientWidth)return;el.style.removePr
   const sh=sp.getBoundingClientRect().left-L-fs*.3;if(sh)sp.style.marginLeft=(-sh)+'px'}}
 // v18.8: centre the subtitle glyph ink (not the font line box) vertically: device fonts differ in ascent/descent
 const CV=document.createElement('canvas').getContext('2d');
-function vcenter(el){if(!el.matches('#msg,.msg'))return;el.style.removeProperty('padding-top');el.style.removeProperty('padding-bottom');
+function vcenter(el){if(document.body.classList.contains('cab-on'))return;if(!el.matches('#msg,.msg'))return;el.style.removeProperty('padding-top');el.style.removeProperty('padding-bottom');
  const cs=getComputedStyle(el);const t=(el.textContent||'').trim()||'財';CV.font=cs.font;const m=CV.measureText(t);
  const fs=parseFloat(cs.fontSize);let lh=parseFloat(cs.lineHeight);if(!lh)lh=(m.fontBoundingBoxAscent+m.fontBoundingBoxDescent);
  const fa=m.fontBoundingBoxAscent,fd=m.fontBoundingBoxDescent,base=(lh-(fa+fd))/2+fa,ink=base-(m.actualBoundingBoxAscent-m.actualBoundingBoxDescent)/2,off=ink-lh/2;
