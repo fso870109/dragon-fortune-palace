@@ -5,7 +5,7 @@ html.lx{--u:calc(min(100vw,520px) / 461);--g1:#fff6d2;--g2:#f6d27a;--g3:#d9a441;
  --gframe:linear-gradient(180deg,#fff3c4,#e8b552 30%,#8a5a14 52%,#f6d27a 72%,#a26a18);
  --lxf:"LxSerif","TCDisp","Noto Serif TC","Noto Serif CJK TC","Songti TC",serif}
 html.lx body{background:#140204}
-html.lx body::before{background:url(assets/lx/bg.webp?v=2840) center top/cover no-repeat!important}
+html.lx body::before{background:url(assets/lx/bg.webp?v=2841) center top/cover no-repeat!important}
 html.lx body::after{background:linear-gradient(180deg,rgba(20,2,4,.25),rgba(20,2,4,.05) 22%,rgba(20,2,4,.35) 45%,rgba(16,1,3,.7) 80%,rgba(12,1,2,.9))!important}
 html.lx #l21Bg{opacity:.55}
 html.lx .wrap.lxOld{display:none!important}
@@ -53,7 +53,7 @@ html.lx .wrap.lxOld{display:none!important}
 .lxSl{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent);mask-image:linear-gradient(180deg,#000 82%,transparent)}
 .lxSl::-webkit-scrollbar{display:none}
 .lxS{position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden;background:radial-gradient(ellipse at 70% 40%,#5a0a18,#1c0206 75%)}
-.lxS::before{content:"";position:absolute;inset:0;background:url(assets/lx/bg.webp?v=2840) 60% 38%/cover;opacity:.55}
+.lxS::before{content:"";position:absolute;inset:0;background:url(assets/lx/bg.webp?v=2841) 60% 38%/cover;opacity:.55}
 .lxS .ph{position:absolute;left:0;top:0;bottom:0;width:62%;background-size:cover;background-position:50% 14%;-webkit-mask-image:linear-gradient(90deg,#000 62%,transparent);mask-image:linear-gradient(90deg,#000 62%,transparent)}
 .lxS.s-neko .ph{background-position:50% 22%}.lxS.s-samurai .ph{background-position:50% 10%}
 .lxS .rt{position:absolute;right:calc(10*var(--u));top:0;bottom:calc(14*var(--u));width:48%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
@@ -123,7 +123,7 @@ html.lx .wrap.lxOld{display:none!important}
  font:900 calc(17*var(--u))/1 sans-serif;color:#4a1a02;background:radial-gradient(circle at 40% 30%,#fff2c0,#e8b040 50%,#9a5e10);box-shadow:0 0 0 1px #5a3205,0 2px 4px rgba(0,0,0,.5)}
 .lxCard .bdg{position:absolute;top:calc(5*var(--u));right:calc(6*var(--u));z-index:2;display:none;min-width:calc(16*var(--u));height:calc(16*var(--u));padding:0 3px;border-radius:99px;font:700 max(9px,calc(11*var(--u)))/calc(16*var(--u)) sans-serif;text-align:center;color:#fff;background:radial-gradient(circle at 35% 30%,#ff8a8a,#e0101e 60%,#8a0008);box-shadow:0 0 0 1.5px #fff2d0}
 .lxCard .bdg.on{display:block}.lxCard .bdg.on:empty{width:calc(12*var(--u));min-width:10px;height:calc(12*var(--u));min-height:10px;padding:0}
-.lxEv{background:linear-gradient(90deg,rgba(20,4,30,.15),rgba(30,4,20,.3) 40%,rgba(30,4,12,.92) 64%) padding-box,url(assets/lx/event.webp?v=2840) 0 50%/auto 100% no-repeat padding-box,linear-gradient(#1a0418,#1a0418) padding-box,var(--gframe) border-box!important}
+.lxEv{background:linear-gradient(90deg,rgba(20,4,30,.15),rgba(30,4,20,.3) 40%,rgba(30,4,12,.92) 64%) padding-box,url(assets/lx/event.webp?v=2841) 0 50%/auto 100% no-repeat padding-box,linear-gradient(#1a0418,#1a0418) padding-box,var(--gframe) border-box!important}
 .lxEv .tx{margin-left:42%}
 .lxCd{display:inline-flex;align-items:center;gap:3px;margin-top:calc(2*var(--u));font:700 max(9.5px,calc(11.5*var(--u)))/1.2 "Noto Sans TC",sans-serif;color:#ffe9b0;white-space:nowrap;font-variant-numeric:tabular-nums}
 .lxCd i{font-style:normal}
@@ -229,7 +229,7 @@ html.lx .rdp{top:calc(116*var(--u) + env(safe-area-inset-top))}
 .lxCol{margin-top:calc(8*var(--u) + var(--xg))}
 .lxShopH img{height:auto!important;max-height:80px;object-fit:contain}
 /* ---- round 5: desktop / landscape background ---- */
-@media (min-aspect-ratio:3/4){html.lx body::before{background:url(assets/lx/bg.webp?v=2840) center/auto 100% no-repeat,radial-gradient(ellipse at 50% 40%,#4a0810,#140204 70%)!important}
+@media (min-aspect-ratio:3/4){html.lx body::before{background:url(assets/lx/bg.webp?v=2841) center/auto 100% no-repeat,radial-gradient(ellipse at 50% 40%,#4a0810,#140204 70%)!important}
  html.lx body::after{background:linear-gradient(90deg,rgba(14,1,3,.85),rgba(14,1,3,.1) 30%,rgba(14,1,3,.1) 70%,rgba(14,1,3,.85)),linear-gradient(180deg,transparent 40%,rgba(14,1,3,.6))!important}}
 @media (orientation:landscape) and (max-height:500px){.lxBot{position:sticky;bottom:0;transform:none;left:auto;margin:0 auto}#lx{padding-bottom:8px}}
 html.lx,html.lx body{background-color:transparent!important}

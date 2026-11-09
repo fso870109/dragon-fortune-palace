@@ -39,7 +39,7 @@ R.innerHTML=
    '<button type="button" class="lxCard lxMis" id="lxMis"><img class="art" src="assets/lx/scroll.webp'+V+'" alt="" width="200" height="243"><span class="tx"><b>每日任務</b><small>完成任務領取獎勵</small><span class="lxPr"><i><u id="lxMisBar"></u><em id="lxMisN">0 / 5</em></i></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxMisB"></span></button>'+
    '<button type="button" class="lxCard lxEv" id="lxEv"><span class="tx"><b>限時活動</b><small id="lxEvN">本週活動</small><span class="lxCd"><i aria-hidden="true">⏱</i><span id="lxEvT">--:--:--</span></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxEvB"></span></button>'+
   '</div>'+
-  '<button type="button" class="lxCol" id="lxCol"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><img class="art" src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><span class="tx"><b>精品收藏館</b><small>收集限定轉盤框・頭像框・稱號</small></span><span class="lxGo">前往<i aria-hidden="true">›</i></span></button>'+
+  '<button type="button" class="lxCol" id="lxCol"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><img class="art" src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><span class="pf" aria-hidden="true"><i style="background-image:url(assets/sakura/p_idle.webp?v=256)"></i><i style="background-image:url(assets/samurai/p_idle.webp?v=256)"></i></span><span class="tx"><b>精品收藏館</b><small>收集限定轉盤框・頭像框・稱號</small></span><span class="lxGo">前往<i aria-hidden="true">›</i></span></button>'+
  '</section>'+
  '<section class="lxTab" data-tab="games" aria-label="機台"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>全部機台</h2></div><div id="lxWallSlot"></div></section>'+
  '<section class="lxTab" data-tab="events" aria-label="活動"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>活動中心</h2></div><div id="lxEvSlot" class="lxStack"></div></section>'+
@@ -131,8 +131,8 @@ function sync(){
  var s=CZ.st,v=CZ.vipOf(s.lv);$('lxLv').textContent='Lv.'+s.lv+' '+v[1];
  $('lxGd').classList.toggle('has',has('gdB'));
  var d=CZ.day(),M=CZ.MISS,cl=0,ready=0;M.forEach(function(m){if(d.cl[m.id])cl++;else if((m.id==='mach'?d.mach.length:d[m.id])>=m.g)ready++});
- $('lxMisN').textContent=cl+' / '+M.length;$('lxMisBar').style.width=(cl/M.length*100)+'%';setB('lxMisB',ready,ready);
- var w=$('wkTd');$('lxEvN').textContent=w&&w.textContent?w.textContent.replace(/・.*$/,''):'本週活動';setB('lxEvB',wkOpen(),0);
+ $('lxMisN').textContent=cl+' / '+M.length;var md=$('bMiss')&&$('bMiss').querySelector('.dot');if(md)md.textContent=ready>0?String(ready):'';$('lxMisBar').style.width=(cl/M.length*100)+'%';setB('lxMisB',ready,ready);
+ var w=$('wkTd');$('lxEvN').textContent=w&&w.textContent?w.textContent.replace(/・.*$/,'').replace(/^今日：/,'今日 '):'本週活動';setB('lxEvB',wkOpen(),0);
  var evHas=wkOpen()||has('ivB')||has('rdB')||has('gdB')||has('bFr');
  var nb=nav.querySelector('[data-tab="events"]');if(nb)nb.classList.toggle('has',evHas);
  $('lxSB').textContent=fmt(CZ.getBal());$('lxSW').textContent=fmt(s.won||0);
@@ -152,10 +152,10 @@ var t0='home';try{t0=SS.getItem('lxTab')||'home'}catch(e){}tab(/^(home|games|eve
 sync();
 
 /* ---------- fit home to tall screens: give spare height to the hero & spacing ---------- */
-function fit(){var h=R.querySelector('.lxTab[data-tab="home"]');if(!h||!h.classList.contains('on'))return;
+function fit(){var bb=R.querySelector('.lxBot');if(bb)R.style.setProperty('--botH',Math.ceil(bb.getBoundingClientRect().height)+'px');var h=R.querySelector('.lxTab[data-tab="home"]');if(!h||!h.classList.contains('on'))return;
  R.style.setProperty('--xh','0px');R.style.setProperty('--xg','0px');
  var nb=$('lxNav').getBoundingClientRect().top,last=$('lxCol').getBoundingClientRect().bottom+scrollY-scrollY;
- var spare=nb-last-10;if(spare<=0)return;
+ var spare=nb-last-6;if(spare<0){R.style.setProperty('--xh',Math.max(spare,-22)+'px');goS(cur,0);return}
  var xh=Math.min(spare*.7,innerWidth*.42),xg=Math.min((spare-xh)/5,14);
  R.style.setProperty('--xh',Math.round(xh)+'px');R.style.setProperty('--xg',Math.max(0,Math.round(xg))+'px');goS(cur,0)}
 addEventListener('resize',fit);addEventListener('load',fit);setTimeout(fit,0);
