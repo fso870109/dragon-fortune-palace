@@ -1,0 +1,209 @@
+/* v28.38 cabinet frame zone — portrait only.
+   Shared geometry: --frame-crown, --frame-rail, --frame-msg, --frame-base.
+   Future skins swap the art on #cabFrame; they do not move the reels,
+   the message band, or the controls. Ornaments stay in the crown, the
+   rails, or the base, at their own aspect ratio. */
+@media (max-width:620px) and (orientation:portrait){
+:root{
+ --frame-rail:clamp(26px,7.4vw,36px);
+ --frame-crown:clamp(34px,5svh,50px);
+ --frame-base:clamp(24px,3.8svh,38px);
+ --frame-msg:clamp(40px,5.8svh,54px);
+}
+}
+@media (max-width:620px) and (orientation:portrait) and (max-height:680px){
+:root{--frame-rail:22px;--frame-crown:26px;--frame-base:18px;--frame-msg:38px}
+}
+
+@media (max-width:620px) and (orientation:portrait){
+#cabStage{
+ flex:none;position:relative;z-index:1;width:100%;max-width:100%;
+ display:grid;
+ grid-template-columns:var(--frame-rail) minmax(0,1fr) var(--frame-rail);
+ grid-template-rows:var(--frame-crown) auto minmax(var(--frame-msg),max-content) var(--frame-base);
+ background:#10080c;
+ box-sizing:border-box;
+}
+#cabWell{grid-column:1/-1;grid-row:2;position:relative;z-index:1;overflow:hidden;width:100%;min-width:0}
+#cabBand{
+ grid-column:1/-1;grid-row:3;position:relative;z-index:2;
+ display:flex;align-items:center;justify-content:center;
+ min-height:var(--frame-msg);
+ padding:2px calc(var(--frame-rail) + 6px) 3px;
+ box-sizing:border-box;
+ background:linear-gradient(180deg,rgba(0,0,0,.18),color-mix(in srgb,var(--acc,#e45) 28%,#14080e) 40%,#0c060a);
+}
+#cabFrame{position:absolute;inset:0;z-index:4;pointer-events:none}
+#cabFrame .crown,#cabFrame .base,#cabFrame .rail{position:absolute;background-repeat:repeat}
+#cabFrame .crown{left:0;right:0;top:0;height:var(--frame-crown);
+ background:linear-gradient(#fff6d2,var(--gold2,#e2b34a) 28%,color-mix(in srgb,var(--acc,#c23) 48%,#2a0a10) 62%,var(--gold2,#e2b34a))}
+#cabFrame .base{left:0;right:0;bottom:0;height:var(--frame-base);
+ background:linear-gradient(color-mix(in srgb,var(--acc,#c23) 42%,#2a0a10),var(--gold2,#e2b34a) 62%,var(--gold3,#6a4010))}
+#cabFrame .rail{top:0;bottom:0;width:var(--frame-rail)}
+#cabFrame .rail.l{left:0;background:linear-gradient(90deg,var(--gold1,#fff1c4),var(--gold2,#e2b34a) 34%,color-mix(in srgb,var(--acc,#c23) 46%,#2a0810) 78%,var(--gold2,#e2b34a))}
+#cabFrame .rail.r{right:0;background:linear-gradient(270deg,var(--gold1,#fff1c4),var(--gold2,#e2b34a) 34%,color-mix(in srgb,var(--acc,#c23) 46%,#2a0810) 78%,var(--gold2,#e2b34a))}
+#cabFrame .lip{position:absolute;left:var(--frame-rail);right:var(--frame-rail);top:var(--frame-crown);bottom:var(--frame-base);
+ box-shadow:inset 0 0 0 1.5px rgba(255,236,190,.78),inset 0 0 0 3px rgba(0,0,0,.45);border-radius:2px}
+#cabFrame .orn{display:none;position:absolute;background:center/contain no-repeat;pointer-events:none}
+
+html body.cab-on #cabBand #msg{
+ position:relative!important;inset:auto!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
+ width:100%!important;height:auto!important;max-height:none!important;min-height:0!important;
+ margin:0!important;contain:none!important;
+ display:block!important;text-align:center!important;
+ white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+ font-size:clamp(12px,3.25vw,15px)!important;line-height:1.28!important;font-weight:700!important;
+ padding:0 2px!important;box-sizing:border-box;
+}
+/* the old reel bezel sits on the glass; the cabinet frame replaces it */
+body.cab-on #skFx{display:none!important}
+}
+
+/* color skins keep their glass tint and borrow the same frame zone */
+body[data-skin="neon"] #cabFrame{--gold1:#e7f7ff;--gold2:#3aa0e0;--gold3:#12386e;--acc:#7ecbff}
+body[data-skin="crystal"] #cabFrame{--gold1:#f7fbff;--gold2:#c5d6ee;--gold3:#6a7e9c;--acc:#d5e8ff}
+body.cab-on[data-skin="neon"] #cabStage{box-shadow:0 0 14px rgba(80,170,255,.45)}
+body.cab-on[data-skin="crystal"] #cabStage{box-shadow:0 0 14px rgba(190,220,255,.4)}
+
+/* illustrated skins: no hue shift on the machine, art lives in the frame slots */
+body[data-skin="jade"] .inner,body[data-skin="royal"] .inner,body[data-skin="obsidian"] .inner,
+body[data-skin="jade"] .board .reel,body[data-skin="royal"] .board .reel,body[data-skin="obsidian"] .board .reel{filter:none!important}
+body[data-skin="jade"]::before,body[data-skin="royal"]::before,body[data-skin="obsidian"]::before{filter:none!important}
+body.cab-on[data-skin="obsidian"] #cabBand #msg,
+body.cab-on[data-skin="jade"] #cabBand #msg,
+body.cab-on[data-skin="royal"] #cabBand #msg{
+ color:#fff8e8!important;text-shadow:0 1px 2px #000,0 0 8px rgba(0,0,0,.75)!important}
+
+/* 金龍祭典 — obsidian slot, price unchanged */
+body[data-skin="obsidian"] #cabStage{background:#3a0c10;box-shadow:0 0 16px rgba(255,140,40,.4)}
+body[data-skin="obsidian"] #cabBand{background:linear-gradient(#6a1418,#2c080c)}
+body[data-skin="obsidian"] #cabFrame .crown{background:url(assets/skins/rail-dragon-h.png?v=2838) center/auto 100% repeat-x}
+body[data-skin="obsidian"] #cabFrame .base{background:url(assets/skins/rail-dragon-h.png?v=2838) center/auto 100% repeat-x;transform:scaleY(-1)}
+body[data-skin="obsidian"] #cabFrame .rail.l{background:url(assets/skins/rail-dragon-v.png?v=2838) center/100% auto repeat-y}
+body[data-skin="obsidian"] #cabFrame .rail.r{background:url(assets/skins/rail-dragon-v.png?v=2838) center/100% auto repeat-y;transform:scaleX(-1)}
+body[data-skin="obsidian"] #cabFrame .lip{box-shadow:inset 0 0 0 1.5px #ffd978,inset 0 0 0 3px rgba(60,8,8,.55)}
+body[data-skin="obsidian"] #cabFrame .dragon,
+body[data-skin="obsidian"] #cabFrame .gem,
+body[data-skin="obsidian"] #cabFrame .ll,
+body[data-skin="obsidian"] #cabFrame .lr,
+body[data-skin="obsidian"] #cabFrame .wave,
+body[data-skin="obsidian"] #cabFrame .cld{display:block}
+body[data-skin="obsidian"] #cabFrame .dragon{
+ left:50%;top:-10px;height:calc(var(--frame-crown) + 10px);width:auto;aspect-ratio:194/86;
+ transform:translateX(-50%);background-image:url(assets/skins/dragon.png?v=2838)}
+body[data-skin="obsidian"] #cabFrame .gem{
+ left:calc(50% + 46px);top:5px;width:16px;height:16px;aspect-ratio:1;
+ background-image:url(assets/skins/gem.png?v=2838)}
+body[data-skin="obsidian"] #cabFrame .ll,
+body[data-skin="obsidian"] #cabFrame .lr{
+ top:calc(var(--frame-crown) + 8px);width:calc(var(--frame-rail) - 4px);height:auto;aspect-ratio:63/116;
+ background-image:url(assets/skins/lantern-red.png?v=2838)}
+body[data-skin="obsidian"] #cabFrame .ll{left:2px}
+body[data-skin="obsidian"] #cabFrame .lr{right:2px}
+body[data-skin="obsidian"] #cabFrame .wave{
+ left:50%;bottom:1px;height:calc(var(--frame-base) - 2px);width:auto;aspect-ratio:180/104;
+ transform:translateX(-50%);background-image:url(assets/skins/wave.png?v=2838)}
+body[data-skin="obsidian"] #cabFrame .cld{
+ bottom:0;height:var(--frame-base);width:auto;aspect-ratio:90/64;
+ background-image:url(assets/skins/cloud.png?v=2838)}
+body[data-skin="obsidian"] #cabFrame .cld.l{left:1px}
+body[data-skin="obsidian"] #cabFrame .cld.r{right:1px}
+
+/* 花火夜祭 — jade slot */
+body[data-skin="jade"] #cabStage{background:#07122c;box-shadow:0 0 16px rgba(80,140,255,.4)}
+body[data-skin="jade"] #cabBand{background:linear-gradient(#16305c,#0a1838)}
+body[data-skin="jade"] #cabFrame .crown{background:url(assets/skins/rail-hanabi-h.png?v=2838) center/auto 100% repeat-x}
+body[data-skin="jade"] #cabFrame .base{background:url(assets/skins/rail-hanabi-h.png?v=2838) center/auto 100% repeat-x;transform:scaleY(-1)}
+body[data-skin="jade"] #cabFrame .rail.l{background:url(assets/skins/rail-hanabi-v.png?v=2838) center/100% auto repeat-y}
+body[data-skin="jade"] #cabFrame .rail.r{background:url(assets/skins/rail-hanabi-v.png?v=2838) center/100% auto repeat-y;transform:scaleX(-1)}
+body[data-skin="jade"] #cabFrame .lip{box-shadow:inset 0 0 0 1.5px #f0d078,inset 0 0 0 3px rgba(6,16,40,.65)}
+body[data-skin="jade"] #cabFrame .crest,
+body[data-skin="jade"] #cabFrame .fanl,
+body[data-skin="jade"] #cabFrame .fanr,
+body[data-skin="jade"] #cabFrame .ll,
+body[data-skin="jade"] #cabFrame .lr,
+body[data-skin="jade"] #cabFrame .torii,
+body[data-skin="jade"] #cabFrame .sk{display:block}
+body[data-skin="jade"] #cabFrame .crest{
+ left:50%;top:1px;height:calc(var(--frame-crown) - 2px);width:auto;aspect-ratio:1;
+ transform:translateX(-50%);background-image:url(assets/skins/crest.png?v=2838)}
+body[data-skin="jade"] #cabFrame .fanl,
+body[data-skin="jade"] #cabFrame .fanr{
+ top:2px;height:calc(var(--frame-crown) - 6px);width:auto}
+body[data-skin="jade"] #cabFrame .fanl{left:4px;aspect-ratio:124/76;background-image:url(assets/skins/fan-red.png?v=2838)}
+body[data-skin="jade"] #cabFrame .fanr{right:4px;aspect-ratio:132/76;background-image:url(assets/skins/fan-blue.png?v=2838)}
+body[data-skin="jade"] #cabFrame .ll,
+body[data-skin="jade"] #cabFrame .lr{
+ top:calc(var(--frame-crown) + 8px);width:calc(var(--frame-rail) - 4px);height:auto;aspect-ratio:63/116;
+ background-image:url(assets/skins/lantern-red.png?v=2838)}
+body[data-skin="jade"] #cabFrame .ll{left:2px}
+body[data-skin="jade"] #cabFrame .lr{right:2px}
+body[data-skin="jade"] #cabFrame .torii{
+ left:50%;bottom:0;height:var(--frame-base);width:auto;aspect-ratio:141/116;
+ transform:translateX(-50%);background-image:url(assets/skins/torii.png?v=2838)}
+body[data-skin="jade"] #cabFrame .sk{
+ top:2px;height:14px;width:auto;aspect-ratio:80/72;background-image:url(assets/skins/sakura.png?v=2838)}
+body[data-skin="jade"] #cabFrame .sk.a{left:2px}
+body[data-skin="jade"] #cabFrame .sk.b{right:2px}
+body[data-skin="jade"] #cabFrame .sk.c{display:none}
+
+/* 極夜霓虹 — royal slot */
+body[data-skin="royal"] #cabStage{background:#140816;box-shadow:0 0 16px rgba(255,60,180,.45),0 0 18px rgba(40,210,255,.28)}
+body[data-skin="royal"] #cabBand{background:linear-gradient(#241028,#100816)}
+body[data-skin="royal"] #cabFrame .crown{background:url(assets/skins/rail-neon-h.png?v=2838) center/auto 100% repeat-x}
+body[data-skin="royal"] #cabFrame .base{background:url(assets/skins/rail-neon-h.png?v=2838) center/auto 100% repeat-x;transform:scaleY(-1)}
+body[data-skin="royal"] #cabFrame .rail.l{background:url(assets/skins/rail-neon-v.png?v=2838) center/100% auto repeat-y}
+body[data-skin="royal"] #cabFrame .rail.r{background:url(assets/skins/rail-neon-v.png?v=2838) center/100% auto repeat-y;transform:scaleX(-1)}
+body[data-skin="royal"] #cabFrame .lip{box-shadow:inset 0 0 0 1.5px #7ef0ff,inset 0 0 0 3px rgba(255,40,160,.45)}
+body[data-skin="royal"] #cabFrame .fanc,
+body[data-skin="royal"] #cabFrame .ll,
+body[data-skin="royal"] #cabFrame .lr,
+body[data-skin="royal"] #cabFrame .torii,
+body[data-skin="royal"] #cabFrame .sk{display:block}
+body[data-skin="royal"] #cabFrame .fanc{
+ left:50%;top:1px;height:calc(var(--frame-crown) - 2px);width:auto;aspect-ratio:132/76;
+ transform:translateX(-50%);background-image:url(assets/skins/fan-blue.png?v=2838)}
+body[data-skin="royal"] #cabFrame .ll{
+ left:2px;top:calc(var(--frame-crown) + 8px);width:calc(var(--frame-rail) - 4px);height:auto;aspect-ratio:78/116;
+ background-image:url(assets/skins/lantern-purple.png?v=2838)}
+body[data-skin="royal"] #cabFrame .lr{
+ right:2px;top:calc(var(--frame-crown) + 8px);width:calc(var(--frame-rail) - 4px);height:auto;aspect-ratio:78/116;
+ background-image:url(assets/skins/lantern-blue.png?v=2838)}
+body[data-skin="royal"] #cabFrame .torii{
+ left:50%;bottom:0;height:var(--frame-base);width:auto;aspect-ratio:141/116;
+ transform:translateX(-50%);background-image:url(assets/skins/torii.png?v=2838);
+ filter:drop-shadow(0 0 3px #ff4ad4) drop-shadow(0 0 4px #3ef0ff)}
+body[data-skin="royal"] #cabFrame .sk{
+ height:13px;width:auto;aspect-ratio:80/72;background-image:url(assets/skins/sakura.png?v=2838)}
+body[data-skin="royal"] #cabFrame .sk.a{left:3px;top:3px}
+body[data-skin="royal"] #cabFrame .sk.b{right:3px;top:3px}
+body[data-skin="royal"] #cabFrame .sk.c{left:50%;top:6px;transform:translateX(-50%);height:12px}
+
+/* landscape and wide layout keep the original cabinet; the frame zone is portrait */
+@media (min-width:621px),(orientation:landscape){
+ #cabStage,#cabWell{display:contents}
+ #cabFrame,#cabBand{display:none!important}
+}
+
+@media (prefers-reduced-motion:no-preference){
+ body.cab-on[data-skin="obsidian"] #cabStage{animation:frGlowD 3s ease-in-out infinite}
+ body.cab-on[data-skin="jade"] #cabStage{animation:frGlowJ 3.2s ease-in-out infinite}
+ body.cab-on[data-skin="royal"] #cabStage{animation:frGlowR 2.6s ease-in-out infinite}
+}
+@keyframes frGlowD{50%{box-shadow:0 0 22px rgba(255,160,50,.7)}}
+@keyframes frGlowJ{50%{box-shadow:0 0 22px rgba(120,170,255,.65)}}
+@keyframes frGlowR{50%{box-shadow:0 0 20px rgba(255,70,190,.7),0 0 24px rgba(50,220,255,.4)}}
+
+/* shop cards: show the frame, not only a recolored blob */
+#shop .s-obsidian{--a:#ffd36a;--b:#8a1420;--g:255,120,40;--sky:#3a0c10;--m:''}
+#shop .s-obsidian .cab{background:#6a1218;border:3px solid #e2b34a;border-radius:8px 8px 6px 6px}
+#shop .s-obsidian .crest{background:url(assets/skins/dragon.png?v=2838) center/contain no-repeat;border-radius:0;box-shadow:none;width:54%;top:0}
+#shop .s-obsidian .crest::after{content:none}
+#shop .s-jade{--a:#f0d78a;--b:#12305c;--g:80,140,255;--sky:#07122c;--m:''}
+#shop .s-jade .cab{background:#10284e;border:3px solid #e2b34a;border-radius:8px}
+#shop .s-jade .crest{background:url(assets/skins/crest.png?v=2838) center/contain no-repeat;border-radius:0;box-shadow:none}
+#shop .s-jade .crest::after{content:none}
+#shop .s-royal{--a:#ff7ad8;--b:#140818;--g:255,70,190;--sky:#120816;--m:''}
+#shop .s-royal .cab{background:#1a0618;border:3px solid #ff4ad4;box-shadow:0 0 10px #22e6ff,inset 0 0 0 1px #22e6ff}
+#shop .s-royal .crest{background:url(assets/skins/fan-blue.png?v=2838) center/contain no-repeat;border-radius:0;box-shadow:none}
+#shop .s-royal .crest::after{content:none}

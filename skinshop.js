@@ -2,10 +2,10 @@
 (()=>{if(typeof SKINS==='undefined')return;
 const X={gold:{tier:'常見',t:'c',name:'金殿',tag:'御用金漆',fx:'金箔浮雕框・暖金招牌',copy:'龍運金殿的原廠金漆機台，一切傳奇的起點。'},
 neon:{tier:'稀有',t:'r',name:'真夜中',tag:'深藍夜行',fx:'霓藍流光邊框・中獎藍閃',copy:'午夜霓虹在漆框上流動，深夜開台的人專屬的冷冽氣場。'},
-jade:{tier:'稀有',t:'r',name:'櫻色',tag:'千本櫻',fx:'櫻瓣飄落・粉金招牌',copy:'整台換上櫻吹雪，每一轉都像在花見席上開獎。'},
+jade:{tier:'稀有',t:'r',name:'花火夜祭',tag:'櫻扇鳥居',fx:'紺青金繪框・菊紋、雙扇、紅燈、鳥居',copy:'紺青與金線收住輪盤和中獎說明，櫻、扇、紅燈與鳥居都停在框上。'},
 crystal:{tier:'傳說',t:'l',name:'月光',tag:'銀月水晶',fx:'銀白水晶框・月暈脈動',copy:'以月光鍛成的水晶機殼，冷光在邊框緩緩呼吸。'},
-royal:{tier:'傳說',t:'l',name:'小堇',tag:'紫堇御殿',fx:'紫金雙層框・星屑環繞',copy:'皇族紫堇與金線刺繡，坐上這台就是殿上貴賓。'},
-obsidian:{tier:'神話',t:'m',name:'夕陽',tag:'焰金黑曜',fx:'黑曜焰紋框・烈陽火花・專屬金牌',copy:'黑曜石機身燃著夕陽焰紋，金殿最頂級的收藏機台。'}};
+royal:{tier:'傳說',t:'l',name:'極夜霓虹',tag:'粉藍霓虹',fx:'粉青霓虹繪框・扇面、紫藍燈、鳥居',copy:'極夜的粉與青沿著同一套框位流動，說明文字留在框內。'},
+obsidian:{tier:'史詩',t:'m',name:'金龍祭典',tag:'赤漆金龍',fx:'赤漆金繪框・金龍、玉、紅燈、浪',copy:'赤漆金框把輪盤和中獎說明收在同一面祭典裡，龍與玉停在框冠。'}};
 SKINS.forEach(k=>Object.assign(k,X[k.id]||{}));
 const B=document.body;let tryT=0,tryId=null,prevSkin;
 // live FX layer
