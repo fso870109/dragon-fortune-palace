@@ -93,7 +93,7 @@ var ft=D.querySelector('.wrap .foot');mv(ft,me);
 if(wrap)wrap.classList.add('lxOld');
 /* ---------- carousel ---------- */
 var sl=$('lxSl'),dots=$('lxDots');
-sl.innerHTML=GAMES.map(function(g,i){return '<div class="lxS s-'+g.id+'" role="group" aria-roledescription="輪播" aria-label="'+(i+1)+' / 4：'+g.n+'"><div class="ph" style="background-image:url(assets/'+g.id+'/p_idle.webp?v=256)"></div><div class="rt"><b class="tt'+(g.n.length>4?' l5':'')+'">'+g.n+'</b><small>'+g.sub+'</small><button type="button" class="lxPlay" data-play="'+g.id+'">立即遊玩<i aria-hidden="true">▶</i></button></div></div>'}).join('');
+sl.innerHTML=GAMES.map(function(g,i){return '<div class="lxS s-'+g.id+'" role="group" aria-roledescription="輪播" aria-label="'+(i+1)+' / 4：'+g.n+'"><div class="hk" style="background-image:url(assets/lx/hero_'+g.id+'.webp?v=2842)"></div><div class="rt"><b class="tt'+(g.n.length>4?' l5':'')+'">'+g.n+'</b><small>'+g.sub+'</small><button type="button" class="lxPlay" data-play="'+g.id+'">立即遊玩<i aria-hidden="true">▶</i></button></div></div>'}).join('');
 dots.innerHTML=GAMES.map(function(g,i){return '<button type="button" aria-label="第 '+(i+1)+' 張：'+g.n+'"'+(i?'':' class="on"')+'></button>'}).join('');
 var cur=0,auto=null,RMQ=matchMedia('(prefers-reduced-motion: reduce)').matches||D.documentElement.classList.contains('dfpRM');
 function goS(i,sm){cur=(i+GAMES.length)%GAMES.length;sl.scrollTo({left:cur*sl.clientWidth,behavior:sm&&!RMQ?'smooth':'auto'});mark()}
