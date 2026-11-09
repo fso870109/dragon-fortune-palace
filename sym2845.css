@@ -1,0 +1,49 @@
+/* v28.45: reel symbols keep their native aspect (240×159). Cells stay the taller filled size from v28.44; images scale uniformly (contain) and sit centered. Orbs use contain so they fill the cell without overflowing or stretching. */
+html body .cell img.sym,
+html body .cell svg.sym,
+html body .cell[data-s] .sym{
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+/* spin motion-blur used scaleY(1.12), which also stretched the art; leave uniform scale / existing blur plates */
+html body .strip.mb .cell .sym{transform:none!important}
+/* 寶珠對碰: generated jewels are square; contain fills the shorter side and never exceeds the cell */
+html body div#hsBox .hsG>i,
+html body div#hsBox.b23 .hsG>i,
+html body div#hsBox .hsG>i.on,
+html body div#hsBox .hsG>i.miss,
+html body #b22Stage div#hsBox .hsG>i,
+html body #b22Stage div#hsBox .hsG>i.on{
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+#b23Sticky i{background-size:contain!important;background-position:center!important}
+/* beat holdspin2816.html body #hsBox .hsG>i.on:not(#z) { background-size:auto 112%,100% 100% } */
+html body div#hsBox .hsG>i.on:not(#z),
+html body #b22Stage div#hsBox .hsG>i.on:not(#z),
+html body div#hsBox.b23 .hsG>i.on:not(#z){
+  background-size:contain,100% 100%!important;
+  background-position:center,center!important;
+}
+html body div#hsBox .hsG>i:not(.spin):not(.on):not(#z),
+html body #b22Stage div#hsBox .hsG>i:not(.spin):not(.on):not(#z){
+  background-size:contain!important;
+  background-position:center!important;
+}
+/* beat holdspin2818 html body #hsBox .hsG>i.on:not(#z):not(#y) { background-size:100% 100% } and its stretch keyframes */
+html body div#hsBox .hsG>i.on:not(#z):not(#y),
+html body #b22Stage div#hsBox .hsG>i.on:not(#z):not(#y),
+html body div#hsBox.b23 .hsG>i.on:not(#z):not(#y){
+  background-size:contain!important;
+  background-position:center!important;
+}
+@keyframes hs18Breath{0%,100%{background-size:contain}50%{background-size:contain}}
+@keyframes hs18Land{0%{background-size:contain;filter:brightness(2.2)}60%{background-size:contain;filter:brightness(1.3)}100%{background-size:contain;filter:none}}
