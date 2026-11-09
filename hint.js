@@ -24,7 +24,7 @@ var css=document.createElement('style');css.textContent=
 document.head.appendChild(css);
 var STEPS=[
  {t:function(){return [$('bFree'),$('bDaily')]},h:'免費籌碼・每日簽到',p:'每 3 小時可領免費籌碼，每天簽到再領更多。<br>籌碼皆為虛擬點數，僅供娛樂。'},
- {t:function(){var c=document.querySelector('.card[href]');return c?[c]:[]},h:'點選機台開始遊戲',p:'金碧輝煌的機台等你挑戰，點選卡片即可進入。<br>祝你鴻運當頭！',scroll:1}
+ {t:function(){var c=document.querySelector('.lxHc[href],.card[href]');return c?[c]:[]},h:'點選機台開始遊戲',p:'金碧輝煌的機台等你挑戰，點選卡片即可進入。<br>祝你鴻運當頭！',scroll:1}
 ];
 var d,hh,hb,i=0,shown=0;
 function rectOf(els){var r=null;els.forEach(function(e){if(!e)return;var b=e.getBoundingClientRect();if(!b.width)return;
@@ -52,6 +52,6 @@ function show(){if(shown)return;shown=1;try{LS.setItem(K,'1')}catch(e){}
  try{d.showModal()}catch(e){d.setAttribute('open','')}
  go()}
 function ready(){if($('load'))return false;if(document.querySelector('dialog[open]'))return false;try{if(LS.getItem('dfp_age18')!=='1')return false}catch(e){}
- if(document.visibilityState==='hidden')return false;return !!$('bFree')&&!!document.querySelector('.card[href]')}
+ if(document.visibilityState==='hidden')return false;return !!$('bFree')&&!!document.querySelector('.lxHc[href],.card[href]')}
 var n=0,tm=setInterval(function(){if(ready()){if(++n>=3){clearInterval(tm);show()}}else n=0},250);
 })();

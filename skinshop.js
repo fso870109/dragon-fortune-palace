@@ -30,3 +30,8 @@ $('shopBtn').addEventListener('click',()=>endTry(),true);
 const t=document.getElementById('shTitle');if(t)t.insertAdjacentHTML('beforebegin','<div class="shk">龍運金殿・御用工房</div>');
 const s=document.querySelector('#shop .shsub');if(s)s.innerHTML='挑一台屬於你的機台・可先試穿 15 秒<span class="chip"><span class="coin" aria-hidden="true"></span><b id="shBal">0</b></span><em>外觀只改變樣式，不影響機率・純虛擬・無兌現</em>';
 skApply();})();
+
+/* v28.40 大廳「精品收藏館」→ 進入機台後自動打開外觀商店（只開面板，不做任何兌換） */
+(()=>{let k=null;try{k=sessionStorage.getItem('dfpOpenShop');if(k)sessionStorage.removeItem('dfpOpenShop')}catch(e){}if(!k)return;try{window.__noDaily=1}catch(e){}
+let n=0;const t=()=>{const b=document.getElementById('shopBtn'),s=document.getElementById('shop');if(s&&s.open)return;const busy=document.querySelector('dialog[open]');if(b&&!busy){b.click();return}if(++n<480)setTimeout(t,250)};
+setTimeout(t,30)})();
