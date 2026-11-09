@@ -1,20 +1,26 @@
-/* v28.39 frame previews; v28.34 機台外觀商店 2.0 — cosmetic only, virtual chips only, odds untouched */
+/* v28.46 six new frames + previews; v28.39 frame previews; v28.34 機台外觀商店 2.0 — cosmetic only, virtual chips only, odds untouched */
 (()=>{if(typeof SKINS==='undefined')return;
 const X={gold:{tier:'常見',t:'c',name:'金殿',tag:'御用金漆',fx:'金漆宮簷繪框・雙鳳、蓮花寶石、粉燈',copy:'宮簷金漆收住輪盤與說明，雙鳳與蓮花寶石停在框冠，一切傳奇的起點。'},
 neon:{tier:'稀有',t:'r',name:'真夜中',tag:'深藍夜行',fx:'深藍銀雲繪框・新月星鑽、藍燈、銀雲',copy:'新月與星鑽升在框冠，銀雲與藍燈守在兩側，深夜開台的冷冽氣場。'},
 jade:{tier:'稀有',t:'r',name:'花火夜祭',tag:'櫻扇鳥居',fx:'紺青金繪框・菊紋、雙扇、紅燈、鳥居',copy:'紺青與金線收住輪盤和中獎說明，櫻、扇、紅燈與鳥居都停在框上。'},
 crystal:{tier:'傳說',t:'l',name:'月光',tag:'銀月水晶',fx:'銀白珠光繪框・滿月玉兔、白梅、水晶',copy:'以月光鍛成的珠光機殼，滿月玉兔與白梅停在框冠，冷光繞著輪盤。'},
 royal:{tier:'傳說',t:'l',name:'極夜霓虹',tag:'粉藍霓虹',fx:'粉青霓虹繪框・扇面、紫藍燈、鳥居',copy:'極夜的粉與青沿著同一套框位流動，說明文字留在框內。'},
-obsidian:{tier:'史詩',t:'m',name:'金龍祭典',tag:'赤漆金龍',fx:'赤漆金繪框・金龍、玉、紅燈、浪',copy:'赤漆金框把輪盤和中獎說明收在同一面祭典裡，龍與玉停在框冠。'}};
+obsidian:{tier:'史詩',t:'m',name:'金龍祭典',tag:'赤漆金龍',fx:'赤漆金繪框・金龍、玉、紅燈、浪',copy:'赤漆金框把輪盤和中獎說明收在同一面祭典裡，龍與玉停在框冠。'},
+blossom:{tier:'稀有',t:'r',name:'櫻花之舞',tag:'櫻社狐燈',fx:'朱金社殿繪框・社屋頂、櫻花、狐面燈',copy:'神社金簷與盛放櫻花收住輪盤，狐面紅燈守在兩側，底軌留給中獎說明。'},
+beach:{tier:'稀有',t:'r',name:'夏日海灘',tag:'棕櫚浪花',fx:'漂流木繪框・棕櫚、浪、衝浪板、提基',copy:'夏日的棕櫚與浪花停在框冠，提基與衝浪板守在兩角，說明寫在木紋底軌上。'},
+tsukiyo:{tier:'傳說',t:'l',name:'月下幻境',tag:'紫藤滿月',fx:'紺紫金繪框・滿月、紫藤、金浪',copy:'滿月升在框冠，紫藤垂在兩側，藍金浪花托住底軌上的中獎說明。'},
+kitsune:{tier:'史詩',t:'m',name:'狐之祕境',tag:'白繩狐面',fx:'白毛注連繩繪框・狐面、金鈴、狐燈',copy:'白毛注連繩與狐面停在框冠，金鈴與狐燈守在兩側，底軌中央留給說明。'},
+kabuto:{tier:'史詩',t:'m',name:'武將之魂',tag:'甲胄刀旗',fx:'黑鐵金繪框・兜、刀、戰旗',copy:'武將的兜與戰旗立在框冠，刀光守在兩角，底軌留給中獎說明。'},
+feast:{tier:'傳說',t:'l',name:'皇宮盛宴',tag:'雙龍金殿',fx:'赤漆金繪框・雙龍、宮簷、紅寶',copy:'雙龍盤在金殿簷上，紅寶停在框冠，赤漆金浪托住底軌上的中獎說明。'}};
 SKINS.forEach(k=>Object.assign(k,X[k.id]||{}));
 const B=document.body;let tryT=0,tryId=null,prevSkin;
 // live FX layer
 function fxLayer(){const inn=document.querySelector('.board')||document.querySelector('.inner');if(!inn||document.getElementById('skFx'))return;const d=document.createElement('div');d.id='skFx';d.setAttribute('aria-hidden','true');
 d.innerHTML='<i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><b class="plq"></b><span class="pt">'+'<em></em>'.repeat(12)+'</span>';inn.appendChild(d)}
 const _ap=skApply;skApply=function(){_ap();fxLayer();const k=SKINS.find(s=>s.id===(B.dataset.skin||'gold'));const p=document.querySelector('#skFx .plq');if(p&&k)p.textContent=k.name+'・'+k.tag;B.dataset.skt=k?k.t:'c'};
-const FRM={gold:'gold',neon:'midnight',jade:'hanabi',crystal:'moon',royal:'neon',obsidian:'dragon'},THM=(location.pathname.split('/').pop()||'').replace('.html','');
+const FRM={gold:'gold',neon:'midnight',jade:'hanabi',crystal:'moon',royal:'neon',obsidian:'dragon',blossom:'blossom',beach:'beach',tsukiyo:'tsukiyo',kitsune:'kitsune',kabuto:'kabuto',feast:'feast'},THM=(location.pathname.split('/').pop()||'').replace('.html','');
 let PVT=THM;window.__skPv=v=>{PVT=v};window.__skPvGet=()=>PVT;
-function pv(k){const f=FRM[k.id];if(f&&/^(neko|sakura|samurai|matsuri)$/.test(PVT))return `<div class="pv2 pvimg s-${k.id}" aria-hidden="true" style="background-image:url(assets/skins/shop/${PVT}-${f}.webp?v=2839)"></div>`;return `<div class="pv2 s-${k.id}" aria-hidden="true"><div class="cab"><div class="crest"></div><div class="mq">${k.name}</div><div class="rl"><i></i><i></i><i></i><i></i><i></i></div><div class="base"></div></div><div class="sp"><em></em><em></em><em></em></div></div>`}
+function pv(k){const f=FRM[k.id];if(f&&/^(neko|sakura|samurai|matsuri)$/.test(PVT))return `<div class="pv2 pvimg s-${k.id}" aria-hidden="true" style="background-image:url(assets/skins/shop/${PVT}-${f}.webp?v=2846)"></div>`;return `<div class="pv2 s-${k.id}" aria-hidden="true"><div class="cab"><div class="crest"></div><div class="mq">${k.name}</div><div class="rl"><i></i><i></i><i></i><i></i><i></i></div><div class="base"></div></div><div class="sp"><em></em><em></em><em></em></div></div>`}
 shRender=function(){const st=skGet();$('shBal').textContent=fmt(bal);
 $('skins').innerHTML=SKINS.map(k=>{const own=st.own.includes(k.id),eq=st.eq===k.id;let btn,state;
 const away=PVT&&PVT!==THM&&/^(neko|sakura|samurai|matsuri)$/.test(PVT);

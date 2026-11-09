@@ -1,0 +1,38 @@
+/* v28.46 six new illustrated frames. Portrait 9-slice; landscape unchanged. Does not touch reel sizing. */
+@media (max-width:620px) and (orientation:portrait){
+body.cab-on[data-skin="blossom"] #cabFrame>*,body.cab-on[data-skin="beach"] #cabFrame>*,body.cab-on[data-skin="tsukiyo"] #cabFrame>*,body.cab-on[data-skin="kitsune"] #cabFrame>*,body.cab-on[data-skin="kabuto"] #cabFrame>*,body.cab-on[data-skin="feast"] #cabFrame>*{display:none!important}
+body.cab-on[data-skin="blossom"] #cabFrame,body.cab-on[data-skin="beach"] #cabFrame,body.cab-on[data-skin="tsukiyo"] #cabFrame,body.cab-on[data-skin="kitsune"] #cabFrame,body.cab-on[data-skin="kabuto"] #cabFrame,body.cab-on[data-skin="feast"] #cabFrame{overflow:visible}
+body.cab-on[data-skin="blossom"] #cabFrame::before,body.cab-on[data-skin="beach"] #cabFrame::before,body.cab-on[data-skin="tsukiyo"] #cabFrame::before,body.cab-on[data-skin="kitsune"] #cabFrame::before,body.cab-on[data-skin="kabuto"] #cabFrame::before,body.cab-on[data-skin="feast"] #cabFrame::before{content:'';position:absolute;left:0;right:0;bottom:0;top:calc(-1 * var(--ovh,0px));box-sizing:border-box;border-style:solid;border-color:transparent;border-width:calc(var(--frame-crown) + var(--ovh,0px)) var(--frame-rail) var(--frame-base) var(--frame-rail);pointer-events:none}
+body.cab-on[data-skin="blossom"] .inner,body.cab-on[data-skin="blossom"] .board .reel,body.cab-on[data-skin="beach"] .inner,body.cab-on[data-skin="beach"] .board .reel,body.cab-on[data-skin="tsukiyo"] .inner,body.cab-on[data-skin="tsukiyo"] .board .reel,body.cab-on[data-skin="kitsune"] .inner,body.cab-on[data-skin="kitsune"] .board .reel,body.cab-on[data-skin="kabuto"] .inner,body.cab-on[data-skin="kabuto"] .board .reel,body.cab-on[data-skin="feast"] .inner,body.cab-on[data-skin="feast"] .board .reel{filter:none!important}
+body.cab-on[data-skin="blossom"]::before,body.cab-on[data-skin="beach"]::before,body.cab-on[data-skin="tsukiyo"]::before,body.cab-on[data-skin="kitsune"]::before,body.cab-on[data-skin="kabuto"]::before,body.cab-on[data-skin="feast"]::before{filter:none!important}
+/* blossom → 櫻花之舞 */
+body.cab-on[data-skin="blossom"] #cabStage{background:#2a0c18}
+body.cab-on[data-skin="blossom"] #cabBand{background:linear-gradient(#4a1426,#20060f)}
+body.cab-on[data-skin="blossom"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.4216)}
+body.cab-on[data-skin="blossom"] #cabFrame::before{border-image:url(assets/skins/frame-blossom.webp?v=2846) 158 81 84 81 stretch}
+/* beach → 夏日海灘 */
+body.cab-on[data-skin="beach"] #cabStage{background:#0e3040}
+body.cab-on[data-skin="beach"] #cabBand{background:linear-gradient(#164858,#0a2430)}
+body.cab-on[data-skin="beach"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.1676)}
+body.cab-on[data-skin="beach"] #cabFrame::before{border-image:url(assets/skins/frame-beach.webp?v=2846) 130 81 84 81 stretch}
+/* tsukiyo → 月下幻境 */
+body.cab-on[data-skin="tsukiyo"] #cabStage{background:#0c1028}
+body.cab-on[data-skin="tsukiyo"] #cabBand{background:linear-gradient(#1a2048,#0a1020)}
+body.cab-on[data-skin="tsukiyo"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.4081)}
+body.cab-on[data-skin="tsukiyo"] #cabFrame::before{border-image:url(assets/skins/frame-tsukiyo.webp?v=2846) 156 81 84 81 stretch}
+/* kitsune → 狐之祕境 */
+body.cab-on[data-skin="kitsune"] #cabStage{background:#1a0810}
+body.cab-on[data-skin="kitsune"] #cabBand{background:linear-gradient(#3a1820,#14080c)}
+body.cab-on[data-skin="kitsune"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.7973)}
+body.cab-on[data-skin="kitsune"] #cabFrame::before{border-image:url(assets/skins/frame-kitsune.webp?v=2846) 199 81 84 81 stretch}
+/* kabuto → 武將之魂 */
+body.cab-on[data-skin="kabuto"] #cabStage{background:#10080c}
+body.cab-on[data-skin="kabuto"] #cabBand{background:linear-gradient(#2a1410,#0c0608)}
+body.cab-on[data-skin="kabuto"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.3838)}
+body.cab-on[data-skin="kabuto"] #cabFrame::before{border-image:url(assets/skins/frame-kabuto.webp?v=2846) 154 81 84 81 stretch}
+/* feast → 皇宮盛宴 */
+body.cab-on[data-skin="feast"] #cabStage{background:#3a0c10}
+body.cab-on[data-skin="feast"] #cabBand{background:linear-gradient(#5a1216,#2a070b)}
+body.cab-on[data-skin="feast"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.4973)}
+body.cab-on[data-skin="feast"] #cabFrame::before{border-image:url(assets/skins/frame-feast.webp?v=2846) 166 81 84 81 stretch}
+}

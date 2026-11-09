@@ -412,7 +412,13 @@ const SKINS=[
 {id:'jade',name:'櫻色',desc:'櫻花粉',price:3000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff9cc8aa,#0c0618 70%)',sym:'rose'},
 {id:'crystal',name:'月光',desc:'銀白冷光',price:5000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#9fd8ffaa,#0c0618 70%)',sym:'perfume'},
 {id:'royal',name:'小堇',desc:'紫羅蘭',price:8000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#c07cffaa,#0c0618 70%)',sym:'ribbon'},
-{id:'obsidian',name:'夕陽',desc:'夕陽橘金',price:12000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff8a4aaa,#0c0618 70%)',sym:'letter'}];
+{id:'obsidian',name:'夕陽',desc:'夕陽橘金',price:12000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff8a4aaa,#0c0618 70%)',sym:'letter'},
+{id:'blossom',name:'櫻花之舞',desc:'櫻社狐燈',price:15000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ff9cc8aa,#0c0618 70%)',sym:'rose'},
+{id:'beach',name:'夏日海灘',desc:'棕櫚浪花',price:15000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#4fd0eaaa,#0c0618 70%)',sym:'love'},
+{id:'tsukiyo',name:'月下幻境',desc:'紫藤滿月',price:20000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#b48cffaa,#0c0618 70%)',sym:'perfume'},
+{id:'kitsune',name:'狐之祕境',desc:'白繩狐面',price:25000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ffd0c0aa,#0c0618 70%)',sym:'letter'},
+{id:'kabuto',name:'武將之魂',desc:'甲胄刀旗',price:30000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#e05030aa,#0c0618 70%)',sym:'ribbon'},
+{id:'feast',name:'皇宮盛宴',desc:'雙龍金殿',price:50000,fr:'linear-gradient(135deg,#fff0c2,#d9a441 25%,#7a5418 50%,#fff0c2 60%,#d9a441)',in:'radial-gradient(ellipse at 50% 110%,#ffd36aaa,#0c0618 70%)',sym:'love'}];
 let shConfirm=null;
 function skGet(){let st;try{st=JSON.parse(localStorage.getItem('fs_skin')||'{}')}catch(e){st={}}
 if(!Array.isArray(st.own))st.own=[];if(!st.own.includes('gold'))st.own.unshift('gold');

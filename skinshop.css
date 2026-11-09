@@ -137,3 +137,8 @@ body[data-skt="m"] #skFx i{width:24px;height:24px;border-radius:4px;transform:ro
 #shop .shtl button.on{border-color:#ffd27a;background:linear-gradient(180deg,#fff2c0,#f2c457 55%,#d5962a);color:#3a1200;box-shadow:0 0 8px rgba(255,200,90,.45)}
 #shop .shtl button.on small{color:#6a3a00}
 #shop .skin button.go{white-space:normal;line-height:1.2}
+
+/* v28.46 tier/eq tags sit in padding above the preview so they don't cover the frame crown */
+#shop .skin{padding-top:38px}
+#shop .tier{top:8px;left:10px}
+#shop .eqtag{top:8px;right:10px}
