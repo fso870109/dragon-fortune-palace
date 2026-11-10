@@ -1,4 +1,4 @@
-/* v28.53 skin shop — lobby overlay + fixed 天下布武 preview (no clip / empty CTA) */
+/* v28.54 skin shop — one scrolling page; full featured crown; lobby overlay + fixed 天下布武 preview */
 (function(){
 const D=document;
 const $=id=>D.getElementById(id);
@@ -85,7 +85,8 @@ function ensureShop(){
   if($('shop'))return;
   const d=D.createElement('dialog');
   d.id='shop';d.setAttribute('aria-labelledby','shTitle');
-  d.innerHTML='<h2 id="shTitle">機台外觀商店</h2>'+
+  d.innerHTML='<div class="shTop"><button type="button" class="shX" id="shX" aria-label="關閉">✕</button></div>'+
+    '<h2 id="shTitle">機台外觀商店</h2>'+
     '<div class="shsub">用遊戲中贏得的虛擬籌碼兌換機台外觀・目前籌碼 <b id="shBal">0</b></div>'+
     '<ul class="skins" id="skins"></ul>'+
     '<div class="shmsg" id="shMsg" role="status" aria-live="polite"></div>'+
@@ -252,6 +253,20 @@ if(sessionStorage.getItem('dfpFrmOk')){
 }
 try{sessionStorage.removeItem('dfpOpenShop')}catch(e){}
 
+function ensureX(){
+  const shop=$('shop');if(!shop)return;
+  let x=$('shX');
+  if(!x){
+    const wrap=D.createElement('div');wrap.className='shTop';
+    x=D.createElement('button');x.type='button';x.id='shX';x.className='shX';x.setAttribute('aria-label','關閉');x.textContent='✕';
+    wrap.appendChild(x);shop.insertBefore(wrap,shop.firstChild);
+  }
+  if(!x.dataset.dfp2854){
+    x.dataset.dfp2854='1';
+    x.addEventListener('click',()=>{try{$('shop').close()}catch(e){}});
+  }
+}
+ensureX();
 const shc=$('shClose'),shopEl=$('shop');
 if(shc){
   if(!shc.textContent.trim())shc.textContent='關閉';

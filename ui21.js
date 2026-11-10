@@ -2,11 +2,11 @@
 (function(){
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,$=i=>document.getElementById(i);
 let AC,bus,bed=null;function ac(){try{if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();bus=AC.createGain();bus.gain.value=0;bus.connect(AC.destination)}if(AC.state==='suspended')AC.resume()}catch(e){}return AC}
-const muted=()=>typeof sound!=='undefined'&&!sound;
-function tone(f,t0,d,ty,v,f2,dest){const a=ac();if(!a||muted())return;const t=a.currentTime+t0,o=a.createOscillator(),g=a.createGain();o.type=ty||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v||.06,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(dest||a.destination);o.start(t);o.stop(t+d+.05)}
+const muted=()=>{try{if(window.DFPvol)return !DFPvol.sfxOn()}catch(e){}return typeof sound!=='undefined'&&!sound};
+function tone(f,t0,d,ty,v,f2,dest){const a=ac();if(!a||muted())return;const t=a.currentTime+t0,o=a.createOscillator(),g=a.createGain();o.type=ty||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime((v||.06)*(window.DFPvol?DFPvol.sfx():1),t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(dest||a.destination);o.start(t);o.stop(t+d+.05)}
 /* music bed with crossfade */
 const BASS=[131,131,175,196],ARP=[523,659,784,659];let step=0;
-function bedOn(){const a=ac();if(!a)return;bus.gain.cancelScheduledValues(a.currentTime);bus.gain.setTargetAtTime(muted()?0:1,a.currentTime,.35);if(bed)return;step=0;bed=setInterval(()=>{if(muted())return;if(step%4==0)tone(BASS[(step/4|0)%4]/2,0,.42,'sine',.09,0,bus);tone(ARP[step%4]*((step/4|0)%4==2?1.335:1),0,.14,'square',.016,0,bus);step++},150)}
+function bedOn(){const a=ac();if(!a)return;bus.gain.cancelScheduledValues(a.currentTime);bus.gain.setTargetAtTime(window.DFPvol?DFPvol.mus():(muted()?0:1),a.currentTime,.35);if(bed)return;step=0;bed=setInterval(()=>{if(muted())return;if(step%4==0)tone(BASS[(step/4|0)%4]/2,0,.42,'sine',.09,0,bus);tone(ARP[step%4]*((step/4|0)%4==2?1.335:1),0,.14,'square',.016,0,bus);step++},150)}
 function bedOff(){const a=ac();if(!a||!bed)return;bus.gain.setTargetAtTime(0,a.currentTime,.3);const b=bed;setTimeout(()=>{if(bed===b&&bus.gain.value<.05){clearInterval(bed);bed=null}},1600)}
 /* anticipation → transition */
 function pre(){return new Promise(res=>{if(!$('f21Orb')){const o=document.createElement('div');o.id='f21Orb';document.body.appendChild(o)}document.body.classList.remove('f21pre');void document.body.offsetWidth;document.body.classList.add('f21pre');

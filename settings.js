@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.53',DFP_APPV='';
+var DFP_WEBV='28.54',DFP_APPV='';
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
 function vibOn(){return CAN&&g('fs_vib')!=='0'}
@@ -14,7 +14,7 @@ function theme(){var pop=$('audioPop');if(!pop||$('vibBtn'))return;
  var b=document.createElement('button');b.id='vibBtn';b.type='button';
  function r(){var on=vibOn();b.textContent=CAN?('📳 震動：'+(on?'開':'關')):'📳 震動：此裝置不支援';b.setAttribute('aria-pressed',on);b.disabled=!CAN}
  r();b.onclick=function(){s('fs_vib',vibOn()?'0':'1');r();if(vibOn())hap(25);try{sfx.click()}catch(e){}};
- var mb=$('musBtn');if(mb&&mb.nextSibling)pop.insertBefore(b,mb.nextSibling);else pop.appendChild(b);
+ var host=$('dfpVolMenu')||pop;var mb=$('musBtn');if(host)host.appendChild(b);else if(mb&&mb.nextSibling)pop.insertBefore(b,mb.nextSibling);else pop.appendChild(b);
  var RMx=window.DFPrm;if(RMx){var m=document.createElement('button');m.id='rmBtn';m.type='button';
   function rr(){var on=RMx.on||RMx.sys;m.textContent='🎞️ 減少動態：'+(on?'開':'關')+(RMx.sys?'（系統）':'');m.setAttribute('aria-pressed',on);m.disabled=RMx.sys}
   rr();m.onclick=function(){RMx.set(!RMx.on);rr();try{sfx.click()}catch(e){}};b.parentNode.insertBefore(m,b.nextSibling)}
@@ -42,8 +42,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '#setDlg .sX{display:block;width:100%;margin-top:12px;font:inherit;font-weight:800;font-size:15px;padding:10px;border-radius:24px;border:0;color:#2a0505;cursor:pointer;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f);box-shadow:0 3px 0 #6b420c}');
  var d=document.createElement('dialog');d.id='setDlg';d.setAttribute('aria-labelledby','setT');
  d.innerHTML='<div class="sC"><h2 id="setT">設定</h2>'+
- '<div class="sR"><span>背景音樂</span><button class="tg" id="sgBgm" type="button" aria-label="背景音樂"></button></div>'+
- '<div class="sR"><span>音效</span><button class="tg" id="sgSnd" type="button" aria-label="音效"></button></div>'+
+ '<div id="sgVol" class="dfpVol dfpVol--dlg"></div>'+
  '<div class="sR"><span>震動回饋<small>'+(CAN?'旋轉、停輪與中獎時輕微震動':'此裝置不支援震動')+'</small></span><button class="tg" id="sgVib" type="button" aria-label="震動回饋"></button></div>'+
  '<div class="sR"><span>減少動態效果<small id="sgRmN">減少閃光、震動畫面與開關門動畫，適合低階手機・省電</small></span><button class="tg" id="sgRm" type="button" aria-label="減少動態效果"></button></div>'+
  '<a class="sL" href="privacy.html">隱私權政策與使用條款・清除資料</a>'+
@@ -52,10 +51,8 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '<p class="sV" id="sgVer">'+(DFP_APPV?('版本 '+DFP_APPV+'・內容 '+DFP_WEBV):('網頁版 '+DFP_WEBV))+'</p>'+
  '<button class="sX" id="sgClose" type="button">關閉</button></div>';
  document.body.appendChild(d);
- function bgm(){return g('cz_bgm')!=='0'}function snd(){return g('fs_sound')!=='0'}
- function r(){$('sgBgm').setAttribute('aria-pressed',bgm());$('sgSnd').setAttribute('aria-pressed',snd());$('sgVib').setAttribute('aria-pressed',vibOn());$('sgVib').disabled=!CAN;var R=window.DFPrm;if(R){$('sgRm').setAttribute('aria-pressed',R.on||R.sys);$('sgRm').disabled=R.sys;if(R.sys)$('sgRmN').textContent='已依系統設定開啟'}else $('sgRm').parentNode.style.display='none'}
- $('sgBgm').onclick=function(){if(orig)orig.call(bb);bb.style.opacity=1;r()};
- $('sgSnd').onclick=function(){s('fs_sound',snd()?'0':'1');r()};
+ function r(){if(window.DFPvol)DFPvol.sync();$('sgVib').setAttribute('aria-pressed',vibOn());$('sgVib').disabled=!CAN;var R=window.DFPrm;if(R){$('sgRm').setAttribute('aria-pressed',R.on||R.sys);$('sgRm').disabled=R.sys;if(R.sys)$('sgRmN').textContent='已依系統設定開啟'}else $('sgRm').parentNode.style.display='none'}
+ if(window.DFPvol)DFPvol.mount($('sgVol'));
  $('sgVib').onclick=function(){s('fs_vib',vibOn()?'0':'1');r();if(vibOn())hap(25)};
  $('sgRm').onclick=function(){var R=window.DFPrm;if(!R||R.sys)return;R.set(!R.on);r()};
  $('sgClose').onclick=function(){d.close()};

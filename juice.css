@@ -1,5 +1,5 @@
 /* v20.0 motion & juice */
-@keyframes jLand{0%{transform:translateY(-9px) scaleY(1.03)}38%{transform:translateY(7px) scaleY(.955)}62%{transform:translateY(-3px) scaleY(1.015)}82%{transform:translateY(1px)}100%{transform:none}}
+@keyframes jLand{0%{transform:translateY(-9px)}38%{transform:translateY(7px)}62%{transform:translateY(-3px)}82%{transform:translateY(1px)}100%{transform:none}}
 html body .reel.land{animation:jLand .42s cubic-bezier(.2,.8,.3,1.2);transform-origin:50% 100%}
 @keyframes jGlow{0%,100%{box-shadow:inset 0 0 0 2px rgba(255,220,120,.55),0 0 8px rgba(var(--glow,255,200,90),.45)}50%{box-shadow:inset 0 0 0 3px rgba(255,240,180,.95),0 0 18px rgba(var(--glow,255,200,90),.9)}}
 html body .cell.hit{animation:jGlow .9s ease-in-out infinite;border-radius:8px;z-index:2}
@@ -21,7 +21,16 @@ html body .reel.jant{animation:jAnt .5s ease-in-out infinite;border-radius:6px;p
 html body #czWin.jpop{animation:jWinPop .45s cubic-bezier(.3,1.6,.5,1);color:#fff3b0}
 @media (prefers-reduced-motion:reduce){html body .reel.land,html body .cell.hit,html body .cell.hit .sym,html body svg.lines polyline,html body .reel.jant,#jRays,html body #czHero img.jdrift,html body #czWin.jpop{animation:none!important}#jAmb{display:none}}
 
-/* v28.53: stopped reels stay fully opaque during anticipation.
-   Theme UI fades .board.teasing .reel:not(.tease) to opacity .55,
-   which composites the cabinet frame through the symbols (ghosting). */
+/* v28.53: stopped reels stay fully opaque during anticipation. */
 html body .board.teasing .reel:not(.tease){opacity:1!important}
+/* v28.54: a stopping/landing reel stays fully opaque and unscaled on Y,
+   so the cabinet does not show through the column (jLand used to scaleY ~.95). */
+html body .board .reel,
+html body .board.teasing .reel,
+html body .board .reel.land,
+html body .board .reel.tease,
+html body .board .reel.jant{opacity:1!important}
+html body .board .reel .strip,
+html body .board .reel .strip.mb,
+html body .board .reel .cell{opacity:1}
+html body .strip.mb .cell .sym{transform:none!important}

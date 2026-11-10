@@ -14,7 +14,7 @@ try{
  num('fs_bet',0,5,0,true);
  num('fs_mv',0,1,.5,false);num('fs_sv',0,1,.8,false);
  ['fs_sound','fs_music','fs_vib','fs_rm','cz_bgm','dfp_age18','czHelp21'].forEach(flag);
- ['fs_inv','fs_stats','fs_daily','fs_ad','fs_skin','cz_gal','cz_jp','cz_st'].forEach(obj);
+ ['fs_inv','fs_stats','fs_daily','fs_ad','fs_skin','cz_gal','cz_jp','cz_st','dfp_vol'].forEach(obj);
  for(var i=LS.length-1;i>=0;i--){var k=LS.key(i);if(!k)continue;
   if(/^cz(TW|TK)_/.test(k))obj(k);
   else if(/^czH[SC]_/.test(k))num(k,0,1e9,null,false)}
