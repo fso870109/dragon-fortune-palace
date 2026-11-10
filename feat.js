@@ -20,8 +20,15 @@ function queue(fn,bet){Qu.push([fn,bet]);setTimeout(pump,1200)}
 function award(w,bet,lbl){w=Math.round(w);if(!(w>0))return;bal+=w;$('win').textContent=w;try{ui();saveLater&&saveLater()}catch(e){}const tot=bet*NL;if(w/tot>=10&&window.bigWin)setTimeout(()=>bigWin(w,tot),300);}
 function pick(a){let s=a.reduce((x,y)=>x+y[1],0),r=Math.random()*s;for(const v of a){if((r-=v[1])<0)return v[0]}return a[0][0]}
 function stage(title){const b=$('board');const L=document.createElement('div');L.className='rfx';L.setAttribute('role','dialog');L.setAttribute('aria-label',title);const p=b.offsetParent;Object.assign(L.style,{left:b.offsetLeft+'px',top:b.offsetTop+'px',width:b.offsetWidth+'px',height:b.offsetHeight+'px'});L.innerHTML=`<p class="rfxN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>`;p.appendChild(L);b.classList.add('rfxOn');return L}
-function clearBoardFX(){const b=$('board');if(!b)return;b.classList.remove('rfxOn','rfxSuck');b.classList.add('rfxClear');setTimeout(()=>b.classList.remove('rfxClear'),180)}
-function finish(L,w,msg,noAmt){return new Promise(res=>{const r=document.createElement('div');r.className='rfxRes';r.innerHTML=`<i class="rfxGem" aria-hidden="true"></i><small>${msg}</small>${noAmt?'':`<b>${NF.format(Math.round(w))}</b>`}`;L.appendChild(r);let done=0;const end=()=>{if(done)return;done=1;L.classList.add('out');clearBoardFX();setTimeout(()=>{if(L.parentNode)L.remove();res(w)},380)};L.onclick=end;setTimeout(end,RM?400:1800)})}
+function goldHTML(s){return Array.from(String(s)).map((ch,i)=>'<i style="--i:'+i+'">'+(ch===' '?'&nbsp;':ch)+'</i>').join('')}
+function fxWorld(){let w=$('twWorld');if(w)return w;w=document.createElement('div');w.id='twWorld';w.setAttribute('aria-hidden','true');w.innerHTML='<div class="twWflash"></div><div class="twWvig"></div><div class="twWbloom"></div><div class="twWrings"></div><div class="twWstreaks"></div><div class="twWrain"></div>';document.body.appendChild(w);document.documentElement.classList.add('twFx');document.body.classList.add('twFx');return w}
+function fxKill(){document.body.classList.remove('twFx','twShake','twPunch');document.documentElement.classList.remove('twFx');const w=$('twWorld');if(w)w.remove()}
+function fxImpact(){if(RM)return;const w=fxWorld(),fl=w.querySelector('.twWflash'),rg=w.querySelector('.twWrings');document.body.classList.remove('twShake');void document.body.offsetWidth;document.body.classList.add('twShake');fl.classList.remove('go');void fl.offsetWidth;fl.classList.add('go');const b=$('board');let top='42%',left='50%';if(b){const r=b.getBoundingClientRect();left=(r.left+r.width/2)+'px';top=(r.top+r.height/2)+'px'}rg.style.left=left;rg.style.top=top;rg.innerHTML='<i></i><i></i><i></i>';setTimeout(()=>document.body.classList.remove('twShake'),560)}
+function fxStreaks(){if(RM)return;const box=fxWorld().querySelector('.twWstreaks'),n=innerWidth<=360?6:10;for(let i=0;i<n;i++){const s=document.createElement('i');s.style.cssText='--a:'+(Math.random()*150-75)+'deg;left:'+(15+Math.random()*70)+'%;top:'+(22+Math.random()*50)+'%;animation-delay:'+(Math.random()*90)+'ms';box.appendChild(s);setTimeout(()=>s.remove(),720)}}
+function fxRain(n){if(RM)return;const box=fxWorld().querySelector('.twWrain'),cap=innerWidth<=360?Math.min(n,36):Math.min(n,60),frag=document.createDocumentFragment();for(let i=0;i<cap;i++){const s=document.createElement('i');if(Math.random()<.18)s.className='gem';s.style.cssText='left:'+(Math.random()*100)+'%;--fall:'+(880+Math.random()*900)+'ms;--dx:'+((Math.random()-.5)*48)+'px;--sz:'+(8+Math.random()*9)+'px;animation-delay:'+(Math.random()*320)+'ms';frag.appendChild(s)}box.appendChild(frag)}
+function fxSpark(host,n){if(RM||!host)return;for(let i=0;i<n;i++){const s=document.createElement('i');s.className='twSpark';s.style.left=(28+Math.random()*44)+'%';s.style.top=(38+Math.random()*36)+'%';host.appendChild(s);setTimeout(()=>s.remove(),480)}}
+function clearBoardFX(){fxKill();const b=$('board');if(!b)return;b.classList.remove('rfxOn','rfxSuck');b.classList.add('rfxClear');setTimeout(()=>b.classList.remove('rfxClear'),180)}
+function finish(L,w,msg,noAmt){return new Promise(res=>{const r=document.createElement('div');r.className='rfxRes rfxHot';r.innerHTML='<i class="rfxGem" aria-hidden="true"></i><i class="twShineBar" aria-hidden="true"></i><small class="twGold twShine">'+goldHTML(msg)+'</small>'+(noAmt?'':'<b class="twAmt twGold">'+NF.format(Math.round(w))+'</b>');L.appendChild(r);if(!RM){fxWorld();fxImpact();fxStreaks();fxRain(innerWidth<=360?28:48);const amt=r.querySelector('.twAmt');if(amt)amt.classList.add('tick','pulse')}let done=0;const end=()=>{if(done)return;done=1;L.classList.add('out');clearBoardFX();setTimeout(()=>{if(L.parentNode)L.remove();res(w)},380)};L.onclick=end;setTimeout(end,RM?400:1800)})}
 const cvs=(L,W,H)=>{const c=document.createElement('canvas'),d=Math.min(1.5,devicePixelRatio||1);c.width=W*d;c.height=H*d;c.style.cssText=`position:absolute;left:0;top:0;width:${W}px;height:${H}px`;L.prepend(c);const x=c.getContext('2d');x.scale(d,d);return [c,x]};
 function twUI(){const h=$('czHero');if(!h)return;let e=$('twBox');if(!e){e=document.createElement('div');e.id='twBox';e.innerHTML='<div class="tr"><i>旋</i></div><div><b>旋風聚寶</b><span></span></div>';h.appendChild(e)}
  e.style.setProperty('--p',tw.n/TW_N*100);e.querySelector('span').textContent=NF.format(Math.round(tw.pot));e.classList.toggle('hot',tw.n>=TW_N*.85)}
@@ -33,15 +40,15 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   L.insertAdjacentHTML('beforeend',
     '<div class="twRays" aria-hidden="true"></div>'+
     '<div class="twFlash" aria-hidden="true"></div>'+
-    '<div class="twSlam"><div class="twPlate"><span class="twFlour l" aria-hidden="true"></span><b>旋風聚寶</b><span class="twFlour r" aria-hidden="true"></span></div></div>'+
-    '<div class="twPlaque" hidden><i class="twCrown" aria-hidden="true"></i><small>旋風聚寶</small><em class="twTier" hidden></em><b class="twAmt">0</b><span class="twSum" hidden>合計獎金</span></div>');
+    '<div class="twSlam"><div class="twPlate"><i class="twShineBar" aria-hidden="true"></i><span class="twFlour l" aria-hidden="true"></span><b class="twGold twShine">'+goldHTML('旋風聚寶')+'</b><span class="twFlour r" aria-hidden="true"></span></div></div>'+
+    '<div class="twPlaque" hidden><i class="twCrown" aria-hidden="true"></i><i class="twShineBar" aria-hidden="true"></i><i class="twFlare a" aria-hidden="true"></i><i class="twFlare b" aria-hidden="true"></i><small class="twGold twShine">'+goldHTML('旋風聚寶')+'</small><em class="twTier" hidden></em><b class="twAmt twGold">0</b><span class="twSum" hidden></span></div>');
   const board=$('board');if(board)board.classList.add('rfxSuck');
   const slam=L.querySelector('.twSlam'),plaque=L.querySelector('.twPlaque'),amtEl=L.querySelector('.twAmt');
   const tierEl=L.querySelector('.twTier'),sumEl=L.querySelector('.twSum');
   const tot=(typeof NL==='number'?bet*NL:bet);
   const ratio=tot>0?pot/tot:0;
-  if(ratio>=5){tierEl.hidden=false;tierEl.textContent='超級'}
-  else if(ratio>=2.5){tierEl.hidden=false;tierEl.textContent='大獎'}
+  if(ratio>=5){tierEl.hidden=false;tierEl.className='twTier twGold twShine';tierEl.innerHTML=goldHTML('超級大獎！')}
+  else if(ratio>=2.5){tierEl.hidden=false;tierEl.className='twTier twGold twShine';tierEl.innerHTML=goldHTML('大獎！')}
   const kind=(window.CZM&&CZM.id==='sakura')?'petal':(window.CZM&&CZM.id==='neko')?'coin':'spark';
   let skip=0,raf=0,phase='intro';
   const onSkip=()=>{skip++};
@@ -59,9 +66,11 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   });
 
   L.classList.add('twIntro');
+  fxWorld();fxImpact();fxStreaks();
+  if(!RM){document.body.classList.add('twPunch');setTimeout(()=>document.body.classList.remove('twPunch'),480)}
   tone(180,0,.5,'sawtooth',.04,640);tone(360,.08,.45,'triangle',.04,980);
   [523,659,784,1047].forEach((f,i)=>tone(f,.28+i*.07,.28,'triangle',.05));
-  if(!RM){L.classList.add('twBoom');await wait(720);L.classList.remove('twBoom')}
+  if(!RM){L.classList.add('twBoom');await wait(900);L.classList.remove('twBoom')}
   else await wait(80);
   slam.classList.add('out');
 
@@ -139,12 +148,14 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
       const k=dur?Math.min(1,(t-c0)/dur):1;
       const e=1-Math.pow(1-k,3);
       amtEl.textContent=NF.format(Math.round(pot*e));
-      if(t-lastTick>70){lastTick=t;tone(980+k*700,0,.045,'square',.03)}
+      if(t-lastTick>70){lastTick=t;tone(980+k*700,0,.045,'square',.03);amtEl.classList.remove('tick');void amtEl.offsetWidth;amtEl.classList.add('tick');fxSpark(plaque,2)}
       if(k<1)requestAnimationFrame(step);else res();
     })(c0)
   });
   amtEl.textContent=NF.format(Math.round(pot));
-  amtEl.classList.add('pulse');
+  amtEl.classList.add('pulse','tick');
+  fxImpact();fxStreaks();fxRain(innerWidth<=360?32:56);
+  if(!RM){document.body.classList.add('twPunch');setTimeout(()=>document.body.classList.remove('twPunch'),480)}
   const nFount=RM?0:(W<=360?14:20);
   for(let i=0;i<nFount;i++){
     const s=document.createElement('i');s.className='twFountain'+(kind==='petal'?' petal':'');
@@ -156,14 +167,14 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   window.W21&&(()=>{const r=L.getBoundingClientRect();W21.burst(r.left+r.width/2,r.top+r.height/2,24,300)})();
   tone(523,0,.3,'square',.05);tone(784,.12,.5,'square',.05);tone(1047,.24,.6,'triangle',.05);
 
-  phase='outro';sumEl.hidden=false;sumEl.classList.add('in');
-  await wait(RM?220:1100);
+  phase='outro';sumEl.hidden=false;sumEl.className='twSum twGold twShine in';sumEl.innerHTML=goldHTML('合計獎金');
+  await wait(RM?220:1300);
 
   L.removeEventListener('pointerdown',onSkip);
   L.classList.add('out');
   clearBoardFX();
   await new Promise(r=>setTimeout(r,380));
-  L.querySelectorAll('.twFountain').forEach(n=>n.remove());
+  L.querySelectorAll('.twFountain,.twSpark').forEach(n=>n.remove());
   if(L.parentNode)L.remove();
   return pot;
  };fn.t='旋風聚寶';return fn}
