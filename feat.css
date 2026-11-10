@@ -15,6 +15,17 @@
 .fxRes{font:900 15px/1.3 "Noto Sans TC",sans-serif;color:#fff;min-height:44px}.fxRes b{display:block;font-size:30px;color:#ffe680;font-variant-numeric:tabular-nums}
 .fxIn button{margin-top:6px;padding:8px 28px;border:0;border-radius:20px;background:linear-gradient(180deg,#ff6fa1,#c2185b);color:#fff;font:900 16px/1 "Noto Sans TC",sans-serif}
 .fxNote{font-size:10px!important;opacity:.75}
+/* v28.64 幸運彈珠 炫炮 */
+.rfx.plStage{contain:paint;background:radial-gradient(circle at 50% 42%,rgba(90,24,50,.22),rgba(10,3,20,.5))}
+.rfx.plStage .twRays{opacity:.82}
+.rfx.plStage .twRays.plDim{opacity:.3}
+.plPop{position:absolute;left:50%;top:56%;translate:-50% -50%;z-index:8;pointer-events:none;text-align:center;max-width:calc(100% - 12px);filter:drop-shadow(0 0 18px rgba(var(--fx-glow,255,176,48),.95));animation:plPopIn .5s cubic-bezier(.2,1.7,.35,1) both}
+.plPop b.twGold{display:flex;justify-content:center;align-items:flex-end;font:900 clamp(34px,12vw,56px)/1 TCDisp,"Noto Serif TC",serif;letter-spacing:.04em;max-width:100%;white-space:nowrap}
+.plPop.t1 b.twGold{font-size:clamp(38px,13vw,60px)}
+.plPop.t2{filter:drop-shadow(0 0 28px rgba(var(--fx-glow,255,176,48),1)) drop-shadow(0 0 8px var(--fx,#ffd36a))}
+.plPop.t2 b.twGold{font-size:clamp(42px,14vw,64px)}
+@keyframes plPopIn{0%{transform:scale(2.5);opacity:0;filter:brightness(2.2)}58%{transform:scale(.9);opacity:1}100%{transform:scale(1)}}
+
 @media (prefers-reduced-motion:reduce){#mxBadge,#twBox.hot .tr i{animation:none}}
 
 /* v28.58 旋風聚寶 — painted plaque overlay */
@@ -128,7 +139,7 @@ body.twShake.twPunch #machine{animation:twScreenShake .5s ease-out}
 @keyframes twCardOut{to{transform:scale(.82) rotateY(16deg);opacity:0;filter:blur(3px) brightness(1.5)}}
 
 @media (prefers-reduced-motion:reduce){
-  .twRays,.twPlate,.twStage.twBoom .twPlate,.twFlash,.twFountain,.twAmt.pulse,.twAmt.tick,.twSum.in,.twTier,.twSlam,.twGold>i,.twShineBar,.twFlare,.twCrown,.twPlaque,#twWorld .twWvig,#twWorld .twWbloom,#twWorld .twWflash,#twWorld .twWrings i,#twWorld .twWstreaks i,#twWorld .twWrain i,body.twShake #machine,body.twPunch #machine,.rfxRes.rfxHot,.twCard.in,.twCard.out,.rfx.twStage.twCollapse{animation:none!important}
+  .twRays,.twPlate,.twStage.twBoom .twPlate,.twFlash,.twFountain,.twAmt.pulse,.twAmt.tick,.twSum.in,.twTier,.twSlam,.twGold>i,.twShineBar,.twFlare,.twCrown,.twPlaque,#twWorld .twWvig,#twWorld .twWbloom,#twWorld .twWflash,#twWorld .twWrings i,#twWorld .twWstreaks i,#twWorld .twWrain i,body.twShake #machine,body.twPunch #machine,.rfxRes.rfxHot,.twCard.in,.twCard.out,.rfx.twStage.twCollapse,.plPop{animation:none!important}
   .twRays{opacity:.3}
   .twSum,.twCard .twSum{opacity:1}
   .twGold>i{-webkit-text-fill-color:transparent}
