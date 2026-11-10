@@ -95,7 +95,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  const ob=document.querySelector('.info .box:nth-child(2)');ob.style.visibility='hidden';const betBox=document.createElement('div');betBox.className='box czbet';betBox.innerHTML='<small>BET ×20</small><b id="czBet">0</b>';
  C.append(mC,betBox,document.querySelector('.controls'),mW);
  const buy=document.createElement('button');buy.id='czBuyBtn';buy.type='button';buy.className='czbuyitem';buy.innerHTML='<span class="ic" aria-hidden="true">💘</span><span class="czbt"><b>✨ 觸發特殊事件 ✨</b><small></small></span>';
- Rr.append($('max16'),$('menuBtn'));{const m16=$('menu16');if(m16)m16.insertBefore(buy,m16.firstChild)}bar.append(L,C,Rr);
+ Rr.append($('max16'),$('menuBtn'));{const m16=$('menu16');if(m16){const ad=$('adBtn');if(ad)ad.after(buy);else m16.insertBefore(buy,m16.firstChild)}}bar.append(L,C,Rr);
  const note=document.querySelector('.sub');const nb=document.createElement('div');nb.className='cznote';nb.textContent=note?note.textContent:'僅供娛樂・虛擬籌碼・純虛擬・無兌現';if(note)note.remove();
  mach.append(bar,nb);
  {// v18.1 AUTO spin (play-money)
@@ -111,7 +111,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  const cv=document.createElement('div');cv.id='czAuStop';cv.setAttribute('aria-label','停止自動旋轉');document.body.appendChild(cv);const pos=()=>{const r=sp.getBoundingClientRect();Object.assign(cv.style,{left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px'})};addEventListener('resize',pos);cv.addEventListener('click',e=>{e.stopPropagation();vib(10);AU.stop()});
  const ovl=()=>['czWheel','czAtari','czMG','bw'].some(i=>{const e=document.getElementById(i);return e&&getComputedStyle(e).display!=='none'&&getComputedStyle(e).visibility!=='hidden'&&(e.classList.contains('on')||e.classList.contains('show')||e.open||e.style.display==='flex'||e.style.display==='block')});
  function tick(){if(!AU.on)return;pos();if(spinning||bwState||window.__hold||(typeof FS!=='undefined'&&FS&&FS.left>0)||ovl()){setTimeout(tick,300);return}
-  if(bal<BETS[betIdx]*NL){AU.stop();toast&&toast('籌碼不足，自動旋轉已停止');return}
+  if(bal<BETS[betIdx]*NL){AU.stop();toast&&toast('籌碼不足，自動旋轉已停止');window.czChipDlg&&czChipDlg(bal<BETS[0]*NL?'low':'short');return}
   if(AU.n<=0){AU.stop();return}AU.n--;lab();spin();setTimeout(tick,500)}
  AU.tick=tick}
  const mir=(a,b)=>{const A=$(a),B=$(b);const f=()=>{B.textContent=A.textContent};f();new MutationObserver(f).observe(A,{childList:true,characterData:true,subtree:true})};mir('bal','czCred');mir('bet','czBet');mir('win','czWin');
@@ -123,7 +123,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  buy.onclick=()=>{if(spinning||FS||bwState||window.__hold)return;dlg.querySelector('.czbp').innerHTML=`價格：<b>${price().toLocaleString()}</b> 籌碼（總押注 ${BETS[betIdx]*NL} × ${CZM.buy}）`;$('czBuyOk').disabled=bal<price();$('czBuyOk').textContent=bal<price()?'籌碼不足':'確認購買';dlg.showModal()};
  $('czBuyNo').onclick=()=>dlg.close();
  $('czBuyOk').onclick=()=>{dlg.close();const p=price();if(bal<p||spinning||FS)return;bal-=p;ui();ach('buy');vib([20,30,20]);
-  ['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i)&&($(i).disabled=true));FS={left:FS_N,tot:FS_N,n:0,won:0,bet:BETS[betIdx]};day().fs++;save();setTimeout(()=>fsIntro(false),250)};
+  ['spinBtn','minus','plus','maxBtn','max16','resetBtn'].forEach(i=>$(i)&&($(i).disabled=true));FS={left:FS_N,tot:FS_N,n:0,won:0,bet:BETS[betIdx]};day().fs++;save();setTimeout(()=>fsIntro(false),250)};
  // loading screen
  let ld=document.getElementById('czLoad');if(!ld){ld=document.createElement('div');ld.id='czLoad';ld.innerHTML=`<div class="czlt">${CZM.name}</div><div class="czlbar"><i></i></div><div class="czls">載入中…</div><div class="cznote2">僅供娛樂・虛擬籌碼・純虛擬・無兌現</div>`;document.body.appendChild(ld)}
  const imgs=[...document.images];let n=0;const tot=Math.max(1,imgs.length);const prog=()=>{n=imgs.filter(i=>i.complete).length;ld.querySelector('i').style.width=(20+80*n/tot)+'%'};

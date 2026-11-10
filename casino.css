@@ -369,3 +369,23 @@ html body .czm b,html body .czbar .box b{font-family:"Noto Sans TC",Arial,sans-s
 /* v28.20 彩金轉盤中文直書 */
 .czwd b{transform:translateX(-50%);writing-mode:vertical-rl;text-orientation:upright;letter-spacing:1px;font-family:"Noto Serif TC","Noto Sans TC",serif}
 .czwd b{font-size:clamp(11px,3.1vw,17px);font-weight:900}.czwd b.s2{font-size:clamp(13px,3.6vw,20px)}
+
+/* v28.62 選單整理：看廣告 hero tile + 2-col leftover grid + combined 說明 */
+body.menu16 #menu16.row2{grid-template-columns:repeat(2,1fr)!important}
+#menu16 #adBtn{grid-column:1/-1;width:100%;display:flex;flex-direction:row!important;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:12px 14px!important;font-size:18px!important;font-weight:900;letter-spacing:.08em;background:linear-gradient(#ff9a3d,#e61d24 58%,#7a080c)!important;border:1px solid #ffd27a!important;color:#fff!important;border-radius:12px;box-shadow:0 0 0 1px #ffd27a,0 0 16px rgba(255,70,40,.7),0 0 28px rgba(255,210,122,.45);text-shadow:0 1px 0 #5a0000}
+#menu16 #adBtn .ic{font-size:24px!important;margin:0!important;filter:none!important}
+#menu16 #adBtn.badge.dot::after{top:8px;right:12px}
+#pay .payTabs{display:flex;gap:8px;justify-content:center;margin:0 0 12px}
+#pay #payHelp{max-height:min(52vh,440px);overflow:auto;-webkit-overflow-scrolling:touch}
+#pay .payHelpCard{margin:0 0 12px;padding:10px 8px 12px;border-radius:14px;background:radial-gradient(120% 70% at 50% 0,rgba(255,200,90,.14),transparent 60%),linear-gradient(180deg,#2c1240,#120620);border:2px solid #ffd65a;box-sizing:border-box}
+#pay .payHelpCard svg{width:100%;height:auto;max-height:28svh;display:block}
+#pay .payHelpCard h3{margin:8px 0 4px;text-align:center;color:#ffe680;font-size:18px}
+#pay .payHelpCard p{margin:0;text-align:center;font:700 14px/1.5 "Noto Sans TC",sans-serif;color:#f4e2b8}
+
+#menu16 .czbuyitem{grid-column:1/-1!important;width:100%!important}
+#menu16 #czBuyHS.czbuyitem{display:flex;flex-direction:row!important;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:10px 14px!important;background:linear-gradient(#9b7cff,#5b28b8 58%,#24085a)!important;border:1px solid #ffd27a!important;color:#fff!important;border-radius:12px;box-shadow:0 0 0 1px #d2b4ff,0 0 14px rgba(140,90,255,.55)}
+#menu16 #czBuyHS .ic{font-size:22px!important;margin:0!important;filter:none!important}
+#menu16 #czBuyHS .czbt{display:flex;flex-direction:column;align-items:center;gap:2px;text-shadow:0 0 8px rgba(200,160,255,.6)}
+#menu16 #czBuyHS .czbt b{font-size:17px!important;font-weight:900;white-space:nowrap;color:#fff}
+#menu16 #czBuyHS .czbt small{font-size:11px!important;opacity:.9;white-space:nowrap;font-weight:500}
+

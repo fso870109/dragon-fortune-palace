@@ -43,7 +43,7 @@ function symHTML(id,sz=''){if(!IMGF.has(id)){let v=id;const IQ=window.__IQ;if(IQ
 function cellHTML(i){const s=SYM[i];return `<div class="cell" data-s="${s.id}" aria-label="${s.name}">${symHTML(s.id)}</div>`}
 function boardLabel(){const rows=['上排','中排','下排'].map((n,r)=>n+'：'+grid.map(c=>SYM[c[r]].name).join('、'));$('board').setAttribute('aria-label','轉輪結果。'+rows.join('；'))}
 function render(){boardLabel();reels.forEach((r,c)=>{const st=r.firstElementChild;st.style.transition='none';st.style.transform='translateY(0)';st.innerHTML=grid[c].map(cellHTML).join('')})}
-function ui(){$('bal').textContent=bal;$('bet').textContent=BETS[betIdx]+'×'+NL;saveLater();{const b=$('soundBtn');b.firstElementChild.textContent=sound?'🔊':'🔇';b.lastElementChild.textContent=sound?'音效：開':'音效：關';b.setAttribute('aria-pressed',sound)}}
+function ui(){$('bal').textContent=bal;$('bet').textContent=BETS[betIdx]+'×'+NL;saveLater();{const b=$('soundBtn');if(b){if(b.firstElementChild)b.firstElementChild.textContent=sound?'🔊':'🔇';if(b.lastElementChild&&b.lastElementChild!==b.firstElementChild)b.lastElementChild.textContent=sound?'音效：開':'音效：關';b.setAttribute('aria-pressed',sound)}}}
 // deferred storage (keeps localStorage writes off the win frame)
 const ric=window.requestIdleCallback||(f=>setTimeout(f,200));let svQ=0;function saveLater(){if(svQ)return;svQ=1;ric(()=>{svQ=0;try{localStorage.setItem('fs_bal',bal);localStorage.setItem('fs_bet',betIdx)}catch(e){}},{timeout:1500})}
 addEventListener('pagehide',()=>{try{localStorage.setItem('fs_bal',bal);localStorage.setItem('fs_bet',betIdx)}catch(e){}});
@@ -129,9 +129,9 @@ requestAnimationFrame(frame)}
 requestAnimationFrame(frame);}
 function spin(){
 if(spinning||bwState||window.__hold)return;const free=!!(FS&&FS.left>0);const bet=free?FS.bet:BETS[betIdx],total=bet*NL;
-if(!free&&bal<total){if(bal>=BETS[0]*NL){let i=betIdx;while(i>0&&BETS[i]*NL>bal)i--;betIdx=i;ui();const t='籌碼不足，押注已調整為 '+BETS[i]+'×'+NL;$('msg').textContent=t;typeof toast==='function'&&toast(t)}else{$('msg').textContent=adLeft()>0?'籌碼不足！可「看廣告領籌碼」或「重置籌碼」':'籌碼不足！可「重置籌碼」';window.czChipDlg&&czChipDlg('low',()=>$('resetBtn').__doReset())}sfx.lose();return}
+if(!free&&bal<total){if(bal>=BETS[0]*NL){let i=betIdx;while(i>0&&BETS[i]*NL>bal)i--;betIdx=i;ui();const t='籌碼不足，押注已調整為 '+BETS[i]+'×'+NL;$('msg').textContent=t;typeof toast==='function'&&toast(t);window.czChipDlg&&czChipDlg('short')}else{$('msg').textContent=adLeft()>0?'籌碼不足！可「看廣告領籌碼」或「每日簽到」':'籌碼不足！可「每日簽到」或「邀請好友」';window.czChipDlg&&czChipDlg('low')}sfx.lose();return}
 BRc=null;boardR();spinning=true;if(free){FS.left--;FS.n++;fsUI()}else{bal-=total;window.CZ&&CZ.onBet(total)}ui();clearWin();$('win').textContent=0;$('msg').textContent=free?`免費次數 ${FS.n}／${FS.tot}（獎金 ×${FS_M}）`:'旋轉中…';$('board').setAttribute('aria-busy','true');
-['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=true);
+['spinBtn','minus','plus','maxBtn','max16','resetBtn'].forEach(i=>{const e=$(i);if(e)e.disabled=true});
 const res=(window.__force&&window.__force.shift())||rndGrid();const tease=teaseCheck(res);
 const ev=evalGrid(res),mult=free?FS_M:1;
 sfx.spinStart();$('machine').classList.add('spinning');lcdSpin((ev.line/NL+ev.scPay)*mult,tease,ev.sc>=3);let done=0;
@@ -163,7 +163,7 @@ ric(()=>{const rk=lbRecord(free?0:total,won,bet,total);if(won&&rk===0&&lbGet().w
 ui();spinning=false;window.CZ&&CZ.onSettle({total,won,xr,free,sc:ev.sc,big:xr>=(free?30:10)&&ev.sc<3});
 if(ev.sc>=3){if(FS){FS.left+=FS_N;FS.tot+=FS_N;fsUI();setTimeout(()=>fsIntro(true),900)}else{FS={left:FS_N,tot:FS_N,n:0,won:0,bet};setTimeout(()=>fsIntro(false),900)}}
 else fsNext();
-if(!FS)['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=false);
+if(!FS)['spinBtn','minus','plus','maxBtn','max16','resetBtn'].forEach(i=>{const e=$(i);if(e)e.disabled=false});
 }
 // ===== free spins =====
 function fsUI(){document.body.classList.toggle('fs-mode',!!FS);if(FS){$('fsN').textContent=FS.n;$('fsT').textContent=FS.tot}}
@@ -171,7 +171,7 @@ let fsTimer=0;
 function fsNext(){if(!FS)return;clearTimeout(fsTimer);
 if(FS.left>0){fsTimer=setTimeout(function go(){if(bwState||spinning||window.__hold){fsTimer=setTimeout(go,400);return}spin()},1300);return}
 const f=FS;fsTimer=setTimeout(function end(){if(bwState||spinning||window.__hold){fsTimer=setTimeout(end,400);return}
-FS=null;fsUI();['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>$(i).disabled=false);
+FS=null;fsUI();['spinBtn','minus','plus','maxBtn','max16','resetBtn'].forEach(i=>{const e=$(i);if(e)e.disabled=false});
 $('msg').textContent=`免費次數結束！共贏得 ${fmt(f.won)} 虛擬籌碼`;if(f.won>0)bigWin(f.won,f.bet*NL,{tier:['mega','免費次數結束','合計獎金'],lbl:'合計獎金'});else lcdReset()},1300)}
 function fsIntro(re){const bw=$('bw');fsUI();lcdBonusFS();
 bw.className='bw show epic fsi';$('bwTier').textContent='超級獎勵';$('bwJp').textContent=re?'謝謝你…♡ +10次':'機會來了!! 一直在等你';
@@ -279,15 +279,14 @@ $('bw').addEventListener('click',bwClose);
 $('spinBtn').onclick=spin;
 $('minus').onclick=()=>{if(betIdx>0)betIdx--;sfx.blip(false);ui()};
 $('plus').onclick=()=>{if(betIdx<BETS.length-1)betIdx++;sfx.blip(true);ui()};
-$('maxBtn').onclick=()=>{let i=BETS.length-1;while(i>0&&BETS[i]*NL>bal)i--;betIdx=i;sfx.click();ui()};
-$('soundBtn').onclick=()=>{sound=!sound;localStorage.setItem('fs_sound',sound?'1':'0');ui();if(sound)aInit();aVol();musSync();sfx.click()};
-$('resetBtn').__doReset=()=>{bal=1000;ui();clearWin();$('win').textContent=0;$('msg').textContent='籌碼已重置為 1000'};$('resetBtn').onclick=()=>{const f=$('resetBtn').__doReset;if(window.czChipDlg)czChipDlg('reset',f);else if(confirm('確定要將籌碼重置為 1000 嗎？'))f()};
-$('payBtn').onclick=()=>{sfx.click();$('pay').showModal()};
+function doMaxBet(){let i=BETS.length-1;while(i>0&&BETS[i]*NL>bal)i--;betIdx=i;sfx.click();ui()}{const mb=$('maxBtn');if(mb)mb.onclick=doMaxBet;const m16=$('max16');if(m16)m16.onclick=doMaxBet}
+{const sb=$('soundBtn');if(sb)sb.onclick=()=>{sound=!sound;localStorage.setItem('fs_sound',sound?'1':'0');ui();if(sound)aInit();aVol();musSync();sfx.click()}}
+{const pb=$('payBtn');if(pb)pb.onclick=()=>{sfx.click();if(window.F21&&F21.openGuide)F21.openGuide('pay');else $('pay').showModal()}};
 document.addEventListener('keydown',e=>{if(bwState&&(e.code==='Space'||e.code==='Enter'||e.code==='Escape')){e.preventDefault();bwClose();return}if(document.querySelector('dialog[open]')||bwState)return;const tg=e.target.tagName;if(tg==='INPUT'||tg==='TEXTAREA')return;
 if(e.code==='Space'){if(tg==='BUTTON'&&e.target.id!=='spinBtn')return;e.preventDefault();spin()}
 else if(!spinning&&(e.key==='+'||e.key==='='||e.code==='NumpadAdd'))$('plus').click();
 else if(!spinning&&(e.key==='-'||e.code==='NumpadSubtract'))$('minus').click();
-else if((e.key==='m'||e.key==='M')&&!e.ctrlKey&&!e.metaKey)$('soundBtn').click()});
+else if((e.key==='m'||e.key==='M')&&!e.ctrlKey&&!e.metaKey){const sb=$('soundBtn');if(sb)sb.click();else if(window.DFPvol)DFPvol.toggleS()}});
 const pt=$('payTable');[...SYM].reverse().forEach(s=>pt.insertAdjacentHTML('beforeend',s.id==='scatter'?`<tr class="payfs"><td class="pname">${symHTML(s.id,'width="34" height="34"')} 分散</td><td>總押注×6</td><td>×25</td><td>×125</td></tr><tr class="payfs"><td colspan="4">3 個以上（任意位置）＝ 10 次免費旋轉・獎金 ×2</td></tr>`:`<tr><td class="pname">${symHTML(s.id,'width="34" height="34"')} ${s.name}</td><td>×${s.pay[0]}</td><td>×${s.pay[1]}</td><td>×${s.pay[2]}</td></tr>`));
 render();ui();
 // ---- Daily check-in (play-money only) ----
@@ -433,9 +432,9 @@ sfx.buy();
 const r=b.getBoundingClientRect();for(let i=0;i<(RM?10:30);i++){sparkP(r.left+r.width/2,r.top);if(i%3===0)confP(r.left+r.width/2,r.top,9)}fxStart();
 shMsg(`兌換成功！已套用「${k.name}」`,'ok');$('msg').textContent=`已換上「${k.name}」機台外觀！`;shRender()}}
 $('skins').addEventListener('click',shAct);
-$('shopBtn').onclick=()=>{sfx.click();shConfirm=null;shMsg('');shRender();$('shop').showModal()};
+{const shopBtn=$('shopBtn');if(shopBtn)shopBtn.onclick=()=>{sfx.click();shConfirm=null;shMsg('');shRender();$('shop').showModal()}}
 $('shClose').onclick=()=>$('shop').close();
-$('shop').addEventListener('close',()=>{shConfirm=null;$('shopBtn').classList.toggle('dot',SKINS.some(k=>!skGet().own.includes(k.id)&&bal>=k.price))});
+if($('shop'))$('shop').addEventListener('close',()=>{shConfirm=null;const sb=$('shopBtn');if(sb)sb.classList.toggle('dot',SKINS.some(k=>!skGet().own.includes(k.id)&&bal>=k.price))});
 {const _u=ui;ui=function(){_u();if($('shopBtn'))$('shopBtn').classList.toggle('dot',SKINS.some(k=>!skGet().own.includes(k.id)&&bal>=k.price))}}
 skApply();ui();
 {const mb=$('musBtn'),mr=()=>{mb.textContent=AS.music?'🎵 音樂：開':'🎵 音樂：關';mb.setAttribute('aria-pressed',AS.music)};mr();$('mvol').value=AS.mv;$('svol').value=AS.sv;

@@ -33,7 +33,11 @@ function help(){if($('h21'))return;const o=document.createElement('div');o.class
  btn.onclick=()=>{const k=idx();if(k>=CARDS.length-1){localStorage.setItem('czHelp21','1');o.classList.add('out');setTimeout(()=>o.remove(),400)}else S.scrollTo({left:(k+1)*(S.clientWidth+12),behavior:RM?'auto':'smooth'})};
  dots.forEach((d,i)=>d.onclick=()=>S.scrollTo({left:i*(S.clientWidth+12),behavior:'smooth'}))}
 window.F21.help=help;
-function menuItem(){const m=$('menu16');if(!m||$('h21Btn'))return;const ref=[...m.children].find(e=>e.tagName==='BUTTON'&&!e.classList.contains('czbuyitem'));const b=document.createElement('button');b.id='h21Btn';b.type='button';if(ref)b.className=ref.className;b.textContent='📖 玩法說明';b.onclick=()=>{document.body.classList.remove('menu16');help()};m.appendChild(b)}
+function helpHTML(){return CARDS.map((c,i)=>`<section class="payHelpCard">${V[i]}<h3>${c[0]}</h3><p>${c[1]}</p></section>`).join('')}
+function showPayTab(which){const helpOn=which==='help';const tabP=$('tabPay'),tabH=$('tabHelp'),wrap=$('payTableWrap'),box=$('payHelp'),title=$('payTitle');if(tabP)tabP.setAttribute('aria-selected',!helpOn);if(tabH)tabH.setAttribute('aria-selected',helpOn);if(wrap)wrap.hidden=helpOn;if(box)box.hidden=!helpOn;if(title)title.textContent=helpOn?'玩法說明':'賠率表'}
+function wirePayTabs(){const pay=$('pay'),tabP=$('tabPay'),tabH=$('tabHelp'),box=$('payHelp');if(!pay||!tabP||!tabH)return;if(box&&!box.dataset.ready){box.innerHTML=helpHTML();box.dataset.ready='1'}if(!tabP.dataset.ready){tabP.dataset.ready='1';tabP.onclick=()=>showPayTab('pay');tabH.onclick=()=>showPayTab('help')}}
+window.F21.openGuide=function(tab){wirePayTabs();showPayTab(tab==='help'?'help':'pay');document.body.classList.remove('menu16');const mb=$('menuBtn');if(mb)mb.setAttribute('aria-expanded','false');const pay=$('pay');if(pay){try{pay.showModal()}catch(e){pay.setAttribute('open','')}}else help()};
+function menuItem(){wirePayTabs()}
 function boot(){menuItem();if(!localStorage.getItem('czHelp21')){const t0=Date.now();(function w(){const busy=document.querySelector('dialog[open]')||($('czLoad')&&$('czLoad').offsetParent);if(busy&&Date.now()-t0<20000)return setTimeout(w,500);help()})()}}
 if(document.readyState==='complete')setTimeout(boot,400);else addEventListener('load',()=>setTimeout(boot,400));
 })();
