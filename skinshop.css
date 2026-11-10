@@ -200,3 +200,53 @@ dialog#shop[open]{display:block;overflow-x:hidden;overflow-y:auto;-webkit-overfl
 }
 #shop button:empty{display:none!important}
 #shop .skin button .coin{display:none!important}
+
+/* v28.55: recaptured shop previews are 400×347 and include each frame's --ovh crown.
+   Scale-to-fit with visible overflow so featured + grid show the full ornament. */
+#shop .shfimg .pv2,#shop .shfimg .pv2.pvimg,
+#shop .skin .pv2,#shop .skin .pv2.pvimg{
+  width:100%;height:auto!important;aspect-ratio:400/347;max-height:none!important;
+  overflow:visible!important;box-sizing:border-box;padding:8px 6px 6px;
+  background-size:contain!important;background-position:center center!important;
+  background-repeat:no-repeat!important;background-origin:content-box;
+  background-clip:content-box;background-color:#0c0608;border-radius:10px
+}
+#shop .shfimg,#shop .skin,#shop .pv2.pvimg{overflow:visible!important}
+
+/* Distinct CTAs: gold 購買, lacquer-red 套用, muted ✓ 使用中 status */
+#shop .skin button.buy,html.lx #shop .skin button.buy{
+  background:linear-gradient(#ffe57a,#f0a800 60%,#b86e00)!important;
+  color:#3a1d00!important;-webkit-text-fill-color:#3a1d00!important;
+  border:0!important;box-shadow:0 3px 0 #6a3a00;font-weight:800;cursor:pointer
+}
+#shop .skin button.use,#shop .shfact button.use,
+html.lx #shop .skin button.use,html.lx #shop .shfact button.use{
+  background:linear-gradient(#e4453a,#c01820 55%,#8a0c14)!important;
+  color:#fff8e8!important;-webkit-text-fill-color:#fff8e8!important;
+  border:1.5px solid #f0d070!important;
+  font:800 13px/1.2 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  box-shadow:0 3px 0 #5a0808,0 0 12px rgba(255,70,50,.4);
+  cursor:pointer
+}
+#shop .skin button.use:hover,#shop .shfact button.use:hover{filter:brightness(1.08)}
+#shop .skin button.use:active,#shop .shfact button.use:active,
+#shop .skin button.use.flash,#shop .shfact button.use.flash{
+  transform:translateY(2px);
+  box-shadow:0 1px 0 #5a0808,0 0 16px rgba(255,210,80,.75);
+  filter:brightness(1.12)
+}
+#shop .shOn{
+  display:flex;align-items:center;justify-content:center;width:100%;
+  padding:7px 4px;border-radius:16px;margin-top:auto;box-sizing:border-box;
+  border:1.5px solid #d4a84a;background:rgba(48,28,12,.55);
+  color:#e8d5a0;font:700 13px/1.2 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  pointer-events:none;letter-spacing:.5px
+}
+#shop .shOn.flash{box-shadow:0 0 16px rgba(255,210,80,.85);border-color:#ffe08a;color:#ffe9b0}
+#shop .shfact{margin-top:6px}
+#shop .shfact .use,#shop .shfact .shOn{width:100%;min-height:38px;border-radius:18px}
+#shop .skin.eq{
+  border-color:#ffd54f!important;
+  box-shadow:0 0 20px rgba(255,210,80,.7),inset 0 0 0 1px rgba(255,226,140,.4)
+}
+#shop .skin.sel:not(.eq){border-color:#ffd54f;box-shadow:0 0 14px rgba(255,210,80,.45)}

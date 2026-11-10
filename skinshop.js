@@ -1,4 +1,4 @@
-/* v28.54 skin shop — one scrolling page; full featured crown; lobby overlay + fixed 天下布武 preview */
+/* v28.55 skin shop — recaptured previews with full crowns; distinct 套用/使用中; one scrolling page */
 (function(){
 const D=document;
 const $=id=>D.getElementById(id);
@@ -55,7 +55,7 @@ function saveSkin(st){if(HAS_GAME_SAVE)return skSave(st);try{localStorage.setIte
 function applySkin(){if(HAS_GAME_APPLY)return skApply()}
 function onMach(){return !!window.CZM}
 function click(){try{if(window.sfx&&sfx.click)sfx.click()}catch(e){}}
-function pvUrl(id){return 'assets/skins/shop/'+PVT+'-'+(FRM[id]||id)+'.webp?v=2846'}
+function pvUrl(id){return 'assets/skins/shop/'+PVT+'-'+(FRM[id]||id)+'.webp?v=2855'}
 function pv(k){return '<div class="pv2 pvimg s-'+k.id+'" aria-hidden="true" style="background-image:url('+pvUrl(k.id)+')"></div>'}
 function msg(t,k){
   if(typeof shMsg==='function'&&onMach()){shMsg(t,k);return}
@@ -103,7 +103,7 @@ function ensureFeat(){
   feat.innerHTML='<div class="shfimg"><div class="pv2 pvimg" id="shFeatPv" aria-hidden="true"></div></div>'+
     '<div class="shfmeta"><span class="tier" id="shFeatTier"></span>'+
     '<b><span id="shFeatName"></span> <small class="tg" id="shFeatTag"></small></b>'+
-    '<p class="cp" id="shFeatCp"></p><p class="fxl" id="shFeatFx"></p><p class="shfpr" id="shFeatPrice"></p></div>';
+    '<p class="cp" id="shFeatCp"></p><p class="fxl" id="shFeatFx"></p><p class="shfpr" id="shFeatPrice"></p><div class="shfact" id="shFeatAct"></div></div>';
   const note=$('shThm');
   $('skins').parentNode.insertBefore(feat, $('skins'));
 }
@@ -131,7 +131,11 @@ function paintFeat(id){
   const tg=$('shFeatTag');if(tg)tg.textContent=k.tag||'';
   const cp=$('shFeatCp');if(cp)cp.textContent=k.copy||k.desc||'';
   const fx=$('shFeatFx');if(fx)fx.textContent=k.fx||'';
-  const pr=$('shFeatPrice');if(pr)pr.textContent=eq?'使用中':(own?'已擁有':('價格 '+fmtN(k.price)+' 虛擬籌碼'));
+  const pr=$('shFeatPrice');
+  const act=$('shFeatAct');
+  if(eq){if(pr)pr.textContent='';if(act)act.innerHTML='<span class="shOn" aria-current="true">✓ 使用中</span>'}
+  else if(own){if(pr)pr.textContent='';if(act)act.innerHTML='<button type="button" class="use" data-act="use" data-id="'+k.id+'">套用</button>'}
+  else {if(pr)pr.textContent='價格 '+fmtN(k.price)+' 虛擬籌碼';if(act)act.innerHTML=''}
   const feat=$('shFeat');if(feat)feat.dataset.id=k.id;
 }
 function selectSkin(id){
@@ -152,7 +156,7 @@ function render(){
   box.innerHTML=C.map(k=>{
     const own=st.own.includes(k.id)||k.id==='gold',eq=st.eq===k.id;
     let btn,state;
-    if(eq){btn='<button type="button" disabled>使用中</button>';state='使用中'}
+    if(eq){btn='<span class="shOn" aria-current="true">✓ 使用中</span>';state='使用中'}
     else if(own){btn='<button type="button" class="use" data-act="use" data-id="'+k.id+'">套用</button>';state='已擁有'}
     else{
       state=fmtN(k.price);
@@ -180,8 +184,12 @@ function lobbyAct(act,id){
   const st=getSkin();
   if(act==='use'){
     st.eq=k.id;saveSkin(st);applySkin();setC(null);
-    click();msg('已套用「'+k.name+'」外觀','ok');
-    sel=k.id;render();return;
+    click();msg('已套用「'+k.name+'」','ok');
+    sel=k.id;render();
+    requestAnimationFrame(function(){
+      document.querySelectorAll('#shop .shOn').forEach(function(el){el.classList.add('flash')});
+    });
+    return;
   }
   if(act==='ask'){
     const c=chips();
@@ -209,6 +217,12 @@ if(skinsEl&&!skinsEl.dataset.dfp2852){
     if(onMach())return;
     const b=e.target.closest('button[data-act]');
     if(!b)return;
+    if(b.dataset.act==='use'){
+      b.classList.add('flash');
+      const id=b.dataset.id;
+      setTimeout(function(){lobbyAct('use',id)},140);
+      return;
+    }
     lobbyAct(b.dataset.act,b.dataset.id);
   });
 }
@@ -278,13 +292,31 @@ if(shc){
 }
 
 function openShop(){
-  ensureShop();ensureFeat();ensureNote();
+  ensureShop();ensureFeat();ensureNote();bindFeatAct();
   setC(null);msg('');
   sel=getSkin().eq||'gold';
   render();
   const shop=$('shop');
   if(shop&&shop.showModal)shop.showModal();
 }
+function bindFeatAct(){
+  const feat=$('shFeat');if(!feat||feat.dataset.dfp2855)return;
+  feat.dataset.dfp2855='1';
+  feat.addEventListener('click',function(e){
+    const b=e.target.closest('button[data-act]');
+    if(!b)return;
+    e.stopPropagation();
+    if(b.dataset.act==='use'){
+      b.classList.add('flash');
+      const id=b.dataset.id;
+      setTimeout(function(){lobbyAct('use',id)},140);
+      return;
+    }
+    lobbyAct(b.dataset.act,b.dataset.id);
+  });
+}
+bindFeatAct();
+
 window.DFPshop={open:openShop,render:render,thumb:syncLobbyThumb};
 syncLobbyThumb();
 })();

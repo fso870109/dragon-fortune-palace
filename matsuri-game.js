@@ -435,7 +435,7 @@ else if(shConfirm===k.id)btn=`<button class="cf" data-act="buy" data-id="${k.id}
 else btn=`<button class="buy" data-act="ask" data-id="${k.id}" ${bal<k.price?'aria-disabled="true"':''} aria-label="以 ${fmt(k.price)} 虛擬籌碼兌換${k.name}"><span class="coin" aria-hidden="true"></span>${fmt(k.price)}</button>`;
 return `<li class="skin${eq?' eq':''}">${eq?'<span class="eqtag">使用中</span>':''}<div class="pv" style="background:${k.fr}" aria-hidden="true"><div style="background:${k.in}"><i>${icon(k.sym)}</i><i>${icon('heroine')}</i><i>${icon(k.sym)}</i></div></div><b>${k.name}</b><small>${own&&!eq?'已擁有':k.desc}</small>${btn}</li>`}).join('')}
 function shAct(e){const b=e.target.closest('button[data-act]');if(!b)return;const k=SKINS.find(x=>x.id===b.dataset.id);if(!k)return;const st=skGet();
-if(b.dataset.act==='use'){st.eq=k.id;skSave(st);skApply();shConfirm=null;sfx.click();shMsg(`已套用「${k.name}」外觀`,'ok');shRender();return}
+if(b.dataset.act==='use'){st.eq=k.id;skSave(st);skApply();shConfirm=null;sfx.click();shMsg(`已套用「${k.name}」`,'ok');shRender();return}
 if(b.dataset.act==='ask'){if(spinning){shMsg('請等待本次旋轉結束','err');return}
 if(bal<k.price){shMsg(`虛擬籌碼不足，還差 ${fmt(k.price-bal)}（可透過遊戲、每日簽到或看廣告取得）`,'err');tone(200,.15,'square',.05);return}
 shConfirm=k.id;sfx.click();shMsg(`再按一次確認，以 ${fmt(k.price)} 虛擬籌碼兌換「${k.name}」`);shRender();$('skins').querySelector('.cf')?.focus();return}
