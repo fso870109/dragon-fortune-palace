@@ -5,7 +5,7 @@
 #avCall{position:fixed;left:0;right:0;top:16%;z-index:9999;pointer-events:none;text-align:center;opacity:0}
 #avCall b{display:inline-block;max-width:92vw;font-family:"TCDisp","Noto Serif TC",serif;font-weight:900;font-size:clamp(30px,10.5vw,54px);line-height:1.1;color:#ffe680;-webkit-text-stroke:2px #3a0800;paint-order:stroke fill;text-shadow:3px 4px 0 #c23a00,6px 8px 0 #4a0a00,0 0 26px rgba(255,170,40,.9);white-space:nowrap}
 #avCall.t2 b{color:#fff0a8;text-shadow:3px 4px 0 #d0157a,6px 8px 0 #4a0030,0 0 30px rgba(255,80,190,.9)}
-#avCall.t3 b{color:#fff;text-shadow:3px 4px 0 #6a2cff,6px 8px 0 #1a0050,0 0 36px rgba(140,180,255,1)}
+#avCall.t3 b{color:#fff8d6;text-shadow:3px 4px 0 #c47a10,6px 8px 0 #4a2200,0 0 36px rgba(255,190,60,1)}
 #avCall.go{animation:avC 1.9s cubic-bezier(.2,1.6,.4,1) forwards}
 @keyframes avC{0%{opacity:0;transform:scale(2.4)}14%{opacity:1;transform:scale(.92)}22%{transform:scale(1.04)}30%{transform:scale(1)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.1) translateY(-20px)}}
 #hsMeter.avHot{animation:avHot .9s ease-in-out infinite}

@@ -61,6 +61,16 @@ body[data-skin="crystal"] .inner{filter:saturate(.25) brightness(1.15) contrast(
 body[data-skin="royal"] .inner{filter:hue-rotate(250deg) saturate(1.3)}
 body[data-skin="obsidian"] .inner{filter:hue-rotate(-15deg) saturate(1.5) contrast(1.15) brightness(.92)}
 body[data-skin] .board .reel{filter:var(--unf)}
+/* v28.63: bonus overlays are parented to .inner (board.offsetParent).
+   Cabinet skins hue-rotate .inner and only un-filter the reels, so gold
+   slam titles / cell cracks / feature stages turned ice-blue on 真夜中. */
+body[data-skin] .inner .rfx,
+body[data-skin] .inner .r24t,
+body[data-skin] .inner .r24c,
+body[data-skin] .inner .fxOv,
+body[data-skin] .inner #hsBox,
+body[data-skin] .inner #w21F,
+body[data-skin] .inner #w21Bloom{filter:var(--unf,none)}
 body[data-skin="neon"]{--unf:hue-rotate(-190deg) saturate(.83)}body[data-skin="jade"]{--unf:hue-rotate(25deg) saturate(.77) brightness(.95)}body[data-skin="crystal"]{--unf:saturate(4) brightness(.87) contrast(.95)}body[data-skin="royal"]{--unf:hue-rotate(-250deg) saturate(.77)}body[data-skin="obsidian"]{--unf:hue-rotate(15deg) saturate(.67) contrast(.87) brightness(1.08)}
 body[data-skin="neon"]::before{filter:hue-rotate(190deg)}body[data-skin="jade"]::before{filter:hue-rotate(-25deg) saturate(1.3)}body[data-skin="crystal"]::before{filter:saturate(.2) brightness(1.1)}body[data-skin="royal"]::before{filter:hue-rotate(250deg)}body[data-skin="obsidian"]::before{filter:hue-rotate(-15deg) saturate(1.6) brightness(.8)}
 #skFx i{position:absolute;width:5cqw;height:5cqw;border:.5cqw solid var(--a);display:none}
