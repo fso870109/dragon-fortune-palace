@@ -14,7 +14,7 @@ html body svg.lines polyline:nth-of-type(n+7){animation-delay:.36s}
 @keyframes jAnt{0%,100%{box-shadow:0 0 0 2px rgba(255,210,90,.6),0 0 14px rgba(255,120,40,.6),inset 0 0 18px rgba(255,200,80,.35)}50%{box-shadow:0 0 0 3px rgba(255,245,170,1),0 0 30px rgba(255,150,40,.95),inset 0 0 26px rgba(255,220,120,.6)}}
 html body .reel.jant{animation:jAnt .5s ease-in-out infinite;border-radius:6px;position:relative;z-index:3}
 /* ambient */
-#jAmb{position:absolute;inset:0;pointer-events:none;z-index:1}
+#jAmb{display:none!important}#czHero .czhp{display:none!important}
 #jRays{position:absolute;left:-30%;right:-30%;top:-40%;height:120%;pointer-events:none;z-index:1;opacity:.16;mix-blend-mode:screen;background:repeating-conic-gradient(from 0deg at 50% 0%,rgba(255,240,200,.9) 0deg 3deg,transparent 3deg 14deg);-webkit-mask:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 70%);mask:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 70%);animation:jRay 22s linear infinite alternate}
 @keyframes jRay{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
 @keyframes jWinPop{0%{transform:scale(1)}35%{transform:scale(1.28)}100%{transform:scale(1)}}
