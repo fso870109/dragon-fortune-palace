@@ -20,3 +20,8 @@ html body .reel.jant{animation:jAnt .5s ease-in-out infinite;border-radius:6px;p
 @keyframes jWinPop{0%{transform:scale(1)}35%{transform:scale(1.28)}100%{transform:scale(1)}}
 html body #czWin.jpop{animation:jWinPop .45s cubic-bezier(.3,1.6,.5,1);color:#fff3b0}
 @media (prefers-reduced-motion:reduce){html body .reel.land,html body .cell.hit,html body .cell.hit .sym,html body svg.lines polyline,html body .reel.jant,#jRays,html body #czHero img.jdrift,html body #czWin.jpop{animation:none!important}#jAmb{display:none}}
+
+/* v28.53: stopped reels stay fully opaque during anticipation.
+   Theme UI fades .board.teasing .reel:not(.tease) to opacity .55,
+   which composites the cabinet frame through the symbols (ghosting). */
+html body .board.teasing .reel:not(.tease){opacity:1!important}

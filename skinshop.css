@@ -172,3 +172,22 @@ html.lx #shop .shmsg.err{color:#ff9a9a}
 html.lx #shop .shmsg.ok{color:#8effb0}
 html.lx #shop .note{font-size:11px;color:#bfa9bd;text-align:center;margin:10px 0 0;line-height:1.45}
 @media (max-width:360px){#shop .shfimg .pv2{height:132px}#shop h2{letter-spacing:4px;font-size:22px}}
+
+/* v28.53 shop layout: preview in-flow, list scrolls, visible 關閉 */
+dialog#shop[open]{display:flex;flex-direction:column;overflow:hidden;max-height:min(92vh,calc(100dvh - 12px))}
+#shop h2,#shop .shsub,#shop .shthm,#shop .shfeat,#shop .shmsg,#shop .dact,#shop>.note{flex:0 0 auto}
+#shop .skins{flex:1 1 auto;min-height:140px;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:4px;overscroll-behavior:contain}
+#shop .shfeat{position:static;top:auto;z-index:auto;overflow:visible;box-shadow:none}
+#shop .shfimg .pv2{width:100%;height:auto;aspect-ratio:400/257;max-height:150px;box-sizing:border-box;background-size:contain;background-position:center;background-repeat:no-repeat}
+#shop .shfimg .pv2.pvimg{background-size:contain;background-position:center}
+#shop #shClose,#shop .dact #shClose,html.lx #shop #shClose{
+  min-width:148px;min-height:42px;padding:8px 24px;border:0;border-radius:20px;
+  background:linear-gradient(#ffe57a,#f0a800 60%,#b86e00)!important;
+  color:#3a1d00!important;-webkit-text-fill-color:#3a1d00!important;
+  -webkit-background-clip:border-box!important;background-clip:border-box!important;
+  font:800 15px/1.2 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  cursor:pointer;box-shadow:0 3px 0 #6a3a00
+}
+#shop button:empty{display:none!important}
+#shop .skin button .coin{display:none!important}
+@media (max-width:360px){#shop .shfimg .pv2{max-height:128px}}

@@ -1,4 +1,4 @@
-/* v28.52 skin shop — lobby overlay + fixed 天下布武 preview (no theme hop) */
+/* v28.53 skin shop — lobby overlay + fixed 天下布武 preview (no clip / empty CTA) */
 (function(){
 const D=document;
 const $=id=>D.getElementById(id);
@@ -89,7 +89,7 @@ function ensureShop(){
     '<div class="shsub">用遊戲中贏得的虛擬籌碼兌換機台外觀・目前籌碼 <b id="shBal">0</b></div>'+
     '<ul class="skins" id="skins"></ul>'+
     '<div class="shmsg" id="shMsg" role="status" aria-live="polite"></div>'+
-    '<div class="dact"><button class="gold" type="button" id="shClose">關閉</button></div>'+
+    '<div class="dact"><button type="button" id="shClose">關閉</button></div>'+
     '<p class="note">外觀僅改變機台樣式，不影響中獎機率・只能用虛擬籌碼兌換，無法以真實金錢購買・僅供娛樂・虛擬籌碼不可兌換或轉讓・純虛擬・無兌現・外框全機台共用</p>';
   D.body.appendChild(d);
 }
@@ -157,7 +157,7 @@ function render(){
       state=fmtN(k.price);
       if(getC()===k.id) btn='<button type="button" class="cf" data-act="buy" data-id="'+k.id+'">確認兌換 '+fmtN(k.price)+'？</button>';
       else{
-        const buy='<button type="button" class="buy" data-act="ask" data-id="'+k.id+'" '+(balNow<k.price?'disabled':'')+' aria-label="以 '+fmtN(k.price)+' 虛擬籌碼兌換'+k.name+'"><span class="coin" aria-hidden="true"></span>購買 · '+fmtN(k.price)+'</button>';
+        const buy='<button type="button" class="buy" data-act="ask" data-id="'+k.id+'" '+(balNow<k.price?'disabled':'')+' aria-label="以 '+fmtN(k.price)+' 虛擬籌碼兌換'+k.name+'">購買 · '+fmtN(k.price)+'</button>';
         btn=onMach()?'<div class="b2"><button type="button" class="try" data-act="try" data-id="'+k.id+'">試穿</button>'+buy+'</div>':buy;
       }
     }
@@ -253,9 +253,13 @@ if(sessionStorage.getItem('dfpFrmOk')){
 try{sessionStorage.removeItem('dfpOpenShop')}catch(e){}
 
 const shc=$('shClose'),shopEl=$('shop');
-if(shc&&shopEl&&!shc.dataset.dfp2852){
-  shc.dataset.dfp2852='1';
-  shc.addEventListener('click',()=>{try{shopEl.close()}catch(e){}});
+if(shc){
+  if(!shc.textContent.trim())shc.textContent='關閉';
+  if(D.documentElement.classList.contains('lx'))shc.classList.remove('gold');
+  if(shopEl&&!shc.dataset.dfp2852){
+    shc.dataset.dfp2852='1';
+    shc.addEventListener('click',()=>{try{shopEl.close()}catch(e){}});
+  }
 }
 
 function openShop(){

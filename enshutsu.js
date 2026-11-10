@@ -2,11 +2,11 @@
 (function(){
 if(!window.CZM)return;
 const RMQ=matchMedia('(prefers-reduced-motion:reduce)').matches,PM=matchMedia('(max-width:620px) and (orientation:portrait)');
-const COL=[['青','#3fa0ff','期待度 ★'],['綠','#3fdc7a','期待度 ★★'],['赤','#ff3b4f','期待度 ★★★ 超熱!'],['金','#ffd24a','期待度 ★★★★ 超熱烈!!'],['虹','rainbow','確定!!']];
+const COL=[['青','#3fa0ff','期待度 ★ 普通'],['綠','#3fdc7a','期待度 ★★ 高'],['赤','#ff3b4f','期待度 ★★★ 極高'],['金','#ffd24a','期待度 ★★★★ 大獎預感'],['虹','rainbow','確定!!']];
 const V=(window.CZM.voice)||{};
 const VO={yokoku:V.yokoku||['…吶，好像要來了？','這感覺…難道！','機會來了♡','心跳加速了…'],
  reach:V.reach||['機會來了！拜託，連成線！','就差一個…！','就在這裡決勝負！'],
- hot:V.hot||['超熱喔！！','這是…要來了！','我相信你！'],
+ hot:V.hot||['好運要來了！','這是…要來了！','我相信你！'],
  win:V.win||['成功了！','好厲害！','漂亮♡','就是這樣！'],
  lose:V.lose||['下次一定…！','差一點呢','好戲才剛開始！'],
  kakutei:V.kakutei||['確定了！恭喜！！','大獎〜！']};
