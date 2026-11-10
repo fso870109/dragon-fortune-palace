@@ -250,22 +250,7 @@ if(onMach()&&$('shopBtn')){
   skinsEl.addEventListener('click',e=>{const b=e.target.closest('[data-act="try"]');if(b)start(b.dataset.id)});
 }
 
-/* 換框 — in-machine shortcut, close returns to that machine */
-function injectFrm(){
-  const bar=D.querySelector('.czbar .controls');if(!bar||$('czFrm'))return;
-  const b=D.createElement('button');b.id='czFrm';b.type='button';b.setAttribute('aria-label','更換機台外框');b.innerHTML='<b>換框</b><i aria-hidden="true">🖼</i>';
-  bar.appendChild(b);
-  b.onclick=()=>{const sb=$('shopBtn');if(sb)sb.click();else if(window.DFPshop)DFPshop.open()};
-}
-if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',injectFrm);
-else injectFrm();
-
-/* arrival toast leftover is unused now (no lobby hop) */
-if(sessionStorage.getItem('dfpFrmOk')){
-  const n=sessionStorage.getItem('dfpFrmOk');sessionStorage.removeItem('dfpFrmOk');
-  const t=D.createElement('div');t.className='ffly';t.textContent='已換上「'+n+'」外框';D.body.appendChild(t);setTimeout(()=>t.remove(),2400);
-}
-try{sessionStorage.removeItem('dfpOpenShop')}catch(e){}
+/* v28.60: in-machine 換框 shortcut removed — frames change from lobby 外框商店 */
 
 function ensureX(){
   const shop=$('shop');if(!shop)return;
