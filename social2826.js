@@ -1,7 +1,8 @@
 /* 龍運金殿 v28.26: 好友每日互送虛擬籌碼（本機示範好友；純虛擬・無兌現・不可交易） */
 (function(){if(!window.CZ)return;var LS=localStorage,K='dfp_fr',$=function(i){return document.getElementById(i)};
-var IV='?v=2848';function ic(id){return '<img src="assets/lx/ev_'+id+'.webp'+IV+'" alt="" width="128" height="128">'}
-var FR=[{id:'a',n:'阿明',ic:'dragon',t:'夏祭花火常客'},{id:'b',n:'小美',ic:'sakura',t:'櫻花斬愛好者'},{id:'c',n:'阿傑',ic:'katana',t:'天下布武玩家'},{id:'d',n:'佳佳',ic:'neko',t:'招財大作戰粉絲'},{id:'e',n:'老王',ic:'lantern',t:'金殿老會員'}];
+var IV='?v=2850';function ic(id){return '<img src="assets/lx/ev_'+id+'.webp'+IV+'" alt="" width="128" height="128">'}
+function face(f){return (f&&f.av)?'<img src="assets/lx/'+f.av+'.webp'+IV+'" alt="">':((f&&f.n)||'?').slice(0,1)}
+var FR=[{id:'a',n:'阿明',av:'av_a',t:'夏祭花火常客'},{id:'b',n:'小美',av:'av_b',t:'櫻花斬愛好者'},{id:'c',n:'阿傑',av:'av_c',t:'天下布武玩家'},{id:'d',n:'佳佳',av:'av_d',t:'招財大作戰粉絲'},{id:'e',n:'老王',av:'av_e',t:'金殿老會員'}];
 var GIFT=50,BONUS=100;
 function dk(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function st(){var s;try{s=JSON.parse(LS.getItem(K)||'{}')}catch(e){s={}}if(!s||s.d!==dk())s={d:dk(),got:0,sent:[],bon:0};if(!Array.isArray(s.sent))s.sent=[];return s}
@@ -19,7 +20,7 @@ function render(){var s=st(),n=FR.length;
  $('frGt').textContent=s.got?'今日禮物已領取':('好友送你 '+n+' 份紅包');
  $('frGs').textContent=s.got?'明天還有新的紅包喔':('每份 '+GIFT+'，共 ＋'+(GIFT*n)+' 虛擬籌碼');
  $('frGet').disabled=!!s.got;$('frGet').textContent=s.got?'已領取':'一鍵全收';$('frG').classList.toggle('on',!s.got);
- $('frL').innerHTML=FR.map(function(f){var done=s.sent.indexOf(f.id)>=0;return '<div class="fri"><span class="fav" aria-hidden="true">'+ic(f.ic)+'</span><div class="n"><b>'+f.n+'</b><small>'+f.t+'</small></div><button class="btn'+(done?'':' hot')+'" data-fr="'+f.id+'"'+(done?' disabled':'')+'>'+(done?'已送出':'回送紅包')+'</button></div>'}).join('');
+ $('frL').innerHTML=FR.map(function(f){var done=s.sent.indexOf(f.id)>=0;return '<div class="fri"><span class="fav" aria-hidden="true">'+face(f)+'</span><div class="n"><b>'+f.n+'</b><small>'+f.t+'</small></div><button class="btn'+(done?'':' hot')+'" data-fr="'+f.id+'"'+(done?' disabled':'')+'>'+(done?'已送出':'回送紅包')+'</button></div>'}).join('');
  var c=s.sent.length;$('frB').innerHTML=(s.bon?'今日回送全滿，已獲得好友獎勵 ＋'+BONUS:'回送 '+c+' / '+n+' 位好友，全送出再得 ＋'+BONUS)+'<i><u style="width:'+(c/n*100)+'%"></u></i>';
  b.classList.toggle('has',!s.got||c<n)}
 $('frGet').onclick=function(){var s=st();if(s.got)return;s.got=1;sv(s);var v=GIFT*FR.length;CZ.addChips(v);CZ.vib(20);CZ.toast('收到好友紅包 ＋'+v,'assets/lx/ev_packet.webp'+IV);snd(2);render()};

@@ -1,4 +1,4 @@
-/* v28.48 活動中心繪製圖示；v28.49 週曆改梅蘭竹菊松柏家紋（週日燈籠加金圈） */
+/* v28.48 活動中心繪製圖示；v28.49 週曆家紋；v28.50 家紋格上下留白＋好友頭像 */
 .lxSak{background-image:url(assets/lx/ev_sakura.webp?v=2848)!important}
 
 #lx .ivb .ive,
@@ -11,6 +11,11 @@
 #lx .ivb .ive img,
 .ivb .ive img{width:70%;height:70%;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
 
+#lx .wkc,#dWk .wki{
+  gap:3px;
+  padding:5px 2px 8px;
+}
+#lx .wkc.has::after{top:3px;right:3px}
 .wkc span,.wki span{
   width:22px;height:22px;font-size:0!important;line-height:0;
   display:grid;place-items:center;border-radius:50%;
@@ -26,8 +31,8 @@
 
 #dFr .gb{font-size:0;width:36px;height:36px;display:grid;place-items:center;flex:none;filter:none}
 #dFr .gb img{width:34px;height:34px;object-fit:contain;display:block}
-#dFr .fav{font-size:0;overflow:hidden}
-#dFr .fav img{width:26px;height:26px;object-fit:contain;display:block}
+#dFr .fav{font-size:0;overflow:hidden;padding:2px;box-sizing:border-box}
+#dFr .fav img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 
 #dRd .rdsh{display:inline-flex;align-items:center;gap:5px}
 #dRd .rdsh img{width:16px;height:16px;object-fit:contain;flex:none}
@@ -37,7 +42,8 @@
   background:radial-gradient(circle at 32% 28%,#fff6d0,#e8b83a 55%,#8a5310);
   box-shadow:inset 0 1px 0 rgba(255,246,208,.85),0 0 0 1px #6a3c06;
 }
-.rdp .rdpi img{width:72%;height:72%;object-fit:contain;display:block}
+.rdp .rdpi{overflow:hidden;padding:2px;box-sizing:border-box}
+.rdp .rdpi img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 
 #dGd .gdk{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:800 11px/1 "Noto Sans TC",sans-serif;color:#5a2a00;background:rgba(255,246,208,.12)}
 #dGd .gdk.rk1{background:radial-gradient(circle at 32% 28%,#fff6d0,#e8b83a 55%,#8a5310);color:#5a2a00}
