@@ -463,4 +463,4 @@ else if(x>=2){slam('小獎','#19e08a','總押注 ×'+(Math.round(x*10)/10));$('l
 else if(x>0){slam('贏','#3a8bff','×'+(Math.round(x*10)/10));$('lcdNavi').textContent='小役 中獎';lcdLater(lcdReset,1800)}
 else{lcdLater(lcdReset,700)}}
 {const mk=(el,a)=>{a.forEach((li,i)=>{const e=document.createElement('b');e.className='pl';e.dataset.l=li;e.textContent=li+1;e.style.setProperty('--lc',COLORS[li]);e.style.setProperty('--i',i);el.appendChild(e)})};mk($('ledL'),[0,1,2,3,4,5,6,7,8,9]);mk($('ledR'),[10,11,12,13,14,15,16,17,18,19])}
-fsUI();{const b=$('setBtn');if(b)b.onclick=e=>{e.stopPropagation();sfx.click();document.body.classList.add('menu16');const mb=$('menuBtn');if(mb)mb.setAttribute('aria-expanded','true');const sl=document.querySelector('#dfpVolMenu input');if(sl)try{sl.focus()}catch(x){}}}
+fsUI();{const b=$('setBtn');if(b)b.onclick=e=>{e.stopPropagation();sfx.click();document.body.classList.add('menu16');const mb=$('menuBtn');if(mb)mb.setAttribute('aria-expanded','true');const sl=document.querySelector('#dfpVolMenu input');if(sl)try{sl.focus({preventScroll:true})}catch(x){}}}

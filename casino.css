@@ -169,7 +169,7 @@ html{background:var(--czth,#1a0618)}
  .cznote{background:transparent!important}
 }
 dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!important;-webkit-overflow-scrolling:touch}
-@media (orientation:landscape) and (max-height:500px){body.menu16 .row2{max-height:calc(100dvh - 80px)!important;overflow:auto!important;bottom:62px!important}}
+@media (orientation:landscape) and (max-height:500px){body.menu16 .row2{max-height:calc(100dvh - var(--czbarH,70px) - 12px)!important;overflow:auto!important;bottom:calc(var(--czbarH,62px) + 6px)!important}}
 /* v17.4 portrait stacked layout */
 #czHero{display:none}
 @media (max-width:620px) and (orientation:portrait){
@@ -272,8 +272,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
  .czbtn,.czbar #max16,.czbar #menuBtn{height:clamp(36px,5.4svh,48px)!important}
 }
 #menu16.row2{z-index:90!important}
-body.menu16 #menu16{max-height:calc(100dvh - 120px)!important;overflow:auto!important;overscroll-behavior:contain}
-@media (max-width:620px) and (orientation:portrait){body.menu16 #menu16{bottom:calc(var(--czbarH,150px) + 6px)!important}}
+body.menu16 #menu16{max-height:calc(100dvh - var(--czbarH,150px) - 12px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))!important;overflow:auto!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+@media (max-width:620px) and (orientation:portrait){body.menu16 #menu16{bottom:calc(var(--czbarH,150px) + 6px + env(safe-area-inset-bottom,0px))!important;top:auto!important}}
 /* v18.1 AUTO */
 .czauto{flex:0 0 auto;width:calc(var(--sp,110px)*.46);height:calc(var(--sp,110px)*.46);min-width:42px;min-height:42px;border-radius:50%;border:2px solid #ffd27a;background:radial-gradient(circle at 50% 35%,#5a3a10,#1d0f04);color:#ffe7a8;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 0 8px rgba(255,200,90,.35);font:900 11px/1 "Arial Black",sans-serif;touch-action:manipulation}
 .czauto i{font-style:normal;font-size:10px;margin-top:2px;color:#fff}

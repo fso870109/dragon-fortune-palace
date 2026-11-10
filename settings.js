@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.60',DFP_APPV='';
+var DFP_WEBV='28.61',DFP_APPV='';
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
 function vibOn(){return CAN&&g('fs_vib')!=='0'}
@@ -58,8 +58,11 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  $('sgClose').onclick=function(){d.close()};
  d.addEventListener('click',function(e){if(e.target===d)d.close()});
  bb.textContent='⚙️';bb.setAttribute('aria-label','設定');bb.removeAttribute('aria-pressed');bb.setAttribute('aria-haspopup','dialog');bb.style.opacity=1;
- bb.onclick=function(){r();try{d.showModal()}catch(e){d.setAttribute('open','')}};
+ bb.onclick=function(){r();if(window.czPinScroll)window.czPinScroll(function(){try{d.showModal()}catch(e){d.setAttribute('open','')}});else{try{d.showModal()}catch(e){d.setAttribute('open','')}}};
 }
-function boot(){theme();lobby()}
+function pinScroll(fn){var y=window.scrollY||document.documentElement.scrollTop||0,x=window.scrollX||0,ret;try{ret=fn&&fn()}catch(e){window.scrollTo(x,y);throw e}var pin=function(){if((window.scrollY||0)!==y||(window.scrollX||0)!==x)window.scrollTo(x,y)};pin();if(typeof requestAnimationFrame==='function')requestAnimationFrame(function(){pin();requestAnimationFrame(pin)});setTimeout(pin,50);return ret}
+window.czPinScroll=pinScroll;
+function wrapShowModal(){var DP=window.HTMLDialogElement&&HTMLDialogElement.prototype;if(!DP||!DP.showModal||DP.showModal.__czPin)return;var orig=DP.showModal;DP.showModal=function(){var self=this,args=arguments;return pinScroll(function(){return orig.apply(self,args)})};DP.showModal.__czPin=1}
+function boot(){wrapShowModal();if(document.getElementById('ageGate')){var mo=new MutationObserver(function(){if(!document.getElementById('ageGate')){wrapShowModal();mo.disconnect()}});mo.observe(document.documentElement,{childList:true,subtree:true})}theme();lobby()}
 if(document.readyState==='complete')boot();else addEventListener('load',boot);
 })();

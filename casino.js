@@ -133,7 +133,12 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
 }
 function czPreSym(){try{const pre=document.querySelector('.cell img.sym');if(!pre)return;const base=pre.getAttribute('src').replace(/t_[^/]*$/,'');const ids=new Set();(typeof SYM!=='undefined'?SYM:[]).forEach(s=>ids.add(s.id));if(typeof VAR!=='undefined')Object.values(VAR).flat().forEach(v=>ids.add(v));window.__symImg=[...ids].map(v=>{const i=new Image();i.src=base+'t_'+v+'.webp';i.decode&&i.decode().catch(()=>{});return i})}catch(e){}}
 if(IN_M)addEventListener('load',czPreSym);
-function czMenuFix(){const m=document.getElementById('menu16');if(m&&m.parentNode!==document.body)document.body.appendChild(m);const b=document.querySelector('.czbar');const set=()=>b&&document.documentElement.style.setProperty('--czbarH',Math.round(b.getBoundingClientRect().height)+'px');requestAnimationFrame(set);/* v246 */addEventListener('resize',set);document.getElementById('menuBtn')?.addEventListener('click',set)}
+function czMenuFix(){const m=document.getElementById('menu16');if(m&&m.parentNode!==document.body)document.body.appendChild(m);const b=document.querySelector('.czbar');const set=()=>b&&document.documentElement.style.setProperty('--czbarH',Math.round(b.getBoundingClientRect().height)+'px');requestAnimationFrame(set);addEventListener('resize',set);document.getElementById('menuBtn')?.addEventListener('click',set);
+ /* v28.61: keep page scroll put when 選單 opens; start the panel at its own top */
+ let y=0,x=0,on=false;
+ const pin=()=>{const cy=window.scrollY||document.documentElement.scrollTop||0,cx=window.scrollX||0;if(cy!==y||cx!==x)window.scrollTo(x,y)};
+ const apply=()=>{const now=document.body.classList.contains('menu16');if(now===on)return;on=now;if(now){y=window.scrollY||document.documentElement.scrollTop||0;x=window.scrollX||0;set();if(m)m.scrollTop=0;pin();requestAnimationFrame(()=>{if(m)m.scrollTop=0;pin();requestAnimationFrame(pin)});setTimeout(pin,50);setTimeout(pin,200)}else{pin();requestAnimationFrame(pin)}};
+ new MutationObserver(apply).observe(document.body,{attributes:true,attributeFilter:['class']})}
 if(IN_M)addEventListener('load',czMenuFix);
 function czHero(){const mach=document.getElementById('machine'),inn=mach&&mach.querySelector('.inner');if(!inn||document.getElementById('czHero'))return;
  const id=(location.pathname.split('/').pop()||'').replace('.html','');const V='?v=239';document.documentElement.style.setProperty('--czhero',`url(assets/${id}/hero.webp${V})`);document.documentElement.style.setProperty('--czbw',`url(assets/${id}/p_bigwin.webp?v=281)`);document.documentElement.style.setProperty('--czbwbl',`url(assets/${id}/p_bigwin_bl.webp?v=281)`);
