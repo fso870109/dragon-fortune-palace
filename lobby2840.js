@@ -76,10 +76,12 @@ if(fr){proxyRow(ev,'lxFr','<img src="assets/lx/ev_friends.webp'+V+'" alt="" widt
 /* collect tab */
 var col=$('lxColSlot');
 var shopRow=el('div','lxShop');
-shopRow.innerHTML='<div class="lxShopH"><img src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><div><b>機台外觀商店</b><small id="lxSkN">以虛擬籌碼兌換限定機台外框・純裝飾，不影響機率</small></div></div><p class="lxShopP">選一台機台進入外觀商店（外觀全機台共用）：</p><div class="lxShopG">'+
- GAMES.map(function(g){return '<button type="button" data-shop="'+g.id+'" style="--bg:url(assets/'+g.id+'/p_idle.webp?v=256);--pos:'+g.pos+'"><span>'+g.n+'</span></button>'}).join('')+'</div>';
+shopRow.innerHTML='<div class="lxShopH"><img src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><div><b>機台外觀商店</b><small id="lxSkN">以虛擬籌碼兌換限定機台外框・純裝飾，不影響機率</small></div></div>'+
+'<p class="lxShopP">外框全機台共用・以虛擬籌碼兌換，純裝飾不影響機率</p>'+
+'<div class="lxShopE"><div class="lxShopPv" id="lxShopPv" aria-hidden="true"></div>'+
+'<button type="button" class="lxShopGo" id="lxShopGo">進入外觀商店 ›</button></div>';
 col.appendChild(shopRow);
-shopRow.addEventListener('click',function(e){var b=e.target.closest('[data-shop]');if(!b)return;tap();try{SS.setItem('dfpOpenShop','1')}catch(_){}play(b.getAttribute('data-shop'))});
+shopRow.addEventListener('click',function(e){var b=e.target.closest('#lxShopGo,.lxShopPv');if(!b)return;tap();if(window.DFPshop&&typeof DFPshop.open==='function')DFPshop.open()});
 proxyRow(col,'lxGal','🎴','角色圖鑑','<span id="lxGalN"></span>','查看',function(){if(window.CZGAL)CZGAL.open()});
 /* me tab */
 var me=$('lxMeSlot');
@@ -140,6 +142,7 @@ function sync(){
  if(window.CZGAL&&$('lxGalN'))$('lxGalN').textContent='已收集 '+CZGAL.count()+' / '+CZGAL.total;
  var sk;try{sk=JSON.parse(LS.getItem('fs_skin')||'{}')}catch(e){sk={}}var own=Array.isArray(sk.own)?sk.own.filter(function(x){return x!=='gold'}).length:0;
  $('lxSkN').textContent=own?('已收藏 '+own+' 款限定外框・以虛擬籌碼兌換，純裝飾不影響機率'):'以虛擬籌碼兌換限定機台外框・純裝飾，不影響機率';
+ var pv=$('lxShopPv');if(pv){var FRM={gold:'gold',neon:'midnight',jade:'hanabi',crystal:'moon',royal:'neon',obsidian:'dragon',blossom:'blossom',beach:'beach',tsukiyo:'tsukiyo',kitsune:'kitsune',kabuto:'kabuto',feast:'feast'};pv.style.backgroundImage='url("assets/skins/shop/samurai-'+(FRM[sk.eq]||'gold')+'.webp?v=2846")'}
 }
 CZ.on(sync);
 ['bFree','bDaily','bMiss','gdB','ivB','rdB','bFr'].forEach(function(id){var e=$(id);if(e)new MutationObserver(sync).observe(e,{attributes:true,attributeFilter:['class']})});

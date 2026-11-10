@@ -142,3 +142,33 @@ body[data-skt="m"] #skFx i{width:24px;height:24px;border-radius:4px;transform:ro
 #shop .skin{padding-top:38px}
 #shop .tier{top:8px;left:10px}
 #shop .eqtag{top:8px;right:10px}
+
+/* v28.52 fixed 天下布武 preview + lobby overlay */
+#shop .shfeat{display:flex;flex-direction:column;gap:8px;margin:0 0 12px;padding:8px;border-radius:12px;border:1.5px solid rgba(226,179,79,.35);background:linear-gradient(180deg,#3e1412,#180808);box-sizing:border-box;position:sticky;top:0;z-index:5;box-shadow:0 10px 18px rgba(0,0,0,.45)}
+#shop .shfimg{width:100%;min-width:0}
+#shop .shfimg .pv2{width:100%;height:150px}
+#shop .shfimg .pv2.pvimg{background-size:contain;background-position:center;background-color:#0c0608}
+#shop .shfmeta{min-width:0;display:flex;flex-direction:column;gap:3px}
+#shop .shfmeta b{font:900 16px/1.25 "Noto Serif TC",serif;color:#fff3d6;display:flex;flex-wrap:wrap;align-items:baseline;gap:5px}
+#shop .shfmeta .tg{font:400 11px sans-serif;color:#c9a35a}
+#shop .shfmeta .cp{margin:0;font-size:12px;line-height:1.4;color:#e2cfae}
+#shop .shfmeta .fxl{margin:0;font-size:10.5px;color:#ffcf70}
+#shop .shfmeta .shfpr{margin:0;font-size:13px;font-weight:700;color:#ffe08a}
+#shop .shfmeta .tier{position:static;display:inline-block;align-self:flex-start;margin:0}
+#shop .shfmeta .tier.t-r{background:linear-gradient(#5aa0ff,#2050b0)}#shop .shfmeta .tier.t-l{background:linear-gradient(#c79bff,#6a2ac0)}#shop .shfmeta .tier.t-m{background:linear-gradient(#ffcf5a,#e0501a);color:#2a0a00}
+#shop .skin.sel{border-color:#ffd54f;box-shadow:0 0 14px rgba(255,210,80,.45)}
+#shop .shtl{display:none!important}
+#shop .skin button.go,#shop .skin button.usego{display:none!important}
+#shop .pv2.pvimg{display:block;background-color:#0c0608;background-position:center;background-size:contain;background-repeat:no-repeat;border-radius:10px;overflow:hidden}
+#shop .pv2.pvimg>*{display:none!important}
+html.lx #shop .skin button{background:linear-gradient(#4a2818,#2a100c);color:#ffe8c0;border:1px solid #8a6a32;cursor:pointer}
+html.lx #shop .skin button.buy{background:linear-gradient(#ffe57a,#f0a800 60%,#b86e00);color:#3a1d00;border:0;box-shadow:0 3px 0 #6a3a00}
+html.lx #shop .skin button.cf{background:linear-gradient(#ffcf5a,#e07020);color:#2a0a00;border:0}
+html.lx #shop .skin button:disabled{opacity:.8;cursor:default}
+html.lx #shop .dact{display:flex;justify-content:center;margin-top:12px}
+html.lx #shop #shClose{min-width:148px;min-height:42px;padding:8px 24px;border:0;border-radius:20px;background:linear-gradient(#ffe57a,#f0a800 60%,#b86e00);color:#3a1d00;font:800 15px/1 inherit;cursor:pointer;box-shadow:0 3px 0 #6a3a00}
+html.lx #shop .shmsg{text-align:center;min-height:1.2em;margin:8px 0 0;font-size:12.5px;color:#ffe08a}
+html.lx #shop .shmsg.err{color:#ff9a9a}
+html.lx #shop .shmsg.ok{color:#8effb0}
+html.lx #shop .note{font-size:11px;color:#bfa9bd;text-align:center;margin:10px 0 0;line-height:1.45}
+@media (max-width:360px){#shop .shfimg .pv2{height:132px}#shop h2{letter-spacing:4px;font-size:22px}}

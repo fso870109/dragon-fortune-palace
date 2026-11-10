@@ -1,77 +1,271 @@
-/* v28.46 six new frames + previews; v28.39 frame previews; v28.34 機台外觀商店 2.0 — cosmetic only, virtual chips only, odds untouched */
-(()=>{if(typeof SKINS==='undefined')return;
-const X={gold:{tier:'常見',t:'c',name:'金殿',tag:'御用金漆',fx:'金漆宮簷繪框・雙鳳、蓮花寶石、粉燈',copy:'宮簷金漆收住輪盤與說明，雙鳳與蓮花寶石停在框冠，一切傳奇的起點。'},
-neon:{tier:'稀有',t:'r',name:'真夜中',tag:'深藍夜行',fx:'深藍銀雲繪框・新月星鑽、藍燈、銀雲',copy:'新月與星鑽升在框冠，銀雲與藍燈守在兩側，深夜開台的冷冽氣場。'},
-jade:{tier:'稀有',t:'r',name:'花火夜祭',tag:'櫻扇鳥居',fx:'紺青金繪框・菊紋、雙扇、紅燈、鳥居',copy:'紺青與金線收住輪盤和中獎說明，櫻、扇、紅燈與鳥居都停在框上。'},
-crystal:{tier:'傳說',t:'l',name:'月光',tag:'銀月水晶',fx:'銀白珠光繪框・滿月玉兔、白梅、水晶',copy:'以月光鍛成的珠光機殼，滿月玉兔與白梅停在框冠，冷光繞著輪盤。'},
-royal:{tier:'傳說',t:'l',name:'極夜霓虹',tag:'粉藍霓虹',fx:'粉青霓虹繪框・扇面、紫藍燈、鳥居',copy:'極夜的粉與青沿著同一套框位流動，說明文字留在框內。'},
-obsidian:{tier:'史詩',t:'m',name:'金龍祭典',tag:'赤漆金龍',fx:'赤漆金繪框・金龍、玉、紅燈、浪',copy:'赤漆金框把輪盤和中獎說明收在同一面祭典裡，龍與玉停在框冠。'},
-blossom:{tier:'稀有',t:'r',name:'櫻花之舞',tag:'櫻社狐燈',fx:'朱金社殿繪框・社屋頂、櫻花、狐面燈',copy:'神社金簷與盛放櫻花收住輪盤，狐面紅燈守在兩側，底軌留給中獎說明。'},
-beach:{tier:'稀有',t:'r',name:'夏日海灘',tag:'棕櫚浪花',fx:'漂流木繪框・棕櫚、浪、衝浪板、提基',copy:'夏日的棕櫚與浪花停在框冠，提基與衝浪板守在兩角，說明寫在木紋底軌上。'},
-tsukiyo:{tier:'傳說',t:'l',name:'月下幻境',tag:'紫藤滿月',fx:'紺紫金繪框・滿月、紫藤、金浪',copy:'滿月升在框冠，紫藤垂在兩側，藍金浪花托住底軌上的中獎說明。'},
-kitsune:{tier:'史詩',t:'m',name:'狐之祕境',tag:'白繩狐面',fx:'白毛注連繩繪框・狐面、金鈴、狐燈',copy:'白毛注連繩與狐面停在框冠，金鈴與狐燈守在兩側，底軌中央留給說明。'},
-kabuto:{tier:'史詩',t:'m',name:'武將之魂',tag:'甲胄刀旗',fx:'黑鐵金繪框・兜、刀、戰旗',copy:'武將的兜與戰旗立在框冠，刀光守在兩角，底軌留給中獎說明。'},
-feast:{tier:'傳說',t:'l',name:'皇宮盛宴',tag:'雙龍金殿',fx:'赤漆金繪框・雙龍、宮簷、紅寶',copy:'雙龍盤在金殿簷上，紅寶停在框冠，赤漆金浪托住底軌上的中獎說明。'}};
-SKINS.forEach(k=>Object.assign(k,X[k.id]||{}));
-const B=document.body;let tryT=0,tryId=null,prevSkin;
-// live FX layer
-function fxLayer(){const inn=document.querySelector('.board')||document.querySelector('.inner');if(!inn||document.getElementById('skFx'))return;const d=document.createElement('div');d.id='skFx';d.setAttribute('aria-hidden','true');
-d.innerHTML='<i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><b class="plq"></b><span class="pt">'+'<em></em>'.repeat(12)+'</span>';inn.appendChild(d)}
-const _ap=skApply;skApply=function(){_ap();fxLayer();const k=SKINS.find(s=>s.id===(B.dataset.skin||'gold'));const p=document.querySelector('#skFx .plq');if(p&&k)p.textContent=k.name+'・'+k.tag;B.dataset.skt=k?k.t:'c'};
-const FRM={gold:'gold',neon:'midnight',jade:'hanabi',crystal:'moon',royal:'neon',obsidian:'dragon',blossom:'blossom',beach:'beach',tsukiyo:'tsukiyo',kitsune:'kitsune',kabuto:'kabuto',feast:'feast'},THM=(location.pathname.split('/').pop()||'').replace('.html','');
-let PVT=THM;window.__skPv=v=>{PVT=v};window.__skPvGet=()=>PVT;
-function pv(k){const f=FRM[k.id];if(f&&/^(neko|sakura|samurai|matsuri)$/.test(PVT))return `<div class="pv2 pvimg s-${k.id}" aria-hidden="true" style="background-image:url(assets/skins/shop/${PVT}-${f}.webp?v=2846)"></div>`;return `<div class="pv2 s-${k.id}" aria-hidden="true"><div class="cab"><div class="crest"></div><div class="mq">${k.name}</div><div class="rl"><i></i><i></i><i></i><i></i><i></i></div><div class="base"></div></div><div class="sp"><em></em><em></em><em></em></div></div>`}
-shRender=function(){const st=skGet();$('shBal').textContent=fmt(bal);
-$('skins').innerHTML=SKINS.map(k=>{const own=st.own.includes(k.id),eq=st.eq===k.id;let btn,state;
-const away=PVT&&PVT!==THM&&/^(neko|sakura|samurai|matsuri)$/.test(PVT);
-if(eq){btn=away?`<button class="use go" data-act="go" data-id="${k.id}">使用中・前往機台 ›</button>`:`<button disabled>✓ 使用中</button>`;state='使用中'}
-else if(own){btn=away?`<button class="use go" data-act="usego" data-id="${k.id}">套用並前往機台 ›</button>`:`<button class="use" data-act="use" data-id="${k.id}">套用</button>`;state='已擁有'}
-else{state=fmt(k.price);btn=shConfirm===k.id?`<button class="cf" data-act="buy" data-id="${k.id}">確認兌換 ${fmt(k.price)}？</button>`:`<div class="b2"><button class="try" data-act="try" data-id="${k.id}">試穿</button><button class="buy" data-act="ask" data-id="${k.id}" ${bal<k.price?'aria-disabled="true"':''} aria-label="以 ${fmt(k.price)} 虛擬籌碼兌換${k.name}"><span class="coin" aria-hidden="true"></span>${fmt(k.price)}</button></div>`}
-return `<li class="skin t-${k.t}${eq?' eq':''}${own?' own':''}"><span class="tier">${k.tier}</span>${eq?'<span class="eqtag">使用中</span>':own?'<span class="eqtag ow">已擁有</span>':''}${pv(k)}<b>${k.name}<small class="tg">${k.tag}</small></b><p class="cp">${k.copy}</p><p class="fxl">✦ ${k.fx}</p>${btn}</li>`}).join('')};
-function endTry(keep){clearTimeout(tryT);const bar=document.getElementById('skTry');bar&&bar.remove();if(tryId&&!keep){if(prevSkin)B.dataset.skin=prevSkin;else delete B.dataset.skin;skApply()}tryId=null}
-$('skins').addEventListener('click',e=>{const b=e.target.closest('button[data-act="try"]');if(!b)return;e.stopImmediatePropagation();const k=SKINS.find(x=>x.id===b.dataset.id);if(!k)return;
-endTry();prevSkin=B.dataset.skin;tryId=k.id;B.dataset.skin=k.id;const p=document.querySelector('#skFx .plq');B.dataset.skt=k.t;if(p)p.textContent=k.name+'・'+k.tag;$('shop').close();
-const bar=document.createElement('div');bar.id='skTry';bar.setAttribute('role','status');bar.innerHTML=`<span>試穿中「${k.name}」</span><button class="buy">兌換 ${fmt(k.price)}</button><button class="x">結束</button>`;document.body.appendChild(bar);
-bar.querySelector('.x').onclick=()=>endTry();bar.querySelector('.buy').onclick=()=>{endTry();shConfirm=k.id;shMsg(`再按一次確認，以 ${fmt(k.price)} 虛擬籌碼兌換「${k.name}」`);shRender();$('shop').showModal()};
-tryT=setTimeout(()=>endTry(),15000)},true);
-$('shopBtn').addEventListener('click',()=>endTry(),true);
-const t=document.getElementById('shTitle');if(t)t.insertAdjacentHTML('beforebegin','<div class="shk">龍運金殿・御用工房</div>');
-const s=document.querySelector('#shop .shsub');if(s)s.innerHTML='挑一款外框・可先試穿 15 秒<span class="chip"><span class="coin" aria-hidden="true"></span><b id="shBal">0</b></span><em>外觀只改變樣式，不影響機率・純虛擬・無兌現</em>';
-skApply();})();
+/* v28.52 skin shop — lobby overlay + fixed 天下布武 preview (no theme hop) */
+(function(){
+const D=document;
+const $=id=>D.getElementById(id);
+const FRM={gold:'gold',neon:'midnight',jade:'hanabi',crystal:'moon',royal:'neon',obsidian:'dragon',blossom:'blossom',beach:'beach',tsukiyo:'tsukiyo',kitsune:'kitsune',kabuto:'kabuto',feast:'feast'};
+const PVT='samurai';
+const X={
+gold:{name:'金殿',tag:'DEFAULT',copy:'夜櫻金粉，金殿初見的第一印象。',tier:'n',fx:''},
+neon:{name:'真夜中',tag:'MOONLIT',copy:'深夜的藍金對比，如月下刀光。',tier:'n',fx:'冷藍月光沿框流動'},
+jade:{name:'花火夜祭',tag:'HANABI',copy:'夜櫻花火，粉金交融的夏夜祭典。',tier:'r',fx:'櫻吹雪沿框緩緩飄落'},
+crystal:{name:'月光',tag:'LUNAR',copy:'銀白冷光，如薄紙上的月光。',tier:'r',fx:'銀白冷輝緩緩呼吸'},
+royal:{name:'極夜霓虹',tag:'NEON',copy:'極夜霓虹，紫金輝映的不夜城。',tier:'l',fx:'霓虹沿框奔跑、紫金輝光'},
+obsidian:{name:'金龍祭典',tag:'DRAGON',copy:'金龍盤框，祭典花火映紅天際。',tier:'m',fx:'金龍磷光巡游、花火綻放'},
+blossom:{name:'櫻花之舞',tag:'SAKURA',copy:'櫻社鳥居與狐狸燈籠，花吹雪中的夜宴。',tier:'l',fx:'櫻吹雪沿框旋轉飄落'},
+beach:{name:'夏日海灘',tag:'NAGISA',copy:'黃昏棕櫚與浪花，金箔夕照灑在機台邊。',tier:'l',fx:'浪花泡沫沿框湧上退去'},
+tsukiyo:{name:'月下幻境',tag:'TSUKIYO',copy:'紫藤花棚與一輪滿月，月華如水傾瀉而下。',tier:'m',fx:'月華光斑緩緩流轉'},
+kitsune:{name:'狐之祕境',tag:'KITSUNE',copy:'朱鳥居與白狐面，稻荷的祕徑只在夜間開啟。',tier:'m',fx:'狐火點點沿鳥居遊走'},
+kabuto:{name:'武將之魂',tag:'KABUTO',copy:'甲胄與刀旗，戰場金箔如雨、鐵與火的氣息。',tier:'m',fx:'金箔劍氣沿甲胄閃爍'},
+feast:{name:'皇宮盛宴',tag:'MIYABI',copy:'雙龍盤柱、金殿華筵，皇家儀仗環繞四周。',tier:'m',fx:'雙龍金輝巡游、華筵燈火'}
+};
+const FALLBACK=[
+{id:'gold',name:'金殿',desc:'預設・夜粉金',price:0},
+{id:'neon',name:'真夜中',desc:'深藍月光',price:2000},
+{id:'jade',name:'櫻色',desc:'櫻花粉',price:3000},
+{id:'crystal',name:'月光',desc:'銀白冷光',price:5000},
+{id:'royal',name:'小堇',desc:'紫羅蘭',price:8000},
+{id:'obsidian',name:'夕陽',desc:'夕陽橘金',price:12000},
+{id:'blossom',name:'櫻花之舞',desc:'櫻社狐燈',price:15000},
+{id:'beach',name:'夏日海灘',desc:'棕櫚浪花',price:15000},
+{id:'tsukiyo',name:'月下幻境',desc:'紫藤滿月',price:20000},
+{id:'kitsune',name:'狐之祕境',desc:'白繩狐面',price:25000},
+{id:'kabuto',name:'武將之魂',desc:'甲胄刀旗',price:30000},
+{id:'feast',name:'皇宮盛宴',desc:'雙龍金殿',price:50000}];
 
-/* v28.40 大廳「精品收藏館」→ 進入機台後自動打開外觀商店（只開面板，不做任何兌換） */
-(()=>{let k=null;try{k=sessionStorage.getItem('dfpOpenShop');if(k)sessionStorage.removeItem('dfpOpenShop')}catch(e){}if(!k)return;try{window.__noDaily=1}catch(e){}
-let n=0;const t=()=>{const b=document.getElementById('shopBtn'),s=document.getElementById('shop');if(s&&s.open)return;const busy=document.querySelector('dialog[open]');if(b&&!busy){b.click();return}if(++n<480)setTimeout(t,250)};
-setTimeout(t,30)})();
+function catalog(){return (typeof SKINS!=='undefined')?SKINS:(window.__dfpSkins||(window.__dfpSkins=FALLBACK.map(k=>Object.assign({},k))))}
+const HAS_GAME_SKIN=(typeof skGet==='function');
+const HAS_GAME_SAVE=(typeof skSave==='function');
+const HAS_GAME_APPLY=(typeof skApply==='function');
+function fmtN(n){if(typeof fmt==='function')return fmt(n);try{return Math.floor(+n||0).toLocaleString('zh-TW')}catch(e){return String(n)}}
+function chips(){return (typeof bal==='number')?bal:(window.CZ&&typeof CZ.getBal==='function'?CZ.getBal():0)}
+function pay(n){if(typeof bal==='number'){bal-=n;if(typeof ui==='function')ui()}else if(window.CZ&&CZ.addChips)CZ.addChips(-n)}
+function getC(){return (typeof shConfirm!=='undefined')?shConfirm:(window.__dfpShC||null)}
+function setC(v){if(typeof shConfirm!=='undefined')shConfirm=v;else window.__dfpShC=v}
+function readSkin(){
+  let st;try{st=JSON.parse(localStorage.getItem('fs_skin')||'{}')}catch(e){st={}}
+  if(!Array.isArray(st.own))st.own=[];
+  if(!st.own.includes('gold'))st.own.unshift('gold');
+  const C=catalog();
+  st.own=st.own.filter(id=>C.some(k=>k.id===id));
+  if(!st.own.includes(st.eq))st.eq='gold';
+  return st;
+}
+function getSkin(){return HAS_GAME_SKIN?skGet():readSkin()}
+function saveSkin(st){if(HAS_GAME_SAVE)return skSave(st);try{localStorage.setItem('fs_skin',JSON.stringify(st))}catch(e){}}
+function applySkin(){if(HAS_GAME_APPLY)return skApply()}
+function onMach(){return !!window.CZM}
+function click(){try{if(window.sfx&&sfx.click)sfx.click()}catch(e){}}
+function pvUrl(id){return 'assets/skins/shop/'+PVT+'-'+(FRM[id]||id)+'.webp?v=2846'}
+function pv(k){return '<div class="pv2 pvimg s-'+k.id+'" aria-hidden="true" style="background-image:url('+pvUrl(k.id)+')"></div>'}
+function msg(t,k){
+  if(typeof shMsg==='function'&&onMach()){shMsg(t,k);return}
+  const m=$('shMsg');if(!m)return;
+  m.textContent=t||'';m.className='shmsg'+(k?' '+k:'');
+}
 
-/* v28.43 外框動線：機台內「換框」入口、預覽機台選擇、套用並前往機台、套用後回到同一台機台（只改外觀，不動價格／機率） */
-(()=>{if(typeof SKINS==='undefined'||!document.getElementById('shop'))return;
-const $$=i=>document.getElementById(i),TH={matsuri:'夏祭花火',samurai:'天下布武',neko:'招財大作戰',sakura:'櫻花斬'},THM=(location.pathname.split('/').pop()||'').replace('.html','');
-const say=t=>{try{window.CZ&&CZ.toast?CZ.toast(t):0}catch(e){}const m=$$('msg');if(m)m.textContent=t};
-// 1) 機台內入口：控制列左側小圓鈕（與「自動」對稱，不蓋輪盤／文字）
-(function mk(n){const ctl=document.querySelector('.czbar .controls');if(!ctl||!$$('czAuto')){if(n<80)setTimeout(()=>mk(n+1),150);return}
-if(!$$('czFrm')){const b=document.createElement('button');b.type='button';b.id='czFrm';b.className='czauto czfrm';b.setAttribute('aria-label','更換機台外框');b.innerHTML='<b>換框</b><i aria-hidden="true">🖼</i>';ctl.appendChild(b);
- b.onclick=()=>{try{window.__skPv&&window.__skPv(THM)}catch(e){}const sb=$$('shopBtn');sb&&sb.click()}}})(0);
-// 2) 商店：預覽機台選擇 + 通用說明
-const sub=document.querySelector('#shop .shsub');
-if(sub&&!$$('shThm')){const w=document.createElement('div');w.id='shThm';w.className='shthm';
- w.innerHTML='<p class="shall">✦ 外框全機台通用：套用後 4 台機台都會換上同一款外框</p><div class="shtl" role="group" aria-label="預覽機台"><span>預覽機台</span>'+Object.keys(TH).map(k=>`<button type="button" data-pv="${k}">${TH[k]}${k===THM?'<small>目前</small>':''}</button>`).join('')+'</div>';
- sub.insertAdjacentElement('afterend',w);
- const mark=()=>{const v=window.__skPvGet?window.__skPvGet():THM;w.querySelectorAll('[data-pv]').forEach(x=>{const on=x.dataset.pv===v;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)})};
- w.addEventListener('click',e=>{const x=e.target.closest('[data-pv]');if(!x)return;window.__skPv&&window.__skPv(x.dataset.pv);try{sfx.click()}catch(_){}shRender();mark()});
- $$('shop').addEventListener('close',()=>{window.__skPv&&window.__skPv(THM)});
- const so=$$('shopBtn');so&&so.addEventListener('click',()=>setTimeout(mark,0));
- new MutationObserver(mark).observe($$('skins'),{childList:true})}
-// 3) 套用並前往機台 / 前往機台
-$$('skins').addEventListener('click',e=>{const b=e.target.closest('button[data-act="go"],button[data-act="usego"]');if(!b)return;e.stopImmediatePropagation();
- const k=SKINS.find(x=>x.id===b.dataset.id),to=window.__skPvGet?window.__skPvGet():THM;if(!k||!TH[to])return;
- if(b.dataset.act==='usego'){const st=skGet();if(!st.own.includes(k.id))return;st.eq=k.id;skSave(st);skApply()}
- try{sessionStorage.setItem('dfpFrmOk',k.name);sessionStorage.setItem('cz_in','1')}catch(_){}try{sfx.click()}catch(_){}
- b.disabled=true;b.textContent='前往'+TH[to]+'…';setTimeout(()=>{location.href=to+'.html'},180)},true);
-// 4) 在本機台套用／兌換成功 → 立即生效，關閉商店回到同一台機台
-$$('skins').addEventListener('click',e=>{const b=e.target.closest('button[data-act="use"],button[data-act="buy"]');if(!b)return;const id=b.dataset.id;
- setTimeout(()=>{const st=skGet();if(st.eq!==id)return;const k=SKINS.find(x=>x.id===id);const d=$$('shop');setTimeout(()=>{if(d.open)d.close();say(`已換上「${k?k.name:''}」外框・4 台機台通用`)},900)},0)});
-// 5) 從別的機台「套用並前往」抵達
-let ok=null;try{ok=sessionStorage.getItem('dfpFrmOk');if(ok)sessionStorage.removeItem('dfpFrmOk')}catch(_){}
-if(ok){try{window.__noDaily=1}catch(_){}setTimeout(()=>say(`已換上「${ok}」外框`),900)}
+catalog().forEach(k=>{if(X[k.id])Object.assign(k,X[k.id])});
+
+/* live cabinet FX (machines only) */
+if(HAS_GAME_APPLY&&onMach()){
+  const _skA=skApply;
+  function fx(){
+    const mach=D.getElementById('machine');if(!mach)return;
+    let el=D.getElementById('skFx');
+    if(!el){el=D.createElement('div');el.id='skFx';el.innerHTML='<i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><b class="plq"></b><span class="pt">'+(Array.from({length:12},()=>'<em></em>').join(''))+'</span>';
+      const bd=D.getElementById('board');(bd||mach).appendChild(el)}
+    const st=getSkin(),k=catalog().find(x=>x.id===st.eq);
+    const plq=el.querySelector('.plq');if(plq)plq.textContent=k?k.name:'';
+    D.body.dataset.skt=k&&k.tier||'';
+  }
+  skApply=function(){_skA();fx()};
+  fx();
+}
+
+function ensureShop(){
+  if($('shop'))return;
+  const d=D.createElement('dialog');
+  d.id='shop';d.setAttribute('aria-labelledby','shTitle');
+  d.innerHTML='<h2 id="shTitle">機台外觀商店</h2>'+
+    '<div class="shsub">用遊戲中贏得的虛擬籌碼兌換機台外觀・目前籌碼 <b id="shBal">0</b></div>'+
+    '<ul class="skins" id="skins"></ul>'+
+    '<div class="shmsg" id="shMsg" role="status" aria-live="polite"></div>'+
+    '<div class="dact"><button class="gold" type="button" id="shClose">關閉</button></div>'+
+    '<p class="note">外觀僅改變機台樣式，不影響中獎機率・只能用虛擬籌碼兌換，無法以真實金錢購買・僅供娛樂・虛擬籌碼不可兌換或轉讓・純虛擬・無兌現・外框全機台共用</p>';
+  D.body.appendChild(d);
+}
+ensureShop();
+
+function ensureFeat(){
+  if($('shFeat')||!$('shop')||!$('skins'))return;
+  const feat=D.createElement('div');
+  feat.id='shFeat';feat.className='shfeat';
+  feat.innerHTML='<div class="shfimg"><div class="pv2 pvimg" id="shFeatPv" aria-hidden="true"></div></div>'+
+    '<div class="shfmeta"><span class="tier" id="shFeatTier"></span>'+
+    '<b><span id="shFeatName"></span> <small class="tg" id="shFeatTag"></small></b>'+
+    '<p class="cp" id="shFeatCp"></p><p class="fxl" id="shFeatFx"></p><p class="shfpr" id="shFeatPrice"></p></div>';
+  const note=$('shThm');
+  $('skins').parentNode.insertBefore(feat, $('skins'));
+}
+function ensureNote(){
+  let w=$('shThm');
+  if(!w){
+    w=D.createElement('div');w.id='shThm';w.className='shthm';
+    const feat=$('shFeat'),sk=$('skins');
+    (feat||sk).parentNode.insertBefore(w, feat||sk);
+  }
+  w.innerHTML='<p class="shall">✦ 外框全機台通用：套用後 4 台機台都會換上同一款外框</p>';
+}
+ensureFeat();
+ensureNote();
+
+let sel=null;
+function paintFeat(id){
+  const C=catalog();
+  const k=C.find(x=>x.id===id)||C[0];if(!k)return;
+  const pvEl=$('shFeatPv');
+  if(pvEl){pvEl.className='pv2 pvimg s-'+k.id;pvEl.style.backgroundImage='url('+pvUrl(k.id)+')'}
+  const st=getSkin(),own=st.own.includes(k.id)||k.id==='gold',eq=st.eq===k.id;
+  const tier=$('shFeatTier');if(tier){tier.textContent={n:'普通',r:'稀有',l:'傳說',m:'神話'}[k.tier]||'普通';tier.className='tier t-'+(k.tier||'n')}
+  const nm=$('shFeatName');if(nm)nm.textContent=k.name;
+  const tg=$('shFeatTag');if(tg)tg.textContent=k.tag||'';
+  const cp=$('shFeatCp');if(cp)cp.textContent=k.copy||k.desc||'';
+  const fx=$('shFeatFx');if(fx)fx.textContent=k.fx||'';
+  const pr=$('shFeatPrice');if(pr)pr.textContent=eq?'使用中':(own?'已擁有':('價格 '+fmtN(k.price)+' 虛擬籌碼'));
+  const feat=$('shFeat');if(feat)feat.dataset.id=k.id;
+}
+function selectSkin(id){
+  sel=id;
+  D.querySelectorAll('#skins .skin').forEach(el=>el.classList.toggle('sel',el.dataset.id===id));
+  paintFeat(id);
+}
+function syncLobbyThumb(){
+  const el=$('lxShopPv');if(!el)return;
+  el.style.backgroundImage='url("'+pvUrl(getSkin().eq||'gold')+'")';
+}
+
+function render(){
+  const st=getSkin(),C=catalog(),balNow=chips();
+  const hb=$('shBal');if(hb)hb.textContent=fmtN(balNow);
+  if(!sel||!C.some(k=>k.id===sel))sel=st.eq||'gold';
+  const box=$('skins');if(!box)return;
+  box.innerHTML=C.map(k=>{
+    const own=st.own.includes(k.id)||k.id==='gold',eq=st.eq===k.id;
+    let btn,state;
+    if(eq){btn='<button type="button" disabled>使用中</button>';state='使用中'}
+    else if(own){btn='<button type="button" class="use" data-act="use" data-id="'+k.id+'">套用</button>';state='已擁有'}
+    else{
+      state=fmtN(k.price);
+      if(getC()===k.id) btn='<button type="button" class="cf" data-act="buy" data-id="'+k.id+'">確認兌換 '+fmtN(k.price)+'？</button>';
+      else{
+        const buy='<button type="button" class="buy" data-act="ask" data-id="'+k.id+'" '+(balNow<k.price?'disabled':'')+' aria-label="以 '+fmtN(k.price)+' 虛擬籌碼兌換'+k.name+'"><span class="coin" aria-hidden="true"></span>購買 · '+fmtN(k.price)+'</button>';
+        btn=onMach()?'<div class="b2"><button type="button" class="try" data-act="try" data-id="'+k.id+'">試穿</button>'+buy+'</div>':buy;
+      }
+    }
+    return '<li class="skin t-'+(k.tier||'n')+(eq?' eq':'')+(sel===k.id?' sel':'')+'" data-id="'+k.id+'">'+
+      (eq?'<span class="eqtag">使用中</span>':own?'<span class="eqtag ow">已擁有</span>':'')+
+      '<span class="tier">'+({n:'普通',r:'稀有',l:'傳說',m:'神話'}[k.tier]||'')+'</span>'+
+      pv(k)+'<b>'+k.name+' <small class="tg">'+(k.tag||'')+'</small></b><p class="cp">'+(k.copy||k.desc||'')+'</p>'+
+      (k.fx?'<p class="fxl">'+k.fx+'</p>':'')+btn+'</li>';
+  }).join('');
+  paintFeat(sel);
+  syncLobbyThumb();
+}
+
+try{shRender=render}catch(e){}
+window.shRender=render;
+
+function lobbyAct(act,id){
+  const k=catalog().find(x=>x.id===id);if(!k)return;
+  const st=getSkin();
+  if(act==='use'){
+    st.eq=k.id;saveSkin(st);applySkin();setC(null);
+    click();msg('已套用「'+k.name+'」外觀','ok');
+    sel=k.id;render();return;
+  }
+  if(act==='ask'){
+    const c=chips();
+    if(c<k.price){msg('虛擬籌碼不足，還差 '+fmtN(k.price-c)+'（可透過遊戲、每日簽到或看廣告取得）','err');return}
+    setC(k.id);click();msg('再按一次確認，以 '+fmtN(k.price)+' 虛擬籌碼兌換「'+k.name+'」');
+    sel=k.id;render();return;
+  }
+  if(act==='buy'){
+    const c=chips();
+    if(c<k.price||st.own.includes(k.id)){setC(null);render();return}
+    pay(k.price);
+    if(!st.own.includes(k.id))st.own.push(k.id);
+    st.eq=k.id;saveSkin(st);applySkin();setC(null);
+    click();msg('兌換成功！已套用「'+k.name+'」','ok');
+    sel=k.id;render();
+  }
+}
+
+const skinsEl=$('skins');
+if(skinsEl&&!skinsEl.dataset.dfp2852){
+  skinsEl.dataset.dfp2852='1';
+  skinsEl.addEventListener('click',function(e){
+    const card=e.target.closest('.skin[data-id]');
+    if(card)selectSkin(card.dataset.id);
+    if(onMach())return;
+    const b=e.target.closest('button[data-act]');
+    if(!b)return;
+    lobbyAct(b.dataset.act,b.dataset.id);
+  });
+}
+
+/* try-on: machine cabinet only — does not navigate */
+if(onMach()&&$('shopBtn')){
+  let tryT=0,tryId=null;
+  function bar(){
+    let el=$('skTry');
+    if(!el){el=D.createElement('div');el.id='skTry';el.innerHTML='<span></span><button type="button" class="buy">購買</button><button type="button" class="x">結束試穿</button>';D.body.appendChild(el);
+      el.querySelector('.x').onclick=end;
+      el.querySelector('.buy').onclick=()=>{const id=tryId;end();setC(id);const shop=$('shop');if(shop&&shop.showModal){render();shop.showModal()}};}
+    return el;
+  }
+  function end(){clearInterval(tryT);const el=$('skTry');if(el)el.remove();tryId=null;if(typeof skApply==='function')skApply()}
+  function start(id){
+    const k=catalog().find(x=>x.id===id);if(!k)return;
+    tryId=id;D.body.dataset.skin=id==='gold'?'':id;
+    const el=bar(),left={n:15};
+    el.querySelector('span').textContent='試穿「'+k.name+'」 '+left.n+'s';
+    el.querySelector('.buy').hidden=getSkin().own.includes(id);
+    clearInterval(tryT);tryT=setInterval(()=>{left.n--;if(left.n<=0){end();return}el.querySelector('span').textContent='試穿「'+k.name+'」 '+left.n+'s'},1000);
+    const shop=$('shop');if(shop)shop.close();
+  }
+  skinsEl.addEventListener('click',e=>{const b=e.target.closest('[data-act="try"]');if(b)start(b.dataset.id)});
+}
+
+/* 換框 — in-machine shortcut, close returns to that machine */
+function injectFrm(){
+  const bar=D.querySelector('.czbar .controls');if(!bar||$('czFrm'))return;
+  const b=D.createElement('button');b.id='czFrm';b.type='button';b.setAttribute('aria-label','更換機台外框');b.innerHTML='<b>換框</b><i aria-hidden="true">🖼</i>';
+  bar.appendChild(b);
+  b.onclick=()=>{const sb=$('shopBtn');if(sb)sb.click();else if(window.DFPshop)DFPshop.open()};
+}
+if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',injectFrm);
+else injectFrm();
+
+/* arrival toast leftover is unused now (no lobby hop) */
+if(sessionStorage.getItem('dfpFrmOk')){
+  const n=sessionStorage.getItem('dfpFrmOk');sessionStorage.removeItem('dfpFrmOk');
+  const t=D.createElement('div');t.className='ffly';t.textContent='已換上「'+n+'」外框';D.body.appendChild(t);setTimeout(()=>t.remove(),2400);
+}
+try{sessionStorage.removeItem('dfpOpenShop')}catch(e){}
+
+const shc=$('shClose'),shopEl=$('shop');
+if(shc&&shopEl&&!shc.dataset.dfp2852){
+  shc.dataset.dfp2852='1';
+  shc.addEventListener('click',()=>{try{shopEl.close()}catch(e){}});
+}
+
+function openShop(){
+  ensureShop();ensureFeat();ensureNote();
+  setC(null);msg('');
+  sel=getSkin().eq||'gold';
+  render();
+  const shop=$('shop');
+  if(shop&&shop.showModal)shop.showModal();
+}
+window.DFPshop={open:openShop,render:render,thumb:syncLobbyThumb};
+syncLobbyThumb();
 })();
