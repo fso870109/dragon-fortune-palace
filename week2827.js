@@ -1,14 +1,14 @@
 /* 龍運金殿 v28.27: 每週活動日曆（骨架）— 每天一個主題日，當日可領一次活動紅包（純虛擬・無兌現；不改機率） */
 (function(){if(!window.CZ)return;var LS=localStorage,K='dfp_wk',$=function(i){return document.getElementById(i)};
-var IV='?v=2848';function ic(id){return '<img src="assets/lx/ev_'+id+'.webp'+IV+'" alt="" width="128" height="128">'}
+var IV='?v=2849';function ic(id){return '<img src="assets/lx/ev_'+id+'.webp'+IV+'" alt="" width="128" height="128">'}
 var DAYS=[ /* index = getDay(): 0=日 */
- {w:'日',n:'金殿團圓日',ic:'lantern',t:'週末團圓，和好友互送紅包',r:150,go:'',gt:'好友互送'},
- {w:'一',n:'開工紅包日',ic:'packet',t:'新的一週，好運開工',r:100,go:'',gt:''},
- {w:'二',n:'天下布武日',ic:'katana',t:'武士出陣，今日主打機台',r:100,go:'samurai.html',gt:'前往天下布武'},
- {w:'三',n:'櫻花斬之日',ic:'sakura',t:'櫻吹雪，週間療癒一下',r:100,go:'sakura.html',gt:'前往櫻花斬'},
- {w:'四',n:'招財貓之日',ic:'neko',t:'招財萌貓，週四招好運',r:100,go:'neko.html',gt:'前往招財大作戰'},
- {w:'五',n:'夏祭花火夜',ic:'hanabi',t:'小週末花火大會',r:120,go:'matsuri.html',gt:'前往夏祭花火'},
- {w:'六',n:'金殿狂歡日',ic:'dragon',t:'週末狂歡，排行榜衝一波',r:150,go:'',gt:''}];
+ {w:'日',n:'金殿團圓日',ic:'km_lantern',t:'週末團圓，和好友互送紅包',r:150,go:'',gt:'好友互送'},
+ {w:'一',n:'開工紅包日',ic:'km_ume',t:'新的一週，好運開工',r:100,go:'',gt:''},
+ {w:'二',n:'天下布武日',ic:'km_ran',t:'武士出陣，今日主打機台',r:100,go:'samurai.html',gt:'前往天下布武'},
+ {w:'三',n:'櫻花斬之日',ic:'km_take',t:'櫻吹雪，週間療癒一下',r:100,go:'sakura.html',gt:'前往櫻花斬'},
+ {w:'四',n:'招財貓之日',ic:'km_kiku',t:'招財萌貓，週四招好運',r:100,go:'neko.html',gt:'前往招財大作戰'},
+ {w:'五',n:'夏祭花火夜',ic:'km_matsu',t:'小週末花火大會',r:120,go:'matsuri.html',gt:'前往夏祭花火'},
+ {w:'六',n:'金殿狂歡日',ic:'km_haku',t:'週末狂歡，排行榜衝一波',r:150,go:'',gt:''}];
 function dk(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function got(){try{return LS.getItem(K)===dk()}catch(e){return false}}
 function snd(n){try{window.sfx&&window.sfx(n)}catch(e){}}
