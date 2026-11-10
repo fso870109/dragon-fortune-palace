@@ -20,24 +20,153 @@ function queue(fn,bet){Qu.push([fn,bet]);setTimeout(pump,1200)}
 function award(w,bet,lbl){w=Math.round(w);if(!(w>0))return;bal+=w;$('win').textContent=w;try{ui();saveLater&&saveLater()}catch(e){}const tot=bet*NL;if(w/tot>=10&&window.bigWin)setTimeout(()=>bigWin(w,tot),300);}
 function pick(a){let s=a.reduce((x,y)=>x+y[1],0),r=Math.random()*s;for(const v of a){if((r-=v[1])<0)return v[0]}return a[0][0]}
 function stage(title){const b=$('board');const L=document.createElement('div');L.className='rfx';L.setAttribute('role','dialog');L.setAttribute('aria-label',title);const p=b.offsetParent;Object.assign(L.style,{left:b.offsetLeft+'px',top:b.offsetTop+'px',width:b.offsetWidth+'px',height:b.offsetHeight+'px'});L.innerHTML=`<p class="rfxN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>`;p.appendChild(L);b.classList.add('rfxOn');return L}
-function finish(L,w,msg,noAmt){return new Promise(res=>{const r=document.createElement('div');r.className='rfxRes';r.innerHTML=`<small>${msg}</small>${noAmt?'':`<b>${NF.format(Math.round(w))}</b>`}`;L.appendChild(r);let done=0;const end=()=>{if(done)return;done=1;L.classList.add('out');$('board').classList.remove('rfxOn','rfxSuck');setTimeout(()=>L.remove(),380);res(w)};L.onclick=end;setTimeout(end,RM?400:1800)})}
+function clearBoardFX(){const b=$('board');if(!b)return;b.classList.remove('rfxOn','rfxSuck');b.classList.add('rfxClear');setTimeout(()=>b.classList.remove('rfxClear'),180)}
+function finish(L,w,msg,noAmt){return new Promise(res=>{const r=document.createElement('div');r.className='rfxRes';r.innerHTML=`<i class="rfxGem" aria-hidden="true"></i><small>${msg}</small>${noAmt?'':`<b>${NF.format(Math.round(w))}</b>`}`;L.appendChild(r);let done=0;const end=()=>{if(done)return;done=1;L.classList.add('out');clearBoardFX();setTimeout(()=>{if(L.parentNode)L.remove();res(w)},380)};L.onclick=end;setTimeout(end,RM?400:1800)})}
 const cvs=(L,W,H)=>{const c=document.createElement('canvas'),d=Math.min(1.5,devicePixelRatio||1);c.width=W*d;c.height=H*d;c.style.cssText=`position:absolute;left:0;top:0;width:${W}px;height:${H}px`;L.prepend(c);const x=c.getContext('2d');x.scale(d,d);return [c,x]};
 function twUI(){const h=$('czHero');if(!h)return;let e=$('twBox');if(!e){e=document.createElement('div');e.id='twBox';e.innerHTML='<div class="tr"><i>旋</i></div><div><b>旋風聚寶</b><span></span></div>';h.appendChild(e)}
  e.style.setProperty('--p',tw.n/TW_N*100);e.querySelector('span').textContent=NF.format(Math.round(tw.pot));e.classList.toggle('hot',tw.n>=TW_N*.85)}
 function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.stringify(tw));twUI();
- const fn=async function(bet){const L=stage('旋風聚寶'),W=L.clientWidth,H=L.clientHeight;const [cv,x]=cvs(L,W,H);L.insertAdjacentHTML('beforeend',`<div class="rvPot"><small>聚寶罐</small><b>0</b></div>`);const tv=L.querySelector('.rvPot b');$('board').classList.add('rfxSuck');
-  const gl=document.createElement('canvas');gl.width=gl.height=32;{const g=gl.getContext('2d'),r=g.createRadialGradient(16,16,0,16,16,16);r.addColorStop(0,'rgba(255,255,235,1)');r.addColorStop(.3,'rgba(255,214,90,.8)');r.addColorStop(1,'rgba(255,150,30,0)');g.fillStyle=r;g.fillRect(0,0,32,32)}
-  const P=[];for(let i=0;i<120;i++)P.push({a:Math.random()*6.28,r:.15+Math.random()*.85,s:.6+Math.random()*1.4,z:Math.random()<.25});
-  tone(160,0,2.4,'sawtooth',.03,900);tone(80,0,2.4,'sine',.08,160);const t0=performance.now(),D=RM?200:2600,cx=W/2,cy=H/2,RX=W*.52,RY=H*.55;
-  await new Promise(res=>{(function fr(t){const k=Math.min(1,(t-t0)/D),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;x.clearRect(0,0,W,H);
-   const bg=x.createRadialGradient(cx,cy,4,cx,cy,Math.max(W,H)*.6);bg.addColorStop(0,`rgba(255,200,90,${.2+.3*e})`);bg.addColorStop(1,'rgba(20,6,32,.55)');x.fillStyle=bg;x.fillRect(0,0,W,H);
-   x.globalCompositeOperation='lighter';
-   for(let j=0;j<8;j++){const rr=(1-j/8),sw=(t/260+j*.8)%6.28;x.beginPath();x.ellipse(cx,cy,RX*rr*(1-e*.3),RY*rr*(1-e*.3),0,sw,sw+3.6);x.strokeStyle=`rgba(255,${200+j*6},${100+j*15},${.16+.05*j})`;x.lineWidth=2.4;x.stroke()}
-   for(const p of P){p.a+=.035*p.s*(1+e*4)/(p.r+.3);const rr=p.r*(1-e*.85),px=cx+Math.cos(p.a)*RX*rr,py=cy+Math.sin(p.a)*RY*rr;const sz=(p.z?14:8)*(0.5+p.r*.6);x.globalAlpha=.55+.45*Math.sin(p.a*2+1);x.drawImage(gl,px-sz/2,py-sz/2,sz,sz)}
-   x.globalAlpha=1;x.globalCompositeOperation='source-over';tv.textContent=NF.format(Math.round(pot*e));
-   if(k<1)requestAnimationFrame(fr);else res()})(t0)});
+ const fn=async function(bet){
+  const L=stage('旋風聚寶'),W=L.clientWidth,H=L.clientHeight;
+  L.classList.add('twStage');
+  const [cv,x]=cvs(L,W,H);cv.className='twVx';
+  L.insertAdjacentHTML('beforeend',
+    '<div class="twRays" aria-hidden="true"></div>'+
+    '<div class="twFlash" aria-hidden="true"></div>'+
+    '<div class="twSlam"><div class="twPlate"><span class="twFlour l" aria-hidden="true"></span><b>旋風聚寶</b><span class="twFlour r" aria-hidden="true"></span></div></div>'+
+    '<div class="twPlaque" hidden><i class="twCrown" aria-hidden="true"></i><small>旋風聚寶</small><em class="twTier" hidden></em><b class="twAmt">0</b><span class="twSum" hidden>合計獎金</span></div>');
+  const board=$('board');if(board)board.classList.add('rfxSuck');
+  const slam=L.querySelector('.twSlam'),plaque=L.querySelector('.twPlaque'),amtEl=L.querySelector('.twAmt');
+  const tierEl=L.querySelector('.twTier'),sumEl=L.querySelector('.twSum');
+  const tot=(typeof NL==='number'?bet*NL:bet);
+  const ratio=tot>0?pot/tot:0;
+  if(ratio>=5){tierEl.hidden=false;tierEl.textContent='超級'}
+  else if(ratio>=2.5){tierEl.hidden=false;tierEl.textContent='大獎'}
+  const kind=(window.CZM&&CZM.id==='sakura')?'petal':(window.CZM&&CZM.id==='neko')?'coin':'spark';
+  let skip=0,raf=0,phase='intro';
+  const onSkip=()=>{skip++};
+  L.addEventListener('pointerdown',onSkip);
+  const wait=ms=>new Promise(res=>{
+    if(RM){setTimeout(res,Math.min(ms,80));return}
+    const t0=performance.now();
+    (function tick(){
+      if(phase==='outro'&&skip>=2)return res();
+      if(phase!=='outro'&&phase!=='prize'&&skip>=1)return res();
+      if(skip>=2)return res();
+      if(performance.now()-t0>=ms)return res();
+      requestAnimationFrame(tick)
+    })()
+  });
+
+  L.classList.add('twIntro');
+  tone(180,0,.5,'sawtooth',.04,640);tone(360,.08,.45,'triangle',.04,980);
+  [523,659,784,1047].forEach((f,i)=>tone(f,.28+i*.07,.28,'triangle',.05));
+  if(!RM){L.classList.add('twBoom');await wait(720);L.classList.remove('twBoom')}
+  else await wait(80);
+  slam.classList.add('out');
+
+  phase='vortex';L.classList.add('twVortex');
+  const nP=W<=360?52:80;
+  const P=[];for(let i=0;i<nP;i++)P.push({a:Math.random()*6.28,r:.22+Math.random()*.85,s:.55+Math.random()*1.5,k:Math.random(),sp:Math.random()*6.28,spin:.04+Math.random()*.08,loot:Math.random()<.4});
+  const cx=W/2,cy=H/2,RX=W*.52,RY=H*.56,Rmax=Math.max(W,H);
+  tone(150,0,RM?.2:2.2,'sawtooth',.028,820);tone(72,0,RM?.2:2.2,'sine',.07,150);
+  if(!RM && skip<1){
+    const t0=performance.now(),D=2400;
+    await new Promise(res=>{(function fr(t){
+      if(skip>=1){res();return}
+      const k=Math.min(1,(t-t0)/D),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      x.clearRect(0,0,W,H);
+      const bg=x.createRadialGradient(cx,cy,4,cx,cy,Rmax*.72);
+      bg.addColorStop(0,'rgba(255,224,140,'+(0.42+0.4*e)+')');
+      bg.addColorStop(.38,'rgba(92,22,58,.88)');
+      bg.addColorStop(1,'rgba(10,3,18,.96)');
+      x.fillStyle=bg;x.fillRect(0,0,W,H);
+      x.save();x.translate(cx,cy);x.rotate(t/1600);x.globalCompositeOperation='lighter';
+      for(let i=0;i<16;i++){const a=i/16*Math.PI*2;x.beginPath();x.moveTo(0,0);x.arc(0,0,Rmax*.7,a,a+.09);x.closePath();x.fillStyle='rgba(255,226,150,'+(0.07+0.05*e)+')';x.fill()}
+      const bloom=x.createRadialGradient(0,0,2,0,0,Rmax*.24);
+      bloom.addColorStop(0,'rgba(255,242,200,'+(0.55+0.3*e)+')');bloom.addColorStop(1,'rgba(255,180,80,0)');
+      x.fillStyle=bloom;x.beginPath();x.arc(0,0,Rmax*.24,0,7);x.fill();
+      x.restore();
+      x.save();x.translate(cx,cy);x.rotate(t/680);x.globalCompositeOperation='lighter';
+      for(let arm=0;arm<6;arm++){
+        x.rotate(Math.PI/3);
+        x.beginPath();
+        for(let i=0;i<40;i++){const u=i/40,rr=Rmax*.52*(1-e*.18)*(1-u*.1),ang=u*4.8,px=Math.cos(ang)*rr,py=Math.sin(ang)*rr*.68;if(i)x.lineTo(px,py);else x.moveTo(px,py)}
+        x.strokeStyle='rgba(255,'+(214+arm*6)+','+(130+arm*10)+','+(0.32+0.1*Math.sin(t/220+arm))+')';
+        x.lineWidth=8.4-arm*.5;x.stroke();
+      }
+      x.restore();
+      x.globalCompositeOperation='lighter';
+      for(const p of P){
+        p.a+=.038*p.s*(1+e*3.4)/(p.r+.28);p.sp+=p.spin;
+        const rr=p.r*(1-e*.9),px=cx+Math.cos(p.a)*RX*rr,py=cy+Math.sin(p.a)*RY*rr,sz=(p.k>.7?13:8)*(0.45+p.r*.65)*(1-e*.15);
+        x.globalAlpha=.58+.42*Math.sin(p.a*2+1);
+        if(p.loot){
+          if(p.k>.55){
+            x.fillStyle='#ffe08a';x.beginPath();x.arc(px,py,sz*.55,0,7);x.fill();
+            x.fillStyle='rgba(255,255,230,.75)';x.beginPath();x.arc(px-sz*.15,py-sz*.15,sz*.2,0,7);x.fill();
+          }else{
+            x.save();x.translate(px,py);x.rotate(p.sp);
+            x.fillStyle='#8ce8ff';x.beginPath();x.moveTo(0,-sz);x.lineTo(sz*.55,0);x.lineTo(0,sz);x.lineTo(-sz*.55,0);x.closePath();x.fill();
+            x.restore();
+          }
+        }else if(kind==='petal'){
+          x.save();x.translate(px,py);x.rotate(p.sp);
+          x.fillStyle=p.k>.5?'#ffd0e4':'#ff9ab8';
+          x.beginPath();x.ellipse(0,0,sz*.5,sz,0,0,7);x.fill();
+          x.restore();
+        }else if(kind==='coin'){
+          x.fillStyle='#ffe08a';x.beginPath();x.arc(px,py,sz*.55,0,7);x.fill();
+          x.fillStyle='rgba(255,255,230,.7)';x.beginPath();x.arc(px-sz*.15,py-sz*.15,sz*.2,0,7);x.fill();
+        }else{
+          x.strokeStyle='#ffe9a0';x.lineWidth=1.6;x.beginPath();
+          x.moveTo(px,py);x.lineTo(px+Math.cos(p.sp)*sz,py+Math.sin(p.sp)*sz);x.stroke();
+          x.fillStyle='#ffd65a';x.beginPath();x.arc(px,py,sz*.3,0,7);x.fill();
+        }
+      }
+      x.globalAlpha=1;x.globalCompositeOperation='source-over';
+      if(k<1)raf=requestAnimationFrame(fr);else res();
+    })(t0)});
+  }
+  if(raf){cancelAnimationFrame(raf);raf=0}
+
+  phase='prize';slam.remove();
+  plaque.hidden=false;L.classList.add('twPrize');L.classList.remove('twVortex','twIntro');
+  const dur=RM||skip>=2?0:980;const c0=performance.now();let lastTick=0;
+  await new Promise(res=>{
+    (function step(t){
+      if(skip>=2){amtEl.textContent=NF.format(Math.round(pot));res();return}
+      const k=dur?Math.min(1,(t-c0)/dur):1;
+      const e=1-Math.pow(1-k,3);
+      amtEl.textContent=NF.format(Math.round(pot*e));
+      if(t-lastTick>70){lastTick=t;tone(980+k*700,0,.045,'square',.03)}
+      if(k<1)requestAnimationFrame(step);else res();
+    })(c0)
+  });
+  amtEl.textContent=NF.format(Math.round(pot));
+  amtEl.classList.add('pulse');
+  const nFount=RM?0:(W<=360?14:20);
+  for(let i=0;i<nFount;i++){
+    const s=document.createElement('i');s.className='twFountain'+(kind==='petal'?' petal':'');
+    const ang=-Math.PI/2+(Math.random()-.5)*1.5,dist=36+Math.random()*78;
+    s.style.setProperty('--dx',Math.cos(ang)*dist+'px');
+    s.style.setProperty('--dy',Math.sin(ang)*dist+'px');
+    L.appendChild(s);
+  }
   window.W21&&(()=>{const r=L.getBoundingClientRect();W21.burst(r.left+r.width/2,r.top+r.height/2,24,300)})();
-  tone(523,0,.3,'square',.05);tone(784,.12,.5,'square',.05);tone(1047,.24,.6,'triangle',.05);return finish(L,pot,'旋風聚寶獎金')};fn.t='旋風聚寶';return fn}
+  tone(523,0,.3,'square',.05);tone(784,.12,.5,'square',.05);tone(1047,.24,.6,'triangle',.05);
+
+  phase='outro';sumEl.hidden=false;sumEl.classList.add('in');
+  await wait(RM?220:1100);
+
+  L.removeEventListener('pointerdown',onSkip);
+  L.classList.add('out');
+  clearBoardFX();
+  await new Promise(r=>setTimeout(r,380));
+  L.querySelectorAll('.twFountain').forEach(n=>n.remove());
+  if(L.parentNode)L.remove();
+  return pot;
+ };fn.t='旋風聚寶';return fn}
 /* ---- 幸運彈珠 ---- */
 async function plinko(bet){const tot=bet*NL,R=8;const L=stage('幸運彈珠'),W=L.clientWidth,H=L.clientHeight;const [cv,x]=cvs(L,W,H);
  const SP=window.B22&&B22.SPR,img=s=>{const i=new Image();i.src=s;return i};const PEG=SP&&SP.peg,BALL=SP&&SP.ball;

@@ -28,9 +28,11 @@
 @keyframes r24In{from{opacity:0}}@keyframes r24Out{to{opacity:0}}
 .rfxN{display:none}
 #board.rfxOn .cell{filter:brightness(.35) saturate(.6);transition:filter .35s}
-.rfxRes{position:absolute;left:50%;top:50%;translate:-50% -50%;min-width:56%;max-width:calc(100% - 16px);box-sizing:border-box;padding:8px 12px;text-align:center;border-radius:12px;background:linear-gradient(180deg,rgba(60,24,80,.95),rgba(20,6,30,.96));border:2px solid #ffd65a;box-shadow:0 0 24px rgba(255,190,60,.7);animation:r24Pop .45s cubic-bezier(.2,1.6,.4,1) both;z-index:3}
-.rfxRes small{display:block;font:900 14px/1.2 "Noto Sans TC",sans-serif;color:#f4d89c}
-.rfxRes b{display:block;font:900 30px/1.15 TCDisp,"Noto Serif TC",serif;color:#ffe680;font-style:italic;text-shadow:0 2px 0 #8a5208,0 3px 0 #4a2200,0 0 12px rgba(255,200,80,.7)}
+.rfxRes{position:absolute;left:50%;top:50%;translate:-50% -50%;min-width:62%;max-width:calc(100% - 16px);box-sizing:border-box;padding:16px 14px 12px;text-align:center;border-radius:10px;background:linear-gradient(180deg,#6a2218 0%,#3a0e16 55%,#1a0610 100%);box-shadow:0 0 0 2px #8a5208,0 0 0 4px #ffd65a,0 0 0 5px #4a2808,0 0 28px rgba(255,190,60,.75),inset 0 0 18px rgba(255,200,90,.16);animation:r24Pop .45s cubic-bezier(.2,1.6,.4,1) both;z-index:3}
+.rfxGem{display:block;width:14px;height:14px;margin:-2px auto 6px;background:radial-gradient(circle at 35% 30%,#fff,#7ee0ff 42%,#1a6ab8);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);box-shadow:0 0 8px #7ee0ff}
+.rfxRes small{display:block;font:800 13px/1.2 "Noto Serif TC","Noto Sans TC",serif;letter-spacing:.1em;color:#f4d89c;text-shadow:0 1px 0 #3a1208}
+.rfxRes b{display:block;font:900 clamp(28px,9vw,38px)/1.15 TCDisp,"Noto Serif TC",serif;color:#ffe680;font-style:italic;font-variant-numeric:tabular-nums;text-shadow:0 2px 0 #c98a1c,0 3px 0 #8a5208,0 4px 0 #4a2200,0 0 14px rgba(255,200,80,.85)}
+#board.rfxClear .cell,#board.rfxClear .cell > *,#board.rfxClear .cell img.sym{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}
 @keyframes r24Pop{0%{scale:.3;opacity:0}100%{scale:1;opacity:1}}
 .r24t{display:grid;place-items:center;pointer-events:none;z-index:9}
 .r24t b{font:900 clamp(30px,10vw,42px)/1 TCDisp,"Noto Serif TC",serif;font-style:italic;color:#ffe680;white-space:nowrap;text-shadow:0 2px 0 #c98a1c,0 4px 0 #8a5208,0 6px 0 #4a2200,0 0 22px rgba(255,190,60,.9);animation:r24Slam .5s cubic-bezier(.2,1.6,.4,1) both;max-width:96%}

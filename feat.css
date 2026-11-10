@@ -16,3 +16,46 @@
 .fxIn button{margin-top:6px;padding:8px 28px;border:0;border-radius:20px;background:linear-gradient(180deg,#ff6fa1,#c2185b);color:#fff;font:900 16px/1 "Noto Sans TC",sans-serif}
 .fxNote{font-size:10px!important;opacity:.75}
 @media (prefers-reduced-motion:reduce){#mxBadge,#twBox.hot .tr i{animation:none}}
+
+/* v28.56 旋風聚寶 presentation — reel-window only */
+.rfx.twStage{contain:paint;background:radial-gradient(circle at 50% 48%,rgba(90,24,50,.28),rgba(10,3,20,.52))}
+.rfx.twStage.twVortex,.rfx.twStage.twPrize{background:radial-gradient(circle at 50% 48%,rgba(74,18,44,.9),rgba(8,2,16,.96))}
+.twPlate::before,.twPlate::after{content:"";position:absolute;width:12px;height:12px;border:2px solid #ffd65a;pointer-events:none}
+.twPlate::before{top:3px;left:3px;border-right:0;border-bottom:0;border-radius:2px 0 0 0}
+.twPlate::after{bottom:3px;right:3px;border-left:0;border-top:0;border-radius:0 0 2px 0}
+.twRays{position:absolute;inset:-8%;pointer-events:none;background:repeating-conic-gradient(from 12deg,rgba(255,220,140,.13) 0 7deg,transparent 7deg 22deg);animation:twSpin 14s linear infinite;mix-blend-mode:screen;opacity:.8;z-index:1}
+.twPrize .twRays{animation-play-state:paused;opacity:.35}
+@keyframes twSpin{to{transform:rotate(360deg)}}
+.twFlash{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:3;background:radial-gradient(circle at 50% 48%,rgba(255,250,230,.9),rgba(255,214,120,.28) 46%,transparent 72%)}
+.twStage.twBoom .twFlash{animation:twFlash .55s ease-out}
+@keyframes twFlash{0%{opacity:1}70%{opacity:.25}100%{opacity:0}}
+.twSlam{position:absolute;inset:0;display:grid;place-items:center;z-index:4;pointer-events:none}
+.twSlam.out{animation:r24Out .32s ease-in forwards}
+.twPlate{position:relative;padding:11px 26px 13px;max-width:calc(100% - 20px);border-radius:8px;background:linear-gradient(180deg,#6a2216 0%,#3a0c12 58%,#1c070e 100%);box-shadow:0 0 0 2px #8a5208,0 0 0 4px #ffd65a,0 0 0 6px #5a3008,0 0 22px rgba(255,200,80,.75),inset 0 1px 0 rgba(255,230,160,.4),inset 0 -8px 16px rgba(0,0,0,.25);animation:twSlamIn .55s cubic-bezier(.2,1.5,.4,1) both}
+.twStage.twBoom .twPlate{animation:twSlamIn .55s cubic-bezier(.2,1.5,.4,1) both,twShake .42s ease-out}
+.twPlate b{display:block;font:900 clamp(22px,7.2vw,30px)/1.15 "Noto Serif TC",TCDisp,serif;letter-spacing:.14em;color:#ffe680;-webkit-text-stroke:1px #5a2208;paint-order:stroke fill;text-shadow:0 2px 0 #c98a1c,2px 3px 0 #4a2200,0 0 16px rgba(255,190,60,.95);white-space:nowrap}
+.twFlour{position:absolute;top:50%;width:12px;height:12px;background:radial-gradient(circle at 35% 30%,#fff8dc,#e8be64 52%,#8a5208);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);transform:translateY(-50%)}
+.twFlour.l{left:6px}.twFlour.r{right:6px}
+@keyframes twSlamIn{0%{transform:scale(2.15);opacity:0}58%{transform:scale(.94);opacity:1}100%{transform:scale(1)}}
+@keyframes twShake{0%,100%{translate:0 0}20%{translate:-3px 2px}40%{translate:3px -2px}60%{translate:-2px -1px}80%{translate:2px 1px}}
+.twPlaque{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:5;width:min(82%,268px);max-width:calc(100% - 16px);box-sizing:border-box;padding:20px 16px 11px;text-align:center;border-radius:10px;background:linear-gradient(180deg,#7a2a1c 0%,#431016 52%,#1a0610 100%);box-shadow:0 0 0 2px #8a5208,0 0 0 4px #ffd65a,0 0 0 5px #4a2808,0 8px 22px rgba(0,0,0,.45),0 0 28px rgba(255,190,60,.7),inset 0 0 0 1px rgba(255,214,90,.35),inset 0 0 22px rgba(255,200,90,.18);animation:r24Pop .5s cubic-bezier(.2,1.6,.4,1) both}
+.twPlaque::before,.twPlaque::after{content:"";position:absolute;width:12px;height:12px;border:2px solid #ffd65a;pointer-events:none}
+.twPlaque::before{top:5px;left:5px;border-right:0;border-bottom:0;border-radius:2px 0 0 0}
+.twPlaque::after{bottom:5px;right:5px;border-left:0;border-top:0;border-radius:0 0 2px 0}
+.twCrown{display:block;width:40px;height:22px;margin:-10px auto 7px;background:radial-gradient(circle at 50% 18%,#c8f7ff 0 20%,transparent 22%),linear-gradient(180deg,#fff3c4,#e8be64 55%,#a86a14);clip-path:polygon(6% 100%,0 46%,20% 66%,50% 0,80% 66%,100% 46%,94% 100%);filter:drop-shadow(0 0 8px rgba(140,230,255,.95)) drop-shadow(0 2px 0 #5a3008)}
+.twPlaque small{display:block;font:800 12px/1.2 "Noto Serif TC",serif;letter-spacing:.18em;color:#f4d89c;text-shadow:0 1px 0 #3a1208}
+.twTier{display:inline-block;margin:5px auto 0;padding:1px 11px;border-radius:10px;font:900 12px/1.35 "Noto Sans TC",sans-serif;font-style:normal;color:#4a2200;background:linear-gradient(180deg,#fff6cf,#ffd65a 55%,#c98a1c);box-shadow:0 0 10px rgba(255,200,80,.55);animation:r24Pop .45s .12s cubic-bezier(.2,1.6,.4,1) both}
+.twAmt{display:block;margin-top:4px;font:900 clamp(34px,11.5vw,50px)/1.05 TCDisp,"Noto Serif TC",serif;font-style:italic;color:#ffe680;font-variant-numeric:tabular-nums;text-shadow:0 2px 0 #c98a1c,0 4px 0 #8a5208,0 6px 0 #4a2200,0 0 22px rgba(255,210,80,.95)}
+.twAmt.pulse{animation:twGlow .7s ease-out}
+@keyframes twGlow{0%{filter:brightness(1.55);text-shadow:0 0 28px #ffe680,0 2px 0 #8a5208,0 4px 0 #4a2200}100%{filter:none}}
+.twSum{display:block;margin-top:6px;font:800 11px/1.2 "Noto Sans TC",sans-serif;letter-spacing:.22em;color:#ffe9a0;opacity:0}
+.twSum.in{animation:twSumIn .4s ease-out forwards}
+@keyframes twSumIn{to{opacity:1}}
+.twFountain{position:absolute;left:50%;top:52%;width:11px;height:11px;margin:-5px 0 0 -5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6cf,#ffd65a 55%,#a8640c);pointer-events:none;z-index:6;animation:twFount .85s ease-out forwards}
+.twFountain.petal{border-radius:62% 38% 62% 38%;background:radial-gradient(circle at 35% 30%,#ffe4f0,#ff9ab8 60%,#c44878)}
+@keyframes twFount{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .twRays,.twPlate,.twStage.twBoom .twPlate,.twFlash,.twFountain,.twAmt.pulse,.twSum.in,.twTier,.twSlam{animation:none!important}
+  .twRays{opacity:.3}
+  .twSum{opacity:1}
+}
