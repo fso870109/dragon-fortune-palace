@@ -17,7 +17,7 @@
 .fxNote{font-size:10px!important;opacity:.75}
 @media (prefers-reduced-motion:reduce){#mxBadge,#twBox.hot .tr i{animation:none}}
 
-/* v28.57 旋風聚寶 — jackpot energy */
+/* v28.58 旋風聚寶 — painted plaque overlay */
 .rfx.twStage{contain:paint;background:radial-gradient(circle at 50% 48%,rgba(90,24,50,.28),rgba(10,3,20,.52))}
 .rfx.twStage.twVortex,.rfx.twStage.twPrize{background:radial-gradient(circle at 50% 48%,rgba(74,18,44,.9),rgba(8,2,16,.96))}
 .twPlate::before,.twPlate::after,.twPlaque::before,.twPlaque::after{content:"";position:absolute;width:12px;height:12px;border:2px solid #ffd65a;pointer-events:none}
@@ -101,10 +101,37 @@ body.twShake.twPunch #machine{animation:twScreenShake .5s ease-out}
 .rfxRes.rfxHot>small.twGold{display:flex;flex-wrap:wrap;justify-content:center;gap:0;font:800 13px/1.25 "Noto Serif TC","Noto Sans TC",serif;letter-spacing:.06em}
 .rfxRes.rfxHot>b.twAmt{margin-top:2px}
 
+/* v28.58 painted plaque overlay — not clipped by the reel window */
+.rfx.twStage.twCollapse{transform-origin:50% 50%;animation:twCollapse .36s ease-in forwards}
+@keyframes twCollapse{to{opacity:.18;transform:scale(.26);filter:brightness(2.8)}}
+.twCard{position:fixed;translate:-50% -50%;width:min(92vw,360px);z-index:32;pointer-events:auto;transform-origin:50% 55%;user-select:none;-webkit-user-select:none}
+@media (max-height:680px){.twCard{width:min(88vw,300px)}}
+.twCardArt{display:block;width:100%;height:auto;pointer-events:none;filter:drop-shadow(0 10px 22px rgba(0,0,0,.55)) drop-shadow(0 0 20px rgba(255,200,80,.45))}
+.twCard>.twShineBar{z-index:2;inset:18% 12% 20% 12%;opacity:.58;border-radius:8px;animation-duration:1.4s}
+.twCardTitle,.twCardAmt,.twCardSum,.twCard>.twTier{position:absolute;z-index:3;box-sizing:border-box;display:flex;align-items:center;justify-content:center;text-align:center;pointer-events:none}
+.twCardTitle{left:22%;right:22%;top:23.6%;height:11.4%;font:900 clamp(15px,4.6vw,21px)/1.05 "Noto Serif TC",TCDisp,serif;letter-spacing:.12em}
+.twCardAmt{left:20%;right:20%;top:39.5%;height:32%}
+.twCard .twAmt{margin:0;font-size:clamp(34px,11vw,52px);line-height:1}
+.twCardSum{left:26%;right:26%;top:79.8%;height:8.2%}
+.twCard .twSum{display:flex;justify-content:center;align-items:center;margin:0;opacity:0;font:800 clamp(14px,3.8vw,17px)/1 "Noto Serif TC","Noto Sans TC",serif;letter-spacing:.26em}
+.twCard .twSum.in{opacity:1}
+.twCard>.twTier{left:50%;top:39%;translate:-50% -50%;margin:0;padding:1px 10px;font-size:11px}
+.twCard.noAmt .twCardTitle{top:38%;height:28%;left:18%;right:18%;font-size:clamp(14px,4.2vw,18px);white-space:normal;line-height:1.25}
+.twCard .twGold>i{animation:twJigSoft .34s ease-in-out calc(var(--i)*80ms) infinite alternate,twGlim .85s ease-in-out calc(var(--i)*80ms) infinite alternate}
+.twPlate .twGold>i{animation:twJig .3s ease-in-out calc(var(--i)*85ms) infinite alternate,twGlim .8s ease-in-out calc(var(--i)*85ms) infinite alternate}
+@keyframes twJigSoft{0%{transform:translateY(1px) rotate(-2deg) scale(.98)}100%{transform:translateY(-3px) rotate(2deg) scale(1.05)}}
+.twCardSum .twGold>i{color:#3a1608;-webkit-text-fill-color:#3a1608;background:none;filter:drop-shadow(0 0 3px rgba(255,240,200,.75)) drop-shadow(0 1px 0 rgba(255,230,160,.35))}
+.twCard.in{animation:twCardIn .56s cubic-bezier(.16,1.28,.32,1) both}
+.twCard.inRM{opacity:1}
+.twCard.out{animation:twCardOut .42s ease-in forwards}
+@keyframes twCardIn{0%{transform:scale(.18) rotateX(18deg) rotate(-10deg);opacity:0;filter:brightness(2.8)}58%{transform:scale(1.03) rotateX(-2deg) rotate(1deg);opacity:1;filter:brightness(1.08)}100%{transform:scale(1) rotateX(0) rotate(0);filter:none}}
+@keyframes twCardOut{to{transform:scale(.82) rotateY(16deg);opacity:0;filter:blur(3px) brightness(1.5)}}
+
 @media (prefers-reduced-motion:reduce){
-  .twRays,.twPlate,.twStage.twBoom .twPlate,.twFlash,.twFountain,.twAmt.pulse,.twAmt.tick,.twSum.in,.twTier,.twSlam,.twGold>i,.twShineBar,.twFlare,.twCrown,.twPlaque,#twWorld .twWvig,#twWorld .twWbloom,#twWorld .twWflash,#twWorld .twWrings i,#twWorld .twWstreaks i,#twWorld .twWrain i,body.twShake #machine,body.twPunch #machine,.rfxRes.rfxHot{animation:none!important}
+  .twRays,.twPlate,.twStage.twBoom .twPlate,.twFlash,.twFountain,.twAmt.pulse,.twAmt.tick,.twSum.in,.twTier,.twSlam,.twGold>i,.twShineBar,.twFlare,.twCrown,.twPlaque,#twWorld .twWvig,#twWorld .twWbloom,#twWorld .twWflash,#twWorld .twWrings i,#twWorld .twWstreaks i,#twWorld .twWrain i,body.twShake #machine,body.twPunch #machine,.rfxRes.rfxHot,.twCard.in,.twCard.out,.rfx.twStage.twCollapse{animation:none!important}
   .twRays{opacity:.3}
-  .twSum{opacity:1}
+  .twSum,.twCard .twSum{opacity:1}
   .twGold>i{-webkit-text-fill-color:transparent}
+  .twCardSum .twGold>i{-webkit-text-fill-color:#3a1608}
   html.twFx,body.twFx{overflow:hidden!important}
 }
