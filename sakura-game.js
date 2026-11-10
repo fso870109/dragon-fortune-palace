@@ -100,21 +100,9 @@ buy:()=>{noise(.15,.15,0,{f:3000,q:2});osc(1568,.08,'square',.05,.02);osc(2093,.
 ad:()=>{arp([67,71,74,79,83,86],.06,0,'triangle',.06,.25);chord([67,71,74,79],1,.38,'sawtooth',.03);coinClink(.5);coinClink(.6,1.2)},
 lose:()=>{osc(330,.18,'triangle',.05,0,{to:250});osc(247,.3,'triangle',.05,.16,{to:180})},
 big:()=>sfx.win(2)};
-// background music: lookahead step sequencer, 128bpm, C-Am-F-G
-const MUS={on:false,step:0,next:0,T:null};const PROG=[[48,60,64,67],[45,57,60,64],[41,57,60,65],[43,55,59,62]];
-const MEL=[72,null,76,79,null,76,72,null,74,null,77,81,null,79,76,null];
-function musTick(){if(!AM||!(window.DFPvol?DFPvol.musOn():(AS.music))||document.hidden||ac.state!=='running')return;const sp=60/128/4;
-if(MUS.next<ac.currentTime-.1)MUS.next=ac.currentTime+.05;
-while(MUS.next<ac.currentTime+.12){const s=MUS.step,t=MUS.next-ac.currentTime,ch=PROG[(s>>4)%4],b=AM.mus;
-if(s%4===0){osc(55,.22,'sine',.5,t,{to:38,bus:b});noise(.04,.06,t,{ft:'lowpass',f:1200,bus:b})}
-if(s%8===4)noise(.15,.16,t,{f:1800,q:.6,bus:b});
-if(s%2===1)noise(.03,.05,t,{ft:'highpass',f:8000,bus:b});
-if(s%2===0)osc(mtof(ch[0]-12+(s%4===2?12:0)),.18,'sawtooth',.09,t,{lp:600,bus:b});
-osc(mtof(ch[1+(s%3)]+12),.09,'square',.025,t,{bus:b});
-if(s%16===0)ch.slice(1).forEach(n=>osc(mtof(n),1.7,'triangle',.03,t,{a:.1,bus:b}));
-const m=MEL[s%16];if(m&&(s>>4)%2===1)osc(mtof(m+((s>>4)%4===3?2:0)),.2,'square',.03,t,{lp:2500,bus:b});
-MUS.step++;MUS.next+=sp}}
-function musSync(){const mon=window.DFPvol?DFPvol.musOn():!!AS.music;if(mon&&AM&&!MUS.T){MUS.next=ac.currentTime+.05;MUS.T=setInterval(musTick,30)}else if(!mon&&MUS.T){clearInterval(MUS.T);MUS.T=null}}
+// v28.59: recorded theme BGM via czaudio.js — old 128bpm C-Am-F-G synth sequencer retired
+const MUS={on:false,step:0,next:0,T:null};
+function musSync(){if(MUS.T){clearInterval(MUS.T);MUS.T=null}if(window.CZA&&CZA.mus){const on=!!((window.DFPvol?DFPvol.musOn():!!AS.music)&&AM);CZA.mus(on)}}
 addEventListener('pointerdown',()=>{if((window.DFPvol?(DFPvol.sfxOn()||DFPvol.musOn()):sound)&&aInit()){if(ac.state==='suspended')ac.resume();aVol();musSync()}},{capture:true});
 addEventListener('keydown',()=>{if((window.DFPvol?(DFPvol.sfxOn()||DFPvol.musOn()):sound)&&aInit()){aVol();musSync()}},{capture:true});
 function clearWin(){$('lines').innerHTML='';document.querySelectorAll('.hit').forEach(e=>e.classList.remove('hit'));$('machine').classList.remove('win-mode')}
@@ -260,7 +248,7 @@ else if(p.k==='puff'){}
 else if(p.k==='ember'){cx.globalCompositeOperation='lighter';const s=p.r*3;cx.drawImage(SP_EMB,p.x-s,p.y-s,s*2,s*2);cx.globalCompositeOperation='source-over'}}
 let megaT=0;
 function bolt(x1,y1,x2,y2,dsp){const pts=[[x1,y1]];const n=10;for(let i=1;i<n;i++){const t=i/n;pts.push([x1+(x2-x1)*t+(Math.random()-.5)*dsp,y1+(y2-y1)*t+(Math.random()-.5)*dsp])}pts.push([x2,y2]);
-cx.save();cx.globalCompositeOperation='lighter';cx.strokeStyle='rgba(160,220,255,.35)';cx.lineWidth=9;cx.beginPath();pts.forEach((p,i)=>i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]));cx.stroke();cx.strokeStyle='rgba(160,220,255,.9)';cx.lineWidth=3;cx.beginPath();pts.forEach((p,i)=>i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]));cx.stroke();cx.strokeStyle='#fff';cx.lineWidth=1.2;cx.stroke();cx.restore()}
+cx.save();cx.globalCompositeOperation='lighter';const rgb=(typeof getComputedStyle==='function'&&(getComputedStyle(document.documentElement).getPropertyValue('--fx-glow').trim()||getComputedStyle(document.body).getPropertyValue('--fx-glow').trim()))||'255,176,48';cx.strokeStyle='rgba('+rgb+',.4)';cx.lineWidth=9;cx.beginPath();pts.forEach((p,i)=>i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]));cx.stroke();cx.strokeStyle='rgba('+rgb+',.95)';cx.lineWidth=3;cx.beginPath();pts.forEach((p,i)=>i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]));cx.stroke();cx.strokeStyle='#fff6d2';cx.lineWidth=1.2;cx.stroke();cx.restore()}
 FXH.push(()=>{if(performance.now()<megaT){if(Math.random()<.5)emberP();if(Math.random()<.18){const W=innerWidth,H=innerHeight,e=Math.random()*4|0,d=Math.min(W,H)*.08;
 if(e===0)bolt(Math.random()*W,0,Math.random()*W,d*1.5,d);else if(e===1)bolt(Math.random()*W,H,Math.random()*W,H-d*1.5,d);else if(e===2)bolt(0,Math.random()*H,d*1.5,Math.random()*H,d);else bolt(W,Math.random()*H,W-d*1.5,Math.random()*H,d)}return true}return false});
 function megaBorder(sec){if(RM)return;megaT=performance.now()+sec*1000;fxStart()}

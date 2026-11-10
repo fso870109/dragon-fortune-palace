@@ -84,7 +84,7 @@
 @media (max-width:420px){.skins{grid-template-columns:repeat(2,1fr)}}
 @media (prefers-reduced-motion:reduce){.skin button.cf{animation:none}.machine,.inner,.board,.lights i,.box{transition:none}}
 /* ===== v12 柏青嫂 restyle ===== */
-:root{--acc:#ff2240;--acc2:#ffc400;--acc3:#2a6bff;--chrome1:#f4f6fb;--chrome2:#8a93a6;--chrome3:#2a2f3a;--cab:#07080f;--glow:255,34,64}
+:root{--acc:#ff2240;--acc2:#ffc400;--acc3:#2a6bff;--chrome1:#f4f6fb;--chrome2:#8a93a6;--chrome3:#2a2f3a;--cab:#07080f;--glow:255,34,64;--fx:#ffd36a;--fx2:#ff8a28;--fx-glow:255,176,48}
 body[data-skin="neon"]{--acc:#00e5ff;--acc2:#ff3ad8;--acc3:#7a3cff;--glow:0,229,255}
 body[data-skin="jade"]{--acc:#19e08a;--acc2:#ffd54f;--acc3:#0a8f5a;--glow:25,224,138}
 body[data-skin="crystal"]{--acc:#8fd8ff;--acc2:#ffffff;--acc3:#3a7bd5;--chrome2:#a9c6e6;--glow:143,216,255}
@@ -155,8 +155,8 @@ h1 .jp{font-size:.55em;margin-left:.4em;-webkit-text-fill-color:var(--acc);lette
 @keyframes symWin{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
 .cell.hit::before{content:"";position:absolute;inset:3px;border:3px solid var(--acc2);box-shadow:0 0 12px var(--acc2),inset 0 0 12px var(--acc2);border-radius:4px;animation:hitBlink .5s steps(2) infinite;pointer-events:none;z-index:1}
 @keyframes hitBlink{50%{opacity:.35}}
-.reel.tease{box-shadow:0 0 0 3px var(--acc);}
-.reel.tease::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 26px 6px var(--acc);animation:teaseO .4s ease-in-out infinite alternate}
+.reel.tease{box-shadow:0 0 0 3px var(--fx,var(--acc));}
+.reel.tease::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 26px 6px var(--fx,var(--acc));animation:teaseO .4s ease-in-out infinite alternate}
 @keyframes teaseO{from{opacity:.4}to{opacity:1}}
 .board.teasing .reel:not(.tease){opacity:.55;transition:opacity .2s}
 .reel.land{animation:land .22s ease-out}
@@ -200,7 +200,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .audio label{display:flex;align-items:center;gap:6px}.audio input[type=range]{width:90px;accent-color:var(--acc)}
 .audio button{min-height:32px;padding:3px 10px;font-size:12px}
 #fx{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:12}
-#flash{position:fixed;inset:0;pointer-events:none;z-index:40;background:#fff;opacity:0;will-change:opacity}
+#flash{position:fixed;inset:0;pointer-events:none;z-index:40;background:radial-gradient(circle at 50% 42%,#fff8e0 0%,var(--fx,#ffd36a) 48%,rgba(255,140,40,.9) 100%);opacity:0;will-change:opacity}
 #flash.go{animation:flash .28s ease-out}
 @keyframes flash{0%{opacity:var(--fo,.5)}100%{opacity:0}}
 .machine.sh1{animation:sh .3s}.machine.sh2{animation:sh .45s;--a:5px}.machine.sh3{animation:sh .6s;--a:8px}.machine.sh4{animation:sh .8s;--a:11px}
@@ -282,7 +282,7 @@ body.fs-mode .lcd .scr{background:radial-gradient(ellipse at 50% 120%,rgba(176,5
 @media (min-width:381px) and (max-width:480px) and (min-height:760px){.lcd{height:120px}.spin{width:100px;height:100px}}
 /* ===== v15 夜色戀曲♡ art direction ===== */
 @font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff2?v=256) format("woff2");font-display:swap}
-:root{--acc:#ff4fa3;--acc2:#ffd27a;--acc3:#ff8fc8;--glow:255,79,163;--gold1:#fff0c2;--gold2:#d9a441;--gold3:#7a5418;--hero-h:clamp(430px,62vh,620px);--hero-top:-4vh;--hero-space:clamp(230px,37vh,320px);--tint:transparent}
+:root{--acc:#ff4fa3;--acc2:#ffd27a;--acc3:#ff8fc8;--glow:255,79,163;--fx:#ffd36a;--fx2:#ff8a28;--fx-glow:255,176,48;--gold1:#fff0c2;--gold2:#d9a441;--gold3:#7a5418;--hero-h:clamp(430px,62vh,620px);--hero-top:-4vh;--hero-space:clamp(230px,37vh,320px);--tint:transparent}
 body[data-skin="neon"]{--acc:#6fa8ff;--acc3:#a8c8ff;--glow:111,168,255;--tint:rgba(40,70,200,.28)}
 body[data-skin="jade"]{--acc:#ff9cc8;--acc3:#ffd0e4;--glow:255,156,200;--tint:rgba(255,150,200,.22)}
 body[data-skin="crystal"]{--acc:#9fd8ff;--acc3:#e0f3ff;--glow:159,216,255;--tint:rgba(150,200,255,.22)}
@@ -331,7 +331,7 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 .cell[data-s="heroine"] .sym{height:calc(var(--c) * .9);width:auto;max-width:94%;aspect-ratio:1;object-fit:cover;border-radius:6px;box-shadow:0 0 0 2px var(--gold2),0 0 0 3px #000;filter:none}
 .cell.hit{background:radial-gradient(circle,rgba(var(--glow),.45),transparent 72%)}
 .cell.hit::before{border-color:var(--acc);box-shadow:0 0 12px var(--acc),inset 0 0 12px var(--acc)}
-.reel.tease{box-shadow:inset 0 0 0 2px var(--acc),0 0 18px var(--acc)}
+.reel.tease{box-shadow:inset 0 0 0 2px var(--fx,var(--acc)),0 0 18px var(--fx,var(--acc))}
 /* side line numbers -> hearts */
 .led{background:linear-gradient(180deg,rgba(18,8,24,.9),rgba(8,4,14,.9)) padding-box,linear-gradient(180deg,var(--gold1),var(--gold3),var(--gold1)) border-box;border:1px solid transparent;box-shadow:0 0 12px rgba(var(--glow),.3);margin-top:44px;height:calc(var(--c-h,300px))}
 .led .pl{border-radius:50%;width:22px;height:22px;font:700 10px/1 sans-serif;background:#1a0a1c}

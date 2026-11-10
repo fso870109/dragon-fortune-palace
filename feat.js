@@ -10,6 +10,20 @@ const MX=[[2,60],[3,30],[5,10]];                                  // multiplier:
 const HS_BUY=48.2;                                                // 45.29/0.94
 const $=i=>document.getElementById(i);
 const tone=(f,t,d,ty,v,f2)=>window.AV&&AV.tone(f,t,d,ty,v,f2);
+/* v28.59 jackpot SFX — layered WebAudio on AM.sfxG; skip cuts layers, then finale plays */
+let jpG=null;
+function jpBus(){const c=(typeof aInit==='function'&&aInit());if(!c||typeof AM==='undefined'||!AM)return null;if(!jpG||jpG.context!==c){jpG=c.createGain();jpG.gain.value=1;jpG.connect(AM.sfxG)}return c}
+function jpCut(){const c=jpBus();if(!c||!jpG)return;try{const old=jpG;old.gain.cancelScheduledValues(c.currentTime);old.gain.setTargetAtTime(0,c.currentTime,.018);setTimeout(()=>{try{old.disconnect()}catch(e){}},90);jpG=c.createGain();jpG.gain.value=1;jpG.connect(AM.sfxG)}catch(e){}}
+function bgmDuck(on){try{if(window.CZA&&CZA.duck)CZA.duck(on?.22:1,on?.08:.32);if(on&&window.F21&&F21.bedOff)F21.bedOff()}catch(e){}}
+function jpOsc(f,t,d,ty,v,f2){const c=jpBus();if(!c||!jpG)return;const o=c.createOscillator(),fl=c.createBiquadFilter(),g=c.createGain();o.type=ty||'sawtooth';o.frequency.setValueAtTime(f,c.currentTime+t);if(f2)o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),c.currentTime+t+Math.max(.03,d));fl.type='lowpass';fl.frequency.value=4800;g.gain.setValueAtTime(0,c.currentTime+t);g.gain.linearRampToValueAtTime(v,c.currentTime+t+.01);g.gain.exponentialRampToValueAtTime(.0008,c.currentTime+t+d);o.connect(fl);fl.connect(g);g.connect(jpG);o.start(c.currentTime+t);o.stop(c.currentTime+t+d+.04)}
+function jpNoise(t,d,v,opts){const c=jpBus();if(!c||!jpG)return;opts=opts||{};const n=Math.max(1,Math.ceil(c.sampleRate*d)),b=c.createBuffer(1,n,c.sampleRate),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=(Math.random()*2-1)*(1-i/n);const s=c.createBufferSource();s.buffer=b;const fl=c.createBiquadFilter();fl.type=opts.ft||'bandpass';fl.frequency.value=opts.f||1800;fl.Q.value=opts.q||.8;const g=c.createGain();g.gain.setValueAtTime(0,c.currentTime+t);g.gain.linearRampToValueAtTime(v,c.currentTime+t+.008);g.gain.exponentialRampToValueAtTime(.0008,c.currentTime+t+d);s.connect(fl);fl.connect(g);g.connect(jpG);s.start(c.currentTime+t);s.stop(c.currentTime+t+d+.02)}
+function jpSlam(){jpOsc(52,0,.62,'sine',.52,34);jpOsc(86,0,.42,'sine',.26,40);jpOsc(176,0,.2,'triangle',.2,88);jpOsc(220,0,.72,'sawtooth',.11,78);jpOsc(330,.02,.58,'triangle',.13,130);jpOsc(880,.012,.14,'square',.075,210);jpOsc(1320,.03,.2,'triangle',.065,420);jpNoise(0,.18,.3,{ft:'bandpass',f:2300,q:1.1});jpNoise(.02,.55,.12,{ft:'lowpass',f:880,q:.55});[523,659,784,1047].forEach((f,i)=>jpOsc(f,.07+i*.05,.38,'triangle',.085))}
+function jpRiser(dur){dur=dur||2.2;jpOsc(78,0,dur,'sawtooth',.085,740);jpOsc(118,0,dur,'sawtooth',.055,1120);jpOsc(46,0,dur,'sine',.15,190);jpNoise(0,dur,.1,{ft:'highpass',f:380,q:.35});jpNoise(dur*.38,dur*.62,.15,{ft:'bandpass',f:1700,q:.7})}
+function jpBurst(){jpOsc(88,0,.38,'sine',.42,48);jpOsc(240,0,.24,'triangle',.2,118);jpOsc(640,0,.2,'sawtooth',.13,1900);jpOsc(1280,0,.13,'square',.055,380);jpNoise(0,.24,.34,{ft:'highpass',f:1700,q:.45});jpNoise(0,.13,.22,{ft:'bandpass',f:3400,q:1})}
+function jpShimmer(){[1047,1319,1568,2093].forEach((f,i)=>jpOsc(f,.02+i*.045,.3,'sine',.075,f*1.98));jpOsc(2637,.12,.36,'triangle',.04,4100);jpNoise(.02,.2,.08,{ft:'highpass',f:5200,q:.4})}
+function jpTick(k){const f=980+k*700;jpOsc(f,0,.055,'square',.058);jpOsc(f*2,0,.032,'sine',.028)}
+function jpFanfare(){jpOsc(62,0,.95,'sine',.48,38);jpOsc(98,0,.72,'sine',.22,48);jpNoise(0,.2,.3,{ft:'lowpass',f:420,q:.8});[[196,0],[246.94,.025],[293.66,.05],[392,.07],[493.88,.09],[587.33,.11]].forEach(([f,off])=>{jpOsc(f,off,.92,'sawtooth',.075);jpOsc(f*1.004,off,.88,'triangle',.048);jpOsc(f*2,off+.04,.55,'square',.016)});jpNoise(.08,.95,.17,{ft:'highpass',f:4300,q:.32});jpNoise(.1,.52,.12,{ft:'bandpass',f:7800,q:.55});[523,659,784,1047].forEach((f,i)=>jpOsc(f,.16+i*.06,.72,'triangle',.082))}
+function jpCoins(n){n=Math.min(n||10,14);for(let i=0;i<n;i++){const off=.05+i*(.065+.035*Math.random()),f=1380+Math.random()*920;jpOsc(f,off,.1,'sine',.072);jpOsc(f*1.48,off,.065,'triangle',.038);jpOsc(860+Math.random()*420,off+.014,.045,'square',.022)}}
 const sleep=ms=>new Promise(r=>setTimeout(r,RM?Math.min(ms,80):ms));
 const KEY='czTW_'+ID;let tw;try{tw=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!tw||typeof tw.n!=='number')tw={n:0,pot:0};
 let armed=0;const Qu=[];const TK='czTK_'+ID;let tk;try{tk=JSON.parse(localStorage.getItem(TK))}catch(e){}if(!tk||typeof tk.p!=='number')tk={p:0,w:0,m:0};const saveT=()=>localStorage.setItem(TK,JSON.stringify(tk));const emitT=(k,full)=>{try{dispatchEvent(new CustomEvent('czf',{detail:{k,full:!!full,tk:Object.assign({},tk),tw:Object.assign({},tw),TW_N,armed}}))}catch(e){}};let busy=false;
@@ -68,8 +82,8 @@ function mountCard(title,opts){
   placeCard(el);
   return el;
 }
-function clearBoardFX(){fxKill();const c=$('twCard');if(c)c.remove();const b=$('board');if(!b)return;b.classList.remove('rfxOn','rfxSuck');b.classList.add('rfxClear');setTimeout(()=>b.classList.remove('rfxClear'),180)}
-function finish(L,w,msg,noAmt){return new Promise(res=>{const card=mountCard(msg,{noAmt:!!noAmt});const amt=card.querySelector('.twAmt');if(amt){amt.textContent=NF.format(Math.round(w));amt.classList.add('tick','pulse')}const sum=card.querySelector('.twSum');if(!noAmt&&sum){sum.hidden=false;sum.className='twSum twGold twShine in';sum.innerHTML=goldHTML('合計獎金')}if(!RM){fxImpact();fxStreaks();fxRain(innerWidth<=360?28:48)}let done=0;const end=()=>{if(done)return;done=1;card.classList.add('out');L.classList.add('out');setTimeout(()=>{clearBoardFX();if(card.parentNode)card.remove();if(L.parentNode)L.remove();res(w)},RM?80:420)};L.onclick=end;card.addEventListener('pointerdown',end);setTimeout(end,RM?400:1800)})}
+function clearBoardFX(){try{jpCut();bgmDuck(false)}catch(e){}fxKill();const c=$('twCard');if(c)c.remove();const b=$('board');if(!b)return;b.classList.remove('rfxOn','rfxSuck');b.classList.add('rfxClear');setTimeout(()=>b.classList.remove('rfxClear'),180)}
+function finish(L,w,msg,noAmt){return new Promise(res=>{try{bgmDuck(true)}catch(e){}const card=mountCard(msg,{noAmt:!!noAmt});const amt=card.querySelector('.twAmt');if(amt){amt.textContent=NF.format(Math.round(w));amt.classList.add('tick','pulse')}const sum=card.querySelector('.twSum');if(!noAmt&&sum){sum.hidden=false;sum.className='twSum twGold twShine in';sum.innerHTML=goldHTML('合計獎金')}if(!RM){fxImpact();fxStreaks();fxRain(innerWidth<=360?28:48)}try{jpShimmer();jpFanfare();if(w>0&&!noAmt)jpCoins(innerWidth<=360?8:12)}catch(e){}let done=0;const end=()=>{if(done)return;done=1;card.classList.add('out');L.classList.add('out');setTimeout(()=>{clearBoardFX();if(card.parentNode)card.remove();if(L.parentNode)L.remove();res(w)},RM?80:420)};L.onclick=end;card.addEventListener('pointerdown',end);setTimeout(end,RM?400:1800)})}
 const cvs=(L,W,H)=>{const c=document.createElement('canvas'),d=Math.min(1.5,devicePixelRatio||1);c.width=W*d;c.height=H*d;c.style.cssText=`position:absolute;left:0;top:0;width:${W}px;height:${H}px`;L.prepend(c);const x=c.getContext('2d');x.scale(d,d);return [c,x]};
 function twUI(){const h=$('czHero');if(!h)return;let e=$('twBox');if(!e){e=document.createElement('div');e.id='twBox';e.innerHTML='<div class="tr"><i>旋</i></div><div><b>旋風聚寶</b><span></span></div>';h.appendChild(e)}
  e.style.setProperty('--p',tw.n/TW_N*100);e.querySelector('span').textContent=NF.format(Math.round(tw.pot));e.classList.toggle('hot',tw.n>=TW_N*.85)}
@@ -89,8 +103,9 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   const tierTxt=ratio>=5?'超級大獎！':ratio>=2.5?'大獎！':'';
   const kind=(window.CZM&&CZM.id==='sakura')?'petal':(window.CZM&&CZM.id==='neko')?'coin':'spark';
   let skip=0,raf=0,phase='intro';
-  const onSkip=()=>{skip++};
+  const onSkip=()=>{skip++;if(phase==='intro'||phase==='vortex'||phase==='prize'){try{jpCut()}catch(e){}}};
   L.addEventListener('pointerdown',onSkip);
+  try{bgmDuck(true)}catch(e){}
   const wait=ms=>new Promise(res=>{
     if(RM){setTimeout(res,Math.min(ms,80));return}
     const t0=performance.now();
@@ -106,8 +121,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   L.classList.add('twIntro');
   fxWorld();fxImpact();fxStreaks();
   if(!RM){document.body.classList.add('twPunch');setTimeout(()=>document.body.classList.remove('twPunch'),480)}
-  tone(180,0,.5,'sawtooth',.04,640);tone(360,.08,.45,'triangle',.04,980);
-  [523,659,784,1047].forEach((f,i)=>tone(f,.28+i*.07,.28,'triangle',.05));
+  try{jpSlam()}catch(e){}
   if(!RM){L.classList.add('twBoom');await wait(900);L.classList.remove('twBoom')}
   else await wait(80);
   slam.classList.add('out');
@@ -116,7 +130,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   const nP=W<=360?52:80;
   const P=[];for(let i=0;i<nP;i++)P.push({a:Math.random()*6.28,r:.22+Math.random()*.85,s:.55+Math.random()*1.5,k:Math.random(),sp:Math.random()*6.28,spin:.04+Math.random()*.08,loot:Math.random()<.4});
   const cx=W/2,cy=H/2,RX=W*.52,RY=H*.56,Rmax=Math.max(W,H);
-  tone(150,0,RM?.2:2.2,'sawtooth',.028,820);tone(72,0,RM?.2:2.2,'sine',.07,150);
+  try{if(RM)jpSlam();else if(skip<1)jpRiser(2.2)}catch(e){}
   if(!RM && skip<1){
     const t0=performance.now(),D=2400;
     await new Promise(res=>{(function fr(t){
@@ -179,10 +193,11 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
 
   phase='prize';
   if(slam&&slam.parentNode)slam.remove();
-  if(!RM&&skip<1){L.classList.add('twCollapse');fxImpact();fxStreaks();tone(480,0,.28,'triangle',.05,1200);await wait(340)}
+  if(!RM&&skip<1){L.classList.add('twCollapse');fxImpact();fxStreaks();try{jpBurst()}catch(e){};await wait(340)}
   else fxImpact();
   L.classList.add('twPrize');L.classList.remove('twVortex','twIntro');
   const card=mountCard('旋風聚寶',{tier:tierTxt});
+  try{jpShimmer()}catch(e){}
   card.addEventListener('pointerdown',onSkip);
   const amtEl=card.querySelector('.twAmt'),sumEl=card.querySelector('.twSum');
   const dur=RM||skip>=2?0:980;const c0=performance.now();let lastTick=0;
@@ -192,7 +207,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
       const k=dur?Math.min(1,(t-c0)/dur):1;
       const e=1-Math.pow(1-k,3);
       if(amtEl)amtEl.textContent=NF.format(Math.round(pot*e));
-      if(t-lastTick>70){lastTick=t;tone(980+k*700,0,.045,'square',.03);if(amtEl){amtEl.classList.remove('tick');void amtEl.offsetWidth;amtEl.classList.add('tick')}fxSpark(card.querySelector('.twCardAmt')||card,2)}
+      if(t-lastTick>70){lastTick=t;try{jpTick(k)}catch(e){};if(amtEl){amtEl.classList.remove('tick');void amtEl.offsetWidth;amtEl.classList.add('tick')}fxSpark(card.querySelector('.twCardAmt')||card,2)}
       if(k<1)requestAnimationFrame(step);else res();
     })(c0)
   });
@@ -200,7 +215,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   fxImpact();fxStreaks();fxRain(innerWidth<=360?32:56);
   if(!RM){document.body.classList.add('twPunch');setTimeout(()=>document.body.classList.remove('twPunch'),480)}
   window.W21&&(()=>{const r=card.getBoundingClientRect();W21.burst(r.left+r.width/2,r.top+r.height/2,24,300)})();
-  tone(523,0,.3,'square',.05);tone(784,.12,.5,'square',.05);tone(1047,.24,.6,'triangle',.05);
+  try{jpFanfare();jpCoins(innerWidth<=360?8:12)}catch(e){}
 
   phase='outro';
   if(sumEl){sumEl.hidden=false;sumEl.className='twSum twGold twShine in';sumEl.innerHTML=goldHTML('合計獎金')}
