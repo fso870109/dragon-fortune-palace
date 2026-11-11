@@ -13,7 +13,7 @@ function lst(){var s;try{s=JSON.parse(LS.getItem(KL)||'{}')}catch(e){s={}}var d=
 function lsv(s){try{LS.setItem(KL,JSON.stringify(s))}catch(e){}}
 function snd(n){try{window.sfx&&window.sfx(n)}catch(e){}}
 function faceAv(av,n){if(window.DFPface)return DFPface(av,n);return face({av:av,n:n})}
-window.DFPface=window.DFPface||function(av,n){return AVS.indexOf(av)>=0?'<img src="assets/lx/'+av+'.webp'+IV+'" alt="">':String(n||'?').slice(0,1)};
+window.DFPface=window.DFPface||function(av,n){var ids=(window.DFPfb&&DFPfb.AVATARS)||AVS,q=(window.DFPfb&&DFPfb.AVQ)||IV;return ids.indexOf(av)>=0?'<img src="assets/lx/'+av+'.webp'+q+'" alt="">':String(n||'?').slice(0,1)};
 var live=false,friends=[],busy=0;
 var top=document.querySelector('.top'),bg=$('bBgm');if(!top)return;
 var b=document.createElement('button');b.className='ib';b.id='bFr';b.setAttribute('aria-label','好友互送');b.innerHTML='👥<span class="dot"></span>';top.insertBefore(b,bg||null);
@@ -23,7 +23,7 @@ d.innerHTML='<h3 id="frT">好友互送</h3><span class="frw" id="frW">示範好�
  '<span class="fav" id="frMeAv" aria-hidden="true"></span>'+
  '<div class="n"><label class="sr" for="frNm">顯示名稱</label><input id="frNm" maxlength="12" autocomplete="off" spellcheck="false">'+
  '<small>好友碼 <b id="frCode"></b> <button type="button" class="btn frcp" id="frCopy">複製</button></small></div></div>'+
-'<div class="fravs" id="frAvs" hidden></div>'+
+'<div class="fravs" id="frAvs"><button type="button" class="btn" id="frAvCh">更換大頭貼</button></div>'+
 '<div class="fradd" id="frAdd"><label class="sr" for="frIn">好友碼</label>'+
  '<input id="frIn" maxlength="12" autocomplete="off" spellcheck="false" placeholder="輸入好友碼 DF-······">'+
  '<button type="button" class="btn hot" id="frAddB">加入</button></div>'+
@@ -34,14 +34,19 @@ d.innerHTML='<h3 id="frT">好友互送</h3><span class="frw" id="frW">示範好�
 document.body.appendChild(d);
 function msg(t){var e=$('frMsg');if(e)e.textContent=t||''}
 function paintMe(){
-  var p=window.DFPfb&&DFPfb.profile;if(!p)return;
-  $('frMeAv').innerHTML=faceAv(p.avatar,p.displayName);
-  $('frNm').value=p.displayName||'';
-  $('frCode').textContent=p.friendCode||'';
-  $('frAvs').innerHTML=AVS.map(function(a){return '<button type="button" class="'+(a===p.avatar?'on':'')+'" data-av="'+a+'" aria-label="頭像 '+a+'">'+faceAv(a,'')+'</button>'}).join('');
-  $('frAvs').hidden=false;
+  var p=window.DFPfb&&DFPfb.profile,av,name,code;
+  if(p){av=p.avatar;name=p.displayName;code=p.friendCode}
+  else{try{var s=JSON.parse(LS.getItem('dfp_profile')||'{}');av=s.avatar;name=s.displayName;code=s.friendCode}catch(e){}}
+  if(!av&&window.DFPfb&&typeof DFPfb.currentAvatar==='function')av=DFPfb.currentAvatar();
+  if($('frMeAv'))$('frMeAv').innerHTML=faceAv(av,name);
+  if($('frNm')&&name&&document.activeElement!==$('frNm'))$('frNm').value=name||'';
+  if($('frCode'))$('frCode').textContent=code||'';
   var img=document.querySelector('#lxMe .lxAv img');
-  if(img)img.src='assets/lx/'+p.avatar+'.webp'+IV;
+  if(img){
+    var src=(window.DFPfb&&typeof DFPfb.avatarSrc==='function')?DFPfb.avatarSrc(av):((av&&/^https:/.test(av))?av:'assets/lx/'+(av&&AVS.indexOf(av)>=0?av:'avatar')+'.webp'+IV);
+    img.onerror=function(){this.onerror=null;this.src='assets/lx/av_a.webp?v=2877'};
+    if(img.getAttribute('src')!==src)img.src=src;
+  }
 }
 function renderDemo(){var s=st(),n=FR.length;
  $('frGt').textContent=s.got?'今日禮物已領取':('好友送你 '+n+' 份紅包');
@@ -112,10 +117,7 @@ $('frNm').onchange=function(){
   if(!live)return;var v=$('frNm').value.trim().slice(0,12);if(!v)return;
   DFPfb.updateProfile({displayName:v}).then(function(){paintMe();msg('已更新顯示名稱')}).catch(function(){msg('名稱沒有更新成功')});
 };
-$('frAvs').onclick=function(e){
-  var t=e.target.closest('[data-av]');if(!t||!live)return;
-  DFPfb.updateProfile({avatar:t.getAttribute('data-av')}).then(function(){paintMe();refreshLive();msg('已更新頭像')}).catch(function(){msg('頭像沒有更新成功')});
-};
+$('frAvCh').onclick=function(){if(window.DFPav)DFPav.open()};
 b.onclick=function(){snd(1);CZ.vib(8);render();d.showModal();if(live)refreshLive()};
 $('frX').onclick=function(){snd(1);d.close()};
 render();
@@ -129,5 +131,6 @@ function goLive(){
   }).catch(function(){});
   return true;
 }
-if(!goLive()){var n=0,iv=setInterval(function(){if(goLive()||++n>80)clearInterval(iv)},50)}
+if(!goLive()){var n=0,iv=setInterval(function(){if(goLive()||++n>240)clearInterval(iv)},50)}
+addEventListener('dfpav',function(){paintMe()});
 window.DFPfr={render:render,refresh:refreshLive}})();

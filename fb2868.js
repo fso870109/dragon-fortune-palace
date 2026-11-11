@@ -1,7 +1,9 @@
-/* 龍運金殿 v28.76: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；含公會／排行榜／掠奪／邀請） */
+/* 龍運金殿 v28.77: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；大頭貼與帳號連結；含公會／排行榜／掠奪／邀請） */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import {
-  getAuth, signInAnonymously, signOut, connectAuthEmulator
+  getAuth, signInAnonymously, signOut, connectAuthEmulator,
+  GoogleAuthProvider, FacebookAuthProvider,
+  linkWithPopup, linkWithRedirect, getRedirectResult
 } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js';
 import {
   getFirestore, connectFirestoreEmulator, doc, getDoc, setDoc, updateDoc,
@@ -17,9 +19,9 @@ const CFG = {
   appId: '1:145905961748:web:59d23670251d01f9795001'
 };
 const FS_DB = 'dragon'; // named Firestore DB (asia-east1), not (default)
-const AVATARS = ['av_a', 'av_b', 'av_c', 'av_d', 'av_e'];
+const AVATARS = ['av_a','av_b','av_c','av_d','av_e','av_f','av_g','av_h','av_i','av_j','av_k','av_l'];
 const AL = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-const AVQ = '?v=2850';
+const AVQ = '?v=2877';
 const GIFT = 50, BONUS = 100, INVITE_REWARD = 5000, INVITE_DAILY_CAP = 5;
 
 function useEmulator() {
@@ -73,11 +75,73 @@ function isPerm(e) {
   const c = e && (e.code || e.message || '');
   return /permission-denied|PERMISSION_DENIED|Missing or insufficient permissions/i.test(String(c));
 }
+function hostAllowed(h) {
+  h = String(h || '').toLowerCase();
+  return h === 'googleusercontent.com' || h.endsWith('.googleusercontent.com')
+    || h === 'graph.facebook.com' || h.endsWith('.graph.facebook.com')
+    || h === 'fbcdn.net' || h.endsWith('.fbcdn.net');
+}
+function isPhotoUrl(av) {
+  if (typeof av !== 'string' || av.length < 20 || av.length > 500) return false;
+  try {
+    const u = new URL(av);
+    return u.protocol === 'https:' && hostAllowed(u.hostname);
+  } catch (e) { return false; }
+}
+function isBuiltIn(av) { return AVATARS.indexOf(av) >= 0; }
+function isAvatar(av) { return isBuiltIn(av) || isPhotoUrl(av); }
+function normAvatar(av, fallback) { return isAvatar(av) ? av : (fallback || 'av_a'); }
+function escAttr(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '').replace(/>/g, '');
+}
+function builtInSrc(id) { return 'assets/lx/' + id + '.webp' + AVQ; }
+function avatarSrc(av) { return isPhotoUrl(av) ? av : builtInSrc(isBuiltIn(av) ? av : 'av_a'); }
 function faceHtml(av, name) {
-  if (AVATARS.indexOf(av) >= 0) {
-    return '<img src="assets/lx/' + av + '.webp' + AVQ + '" alt="">';
+  if (isPhotoUrl(av)) {
+    return '<img src="' + escAttr(av) + '" alt="" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=\'' + builtInSrc('av_a') + '\'">';
+  }
+  if (isBuiltIn(av)) {
+    return '<img src="' + builtInSrc(av) + '" alt="">';
   }
   return String(name || '?').slice(0, 1);
+}
+function enlargeFbPhoto(url, fbUid) {
+  if (fbUid) {
+    return 'https://graph.facebook.com/' + encodeURIComponent(fbUid) + '/picture?type=large&width=256&height=256';
+  }
+  if (!url) return '';
+  try {
+    const u = new URL(url);
+    if (u.hostname === 'graph.facebook.com' || u.hostname.endsWith('.graph.facebook.com')) {
+      u.searchParams.set('type', 'large');
+      u.searchParams.set('width', '256');
+      u.searchParams.set('height', '256');
+      const out = u.toString();
+      return out.length <= 500 ? out : '';
+    }
+  } catch (e) {}
+  return isPhotoUrl(url) ? url : '';
+}
+function photoFromProvider(p) {
+  if (!p) return '';
+  if (p.providerId === 'facebook.com') return enlargeFbPhoto(p.photoURL, p.uid);
+  let u = p.photoURL || '';
+  if (u && /googleusercontent\.com/i.test(u)) {
+    const bigger = u.replace(/=s\d+(-[a-z])?/gi, '=s256$1');
+    if (isPhotoUrl(bigger)) return bigger;
+  }
+  return isPhotoUrl(u) ? u : '';
+}
+function emitAv() {
+  try { dispatchEvent(new CustomEvent('dfpav', { detail: { avatar: currentAvatar() } })); } catch (e) {}
+}
+function currentAvatar() {
+  if (api.profile && isAvatar(api.profile.avatar)) return api.profile.avatar;
+  try {
+    const saved = JSON.parse(localStorage.getItem('dfp_profile') || '{}');
+    if (saved && isAvatar(saved.avatar)) return saved.avatar;
+  } catch (e) {}
+  return 'av_a';
 }
 function localName() {
   try {
@@ -90,7 +154,7 @@ function localName() {
 function pickAvatar(uid) {
   try {
     const saved = JSON.parse(localStorage.getItem('dfp_profile') || '{}');
-    if (saved && AVATARS.indexOf(saved.avatar) >= 0) return saved.avatar;
+    if (saved && isAvatar(saved.avatar)) return saved.avatar;
   } catch (e) {}
   let h = 0;
   String(uid || '').split('').forEach((ch) => { h = (h + ch.charCodeAt(0)) % 5; });
@@ -137,12 +201,13 @@ const api = {
   guildsOk: false,
   raidsOk: false,
   invitesOk: false,
+  linkNotice: '',
   dbId: 'dragon',
   emu: false,
   writesEnabled: false,
   user: null,
   profile: null,
-  GIFT, BONUS, INVITE_REWARD, INVITE_DAILY_CAP, AVATARS, AVQ, dayId, weekKey, localSpins, faceHtml, normCode, normGuildCode
+  GIFT, BONUS, INVITE_REWARD, INVITE_DAILY_CAP, AVATARS, AVQ, dayId, weekKey, localSpins, faceHtml, normCode, normGuildCode, isAvatar, avatarSrc, currentAvatar
 };
 window.DFPfb = api;
 window.DFPface = faceHtml;
@@ -202,8 +267,17 @@ async function ensureProfile() {
         createdAt: serverTimestamp(), updatedAt: serverTimestamp()
       };
       if (pendingRef && pendingRef !== friendCode) row.pendingRef = pendingRef;
-      await setDoc(pref, row);
-      api.profile = { uid, displayName, avatar, level, friendCode, guildId: '', pendingRef: row.pendingRef || '' };
+      try {
+        await setDoc(pref, row);
+      } catch (e) {
+        if (isPerm(e) && row.avatar !== 'av_a') {
+          row.avatar = 'av_a';
+          await setDoc(pref, row);
+        } else {
+          throw e;
+        }
+      }
+      api.profile = { uid, displayName, avatar: row.avatar, level, friendCode, guildId: '', pendingRef: row.pendingRef || '' };
       cacheProfile(api.profile);
       return api.profile;
     } catch (e) {
@@ -225,7 +299,7 @@ api.updateProfile = async function (patch) {
     const n = patch.displayName.trim().slice(0, 12);
     if (n) next.displayName = n;
   }
-  if (patch && AVATARS.indexOf(patch.avatar) >= 0) next.avatar = patch.avatar;
+  if (patch && isAvatar(patch.avatar)) next.avatar = patch.avatar;
   const level = Math.max(1, Math.min(999, (window.CZ && CZ.st && CZ.st.lv) | 0 || api.profile.level || 1));
   await updateDoc(doc(db, 'players', api.user.uid), {
     displayName: next.displayName,
@@ -237,6 +311,10 @@ api.updateProfile = async function (patch) {
   api.profile.avatar = next.avatar;
   api.profile.level = level;
   cacheProfile(api.profile);
+  emitAv();
+  if (api.guildsOk) {
+    api.reportStats({}).catch(function () {});
+  }
   return api.profile;
 };
 
@@ -256,7 +334,7 @@ async function drainInbox() {
         code = d.friendCode || code;
       }
     } catch (e) {}
-    if (AVATARS.indexOf(av) < 0) av = 'av_a';
+    av = normAvatar(av);
     if (!name) name = '好友';
     try {
       await setDoc(doc(db, 'players', uid, 'friends', from), {
@@ -661,7 +739,7 @@ api.listRaidTargets = async function () {
     map.set(p.uid, {
       uid: p.uid,
       displayName: p.displayName || '旅人',
-      avatar: AVATARS.indexOf(p.avatar) >= 0 ? p.avatar : 'av_a'
+      avatar: normAvatar(p.avatar)
     });
   };
   try { (await api.listFriends()).forEach(add); } catch (e) {}
@@ -755,7 +833,7 @@ api.listHits = async function () {
         av = p.data().avatar || av;
       }
     } catch (e) {}
-    if (AVATARS.indexOf(av) < 0) av = 'av_a';
+    av = normAvatar(av);
     let ts = Date.now();
     try {
       if (d.createdAt && typeof d.createdAt.toMillis === 'function') ts = d.createdAt.toMillis();
@@ -853,7 +931,7 @@ api.listInviteRewards = async function () {
         av = p.data().avatar || av;
       }
     } catch (e) {}
-    if (AVATARS.indexOf(av) < 0) av = 'av_a';
+    av = normAvatar(av);
     let ts = Date.now();
     try {
       if (d.createdAt && typeof d.createdAt.toMillis === 'function') ts = d.createdAt.toMillis();
@@ -901,6 +979,116 @@ api.claimInviteReward = async function (inviteId) {
   return { inviteId, reward: INVITE_REWARD, slot, day };
 };
 
+function linkErr(e, which) {
+  const c = (e && (e.code || e.message)) || '';
+  const w = which === 'facebook' ? 'Facebook' : (which === 'google' ? 'Google' : '');
+  if (/operation-not-allowed/i.test(c)) {
+    return which === 'facebook' ? 'FB 登入即將開放' : (which === 'google' ? 'Google 登入即將開放' : '這個登入方式即將開放');
+  }
+  if (/credential-already-in-use|account-exists-with-different-credential/i.test(c)) {
+    const n = w || '這個';
+    return n + ' 帳號已經連結到另一位旅人，無法再連到目前的身分。請改用尚未連結過的' + (w ? (' ' + w) : '') + ' 帳號。';
+  }
+  if (/popup-closed-by-user|cancelled-popup-request/i.test(c)) return '已取消連結';
+  if (/popup-blocked/i.test(c)) return '瀏覽器擋住了視窗，正在改用頁面跳轉';
+  if (/unauthorized-domain/i.test(c)) return '這個網域還沒有開放登入';
+  if (/offline|fb-writes-blocked/i.test(c)) return '連線後才能連結 Google 或 Facebook';
+  return '連結沒有成功，請稍後再試';
+}
+api.linkError = linkErr;
+function preferRedirect() {
+  try {
+    if (window.Capacitor && typeof Capacitor.isNativePlatform === 'function' && Capacitor.isNativePlatform()) return true;
+    if (window.Capacitor && window.Capacitor.isNative === true) return true;
+  } catch (e) {}
+  try {
+    if (window.matchMedia('(display-mode: standalone)').matches && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent || '')) return true;
+  } catch (e) {}
+  return false;
+}
+function googleProvider() {
+  const p = new GoogleAuthProvider();
+  p.addScope('profile');
+  p.setCustomParameters({ prompt: 'select_account' });
+  return p;
+}
+function facebookProvider() {
+  const p = new FacebookAuthProvider();
+  p.addScope('public_profile');
+  p.addScope('email');
+  return p;
+}
+api.linkedProviders = function () {
+  const out = { google: null, facebook: null };
+  const u = api.user;
+  if (!u || !u.providerData) return out;
+  u.providerData.forEach(function (p) {
+    if (p.providerId === 'google.com') out.google = { photoURL: photoFromProvider(p), displayName: p.displayName || '' };
+    if (p.providerId === 'facebook.com') out.facebook = { photoURL: photoFromProvider(p), displayName: p.displayName || '' };
+  });
+  return out;
+};
+api.setAvatar = async function (av) {
+  if (!isAvatar(av)) throw new Error('bad-avatar');
+  if (api.live && api.writesEnabled) {
+    try {
+      return await api.updateProfile({ avatar: av });
+    } catch (e) {
+      try {
+        const saved = JSON.parse(localStorage.getItem('dfp_profile') || '{}');
+        saved.avatar = av;
+        localStorage.setItem('dfp_profile', JSON.stringify(saved));
+      } catch (x) {}
+      if (api.profile) api.profile.avatar = av;
+      emitAv();
+      if (isPerm(e)) {
+        const err = new Error('local-only');
+        err.code = 'local-only';
+        throw err;
+      }
+      throw e;
+    }
+  }
+  try {
+    const saved = JSON.parse(localStorage.getItem('dfp_profile') || '{}');
+    saved.avatar = av;
+    localStorage.setItem('dfp_profile', JSON.stringify(saved));
+  } catch (e) {}
+  if (api.profile) api.profile.avatar = av;
+  emitAv();
+  return { avatar: av };
+};
+api.linkAccount = async function (which) {
+  if (!api.live || !api.user) {
+    const err = new Error('offline');
+    err.code = 'offline';
+    throw err;
+  }
+  const key = which === 'facebook' ? 'facebook' : 'google';
+  const have = api.linkedProviders()[key];
+  if (have) return { already: true };
+  const provider = key === 'facebook' ? facebookProvider() : googleProvider();
+  try {
+    if (preferRedirect()) {
+      try { sessionStorage.setItem('dfp_link_which', key); } catch (e) {}
+      await linkWithRedirect(api.user, provider);
+      return { redirect: true };
+    }
+    const cred = await linkWithPopup(api.user, provider);
+    api.user = (cred && cred.user) || api.user;
+    emitAv();
+    return { ok: true };
+  } catch (e) {
+    if (e && e.code === 'auth/popup-blocked') {
+      try { sessionStorage.setItem('dfp_link_which', key); } catch (x) {}
+      await linkWithRedirect(api.user, provider);
+      return { redirect: true };
+    }
+    e._which = key;
+    throw e;
+  }
+};
+
 async function probeAndInit() {
   const emu = useEmulator();
   api.emu = emu;
@@ -911,9 +1099,18 @@ async function probeAndInit() {
     connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
     connectFirestoreEmulator(db, '127.0.0.1', 8080);
   }
-  let cred;
   try {
-    cred = await signInAnonymously(auth);
+    try {
+      await getRedirectResult(auth);
+    } catch (e) {
+      let which = '';
+      try { which = sessionStorage.getItem('dfp_link_which') || ''; } catch (x) {}
+      api.linkNotice = linkErr(e, which);
+    }
+    try { sessionStorage.removeItem('dfp_link_which'); } catch (e) {}
+    if (!auth.currentUser) await signInAnonymously(auth);
+    api.user = auth.currentUser;
+    if (!api.user) throw new Error('no-user');
   } catch (e) {
     api.live = false;
     api.writesEnabled = false;
@@ -922,17 +1119,16 @@ async function probeAndInit() {
     api.invitesOk = false;
     return false;
   }
-  api.user = cred.user;
   try {
-    await getDoc(doc(db, 'players', cred.user.uid));
+    await getDoc(doc(db, 'players', api.user.uid));
   } catch (e) {
     api.live = false;
     api.writesEnabled = false;
     api.guildsOk = false;
     api.raidsOk = false;
     api.invitesOk = false;
-    if (!emu) {
-      try { await cred.user.delete(); } catch (x) {
+    if (!emu && api.user && api.user.isAnonymous) {
+      try { await api.user.delete(); } catch (x) {
         try { await signOut(auth); } catch (y) {}
       }
     }
@@ -954,12 +1150,13 @@ async function probeAndInit() {
     api.raidsOk = false;
   }
   try {
-    await getDocs(query(collection(db, 'invites'), where('inviterUid', '==', cred.user.uid)));
+    await getDocs(query(collection(db, 'invites'), where('inviterUid', '==', api.user.uid)));
     api.invitesOk = true;
   } catch (e) {
     api.invitesOk = false;
   }
   await ensureProfile();
+  emitAv();
   if (api.invitesOk) {
     try { await recordPendingInvite(); } catch (e) {}
   }

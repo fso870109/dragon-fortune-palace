@@ -20,7 +20,7 @@ var R=el('div');R.id='lx';
 R.innerHTML=
 '<header class="lxTop">'+
  '<div class="lxLogo"><img src="assets/lx/dragon.webp'+V+'" alt="" width="160" height="181"><span><b>龍運金殿</b><small>DRAGON FORTUNE PALACE</small></span></div>'+
- '<button class="lxMe" id="lxMe" type="button" aria-label="我的會員資料"><span class="lxAv"><img src="assets/lx/avatar.webp'+V+'" alt="" width="128" height="128"></span><span class="lxMeT"><small id="lxLv">Lv.1</small><span class="lxBal"><i class="lxCoin" aria-hidden="true"></i><span id="lxBalSlot"></span></span></span></button>'+
+ '<button class="lxMe" id="lxMe" type="button" aria-label="我的會員資料"><span class="lxAv" id="lxAv" aria-label="更換大頭貼"><img src="assets/lx/avatar.webp'+V+'" alt="" width="128" height="128"></span><span class="lxMeT"><small id="lxLv">Lv.1</small><span class="lxBal"><i class="lxCoin" aria-hidden="true"></i><span id="lxBalSlot"></span></span></span></button>'+
  '<button class="lxPlus" id="lxPlus" type="button" aria-label="領取免費籌碼"><span aria-hidden="true">+</span></button>'+
  '<span id="lxGearSlot"></span>'+
 '</header>'+
@@ -87,6 +87,7 @@ proxyRow(col,'lxGal','🎴','角色圖鑑','<span id="lxGalN"></span>','查看',
 var me=$('lxMeSlot');
 mv($('lv'),me);
 var st=el('div','lxStat');st.innerHTML='<div><small>虛擬籌碼</small><b id="lxSB">0</b></div><div><small>累積贏得</small><b id="lxSW">0</b></div><div><small>成就</small><b id="lxSA">0</b></div>';me.appendChild(st);
+proxyRow(me,'lxAvRow','<img src="assets/lx/av_a.webp?v=2877" alt="" width="64" height="64">','更換大頭貼','選擇金殿旅人像，或使用 Google／FB 照片','更換',function(){if(window.DFPav)DFPav.open()});
 proxyRow(me,'lxMeLb','🏆','排行榜','依累積贏得虛擬籌碼排序','查看','bLb');
 proxyRow(me,'lxMeAch','🎖️','任務與成就','每日任務・成就收藏','查看','bMiss');
 proxyRow(me,'lxMeSet','⚙️','設定','音樂・音效・震動・減少動態效果','開啟','bBgm');
@@ -120,7 +121,7 @@ function tab(t,noScroll){[].forEach.call(R.querySelectorAll('.lxTab'),function(s
 nav.addEventListener('click',function(e){var b=e.target.closest('button[data-tab]');if(!b)return;tap();tab(b.getAttribute('data-tab'))});
 R.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b){tap();tab(b.getAttribute('data-go'))}});
 $('lxCol').onclick=function(){tap();tab('collect')};
-$('lxMe').onclick=function(){tap();tab('me')};
+$('lxMe').onclick=function(e){if(e.target.closest('.lxAv')){tap();if(window.DFPav)DFPav.open();return}tap();tab('me')};
 $('lxMis').onclick=function(){var m=$('bMiss');if(m)m.click()};
 $('lxEv').onclick=function(){var w=D.querySelector('.wkc[data-wd="'+new Date().getDay()+'"]');if(w)w.click();else tab('events')};
 /* Android back: non-home tab → 首頁 */
