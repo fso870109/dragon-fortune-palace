@@ -1,11 +1,11 @@
-/* 龍運金殿 v28.70: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；含公會／排行榜／掠奪） */
+/* 龍運金殿 v28.71: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；含公會／排行榜／掠奪／邀請） */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import {
   getAuth, signInAnonymously, signOut, connectAuthEmulator
 } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js';
 import {
   getFirestore, connectFirestoreEmulator, doc, getDoc, setDoc, updateDoc,
-  deleteDoc, collection, getDocs, query, where, serverTimestamp
+  deleteDoc, collection, getDocs, query, where, serverTimestamp, writeBatch
 } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js';
 
 const CFG = {
@@ -19,7 +19,7 @@ const CFG = {
 const AVATARS = ['av_a', 'av_b', 'av_c', 'av_d', 'av_e'];
 const AL = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const AVQ = '?v=2850';
-const GIFT = 50, BONUS = 100;
+const GIFT = 50, BONUS = 100, INVITE_REWARD = 5000, INVITE_DAILY_CAP = 5;
 
 function useEmulator() {
   try {
@@ -51,6 +51,22 @@ function normCode(s) {
   s = String(s || '').toUpperCase().replace(/\s+/g, '');
   if (/^DF[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{6}$/.test(s)) s = 'DF-' + s.slice(2);
   return s;
+}
+function readPendingRef() {
+  try {
+    const q = new URLSearchParams(location.search);
+    const code = normCode(q.get('ref') || '');
+    if (/^DF-[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{6}$/.test(code)) {
+      try { localStorage.setItem('dfp_ref', JSON.stringify({ code, t: Date.now() })); } catch (e) {}
+      return code;
+    }
+  } catch (e) {}
+  try {
+    const s = JSON.parse(localStorage.getItem('dfp_ref') || '{}');
+    const code = normCode(s && s.code);
+    if (/^DF-[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{6}$/.test(code)) return code;
+  } catch (e) {}
+  return '';
 }
 function isPerm(e) {
   const c = e && (e.code || e.message || '');
@@ -119,11 +135,12 @@ const api = {
   live: false,
   guildsOk: false,
   raidsOk: false,
+  invitesOk: false,
   emu: false,
   writesEnabled: false,
   user: null,
   profile: null,
-  GIFT, BONUS, AVATARS, AVQ, dayId, weekKey, localSpins, faceHtml, normCode, normGuildCode
+  GIFT, BONUS, INVITE_REWARD, INVITE_DAILY_CAP, AVATARS, AVQ, dayId, weekKey, localSpins, faceHtml, normCode, normGuildCode
 };
 window.DFPfb = api;
 window.DFPface = faceHtml;
@@ -143,6 +160,10 @@ function guardRaid() {
   guardWrite();
   if (!api.raidsOk) throw new Error('raids-offline');
 }
+function guardInvite() {
+  guardWrite();
+  if (!api.invitesOk) throw new Error('invites-offline');
+}
 
 async function ensureProfile() {
   guardWrite();
@@ -158,7 +179,8 @@ async function ensureProfile() {
       avatar: p.avatar,
       level: p.level || level,
       friendCode: p.friendCode,
-      guildId: p.guildId || ''
+      guildId: p.guildId || '',
+      pendingRef: p.pendingRef || ''
     };
     if (p.level !== level) {
       try { await updateDoc(pref, { level, updatedAt: serverTimestamp() }); api.profile.level = level; } catch (e) {}
@@ -172,11 +194,14 @@ async function ensureProfile() {
     const friendCode = genCode();
     try {
       await setDoc(doc(db, 'friendCodes', friendCode), { uid });
-      await setDoc(pref, {
+      const pendingRef = readPendingRef();
+      const row = {
         displayName, avatar, level, friendCode,
         createdAt: serverTimestamp(), updatedAt: serverTimestamp()
-      });
-      api.profile = { uid, displayName, avatar, level, friendCode, guildId: '' };
+      };
+      if (pendingRef && pendingRef !== friendCode) row.pendingRef = pendingRef;
+      await setDoc(pref, row);
+      api.profile = { uid, displayName, avatar, level, friendCode, guildId: '', pendingRef: row.pendingRef || '' };
       cacheProfile(api.profile);
       return api.profile;
     } catch (e) {
@@ -300,6 +325,7 @@ api.addFriend = async function (raw) {
     friendCode: api.profile.friendCode,
     at: serverTimestamp()
   });
+  try { await maybeWriteInvite(other, code); } catch (e) {}
   return {
     uid: other,
     displayName: p.displayName,
@@ -768,6 +794,111 @@ api.counterRaid = async function (hitId) {
   return { id: hitId, to: rs.data().from, name: hs.data().displayName || '旅人' };
 };
 
+
+async function maybeWriteInvite(inviterUid, inviterCode) {
+  if (!api.invitesOk || !api.user || !inviterUid) return false;
+  const me = await getDoc(doc(db, 'players', api.user.uid));
+  if (!me.exists()) return false;
+  const pending = me.data().pendingRef || '';
+  if (!pending) return false;
+  if (inviterCode && pending !== inviterCode) return false;
+  if (!inviterCode) {
+    const inviter = await getDoc(doc(db, 'players', inviterUid));
+    if (!inviter.exists() || inviter.data().friendCode !== pending) return false;
+  }
+  const existing = await getDoc(doc(db, 'invites', api.user.uid));
+  if (existing.exists()) return false;
+  const fr = await getDoc(doc(db, 'players', api.user.uid, 'friends', inviterUid));
+  if (!fr.exists()) return false;
+  await setDoc(doc(db, 'invites', api.user.uid), {
+    inviterUid,
+    createdAt: serverTimestamp(),
+    claimed: false
+  });
+  return true;
+}
+
+async function recordPendingInvite() {
+  if (!api.invitesOk || !api.user) return false;
+  const pending = (api.profile && api.profile.pendingRef) || readPendingRef();
+  if (!pending) return false;
+  const look = await getDoc(doc(db, 'friendCodes', pending));
+  if (!look.exists() || !look.data().uid) return false;
+  return maybeWriteInvite(look.data().uid, pending);
+}
+
+api.listInviteRewards = async function () {
+  guardInvite();
+  await ensureProfile();
+  const uid = api.user.uid;
+  const snap = await getDocs(query(collection(db, 'invites'), where('inviterUid', '==', uid)));
+  const day = dayId();
+  let claimedToday = 0;
+  for (const slot of [0, 1, 2, 3, 4]) {
+    try {
+      const c = await getDoc(doc(db, 'inviteClaims', uid + '_' + slot + '_' + day));
+      if (c.exists()) claimedToday += 1;
+    } catch (e) {}
+  }
+  const rows = [];
+  for (const row of snap.docs) {
+    const d = row.data() || {};
+    let name = '新好友', av = 'av_a';
+    try {
+      const p = await getDoc(doc(db, 'players', row.id));
+      if (p.exists()) {
+        name = p.data().displayName || name;
+        av = p.data().avatar || av;
+      }
+    } catch (e) {}
+    if (AVATARS.indexOf(av) < 0) av = 'av_a';
+    let ts = Date.now();
+    try {
+      if (d.createdAt && typeof d.createdAt.toMillis === 'function') ts = d.createdAt.toMillis();
+    } catch (e) {}
+    rows.push({
+      id: row.id,
+      inviterUid: d.inviterUid,
+      claimed: !!d.claimed,
+      displayName: name,
+      avatar: av,
+      t: ts
+    });
+  }
+  rows.sort((a, b) => (a.claimed - b.claimed) || (b.t - a.t));
+  return { rows, claimedToday, cap: INVITE_DAILY_CAP, reward: INVITE_REWARD };
+};
+
+api.claimInviteReward = async function (inviteId) {
+  guardInvite();
+  await ensureProfile();
+  if (!inviteId) throw new Error('not-found');
+  const inv = await getDoc(doc(db, 'invites', inviteId));
+  if (!inv.exists() || inv.data().inviterUid !== api.user.uid) throw new Error('not-found');
+  if (inv.data().claimed) throw new Error('claimed');
+  const day = dayId();
+  let slot = -1;
+  for (const s of [0, 1, 2, 3, 4]) {
+    const c = await getDoc(doc(db, 'inviteClaims', api.user.uid + '_' + s + '_' + day));
+    if (!c.exists()) { slot = s; break; }
+  }
+  if (slot < 0) throw new Error('limit');
+  const batch = writeBatch(db);
+  batch.set(doc(db, 'inviteClaims', api.user.uid + '_' + slot + '_' + day), {
+    inviteId,
+    createdAt: serverTimestamp(),
+    slot
+  });
+  batch.update(doc(db, 'invites', inviteId), {
+    claimed: true,
+    claimedAt: serverTimestamp(),
+    claimDay: day,
+    claimSlot: slot
+  });
+  await batch.commit();
+  return { inviteId, reward: INVITE_REWARD, slot, day };
+};
+
 async function probeAndInit() {
   const emu = useEmulator();
   api.emu = emu;
@@ -786,6 +917,7 @@ async function probeAndInit() {
     api.writesEnabled = false;
     api.guildsOk = false;
     api.raidsOk = false;
+    api.invitesOk = false;
     return false;
   }
   api.user = cred.user;
@@ -796,6 +928,7 @@ async function probeAndInit() {
     api.writesEnabled = false;
     api.guildsOk = false;
     api.raidsOk = false;
+    api.invitesOk = false;
     if (!emu) {
       try { await cred.user.delete(); } catch (x) {
         try { await signOut(auth); } catch (y) {}
@@ -818,7 +951,16 @@ async function probeAndInit() {
   } catch (e) {
     api.raidsOk = false;
   }
+  try {
+    await getDocs(query(collection(db, 'invites'), where('inviterUid', '==', cred.user.uid)));
+    api.invitesOk = true;
+  } catch (e) {
+    api.invitesOk = false;
+  }
   await ensureProfile();
+  if (api.invitesOk) {
+    try { await recordPendingInvite(); } catch (e) {}
+  }
   if (api.raidsOk) {
     try { await api.heartbeat(); } catch (e) {}
   }
@@ -830,5 +972,6 @@ api.ready = probeAndInit().catch(function () {
   api.writesEnabled = false;
   api.guildsOk = false;
   api.raidsOk = false;
+  api.invitesOk = false;
   return false;
 });
