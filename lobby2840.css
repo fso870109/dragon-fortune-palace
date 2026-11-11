@@ -1,5 +1,5 @@
 /* 龍運金殿 v28.40 大廳 2.0（參考稿版面）— 只換版面與外觀，不改機率與經濟 */
-@font-face{font-family:"LxSerif";src:url(assets/fonts/lxserif.woff2?v=2867) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"LxSerif";src:url(assets/fonts/lxserif.woff2?v=2872) format("woff2");font-weight:900;font-display:swap}
 html.lx{--u:calc(min(100vw,520px) / 461);--g1:#fff6d2;--g2:#f6d27a;--g3:#d9a441;--g4:#8a5a14;--red1:#6d0b12;--red2:#3a0408;--red3:#1c0204;
  --gold:linear-gradient(180deg,#fffbe6 6%,#ffe08a 36%,#f2b53a 60%,#a8650c 94%);
  --gframe:linear-gradient(180deg,#fff3c4,#e8b552 30%,#8a5a14 52%,#f6d27a 72%,#a26a18);
