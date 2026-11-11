@@ -2,13 +2,13 @@
 (function(){if(!window.CZ)return;var LS=localStorage,K='dfp_wk',$=function(i){return document.getElementById(i)};
 var IV='?v=2849';function ic(id){return '<img src="assets/lx/ev_'+id+'.webp'+IV+'" alt="" width="128" height="128">'}
 var DAYS=[ /* index = getDay(): 0=日 */
- {w:'日',n:'金殿團圓日',ic:'km_lantern',t:'週末團圓，和好友互送紅包',r:150,go:'',gt:'好友互送'},
- {w:'一',n:'開工紅包日',ic:'km_ume',t:'新的一週，好運開工',r:100,go:'',gt:''},
- {w:'二',n:'天下布武日',ic:'km_ran',t:'武士出陣，今日主打機台',r:100,go:'samurai.html',gt:'前往天下布武'},
- {w:'三',n:'櫻花斬之日',ic:'km_take',t:'櫻吹雪，週間療癒一下',r:100,go:'sakura.html',gt:'前往櫻花斬'},
- {w:'四',n:'招財貓之日',ic:'km_kiku',t:'招財萌貓，週四招好運',r:100,go:'neko.html',gt:'前往招財大作戰'},
- {w:'五',n:'夏祭花火夜',ic:'km_matsu',t:'小週末花火大會',r:120,go:'matsuri.html',gt:'前往夏祭花火'},
- {w:'六',n:'金殿狂歡日',ic:'km_haku',t:'週末狂歡，排行榜衝一波',r:150,go:'',gt:''}];
+ {w:'日',n:'燈之日',ic:'km_lantern',t:'週末團圓，和好友互送紅包',r:150,go:'',gt:'好友互送'},
+ {w:'一',n:'梅之日',ic:'km_ume',t:'新的一週，好運開工',r:100,go:'',gt:''},
+ {w:'二',n:'蘭之日',ic:'km_ran',t:'武士出陣，今日主打機台',r:100,go:'samurai.html',gt:'前往天下布武'},
+ {w:'三',n:'竹之日',ic:'km_take',t:'櫻吹雪，週間療癒一下',r:100,go:'sakura.html',gt:'前往櫻花斬'},
+ {w:'四',n:'菊之日',ic:'km_kiku',t:'招財萌貓，週四招好運',r:100,go:'neko.html',gt:'前往招財大作戰'},
+ {w:'五',n:'松之日',ic:'km_matsu',t:'小週末花火大會',r:120,go:'matsuri.html',gt:'前往夏祭花火'},
+ {w:'六',n:'柏之日',ic:'km_haku',t:'週末狂歡，排行榜衝一波',r:150,go:'',gt:''}];
 function dk(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function got(){try{return LS.getItem(K)===dk()}catch(e){return false}}
 function snd(n){try{window.sfx&&window.sfx(n)}catch(e){}}
@@ -29,7 +29,7 @@ function render(sel){var td=new Date().getDay();if(sel==null)sel=td;var d=DAYS[s
  else h+='<div class="wka"><span class="wkn">'+(((sel-td+7)%7)?'還有 '+((sel-td+7)%7)+' 天開放':'')+'</span></div>';
  $('wkX').className='wkx'+(isT?' on':'');$('wkX').innerHTML=h;
  $('wkL').innerHTML=order.map(function(i){var x=DAYS[i];return '<button class="wki'+(i===td?' td':'')+(i===sel?' sel':'')+'" data-wd="'+i+'"><small>週'+x.w+'</small><span aria-hidden="true">'+ic(x.ic)+'</span></button>'}).join('');
- var gb=$('wkGet');if(gb)gb.onclick=function(){if(got())return;try{LS.setItem(K,dk())}catch(e){}CZ.addChips(d.r);CZ.vib(20);CZ.toast(d.n+'活動紅包 ＋'+d.r,'assets/lx/ev_'+d.ic+'.webp'+IV);snd(2);render(sel)};
+ var gb=$('wkGet');if(gb)gb.onclick=function(){if(got())return;try{LS.setItem(K,dk())}catch(e){}CZ.addChips(d.r);CZ.vib(20);CZ.toast(d.n+'・活動紅包 ＋'+d.r,'assets/lx/ev_'+d.ic+'.webp'+IV);snd(2);render(sel)};
  var fb=$('wkFr');if(fb)fb.onclick=function(){dl.close();var b=$('bFr');b&&b.click()}}
 function open(i){snd(1);CZ.vib(8);render(i);if(!dl.open)dl.showModal()}
 $('wkR').onclick=function(e){var t=e.target.closest('[data-wd]');if(t)open(+t.getAttribute('data-wd'))};
