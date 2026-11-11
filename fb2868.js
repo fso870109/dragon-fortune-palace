@@ -1,4 +1,4 @@
-/* 龍運金殿 v28.71: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；含公會／排行榜／掠奪／邀請） */
+/* 龍運金殿 v28.76: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；含公會／排行榜／掠奪／邀請） */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import {
   getAuth, signInAnonymously, signOut, connectAuthEmulator
@@ -16,6 +16,7 @@ const CFG = {
   messagingSenderId: '145905961748',
   appId: '1:145905961748:web:59d23670251d01f9795001'
 };
+const FS_DB = 'dragon'; // named Firestore DB (asia-east1), not (default)
 const AVATARS = ['av_a', 'av_b', 'av_c', 'av_d', 'av_e'];
 const AL = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const AVQ = '?v=2850';
@@ -136,6 +137,7 @@ const api = {
   guildsOk: false,
   raidsOk: false,
   invitesOk: false,
+  dbId: 'dragon',
   emu: false,
   writesEnabled: false,
   user: null,
@@ -904,7 +906,7 @@ async function probeAndInit() {
   api.emu = emu;
   const app = initializeApp(CFG);
   auth = getAuth(app);
-  db = getFirestore(app);
+  db = getFirestore(app, FS_DB);
   if (emu) {
     connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
     connectFirestoreEmulator(db, '127.0.0.1', 8080);
