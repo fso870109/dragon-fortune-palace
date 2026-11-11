@@ -31,7 +31,7 @@ function enhance(){
       if(mb)mb.setAttribute('aria-expanded','false');
     });
   }
-  tile('adBtn',svg(FILM),'看廣告','領 200 籌碼');
+  tile('adBtn',svg(FILM),'看廣告','領 800 籌碼');
   tile('dailyBtn',img('assets/lx/i_cal.webp'),'每日簽到');
   tile('lbBtn',img('assets/lx/i_rank.webp'),'排行榜');
   tile('invBtn',img('assets/lx/ev_packet.webp'),'邀請好友');

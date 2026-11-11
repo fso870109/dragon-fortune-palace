@@ -333,7 +333,7 @@ $('tabTop').onclick=()=>{lbTab='top';sfx.click();lbRender()};$('tabMe').onclick=
 $('lbReset').onclick=()=>{const f=()=>{const n=lbGet().name;lbSave({name:n,peak:bal});lbNew=-1;lbRender()};if(window.czChipDlg)czChipDlg('lbclear',f);else if(confirm('確定清除本機排行榜與統計嗎？'))f()};
 $('lbClose').onclick=()=>$('lb').close();
 // ---- Rewarded watch-ad: in-house 贊助影片 via DFPad (no daily cap; AdMob flag off) ----
-const AD_REWARD=200;
+const AD_REWARD=800;
 const adLeft=()=>1;
 function adRender(){const b=$('adBtn');if(!b)return;b.classList.remove('dot');b.disabled=false;
 const sm=b.querySelector('.m16sub')||b.querySelector('small');if(sm)sm.textContent='領 '+AD_REWARD+' 籌碼'}

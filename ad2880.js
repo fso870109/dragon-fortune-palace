@@ -1,7 +1,7 @@
 /* v28.80 in-house 贊助影片 (AdMob IDs reserved; SDK flag OFF until app 2.60) */
 (function(){
 if(window.DFPad)return;
-var REWARD=200,DURATION=18;
+var REWARD=800,DURATION=18;
 var ADMOB={
   appId:'ca-app-pub-8660950914804865~4933470237',
   rewardedUnitId:'ca-app-pub-8660950914804865/6354363115'
@@ -29,7 +29,7 @@ function build(){
     '<button type="button" class="dfpAdBtn" id="dfpAdGo" disabled>請看完贊助影片</button></div>'+
     '<div class="dfpAdBox dfpAdRw" id="dfpAdRw" hidden>'+
     '<h2>獎勵到帳</h2>'+
-    '<p class="dfpAdAmt">獲得 <b id="dfpAdAmt">200</b> 籌碼</p>'+
+    '<p class="dfpAdAmt">獲得 <b id="dfpAdAmt">800</b> 籌碼</p>'+
     '<p class="dfpAdNote">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>'+
     '<button type="button" class="dfpAdBtn" id="dfpAdOk">收下</button></div>';
   document.body.appendChild(el);
