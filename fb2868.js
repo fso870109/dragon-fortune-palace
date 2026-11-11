@@ -1,4 +1,4 @@
-/* 龍運金殿 v28.69: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；含公會／排行榜） */
+/* 龍運金殿 v28.70: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；含公會／排行榜／掠奪） */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import {
   getAuth, signInAnonymously, signOut, connectAuthEmulator
@@ -118,6 +118,7 @@ const api = {
   ready: null,
   live: false,
   guildsOk: false,
+  raidsOk: false,
   emu: false,
   writesEnabled: false,
   user: null,
@@ -137,6 +138,10 @@ function guardWrite() {
 function guardGuild() {
   guardWrite();
   if (!api.guildsOk) throw new Error('guilds-offline');
+}
+function guardRaid() {
+  guardWrite();
+  if (!api.raidsOk) throw new Error('raids-offline');
 }
 
 async function ensureProfile() {
@@ -582,6 +587,187 @@ window.DFPstat = window.DFPstat || {
   }
 };
 
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+api.heartbeat = async function () {
+  guardRaid();
+  await ensureProfile();
+  const day = dayId();
+  const ref = doc(db, 'active', day, 'rows', api.user.uid);
+  const payload = {
+    displayName: api.profile.displayName,
+    avatar: api.profile.avatar,
+    updatedAt: serverTimestamp()
+  };
+  try {
+    const snap = await getDoc(ref);
+    if (snap.exists()) await updateDoc(ref, payload);
+    else await setDoc(ref, payload);
+  } catch (e) {}
+};
+
+api.listActive = async function () {
+  guardRaid();
+  const snap = await getDocs(collection(db, 'active', dayId(), 'rows'));
+  return snap.docs.map((d) => ({ uid: d.id, ...d.data() }))
+    .filter((p) => p.uid !== api.user.uid);
+};
+
+api.listRaidTargets = async function () {
+  guardRaid();
+  await ensureProfile();
+  await api.heartbeat();
+  const me = api.user.uid;
+  const map = new Map();
+  const add = function (p) {
+    if (!p || !p.uid || p.uid === me) return;
+    if (map.has(p.uid)) return;
+    map.set(p.uid, {
+      uid: p.uid,
+      displayName: p.displayName || '旅人',
+      avatar: AVATARS.indexOf(p.avatar) >= 0 ? p.avatar : 'av_a'
+    });
+  };
+  try { (await api.listFriends()).forEach(add); } catch (e) {}
+  try {
+    if (api.guildsOk && api.profile && api.profile.guildId) {
+      (await api.listMembers()).forEach((m) => add({
+        uid: m.uid, displayName: m.displayName, avatar: m.avatar
+      }));
+    }
+  } catch (e) {}
+  let extras = [];
+  try { extras = await api.listActive(); } catch (e) {}
+  shuffle(extras).forEach(add);
+  return Array.from(map.values()).slice(0, 10);
+};
+
+api.listMyRaids = async function () {
+  guardRaid();
+  const day = dayId();
+  const uid = api.user.uid;
+  const out = [];
+  for (const slot of [0, 1, 2]) {
+    const id = uid + '_' + slot + '_' + day;
+    const snap = await getDoc(doc(db, 'raids', id));
+    if (snap.exists()) out.push({ id: snap.id, ...snap.data() });
+  }
+  return out;
+};
+
+api.raidPlayer = async function (toUid) {
+  guardRaid();
+  await ensureProfile();
+  if (!toUid || toUid === api.user.uid) throw new Error('self');
+  const pref = await getDoc(doc(db, 'players', toUid));
+  if (!pref.exists()) throw new Error('not-found');
+  const day = dayId();
+  const used = await api.listMyRaids();
+  if (used.length >= 3) throw new Error('limit');
+  let slot = -1;
+  for (const s of [0, 1, 2]) {
+    if (!used.some((r) => r.id === api.user.uid + '_' + s + '_' + day)) {
+      slot = s;
+      break;
+    }
+  }
+  if (slot < 0) throw new Error('limit');
+  const id = api.user.uid + '_' + slot + '_' + day;
+  await setDoc(doc(db, 'raids', id), {
+    from: api.user.uid,
+    to: toUid,
+    day,
+    createdAt: serverTimestamp()
+  });
+  await setDoc(doc(db, 'players', toUid, 'hits', id), {
+    from: api.user.uid,
+    displayName: api.profile.displayName,
+    avatar: api.profile.avatar,
+    day,
+    createdAt: serverTimestamp()
+  });
+  const p = pref.data();
+  return {
+    id,
+    to: toUid,
+    toName: p.displayName || '旅人',
+    toAvatar: p.avatar || 'av_a',
+    slot,
+    day
+  };
+};
+
+api.listHits = async function () {
+  guardRaid();
+  const day = dayId();
+  const snap = await getDocs(collection(db, 'players', api.user.uid, 'hits'));
+  const rows = [];
+  for (const row of snap.docs) {
+    const d = row.data() || {};
+    if (d.day && d.day !== day) continue;
+    let countered = false;
+    try {
+      const c = await getDoc(doc(db, 'counters', row.id));
+      countered = c.exists();
+    } catch (e) {}
+    let name = d.displayName || '旅人';
+    let av = d.avatar || 'av_a';
+    try {
+      const p = await getDoc(doc(db, 'players', d.from));
+      if (p.exists()) {
+        name = p.data().displayName || name;
+        av = p.data().avatar || av;
+      }
+    } catch (e) {}
+    if (AVATARS.indexOf(av) < 0) av = 'av_a';
+    let ts = Date.now();
+    try {
+      if (d.createdAt && typeof d.createdAt.toMillis === 'function') ts = d.createdAt.toMillis();
+    } catch (e) {}
+    rows.push({
+      id: row.id,
+      from: d.from,
+      displayName: name,
+      avatar: av,
+      day: d.day,
+      t: ts,
+      r: countered
+    });
+  }
+  rows.sort((a, b) => b.t - a.t);
+  return rows;
+};
+
+api.counterRaid = async function (hitId) {
+  guardRaid();
+  await ensureProfile();
+  const href = doc(db, 'players', api.user.uid, 'hits', hitId);
+  const hs = await getDoc(href);
+  if (!hs.exists()) throw new Error('not-found');
+  const rs = await getDoc(doc(db, 'raids', hitId));
+  if (!rs.exists() || rs.data().to !== api.user.uid) throw new Error('not-found');
+  const day = dayId();
+  if (rs.data().day !== day) throw new Error('expired');
+  const cref = doc(db, 'counters', hitId);
+  const cs = await getDoc(cref);
+  if (cs.exists()) throw new Error('already');
+  await setDoc(cref, {
+    from: api.user.uid,
+    to: rs.data().from,
+    day,
+    createdAt: serverTimestamp()
+  });
+  return { id: hitId, to: rs.data().from, name: hs.data().displayName || '旅人' };
+};
+
 async function probeAndInit() {
   const emu = useEmulator();
   api.emu = emu;
@@ -599,6 +785,7 @@ async function probeAndInit() {
     api.live = false;
     api.writesEnabled = false;
     api.guildsOk = false;
+    api.raidsOk = false;
     return false;
   }
   api.user = cred.user;
@@ -608,6 +795,7 @@ async function probeAndInit() {
     api.live = false;
     api.writesEnabled = false;
     api.guildsOk = false;
+    api.raidsOk = false;
     if (!emu) {
       try { await cred.user.delete(); } catch (x) {
         try { await signOut(auth); } catch (y) {}
@@ -624,7 +812,16 @@ async function probeAndInit() {
   } catch (e) {
     api.guildsOk = false;
   }
+  try {
+    await getDocs(collection(db, 'active', dayId(), 'rows'));
+    api.raidsOk = true;
+  } catch (e) {
+    api.raidsOk = false;
+  }
   await ensureProfile();
+  if (api.raidsOk) {
+    try { await api.heartbeat(); } catch (e) {}
+  }
   return true;
 }
 
@@ -632,5 +829,6 @@ api.ready = probeAndInit().catch(function () {
   api.live = false;
   api.writesEnabled = false;
   api.guildsOk = false;
+  api.raidsOk = false;
   return false;
 });

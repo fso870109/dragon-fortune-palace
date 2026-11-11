@@ -1,11 +1,16 @@
-/* 龍運金殿 v28.29: 金殿掠奪／回擊＋被打推播（本機示範；只得不失；純虛擬・無兌現） */
-(function(){if(!window.CZ)return;var LS=localStorage,K='dfp_rd',$=function(i){return document.getElementById(i)};
+/* 龍運金殿 v28.70: 金殿掠奪／回擊＋被打推播（連線對戰；規則未發布時回退本機示範；只得不失；純虛擬・無兌現） */
+(function(){if(!window.CZ)return;var LS=localStorage,K='dfp_rd',KL='dfp_rd_live',$=function(i){return document.getElementById(i)};
 var AV='?v=2850',FR=[{id:'a',n:'阿明',av:'av_a'},{id:'b',n:'小美',av:'av_b'},{id:'c',n:'阿傑',av:'av_c'},{id:'d',n:'佳佳',av:'av_d'},{id:'e',n:'老王',av:'av_e'}],AT=3,RW=[30,50,80],RV=80,GAP=7200000;
 function face(name){var p=null,i;for(i=0;i<FR.length;i++)if(FR[i].n===name||FR[i].id===name)p=FR[i];if(window.DFPface)return DFPface(p&&p.av,name||(p&&p.n));if(p&&p.av)return '<img src="assets/lx/'+p.av+'.webp'+AV+'" alt="">';return (name||(p&&p.n)||'?').slice(0,1)}
+function faceAv(av,n){return window.DFPface?DFPface(av,n):face(n)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function bindMq(){[].forEach.call(document.querySelectorAll('#rdL .rdn'),function(w){var b=w.querySelector('b');if(!b)return;w.classList.remove('rdmq');b.style.removeProperty('--mq');if(b.scrollWidth>w.clientWidth+1){w.classList.add('rdmq');b.style.setProperty('--mq',(b.scrollWidth-w.clientWidth)+'px')}})}
 function dk(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function st(){var s;try{s=JSON.parse(LS.getItem(K)||'{}')}catch(e){s={}}if(!s||s.d!==dk())s={d:dk(),a:0,h:[],g:0};if(!Array.isArray(s.h))s.h=[];return s}
 function sv(s){try{LS.setItem(K,JSON.stringify(s))}catch(e){}}
+function liveDay(){return (window.DFPfb&&DFPfb.dayId)?DFPfb.dayId():dk()}
+function lst(){var s;try{s=JSON.parse(LS.getItem(KL)||'{}')}catch(e){s={}}var d=liveDay();if(!s||s.d!==d)s={d:d,sn:[]};if(!Array.isArray(s.sn))s.sn=[];return s}
+function lsv(s){try{LS.setItem(KL,JSON.stringify(s))}catch(e){}}
 function snd(n){try{window.sfx&&window.sfx(n)}catch(e){}}
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
 function hm(t){var d=new Date(t);return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
@@ -13,29 +18,128 @@ var anc=$('ivB')||document.querySelector('.wk')||document.querySelector('.top');
 var bn=document.createElement('button');bn.className='ivb rdb';bn.id='rdB';bn.innerHTML='<span class="ive" aria-hidden="true"><img src="assets/lx/ev_raid.webp?v=2848" alt="" width="128" height="128"></span><span class="ivt"><b>金殿掠奪</b><small id="rdBs"></small></span><span class="ivg">出擊</span>';
 anc.parentNode.insertBefore(bn,anc.nextSibling);
 var d=document.createElement('dialog');d.id='dRd';d.setAttribute('aria-labelledby','rdT');
-d.innerHTML='<h3 id="rdT">金殿掠奪</h3><p class="rdx">示範好友：本機示範，連線對戰準備中</p><div class="rdk"><span id="rdN"></span><span class="rdsh"><img src="assets/lx/ev_shield.webp?v=2848" alt="" width="128" height="128"> 金殿護盾：被掠奪不扣籌碼</span></div>'+
+d.innerHTML='<h3 id="rdT">金殿掠奪</h3><p class="rdx" id="rdW">示範好友：本機示範，連線對戰準備中</p><div class="rdk"><span id="rdN"></span><span class="rdsh"><img src="assets/lx/ev_shield.webp?v=2848" alt="" width="128" height="128"> 金殿護盾：被掠奪不扣籌碼</span></div>'+
 '<div class="rdl" id="rdL"></div><h4 class="rdh">被掠奪紀錄</h4><div class="rdi" id="rdI"></div><p class="ivm" id="rdM" role="status"></p>'+
 '<p class="note">每日可掠奪 3 次（每次 ＋30～80），被好友掠奪可「回擊」領 ＋80，0 點重置<br>掠奪只得不失，不會扣任何籌碼<br>虛擬籌碼僅供娛樂・純虛擬・無兌現・不可轉讓或交易</p><div class="frs"><button class="btn close" id="rdX">關閉</button></div>';
 document.body.appendChild(d);
 var pu=document.createElement('div');pu.className='rdp';pu.id='rdP';pu.setAttribute('role','status');document.body.appendChild(pu);
+var live=false,busy=0,targets=[],myRaids=[],hits=[],demoStarted=0;
 function incoming(){var s=st(),now=Date.now();if(s.g<2&&now-(s.lt||0)>=GAP){s.g++;s.lt=now;s.h.unshift({f:pick(FR).n,t:now,r:0,sn:0});sv(s)}return s}
-function render(){var s=st(),left=AT-s.a,rv=s.h.filter(function(x){return !x.r}).length;
+function renderDemo(){var s=st(),left=AT-s.a,rv=s.h.filter(function(x){return !x.r}).length;
  $('rdN').textContent='今日掠奪 '+s.a+' / '+AT+' 次';
  $('rdL').innerHTML=FR.map(function(f,i){return '<div class="rdf"><span class="rda">'+face(f.n)+'</span><div class="rdn"><b>'+f.n+'</b></div><button class="btn'+(left>0?' hot':'')+'" data-at="'+i+'"'+(left>0?'':' disabled')+'>'+(left>0?'掠奪':'明日')+'</button></div>'}).join('');
  $('rdI').innerHTML=s.h.length?s.h.map(function(x,i){return '<div class="rdr'+(x.r?' got':'')+'"><span class="rda">'+face(x.f)+'</span><span>'+hm(x.t)+'</span><b>'+x.f+' 掠奪了你的金殿！</b><button class="btn'+(x.r?'':' hot')+'" data-rv="'+i+'"'+(x.r?' disabled':'')+'>'+(x.r?'已回擊':'回擊 ＋'+RV)+'</button></div>'}).join(''):'<p class="rde">今天還沒有人來掠奪，金殿平安～</p>';
  $('rdBs').textContent=rv?(rv+' 位好友掠奪了你，快回擊！'):(left>0?('今日還能掠奪 '+left+' 次'):'今日掠奪已用完');
  bn.classList.toggle('has',rv>0||left>0);bindMq()}
-function push(){var s=st(),x=s.h[0];if(!x||x.sn)return;x.sn=1;sv(s);
- pu.innerHTML='<span class="rdpi">'+face(x.f)+'</span><span class="rdpt"><b>'+x.f+' 掠奪了你的金殿！</b><small>護盾已擋下・點此回擊領 ＋'+RV+'</small></span>';
- pu.classList.add('on');try{CZ.vib([30,40,30])}catch(e){}snd(1);clearTimeout(pu._t);pu._t=setTimeout(function(){pu.classList.remove('on')},5200)}
-pu.onclick=function(){pu.classList.remove('on');render();d.open||d.showModal()};
-$('rdL').onclick=function(e){var b=e.target.closest('[data-at]');if(!b||b.disabled)return;var s=st();if(s.a>=AT)return;var f=FR[+b.getAttribute('data-at')],r=pick(RW);s.a++;sv(s);CZ.addChips(r);CZ.vib(25);snd(2);$('rdM').textContent='掠奪 '+f.n+' 的金殿成功！搶回 ＋'+r+'（對方有護盾，不會損失）';CZ.toast('掠奪成功 ＋'+r,'assets/lx/ev_raid.webp?v=2848');render()};
-$('rdI').onclick=function(e){var b=e.target.closest('[data-rv]');if(!b||b.disabled)return;var s=st(),x=s.h[+b.getAttribute('data-rv')];if(!x||x.r)return;x.r=1;sv(s);CZ.addChips(RV);CZ.vib(25);snd(2);$('rdM').textContent='回擊 '+x.f+' 成功！＋'+RV;CZ.toast('回擊成功 ＋'+RV,'assets/lx/ev_counter.webp?v=2848');render()};
-bn.onclick=function(){snd(1);CZ.vib(8);render();d.showModal()};$('rdX').onclick=function(){snd(1);d.close()};
-incoming();render();
+function renderLive(){var left=AT-myRaids.length,rv=hits.filter(function(x){return !x.r}).length;
+ $('rdN').textContent='今日掠奪 '+myRaids.length+' / '+AT+' 次';
+ if(!targets.length)$('rdL').innerHTML='<p class="rde">現在還沒有可掠奪的旅人，晚點再來看看。</p>';
+ else $('rdL').innerHTML=targets.map(function(t){return '<div class="rdf"><span class="rda">'+faceAv(t.avatar,t.displayName)+'</span><div class="rdn"><b>'+esc(t.displayName)+'</b></div><button class="btn'+(left>0?' hot':'')+'" data-uid="'+esc(t.uid)+'"'+(left>0?'':' disabled')+'>'+(left>0?'掠奪':'明日')+'</button></div>'}).join('');
+ $('rdI').innerHTML=hits.length?hits.map(function(x){return '<div class="rdr'+(x.r?' got':'')+'"><span class="rda">'+faceAv(x.avatar,x.displayName)+'</span><span>'+hm(x.t)+'</span><b>'+esc(x.displayName)+' 掠奪了你的金殿！</b><button class="btn'+(x.r?'':' hot')+'" data-hid="'+esc(x.id)+'"'+(x.r?' disabled':'')+'>'+(x.r?'已回擊':'回擊 ＋'+RV)+'</button></div>'}).join(''):'<p class="rde">今天還沒有人來掠奪，金殿平安～</p>';
+ $('rdBs').textContent=rv?(rv+' 位旅人掠奪了你，快回擊！'):(left>0?('今日還能掠奪 '+left+' 次'):'今日掠奪已用完');
+ bn.classList.toggle('has',rv>0||left>0);bindMq()}
+function render(){if(live)renderLive();else renderDemo()}
+function refreshLive(){
+  if(!live||!window.DFPfb||!DFPfb.raidsOk)return Promise.resolve();
+  return Promise.all([
+    DFPfb.listRaidTargets().catch(function(){return []}),
+    DFPfb.listMyRaids().catch(function(){return []}),
+    DFPfb.listHits().catch(function(){return []})
+  ]).then(function(x){
+    targets=x[0]||[];myRaids=x[1]||[];hits=x[2]||[];
+    renderLive();
+  }).catch(function(){renderLive()});
+}
+function rmsg(t){var e=$('rdM');if(e)e.textContent=t||''}
+function doLiveCounter(hid){
+  if(!hid||busy)return Promise.resolve(false);
+  var row=hits.filter(function(x){return x.id===hid})[0];
+  if(row&&row.r)return Promise.resolve(false);
+  busy=1;
+  return DFPfb.counterRaid(hid).then(function(res){
+    busy=0;CZ.addChips(RV);CZ.vib(25);snd(2);
+    rmsg('回擊 '+(res.name||'')+' 成功！＋'+RV);
+    CZ.toast('回擊成功 ＋'+RV,'assets/lx/ev_counter.webp?v=2848');
+    pu.classList.remove('on');
+    return refreshLive();
+  }).catch(function(e){
+    busy=0;var k=e&&e.message;
+    rmsg(k==='already'?'這一擊已經回擊過了':k==='expired'?'這次掠奪已過期':'回擊沒有成功，請稍後再試');
+    return refreshLive();
+  }).then(function(){return true});
+}
+function doDemoCounter(i){
+  var s=st(),x=s.h[i];if(!x||x.r)return false;
+  x.r=1;sv(s);CZ.addChips(RV);CZ.vib(25);snd(2);$('rdM').textContent='回擊 '+x.f+' 成功！＋'+RV;CZ.toast('回擊成功 ＋'+RV,'assets/lx/ev_counter.webp?v=2848');render();return true;
+}
+function paintPush(html){
+  pu.innerHTML=html;
+  pu.classList.add('on');try{CZ.vib([30,40,30])}catch(e){}snd(1);
+}
+function push(){if(live){
+  var seen=lst().sn,x=null,i;
+  for(i=0;i<hits.length;i++){if(!hits[i].r&&seen.indexOf(hits[i].id)<0){x=hits[i];break}}
+  if(!x)return;
+  var s=lst();if(s.sn.indexOf(x.id)<0){s.sn.push(x.id);lsv(s)}
+  pu._hid=x.id;pu._ix=-1;
+  paintPush('<span class="rdpi">'+faceAv(x.avatar,x.displayName)+'</span><span class="rdpt"><b>'+esc(x.displayName)+' 掠奪了你的金殿！</b><span class="rdps">護盾已擋下・不會損失籌碼</span></span><button type="button" class="btn hot rdpc" id="rdPC">回擊 ＋'+RV+'</button>');
+  return;
+}
+ var s=st(),x=s.h[0];if(!x||x.sn)return;x.sn=1;sv(s);pu._hid='';pu._ix=0;
+ paintPush('<span class="rdpi">'+face(x.f)+'</span><span class="rdpt"><b>'+x.f+' 掠奪了你的金殿！</b><span class="rdps">護盾已擋下・不會損失籌碼</span></span><button type="button" class="btn hot rdpc" id="rdPC">回擊 ＋'+RV+'</button>');
+}
+pu.onclick=function(e){
+  var btn=e.target.closest('#rdPC,.rdpc');
+  if(btn){
+    e.preventDefault();e.stopPropagation();
+    if(live){doLiveCounter(pu._hid);return}
+    if(pu._ix>=0)doDemoCounter(pu._ix);
+    pu.classList.remove('on');
+    return;
+  }
+  pu.classList.remove('on');render();d.open||d.showModal()
+};
+$('rdL').onclick=function(e){
+  var b=e.target.closest('[data-uid],[data-at]');if(!b||b.disabled)return;
+  if(live){
+    var uid=b.getAttribute('data-uid');if(!uid||busy)return;
+    if(myRaids.length>=AT)return;
+    busy=1;rmsg('正在掠奪…');
+    DFPfb.raidPlayer(uid).then(function(res){
+      var r=pick(RW);busy=0;CZ.addChips(r);CZ.vib(25);snd(2);
+      rmsg('掠奪 '+(res.toName||'')+' 的金殿成功！搶回 ＋'+r+'（對方有護盾，不會損失）');
+      CZ.toast('掠奪成功 ＋'+r,'assets/lx/ev_raid.webp?v=2848');
+      return refreshLive();
+    }).catch(function(err){
+      busy=0;var k=err&&err.message;
+      rmsg(k==='limit'?'今日掠奪已用完':k==='self'?'不能掠奪自己':k==='not-found'?'找不到這位旅人':'掠奪沒有成功，請稍後再試');
+      refreshLive();
+    });
+    return;
+  }
+  var s=st();if(s.a>=AT)return;var f=FR[+b.getAttribute('data-at')],r=pick(RW);s.a++;sv(s);CZ.addChips(r);CZ.vib(25);snd(2);$('rdM').textContent='掠奪 '+f.n+' 的金殿成功！搶回 ＋'+r+'（對方有護盾，不會損失）';CZ.toast('掠奪成功 ＋'+r,'assets/lx/ev_raid.webp?v=2848');render()
+};
+$('rdI').onclick=function(e){
+  var b=e.target.closest('[data-hid],[data-rv]');if(!b||b.disabled)return;
+  if(live){doLiveCounter(b.getAttribute('data-hid'));return}
+  doDemoCounter(+b.getAttribute('data-rv'));
+};
+bn.onclick=function(){snd(1);CZ.vib(8);render();d.showModal();if(live)refreshLive()};$('rdX').onclick=function(){snd(1);d.close()};
 /* v28.43: only after the player is on the lobby main screen (splash/door/age gate gone, no dialog), then a slim pill above the nav */
 function rdy(){if(document.getElementById('load')||document.getElementById('czDoor')&&document.getElementById('czDoor').offsetParent)return false;if(document.querySelector('dialog[open],.agOn,#h21'))return false;var H=document.documentElement;if(H.classList.contains('lx')){var lx=document.getElementById('lx');if(!lx||lx.getAttribute('data-cur')&&lx.getAttribute('data-cur')!=='home')return false}if(document.hidden)return false;return true}
-var _push=push;push=function(){if(!rdy()){setTimeout(function(){w2(0)},1500);return}var bb=document.querySelector('#lx .lxBot');pu.style.bottom=bb&&bb.offsetParent?(Math.ceil(innerHeight-bb.getBoundingClientRect().top)+4)+'px':'';_push();clearTimeout(pu._t);pu._t=setTimeout(function(){pu.classList.remove('on')},4200)};
+var _push=push;push=function(){if(!rdy()){setTimeout(function(){w2(0)},1500);return}var bar=document.querySelector('#lx .lxIco')||document.querySelector('#lx .lxTop')||document.querySelector('.top');var y=8;if(bar){var r=bar.getBoundingClientRect();if(r&&r.bottom>0)y=Math.ceil(r.bottom)+8}pu.style.top=y+'px';pu.style.bottom='auto';_push();clearTimeout(pu._t);pu._t=setTimeout(function(){pu.classList.remove('on')},4200)};
 function w2(n){var ok=rdy();if(ok){setTimeout(function(){rdy()?_ok():w2(n+1)},1500);return}if(n<300)setTimeout(function(){w2(n+1)},800)}
 function _ok(){push()}
-w2(0);window.DFPrd={render:render,push:push,incoming:incoming,bindMq:bindMq,FR:FR}})();
+function startDemo(){if(live||demoStarted)return;demoStarted=1;incoming();render();w2(0)}
+function goLive(){
+  if(!window.DFPfb||!DFPfb.ready)return false;
+  DFPfb.ready.then(function(ok){
+    if(!ok||!DFPfb.raidsOk){startDemo();return}
+    live=true;d.classList.add('fb');
+    $('rdW').textContent='連線掠奪：向旅人出擊，對方有護盾不會損失';
+    refreshLive().then(function(){w2(0)});
+  }).catch(function(){startDemo()});
+  return true;
+}
+if(!goLive()){var n=0,iv=setInterval(function(){if(goLive()||++n>80){clearInterval(iv);if(n>80)startDemo()}},50)}
+window.DFPrd={render:render,refresh:refreshLive,push:push,incoming:incoming,bindMq:bindMq,FR:FR}})();
