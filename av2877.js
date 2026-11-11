@@ -1,11 +1,12 @@
-/* 龍運金殿 v28.77：大廳大頭貼選擇與帳號連結 */
+/* 龍運金殿 v28.78：大廳大頭貼選擇與帳號連結（FB_LOGIN 可重開 Facebook） */
 (function(){
 var $=function(i){return document.getElementById(i)};
 var AVS=['av_a','av_b','av_c','av_d','av_e','av_f','av_g','av_h','av_i','av_j','av_k','av_l'];
-var Q='?v=2877';
+var Q='?v=2878';
 var FALL='assets/lx/av_a.webp'+Q;
 var blocked={google:false,facebook:false};
 var busy=0;
+function fbOn(){return window.FB_LOGIN===true}
 function ids(){return (window.DFPfb&&DFPfb.AVATARS)||AVS}
 function qv(){return (window.DFPfb&&DFPfb.AVQ)||Q}
 function built(id){return 'assets/lx/'+id+'.webp'+qv()}
@@ -46,7 +47,7 @@ function ensure(){
       '<small class="avLkT">連結帳號</small>'+
       '<div class="avBtns">'+
         '<button type="button" class="btn" id="avG">連結 Google</button>'+
-        '<button type="button" class="btn" id="avF">連結 Facebook</button>'+
+        (fbOn()?'<button type="button" class="btn" id="avF">連結 Facebook</button>':'')+
       '</div>'+
       '<small class="avNote">虛擬籌碼只留在這部裝置，連結不會改到你的籌碼<br>連結後仍是同一個旅人，進度會保留</small>'+
     '</div>'+
@@ -55,7 +56,7 @@ function ensure(){
   $('avGrid').addEventListener('click',onPick);
   $('avProv').addEventListener('click',onPick);
   $('avG').onclick=function(){doLink('google')};
-  $('avF').onclick=function(){doLink('facebook')};
+  if($('avF')) $('avF').onclick=function(){doLink('facebook')};
   $('avX').onclick=function(){snd(1);d.close()};
   return d;
 }
@@ -90,14 +91,13 @@ function paint(){
   }).join('');
   var bits=[];
   if(lk.google&&lk.google.photoURL) bits.push(photoTile(lk.google.photoURL, now===lk.google.photoURL, '使用 Google 大頭貼'));
-  if(lk.facebook&&lk.facebook.photoURL) bits.push(photoTile(lk.facebook.photoURL, now===lk.facebook.photoURL, '使用 FB 大頭貼'));
+  if(fbOn()&&lk.facebook&&lk.facebook.photoURL) bits.push(photoTile(lk.facebook.photoURL, now===lk.facebook.photoURL, '使用 FB 大頭貼'));
   $('avProv').innerHTML=bits.join('');
   $('avProv').hidden=!bits.length;
   var g=$('avG'), f=$('avF');
   g.textContent=gLabel(!!lk.google);
-  f.textContent=fLabel(!!lk.facebook);
   g.disabled=!!lk.google;
-  f.disabled=!!lk.facebook;
+  if(f){ f.hidden=false; f.textContent=fLabel(!!lk.facebook); f.disabled=!!lk.facebook; }
   paintLobby(now);
   if(window.DFPfb&&DFPfb.linkNotice){
     say(DFPfb.linkNotice);
@@ -137,7 +137,7 @@ function onPick(e){
 function doLink(which){
   if(busy)return;
   if(!window.DFPfb||!DFPfb.live||!DFPfb.linkAccount){
-    say('連線後才能連結 Google 或 Facebook');
+    say(fbOn()?'連線後才能連結 Google 或 Facebook':'連線後才能連結 Google');
     return;
   }
   busy=1;say(which==='facebook'?'正在連結 Facebook…':'正在連結 Google…');

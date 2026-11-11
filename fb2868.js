@@ -1,4 +1,4 @@
-/* 龍運金殿 v28.77: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；大頭貼與帳號連結；含公會／排行榜／掠奪／邀請） */
+/* 龍運金殿 v28.78: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；大頭貼與帳號連結；含公會／排行榜／掠奪／邀請） */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import {
   getAuth, signInAnonymously, signOut, connectAuthEmulator,
@@ -21,7 +21,7 @@ const CFG = {
 const FS_DB = 'dragon'; // named Firestore DB (asia-east1), not (default)
 const AVATARS = ['av_a','av_b','av_c','av_d','av_e','av_f','av_g','av_h','av_i','av_j','av_k','av_l'];
 const AL = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-const AVQ = '?v=2877';
+const AVQ = '?v=2878';
 const GIFT = 50, BONUS = 100, INVITE_REWARD = 5000, INVITE_DAILY_CAP = 5;
 
 function useEmulator() {
@@ -992,7 +992,7 @@ function linkErr(e, which) {
   if (/popup-closed-by-user|cancelled-popup-request/i.test(c)) return '已取消連結';
   if (/popup-blocked/i.test(c)) return '瀏覽器擋住了視窗，正在改用頁面跳轉';
   if (/unauthorized-domain/i.test(c)) return '這個網域還沒有開放登入';
-  if (/offline|fb-writes-blocked/i.test(c)) return '連線後才能連結 Google 或 Facebook';
+  if (/offline|fb-writes-blocked/i.test(c)) return (window.FB_LOGIN === true) ? '連線後才能連結 Google 或 Facebook' : '連線後才能連結 Google';
   return '連結沒有成功，請稍後再試';
 }
 api.linkError = linkErr;
@@ -1065,6 +1065,11 @@ api.linkAccount = async function (which) {
     throw err;
   }
   const key = which === 'facebook' ? 'facebook' : 'google';
+  if (key === 'facebook' && window.FB_LOGIN !== true) {
+    const err = new Error('auth/operation-not-allowed');
+    err.code = 'auth/operation-not-allowed';
+    throw err;
+  }
   const have = api.linkedProviders()[key];
   if (have) return { already: true };
   const provider = key === 'facebook' ? facebookProvider() : googleProvider();
