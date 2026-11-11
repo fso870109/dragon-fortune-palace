@@ -18,18 +18,20 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 #wipeNo{background:#2a0d0d;border:1px solid #c99a3a;color:#ffe9b0}#wipeYes{border:0!important;color:#2a0505!important;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f)!important;box-shadow:0 3px 0 #6b420c}
 @media (prefers-reduced-motion:no-preference){#wipeDlg[open] .wC{animation:wIn .22s cubic-bezier(.2,.8,.3,1)}@keyframes wIn{from{opacity:0;transform:translateY(10px) scale(.96)}}}</style></head>
 <body><main>
-<header><img src="assets/lobby/logo22.webp?v=256" alt="龍運金殿" width="880" height="529"><h1>隱私權政策與使用條款</h1><div class="upd">最後更新：2026 年 11 月 4 日</div>
+<header><img src="assets/lobby/logo22.webp?v=256" alt="龍運金殿" width="880" height="529"><h1>隱私權政策與使用條款</h1><div class="upd">最後更新：2026 年 11 月 11 日</div>
 <nav><a href="#privacy">隱私權政策</a><a href="#terms">使用條款</a><a href="#data">資料刪除</a></nav></header>
 <div class="notice">僅供娛樂・虛擬籌碼・純虛擬・無兌現<br><small style="font-weight:400">本遊戲不提供真實金錢賭博，亦無法贏得真實金錢或獎品。</small></div>
 
 <h2 id="privacy">一、隱私權政策</h2>
-<p>「龍運金殿」（以下稱「本遊戲」）重視你的隱私。本遊戲設計為不需註冊帳號即可遊玩，我們不會收集、上傳或出售你的個人資料。</p>
+<p>「龍運金殿」（以下稱「本遊戲」）重視你的隱私。你可以不必另外建立帳號就開始遊玩。虛擬籌碼與大部分遊戲進度只存在你的裝置上；若你使用好友、公會、排行榜、掠奪或大頭貼等連線功能，我們會透過 Google Firebase 以安全連線保存必要的顯示資料。我們不會出售你的資料。</p>
 <ul>
-<li><b>不收集個人資料：</b>本遊戲不要求、也不收集姓名、電子郵件、電話、位置、聯絡人、照片或任何可識別你身分的資料。</li>
-<li><b>僅存於你的裝置：</b>遊戲進度（虛擬籌碼餘額、等級、簽到與任務紀錄、圖鑑收集、音效與音樂設定等）只儲存在你裝置瀏覽器的本機儲存空間（localStorage）與快取中，不會傳送到我們的伺服器。</li>
-<li><b>無第三方追蹤：</b>本遊戲未使用任何廣告聯播網、分析工具、社群登入或第三方追蹤 SDK，也不使用追蹤型 Cookie。遊戲內的「看廣告領籌碼」為模擬功能，不會播放或載入任何第三方廣告。</li>
+<li><b>遊客身分：</b>使用連線功能時，系統會透過 Firebase Authentication 自動建立一組無法對應真實姓名的遊客編號。你可以選擇「連結 Google」，把同一個編號連到你的 Google 帳號，之後才有機會在另一部裝置找回同一個旅人。連結不會上傳或改動你的虛擬籌碼。</li>
+<li><b>顯示名稱與大頭貼：</b>你可以設定最多 12 字的顯示名稱，並選擇內建旅人像；若已連結 Google，也可以選用 Google 大頭貼。名稱與大頭貼會存到 Firebase Firestore，並顯示給別的旅人（好友、公會、排行榜、掠奪／回擊）。</li>
+<li><b>好友碼、公會與對戰紀錄：</b>好友碼、公會與成員、本週轉動次數、掠奪／回擊等顯示用紀錄會保存在 Firebase Firestore。別的旅人看得到你的名稱、大頭貼與公開進度。</li>
+<li><b>只存在你的裝置：</b>虛擬籌碼餘額、押注與中獎、簽到與任務、成就領取、圖鑑收集、外觀與音效設定等，只儲存在裝置的本機儲存空間，不會存到 Firebase，也無法兌換現金、獎品或任何有價物品。</li>
+<li><b>無第三方追蹤：</b>本遊戲未使用廣告聯播網、分析工具或追蹤型 Cookie，也不使用廣告識別碼。遊戲內的「看廣告領籌碼」為模擬功能，不會播放或載入任何第三方廣告。</li>
 <li><b>無付款功能：</b>本遊戲沒有任何應用程式內購買、儲值或付款功能，也不會要求你提供付款資訊。</li>
-<li><b>網路連線：</b>本遊戲僅在載入與更新遊戲檔案時連線至主機（GitHub Pages）。主機服務商可能依其政策記錄一般伺服器日誌（例如 IP 位址與請求時間），此部分不在本遊戲控制範圍內。</li>
+<li><b>網路連線：</b>載入與更新遊戲檔案時會連線至 GitHub Pages；使用連線功能時會連線至 Google Firebase。服務商可能依其政策記錄一般伺服器日誌（例如 IP 位址與請求時間），此部分不在本遊戲控制範圍內。</li>
 <li><b>兒童：</b>本遊戲含模擬賭博內容，適合 18 歲以上玩家，並非為兒童設計，我們也不會刻意收集兒童資料。</li>
 </ul>
 
@@ -38,13 +40,13 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 <li><b>僅供娛樂：</b>本遊戲為模擬老虎機的娛樂遊戲，所有籌碼皆為遊戲內虛擬點數，<b>無法儲值、購買、兌換、轉讓或提領</b>，不具任何現金價值。</li>
 <li><b>不代表真實賭博：</b>在本遊戲中的表現，不代表在真實賭博中會獲得相同結果。</li>
 <li><b>年齡限制：</b>本遊戲適合 18 歲以上玩家。</li>
-<li><b>排行榜：</b>排行榜除「你」以外皆為示範資料，並非真實玩家排名。</li>
+<li><b>排行榜：</b>連線後的排行榜會顯示別的真實旅人的公開名稱、大頭貼與本週轉動次數。若暫時無法連線，則可能改為示範資料。</li>
 <li><b>服務變更：</b>我們可能隨時更新、調整或停止本遊戲的內容與功能。虛擬籌碼與進度儲存在你的裝置上，清除瀏覽器資料或解除安裝後可能無法復原。</li>
 <li><b>適度遊戲：</b>請適度娛樂，合理安排時間。若你或身邊的人有賭博成癮困擾，請尋求專業協助。</li>
 </ul>
 
 <h2 id="data">三、資料刪除</h2>
-<p>因為所有資料只存在你的裝置上，你可以隨時自行刪除：清除本網站的瀏覽器資料，或解除安裝 App，即會移除全部遊戲進度。你也可以直接按下方按鈕清除本裝置上的遊戲資料。</p>
+<p>本機上的虛擬籌碼與遊戲進度，你可以隨時自行刪除：清除本網站的瀏覽器資料、解除安裝 App，或直接按下方按鈕。這會重設本裝置的籌碼與進度；連線後保存的顯示名稱、大頭貼與好友碼仍會留在這個遊客編號下。若要處理連線資料，請透過應用程式商店頁面的開發者聯絡方式與我們聯繫。</p>
 <p class="wipeRow"><button id="wipe" type="button">清除本裝置的遊戲資料</button></p><p id="wipeMsg" role="status"></p>
 <dialog id="wipeDlg" aria-labelledby="wipeT"><div class="wC"><h3 id="wipeT">清除遊戲資料</h3><p>確定要清除本裝置上的所有遊戲進度嗎？</p><ul><li>虛擬籌碼將重設為 1,000</li><li>等級、簽到、任務與角色圖鑑收集紀錄會刪除</li><li>音效、音樂與震動等設定恢復預設</li></ul><p class="wW">此動作無法復原。</p><div class="wB"><button type="button" id="wipeNo">取消</button><button type="button" id="wipeYes">確定清除</button></div></div></dialog>
 
