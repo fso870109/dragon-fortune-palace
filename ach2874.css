@@ -1,4 +1,4 @@
-/* v28.74 金殿成就殿堂 */
+/* v28.75 金殿成就殿堂 */
 #dMiss{padding:14px 12px 16px}
 #dMiss .achTop{display:flex;gap:8px;margin:0 0 12px}
 #dMiss .achTop button{
@@ -55,6 +55,14 @@
     radial-gradient(circle at 35% 30%,#fff3c4,#e2a83a 46%,#8a3a14 78%,#3a1208)
 }
 .acs img{width:26px;height:26px;object-fit:contain}
+.acr.t4 .acs{
+  width:52px;height:52px;
+  background:
+    url(assets/lx/ach_ring.svg?v=2875) center/52px 52px no-repeat,
+    radial-gradient(circle at 35% 30%,#fff3c4,#e2a83a 42%,#8a3a14 76%,#3a1208);
+  box-shadow:0 0 12px rgba(255,200,90,.5)
+}
+.acr.t4 .acs img{width:26px;height:26px}
 .acr.hid .acs img{opacity:.35;filter:grayscale(1)}
 .acx{flex:1;min-width:0}
 .acx b{
@@ -81,7 +89,7 @@
 .acr > .btn{flex:none;align-self:center;height:34px;padding:0 12px;font-size:13px}
 @media (max-width:360px){
   #dMiss{padding:12px 10px 14px}
-  .acs{width:44px;height:44px;background-size:44px 44px,auto}
+  .acs{width:44px;height:44px;background-size:44px 44px,auto}.acr.t4 .acs{width:48px;height:48px;background-size:48px 48px,auto}
   .acx b{font-size:14px}
   .acr{padding:10px 8px;gap:8px}
   #ach{max-height:min(52dvh,460px)}

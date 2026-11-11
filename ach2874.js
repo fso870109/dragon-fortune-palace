@@ -1,10 +1,10 @@
-/* v28.74 金殿成就殿堂 UI（資料與進度在 casino.js） */
+/* v28.75 金殿成就殿堂 UI（資料與進度在 casino.js） */
 (function(){
 if(!window.CZ||!document.getElementById('dMiss'))return;
 var $=function(i){return document.getElementById(i)};
 var CATS=[['all','全部'],['spin','轉動'],['win','贏分'],['mach','機台'],['feat','特色'],['gal','圖鑑'],['sign','簽到'],['frame','外框'],['social','社群'],['lv','等級'],['week','週曆']];
 var TIER=['','銅','銀','金','金殿傳說'];
-var ICO={spin:'assets/lx/i_task.webp?v=2848',win:'assets/lx/i_trophy.webp?v=2848',mach:'assets/lx/dragon.webp?v=2848',feat:'assets/lx/ev_gift.webp?v=2848',gal:'assets/lx/scroll.webp?v=2848',sign:'assets/lx/i_cal.webp?v=2848',frame:'assets/lobby/medal.webp?v=256',social:'assets/lx/ev_friends.webp?v=2848',lv:'assets/lx/i_trophy.webp?v=2848',week:'assets/lx/ev_km_lantern.webp?v=2849'};
+var ICO={spin:'assets/lx/ach_spin.svg?v=2875',win:'assets/lx/ach_win.svg?v=2875',mach:'assets/lx/ach_mach.svg?v=2875',feat:'assets/lx/ach_feat.svg?v=2875',gal:'assets/lx/scroll.webp?v=2848',sign:'assets/lx/i_cal.webp?v=2848',frame:'assets/lx/ach_frame.svg?v=2875',social:'assets/lx/ev_friends.webp?v=2848',lv:'assets/lx/ach_lv.svg?v=2875',week:'assets/lx/ev_lantern.webp?v=2848'};
 var cat='all';
 function fmt(n){try{return Math.floor(+n||0).toLocaleString('zh-Hant')}catch(e){return String(n)}}
 function pane(which){
