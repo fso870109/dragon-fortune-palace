@@ -1,9 +1,9 @@
-/* 龍運金殿 v28.82: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；大頭貼與帳號連結；含公會／排行榜／掠奪／邀請） */
+/* 龍運金殿 v28.83: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；大頭貼與帳號連結；含公會／排行榜／掠奪／邀請） */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import {
   getAuth, signInAnonymously, signOut, connectAuthEmulator,
   GoogleAuthProvider, FacebookAuthProvider,
-  linkWithPopup, linkWithRedirect, getRedirectResult, linkWithCredential
+  linkWithPopup, linkWithRedirect, getRedirectResult, linkWithCredential, signInWithCredential
 } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js';
 import {
   getFirestore, connectFirestoreEmulator, doc, getDoc, setDoc, updateDoc,
@@ -1068,19 +1068,32 @@ api.setAvatar = async function (av) {
   emitAv();
   return { avatar: av };
 };
-async function linkGoogleNative() {
+async function nativeGoogleIdToken() {
   const cap = window.Capacitor;
   const plugins = (cap && cap.Plugins) || {};
+  const opts = { skipNativeAuth: true };
+  let res = null;
+  if (plugins.FirebaseAuthentication && typeof plugins.FirebaseAuthentication.signInWithGoogle === 'function') {
+    res = await plugins.FirebaseAuthentication.signInWithGoogle(opts);
+  } else if (plugins.GoogleAuth && typeof plugins.GoogleAuth.signIn === 'function') {
+    res = await plugins.GoogleAuth.signIn();
+  }
+  return (res && res.credential && res.credential.idToken)
+    || (res && res.authentication && res.authentication.idToken)
+    || (res && res.idToken)
+    || '';
+}
+async function linkGoogleNative() {
   let idToken = '';
   try {
-    if (plugins.GoogleAuth && typeof plugins.GoogleAuth.signIn === 'function') {
-      const user = await plugins.GoogleAuth.signIn();
-      idToken = (user && user.authentication && user.authentication.idToken) || (user && user.idToken) || '';
-    } else if (plugins.FirebaseAuthentication && typeof plugins.FirebaseAuthentication.signInWithGoogle === 'function') {
-      const res = await plugins.FirebaseAuthentication.signInWithGoogle();
-      idToken = (res && res.credential && res.credential.idToken) || '';
-    }
+    idToken = await nativeGoogleIdToken();
   } catch (e) {
+    const msg = String((e && (e.code || e.message)) || e || '');
+    if (/cancel/i.test(msg)) {
+      const err = new Error('auth/popup-closed-by-user');
+      err.code = 'auth/popup-closed-by-user';
+      throw err;
+    }
     throw e;
   }
   if (!idToken) {
@@ -1089,8 +1102,20 @@ async function linkGoogleNative() {
     throw err;
   }
   const cred = GoogleAuthProvider.credential(idToken);
-  const linked = await linkWithCredential(api.user, cred);
-  api.user = (linked && linked.user) || api.user;
+  try {
+    const linked = await linkWithCredential(api.user, cred);
+    api.user = (linked && linked.user) || api.user;
+  } catch (e) {
+    if (e && /credential-already-in-use/i.test(String(e.code || e.message || ''))) {
+      const signed = await signInWithCredential(auth, cred);
+      api.user = (signed && signed.user) || (auth && auth.currentUser) || api.user;
+      try { await ensureProfile(); } catch (x) {}
+      emitAv();
+      return { ok: true, native: true, switched: true };
+    }
+    throw e;
+  }
+  try { await ensureProfile(); } catch (x) {}
   emitAv();
   return { ok: true, native: true };
 }

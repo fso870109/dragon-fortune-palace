@@ -1,4 +1,4 @@
-/* 龍運金殿 v28.78：大廳大頭貼選擇與帳號連結（FB_LOGIN 可重開 Facebook） */
+/* 龍運金殿 v28.83：大廳大頭貼選擇與帳號連結（FB_LOGIN 可重開 Facebook） */
 (function(){
 var $=function(i){return document.getElementById(i)};
 var AVS=['av_a','av_b','av_c','av_d','av_e','av_f','av_g','av_h','av_i','av_j','av_k','av_l'];
@@ -144,9 +144,9 @@ function doLink(which){
   DFPfb.linkAccount(which).then(function(r){
     busy=0;
     if(r&&r.redirect){say('正在改用頁面跳轉，請稍候');return}
-    say('已連結，旅人資料會留在同一個身分');
+    if(r&&r.switched){say('已登入這個 Google 帳號');toast('已登入 Google')}
+    else{say('已連結，旅人資料會留在同一個身分');toast(which==='facebook'?'已連結 Facebook':'已連結 Google')}
     paint();
-    toast(which==='facebook'?'已連結 Facebook':'已連結 Google');
     snd(2);
   }).catch(function(e){
     busy=0;
