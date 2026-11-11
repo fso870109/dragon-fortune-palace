@@ -18,7 +18,7 @@ var live=false,friends=[],busy=0;
 var top=document.querySelector('.top'),bg=$('bBgm');if(!top)return;
 var b=document.createElement('button');b.className='ib';b.id='bFr';b.setAttribute('aria-label','好友互送');b.innerHTML='👥<span class="dot"></span>';top.insertBefore(b,bg||null);
 var d=document.createElement('dialog');d.id='dFr';d.setAttribute('aria-labelledby','frT');
-d.innerHTML='<h3 id="frT">好友互送</h3><span class="frw" id="frW">示範好友：本機示範，連線好友準備中</span>'+
+d.innerHTML='<h3 id="frT">好友互送</h3><span class="frw" id="frW">目前離線，顯示本機示範資料</span>'+
 '<div class="frme" id="frMe">'+
  '<span class="fav" id="frMeAv" aria-hidden="true"></span>'+
  '<div class="n"><label class="sr" for="frNm">顯示名稱</label><input id="frNm" maxlength="12" autocomplete="off" spellcheck="false">'+

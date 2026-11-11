@@ -1,4 +1,4 @@
-/* v28.75 金殿成就殿堂 UI（資料與進度在 casino.js） */
+/* v28.82 金殿成就殿堂 UI（資料與進度在 casino.js） */
 (function(){
 if(!window.CZ||!document.getElementById('dMiss'))return;
 var $=function(i){return document.getElementById(i)};
@@ -19,6 +19,7 @@ function render(){
   var list=CZ.ACH||[],done=list.filter(function(a){return CZ.st.ach[a.id]}).length;
   var wait=CZ.unclaimed?CZ.unclaimed():0;
   if($('achSum'))$('achSum').textContent='已解鎖 '+done+' / '+list.length+(wait?('・待領 '+wait):'');
+  if($('achAllWrap'))$('achAllWrap').hidden=!wait;
   var bar=$('achAlli');if(bar)bar.style.width=(list.length?Math.round(done/list.length*100):0)+'%';
   if($('tabAchN')){if(wait){$('tabAchN').hidden=false;$('tabAchN').textContent=wait}else $('tabAchN').hidden=true}
   var cats=$('achCats');
@@ -61,5 +62,6 @@ if(box)box.addEventListener('click',function(e){
 });
 if($('tabMiss'))$('tabMiss').onclick=function(){pane('miss')};
 if($('tabAch'))$('tabAch').onclick=function(){pane('ach')};
+if($('achAll'))$('achAll').onclick=function(){if(!CZ.claimAllAchs)return;var r=CZ.claimAllAchs();if(r&&r.n)try{window.sfx&&sfx(2)}catch(err){}render()};
 window.DFPach={render:render,pane:pane};
 })();

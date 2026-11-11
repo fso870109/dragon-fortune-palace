@@ -1,9 +1,15 @@
-/* v28.77 金殿大頭貼選擇 */
+/* v28.82 金殿大頭貼選擇 */
 #lxMe .lxAv{cursor:pointer;position:relative}
 #lxMe .lxAv::after{content:"";position:absolute;inset:-3px;border-radius:50%;box-shadow:0 0 0 1.5px rgba(224,179,74,.0);pointer-events:none;transition:box-shadow .2s}
 #lxMe .lxAv:hover::after,#lxMe .lxAv:active::after{box-shadow:0 0 0 2px rgba(224,179,74,.75),0 0 10px rgba(255,200,90,.35)}
-#lxAvRow .ive{overflow:hidden;border-radius:50%}
-#lxAvRow .ive img{width:100%;height:100%;object-fit:cover;display:block}
+#lx #lxAvRow .ive,#lxAvRow.ivb .ive{
+  overflow:hidden;border-radius:50%;box-sizing:border-box;padding:2px
+}
+#lx #lxAvRow .ive img,#lxAvRow.ivb .ive img{
+  width:100%!important;height:100%!important;object-fit:cover!important;
+  border-radius:50%;display:block;filter:none
+}
+#lx .ivb .ive svg,.ivb .ive svg{width:70%;height:70%;display:block}
 
 #dFr .fravs{display:flex;align-items:center}
 #dFr #frAvCh{width:auto;height:32px;padding:0 12px;border-radius:16px;font:700 13px/1 "Noto Sans TC",sans-serif;color:#ffe08a;flex:none}

@@ -36,3 +36,10 @@
 
 .rdp{overflow:hidden}
 .rdp .rdpc::before,.rdp .rdpc::after{content:none!important;display:none!important}
+
+/* v28.82 compact push */
+.rdp{padding:5px 10px;gap:6px;top:6px;border-radius:12px}
+.rdp b{font-size:12.5px;line-height:1.2}
+.rdp small,.rdp .rdps{font-size:11px;margin-top:0;line-height:1.25}
+.rdp .rdpi{width:26px;height:26px}
+.rdp .rdpc{height:26px;padding:0 8px;font-size:11.5px}

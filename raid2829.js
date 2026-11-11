@@ -18,7 +18,7 @@ var anc=$('ivB')||document.querySelector('.wk')||document.querySelector('.top');
 var bn=document.createElement('button');bn.className='ivb rdb';bn.id='rdB';bn.innerHTML='<span class="ive" aria-hidden="true"><img src="assets/lx/ev_raid.webp?v=2848" alt="" width="128" height="128"></span><span class="ivt"><b>金殿掠奪</b><small id="rdBs"></small></span><span class="ivg">出擊</span>';
 anc.parentNode.insertBefore(bn,anc.nextSibling);
 var d=document.createElement('dialog');d.id='dRd';d.setAttribute('aria-labelledby','rdT');
-d.innerHTML='<h3 id="rdT">金殿掠奪</h3><p class="rdx" id="rdW">示範好友：本機示範，連線對戰準備中</p><div class="rdk"><span id="rdN"></span><span class="rdsh"><img src="assets/lx/ev_shield.webp?v=2848" alt="" width="128" height="128"> 金殿護盾：被掠奪不扣籌碼</span></div>'+
+d.innerHTML='<h3 id="rdT">金殿掠奪</h3><p class="rdx" id="rdW">目前離線，顯示本機示範資料</p><div class="rdk"><span id="rdN"></span><span class="rdsh"><img src="assets/lx/ev_shield.webp?v=2848" alt="" width="128" height="128"> 金殿護盾：被掠奪不扣籌碼</span></div>'+
 '<div class="rdl" id="rdL"></div><h4 class="rdh">被掠奪紀錄</h4><div class="rdi" id="rdI"></div><p class="ivm" id="rdM" role="status"></p>'+
 '<p class="note">每日可掠奪 3 次（每次 ＋30～80），被好友掠奪可「回擊」領 ＋80，0 點重置<br>掠奪只得不失，不會扣任何籌碼<br>虛擬籌碼僅供娛樂・純虛擬・無兌現・不可轉讓或交易</p><div class="frs"><button class="btn close" id="rdX">關閉</button></div>';
 document.body.appendChild(d);

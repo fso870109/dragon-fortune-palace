@@ -1,10 +1,10 @@
-/* v28.73 shared 金殿 reward toast — #czToast .czt */
+/* v28.82 compact 金殿 reward toast — #czToast .czt */
 #czToast{
   z-index:12000;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:8px;
+  gap:4px;
   pointer-events:none;
   max-width:calc(100vw - 16px);
   animation:none!important;
@@ -12,7 +12,7 @@
 dialog[open] #czToast{
   position:fixed;
   left:50%;
-  top:calc(env(safe-area-inset-top,0px) + 12px);
+  top:calc(env(safe-area-inset-top,0px) + 8px);
   transform:translateX(-50%);
   z-index:20;
 }
@@ -24,18 +24,18 @@ dialog[open] #czToast{
   position:relative;
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
   width:min(380px,calc(100vw - 24px));
   max-width:calc(100vw - 24px);
   box-sizing:border-box;
-  padding:13px 14px 13px 12px;
-  border-radius:16px;
+  padding:6px 10px 6px 8px;
+  border-radius:12px;
   color:#fff4dc;
   background:
-    var(--czt-tl) 5px 5px / 22px 22px no-repeat,
-    var(--czt-tr) calc(100% - 5px) 5px / 22px 22px no-repeat,
-    var(--czt-bl) 5px calc(100% - 5px) / 22px 22px no-repeat,
-    var(--czt-br) calc(100% - 5px) calc(100% - 5px) / 22px 22px no-repeat,
+    var(--czt-tl) 4px 4px / 16px 16px no-repeat,
+    var(--czt-tr) calc(100% - 4px) 4px / 16px 16px no-repeat,
+    var(--czt-bl) 4px calc(100% - 4px) / 16px 16px no-repeat,
+    var(--czt-br) calc(100% - 4px) calc(100% - 4px) / 16px 16px no-repeat,
     radial-gradient(120% 90% at 50% -18%,rgba(176,36,52,.55),transparent 54%),
     linear-gradient(180deg,#4a1528 0%,#1c0810 56%,#12060a 100%);
   border:2px solid #e0b34a;
@@ -51,8 +51,8 @@ dialog[open] #czToast{
 #czToast .czt::before{
   content:"";
   position:absolute;
-  inset:5px;
-  border-radius:11px;
+  inset:3px;
+  border-radius:8px;
   border:1px solid rgba(232,196,106,.34);
   pointer-events:none;
   z-index:1;
@@ -80,19 +80,19 @@ dialog[open] #czToast{
   position:relative;
   z-index:2;
   flex:none;
-  width:56px;
-  height:56px;
+  width:34px;
+  height:34px;
   display:grid;
   place-items:center;
   border-radius:50%;
   background:
-    url(assets/lobby/medal.webp?v=256) center / 56px 56px no-repeat,
+    url(assets/lobby/medal.webp?v=256) center / 34px 34px no-repeat,
     radial-gradient(circle at 35% 30%,#fff3c4,#e2a83a 46%,#8a3a14 78%,#3a1208);
   box-shadow:0 0 12px rgba(255,200,90,.4);
 }
 #czToast .cztSeal img{
-  width:30px;
-  height:30px;
+  width:18px;
+  height:18px;
   object-fit:contain;
   filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));
 }
@@ -105,27 +105,25 @@ dialog[open] #czToast{
 }
 #czToast .cztT{
   display:block;
-  font:700 16px/1.25 "KleeSub","Noto Sans TC",sans-serif;
+  font:700 13.5px/1.2 "KleeSub","Noto Sans TC",sans-serif;
   letter-spacing:.08em;
   background:linear-gradient(180deg,#fff6d0,#f0c35a 58%,#d9a441);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  overflow-wrap:anywhere;
-  word-break:break-word;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 #czToast .cztD{
   display:block;
-  margin-top:3px;
-  font:600 12.5px/1.35 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  margin-top:1px;
+  font:600 11px/1.25 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
   color:#f0e2c0;
-  overflow-wrap:anywhere;
-  word-break:break-word;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 #czToast .cztBar{
   display:block;
-  margin-top:7px;
-  height:5px;
+  margin-top:4px;
+  height:4px;
   border-radius:99px;
   background:rgba(80,24,20,.88);
   border:1px solid rgba(224,179,74,.45);
@@ -146,7 +144,7 @@ dialog[open] #czToast{
   flex:none;
   max-width:42%;
   margin-left:2px;
-  font:800 22px/1 "TCDisp","LxSerif","Noto Serif TC",serif;
+  font:800 16px/1 "TCDisp","LxSerif","Noto Serif TC",serif;
   letter-spacing:.02em;
   white-space:nowrap;
   background:linear-gradient(180deg,#fff8dc,#ffe08a 42%,#e8b030);
@@ -176,10 +174,16 @@ dialog[open] #czToast{
   10%,82%{opacity:1}
   100%{opacity:0}
 }
+#czToast .cztMore{
+  justify-content:center;text-align:center;min-height:0;padding:4px 12px;width:auto;
+  animation:none!important;
+  font:700 12px/1.2 "Noto Sans TC",sans-serif;color:#ffe08a;letter-spacing:.08em
+}
+#czToast .cztMore::before{display:none}
 @media (max-width:360px){
-  #czToast .czt{padding:11px 12px 11px 10px;gap:8px}
-  #czToast .cztSeal{width:50px;height:50px;background-size:50px 50px,auto}
-  #czToast .cztSeal img{width:26px;height:26px}
-  #czToast .cztT{font-size:15px}
-  #czToast .cztAmt{font-size:20px}
+  #czToast .czt{padding:5px 8px 5px 6px;gap:6px}
+  #czToast .cztSeal{width:30px;height:30px;background-size:30px 30px,auto}
+  #czToast .cztSeal img{width:16px;height:16px}
+  #czToast .cztT{font-size:12.5px}
+  #czToast .cztAmt{font-size:15px}
 }

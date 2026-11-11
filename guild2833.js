@@ -22,7 +22,7 @@ var anc=$('rdB')||$('ivB')||document.querySelector('.wk')||document.querySelecto
 var bn=document.createElement('button');bn.className='ivb gdb';bn.id='gdB';bn.innerHTML='<span class="ive" aria-hidden="true"><img src="assets/lx/ev_castle.webp?v=2848" alt="" width="128" height="128"></span><span class="ivt"><b>公會任務</b><small id="gdBs"></small></span><span class="ivg">共闖</span>';
 anc.parentNode.insertBefore(bn,anc.nextSibling);
 var d=document.createElement('dialog');d.id='dGd';d.setAttribute('aria-labelledby','gdT');
-d.innerHTML='<h3 id="gdT">公會・'+GN+'</h3><p class="gdx" id="gdW">示範公會：本機示範，連線公會準備中</p>'+
+d.innerHTML='<h3 id="gdT">公會・'+GN+'</h3><p class="gdx" id="gdW">目前離線，顯示本機示範資料</p>'+
 '<div class="gdme" id="gdMe"><span class="gdfav" id="gdMeAv" aria-hidden="true"></span><div class="n"><b id="gdGName"></b><small>公會碼 <b id="gdCode"></b> <button type="button" class="btn gdcp" id="gdCopy">複製</button> <button type="button" class="btn" id="gdLeave">退出公會</button></small></div></div>'+
 '<div class="gdjoin" id="gdJoin"><label class="sr" for="gdName">公會名稱</label><input id="gdName" maxlength="12" autocomplete="off" spellcheck="false" placeholder="替公會取個名字">'+
 '<button type="button" class="btn hot" id="gdCreate">建立公會</button>'+

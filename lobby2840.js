@@ -88,15 +88,15 @@ var me=$('lxMeSlot');
 mv($('lv'),me);
 var st=el('div','lxStat');st.innerHTML='<div><small>虛擬籌碼</small><b id="lxSB">0</b></div><div><small>累積贏得</small><b id="lxSW">0</b></div><div><small>成就</small><b id="lxSA">0</b></div>';me.appendChild(st);
 proxyRow(me,'lxAvRow','<img src="assets/lx/av_a.webp?v=2878" alt="" width="64" height="64">','更換大頭貼',(window.FB_LOGIN===true?'選擇金殿旅人像，或使用 Google／FB 照片':'選擇金殿旅人像，或使用 Google 照片'),'更換',function(){if(window.DFPav)DFPav.open()});
-proxyRow(me,'lxMeLb','🏆','排行榜','依累積贏得虛擬籌碼排序','查看','bLb');
-proxyRow(me,'lxMeAch','🎖️','任務與成就','每日任務・成就收藏','查看','bMiss');
-proxyRow(me,'lxMeSet','⚙️','設定','音樂・音效・震動・減少動態效果','開啟','bBgm');
+proxyRow(me,'lxMeLb','<img src="assets/lx/i_rank.webp" alt="" width="64" height="64">','排行榜','依累積贏得虛擬籌碼排序','查看','bLb');
+proxyRow(me,'lxMeAch','<img src="assets/lx/i_trophy.webp" alt="" width="64" height="64">','任務與成就','每日任務・成就收藏','查看','bMiss');
+proxyRow(me,'lxMeSet','<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M19.2 6.8h9.6l1.4 4.6 4.2 1.7 4.2-2.4 4.8 4.8-2.4 4.2 1.7 4.2 4.6 1.4v9.6l-4.6 1.4-1.7 4.2 2.4 4.2-4.8 4.8-4.2-2.4-4.2 1.7-1.4 4.6h-9.6l-1.4-4.6-4.2-1.7-4.2 2.4-4.8-4.8 2.4-4.2-1.7-4.2L6.8 28.8v-9.6l4.6-1.4 1.7-4.2-2.4-4.2 4.8-4.8 4.2 2.4 4.2-1.7z" fill="#f0c45a" stroke="#8a5200" stroke-width="1.4" stroke-linejoin="round"/><circle cx="24" cy="24" r="7.2" fill="#2a0808" stroke="#fff1b0" stroke-width="2"/></svg>','設定','音樂・音效・震動・減少動態效果','開啟','bBgm');
 var ft=D.querySelector('.wrap .foot');mv(ft,me);
 /* hide legacy shell (all live nodes we need were moved out) */
 if(wrap)wrap.classList.add('lxOld');
 /* ---------- carousel ---------- */
 var sl=$('lxSl'),dots=$('lxDots');
-sl.innerHTML=GAMES.map(function(g,i){return '<div class="lxS s-'+g.id+'" role="group" aria-roledescription="輪播" aria-label="'+(i+1)+' / 4：'+g.n+'"><div class="hk" style="background-image:url(assets/lx/hero_'+g.id+'.webp?v=2842)"></div><div class="rt"><b class="tt'+(g.n.length>4?' l5':'')+'">'+g.n+'</b><small>'+g.sub+'</small><button type="button" class="lxPlay" data-play="'+g.id+'">立即遊玩<i aria-hidden="true">▶</i></button></div></div>'}).join('');
+sl.innerHTML=GAMES.map(function(g,i){return '<div class="lxS s-'+g.id+'" role="group" aria-roledescription="輪播" aria-label="'+(i+1)+' / 4：'+g.n+'"><div class="hk" style="background-image:url(assets/lx/hero_'+g.id+'.webp?v=2882)"></div><div class="rt"><b class="tt'+(g.n.length>4?' l5':'')+'">'+g.n+'</b><small>'+g.sub+'</small><button type="button" class="lxPlay" data-play="'+g.id+'">立即遊玩<i aria-hidden="true">▶</i></button></div></div>'}).join('');
 dots.innerHTML=GAMES.map(function(g,i){return '<button type="button" aria-label="第 '+(i+1)+' 張：'+g.n+'"'+(i?'':' class="on"')+'></button>'}).join('');
 var cur=0,auto=null,RMQ=matchMedia('(prefers-reduced-motion: reduce)').matches||D.documentElement.classList.contains('dfpRM');
 function goS(i,sm){cur=(i+GAMES.length)%GAMES.length;sl.scrollTo({left:cur*sl.clientWidth,behavior:sm&&!RMQ?'smooth':'auto'});mark()}

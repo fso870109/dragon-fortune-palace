@@ -1,9 +1,9 @@
-/* 龍運金殿 v28.78: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；大頭貼與帳號連結；含公會／排行榜／掠奪／邀請） */
+/* 龍運金殿 v28.82: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；大頭貼與帳號連結；含公會／排行榜／掠奪／邀請） */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import {
   getAuth, signInAnonymously, signOut, connectAuthEmulator,
   GoogleAuthProvider, FacebookAuthProvider,
-  linkWithPopup, linkWithRedirect, getRedirectResult
+  linkWithPopup, linkWithRedirect, getRedirectResult, linkWithCredential
 } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js';
 import {
   getFirestore, connectFirestoreEmulator, doc, getDoc, setDoc, updateDoc,
@@ -24,12 +24,21 @@ const AL = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const AVQ = '?v=2878';
 const GIFT = 50, BONUS = 100, INVITE_REWARD = 5000, INVITE_DAILY_CAP = 5;
 
+function isNativeApp() {
+  try {
+    if (window.Capacitor && typeof Capacitor.isNativePlatform === 'function' && Capacitor.isNativePlatform()) return true;
+    if (window.Capacitor && window.Capacitor.isNative === true) return true;
+  } catch (e) {}
+  return false;
+}
 function useEmulator() {
   try {
     const q = new URLSearchParams(location.search);
     if (q.get('fbemu') === '0') return false;
     if (q.get('fbemu') === '1') return true;
   } catch (e) {}
+  /* Capacitor WebView origin is https://localhost — that is NOT the Firebase emulator */
+  if (isNativeApp()) return false;
   return location.hostname === '127.0.0.1' || location.hostname === 'localhost';
 }
 function pad2(n) { return n < 10 ? '0' + n : '' + n; }
@@ -993,13 +1002,14 @@ function linkErr(e, which) {
   if (/popup-blocked/i.test(c)) return '瀏覽器擋住了視窗，正在改用頁面跳轉';
   if (/unauthorized-domain/i.test(c)) return '這個網域還沒有開放登入';
   if (/offline|fb-writes-blocked/i.test(c)) return (window.FB_LOGIN === true) ? '連線後才能連結 Google 或 Facebook' : '連線後才能連結 Google';
+  if (/native-google-unavailable/i.test(c)) return 'App 內 Google 連結還需要完成 Firebase Android 設定';
   return '連結沒有成功，請稍後再試';
 }
 api.linkError = linkErr;
 function preferRedirect() {
   try {
-    if (window.Capacitor && typeof Capacitor.isNativePlatform === 'function' && Capacitor.isNativePlatform()) return true;
-    if (window.Capacitor && window.Capacitor.isNative === true) return true;
+    /* Native app uses credential linking, not a WebView redirect */
+    if (isNativeApp()) return false;
   } catch (e) {}
   try {
     if (window.matchMedia('(display-mode: standalone)').matches && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent || '')) return true;
@@ -1058,6 +1068,32 @@ api.setAvatar = async function (av) {
   emitAv();
   return { avatar: av };
 };
+async function linkGoogleNative() {
+  const cap = window.Capacitor;
+  const plugins = (cap && cap.Plugins) || {};
+  let idToken = '';
+  try {
+    if (plugins.GoogleAuth && typeof plugins.GoogleAuth.signIn === 'function') {
+      const user = await plugins.GoogleAuth.signIn();
+      idToken = (user && user.authentication && user.authentication.idToken) || (user && user.idToken) || '';
+    } else if (plugins.FirebaseAuthentication && typeof plugins.FirebaseAuthentication.signInWithGoogle === 'function') {
+      const res = await plugins.FirebaseAuthentication.signInWithGoogle();
+      idToken = (res && res.credential && res.credential.idToken) || '';
+    }
+  } catch (e) {
+    throw e;
+  }
+  if (!idToken) {
+    const err = new Error('native-google-unavailable');
+    err.code = 'native-google-unavailable';
+    throw err;
+  }
+  const cred = GoogleAuthProvider.credential(idToken);
+  const linked = await linkWithCredential(api.user, cred);
+  api.user = (linked && linked.user) || api.user;
+  emitAv();
+  return { ok: true, native: true };
+}
 api.linkAccount = async function (which) {
   if (!api.live || !api.user) {
     const err = new Error('offline');
@@ -1072,6 +1108,9 @@ api.linkAccount = async function (which) {
   }
   const have = api.linkedProviders()[key];
   if (have) return { already: true };
+  if (key === 'google' && isNativeApp()) {
+    return await linkGoogleNative();
+  }
   const provider = key === 'facebook' ? facebookProvider() : googleProvider();
   try {
     if (preferRedirect()) {

@@ -1,5 +1,5 @@
 /* 龍運金殿 v28.40 大廳 2.0（參考稿版面）— 只換版面與外觀，不改機率與經濟 */
-@font-face{font-family:"LxSerif";src:url(assets/fonts/lxserif.woff2?v=2880) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"LxSerif";src:url(assets/fonts/lxserif.woff2?v=2882) format("woff2");font-weight:900;font-display:swap}
 html.lx{--u:calc(min(100vw,520px) / 461);--g1:#fff6d2;--g2:#f6d27a;--g3:#d9a441;--g4:#8a5a14;--red1:#6d0b12;--red2:#3a0408;--red3:#1c0204;
  --gold:linear-gradient(180deg,#fffbe6 6%,#ffe08a 36%,#f2b53a 60%,#a8650c 94%);
  --gframe:linear-gradient(180deg,#fff3c4,#e8b552 30%,#8a5a14 52%,#f6d27a 72%,#a26a18);
@@ -24,7 +24,7 @@ html.lx .wrap.lxOld{display:none!important}
 .lxLogo small{margin-top:calc(3*var(--u));font:700 max(6.5px,calc(8.4*var(--u)))/1 "Times New Roman",serif;letter-spacing:.06em;color:#f6d27a;white-space:nowrap}
 .lxMe{flex:1 1 auto;min-width:0;display:flex;align-items:center;height:calc(46*var(--u));min-height:36px;margin-left:calc(2*var(--u));padding:0 calc(10*var(--u)) 0 0!important;border-radius:999px!important;
  background:linear-gradient(180deg,rgba(60,8,12,.92),rgba(22,2,4,.92)) padding-box,var(--gframe) border-box!important;border:1.5px solid transparent!important;box-shadow:0 2px 8px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,220,150,.25)}
-.lxAv{flex:none;width:calc(50*var(--u));height:calc(50*var(--u));min-width:38px;min-height:38px;margin:-2px calc(5*var(--u)) -2px -3px;border-radius:50%;padding:2px;background:var(--gframe);box-shadow:0 0 8px rgba(255,190,60,.55)}
+.lxAv{flex:none;width:calc(50*var(--u));height:calc(50*var(--u));min-width:38px;min-height:38px;margin:-2px calc(5*var(--u)) -2px -3px;border-radius:50%;padding:2px;overflow:hidden;background:var(--gframe);box-shadow:0 0 8px rgba(255,190,60,.55)}
 .lxAv img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 .lxMeT{display:flex;flex-direction:column;align-items:flex-start;min-width:0;line-height:1.1}
 .lxMeT small{font:700 max(9.5px,calc(11.5*var(--u)))/1.2 "Noto Sans TC",sans-serif;color:#ffe2a0;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
