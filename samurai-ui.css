@@ -281,7 +281,7 @@ body.fs-mode .lcd .scr{background:radial-gradient(ellipse at 50% 120%,rgba(176,5
 @media (max-width:340px){h1 .jp{display:none}.lcd{height:80px}.spin{width:76px;height:76px}.row2 button{font-size:9.5px}}
 @media (min-width:381px) and (max-width:480px) and (min-height:760px){.lcd{height:120px}.spin{width:100px;height:100px}}
 /* ===== v15 夜色戀曲♡ art direction ===== */
-@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff2?v=2872) format("woff2");font-display:swap}
+@font-face{font-family:"KleeSub";src:url(assets/fonts/klee-sub.woff2?v=2874) format("woff2");font-display:swap}
 :root{--acc:#ff4fa3;--acc2:#ffd27a;--acc3:#ff8fc8;--glow:255,79,163;--fx:#ffd36a;--fx2:#ff8a28;--fx-glow:255,176,48;--gold1:#fff0c2;--gold2:#d9a441;--gold3:#7a5418;--hero-h:clamp(430px,62vh,620px);--hero-top:-4vh;--hero-space:clamp(230px,37vh,320px);--tint:transparent}
 body[data-skin="neon"]{--acc:#6fa8ff;--acc3:#a8c8ff;--glow:111,168,255;--tint:rgba(40,70,200,.28)}
 body[data-skin="jade"]{--acc:#ff9cc8;--acc3:#ffd0e4;--glow:255,156,200;--tint:rgba(255,150,200,.22)}

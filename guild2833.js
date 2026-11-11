@@ -103,9 +103,9 @@ $('gdR').onclick=function(e){var b=e.target.closest('[data-cl]');if(!b||b.disabl
     var s=lst(),i=+b.getAttribute('data-cl'),t=0;
     if(guild&&members.length)members.forEach(function(m){if(m.weekKey===s.w)t+=(m.weekSpins|0)});
     if(s.c[i]||t<GOAL[i])return;s.c[i]=1;lsv(s);CZ.addChips(RW[i]);CZ.vib(25);snd(2);
-    gmsg('公會任務 '+GOAL[i]+' 轉達標！＋'+RW[i]);CZ.toast('公會獎勵 ＋'+RW[i],'assets/lx/ev_castle.webp?v=2848');renderLive();return;
+    gmsg('公會任務 '+GOAL[i]+' 轉達標！＋'+RW[i]);CZ.toast('公會獎勵 ＋'+RW[i],'assets/lx/ev_castle.webp?v=2848');try{CZ.track&&CZ.track('gd')}catch(e){}renderLive();return;
   }
-  var s=st(),i=+b.getAttribute('data-cl');if(s.c[i]||total(s)<GOAL[i])return;s.c[i]=1;sv(s);CZ.addChips(RW[i]);CZ.vib(25);snd(2);$('gdM').textContent='公會任務 '+GOAL[i]+' 轉達標！＋'+RW[i];CZ.toast('公會獎勵 ＋'+RW[i],'assets/lx/ev_castle.webp?v=2848');render()};
+  var s=st(),i=+b.getAttribute('data-cl');if(s.c[i]||total(s)<GOAL[i])return;s.c[i]=1;sv(s);CZ.addChips(RW[i]);CZ.vib(25);snd(2);$('gdM').textContent='公會任務 '+GOAL[i]+' 轉達標！＋'+RW[i];CZ.toast('公會獎勵 ＋'+RW[i],'assets/lx/ev_castle.webp?v=2848');try{CZ.track&&CZ.track('gd')}catch(e){}render()};
 d.querySelector('.gdtab').onclick=function(e){var b=e.target.closest('[data-tb]');if(!b)return;tab=+b.getAttribute('data-tb');snd(1);render()};
 $('gdCreate').onclick=function(){
   if(!live||busy)return;var name=$('gdName').value.trim().slice(0,12);if(!name){gmsg('請先替公會取個名字');return}

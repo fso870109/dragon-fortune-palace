@@ -10,7 +10,7 @@ const st=(g,id)=>g[id]||(g[id]={spins:0,fs:0});
 function count(){const g=load();let n=0;MS.forEach(([id])=>ART.forEach(a=>{if(a[2](st(g,id)))n++}));return n}
 window.CZGAL={count,total:MS.length*ART.length,open,got(){const g=load(),r=[];MS.forEach(([id])=>ART.forEach(a=>{if(a[2](st(g,id)))r.push('assets/'+id+'/'+a[0]+'.webp')}));return r}};
 if(window.CZM&&window.CZ&&CZ.onSettle){const _s=CZ.onSettle.bind(CZ);CZ.onSettle=function(o){const r=_s(o);try{const g=load(),s=st(g,CZM.id),b=count();if(!o.free)s.spins++;if(o.sc>=3)s.fs++;if(o.won>0)s.win=(s.win||0)+1;if((o.xr||0)>=10)s.big=(s.big||0)+1;save(g);const a=count();
-  if(a>b&&window.CZEN)CZEN.say('圖鑑新增了一張插圖喔♡',3,2600);if(a>b){galNote(a,MS.length*ART.length)}}catch(e){}return r}}
+  if(a>b&&window.CZEN)CZEN.say('圖鑑新增了一張插圖喔♡',3,2600);if(a>b){galNote(a,MS.length*ART.length);try{window.CZ&&CZ.scanAch&&CZ.scanAch()}catch(e){}}}catch(e){}return r}}
 function open(){const g=load();let d=document.getElementById('czGal');if(d)d.remove();d=document.createElement('dialog');d.id='czGal';
  d.innerHTML=`<h3>🖼 角色圖鑑 <small>${count()}/${MS.length*ART.length}</small></h3><p class="gn">僅供娛樂</p>`+MS.map(([id,nm])=>{const s=st(g,id);return `<div class="gm"><b>${nm}</b><div class="gr">${ART.map(a=>{const ok=a[2](s);return `<button class="gi${ok?'':' lk'}" data-src="assets/${id}/${a[0]}.webp${V}" ${ok?'':'disabled'}>${ok?`<img loading="lazy" src="assets/${id}/${a[0]}.webp${V}" alt="">`:'<i>？</i>'}</button>`}).join('')}</div></div>`}).join('')+`<div class="gv" hidden><img alt=""></div><button class="gx">關閉</button>`;
  document.body.appendChild(d);d.showModal();d.querySelector('.gx').onclick=()=>d.close();d.addEventListener('close',()=>d.remove());

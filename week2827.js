@@ -29,7 +29,7 @@ function render(sel){var td=new Date().getDay();if(sel==null)sel=td;var d=DAYS[s
  else h+='<div class="wka"><span class="wkn">'+(((sel-td+7)%7)?'還有 '+((sel-td+7)%7)+' 天開放':'')+'</span></div>';
  $('wkX').className='wkx'+(isT?' on':'');$('wkX').innerHTML=h;
  $('wkL').innerHTML=order.map(function(i){var x=DAYS[i];return '<button class="wki'+(i===td?' td':'')+(i===sel?' sel':'')+'" data-wd="'+i+'"><small>週'+x.w+'</small><span aria-hidden="true">'+ic(x.ic)+'</span></button>'}).join('');
- var gb=$('wkGet');if(gb)gb.onclick=function(){if(got())return;try{LS.setItem(K,dk())}catch(e){}CZ.addChips(d.r);CZ.vib(20);CZ.toast(d.n+'・活動紅包 ＋'+d.r,'assets/lx/ev_'+d.ic+'.webp'+IV);snd(2);render(sel)};
+ var gb=$('wkGet');if(gb)gb.onclick=function(){if(got())return;try{LS.setItem(K,dk())}catch(e){}CZ.addChips(d.r);CZ.vib(20);CZ.toast(d.n+'・活動紅包 ＋'+d.r,'assets/lx/ev_'+d.ic+'.webp'+IV);try{CZ.track&&CZ.track('wk');CZ.track('wkd',sel)}catch(e){}snd(2);render(sel)};
  var fb=$('wkFr');if(fb)fb.onclick=function(){dl.close();var b=$('bFr');b&&b.click()}}
 function open(i){snd(1);CZ.vib(8);render(i);if(!dl.open)dl.showModal()}
 $('wkR').onclick=function(e){var t=e.target.closest('[data-wd]');if(t)open(+t.getAttribute('data-wd'))};

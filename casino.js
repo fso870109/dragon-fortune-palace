@@ -8,9 +8,71 @@ const MACH={love:'夜色戀曲♡',matsuri:'夏祭花火',caishen:'財神降臨'
 const need=l=>Math.round(400*Math.pow(l,1.45));
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
 const MISS=[{id:'spin',t:'今日旋轉 50 次',g:50,r:300},{id:'won',t:'今日累積贏得 2,000 籌碼',g:2000,r:400},{id:'fs',t:'觸發 1 次免費旋轉',g:1,r:500},{id:'mach',t:'今日玩過 2 台不同機台',g:2,r:300},{id:'big',t:'達成 1 次大獎以上',g:1,r:600}];
-const ACH=[{id:'first',t:'初次中獎',d:'第一次贏得籌碼',r:100},{id:'s100',t:'常客',d:'累計旋轉 100 次',r:300},{id:'s1000',t:'夜之常駐',d:'累計旋轉 1,000 次',r:1500},{id:'big',t:'大獎!',d:'首次大獎',r:500},{id:'epic',t:'傳說',d:'單次贏得總押注 80 倍以上',r:2000},{id:'jp',t:'彩金得主',d:'首次抽中彩金',r:1000},{id:'lv10',t:'銀卡晉升',d:'達到 Lv.10',r:1000},{id:'all',t:'全館制霸',d:'三台機台都玩過',r:800},{id:'buy',t:'直通免費次數',d:'首次購買免費旋轉',r:200}];
+const MIDS=['matsuri','samurai','neko','sakura'];
+const ACH=[
+['s10','初轉金殿','累計旋轉 10 次',80,'spin',1,10,'spins'],
+['s100','常客','累計旋轉 100 次',300,'spin',1,100,'spins'],
+['s1000','夜之常駐','累計旋轉 1,000 次',1500,'spin',3,1000,'spins'],
+['s10k','萬轉金殿','累計旋轉 10,000 次',800,'spin',3,10000,'spins'],
+['s100k','十萬金輪','累計旋轉 100,000 次',1500,'spin',3,100000,'spins'],
+['s1m','百萬金轉','累計旋轉 1,000,000 次',3000,'spin',4,1000000,'spins','百萬金轉'],
+['first','初次中獎','第一次贏得籌碼',100,'win',1,1,'first'],
+['w100k','累積十萬','累計贏得 100,000 籌碼',350,'win',2,100000,'won'],
+['w1m','累積百萬','累計贏得 1,000,000 籌碼',800,'win',3,1000000,'won'],
+['w10m','累積千萬','累計贏得 10,000,000 籌碼',1500,'win',3,10000000,'won'],
+['big','大獎!','首次大獎',500,'win',2,1,'big'],
+['xr30','三十倍風光','單次贏得總押注 30 倍以上',400,'win',2,30,'xr'],
+['epic','傳說','單次贏得總押注 80 倍以上',2000,'win',3,80,'xr'],
+['jp','彩金得主','首次抽中彩金',1000,'win',3,1,'jp'],
+['xr5k','五千倍金輝','單次贏得總押注 5,000 倍以上',3000,'win',4,5000,'xr','五千倍金輝'],
+['all','全館制霸','三台機台都玩過',800,'mach',2,3,'mach'],
+['all4','四館都到','四台機台都玩過',400,'mach',2,4,'mach'],
+['mmats','花火百轉','在夏祭花火累計旋轉 100 次',150,'mach',1,100,'ms_matsuri'],
+['msamu','布武百轉','在天下布武累計旋轉 100 次',150,'mach',1,100,'ms_samurai'],
+['mneko','招財百轉','在招財大作戰累計旋轉 100 次',150,'mach',1,100,'ms_neko'],
+['msaku','櫻斬百轉','在櫻花斬累計旋轉 100 次',150,'mach',1,100,'ms_sakura'],
+['mall1k','四館千轉','四台機台各累計旋轉 1,000 次',1200,'mach',3,4,'ms1k'],
+['buy','直通免費次數','首次購買免費旋轉',200,'feat',1,1,'buy'],
+['fs1','免費初開','觸發 1 次免費旋轉',150,'feat',1,1,'fs'],
+['fs10','免費十連','觸發 10 次免費旋轉',400,'feat',2,10,'fs'],
+['fs100','免費百開','觸發 100 次免費旋轉',1000,'feat',3,100,'fs'],
+['hs1','寶珠初遇','觸發 1 次寶珠對碰',150,'feat',1,1,'hs'],
+['tw1','旋風初起','觸發 1 次旋風聚寶',150,'feat',1,1,'tw'],
+['pl1','彈珠初試','觸發 1 次幸運彈珠',150,'feat',1,1,'pl'],
+['mx1','狂熱初現','觸發 1 次狂熱倍數',150,'feat',1,1,'mx'],
+['feat4','特色齊全','寶珠對碰、旋風聚寶、幸運彈珠、狂熱倍數都觸發過',800,'feat',3,4,'feat4'],
+['g1','初開圖鑑','解鎖 1 張圖鑑',100,'gal',1,1,'gal'],
+['g6','圖鑑六張','解鎖 6 張圖鑑',300,'gal',2,6,'gal'],
+['g12','圖鑑十二','解鎖 12 張圖鑑',500,'gal',2,12,'gal'],
+['g24','圖鑑全收','解鎖全部 24 張圖鑑',2500,'gal',4,24,'gal','圖鑑全收'],
+['d1','初來簽到','簽到 1 天',80,'sign',1,1,'dstreak'],
+['d7','七日連續','連續簽到 7 天',300,'sign',2,7,'dstreak'],
+['d30','三十日連續','連續簽到 30 天',800,'sign',3,30,'dstreak'],
+['d100','百日連續','連續簽到 100 天',1500,'sign',3,100,'dstreak'],
+['d365','全年連續','連續簽到 365 天',3000,'sign',4,365,'dstreak','全年連續'],
+['f2','換上新框','擁有 2 款外框',100,'frame',1,2,'frame'],
+['f6','六框在手','擁有 6 款外框',400,'frame',2,6,'frame'],
+['f12','十二框全','集齊全部 12 款外框',3000,'frame',4,12,'frame','十二框全'],
+['gf1','收到紅包','收到好友紅包 1 次',100,'social',1,1,'gf'],
+['gf10','回送十份','回送好友紅包 10 次',350,'social',2,10,'gs'],
+['gd1','公會立功','領取公會任務獎勵 1 次',150,'social',1,1,'gd'],
+['rd1','初試掠奪','成功掠奪 1 次',100,'social',1,1,'rd'],
+['rv1','初次回擊','成功回擊 1 次',100,'social',1,1,'rv'],
+['rv10','十次回擊','成功回擊 10 次',400,'social',2,10,'rv'],
+['iv1','邀請一位','真實邀請 1 位新玩家',400,'social',2,1,'iv'],
+['iv5','邀請五位','真實邀請 5 位新玩家',1000,'social',3,5,'iv'],
+['iv20','邀請二十','真實邀請 20 位新玩家',2500,'social',4,20,'iv','邀請二十'],
+['lv5','銅卡在身','達到 Lv.5',150,'lv',1,5,'lv'],
+['lv10','銀卡晉升','達到 Lv.10',1000,'lv',3,10,'lv'],
+['lv20','金卡加身','達到 Lv.20',800,'lv',3,20,'lv'],
+['lv50','鑽石殿主','達到 Lv.50',2500,'lv',4,50,'lv','鑽石殿主'],
+['wk1','主題日初領','領取 1 次主題日紅包',80,'week',1,1,'wk'],
+['wk7','主題七日','累計領取 7 次主題日紅包',350,'week',2,7,'wk'],
+['wkAll','主題日全領','七種主題日紅包都領過',1000,'week',3,7,'wkd'],
+['wk365','主題全年','累計領取 365 次主題日紅包',2500,'week',4,365,'wk','主題全年']
+].map(function(x){return {id:x[0],t:x[1],d:x[2],r:x[3],c:x[4],tier:x[5],g:x[6],k:x[7],bd:x[8]||''}});
 let st=J('cz_st',null);if(!st||typeof st!=='object')st={xp:0,lv:1,spins:0,won:0,ach:{},mach:{},free:0,feed:[]};
-st.ach=st.ach||{};st.mach=st.mach||{};st.feed=st.feed||[];
+st.ach=st.ach||{};st.mach=st.mach||{};st.feed=st.feed||[];st.acl=st.acl||{};st.ax=st.ax||{};if(!st._achM){Object.keys(st.ach).forEach(function(k){if(st.ach[k]&&!st.acl[k])st.acl[k]=st.ach[k]});st._achM=1}
 function day(){if(!st.d||st.d.date!==today())st.d={date:today(),spin:0,won:0,fs:0,mach:[],big:0,cl:{}};return st.d}
 let svT=0;const save=()=>{if(svT)return;svT=setTimeout(()=>{svT=0;S('cz_st',st)},400)};addEventListener('pagehide',()=>S('cz_st',st));
 function pools(){let p=J('cz_jp',null);if(!Array.isArray(p)||p.length!==3)p=JP.seed.slice();for(let i=0;i<3;i++)if(!(p[i]>=JP.seed[i]))p[i]=JP.seed[i];return p}
@@ -26,24 +88,39 @@ function toastIco(title,ic){if(typeof ic==='string'&&ic&&ic.indexOf('.')>=0)retu
 function toastHost(){let w=document.getElementById('czToast');if(!w){w=document.createElement('div');w.id='czToast';w.setAttribute('role','status');w.setAttribute('aria-live','polite')}const dlg=document.querySelector('dialog[open]'),dest=dlg||document.body;if(w.parentNode!==dest)dest.appendChild(w);return w}
 function toast(t,ic,opt){if(ic&&typeof ic==='object'&&!Array.isArray(ic)){opt=ic;ic=''}opt=opt||{};let raw=stripMoji(t);let title=opt.title?stripMoji(opt.title):'';let detail=opt.detail?stripMoji(opt.detail):'';let amt=opt.amt!=null&&opt.amt!==''?String(opt.amt):'';if(!amt){const m=raw.match(/[＋+](\d[\d,]*)\s*(籌碼)?/);if(m){amt='＋'+m[1];raw=raw.replace(m[0],'').trim()}}if(!detail){const q=raw.match(/「([^」]+)」/);if(q){detail=q[1];raw=raw.replace(q[0],'').trim()}}raw=raw.replace(/^[！!]+/,'').replace(/[！!]+$/,'').trim();if(!title){if(/^任務完成/.test(raw)){title='任務完成';raw=raw.replace(/^任務完成/,'').trim()}else if(/^成就達成/.test(raw)){title='成就達成';raw=raw.replace(/^成就達成/,'').trim()}else if(/^升級/.test(raw)){title='升級';raw=raw.replace(/^升級/,'').trim()}else if(/^簽到成功/.test(raw)){title='簽到成功';raw=raw.replace(/^簽到成功/,'').trim()}else if(/^免費籌碼/.test(raw)){title='免費籌碼';raw=raw.replace(/^免費籌碼/,'').trim()}else if(/^圖鑑/.test(raw)){title='圖鑑解鎖';raw=raw.replace(/^圖鑑解鎖|^圖鑑/,'').trim()}else{title=raw;raw=''}}raw=raw.replace(/^[！!、，。\s]+/,'').replace(/[！!]+$/,'').trim();if(!detail&&raw)detail=raw;title=stripMoji(title)||'金殿';detail=stripMoji(detail).replace(/^[！!、，。\s]+/,'').replace(/[！!]+$/,'');const src=toastIco(title+(detail?' '+detail:''),ic);const e=document.createElement('div');e.className='czt';const shine=document.createElement('span');shine.className='cztShine';shine.setAttribute('aria-hidden','true');e.appendChild(shine);const seal=document.createElement('span');seal.className='cztSeal';const im=document.createElement('img');im.src=src;im.alt='';im.width=32;im.height=32;im.onerror=function(){this.onerror=null;this.src=TOAST_ICO.gift};seal.appendChild(im);e.appendChild(seal);const tx=document.createElement('span');tx.className='cztTxt';const tb=document.createElement('b');tb.className='cztT';tb.textContent=title;tx.appendChild(tb);if(detail){const sm=document.createElement('small');sm.className='cztD';sm.textContent=detail;tx.appendChild(sm)}if(opt.progress&&opt.progress.length>=2){const a=+opt.progress[0]||0,n=+opt.progress[1]||1;const bar=document.createElement('span');bar.className='cztBar';const iel=document.createElement('i');iel.style.width='0';bar.appendChild(iel);tx.appendChild(bar);requestAnimationFrame(function(){setTimeout(function(){iel.style.width=Math.max(0,Math.min(100,a/n*100))+'%'},40)});if(!amt)amt=a+' / '+n}e.appendChild(tx);if(amt){const em=document.createElement('em');em.className='cztAmt';em.textContent=amt;e.appendChild(em)}toastHost().appendChild(e);setTimeout(function(){e.remove()},3200)}
 function feed(t){st.feed.unshift({t,ts:Date.now()});st.feed.length=Math.min(st.feed.length,12);save()}
-function ach(id){if(st.ach[id])return;const a=ACH.find(x=>x.id===id);if(!a)return;st.ach[id]=Date.now();addChips(a.r);toast(`成就達成「${a.t}」＋${a.r} 籌碼`);feed(`成就「${a.t}」`);save()}
+function ax(){return st.ax||(st.ax={})}
+function frameN(){try{const s=J('fs_skin',{});const o=Array.isArray(s.own)?s.own.slice():[];if(o.indexOf('gold')<0)o.push('gold');return o.length}catch(e){return 1}}
+function galN(){try{return (window.CZGAL&&CZGAL.count())||0}catch(e){return 0}}
+function msN(id){const m=ax().ms||{};return m[id]||0}
+function progOf(a){const x=ax(),k=a.k;if(k==='spins')return st.spins||0;if(k==='won')return Math.floor(st.won||0);if(k==='xr')return x.xr||0;if(k==='first')return ((st.won||0)>0||st.ach.first)?1:0;if(k==='big')return x.big||0;if(k==='jp')return x.jp||0;if(k==='mach')return MIDS.filter(id=>st.mach&&st.mach[id]).length;if(k==='ms_matsuri')return msN('matsuri');if(k==='ms_samurai')return msN('samurai');if(k==='ms_neko')return msN('neko');if(k==='ms_sakura')return msN('sakura');if(k==='ms1k')return MIDS.filter(id=>msN(id)>=1000).length;if(k==='buy')return x.buy||(st.ach.buy?1:0);if(k==='fs')return x.fs||0;if(k==='hs')return x.hs||0;if(k==='tw')return x.tw||0;if(k==='pl')return x.pl||0;if(k==='mx')return x.mx||0;if(k==='feat4')return [x.hs,x.tw,x.pl,x.mx].filter(v=>v>0).length;if(k==='gal')return galN();if(k==='dstreak')return Math.max(x.dstreak||0,(function(){try{return J('fs_daily',{}).life||0}catch(e){return 0}})());if(k==='frame')return frameN();if(k==='gf')return x.gf||0;if(k==='gs')return x.gs||0;if(k==='gd')return x.gd||0;if(k==='rd')return x.rd||0;if(k==='rv')return x.rv||0;if(k==='iv')return x.iv||0;if(k==='lv')return st.lv||1;if(k==='wk')return x.wk||0;if(k==='wkd')return Object.keys(x.wkd||{}).length;return x[k]||0}
+function scanAch(quiet){ACH.forEach(a=>{if(!st.ach[a.id]&&progOf(a)>=a.g)ach(a.id,quiet)})}
+function track(k,n){if(n==null)n=1;const x=ax();if(k==='wkd'){x.wkd=x.wkd||{};x.wkd[String(n)]=1;save();scanAch();emit();return}x[k]=(x[k]||0)+(+n||0);save();scanAch();emit()}
+function trackSign(life,total){const x=ax();x.dstreak=Math.max(x.dstreak||0,life||0);x.dsign=Math.max(x.dsign||0,total||0);save();scanAch();emit()}
+function trackFeat(name){if(name==='旋風聚寶')track('tw');else if(name==='幸運彈珠')track('pl');else if(name==='狂熱倍數')track('mx')}
+function bootSign(){try{const s=J('fs_daily',{});const life=s.life||s.streak||0;if(life)ax().dstreak=Math.max(ax().dstreak||0,life)}catch(e){}}
+function ach(id,quiet){if(st.ach[id])return;const a=ACH.find(x=>x.id===id);if(!a)return;st.ach[id]=Date.now();if(!quiet)toast('成就達成「'+a.t+'」','assets/lx/i_trophy.webp?v=2848');feed('成就「'+a.t+'」');save();emit()}
+function claimAch(id){const a=ACH.find(x=>x.id===id);if(!a||!st.ach[id]||st.acl[id])return false;st.acl[id]=Date.now();addChips(a.r);toast('成就獎勵「'+a.t+'」＋'+a.r,'assets/lx/i_trophy.webp?v=2848');if(a.bd)ax().title=a.bd;save();emit();return true}
+function unclaimed(){return ACH.filter(a=>st.ach[a.id]&&!st.acl[a.id]).length}
 function addXP(x){st.xp+=x;let up=0;while(st.xp>=need(st.lv)){st.xp-=need(st.lv);st.lv++;up++;const r=100*st.lv;addChips(r);toast(`升級！Lv.${st.lv}（${vipOf(st.lv)[1]}）＋${r} 籌碼`);vib([20,40,20])}
- if(st.lv>=10)ach('lv10');if(up)feed(`升級到 Lv.${st.lv}`);save();emit()}
+ if(up){feed(`升級到 Lv.${st.lv}`);scanAch()}save();emit()}
 const FREE_MS=3*3600e3,freeAmt=()=>300+50*VIP.indexOf(vipOf(st.lv));
 const freeLeft=()=>Math.max(0,(st.free||0)+FREE_MS-Date.now());
 function claimFree(){if(freeLeft()>0)return false;st.free=Date.now();const v=freeAmt();addChips(v);toast(`免費籌碼 ＋${v}`);vib(15);save();return true}
 function claimMission(id){const d=day(),m=MISS.find(x=>x.id===id);if(!m||d.cl[id])return;const v=id==='mach'?d.mach.length:d[id];if(v<m.g)return;d.cl[id]=1;addChips(m.r);toast(`任務完成「${m.t}」＋${m.r}`);save();emit()}
 // sample leaderboard — fake players, clearly labelled
 const SAMPLE=[['夜櫻美香',2860400],['Kaito★',1980300],['財神使者',1544800],['最愛煙火',1203000],['LuckyNeko',986500],['賞月兔',742000],['紅包王',530900],['Yuki_88',401200]];
-window.CZ={st,JP,VIP,MISS,ACH,MACH,need,vipOf,pools:()=>P,getBal,addChips,claimFree,freeLeft,freeAmt,claimMission,day,on:f=>ls.add(f),sample:SAMPLE,toast,vib,feed,save,
+window.CZ={st,JP,VIP,MISS,ACH,MACH,need,vipOf,pools:()=>P,getBal,addChips,claimFree,freeLeft,freeAmt,claimMission,day,on:f=>ls.add(f),sample:SAMPLE,toast,vib,feed,save,ach,claimAch,scanAch,track,trackSign,trackFeat,prog:progOf,unclaimed,
  onBet(total){for(let i=0;i<3;i++)P[i]+=total*JP.c*JP.split[i];saveP();if(Math.random()<total/JP.d)pend=total},
- onSettle(o){if(window.CZAUTO&&CZAUTO.on&&(o.sc>=3||o.xr>=10||(pend&&!o.free)))CZAUTO.stop();const d=day();st.spins++;d.spin++;if(o.won>0){st.won+=o.won;d.won+=o.won;ach('first')}
-  if(o.sc>=3){d.fs++}if(o.big){d.big++;ach('big')}if(o.xr>=80)ach('epic');
-  if(IN_M){st.mach[CZM.id]=1;if(!d.mach.includes(CZM.id))d.mach.push(CZM.id);if(Object.keys(st.mach).length>=3)ach('all')}
-  if(st.spins>=100)ach('s100');if(st.spins>=1000)ach('s1000');
+ onSettle(o){if(window.CZAUTO&&CZAUTO.on&&(o.sc>=3||o.xr>=10||(pend&&!o.free)))CZAUTO.stop();const d=day();st.spins++;d.spin++;const x=ax();
+  if(o.won>0){st.won+=o.won;d.won+=o.won}
+  if(o.sc>=3){d.fs++;x.fs=(x.fs||0)+1}
+  if(o.big){d.big++;x.big=(x.big||0)+1}
+  if((o.xr||0)>0)x.xr=Math.max(x.xr||0,o.xr);
+  if(IN_M){st.mach[CZM.id]=1;if(!d.mach.includes(CZM.id))d.mach.push(CZM.id);x.ms=x.ms||{};x.ms[CZM.id]=(x.ms[CZM.id]||0)+1}
+  scanAch();
   if(o.xr>=10)feed(`${IN_M?CZM.name:''} ${o.xr>=80?'傳說大獎':o.xr>=30?'超級大獎':'大獎'} ${Math.round(o.won).toLocaleString()}`);
   if(!o.free)addXP(Math.max(1,Math.round(o.total/4)));else save();
-  if(pend&&!o.free){const t=pend;pend=0;waitIdle(()=>CZ.wheel(t))}emit()}};
+  if(pend&&!o.free){const t=pend;pend=0;waitIdle(()=>CZ.wheel(t))}emit()}};bootSign();scanAch(true);
 let pend=0;
 function idle(){return typeof spinning!=='undefined'&&!spinning&&!bwState&&!FS&&!document.querySelector('dialog[open]')}
 function waitIdle(f){const k=()=>{if(idle())f();else setTimeout(k,300)};setTimeout(k,600)}
@@ -61,7 +138,7 @@ function wheel(total){window.__hold=true;const w=wheelEl(),d=w.querySelector('.c
   const rot=(RM?360:360*6)+(360-(i*18+9))+(Math.random()*10-5);
   requestAnimationFrame(()=>{d.style.transition=`transform ${RM?.6:4.6}s cubic-bezier(.12,.7,.1,1)`;d.style.transform=`rotate(${rot}deg)`});
   setTimeout(()=>{const amt=Math.floor(P[k]);P[k]=JP.seed[k];S('cz_jp',P);res.innerHTML=`<b>${JP.name[k]}彩金</b> ＋${amt.toLocaleString()}`;vib([80,50,80,50,200]);
-   ach('jp');feed(`${JP.name[k]}彩金 ${amt.toLocaleString()}`);
+   ax().jp=(ax().jp||0)+1;scanAch();feed(`${JP.name[k]}彩金 ${amt.toLocaleString()}`);
    setTimeout(()=>{w.classList.remove('on');bal+=amt;ui();$('win').textContent=amt;window.__hold=false;
     bigWin(amt,total,{tier:['epic',JP.name[k]+'彩金','彩金大獎!! 恭喜'],lbl:'彩金池・虛擬籌碼',noStamp:1});emit()},1400)},RM?700:4800)}}
 window.CZ.wheel=wheel;
@@ -125,7 +202,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  const buyLab=()=>{buy.querySelector('small').textContent=`花 ${price().toLocaleString()} 籌碼開啟`};buyLab();new MutationObserver(buyLab).observe($('bet'),{childList:true,characterData:true,subtree:true});
  buy.onclick=()=>{if(spinning||FS||bwState||window.__hold)return;dlg.querySelector('.czbp').innerHTML=`價格：<b>${price().toLocaleString()}</b> 籌碼（總押注 ${BETS[betIdx]*NL} × ${CZM.buy}）`;$('czBuyOk').disabled=bal<price();$('czBuyOk').textContent=bal<price()?'籌碼不足':'確認購買';dlg.showModal()};
  $('czBuyNo').onclick=()=>dlg.close();
- $('czBuyOk').onclick=()=>{dlg.close();const p=price();if(bal<p||spinning||FS)return;bal-=p;ui();ach('buy');vib([20,30,20]);
+ $('czBuyOk').onclick=()=>{dlg.close();const p=price();if(bal<p||spinning||FS)return;bal-=p;ui();ax().buy=1;scanAch();vib([20,30,20]);
   ['spinBtn','minus','plus','maxBtn','max16','resetBtn'].forEach(i=>$(i)&&($(i).disabled=true));FS={left:FS_N,tot:FS_N,n:0,won:0,bet:BETS[betIdx]};day().fs++;save();setTimeout(()=>fsIntro(false),250)};
  // loading screen
  let ld=document.getElementById('czLoad');if(!ld){ld=document.createElement('div');ld.id='czLoad';ld.innerHTML=`<div class="czlt">${CZM.name}</div><div class="czlbar"><i></i></div><div class="czls">載入中…</div><div class="cznote2">僅供娛樂・虛擬籌碼・純虛擬・無兌現</div>`;document.body.appendChild(ld)}

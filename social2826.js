@@ -77,9 +77,9 @@ $('frGet').onclick=function(){
     if(busy)return;var s=lst(),rec=(window.__dfpRec||[]).filter(function(g){return s.got.indexOf(g.id)<0});
     if(!rec.length)return;
     var v=GIFT*rec.length;rec.forEach(function(g){s.got.push(g.id)});lsv(s);
-    CZ.addChips(v);CZ.vib(20);CZ.toast('收到好友紅包 ＋'+v,'assets/lx/ev_packet.webp'+IV);snd(2);renderLive();return;
+    CZ.addChips(v);CZ.vib(20);CZ.toast('收到好友紅包 ＋'+v,'assets/lx/ev_packet.webp'+IV);try{CZ.track&&CZ.track('gf',rec.length)}catch(e){}snd(2);renderLive();return;
   }
-  var s=st();if(s.got)return;s.got=1;sv(s);var v=GIFT*FR.length;CZ.addChips(v);CZ.vib(20);CZ.toast('收到好友紅包 ＋'+v,'assets/lx/ev_packet.webp'+IV);snd(2);render()};
+  var s=st();if(s.got)return;s.got=1;sv(s);var v=GIFT*FR.length;CZ.addChips(v);CZ.vib(20);CZ.toast('收到好友紅包 ＋'+v,'assets/lx/ev_packet.webp'+IV);try{CZ.track&&CZ.track('gf',1)}catch(e){}snd(2);render()};
 $('frL').onclick=function(e){
   var t=e.target.closest('[data-fr]');if(!t)return;
   if(live){
@@ -90,12 +90,12 @@ $('frL').onclick=function(e){
       s=lst();if(s.sent.indexOf(id)<0)s.sent.push(id);
       if(friends.length&&s.sent.length>=friends.length&&!s.bon){s.bon=1;lsv(s);CZ.addChips(BONUS);CZ.toast('好友全回送 ＋'+BONUS,'assets/lx/ev_friends.webp'+IV);snd(2)}
       else{lsv(s);CZ.toast('已回送紅包給 '+(f?f.displayName:'好友'),'assets/lx/ev_packet.webp'+IV);snd(1)}
-      CZ.vib(10);busy=0;renderLive();
+      try{CZ.track&&CZ.track('gs')}catch(e){}CZ.vib(10);busy=0;renderLive();
     }).catch(function(){busy=0;msg('送禮沒有成功，請稍後再試');renderLive()});
     return;
   }
   var s=st(),id=t.getAttribute('data-fr');if(s.sent.indexOf(id)>=0)return;s.sent.push(id);var f=FR.filter(function(x){return x.id===id})[0];
-  if(s.sent.length>=FR.length&&!s.bon){s.bon=1;sv(s);CZ.addChips(BONUS);CZ.toast('好友全回送 ＋'+BONUS,'assets/lx/ev_friends.webp'+IV);snd(2)}else{sv(s);CZ.toast('已回送紅包給 '+(f?f.n:'好友'),'assets/lx/ev_packet.webp'+IV);snd(1)}CZ.vib(10);render()};
+  if(s.sent.length>=FR.length&&!s.bon){s.bon=1;sv(s);CZ.addChips(BONUS);CZ.toast('好友全回送 ＋'+BONUS,'assets/lx/ev_friends.webp'+IV);snd(2)}else{sv(s);CZ.toast('已回送紅包給 '+(f?f.n:'好友'),'assets/lx/ev_packet.webp'+IV);snd(1)}try{CZ.track&&CZ.track('gs')}catch(e){}CZ.vib(10);render()};
 $('frAddB').onclick=function(){
   if(!live||busy)return;var code=$('frIn').value;msg('正在加入…');busy=1;
   DFPfb.addFriend(code).then(function(f){

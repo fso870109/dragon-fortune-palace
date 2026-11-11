@@ -49,7 +49,7 @@ $('ivShare').onclick=async function(){snd(1);var t='來玩龍運金殿！輸入�
 $('ivCopy').onclick=async function(){snd(1);try{await navigator.clipboard.writeText(code());msg('已複製邀請碼 '+code())}catch(e){msg('請長按邀請碼手動複製')}};
 $('ivL').onclick=function(e){var b=e.target.closest('[data-iv]');if(!b||b.disabled)return;var i=+b.getAttribute('data-iv'),s=st(),t=TI[i];if(s.c.indexOf(i)>=0||s.n<t.n)return;s.c.push(i);sv(s);CZ.addChips(t.r);CZ.vib(20);CZ.toast('邀請階梯紅包 ＋'+t.r,'assets/lx/ev_gift.webp?v=2848');snd(2);render()};
 $('ivRealL').onclick=function(e){var b=e.target.closest('[data-ivr]');if(!b||b.disabled||!liveOn()||!DFPfb.claimInviteReward)return;var id=b.getAttribute('data-ivr');b.disabled=true;
- DFPfb.claimInviteReward(id).then(function(r){var v=(r&&r.reward)|0||RR;CZ.addChips(v);CZ.vib(20);CZ.toast('好友加入獎勵 ＋'+v,'assets/lx/ev_gift.webp?v=2848');snd(2);msg('已領取好友加入獎勵 ＋'+v);refreshLive()}).catch(function(err){var k=err&&err.message;msg(k==='limit'?'今日邀請獎勵已達上限':k==='claimed'?'已經領過了':'領取沒有成功，請稍後再試');refreshLive()})};
+ DFPfb.claimInviteReward(id).then(function(r){var v=(r&&r.reward)|0||RR;CZ.addChips(v);CZ.vib(20);CZ.toast('好友加入獎勵 ＋'+v,'assets/lx/ev_gift.webp?v=2848');try{CZ.track&&CZ.track('iv')}catch(e){}snd(2);msg('已領取好友加入獎勵 ＋'+v);refreshLive()}).catch(function(err){var k=err&&err.message;msg(k==='limit'?'今日邀請獎勵已達上限':k==='claimed'?'已經領過了':'領取沒有成功，請稍後再試');refreshLive()})};
 bn.onclick=function(){snd(1);CZ.vib(8);render();d.showModal();if(liveOn())refreshLive()};$('ivX').onclick=function(){snd(1);d.close()};
 if(REF){var inp=$('frIn');if(inp&&!inp.value)inp.value=REF}
 render();

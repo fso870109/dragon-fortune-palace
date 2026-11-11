@@ -29,7 +29,7 @@ if(_st)window.settle=function(bet,free){const r=_st.apply(this,arguments);if(!fr
  if(orbs.length>=START){{const all=[...Array(CELLS).keys()];window.__hsStart=[];while(window.__hsStart.length<START)window.__hsStart.push(all.splice(Math.random()*all.length|0,1)[0])}orbs=[];meter=0;pending=true;setTimeout(()=>run(bet),900)}
  localStorage.setItem(KEY,meter);localStorage.setItem(KO,orbs.length);mUI()}return r};
 function run(bet){if(running)return;if(typeof spinning!=='undefined'&&spinning||typeof bwState!=='undefined'&&bwState||typeof FS!=='undefined'&&FS||document.getElementById('czMG')&&document.getElementById('czMG').offsetParent){setTimeout(()=>run(bet),500);return}
- running=true;pending=false;window.__hold=true;(window.F21?F21.pre('寶珠對碰'):Promise.resolve()).then(()=>play(bet)).then(won=>{window.F21&&F21.back();running=false;window.__hold=false;
+ running=true;pending=false;window.__hold=true;try{if(window.CZ&&CZ.track)CZ.track('hs')}catch(e){}(window.F21?F21.pre('寶珠對碰'):Promise.resolve()).then(()=>play(bet)).then(won=>{window.F21&&F21.back();running=false;window.__hold=false;
   if(won>0){bal+=won;const w=document.getElementById('win');w.textContent=won;try{ui();saveLater&&saveLater()}catch(e){}const total=bet*NL;if(won/total>=10&&window.bigWin)setTimeout(()=>bigWin(won,total),300);document.getElementById('msg').textContent=`寶珠對碰結束，贏得 ${NFh.format(won)} 籌碼！`}
   try{['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>{const e=document.getElementById(i);if(e)e.disabled=false})}catch(e){}})}
 function play(bet){return new Promise(res=>{const total=bet*NL;const o=document.createElement('div');o.id='hsBox';o.setAttribute('role','dialog');o.setAttribute('aria-label','寶珠對碰');

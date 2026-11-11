@@ -59,7 +59,7 @@ function doLiveCounter(hid){
   return DFPfb.counterRaid(hid).then(function(res){
     busy=0;CZ.addChips(RV);CZ.vib(25);snd(2);
     rmsg('回擊 '+(res.name||'')+' 成功！＋'+RV);
-    CZ.toast('回擊成功 ＋'+RV,'assets/lx/ev_counter.webp?v=2848');
+    CZ.toast('回擊成功 ＋'+RV,'assets/lx/ev_counter.webp?v=2848');try{CZ.track&&CZ.track('rv')}catch(e){}
     pu.classList.remove('on');
     return refreshLive();
   }).catch(function(e){
@@ -70,7 +70,7 @@ function doLiveCounter(hid){
 }
 function doDemoCounter(i){
   var s=st(),x=s.h[i];if(!x||x.r)return false;
-  x.r=1;sv(s);CZ.addChips(RV);CZ.vib(25);snd(2);$('rdM').textContent='回擊 '+x.f+' 成功！＋'+RV;CZ.toast('回擊成功 ＋'+RV,'assets/lx/ev_counter.webp?v=2848');render();return true;
+  x.r=1;sv(s);CZ.addChips(RV);CZ.vib(25);snd(2);$('rdM').textContent='回擊 '+x.f+' 成功！＋'+RV;CZ.toast('回擊成功 ＋'+RV,'assets/lx/ev_counter.webp?v=2848');try{CZ.track&&CZ.track('rv')}catch(e){}render();return true;
 }
 function paintPush(html){
   pu.innerHTML=html;
@@ -108,7 +108,7 @@ $('rdL').onclick=function(e){
     DFPfb.raidPlayer(uid).then(function(res){
       var r=pick(RW);busy=0;CZ.addChips(r);CZ.vib(25);snd(2);
       rmsg('掠奪 '+(res.toName||'')+' 的金殿成功！搶回 ＋'+r+'（對方有護盾，不會損失）');
-      CZ.toast('掠奪成功 ＋'+r,'assets/lx/ev_raid.webp?v=2848');
+      CZ.toast('掠奪成功 ＋'+r,'assets/lx/ev_raid.webp?v=2848');try{CZ.track&&CZ.track('rd')}catch(e){}
       return refreshLive();
     }).catch(function(err){
       busy=0;var k=err&&err.message;
@@ -117,7 +117,7 @@ $('rdL').onclick=function(e){
     });
     return;
   }
-  var s=st();if(s.a>=AT)return;var f=FR[+b.getAttribute('data-at')],r=pick(RW);s.a++;sv(s);CZ.addChips(r);CZ.vib(25);snd(2);$('rdM').textContent='掠奪 '+f.n+' 的金殿成功！搶回 ＋'+r+'（對方有護盾，不會損失）';CZ.toast('掠奪成功 ＋'+r,'assets/lx/ev_raid.webp?v=2848');render()
+  var s=st();if(s.a>=AT)return;var f=FR[+b.getAttribute('data-at')],r=pick(RW);s.a++;sv(s);CZ.addChips(r);CZ.vib(25);snd(2);$('rdM').textContent='掠奪 '+f.n+' 的金殿成功！搶回 ＋'+r+'（對方有護盾，不會損失）';CZ.toast('掠奪成功 ＋'+r,'assets/lx/ev_raid.webp?v=2848');try{CZ.track&&CZ.track('rd')}catch(e){}render()
 };
 $('rdI').onclick=function(e){
   var b=e.target.closest('[data-hid],[data-rv]');if(!b||b.disabled)return;

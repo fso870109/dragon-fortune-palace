@@ -183,7 +183,7 @@ function lobbyAct(act,id){
   const k=catalog().find(x=>x.id===id);if(!k)return;
   const st=getSkin();
   if(act==='use'){
-    st.eq=k.id;saveSkin(st);applySkin();setC(null);
+    st.eq=k.id;saveSkin(st);applySkin();setC(null);try{window.CZ&&CZ.scanAch&&CZ.scanAch()}catch(e){}
     click();msg('已套用「'+k.name+'」','ok');
     sel=k.id;render();
     requestAnimationFrame(function(){
