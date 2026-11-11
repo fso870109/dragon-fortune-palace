@@ -1,7 +1,7 @@
 /* 龍運金殿 v28.29: 金殿掠奪／回擊＋被打推播（本機示範；只得不失；純虛擬・無兌現） */
 (function(){if(!window.CZ)return;var LS=localStorage,K='dfp_rd',$=function(i){return document.getElementById(i)};
 var AV='?v=2850',FR=[{id:'a',n:'阿明',av:'av_a'},{id:'b',n:'小美',av:'av_b'},{id:'c',n:'阿傑',av:'av_c'},{id:'d',n:'佳佳',av:'av_d'},{id:'e',n:'老王',av:'av_e'}],AT=3,RW=[30,50,80],RV=80,GAP=7200000;
-function face(name){var p=null,i;for(i=0;i<FR.length;i++)if(FR[i].n===name||FR[i].id===name)p=FR[i];if(p&&p.av)return '<img src="assets/lx/'+p.av+'.webp'+AV+'" alt="">';return (name||(p&&p.n)||'?').slice(0,1)}
+function face(name){var p=null,i;for(i=0;i<FR.length;i++)if(FR[i].n===name||FR[i].id===name)p=FR[i];if(window.DFPface)return DFPface(p&&p.av,name||(p&&p.n));if(p&&p.av)return '<img src="assets/lx/'+p.av+'.webp'+AV+'" alt="">';return (name||(p&&p.n)||'?').slice(0,1)}
 function bindMq(){[].forEach.call(document.querySelectorAll('#rdL .rdn'),function(w){var b=w.querySelector('b');if(!b)return;w.classList.remove('rdmq');b.style.removeProperty('--mq');if(b.scrollWidth>w.clientWidth+1){w.classList.add('rdmq');b.style.setProperty('--mq',(b.scrollWidth-w.clientWidth)+'px')}})}
 function dk(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function st(){var s;try{s=JSON.parse(LS.getItem(K)||'{}')}catch(e){s={}}if(!s||s.d!==dk())s={d:dk(),a:0,h:[],g:0};if(!Array.isArray(s.h))s.h=[];return s}
