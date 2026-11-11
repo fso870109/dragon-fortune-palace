@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.83',DFP_APPV='';
+var DFP_WEBV='28.84',DFP_APPV='';
 var FB_LOGIN=false; // 改 true 即可重新顯示 Facebook 連結
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
@@ -58,7 +58,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  $('sgRm').onclick=function(){var R=window.DFPrm;if(!R||R.sys)return;R.set(!R.on);r()};
  $('sgClose').onclick=function(){d.close()};
  d.addEventListener('click',function(e){if(e.target===d)d.close()});
- bb.textContent='⚙️';bb.setAttribute('aria-label','設定');bb.removeAttribute('aria-pressed');bb.setAttribute('aria-haspopup','dialog');bb.style.opacity=1;
+ bb.textContent='';bb.setAttribute('aria-label','設定');bb.removeAttribute('aria-pressed');bb.setAttribute('aria-haspopup','dialog');bb.style.opacity=1;
  bb.onclick=function(){r();if(window.czPinScroll)window.czPinScroll(function(){try{d.showModal()}catch(e){d.setAttribute('open','')}});else{try{d.showModal()}catch(e){d.setAttribute('open','')}}};
 }
 function pinScroll(fn){var y=window.scrollY||document.documentElement.scrollTop||0,x=window.scrollX||0,ret;try{ret=fn&&fn()}catch(e){window.scrollTo(x,y);throw e}var pin=function(){if((window.scrollY||0)!==y||(window.scrollX||0)!==x)window.scrollTo(x,y)};pin();if(typeof requestAnimationFrame==='function')requestAnimationFrame(function(){pin();requestAnimationFrame(pin)});setTimeout(pin,50);return ret}

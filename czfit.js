@@ -29,7 +29,7 @@ function clipBox(el){let b=el.getBoundingClientRect(),L=b.left,R=b.right,c=el.pa
 function fitBox(el){if(document.body.classList.contains('cab-on')&&el.matches('#msg,.msg'))return;if(!el.isConnected||!el.clientWidth)return;el.style.removeProperty('font-size');
  let fs=parseFloat(getComputedStyle(el).fontSize),n=0;const min=Math.max(9,fs*.62);el.classList.remove('czmq');
  const over=()=>{const g=document.createRange();g.selectNodeContents(el);const r=g.getBoundingClientRect();if(!r.width)return false;const [L,R]=clipBox(el);const sk=fs*.2;
-  return el.scrollWidth>el.clientWidth+1||r.left<L+2||r.right+sk>R-2};
+  return r.width>el.clientWidth+1||r.left<L+2||r.right+sk>R-2};
  while(over()&&fs>min&&n++<30){fs*=.93;el.style.setProperty('font-size',fs+'px','important')}
  if(over()&&el.matches('#msg,.msg')){const t=el.textContent;const sp=document.createElement('span');sp.textContent=t;el.__mq=1;el.textContent='';el.appendChild(sp);el.classList.add('czmq');
   const [L,R]=clipBox(el);const d=sp.getBoundingClientRect().width-(R-L)+fs*.8;el.style.setProperty('--mqd',(-Math.max(0,d))+'px');el.style.setProperty('--mqt',Math.max(3,d/28)+'s');

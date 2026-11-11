@@ -1,4 +1,4 @@
-/* 龍運金殿 shared layer — PLAY MONEY ONLY (僅供娛樂・虛擬籌碼・純虛擬・無兌現) */
+/* 龍運金殿 v28.84 大廳/選單金殿圖示； shared layer — PLAY MONEY ONLY (僅供娛樂・虛擬籌碼・純虛擬・無兌現) */
 (()=>{
 const LS=localStorage,J=(k,d)=>{try{const v=JSON.parse(LS.getItem(k));return v==null?d:v}catch(e){return d}},S=(k,v)=>{try{LS.setItem(k,JSON.stringify(v))}catch(e){}};
 const IN_M=!!window.CZM,RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -173,7 +173,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  const sp=$('spinBtn');sp.addEventListener('pointerdown',()=>vib(12),{passive:true});
  // control bar: move existing controls into one flex bar
  const bar=document.createElement('div');bar.className='czbar';
- const L=document.createElement('div');L.className='czL';L.innerHTML=`<a class="czbtn" id="czLobby" href="index.html" aria-label="回到大廳">🏠<span>大廳</span></a><div class="czlv" id="czLv"><b></b><i><u></u></i></div>`;
+ const L=document.createElement('div');L.className='czL';L.innerHTML=`<a class="czbtn" id="czLobby" href="index.html" aria-label="回到大廳"><i class="czIco czIco-home" aria-hidden="true"></i><span>大廳</span></a><div class="czlv" id="czLv"><b></b><i><u></u></i></div>`;
  const C=document.createElement('div');C.className='czC';
  const Rr=document.createElement('div');Rr.className='czR';
  const mC=document.createElement('div');mC.className='czm czmC';mC.innerHTML='<small>CREDIT</small><b id="czCred">0</b>';
@@ -211,7 +211,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
 }
 function czPreSym(){try{const pre=document.querySelector('.cell img.sym');if(!pre)return;const base=pre.getAttribute('src').replace(/t_[^/]*$/,'');const ids=new Set();(typeof SYM!=='undefined'?SYM:[]).forEach(s=>ids.add(s.id));if(typeof VAR!=='undefined')Object.values(VAR).flat().forEach(v=>ids.add(v));window.__symImg=[...ids].map(v=>{const i=new Image();i.src=base+'t_'+v+'.webp';i.decode&&i.decode().catch(()=>{});return i})}catch(e){}}
 if(IN_M)addEventListener('load',czPreSym);
-function czMenuFix(){const m=document.getElementById('menu16');if(m&&m.parentNode!==document.body)document.body.appendChild(m);const b=document.querySelector('.czbar');const set=()=>b&&document.documentElement.style.setProperty('--czbarH',Math.round(b.getBoundingClientRect().height)+'px');requestAnimationFrame(set);addEventListener('resize',set);document.getElementById('menuBtn')?.addEventListener('click',set);
+function czMenuFix(){document.documentElement.classList.add('czMach');const m=document.getElementById('menu16');if(m&&m.parentNode!==document.body)document.body.appendChild(m);const b=document.querySelector('.czbar');const set=()=>b&&document.documentElement.style.setProperty('--czbarH',Math.round(b.getBoundingClientRect().height)+'px');requestAnimationFrame(set);addEventListener('resize',set);document.getElementById('menuBtn')?.addEventListener('click',set);
  /* v28.61: keep page scroll put when 選單 opens; start the panel at its own top */
  let y=0,x=0,on=false;
  const pin=()=>{const cy=window.scrollY||document.documentElement.scrollTop||0,cx=window.scrollX||0;if(cy!==y||cx!==x)window.scrollTo(x,y)};

@@ -37,7 +37,7 @@ R.innerHTML=
   '<div class="lxHot" id="lxHot"></div>'+
   '<div class="lxDuo">'+
    '<button type="button" class="lxCard lxMis" id="lxMis"><img class="art" src="assets/lx/scroll.webp'+V+'" alt="" width="200" height="243"><span class="tx"><b>每日任務</b><small>完成任務領取獎勵</small><span class="lxPr"><i><u id="lxMisBar"></u><em id="lxMisN">0 / 5</em></i></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxMisB"></span></button>'+
-   '<button type="button" class="lxCard lxEv" id="lxEv"><span class="tx"><b>限時活動</b><small id="lxEvN">本週活動</small><span class="lxCd"><i aria-hidden="true">⏱</i><span id="lxEvT">--:--:--</span></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxEvB"></span></button>'+
+   '<button type="button" class="lxCard lxEv" id="lxEv"><span class="tx"><b>限時活動</b><small id="lxEvN">本週活動</small><span class="lxCd"><i class="lxIcoTime" aria-hidden="true"></i><span id="lxEvT">--:--:--</span></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxEvB"></span></button>'+
   '</div>'+
   '<button type="button" class="lxCol" id="lxCol"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><img class="art" src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><span class="pf" aria-hidden="true"><i style="background-image:url(assets/sakura/p_idle.webp?v=256)"></i><i style="background-image:url(assets/samurai/p_idle.webp?v=256)"></i></span><span class="tx"><b>精品收藏館</b><small>收集限定轉盤框・頭像框・稱號</small></span><span class="lxGo">前往<i aria-hidden="true">›</i></span></button>'+
  '</section>'+
@@ -82,7 +82,7 @@ shopRow.innerHTML='<div class="lxShopH"><img src="assets/lx/chest.webp'+V+'" alt
 '<button type="button" class="lxShopGo" id="lxShopGo">進入外觀商店 ›</button></div>';
 col.appendChild(shopRow);
 shopRow.addEventListener('click',function(e){var b=e.target.closest('#lxShopGo,.lxShopPv');if(!b)return;tap();if(window.DFPshop&&typeof DFPshop.open==='function')DFPshop.open()});
-proxyRow(col,'lxGal','🎴','角色圖鑑','<span id="lxGalN"></span>','查看',function(){if(window.CZGAL)CZGAL.open()});
+proxyRow(col,'lxGal','<img src="assets/lx/scroll.webp'+V+'" alt="" width="200" height="243">','角色圖鑑','<span id="lxGalN"></span>','查看',function(){if(window.CZGAL)CZGAL.open()});
 /* me tab */
 var me=$('lxMeSlot');
 mv($('lv'),me);
@@ -96,7 +96,7 @@ var ft=D.querySelector('.wrap .foot');mv(ft,me);
 if(wrap)wrap.classList.add('lxOld');
 /* ---------- carousel ---------- */
 var sl=$('lxSl'),dots=$('lxDots');
-sl.innerHTML=GAMES.map(function(g,i){return '<div class="lxS s-'+g.id+'" role="group" aria-roledescription="輪播" aria-label="'+(i+1)+' / 4：'+g.n+'"><div class="hk" style="background-image:url(assets/lx/hero_'+g.id+'.webp?v=2882)"></div><div class="rt"><b class="tt'+(g.n.length>4?' l5':'')+'">'+g.n+'</b><small>'+g.sub+'</small><button type="button" class="lxPlay" data-play="'+g.id+'">立即遊玩<i aria-hidden="true">▶</i></button></div></div>'}).join('');
+sl.innerHTML=GAMES.map(function(g,i){return '<div class="lxS s-'+g.id+'" role="group" aria-roledescription="輪播" aria-label="'+(i+1)+' / 4：'+g.n+'"><div class="hk" style="background-image:url(assets/lx/hero_'+g.id+'.webp?v=2882)"></div><div class="rt"><b class="tt'+(g.n.length>4?' l5':'')+'">'+g.n+'</b><small>'+g.sub+'</small><button type="button" class="lxPlay" data-play="'+g.id+'">立即遊玩<i class="lxPlayI" aria-hidden="true"></i></button></div></div>'}).join('');
 dots.innerHTML=GAMES.map(function(g,i){return '<button type="button" aria-label="第 '+(i+1)+' 張：'+g.n+'"'+(i?'':' class="on"')+'></button>'}).join('');
 var cur=0,auto=null,RMQ=matchMedia('(prefers-reduced-motion: reduce)').matches||D.documentElement.classList.contains('dfpRM');
 function goS(i,sm){cur=(i+GAMES.length)%GAMES.length;sl.scrollTo({left:cur*sl.clientWidth,behavior:sm&&!RMQ?'smooth':'auto'});mark()}

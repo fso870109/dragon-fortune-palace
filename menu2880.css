@@ -1,7 +1,11 @@
 /* v28.80 in-game 選單 — 金殿 lacquer panel */
 body.menu16 .row2:not(#menu16){display:none!important}
+/* v28.84: .m16panel used to force display:grid even when 選單 was closed,
+   leaving the panel in document flow just below the cabinet. Swiping down
+   scrolled it into view. Hide unless body.menu16; lock page scroll. */
+html body:not(.menu16) #menu16{display:none!important}
 html body.menu16 #menu16.row2,
-html body #menu16.m16panel{
+html body.menu16 #menu16.m16panel{
   display:grid!important;
   grid-template-columns:1fr 1fr!important;
   gap:8px!important;
@@ -129,4 +133,12 @@ html body #menu16 #czBuyHS{display:none!important}
   html body #menu16 > button#payBtn{min-height:52px;font-size:12px!important;padding:6px 4px!important}
   html body #menu16 .m16ic,html body #menu16 .m16svg,html body #menu16 .m16svg svg{width:24px;height:24px}
   html body #menu16 #adBtn .m16ic,html body #menu16 #adBtn .m16svg,html body #menu16 #adBtn .m16svg svg{width:28px;height:28px}
+}
+
+html.czMach,html.czMach body,html:has(#menu16),html:has(#menu16) body{
+  overflow:hidden!important;
+  overscroll-behavior:none;
+  height:100%;
+  height:100dvh;
+  max-height:100dvh;
 }
