@@ -174,8 +174,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  const mW=document.createElement('div');mW.className='czm czmW';mW.innerHTML='<small>WIN</small><b id="czWin">0</b>';
  const ob=document.querySelector('.info .box:nth-child(2)');ob.style.visibility='hidden';const betBox=document.createElement('div');betBox.className='box czbet';betBox.innerHTML='<small>BET ×20</small><b id="czBet">0</b>';
  C.append(mC,betBox,document.querySelector('.controls'),mW);
- const buy=document.createElement('button');buy.id='czBuyBtn';buy.type='button';buy.className='czbuyitem';buy.innerHTML='<span class="ic" aria-hidden="true">💘</span><span class="czbt"><b>✨ 觸發特殊事件 ✨</b><small></small></span>';
- Rr.append($('max16'),$('menuBtn'));{const m16=$('menu16');if(m16){const ad=$('adBtn');if(ad)ad.after(buy);else m16.insertBefore(buy,m16.firstChild)}}bar.append(L,C,Rr);
+ Rr.append($('max16'),$('menuBtn'));bar.append(L,C,Rr);
  const note=document.querySelector('.sub');const nb=document.createElement('div');nb.className='cznote';nb.textContent=note?note.textContent:'僅供娛樂・虛擬籌碼・純虛擬・無兌現';if(note)note.remove();
  mach.append(bar,nb);
  {// v18.1 AUTO spin (play-money)
@@ -196,14 +195,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  AU.tick=tick}
  const mir=(a,b)=>{const A=$(a),B=$(b);const f=()=>{B.textContent=A.textContent};f();new MutationObserver(f).observe(A,{childList:true,characterData:true,subtree:true})};mir('bal','czCred');mir('bet','czBet');mir('win','czWin');
  const lvR=()=>{const v=vipOf(st.lv);const e=$('czLv');e.querySelector('b').textContent=`Lv.${st.lv} ${v[1]}`;e.querySelector('b').style.color=v[2];e.querySelector('u').style.width=Math.min(100,st.xp/need(st.lv)*100)+'%'};lvR();CZ.on(lvR);
- // buy feature dialog
- const dlg=document.createElement('dialog');dlg.id='czBuy';dlg.innerHTML=`<h2>✨ 觸發特殊事件 ✨</h2><p class="czbp"></p><p class="note">直接進入免費次數：10 次免費旋轉（獎金 ×${CZM.fsm}，可再觸發）。<br>理論回收率 ${CZM.buyRtp}%・僅使用虛擬籌碼・純虛擬・無兌現</p><div class="dact"><button class="claim" id="czBuyOk">確認購買</button><button id="czBuyNo">取消</button></div>`;document.body.appendChild(dlg);
- const price=()=>Math.round(BETS[betIdx]*NL*CZM.buy);
- const buyLab=()=>{buy.querySelector('small').textContent=`花 ${price().toLocaleString()} 籌碼開啟`};buyLab();new MutationObserver(buyLab).observe($('bet'),{childList:true,characterData:true,subtree:true});
- buy.onclick=()=>{if(spinning||FS||bwState||window.__hold)return;dlg.querySelector('.czbp').innerHTML=`價格：<b>${price().toLocaleString()}</b> 籌碼（總押注 ${BETS[betIdx]*NL} × ${CZM.buy}）`;$('czBuyOk').disabled=bal<price();$('czBuyOk').textContent=bal<price()?'籌碼不足':'確認購買';dlg.showModal()};
- $('czBuyNo').onclick=()=>dlg.close();
- $('czBuyOk').onclick=()=>{dlg.close();const p=price();if(bal<p||spinning||FS)return;bal-=p;ui();ax().buy=1;scanAch();vib([20,30,20]);
-  ['spinBtn','minus','plus','maxBtn','max16','resetBtn'].forEach(i=>$(i)&&($(i).disabled=true));FS={left:FS_N,tot:FS_N,n:0,won:0,bet:BETS[betIdx]};day().fs++;save();setTimeout(()=>fsIntro(false),250)};
+ /* buy-FS menu entry removed in v28.80; natural scatter FS untouched */
  // loading screen
  let ld=document.getElementById('czLoad');if(!ld){ld=document.createElement('div');ld.id='czLoad';ld.innerHTML=`<div class="czlt">${CZM.name}</div><div class="czlbar"><i></i></div><div class="czls">載入中…</div><div class="cznote2">僅供娛樂・虛擬籌碼・純虛擬・無兌現</div>`;document.body.appendChild(ld)}
  const imgs=[...document.images];let n=0;const tot=Math.max(1,imgs.length);const prog=()=>{n=imgs.filter(i=>i.complete).length;ld.querySelector('i').style.width=(20+80*n/tot)+'%'};

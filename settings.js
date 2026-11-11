@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.79',DFP_APPV='';
+var DFP_WEBV='28.80',DFP_APPV='';
 var FB_LOGIN=false; // 改 true 即可重新顯示 Facebook 連結
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
@@ -13,11 +13,11 @@ function css(t){var e=document.createElement('style');e.textContent=t;document.h
 function theme(){var pop=$('audioPop');if(!pop||$('vibBtn'))return;
  css('#audioPop{left:50%!important;right:auto!important;box-sizing:border-box;width:min(calc(100vw - 20px),560px);margin-left:calc(min(calc(100vw - 20px),560px) / -2)!important}');
  var b=document.createElement('button');b.id='vibBtn';b.type='button';
- function r(){var on=vibOn();b.textContent=CAN?('📳 震動：'+(on?'開':'關')):'📳 震動：此裝置不支援';b.setAttribute('aria-pressed',on);b.disabled=!CAN}
+ function r(){var on=vibOn();b.textContent=CAN?('震動：'+(on?'開':'關')):'震動：此裝置不支援';b.setAttribute('aria-pressed',on);b.disabled=!CAN}
  r();b.onclick=function(){s('fs_vib',vibOn()?'0':'1');r();if(vibOn())hap(25);try{sfx.click()}catch(e){}};
  var host=$('dfpVolMenu')||pop;var mb=$('musBtn');if(host)host.appendChild(b);else if(mb&&mb.nextSibling)pop.insertBefore(b,mb.nextSibling);else pop.appendChild(b);
  var RMx=window.DFPrm;if(RMx){var m=document.createElement('button');m.id='rmBtn';m.type='button';
-  function rr(){var on=RMx.on||RMx.sys;m.textContent='🎞️ 減少動態：'+(on?'開':'關')+(RMx.sys?'（系統）':'');m.setAttribute('aria-pressed',on);m.disabled=RMx.sys}
+  function rr(){var on=RMx.on||RMx.sys;m.textContent='減少動態：'+(on?'開':'關')+(RMx.sys?'（系統）':'');m.setAttribute('aria-pressed',on);m.disabled=RMx.sys}
   rr();m.onclick=function(){RMx.set(!RMx.on);rr();try{sfx.click()}catch(e){}};b.parentNode.insertBefore(m,b.nextSibling)}
  try{if(typeof sfx==='object'&&sfx){var O={stop:sfx.stop,win:sfx.win,spinStart:sfx.spinStart};
   sfx.spinStart=function(){hap(12);return O.spinStart&&O.spinStart.apply(this,arguments)};

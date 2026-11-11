@@ -3,7 +3,7 @@ html.czIn::before{content:'';position:fixed;inset:0;z-index:2147483000;backgroun
 html.czDoorOn #czLoad{opacity:0!important;transition:none!important}
 html.l21enter body,html.l21leave body{animation:none!important}
 #l21Zoom{display:none!important}
-@font-face{font-family:"TCDisp";src:url(assets/fonts/tcdisp.woff2?v=2877) format("woff2");font-weight:900;font-display:block}
+@font-face{font-family:"TCDisp";src:url(assets/fonts/tcdisp.woff2?v=2880) format("woff2");font-weight:900;font-display:block}
 #czDoor{position:fixed;inset:0;z-index:2147483001;pointer-events:none;overflow:hidden;perspective:1100px;perspective-origin:50% 45%;background:transparent}
 #czDoor.skip{pointer-events:auto}
 #czDoor .d{position:absolute;top:0;bottom:0;width:50%;will-change:transform;backface-visibility:hidden;

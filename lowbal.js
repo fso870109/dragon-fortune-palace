@@ -1,11 +1,11 @@
-/* 龍運金殿 v28.62: 籌碼不足（看廣告／簽到／好友） / 清除排行榜 — no free chip reset */
+/* 龍運金殿 v28.80: 籌碼不足（看廣告／簽到／好友） / 清除排行榜 — no free chip reset */
 (function(){var D,cb;
 function css(t){var e=document.createElement('style');e.textContent=t;document.head.appendChild(e)}
 function $(id){return document.getElementById(id)}
 function dailyOk(){var b=$('dailyBtn');if(b&&b.classList.contains('dot'))return true;var c=$('dClaim');return !!(c&&!c.disabled)}
 function go(id){cb=null;if(D)try{D.close()}catch(e){}
- var b=$(id);if(b){try{b.click()}catch(e){return}}
- var map={adBtn:'ad',dailyBtn:'daily',invBtn:'inv'};var dlg=$(map[id]||'');if(dlg&&dlg.showModal)try{dlg.showModal()}catch(e){}}
+ var b=$(id);if(b){try{b.click()}catch(e){return}if(id==='adBtn')return}
+ var map={dailyBtn:'daily',invBtn:'inv'};var dlg=$(map[id]||'');if(dlg&&dlg.showModal)try{dlg.showModal()}catch(e){}}
 function build(){if(D)return D;
  css('#czChipDlg{border:0!important;padding:0!important;width:auto!important;box-shadow:none!important;border-radius:0!important;outline:0!important;background:transparent!important;max-width:none!important;max-height:none!important;overflow:visible!important;color:#ffeccb;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}'+
  '#czChipDlg::before,#czChipDlg::after{display:none!important}#czChipDlg::backdrop{background:rgba(6,2,2,.74)}'+
@@ -21,10 +21,10 @@ function build(){if(D)return D;
  '#czChipDlg button[hidden]{display:none!important}'+
  '#czChipDlg small{display:block;margin-top:12px;font-size:11px;color:#c9a978;letter-spacing:.04em}');
  D=document.createElement('dialog');D.id='czChipDlg';D.setAttribute('aria-labelledby','czChipT');
- D.innerHTML='<div class="cC"><div class="cI" aria-hidden="true">🪙</div><h3 id="czChipT"></h3><p id="czChipP"></p><div class="cB">'+
-  '<button type="button" class="cOk" id="czChipAd">🎬 看廣告領籌碼</button>'+
-  '<button type="button" class="cAlt" id="czChipDaily">📅 每日簽到</button>'+
-  '<button type="button" class="cAlt" id="czChipInv">🎁 邀請好友</button>'+
+ D.innerHTML='<div class="cC"><h3 id="czChipT"></h3><p id="czChipP"></p><div class="cB">'+
+  '<button type="button" class="cOk" id="czChipAd">看廣告領籌碼</button>'+
+  '<button type="button" class="cAlt" id="czChipDaily">每日簽到</button>'+
+  '<button type="button" class="cAlt" id="czChipInv">邀請好友</button>'+
   '<button type="button" class="cOk" id="czChipOk"></button>'+
   '<button type="button" class="cNo" id="czChipNo"></button></div>'+
   '<small>僅供娛樂・虛擬籌碼・純虛擬・無兌現</small></div>';

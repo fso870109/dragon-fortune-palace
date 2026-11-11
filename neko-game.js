@@ -332,36 +332,18 @@ $('lbName').onchange=()=>{const st=lbGet(),v=$('lbName').value.trim().slice(0,12
 $('tabTop').onclick=()=>{lbTab='top';sfx.click();lbRender()};$('tabMe').onclick=()=>{lbTab='me';sfx.click();lbRender()};
 $('lbReset').onclick=()=>{const f=()=>{const n=lbGet().name;lbSave({name:n,peak:bal});lbNew=-1;lbRender()};if(window.czChipDlg)czChipDlg('lbclear',f);else if(confirm('確定清除本機排行榜與統計嗎？'))f()};
 $('lbClose').onclick=()=>$('lb').close();
-// ---- Rewarded "watch ad" placeholder (no real ad network; play-money only) ----
-const AD_REWARD=200,AD_MAX=5,AD_SEC=window.__adSec||15;
-function adGet(){let st;try{st=JSON.parse(localStorage.getItem('fs_ad')||'{}')}catch(e){st={}}return st.d===dkey(new Date())?st:{d:dkey(new Date()),n:0}}
-const adLeft=()=>AD_MAX-adGet().n;
-let adT=null,adState='idle';
-function adRender(){const left=adLeft(),n=AD_MAX-left;
-$('adPips').innerHTML=Array.from({length:AD_MAX},(_,i)=>`<i class="${i<n?'on':''}"></i>`).join('');
-$('adPips').setAttribute('aria-label',`今日已觀看 ${n} / ${AD_MAX} 次`);
-$('adBtn').classList.toggle('dot',left>0&&bal<BETS[0]*NL);$('adBtn').disabled=false;
-if(adState==='idle'){$('adScreen').classList.remove('done');$('adRing').style.strokeDashoffset=201;$('adCount').textContent=AD_SEC;
-$('adPh').textContent=left>0?'準備播放…':'今日次數已用完，明天再來！';
-$('adGo').textContent=left>0?'開始觀看':'今日已達上限';$('adGo').disabled=left<=0;
-$('adSub').textContent=`看完 ${AD_SEC} 秒示意廣告，即可領取 ${AD_REWARD} 虛擬籌碼（今日剩 ${left} 次）`}}
-function adStop(){clearInterval(adT);adT=null;adState='idle'}
-function adStart(){if(adLeft()<=0||adState!=='idle')return;adState='play';sfx.click();
-const t0=performance.now();$('adGo').disabled=true;$('adGo').textContent='播放中…';$('adPh').textContent='示意廣告播放中…';
-adT=setInterval(()=>{const e=(performance.now()-t0)/1000,r=Math.max(0,AD_SEC-e);
-$('adCount').textContent=Math.ceil(r);$('adRing').style.strokeDashoffset=201*(r/AD_SEC);
-if(r<=0){clearInterval(adT);adT=null;adState='done';$('adScreen').classList.add('done');$('adCount').textContent='✓';
-$('adPh').textContent='觀看完成！';$('adGo').disabled=false;$('adGo').textContent='領取 +'+AD_REWARD;tone(880,.15,'triangle',.07)}},100)}
-function adClaim(){if(adState!=='done')return;const st=adGet();st.n++;localStorage.setItem('fs_ad',JSON.stringify(st));
-bal+=AD_REWARD;ui();adState='idle';
-sfx.ad();
-const b=$('adGo').getBoundingClientRect();for(let i=0;i<(RM?12:36);i++){coinP(b.left+b.width/2,b.top,11);if(i%2)sparkP(b.left+b.width/2,b.top)}fxStart();
-$('msg').textContent=`獲得 ${AD_REWARD} 虛擬籌碼！（今日剩 ${adLeft()} 次）`;adRender()}
-$('adGo').onclick=()=>adState==='done'?adClaim():adStart();
-$('adBtn').onclick=()=>{sfx.click();adRender();$('ad').showModal()};
-$('adClose').onclick=()=>$('ad').close();
-$('ad').addEventListener('close',()=>{if(adState==='play'){adStop();$('msg').textContent='廣告未看完，未發放籌碼'}adRender()});
-const _ui=ui;ui=function(){_ui();if(typeof adRender==='function'&&$('adPips'))adRender()};
+// ---- Rewarded watch-ad: in-house 贊助影片 via DFPad (no daily cap; AdMob flag off) ----
+const AD_REWARD=200;
+const adLeft=()=>1;
+function adRender(){const b=$('adBtn');if(!b)return;b.classList.remove('dot');b.disabled=false;
+const sm=b.querySelector('.m16sub')||b.querySelector('small');if(sm)sm.textContent='領 '+AD_REWARD+' 籌碼'}
+function adClaim(){bal+=AD_REWARD;ui();try{sfx.ad()}catch(e){}
+try{const el=$('dfpAdOk')||$('adBtn');const b=el.getBoundingClientRect();for(let i=0;i<(RM?12:36);i++){coinP(b.left+b.width/2,b.top,11);if(i%2)sparkP(b.left+b.width/2,b.top)}fxStart()}catch(e){}
+$('msg').textContent=`獲得 ${AD_REWARD} 虛擬籌碼！`;adRender()}
+function adStart(){try{document.body.classList.remove('menu16');const mb=$('menuBtn');if(mb)mb.setAttribute('aria-expanded','false')}catch(e){}
+if(window.DFPad){DFPad.watch({reward:AD_REWARD,onReward:adClaim});return}adClaim()}
+$('adBtn').onclick=()=>{sfx.click();adStart()};
+const _ui=ui;ui=function(){_ui();adRender()};
 adRender();
 // ---- Invite code placeholder (local only, no server; chips never transfer between players) ----
 const INV_REWARD=300,INV_AL='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
