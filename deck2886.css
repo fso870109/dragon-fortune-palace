@@ -1,0 +1,132 @@
+/* v28.86 PREVIEW — skinnable 金殿 side buttons (+ / − / 自動).
+   Art comes from --deck-btn so 外觀商店 skins can replace it via html[data-deck-skin]. */
+:root,
+html[data-deck-skin="gold"]{
+  --deck-btn:url("assets/deck/skins/gold/btn-round.webp?v=2886");
+  --deck-btn-glyph:#ffe39a;
+  --deck-btn-lit:255,96,160;
+  --deck-auto-emblem:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff6c8'/%3E%3Cstop offset='.5' stop-color='%23f0c45a'/%3E%3Cstop offset='1' stop-color='%239a6212'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 16c-5-6-9-10-15-10a10 10 0 0 0 0 20c6 0 10-4 15-10s9-10 15-10a10 10 0 0 1 0 20c-6 0-10-4-15-10z' fill='none' stroke='%235a2a04' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M32 16c-5-6-9-10-15-10a10 10 0 0 0 0 20c6 0 10-4 15-10s9-10 15-10a10 10 0 0 1 0 20c-6 0-10-4-15-10z' fill='none' stroke='url(%23g)' stroke-width='4.2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ---- shared face ---- */
+html body .czbar .controls #minus,
+html body .czbar .controls #plus,
+html body .czbar #czAuto{
+  background:var(--deck-btn) center / 100% 100% no-repeat !important;
+  border:0 !important;
+  border-radius:50% !important;
+  box-shadow:0 3px 6px rgba(0,0,0,.45),0 0 10px rgba(255,214,140,.22) !important;
+  color:var(--deck-btn-glyph) !important;
+  opacity:1 !important;
+  transition:transform .08s ease,filter .15s ease,box-shadow .2s ease;
+  overflow:visible !important;
+}
+html body .czbar .controls #minus svg.pm,
+html body .czbar .controls #plus svg.pm{
+  width:50% !important;
+  height:50% !important;
+  opacity:1 !important;
+  filter:drop-shadow(0 1px 1px rgba(60,10,0,.85)) drop-shadow(0 0 3px rgba(255,220,140,.55));
+}
+
+/* pressed */
+html body .czbar .controls #minus:not(:disabled):active,
+html body .czbar .controls #plus:not(:disabled):active,
+html body .czbar #czAuto:not(:disabled):active{
+  transform:scale(.92) !important;
+  filter:brightness(1.18) saturate(1.1);
+  box-shadow:0 1px 2px rgba(0,0,0,.5),0 0 16px rgba(255,214,140,.7) !important;
+}
+/* disabled — solid, dimmed face */
+html body .czbar .controls #minus:disabled,
+html body .czbar .controls #plus:disabled,
+html body .czbar #czAuto:disabled{
+  opacity:1 !important;
+  filter:grayscale(.55) brightness(.7) !important;
+  box-shadow:0 2px 4px rgba(0,0,0,.45) !important;
+  cursor:not-allowed;
+}
+
+/* ---- 自動: emblem + label ---- */
+html body .czbar #czAuto{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:1px !important;
+  padding:0 !important;
+}
+html body .czbar #czAuto::before{
+  content:"";
+  display:block;
+  width:44%;
+  height:22%;
+  background:var(--deck-auto-emblem) center / contain no-repeat;
+  filter:drop-shadow(0 0 2px rgba(255,220,140,.5));
+  margin-top:2px;
+}
+html body .czbar #czAuto b{
+  font:900 clamp(9px,calc(var(--sp,110px) * .1),11px)/1 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif !important;
+  letter-spacing:.06em !important;
+  color:#ffe7a8 !important;
+  text-shadow:0 1px 0 #3a0400,0 0 4px rgba(0,0,0,.8) !important;
+}
+html body .czbar #czAuto i{
+  font:800 8px/1 "Noto Sans TC",sans-serif !important;
+  color:#fff !important;
+  margin-top:0 !important;
+  min-height:0;
+}
+html body .czbar #czAuto i:empty{display:none}
+
+/* lit / active while auto-spin runs */
+html body .czbar #czAuto.run{
+  animation:deckAutoLit 1.1s ease-in-out infinite alternate !important;
+  filter:brightness(1.15) saturate(1.2) !important;
+}
+html body .czbar #czAuto.run::before{
+  animation:deckAutoSpin 1.1s ease-in-out infinite;
+  filter:drop-shadow(0 0 4px rgba(255,240,190,.95));
+}
+html body .czbar #czAuto.run b{color:#fff !important;text-shadow:0 0 6px rgba(var(--deck-btn-lit),.95),0 1px 0 #3a0400 !important}
+@keyframes deckAutoLit{
+  from{box-shadow:0 0 0 2px rgba(255,230,170,.85),0 0 10px rgba(var(--deck-btn-lit),.55),0 0 18px rgba(255,214,140,.4)}
+  to{box-shadow:0 0 0 2px #fff6d0,0 0 18px rgba(var(--deck-btn-lit),.95),0 0 30px rgba(255,214,140,.75)}
+}
+@keyframes deckAutoSpin{
+  0%,100%{transform:scale(1);filter:drop-shadow(0 0 2px rgba(255,240,190,.6))}
+  50%{transform:scale(1.12);filter:drop-shadow(0 0 6px rgba(255,250,220,1))}
+}
+@media (prefers-reduced-motion:reduce){
+  html body .czbar #czAuto.run,
+  html body .czbar #czAuto.run::before{animation:none !important}
+  html body .czbar #czAuto.run{box-shadow:0 0 0 2px #fff6d0,0 0 16px rgba(var(--deck-btn-lit),.85) !important}
+}
+
+/* ---- portrait sizing + spacing: equal size, clear of PUSH ring and lanterns ---- */
+@media (orientation:portrait){
+  html body .czbar .controls{
+    column-gap:clamp(16px,5vw,24px) !important;
+    gap:4px clamp(16px,5vw,24px) !important;
+    row-gap:4px !important;
+  }
+  html body .czbar .controls #minus,
+  html body .czbar .controls #plus,
+  html body .czbar .controls #czAuto,
+  html body .czbar #czAuto{
+    width:clamp(44px,calc(var(--sp,110px) * .48),52px) !important;
+    height:clamp(44px,calc(var(--sp,110px) * .48),52px) !important;
+    min-width:44px !important;
+    min-height:44px !important;
+  }
+}
+@media (orientation:landscape) and (max-height:500px){
+  html body .czbar .controls #minus,
+  html body .czbar .controls #plus,
+  html body .czbar #czAuto{
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+  }
+}
