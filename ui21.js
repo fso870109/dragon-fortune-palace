@@ -43,7 +43,10 @@ if(document.readyState==='complete')setTimeout(boot,400);else addEventListener('
 })();
 /* ===== v21 life layer ===== */
 (function(){const $=i=>document.getElementById(i);
-function bump(e,dn){if(!e)return;e.classList.remove('l21bump','l21dn');void e.offsetWidth;e.classList.add(dn?'l21dn':'l21bump')}
+/* v28.87: restart the bump without a forced reflow; during a count-up (changes <150 ms apart) only the settled value bumps, as before */
+function bump(e,dn){if(!e)return;const now=performance.now(),q=now-(e.__bq||0)<150;e.__bq=now;clearTimeout(e.__bt);
+ const go=()=>{e.classList.remove('l21bump','l21dn');requestAnimationFrame(()=>requestAnimationFrame(()=>e.classList.add(e.__bd?'l21dn':'l21bump')))};e.__bd=dn;
+ if(q){e.classList.remove('l21bump','l21dn');e.__bt=setTimeout(go,160)}else go()}
 function num(e){return +(e.textContent||'').replace(/[^\d.-]/g,'')||0}
 function watch(id){const e=$(id);if(!e)return;let v=num(e);new MutationObserver(()=>{const n=num(e);if(n!==v){bump(e,n<v&&id!=='czBet');v=n}}).observe(e,{childList:true,characterData:true,subtree:true})}
 function floatTxt(el,t){if(!el)return;const r=el.getBoundingClientRect(),f=document.createElement('div');f.className='l21fl';f.textContent=t;f.style.left=(r.left+r.width/2-8)+'px';f.style.top=(r.top-4)+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),850)}

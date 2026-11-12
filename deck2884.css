@@ -6,10 +6,10 @@
 :root{
   --deck-skin:gold;
   --deck-fill:url("assets/deck/skins/gold/fill.webp?v=2884");
-  --deck-frame:url("assets/deck/skins/gold/frame.webp?v=2884");
-  --deck-crest:url("assets/deck/skins/gold/crest.webp?v=2884");
-  --deck-plaque:url("assets/deck/skins/gold/plaque.webp?v=2884");
-  --deck-plaque-bet:url("assets/deck/skins/gold/plaque-bet.webp?v=2884");
+  --deck-frame:url("assets/deck/skins/gold/frame.webp?v=2887");
+  --deck-crest:url("assets/deck/skins/gold/crest.webp?v=2887");
+  --deck-plaque:url("assets/deck/skins/gold/plaque.webp?v=2887");
+  --deck-plaque-bet:url("assets/deck/skins/gold/plaque-bet.webp?v=2887");
   --deck-glow:255,214,140;
   --deck-lacquer:42,12,18;
   --deck-frame-over-top:4px;
@@ -23,10 +23,10 @@
 html[data-deck-skin="gold"]{
   --deck-skin:gold;
   --deck-fill:url("assets/deck/skins/gold/fill.webp?v=2884");
-  --deck-frame:url("assets/deck/skins/gold/frame.webp?v=2884");
-  --deck-crest:url("assets/deck/skins/gold/crest.webp?v=2884");
-  --deck-plaque:url("assets/deck/skins/gold/plaque.webp?v=2884");
-  --deck-plaque-bet:url("assets/deck/skins/gold/plaque-bet.webp?v=2884");
+  --deck-frame:url("assets/deck/skins/gold/frame.webp?v=2887");
+  --deck-crest:url("assets/deck/skins/gold/crest.webp?v=2887");
+  --deck-plaque:url("assets/deck/skins/gold/plaque.webp?v=2887");
+  --deck-plaque-bet:url("assets/deck/skins/gold/plaque-bet.webp?v=2887");
   --deck-glow:255,214,140;
   --deck-lacquer:42,12,18;
 }

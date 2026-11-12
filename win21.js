@@ -12,15 +12,17 @@ const S={
 S.coinD=spr(64,(x,s)=>{x.drawImage(S.coin,0,0);x.globalCompositeOperation='source-atop';x.fillStyle='rgba(60,30,0,.35)';x.fillRect(0,0,s,s)});
 S.ray=spr(256,(x,s)=>{const g=x.createLinearGradient(0,0,s,0);g.addColorStop(0,'rgba(255,230,150,.9)');g.addColorStop(1,'rgba(255,200,80,0)');x.fillStyle=g;x.beginPath();x.moveTo(0,s/2);x.lineTo(s,s*.38);x.lineTo(s,s*.62);x.fill()});
 function ensure(){if(cv)return;cv=document.createElement('canvas');cv.id='w21C';document.body.appendChild(cv);cx=cv.getContext('2d');const rs=()=>{W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0)};rs();addEventListener('resize',rs)}
-function add(p){if(RM)return;ensure();if(P.length>=CAP)P.shift();p.t=0;P.push(p);if(!run){run=true;requestAnimationFrame(loop)}}
+/* v28.87: particle cap and coin motion-trail copies follow the device tier */
+const capN=()=>Math.round(CAP*(window.DFPPERF?DFPPERF.scale:1));
+function add(p){if(RM)return;ensure();if(P.length>=capN())P.shift();p.t=0;P.push(p);if(!run){run=true;requestAnimationFrame(loop)}}
 const ease=t=>1-Math.pow(1-t,3);
-let lt=0;function loop(now){const dt=Math.min(.05,(now-(lt||now))/1000);lt=now;cx.clearRect(0,0,W,H);
+let lt=0,TRL=2;function loop(now){const dt=Math.min(.05,(now-(lt||now))/1000);lt=now;TRL=window.DFPPERF?DFPPERF.trail:2;cx.clearRect(0,0,W,H);
  if(rays){rays.t+=dt;const k=Math.min(1,rays.t/.4)*Math.max(0,Math.min(1,(rays.d-rays.t)/.8));if(k<=0)rays=null;else{cx.save();cx.globalCompositeOperation='lighter';cx.translate(rays.x,rays.y);cx.rotate(rays.t*.35);const n=rays.n,R=Math.hypot(W,H)*.75;cx.globalAlpha=.32*k;for(let i=0;i<n;i++){cx.rotate(6.2832/n);cx.drawImage(S.ray,0,-R*.14,R,R*.28)}cx.globalAlpha=1;cx.restore()}}
  for(let i=P.length-1;i>=0;i--){const p=P[i];p.t+=dt;const u=p.t/p.life;if(u>=1){P.splice(i,1);continue}
   if(p.path){const q=p.path,L=q.len,d=ease(Math.min(1,u))*L;const pt=at(q,d);p.x=pt[0];p.y=pt[1]}else{p.vy+=(p.g||0)*dt;p.vx*=p.drag||1;p.vy*=p.drag||1;p.x+=p.vx*dt;p.y+=p.vy*dt}
   const a=u<.15?u/.15:1-Math.pow((u-.15)/.85,2);
   if(p.k==='coin'){const ph=p.ph+p.t*p.sp,sx=Math.cos(ph),sz=p.s;cx.globalCompositeOperation='source-over';
-   for(let m=2;m>=0;m--){cx.globalAlpha=a*(m?0.18/m:1);cx.save();cx.translate(p.x-p.vx*dt*m*1.6,p.y-p.vy*dt*m*1.6);cx.rotate(p.r);cx.scale(Math.max(.08,Math.abs(sx)),1);cx.drawImage(sx<0?S.coinD:S.coin,-sz/2,-sz/2,sz,sz);cx.restore()}}
+   for(let m=TRL;m>=0;m--){cx.globalAlpha=a*(m?0.18/m:1);cx.save();cx.translate(p.x-p.vx*dt*m*1.6,p.y-p.vy*dt*m*1.6);cx.rotate(p.r);cx.scale(Math.max(.08,Math.abs(sx)),1);cx.drawImage(sx<0?S.coinD:S.coin,-sz/2,-sz/2,sz,sz);cx.restore()}}
   else{cx.globalCompositeOperation='lighter';cx.globalAlpha=a*(p.a||1);const sz=p.s*(p.k==='star'?(.6+.4*Math.sin(p.t*14+p.ph)):1);cx.drawImage(S[p.k],p.x-sz/2,p.y-sz/2,sz,sz)}}
  cx.globalAlpha=1;cx.globalCompositeOperation='source-over';if(P.length||rays)requestAnimationFrame(loop);else{run=false;lt=0;cx.clearRect(0,0,W,H)}}
 function at(q,d){let i=0;while(i<q.seg.length-1&&q.acc[i+1]<d)i++;const s=q.seg[i],f=(d-q.acc[i])/(s.l||1);return [s.x0+(s.x1-s.x0)*f,s.y0+(s.y1-s.y0)*f]}

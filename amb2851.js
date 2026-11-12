@@ -44,6 +44,8 @@ function star(rgb){
   g.beginPath();g.moveTo(24,9);g.lineTo(24,39);g.moveTo(9,24);g.lineTo(39,24);g.stroke();
   return c;
 }
+/* hero ambience is hidden under the big-win / 大獎 overlays: stop drawing it there */
+function covered(){const c=document.documentElement.classList;return c.contains('czFxBw')||c.contains('czFxAt')}
 function env(t){return t<.1?t/.1:t>.84?(1-t)/.16:1}
 
 function mount(host,id){
@@ -72,7 +74,9 @@ function mount(host,id){
       rot:Math.random()*6.3,sp:(Math.random()-.5)*.045,rgb:pal,spr:sprites[si]
     });
   }
-  function seed(){P.length=0;for(let i=0;i<cfg.n;i++)P.push(mk(true))}
+  /* v28.87: particle count follows the device tier */
+  function count(){return Math.max(6,Math.round(cfg.n*(window.DFPPERF?Math.max(.5,DFPPERF.scale):1)))}
+  function seed(){P.length=0;const n=count();for(let i=0;i<n;i++)P.push(mk(true))}
   function draw(p,pt,a){
     const o=p.o*a*env(p.t)*(.55+.45*Math.sin(p.tw));
     if(o<=.02)return;
@@ -92,18 +96,18 @@ function mount(host,id){
     x.globalCompositeOperation='source-over';x.globalAlpha=1;
   }
   function frame(now){
-    if(document.hidden||reduced()){raf=0;return}
+    if(document.hidden||reduced()||covered()){raf=0;return}
     raf=requestAnimationFrame(frame);
     if(now-last<28)return;
     const dt=Math.min(48,now-(last||now));last=now;
-    x.clearRect(0,0,W,H);
+    x.clearRect(0,0,W,H);const tr=window.DFPPERF?DFPPERF.trail:2;
     for(let i=0;i<P.length;i++){
       const p=P[i];
       p.t+=dt/p.life;p.tw+=p.tws*dt;p.rot+=p.sp*dt*.06;
       if(p.t>=1){P[i]=mk(false);continue}
       if(cfg.k!=='petal'){
-        draw(p,bez(p.p0,p.p1,p.p2,p.p3,Math.max(0,p.t-.14)),.22);
-        draw(p,bez(p.p0,p.p1,p.p2,p.p3,Math.max(0,p.t-.09)),.38);
+        if(tr>1)draw(p,bez(p.p0,p.p1,p.p2,p.p3,Math.max(0,p.t-.14)),.22);
+        if(tr>0)draw(p,bez(p.p0,p.p1,p.p2,p.p3,Math.max(0,p.t-.09)),.38);
         draw(p,bez(p.p0,p.p1,p.p2,p.p3,Math.max(0,p.t-.045)),.62);
       }
       draw(p,bez(p.p0,p.p1,p.p2,p.p3,p.t),1);
@@ -111,18 +115,22 @@ function mount(host,id){
     x.globalAlpha=1;x.globalCompositeOperation='source-over';
   }
   function start(){
-    resize();if(!W||!H){if(tries++<24)setTimeout(start,120);return}tries=0;if(!P.length)seed();
+    if(!W||!H||cv.width<2)resize();if(!W||!H){if(tries++<24)setTimeout(start,120);return}tries=0;if(!P.length)seed();
     if(reduced()){
       if(raf){cancelAnimationFrame(raf);raf=0}
       x.clearRect(0,0,W,H);
       P.forEach(function(p){draw(p,bez(p.p0,p.p1,p.p2,p.p3,p.t),1)});
       return;
     }
+    if(covered())return;
     if(!raf){last=0;raf=requestAnimationFrame(frame)}
   }
-  addEventListener('resize',function(){resize()},{passive:true});
+  /* v28.87: html class flips (door, overlays) no longer re-measure + reallocate the canvas; size follows a ResizeObserver */
+  function onCls(){if(covered()||reduced()){if(raf){cancelAnimationFrame(raf);raf=0}if(reduced())start();return}start()}
+  try{new ResizeObserver(function(){const w=host.clientWidth,h=host.clientHeight;if(w&&h&&(Math.abs(w-W)>.5||Math.abs(h-H)>.5)){resize();if(raf===0&&!covered())start()}}).observe(host)}catch(e){}
+
   document.addEventListener('visibilitychange',function(){if(!document.hidden)start()});
-  try{new MutationObserver(start).observe(document.documentElement,{attributes:true,attributeFilter:['class']})}catch(e){}
+  try{new MutationObserver(onCls).observe(document.documentElement,{attributes:true,attributeFilter:['class']})}catch(e){}
   start();
   return cv;
 }
@@ -133,7 +141,8 @@ function boot(){
   if(lg)mount(lg,'lobby');
 }
 window.DFPamb={mount:mount,boot:boot};
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);
+/* v28.87: first mount inside a frame (was a forced style+layout mid-DOMContentLoaded) */
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){requestAnimationFrame(boot)});
 else boot();
 addEventListener('load',boot);
 })();

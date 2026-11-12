@@ -1,0 +1,4 @@
+/* v28.87 lite tier (slow devices only, set by perf2887.js): pause decorative full-surface loops, keep every frame and control visible */
+html.dfpLite body::after,html.dfpLite #czHero .czhs,html.dfpLite .czbar::after{animation:none!important}
+html.dfpLite body .cell.hit{animation:none!important;box-shadow:inset 0 0 0 2px rgba(255,230,150,.75),0 0 12px rgba(var(--fx-glow,var(--glow,255,200,90)),.7)}
+html.dfpLite #board svg.lines .beam{animation:none!important;opacity:.6}

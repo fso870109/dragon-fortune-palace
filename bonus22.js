@@ -81,12 +81,14 @@ function socket(S){return cnv(S,S,(x,w)=>{const c=w/2,R=c*.94;
 function sphere(S,cols){return cnv(S,S,(x,w)=>{const c=w/2,r=c*.92;const g=x.createRadialGradient(c-r*.35,c-r*.4,r*.05,c,c,r);cols.forEach((v,i)=>g.addColorStop(i/(cols.length-1),v));x.fillStyle=g;x.beginPath();x.arc(c,c,r,0,7);x.fill();x.fillStyle='rgba(255,255,255,.9)';x.beginPath();x.arc(c-r*.38,c-r*.42,r*.2,0,7);x.fill()})}
 function frameSVG(c1,c2){return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#fff6cf'/><stop offset='.5' stop-color='${c1}'/><stop offset='1' stop-color='${c2}'/></linearGradient></defs><rect x='3' y='3' width='54' height='54' rx='9' fill='none' stroke='url(#g)' stroke-width='5'/><rect x='8' y='8' width='44' height='44' rx='6' fill='none' stroke='#fff3c4' stroke-opacity='.5' stroke-width='1'/>${[[6,6],[54,6],[6,54],[54,54]].map(([a,b])=>`<path d='M${a-5} ${b} L${a} ${b-5} L${a+5} ${b} L${a} ${b+5}Z' fill='#fff3c4' stroke='#7a4a08' stroke-width='1'/>`).join('')}</svg>`)}")`}
 const SPR={};
-function art(){if(SPR.done)return;SPR.done=1;const S=192;['gold','mini','minor','major','col'].forEach(k=>SPR[k]=jewel(k,S).toDataURL());SPR.sock=socket(S).toDataURL();
+/* v28.87: short blob: URLs instead of 60-90 KB data: URLs — var(--orb) is re-substituted on every animated style recalc */
+function U(c){try{const d=c.toDataURL('image/png'),b=atob(d.slice(d.indexOf(',')+1)),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return URL.createObjectURL(new Blob([a],{type:'image/png'}))}catch(e){return c.toDataURL()}}
+function art(){if(SPR.done)return;SPR.done=1;const S=192;['gold','mini','minor','major','col'].forEach(k=>SPR[k]=SPR[k]||U(jewel(k,S)));SPR.sock=SPR.sock||U(socket(S));
  SPR.peg=sphere(24,['#fffbe6','#ffd65a','#a8640c','#4a2600']);SPR.ball=sphere(40,['#ffffff','#fff3d6','#e8c27a','#8a5a20']);
  /* vertical reel-strip used while a cell is spinning */
- SPR.strip=cnv(64,256,(x,w,h)=>{x.fillStyle='#12061e';x.fillRect(0,0,w,h);const keys=['gold','mini','minor','major','col','gold'];
+ SPR.strip=U(cnv(64,256,(x,w,h)=>{x.fillStyle='#12061e';x.fillRect(0,0,w,h);const keys=['gold','mini','minor','major','col','gold'];
   keys.forEach((k,i)=>{const yy=i*(h/6)+4,p=PAL[k]||PAL.gold;let gg=x.createRadialGradient(w/2,yy+16,2,w/2,yy+18,18);gg.addColorStop(0,p[0]);gg.addColorStop(.45,p[1]);gg.addColorStop(1,p[3]);x.fillStyle=gg;x.beginPath();x.arc(w/2,yy+18,16,0,7);x.fill();x.strokeStyle='#ffd65a';x.lineWidth=2;x.stroke();x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.ellipse(w/2-4,yy+10,7,4,0,0,7);x.fill()});
-  let veil=x.createLinearGradient(0,0,0,h);veil.addColorStop(0,'rgba(10,4,20,.55)');veil.addColorStop(.5,'rgba(10,4,20,0)');veil.addColorStop(1,'rgba(10,4,20,.55)');x.fillStyle=veil;x.fillRect(0,0,w,h)}).toDataURL();
+  let veil=x.createLinearGradient(0,0,0,h);veil.addColorStop(0,'rgba(10,4,20,.55)');veil.addColorStop(.5,'rgba(10,4,20,0)');veil.addColorStop(1,'rgba(10,4,20,.55)');x.fillStyle=veil;x.fillRect(0,0,w,h)}));
  const css=document.createElement('style');css.id='b22art';css.textContent=`
  html body #hsBox .hsG>i,html body #b22Stage #hsBox .hsG>i,html body #hsBox.b23 .hsG>i{background:url(${SPR.sock}) center / auto 96% no-repeat!important;border:0!important;box-shadow:none!important;overflow:hidden!important}
  html body #hsBox .hsG>i.on,html body #b22Stage #hsBox .hsG>i.on,html body #hsBox.b23 .hsG>i.on{background:url(${SPR.gold}) center / auto 96% no-repeat!important;border:0!important;box-shadow:none!important;filter:none!important;overflow:hidden!important}
@@ -102,6 +104,11 @@ function art(){if(SPR.done)return;SPR.done=1;const S=192;['gold','mini','minor',
  html body #hsBox .hsJp .mini{border-image-source:${frameSVG('#6fb6ff','#1f5fb0')}!important}#hsBox .hsJp .minor{border-image-source:${frameSVG('#5be0a6','#178a5c')}!important}#hsBox .hsJp .major{border-image-source:${frameSVG('#ff7ab8','#c2185b')}!important}
  @keyframes b22Reel{to{background-position:center 256px}}`;document.body.appendChild(css)}
 window.B22={SPR,art,swoop:t=>swoop(t)};
+/* v28.87: paint the jewel art while idle so 寶珠對碰 does not encode PNGs on its first frame */
+addEventListener('load',()=>{const ri=window.requestIdleCallback||(f=>setTimeout(f,60));const steps=['gold','mini','minor','major','col','sock','all'];
+ const busy=()=>(typeof spinning!=='undefined'&&spinning)||(typeof bwState!=='undefined'&&bwState)||document.documentElement.classList.contains('czDoorOn');
+ const next=()=>{if(SPR.done)return;if(busy()){setTimeout(next,700);return}ri(d=>{if(SPR.done)return;const k=steps.shift();try{if(k==='all')art();else if(k==='sock')SPR.sock=SPR.sock||U(socket(192));else SPR[k]=SPR[k]||U(jewel(k,192))}catch(e){}if(steps.length)next()},{timeout:4000})};
+ setTimeout(next,5000)});
 /* ---------- in-machine stage ---------- */
 function stageRect(){const h=$('czHero'),b=$('board');if(!h||!b)return null;const a=h.getBoundingClientRect(),c=b.getBoundingClientRect();return {l:Math.min(a.left,c.left),t:Math.max(0,a.top),r:Math.max(a.right,c.right),b:c.bottom+8}}
 function stage(){let s=$('b22Stage');if(!s){s=document.createElement('div');s.id='b22Stage';s.innerHTML='<div class="b22bg"></div><div class="b22rays"></div>';document.body.appendChild(s)}const r=stageRect();if(r)Object.assign(s.style,{left:r.l+'px',top:r.t+'px',width:(r.r-r.l)+'px',height:(r.b-r.t)+'px'});return s}

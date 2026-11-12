@@ -17,7 +17,10 @@ function fit0(el){
  while(over()&&fs>14&&n++<30){fs*=.92;el.style.setProperty('font-size',fs+'px','important')}}
 let MO=null;function fitAll(){document.querySelectorAll(SEL).forEach(e=>{try{fit(e)}catch(_){}});if(MO)MO.takeRecords() /* v23.9: drop self-caused style mutations */}
 let t=0;const sch=()=>{cancelAnimationFrame(t);t=requestAnimationFrame(()=>requestAnimationFrame(fitAll))};
-MO=new MutationObserver(m=>{for(const x of m){const n=x.target.nodeType===1?x.target:x.target.parentNode;if(n&&n.closest&&n.closest('#bw,#czWheel,#czAtari,#czMG,#czEn')){sch();return}}});MO.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','open','style','hidden']});
+/* v28.87: count-up digits (#bwAmt) and inline style writes on non-title children no longer refit every title each frame */
+const ROOTS='#bw,#czWheel,#czAtari,#czMG,#czEn',SKIP='#bwAmt,#bwAmt *';
+MO=new MutationObserver(m=>{for(const x of m){const n=x.target.nodeType===1?x.target:x.target.parentNode;if(!n||!n.closest||!n.closest(ROOTS))continue;if(n.matches(SKIP))continue;
+ if(x.type==='attributes'&&x.attributeName==='style'&&!n.matches(ROOTS)&&!n.matches(SEL))continue;sch();return}});MO.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','open','style','hidden']});
 addEventListener('resize',sch);window.CZFIT=fitAll;
 })();
 /* v18.5b: fit-to-box for subtitle bar, voice bubbles, stats, buttons (shrink, never clip) */
@@ -43,8 +46,14 @@ function vcenter(el){if(document.body.classList.contains('cab-on'))return;if(!el
  el.style.setProperty('box-sizing','border-box','important');const p=Math.min(Math.abs(off)*2,fs*.6).toFixed(2)+'px';
  if(off>.25)el.style.setProperty('padding-bottom',p,'important');else if(off<-.25)el.style.setProperty('padding-top',p,'important');el.dataset.vo=off.toFixed(2)}
 function all(){document.querySelectorAll('#msg,.msg').forEach(e=>{try{vcenter(e)}catch(_){}});document.querySelectorAll(BOX).forEach(e=>{if(e.__mq){e.__mq=0;return}try{fitBox(e)}catch(_){}})}
-let t=0;const sch=()=>{cancelAnimationFrame(t);t=requestAnimationFrame(all)};
-const obs=new MutationObserver(sch);
+/* v28.87: refit only the boxes whose text changed; skip same-length updates that already fit with room (WIN/CREDIT count-ups) */
+function fitOne(e){if(e.__mq){e.__mq=0;return}const L=(e.textContent||'').length;if(e.__fl===L&&e.__ok&&!e.matches('#msg,.msg'))return;try{fitBox(e)}catch(_){}
+ e.__fl=L;try{const g=document.createRange();g.selectNodeContents(e);const w=g.getBoundingClientRect().width;e.__ok=!e.style.fontSize&&e.clientWidth>0&&w<e.clientWidth*.86}catch(_){e.__ok=false}}
+let t=0,full=true;const P=new Set();
+function run(){if(full){full=false;P.clear();all();document.querySelectorAll(BOX).forEach(e=>{e.__fl=-1});return}const L=[...P];P.clear();
+ L.forEach(e=>{if(!e.isConnected)return;if(e.matches('#msg,.msg'))try{vcenter(e)}catch(_){}fitOne(e)})}
+const sch=()=>{full=true;cancelAnimationFrame(t);t=requestAnimationFrame(run)};
+const obs=new MutationObserver(ms=>{for(const m of ms){const n=m.target.nodeType===1?m.target:m.target.parentNode;const b=n&&n.closest&&n.closest(BOX);if(b)P.add(b);else full=true}cancelAnimationFrame(t);t=requestAnimationFrame(run)});
 function hook(){document.querySelectorAll(BOX).forEach(e=>obs.observe(e,{childList:true,characterData:true,subtree:true}));
  const en=document.getElementById('czEn');if(en)obs.observe(en,{childList:true,subtree:true,characterData:true})}
 addEventListener('load',()=>{hook();sch();setTimeout(()=>{hook();sch()},1500)});addEventListener('resize',sch);window.CZFITBOX=all;
