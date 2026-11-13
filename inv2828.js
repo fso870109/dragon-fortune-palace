@@ -1,4 +1,4 @@
-/* 龍運金殿 v28.71: 邀請階梯紅包（每日分享 1／3 次領 ＋1000／＋2000；連線後新玩家用好友碼加入再領 ＋5000；純虛擬・無兌現） */
+/* 龍運金殿 v28.91: 邀請階梯紅包（每日分享 1／3 次領 ＋1000／＋2000；連線後新玩家用好友碼加入再領 ＋5000；純虛擬・無兌現；＋金額不斷行） */
 (function(){if(!window.CZ)return;var LS=localStorage,K='dfp_iv',RK='dfp_ref',$=function(i){return document.getElementById(i)};
 var AL='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',TI=[{n:1,r:1000},{n:3,r:2000}],CD=15000,RR=5000,RCAP=5;
 function dk(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
@@ -18,15 +18,15 @@ if(wk)wk.parentNode.insertBefore(bn,wk.nextSibling);else top.parentNode.insertBe
 var d=document.createElement('dialog');d.id='dIv';d.setAttribute('aria-labelledby','ivT');
 d.innerHTML='<h3 id="ivT">邀請階梯</h3><div class="ivc"><small>我的邀請碼</small><b id="ivCode"></b><small id="ivFc" class="ivfc" hidden></small><div class="iva"><button class="btn hot" id="ivShare">分享邀請</button><button class="btn" id="ivCopy">複製邀請碼</button></div><p class="ivm" id="ivM" role="status"></p></div>'+
 '<div class="ivp"><i><u id="ivBar"></u></i><span id="ivN"></span></div><div class="ivl" id="ivL"></div>'+
-'<div class="ivreal"><h4>好友加入 ＋'+RR+'</h4><p class="note" id="ivRealN"></p><div class="ivrl" id="ivRealL"></div></div>'+
-'<p class="note">每日分享邀請達 1／3 次可領階梯紅包 ＋1000／＋2000（每次分享間隔 15 秒才計入），0 點重置<br>新玩家點你分享的邀請並用好友碼加入，你可再領 ＋'+RR+'（每日最多 '+RCAP+' 位，連線後開放）<br>好友輸入你的邀請碼可在機台內「邀請好友」領 300<br>虛擬籌碼僅供娛樂・純虛擬・無兌現・不可轉讓或交易</p><div class="frs"><button class="btn close" id="ivX">關閉</button></div>';
+'<div class="ivreal"><h4>好友加入 <span class="ivamt">＋'+RR+'</span></h4><p class="note" id="ivRealN"></p><div class="ivrl" id="ivRealL"></div></div>'+
+'<p class="note">每日分享邀請達 1／3 次可領階梯紅包 <span class="ivamt">＋1000／＋2000</span>（每次分享間隔 15 秒才計入），0 點重置<br>新玩家點你分享的邀請並用好友碼加入，<span class="ivamt">你可再領 ＋'+RR+'</span>（每日最多 '+RCAP+' 位，連線後開放）<br>好友輸入你的邀請碼可在機台內「邀請好友」領 300<br>虛擬籌碼僅供娛樂・純虛擬・無兌現・不可轉讓或交易</p><div class="frs"><button class="btn close" id="ivX">關閉</button></div>';
 document.body.appendChild(d);
 var liveInv={ok:false,rows:[],claimedToday:0,cap:RCAP,reward:RR};
 function face(av,n){if(window.DFPface)return DFPface(av,n);return String(n||'?').slice(0,1)}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function paintReal(){var box=$('ivRealL'),note=$('ivRealN');if(!box||!note)return;
- if(!liveInv.ok){note.textContent='新玩家用你的好友碼加入，你可領 ＋'+RR+'（每日最多 '+RCAP+' 位）。連線好友準備中，此獎勵先不開放。';box.innerHTML='<div class="ivi"><span class="ivs">好友加入</span><b>＋'+RR+'</b><button class="btn" disabled>未開放</button></div>';return}
- note.textContent='新玩家點你分享的邀請並用好友碼加入，你可領 ＋'+RR+'。今日已領 '+liveInv.claimedToday+' / '+liveInv.cap+'。';
+ if(!liveInv.ok){note.innerHTML='新玩家用你的好友碼加入，<span class="ivamt">你可領 ＋'+RR+'</span>（每日最多 '+RCAP+' 位）。連線好友準備中，此獎勵先不開放。';box.innerHTML='<div class="ivi"><span class="ivs">好友加入</span><b>＋'+RR+'</b><button class="btn" disabled>未開放</button></div>';return}
+ note.innerHTML='新玩家點你分享的邀請並用好友碼加入，<span class="ivamt">你可領 ＋'+RR+'</span>。今日已領 '+liveInv.claimedToday+' / '+liveInv.cap+'。';
  if(!liveInv.rows.length){box.innerHTML='<p class="ivm">還沒有新玩家用你的好友碼加入。</p>';return}
  var full=liveInv.claimedToday>=liveInv.cap;
  box.innerHTML=liveInv.rows.map(function(r){var got=!!r.claimed,dis=got||full;return '<div class="ivri'+(got?' got':'')+'"><span class="fav" aria-hidden="true">'+face(r.avatar,r.displayName)+'</span><div class="n"><b>'+esc(r.displayName||'新好友')+'</b><small>＋'+liveInv.reward+'</small></div><button class="btn'+(dis?'':' hot')+'" data-ivr="'+esc(r.id)+'"'+(dis?' disabled':'')+'>'+(got?'已領取':full?'今日已滿':'領取')+'</button></div>'}).join('')}
@@ -35,7 +35,7 @@ function render(){var s=st(),mx=TI[TI.length-1].n,ready=0;$('ivCode').textConten
  $('ivL').innerHTML=TI.map(function(t,i){var got=s.c.indexOf(i)>=0,ok=s.n>=t.n;if(ok&&!got)ready++;return '<div class="ivi'+(got?' got':ok?' ok':'')+'"><span class="ivs">'+t.n+' 次</span><b>＋'+t.r+'</b><button class="btn'+(ok&&!got?' hot':'')+'" data-iv="'+i+'"'+(ok&&!got?'':' disabled')+'>'+(got?'已領取':ok?'領取':'未達成')+'</button></div>'}).join('');
  $('ivN').textContent='今日已分享 '+Math.min(s.n,mx)+' / '+mx+' 次';$('ivBar').style.width=(Math.min(s.n,mx)/mx*100)+'%';
  var pend=liveInv.ok?liveInv.rows.filter(function(r){return !r.claimed}).length:0;
- var card=ready?('有 '+ready+' 個紅包可領'):(pend?('有 '+pend+' 位好友加入可領 ＋'+RR):(s.c.length>=TI.length?'今日分享階梯已領完':'分享 1／3 次領 ＋1000／＋2000'));
+ var card=ready?('有 '+ready+' 個紅包可領'):(pend?('有 '+pend+' 位好友加入可領 ＋\u2060'+RR):(s.c.length>=TI.length?'今日分享階梯已領完':'分享 1／3 次領 ＋\u20601000／＋\u20602000'));
  $('ivBs').textContent=card;
  bn.classList.toggle('has',ready>0||pend>0||s.n<mx);
  paintReal()}
