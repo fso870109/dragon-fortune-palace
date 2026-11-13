@@ -17,3 +17,5 @@
 #dWk .wka .btn:disabled{opacity:.55;filter:grayscale(.4)}#dWk .wkn{color:#bfa9bd;font-size:12px}
 #dWk .wkl{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 #dWk .frs{display:flex;gap:8px;justify-content:center;margin-top:8px}
+
+#dWk .wkx .x small .wkamt{white-space:nowrap}

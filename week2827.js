@@ -24,7 +24,7 @@ document.body.appendChild(dl);
 function render(sel){var td=new Date().getDay();if(sel==null)sel=td;var d=DAYS[sel],isT=sel===td,g=got();
  $('wkTd').textContent='今日：'+DAYS[td].n+(g?'・已領':'・紅包可領');
  [].forEach.call(document.querySelectorAll('#wkR .wkc'),function(b){var i=+b.getAttribute('data-wd');b.classList.toggle('td',i===td);b.classList.toggle('has',i===td&&!g)});
- var h='<span class="wke" aria-hidden="true">'+ic(d.ic)+'</span><div class="x"><b>週'+d.w+'・'+d.n+'</b><small>'+d.t+'・活動紅包 ＋'+d.r+'</small></div>';
+ var h='<span class="wke" aria-hidden="true">'+ic(d.ic)+'</span><div class="x"><b>週'+d.w+'・'+d.n+'</b><small>'+d.t+'・活動紅包 <span class="wkamt">＋'+d.r+'</span></small></div>';
  if(isT)h+='<div class="wka"><button class="btn'+(g?'':' hot')+'" id="wkGet"'+(g?' disabled':'')+'>'+(g?'今日已領':'領取 ＋'+d.r)+'</button>'+(d.go?'<a class="btn" href="'+d.go+'">'+d.gt+'</a>':(d.gt?'<button class="btn" id="wkFr">'+d.gt+'</button>':''))+'</div>';
  else h+='<div class="wka"><span class="wkn">'+(((sel-td+7)%7)?'還有 '+((sel-td+7)%7)+' 天開放':'')+'</span></div>';
  $('wkX').className='wkx'+(isT?' on':'');$('wkX').innerHTML=h;
