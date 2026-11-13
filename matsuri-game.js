@@ -174,7 +174,7 @@ const f=FS;fsTimer=setTimeout(function end(){if(bwState||spinning||window.__hold
 FS=null;fsUI();['spinBtn','minus','plus','maxBtn','max16','resetBtn'].forEach(i=>{const e=$(i);if(e)e.disabled=false});
 $('msg').textContent=`免費次數結束！共贏得 ${fmt(f.won)} 虛擬籌碼`;if(f.won>0)bigWin(f.won,f.bet*NL,{tier:['mega','免費次數結束','合計獎金'],lbl:'合計獎金'});else lcdReset()},1300)}
 function fsIntro(re){const bw=$('bw');fsUI();lcdBonusFS();
-bw.className='bw show epic fsi';$('bwTier').textContent='超級獎勵';$('bwJp').textContent=re?'謝謝你…♡ +10次':'機會來了!! 一直在等你';
+bw.className='bw show epic fsi';$('bwTier').textContent='超級獎勵';$('bwJp').textContent=re?'謝謝你… +10次':'機會來了!! 一直在等你';
 bw.querySelector('.lbl').textContent=re?'免費次數追加':'免費次數（獎金 ×2）';$('bwAmt').textContent=(re?'+':'')+FS_N+' 回';$('bwBtn').textContent='開始！';
 bwState={won:0,done:true,fin:true,intro:true};sfx.win(3);lastFlash=0;flash(.45);fountain();megaBorder(2.5);bw.classList.add('ready');setTimeout(()=>$('bwBtn').focus(),50);
 if(window.__fsAuto)setTimeout(bwClose,window.__fsAuto)}
@@ -440,7 +440,7 @@ function lcdSpin(x,tease,bon){lcdReset();$('lcdIdle').style.opacity=.25;$('lcdNa
 let k=-1;const r=Math.random();
 if(bon||x>=80)k=r<.5?4:3;else if(x>=10)k=r<.6?3:2;else if(x>=3)k=r<.7?2:1;else if(x>0)k=r<.5?1:(r<.8?0:-1);else if(tease)k=r<.6?1:2;else k=r<.22?0:(r<.27?1:-1);
 lcd._k=k;if(k>=0)lcdLater(()=>{setKitai(k);if(k>=2)slam(k>=3?'大獎預感!!':'機會!','#ff4fa3')},350)}
-function lcdReach(){lcd.classList.add('reach');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='大獎機會演出中';$('spinBtn').classList.add('push');const k=Math.max(1,lcd._k|0);slam('機會!!','#ff4fa3','心跳…♡');sfx.blip&&sfx.blip(true)}
+function lcdReach(){lcd.classList.add('reach');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='大獎機會演出中';$('spinBtn').classList.add('push');const k=Math.max(1,lcd._k|0);slam('機會!!','#ff4fa3','心跳…');sfx.blip&&sfx.blip(true)}
 function lcdBonusFS(){lcdClear();lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='免費次數 開始!!';slam('超級獎勵','#ff4fa3','免費次數 ×10');lcdLater(()=>lcd.classList.remove('bonus'),2200)}
 function lcdResult(x,bon){$('spinBtn').classList.remove('push');lcd.classList.remove('reach');if(bon)return;
 if(x>=10){lcd.classList.add('bonus');$('lcdIdle').style.opacity=0;$('lcdNavi').textContent='獎勵確定!!';slam('7',x>=80?'#fff':'#ffc400',x>=30?'超級大獎':'大獎');lcdLater(()=>slam(x>=80?'大獎!!':'大獎','#ff2240','確定'),550)}

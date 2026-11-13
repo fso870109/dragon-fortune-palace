@@ -343,7 +343,7 @@ h1.logo .zh{display:block;margin:.25em 0 0 1.5em;font:700 .24em/1.2 "Noto Sans T
 .box.win b{color:#ff7ec0;text-shadow:0 0 6px #ff3c9a,0 0 14px rgba(255,60,154,.6)}
 /* message bar */
 .msg{position:relative;margin:0 0 8px;padding:7px 12px;min-height:34px;border-radius:6px;font:400 clamp(14px,2vw,19px)/1.3 "KleeSub","Noto Sans TC",sans-serif;color:#fff;text-shadow:0 0 6px var(--acc),0 0 12px rgba(var(--glow),.6);background:linear-gradient(180deg,rgba(10,6,30,.2),rgba(10,6,30,.85)),repeating-linear-gradient(90deg,#120c2a 0 18px,#1b1438 18px 22px,#0f0a24 22px 34px,#22183f 34px 38px);box-shadow:inset 0 0 0 1px rgba(255,210,122,.45),inset 0 -14px 20px rgba(255,170,90,.12)}
-.msg::after{content:" ♡";color:var(--acc3)}
+.msg::after{content:none}
 /* controls */
 .spin{background:radial-gradient(circle at 50% 30%,#fff 0%,#ffb3d6 18%,var(--acc) 45%,#8a0f4e 90%);box-shadow:0 0 0 3px #2a0716,0 0 0 6px var(--gold2),0 0 0 8px #000,0 0 26px rgba(var(--glow),.9),0 7px 0 8px #000,inset 0 -8px 16px rgba(0,0,0,.4),inset 0 6px 10px rgba(255,255,255,.6)}
 .spin::after{border-color:var(--acc3)}
@@ -404,7 +404,7 @@ body::after{display:none!important}
 .info .box b[data-l="4"]{font-size:3.4cqw!important}.info .box b[data-l="5"]{font-size:2.8cqw!important}.info .box b[data-l="6"]{font-size:2.3cqw!important}.info .box b[data-l="7"],.info .box b[data-l="8"],.info .box b[data-l="9"]{font-size:1.9cqw!important}
 .info .box:nth-child(2){position:fixed!important;pointer-events:auto}
 .msg{position:absolute!important;left:18.8%;top:84.2%;width:63%;height:7.8%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center;justify-content:center;font:600 2.1cqw/1 "KleeSub","Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif!important;color:#ffe6f4!important;text-shadow:0 0 .4cqw #ff4fa3,0 0 1cqw rgba(255,79,163,.8)!important;contain:strict}
-.msg::after{content:" ♡";color:#ff8fc8;margin-left:.3em}
+.msg::after{content:none}
 /* cut-in stage over the heroine */
 .lcd{position:absolute!important;left:18%!important;right:auto!important;top:1.5%!important;bottom:auto!important;width:64%!important;height:36%!important;margin:0!important;z-index:6;pointer-events:none}
 .lcd .ci{background:url(assets/neko/cutin.webp?v=256) 50% 35%/cover!important;border-radius:1cqw!important;box-shadow:0 0 0 .2cqw #d9a441,0 0 2cqw rgba(255,79,163,.9)!important}
