@@ -50,7 +50,7 @@ function paintMe(){
 }
 function renderDemo(){var s=st(),n=FR.length;
  $('frGt').textContent=s.got?'今日禮物已領取':('好友送你 '+n+' 份紅包');
- $('frGs').textContent=s.got?'明天還有新的紅包喔':('每份 '+GIFT+'，共 ＋'+(GIFT*n)+' 虛擬籌碼');
+ $('frGs').innerHTML=s.got?'明天還有新的紅包喔':('每份 '+GIFT+'，共 <span class="framt">＋'+(GIFT*n)+' 虛擬籌碼</span>');
  $('frGet').disabled=!!s.got;$('frGet').textContent=s.got?'已領取':'一鍵全收';$('frG').classList.toggle('on',!s.got);
  $('frL').innerHTML=FR.map(function(f){var done=s.sent.indexOf(f.id)>=0;return '<div class="fri"><span class="fav" aria-hidden="true">'+face(f)+'</span><div class="n"><b>'+f.n+'</b><small>'+f.t+'</small></div><button class="btn'+(done?'':' hot')+'" data-fr="'+f.id+'"'+(done?' disabled':'')+'>'+(done?'已送出':'回送紅包')+'</button></div>'}).join('');
  var c=s.sent.length;$('frB').innerHTML=(s.bon?'今日回送全滿，已獲得好友獎勵 ＋'+BONUS:'回送 '+c+' / '+n+' 位好友，全送出再得 ＋'+BONUS)+'<i><u style="width:'+(c/n*100)+'%"></u></i>';
@@ -59,7 +59,7 @@ function renderLive(){var s=lst(),n=friends.length,inbox=0;
  try{/* claimed ids already in s.got */}catch(e){}
  var rec=window.__dfpRec||[];inbox=rec.filter(function(g){return s.got.indexOf(g.id)<0}).length;
  $('frGt').textContent=inbox?('好友送你 '+inbox+' 份紅包'):(s.got.length?'今日禮物已領取':'還沒有新的好友紅包');
- $('frGs').textContent=inbox?('每份 '+GIFT+'，共 ＋'+(GIFT*inbox)+' 虛擬籌碼'):(n?'等好友回送紅包給你':'先用好友碼加一位好友');
+ $('frGs').innerHTML=inbox?('每份 '+GIFT+'，共 <span class="framt">＋'+(GIFT*inbox)+' 虛擬籌碼</span>'):(n?'等好友回送紅包給你':'先用好友碼加一位好友');
  $('frGet').disabled=!inbox;$('frGet').textContent=inbox?'一鍵全收':'已領取';$('frG').classList.toggle('on',!!inbox);
  if(!n)$('frL').innerHTML='<p class="fre">還沒有好友。請輸入對方的好友碼。</p>';
  else $('frL').innerHTML=friends.map(function(f){var done=s.sent.indexOf(f.uid)>=0;return '<div class="fri"><span class="fav" aria-hidden="true">'+faceAv(f.avatar,f.displayName)+'</span><div class="n"><b>'+esc(f.displayName)+'</b><small>Lv.'+(f.level||1)+' · '+esc(f.friendCode)+'</small></div><button class="btn'+(done?'':' hot')+'" data-fr="'+esc(f.uid)+'"'+(done?' disabled':'')+'>'+(done?'已送出':'回送紅包')+'</button></div>'}).join('');

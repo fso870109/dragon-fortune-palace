@@ -5,6 +5,7 @@
 #dFr .frg.on .gb{animation:frBob 1.6s ease-in-out infinite}
 @keyframes frBob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-3px) rotate(4deg)}}
 #dFr .frg .x{flex:1;min-width:0}#dFr .frg .x b{display:block;color:#ffe08a;font-size:15px}#dFr .frg .x small{color:#d9c2cf;font-size:12px}
+#dFr .frg .x small .framt{white-space:nowrap}
 #dFr .frl{display:grid;gap:6px;margin:0}
 #dFr .fri{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:12px;border:1px solid rgba(217,164,65,.45);background:rgba(20,6,16,.7)}
 #dFr .fav{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:radial-gradient(circle at 35% 30%,#5a1a3a,#1a0610);box-shadow:0 0 0 2px #d9a441,0 0 0 3px #4a2a08}
