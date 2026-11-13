@@ -11,7 +11,9 @@ html.lx .rdp.on{visibility:visible;opacity:1}
 html.lx .rdp{top:auto;bottom:calc(96px + env(safe-area-inset-bottom));width:max-content;max-width:min(88vw,340px);padding:5px 6px 5px 10px;gap:6px;border-radius:999px;border:1px solid rgba(255,200,110,.75);background:linear-gradient(90deg,rgba(120,10,22,.94),rgba(60,6,14,.94));box-shadow:0 4px 14px rgba(0,0,0,.55),0 0 10px rgba(255,120,60,.3);transform:translate(-50%,14px)}
 html.lx .rdp.on{transform:translate(-50%,0)}
 html.lx .rdp .rdpi{font-size:15px;animation:none}
-html.lx .rdp .rdpt{display:flex;align-items:center;min-width:0}
+html.lx .rdp .rdpt{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0}
 html.lx .rdp b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#ffe7a6}
 html.lx .rdp small{display:none}
-html.lx .rdp::after{content:"回擊 ›";flex:none;padding:3px 9px;border-radius:999px;font:900 12px/1.2 var(--lxf,inherit);color:#3a1200;background:linear-gradient(180deg,#fff2c0,#f2c457 55%,#d5962a)}
+html.lx .rdp .rdps{white-space:nowrap}
+/* v28.105: drop leftover ::after「回擊 ›」— real #rdPC already shows 回擊 ＋80; the extra pill squeezed the subtitle and split「籌碼」at 360 */
+html.lx .rdp::after{content:none!important;display:none!important}
