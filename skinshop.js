@@ -1,4 +1,4 @@
-/* v28.55 skin shop — recaptured previews with full crowns; distinct 套用/使用中; one scrolling page */
+/* v28.92 skin shop — hide English tags (DEFAULT/MOONLIT/…) from UI; names stay Traditional Chinese */
 (function(){
 const D=document;
 const $=id=>D.getElementById(id);
@@ -102,7 +102,7 @@ function ensureFeat(){
   feat.id='shFeat';feat.className='shfeat';
   feat.innerHTML='<div class="shfimg"><div class="pv2 pvimg" id="shFeatPv" aria-hidden="true"></div></div>'+
     '<div class="shfmeta"><span class="tier" id="shFeatTier"></span>'+
-    '<b><span id="shFeatName"></span> <small class="tg" id="shFeatTag"></small></b>'+
+    '<b><span id="shFeatName"></span></b>'+
     '<p class="cp" id="shFeatCp"></p><p class="fxl" id="shFeatFx"></p><p class="shfpr" id="shFeatPrice"></p><div class="shfact" id="shFeatAct"></div></div>';
   const note=$('shThm');
   $('skins').parentNode.insertBefore(feat, $('skins'));
@@ -128,7 +128,6 @@ function paintFeat(id){
   const st=getSkin(),own=st.own.includes(k.id)||k.id==='gold',eq=st.eq===k.id;
   const tier=$('shFeatTier');if(tier){tier.textContent={n:'普通',r:'稀有',l:'傳說',m:'神話'}[k.tier]||'普通';tier.className='tier t-'+(k.tier||'n')}
   const nm=$('shFeatName');if(nm)nm.textContent=k.name;
-  const tg=$('shFeatTag');if(tg)tg.textContent=k.tag||'';
   const cp=$('shFeatCp');if(cp)cp.textContent=k.copy||k.desc||'';
   const fx=$('shFeatFx');if(fx)fx.textContent=k.fx||'';
   const pr=$('shFeatPrice');
@@ -169,7 +168,7 @@ function render(){
     return '<li class="skin t-'+(k.tier||'n')+(eq?' eq':'')+(sel===k.id?' sel':'')+'" data-id="'+k.id+'">'+
       (eq?'<span class="eqtag">使用中</span>':own?'<span class="eqtag ow">已擁有</span>':'')+
       '<span class="tier">'+({n:'普通',r:'稀有',l:'傳說',m:'神話'}[k.tier]||'')+'</span>'+
-      pv(k)+'<b>'+k.name+' <small class="tg">'+(k.tag||'')+'</small></b><p class="cp">'+(k.copy||k.desc||'')+'</p>'+
+      pv(k)+'<b>'+k.name+'</b><p class="cp">'+(k.copy||k.desc||'')+'</p>'+
       (k.fx?'<p class="fxl">'+k.fx+'</p>':'')+btn+'</li>';
   }).join('');
   paintFeat(sel);
