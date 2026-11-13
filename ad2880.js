@@ -26,7 +26,7 @@ function build(){
     '<div class="dfpAdRing"><b id="dfpAdN">18</b><small>秒</small></div></div>'+
     '<div class="dfpAdProg"><i id="dfpAdBar"></i></div>'+
     '<p class="dfpAdHint" id="dfpAdHint">請看完贊助影片</p>'+
-    '<button type="button" class="dfpAdBtn" id="dfpAdGo" disabled>請看完贊助影片</button></div>'+
+    '<button type="button" class="dfpAdBtn" id="dfpAdGo" disabled>觀看中</button></div>'+
     '<div class="dfpAdBox dfpAdRw" id="dfpAdRw" hidden>'+
     '<h2>獎勵到帳</h2>'+
     '<p class="dfpAdAmt">獲得 <b id="dfpAdAmt">800</b> 籌碼</p>'+
@@ -42,7 +42,7 @@ function paint(left){
   if(bar)bar.style.width=Math.min(100,((dur-left)/dur)*100)+'%';
   if(left>0){
     if(hint)hint.textContent='請看完贊助影片';
-    if(go){go.disabled=true;go.textContent='請看完贊助影片'}
+    if(go){go.disabled=true;go.textContent='觀看中'}
   }else{
     if(hint)hint.textContent='觀看完成，可領取獎勵';
     if(go){go.disabled=false;go.textContent='領取獎勵'}
