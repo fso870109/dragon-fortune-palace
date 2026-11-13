@@ -1,7 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.106',DFP_APPV='';
-var FB_LOGIN=false; // 改 true 即可重新顯示 Facebook 連結
+var DFP_WEBV='28.107',DFP_APPV='';
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
 function vibOn(){return CAN&&g('fs_vib')!=='0'}

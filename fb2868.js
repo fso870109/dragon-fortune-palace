@@ -2,7 +2,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import {
   getAuth, signInAnonymously, signOut, connectAuthEmulator,
-  GoogleAuthProvider, FacebookAuthProvider,
+  GoogleAuthProvider,
   linkWithPopup, linkWithRedirect, getRedirectResult, linkWithCredential, signInWithCredential
 } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js';
 import {
@@ -86,9 +86,7 @@ function isPerm(e) {
 }
 function hostAllowed(h) {
   h = String(h || '').toLowerCase();
-  return h === 'googleusercontent.com' || h.endsWith('.googleusercontent.com')
-    || h === 'graph.facebook.com' || h.endsWith('.graph.facebook.com')
-    || h === 'fbcdn.net' || h.endsWith('.fbcdn.net');
+  return h === 'googleusercontent.com' || h.endsWith('.googleusercontent.com');
 }
 function isPhotoUrl(av) {
   if (typeof av !== 'string' || av.length < 20 || av.length > 500) return false;
@@ -114,26 +112,8 @@ function faceHtml(av, name) {
   }
   return String(name || '?').slice(0, 1);
 }
-function enlargeFbPhoto(url, fbUid) {
-  if (fbUid) {
-    return 'https://graph.facebook.com/' + encodeURIComponent(fbUid) + '/picture?type=large&width=256&height=256';
-  }
-  if (!url) return '';
-  try {
-    const u = new URL(url);
-    if (u.hostname === 'graph.facebook.com' || u.hostname.endsWith('.graph.facebook.com')) {
-      u.searchParams.set('type', 'large');
-      u.searchParams.set('width', '256');
-      u.searchParams.set('height', '256');
-      const out = u.toString();
-      return out.length <= 500 ? out : '';
-    }
-  } catch (e) {}
-  return isPhotoUrl(url) ? url : '';
-}
 function photoFromProvider(p) {
   if (!p) return '';
-  if (p.providerId === 'facebook.com') return enlargeFbPhoto(p.photoURL, p.uid);
   let u = p.photoURL || '';
   if (u && /googleusercontent\.com/i.test(u)) {
     const bigger = u.replace(/=s\d+(-[a-z])?/gi, '=s256$1');
@@ -990,18 +970,14 @@ api.claimInviteReward = async function (inviteId) {
 
 function linkErr(e, which) {
   const c = (e && (e.code || e.message)) || '';
-  const w = which === 'facebook' ? 'Facebook' : (which === 'google' ? 'Google' : '');
-  if (/operation-not-allowed/i.test(c)) {
-    return which === 'facebook' ? 'FB 登入即將開放' : (which === 'google' ? 'Google 登入即將開放' : '這個登入方式即將開放');
-  }
+  if (/operation-not-allowed/i.test(c)) return 'Google 登入暫時無法使用，請稍後再試';
   if (/credential-already-in-use|account-exists-with-different-credential/i.test(c)) {
-    const n = w || '這個';
-    return n + ' 帳號已經連結到另一位旅人，無法再連到目前的身分。請改用尚未連結過的' + (w ? (' ' + w) : '') + ' 帳號。';
+    return '這個 Google 帳號已經連結到另一位旅人，無法再連到目前的身分。請改用尚未連結過的 Google 帳號。';
   }
   if (/popup-closed-by-user|cancelled-popup-request/i.test(c)) return '已取消連結';
   if (/popup-blocked/i.test(c)) return '瀏覽器擋住了視窗，正在改用頁面跳轉';
   if (/unauthorized-domain/i.test(c)) return '這個網域還沒有開放登入';
-  if (/offline|fb-writes-blocked/i.test(c)) return (window.FB_LOGIN === true) ? '連線後才能連結 Google 或 Facebook' : '連線後才能連結 Google';
+  if (/offline|fb-writes-blocked/i.test(c)) return '連線後才能連結 Google';
   if (/native-google-unavailable/i.test(c)) return 'App 內 Google 連結還需要完成 Firebase Android 設定';
   return '連結沒有成功，請稍後再試';
 }
@@ -1022,19 +998,12 @@ function googleProvider() {
   p.setCustomParameters({ prompt: 'select_account' });
   return p;
 }
-function facebookProvider() {
-  const p = new FacebookAuthProvider();
-  p.addScope('public_profile');
-  p.addScope('email');
-  return p;
-}
 api.linkedProviders = function () {
-  const out = { google: null, facebook: null };
+  const out = { google: null };
   const u = api.user;
   if (!u || !u.providerData) return out;
   u.providerData.forEach(function (p) {
     if (p.providerId === 'google.com') out.google = { photoURL: photoFromProvider(p), displayName: p.displayName || '' };
-    if (p.providerId === 'facebook.com') out.facebook = { photoURL: photoFromProvider(p), displayName: p.displayName || '' };
   });
   return out;
 };
@@ -1125,18 +1094,14 @@ api.linkAccount = async function (which) {
     err.code = 'offline';
     throw err;
   }
-  const key = which === 'facebook' ? 'facebook' : 'google';
-  if (key === 'facebook' && window.FB_LOGIN !== true) {
-    const err = new Error('auth/operation-not-allowed');
-    err.code = 'auth/operation-not-allowed';
-    throw err;
-  }
+  /* v28.107: Google is the only sign-in provider */
+  const key = 'google';
   const have = api.linkedProviders()[key];
   if (have) return { already: true };
   if (key === 'google' && isNativeApp()) {
     return await linkGoogleNative();
   }
-  const provider = key === 'facebook' ? facebookProvider() : googleProvider();
+  const provider = googleProvider();
   try {
     if (preferRedirect()) {
       try { sessionStorage.setItem('dfp_link_which', key); } catch (e) {}
