@@ -10,13 +10,13 @@ neon:{name:'真夜中',tag:'MOONLIT',copy:'深夜的藍金對比，如月下刀�
 jade:{name:'花火夜祭',tag:'HANABI',copy:'夜櫻花火，粉金交融的夏夜祭典。',tier:'r',fx:'櫻吹雪沿框緩緩飄落'},
 crystal:{name:'月光',tag:'LUNAR',copy:'銀白冷光，如薄紙上的月光。',tier:'r',fx:'銀白冷輝緩緩呼吸'},
 royal:{name:'極夜霓虹',tag:'NEON',copy:'極夜霓虹，紫金輝映的不夜城。',tier:'l',fx:'霓虹沿框奔跑、紫金輝光'},
-obsidian:{name:'金龍祭典',tag:'DRAGON',copy:'金龍盤框，祭典花火映紅天際。',tier:'m',fx:'金龍磷光巡游、花火綻放'},
+obsidian:{name:'金龍祭典',tag:'DRAGON',copy:'金龍盤框，祭典花火映紅天際。',tier:'m',fx:'金龍磷光巡遊、花火綻放'},
 blossom:{name:'櫻花之舞',tag:'SAKURA',copy:'櫻社鳥居與狐狸燈籠，花吹雪中的夜宴。',tier:'l',fx:'櫻吹雪沿框旋轉飄落'},
 beach:{name:'夏日海灘',tag:'NAGISA',copy:'黃昏棕櫚與浪花，金箔夕照灑在機台邊。',tier:'l',fx:'浪花泡沫沿框湧上退去'},
 tsukiyo:{name:'月下幻境',tag:'TSUKIYO',copy:'紫藤花棚與一輪滿月，月華如水傾瀉而下。',tier:'m',fx:'月華光斑緩緩流轉'},
 kitsune:{name:'狐之祕境',tag:'KITSUNE',copy:'朱鳥居與白狐面，稻荷的祕徑只在夜間開啟。',tier:'m',fx:'狐火點點沿鳥居遊走'},
 kabuto:{name:'武將之魂',tag:'KABUTO',copy:'甲胄與刀旗，戰場金箔如雨、鐵與火的氣息。',tier:'m',fx:'金箔劍氣沿甲胄閃爍'},
-feast:{name:'皇宮盛宴',tag:'MIYABI',copy:'雙龍盤柱、金殿華筵，皇家儀仗環繞四周。',tier:'m',fx:'雙龍金輝巡游、華筵燈火'}
+feast:{name:'皇宮盛宴',tag:'MIYABI',copy:'雙龍盤柱、金殿華筵，皇家儀仗環繞四周。',tier:'m',fx:'雙龍金輝巡遊、華筵燈火'}
 };
 const FALLBACK=[
 {id:'gold',name:'金殿',desc:'預設・夜粉金',price:0},
