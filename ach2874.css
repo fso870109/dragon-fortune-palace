@@ -1,4 +1,4 @@
-/* v28.82 金殿成就殿堂 */
+/* v28.82 金殿成就殿堂；v28.98 分類列改換行，360 不再裁「圖鑑」 */
 #dMiss{padding:14px 12px 16px}
 #dMiss .claimAll{margin:0 0 10px}
 #dMiss .claimAll .btn{width:100%;min-height:42px}
@@ -29,11 +29,11 @@
 .achHero .bar{height:8px;border-radius:99px;background:rgba(80,24,20,.88);border:1px solid rgba(224,179,74,.45);overflow:hidden}
 .achHero .bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#8a3a14,#e0b34a 55%,#ffe9a8)}
 .achCats{
-  display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;
-  max-width:100%;padding:2px 0 10px;margin:0 0 4px;scrollbar-width:thin
+  display:flex;flex-wrap:wrap;gap:6px;
+  max-width:100%;padding:2px 0 10px;margin:0 0 4px
 }
 .achCats button{
-  flex:none;height:32px;padding:0 12px;border-radius:16px;
+  flex:none;height:32px;padding:0 10px;border-radius:16px;
   border:1px solid rgba(217,164,65,.45);background:rgba(20,6,16,.75);
   color:#f0e2c0;font:700 12.5px/1 "Noto Sans TC",sans-serif;white-space:nowrap
 }
@@ -91,6 +91,8 @@
 .acx .acb{display:inline-block;margin-top:6px;padding:1px 8px;border-radius:99px;font:700 11px/1.4 "Noto Sans TC",sans-serif;color:#fff6d0;border:1px solid rgba(224,179,74,.55);background:rgba(90,28,24,.65)}
 .acr > .btn{flex:none;align-self:center;height:34px;padding:0 12px;font-size:13px}
 @media (max-width:360px){
+  .achCats{gap:5px}
+  .achCats button{padding:0 8px;font-size:12px}
   #dMiss{padding:12px 10px 14px}
   .acs{width:44px;height:44px;background-size:44px 44px,auto}.acr.t4 .acs{width:48px;height:48px;background-size:48px 48px,auto}
   .acx b{font-size:14px}
