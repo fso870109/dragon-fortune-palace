@@ -76,7 +76,7 @@ if(fr){proxyRow(ev,'lxFr','<img src="assets/lx/ev_friends.webp'+V+'" alt="" widt
 /* collect tab */
 var col=$('lxColSlot');
 var shopRow=el('div','lxShop');
-shopRow.innerHTML='<div class="lxShopH"><img src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><div><b>機台外觀商店</b><small id="lxSkN">以虛擬籌碼兌換限定機台外框・純裝飾，不影響機率</small></div></div>'+
+shopRow.innerHTML='<div class="lxShopH"><img src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><div><b>機台外觀商店</b><small id="lxSkN">尚未收藏限定外框</small></div></div>'+
 '<p class="lxShopP">外框全機台共用・以虛擬籌碼兌換，純裝飾不影響機率</p>'+
 '<div class="lxShopE"><div class="lxShopPv" id="lxShopPv" aria-hidden="true"></div>'+
 '<button type="button" class="lxShopGo" id="lxShopGo">進入外觀商店 ›</button></div>';
@@ -142,7 +142,7 @@ function sync(){
  var ac=0;for(var k in s.ach)if(s.ach[k])ac++;$('lxSA').textContent=ac+' / '+CZ.ACH.length;
  if(window.CZGAL&&$('lxGalN'))$('lxGalN').textContent='已收集 '+CZGAL.count()+' / '+CZGAL.total;
  var sk;try{sk=JSON.parse(LS.getItem('fs_skin')||'{}')}catch(e){sk={}}var own=Array.isArray(sk.own)?sk.own.filter(function(x){return x!=='gold'}).length:0;
- $('lxSkN').textContent=own?('已收藏 '+own+' 款限定外框・以虛擬籌碼兌換，純裝飾不影響機率'):'以虛擬籌碼兌換限定機台外框・純裝飾，不影響機率';
+ $('lxSkN').textContent=own?('已收藏 '+own+' 款限定外框'):'尚未收藏限定外框';
  var pv=$('lxShopPv');if(pv){var FRM={gold:'gold',neon:'midnight',jade:'hanabi',crystal:'moon',royal:'neon',obsidian:'dragon',blossom:'blossom',beach:'beach',tsukiyo:'tsukiyo',kitsune:'kitsune',kabuto:'kabuto',feast:'feast'};pv.style.backgroundImage='url("assets/skins/shop/samurai-'+(FRM[sk.eq]||'gold')+'.webp?v=2846")'}
 }
 CZ.on(sync);
