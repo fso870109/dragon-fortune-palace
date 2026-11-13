@@ -159,7 +159,7 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
   const n=ac.createBufferSource(),b=ac.createBuffer(1,ac.sampleRate*.6,ac.sampleRate),c=b.getChannelData(0);for(let i=0;i<c.length;i++)c[i]=(Math.random()*2-1)*Math.pow(1-i/c.length,3);n.buffer=b;const ng=ac.createGain();ng.gain.value=.25;n.connect(ng).connect(g);n.start(t)}catch(e){}}
  let atCb=null,atT=0;
  function atari(txt,sub,cb){window.__hold=true;atCb=cb;at.querySelector('.atx b').textContent=txt;at.querySelector('.atx i').textContent=sub||'';
-  at.className='';void at.offsetWidth;at.className='on'+(RM?' rm':'');vib([40,40,80]);sting();clearTimeout(atT);atT=setTimeout(atEnd,RM?1000:2300)}
+  at.className='';void at.offsetWidth;at.className='on'+(RM?' rm':'');vib([40,40,80]);sting();clearTimeout(atT);atT=setTimeout(atEnd,RM?900:1700)}
  function atEnd(){if(!at.classList.contains('on')||at.classList.contains('out'))return;clearTimeout(atT);window.__hold=false;const f=atCb;atCb=null;f&&f();setTimeout(()=>{at.classList.add('out');setTimeout(()=>{at.className=''},280)},420)}
  at.addEventListener('pointerdown',atEnd);addEventListener('keydown',e=>{if(at.classList.contains('on')&&(e.key===' '||e.key==='Enter'||e.key==='Escape')){e.preventDefault();e.stopPropagation();atEnd()}},true);
  CZ.atari=atari;

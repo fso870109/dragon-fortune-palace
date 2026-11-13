@@ -182,7 +182,7 @@ if(window.__fsAuto)setTimeout(bwClose,window.__fsAuto)}
 /* v28.87: viewport size cached (reading innerWidth/innerHeight inside the particle loop forced a style+layout pass every frame) */
 let VW=innerWidth,VH=innerHeight;addEventListener('resize',()=>{VW=innerWidth;VH=innerHeight},{passive:true});
 const fx=$('fx'),cx=fx.getContext('2d');let P=[],fxRun=false,DPR=1;
-function fxSize(){VW=innerWidth;VH=innerHeight;DPR=Math.min(1.25,window.devicePixelRatio||1);fx.width=innerWidth*DPR;fx.height=innerHeight*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
+function fxSize(){VW=innerWidth;VH=innerHeight;DPR=Math.min(innerWidth<620?1:1.25,window.devicePixelRatio||1); /* v28.88: 1x particle canvas on phones */fx.width=innerWidth*DPR;fx.height=innerHeight*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
 requestAnimationFrame(fxSize);/* v246: first size in rAF (no forced layout mid-parse) */{let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(fxSize,120)},{passive:true})}
 document.addEventListener('visibilitychange',()=>{const h=document.hidden;document.body.classList.toggle('bg-paused',h);if(h){P.length=0;megaT=0;clearInterval(rainT);if(ac&&ac.state==='running')ac.suspend()}else if(ac&&ac.state==='suspended')ac.resume()});
 const CONF=['#ff4fa3','#ffb3d6','#ffd27a','#ffffff','#ff7ec0','#e8b4ff'];

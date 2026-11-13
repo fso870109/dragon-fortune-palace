@@ -20,7 +20,7 @@ let t=0;const sch=()=>{cancelAnimationFrame(t);t=requestAnimationFrame(()=>reque
 /* v28.87: count-up digits (#bwAmt) and inline style writes on non-title children no longer refit every title each frame */
 const ROOTS='#bw,#czWheel,#czAtari,#czMG,#czEn',SKIP='#bwAmt,#bwAmt *';
 MO=new MutationObserver(m=>{for(const x of m){const n=x.target.nodeType===1?x.target:x.target.parentNode;if(!n||!n.closest||!n.closest(ROOTS))continue;if(n.matches(SKIP))continue;
- if(x.type==='attributes'&&x.attributeName==='style'&&!n.matches(ROOTS)&&!n.matches(SEL))continue;sch();return}});MO.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','open','style','hidden']});
+ if(x.type==='attributes'&&(x.attributeName==='style'||x.attributeName==='class')&&!n.matches(ROOTS)&&!n.matches(SEL))continue; /* v28.88: effect-class toggles inside an overlay no longer refit every title */sch();return}});MO.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','open','style','hidden']});
 addEventListener('resize',sch);window.CZFIT=fitAll;
 })();
 /* v18.5b: fit-to-box for subtitle bar, voice bubbles, stats, buttons (shrink, never clip) */

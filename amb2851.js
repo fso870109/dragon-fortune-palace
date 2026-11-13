@@ -61,7 +61,7 @@ function mount(host,id){
   const sprites=cfg.pal.map(function(c){return cfg.k==='spark'?star(c):glow(c)});
   function resize(){
     const r=host.getBoundingClientRect();W=r.width;H=r.height;
-    D=Math.min(1.5,devicePixelRatio||1);
+    D=Math.min(innerWidth<620?1:1.5,devicePixelRatio||1);
     cv.width=Math.max(1,Math.round(W*D));cv.height=Math.max(1,Math.round(H*D));
     x.setTransform(D,0,0,D,0,0);
   }

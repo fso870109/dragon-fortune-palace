@@ -17,7 +17,7 @@ const capN=()=>Math.round(CAP*(window.DFPPERF?DFPPERF.scale:1));
 function add(p){if(RM)return;ensure();if(P.length>=capN())P.shift();p.t=0;P.push(p);if(!run){run=true;requestAnimationFrame(loop)}}
 const ease=t=>1-Math.pow(1-t,3);
 let lt=0,TRL=2;function loop(now){const dt=Math.min(.05,(now-(lt||now))/1000);lt=now;TRL=window.DFPPERF?DFPPERF.trail:2;cx.clearRect(0,0,W,H);
- if(rays){rays.t+=dt;const k=Math.min(1,rays.t/.4)*Math.max(0,Math.min(1,(rays.d-rays.t)/.8));if(k<=0)rays=null;else{cx.save();cx.globalCompositeOperation='lighter';cx.translate(rays.x,rays.y);cx.rotate(rays.t*.35);const n=rays.n,R=Math.hypot(W,H)*.75;cx.globalAlpha=.32*k;for(let i=0;i<n;i++){cx.rotate(6.2832/n);cx.drawImage(S.ray,0,-R*.14,R,R*.28)}cx.globalAlpha=1;cx.restore()}}
+ if(rays){rays.t+=dt;const k=Math.min(1,rays.t/.4)*Math.max(0,Math.min(1,(rays.d-rays.t)/.8));if(k<=0)rays=null;else{cx.save();cx.globalCompositeOperation='lighter';cx.translate(rays.x,rays.y);cx.rotate(rays.t*.35);const n=rays.n,R=Math.hypot(W,H)*.55;cx.globalAlpha=.32*k;for(let i=0;i<n;i++){cx.rotate(6.2832/n);cx.drawImage(S.ray,0,-R*.14,R,R*.28)}cx.globalAlpha=1;cx.restore()}}
  for(let i=P.length-1;i>=0;i--){const p=P[i];p.t+=dt;const u=p.t/p.life;if(u>=1){P.splice(i,1);continue}
   if(p.path){const q=p.path,L=q.len,d=ease(Math.min(1,u))*L;const pt=at(q,d);p.x=pt[0];p.y=pt[1]}else{p.vy+=(p.g||0)*dt;p.vx*=p.drag||1;p.vy*=p.drag||1;p.x+=p.vx*dt;p.y+=p.vy*dt}
   const a=u<.15?u/.15:1-Math.pow((u-.15)/.85,2);
@@ -70,8 +70,8 @@ const _bw=window.bigWin;if(_bw){window.bigWin=function(won,total,o){o=o||{};cons
   pend={won,total,x};const r=_bw.call(this,won,total,o);return r}}
 let pend=null;function seq(){const p=pend;pend=null;if(!p)return;const x=p.x;
   try{const t=$('bwTier');if(t){t.classList.remove('w21imp');void t.offsetWidth;t.classList.add('w21imp');const sp=document.createElement('span');sp.className='w21ts';sp.textContent=t.textContent;t.appendChild(sp)}
-   const tier=x>=50?3:x>=25?2:1,dur=RM?600:Math.min(6500,2200+x*45);
-   rays={x:innerWidth/2,y:innerHeight*.42,t:0,d:dur/1000+1.5,n:tier==1?10:tier==2?14:18};ensure();if(!run){run=true;requestAnimationFrame(loop)}
+   const tier=x>=50?3:x>=25?2:1,dur=RM?600:Math.min(4500,1800+x*30); /* v28.88: shorter, fewer god-rays; none on lite tier */
+   if(!(window.DFPPERF&&DFPPERF.tier===0))rays={x:innerWidth/2,y:innerHeight*.42,t:0,d:dur/1000+.8,n:tier==1?6:tier==2?8:10};ensure();if(!run){run=true;requestAnimationFrame(loop)}
    coins([0,40,80,140][tier],tier);dust(tier*14);
    const beats=tier+2;for(let i=1;i<=beats;i++)setTimeout(()=>{if(!bwState||bwState.fin)return;const a=$('bwAmt');[t,a].forEach(e=>{if(!e)return;e.classList.remove('w21beat');void e.offsetWidth;e.classList.add('w21beat')});
      const base=[523,587,659,784,880][i%5];tone(base,0,.25,'triangle',.06);tone(base*1.5,.02,.25,'triangle',.04);tone(base/2,0,.3,'sine',.08);coins(tier*6,tier);burst(innerWidth/2,innerHeight*.45,10+tier*4,300,'star');window.shake&&shake(Math.min(4,tier+1))},dur*i/(beats+1));
