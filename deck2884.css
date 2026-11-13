@@ -53,34 +53,8 @@ html[data-deck-skin="gold"]{
     -webkit-mask-image:none;
     mask-image:none;
   }
-  html body .czbar::after{
-    content:"";
-    position:absolute;
-    left:0;right:0;
-    top:calc(var(--deck-frame-over-top,22px) * -1);
-    height:calc(100% + var(--deck-frame-over-top,22px));
-    z-index:6;
-    pointer-events:none;
-    background:linear-gradient(115deg,
-      transparent 36%,
-      rgba(var(--deck-glow),0) 44%,
-      rgba(var(--deck-glow),.5) 50%,
-      rgba(255,248,220,.38) 52%,
-      rgba(var(--deck-glow),0) 58%,
-      transparent 66%);
-    background-size:240% 100%;
-    background-position:130% 0;
-    animation:deckSweep 5.2s ease-in-out 1.1s infinite;
-    mix-blend-mode:screen;
-    -webkit-mask-image:var(--deck-frame);
-    mask-image:var(--deck-frame);
-    -webkit-mask-size:100% 100%;
-    mask-size:100% 100%;
-    -webkit-mask-repeat:no-repeat;
-    mask-repeat:no-repeat;
-    -webkit-mask-position:center;
-    mask-position:center;
-  }
+  /* v28.108: no diagonal frame sweep — the sliding 115deg band still made the gold window look boxy */
+  html body .czbar::after{content:none}
   html body .czbar > *{position:relative;z-index:5}
 
   html body .czbar .controls{position:relative !important}
@@ -208,12 +182,6 @@ html[data-deck-skin="gold"]{
   }
 }
 
-@keyframes deckSweep{
-  0%,18%{background-position:130% 0;opacity:0}
-  32%{opacity:1}
-  58%{background-position:-30% 0;opacity:0}
-  100%{background-position:-30% 0;opacity:0}
-}
 @keyframes deckCrest{
   0%,100%{filter:drop-shadow(0 0 8px rgba(var(--deck-glow),.4));transform:translate(-50%,-50%) scale(1)}
   50%{filter:drop-shadow(0 0 16px rgba(var(--deck-glow),.85)) drop-shadow(0 0 8px rgba(255,80,140,.32));transform:translate(-50%,-50%) scale(1.03)}
@@ -225,7 +193,6 @@ html[data-deck-skin="gold"]{
 }
 
 @media (prefers-reduced-motion:reduce){
-  html body .czbar::after,
   html body .czbar .controls::before,
   html body .czbar .controls::after{animation:none !important}
   html body .czbar .controls::before{

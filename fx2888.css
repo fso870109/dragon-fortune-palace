@@ -9,17 +9,15 @@ body[data-skin="crystal"] .inner>:not(.board):not(.rfx):not(.r24t):not(.r24c):no
 /* rectangular glow around the reel stage read as a box against the sculpted deck */
 body.cab-on[data-skin="crystal"] #cabStage,body.cab-on[data-skin="neon"] #cabStage{box-shadow:none!important}
 
-/* v28.88 (2) deck glints follow the sculpted plaque art instead of a rectangle sliding past it (opacity only) */
-@media (max-width:620px) and (orientation:portrait){
-  html body .czm::before,html body .czbar .box.czbet::before{
-    inset:auto;top:calc(var(--deck-plq-out-t) * -1);bottom:calc(var(--deck-plq-out-b) * -1);left:calc(var(--deck-plq-out-x) * -1);right:calc(var(--deck-plq-out-x) * -1);
-    background:linear-gradient(105deg,transparent 28%,rgba(255,240,200,.26) 50%,transparent 72%);
-    -webkit-mask:var(--deck-plaque) center / 100% 100% no-repeat;mask:var(--deck-plaque) center / 100% 100% no-repeat;
-    translate:none!important;opacity:0;animation:dfpGlint 5.5s ease-in-out infinite!important;z-index:0}
-  html body .czbar .box.czbet::before{top:calc(var(--deck-bet-out-t) * -1);bottom:calc(var(--deck-bet-out-b) * -1);left:calc(var(--deck-bet-out-x) * -1);right:calc(var(--deck-bet-out-x) * -1);
-    -webkit-mask-image:var(--deck-plaque-bet);mask-image:var(--deck-plaque-bet);animation-delay:.35s!important}
+/* v28.108: remove diagonal deck shine entirely (mask-to-plaque still read as a boxy window frame).
+   Disables ui21.css .czm::before / .czbar .box.czbet::before (l21Sw 105deg sweep) on all viewports. */
+html body .czm::before,
+html body .czbar .box.czbet::before{
+  content:none!important;
+  animation:none!important;
+  background:none!important;
+  translate:none!important;
 }
-@keyframes dfpGlint{0%,64%,100%{opacity:0}78%{opacity:1}}
 
 /* v28.88 (3) lighter reel effects */
 /* win frame ring: static gold ring + opacity pulse (was a per-frame repaint of an animated conic gradient) */
