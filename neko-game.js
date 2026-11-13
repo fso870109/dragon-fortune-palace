@@ -159,7 +159,7 @@ $('msg').textContent=`恭喜！${hits.length} 條連線${ev.sc>=3?'＋分散':''
 const big=xr>=(free?30:10)&&ev.sc<3;
 winFX();winVFX(xr);if(big){setTimeout(()=>bigWin(won,total),1100)}else{sfx.win(winTier(xr));if(xr>=3)rain(1.2,1)}}
 else{$('msg').textContent=free?`免費次數 ${FS.n}／${FS.tot}`:LOVE_L[Math.random()*LOVE_L.length|0];if(!free)sfx.lose()}
-ric(()=>{const rk=lbRecord(free?0:total,won,bet,total);if(won&&rk===0&&lbGet().wins.length>1)$('msg').textContent+=' 🏆 新紀錄！'},{timeout:2000});
+ric(()=>{const rk=lbRecord(free?0:total,won,bet,total);if(won&&rk===0&&lbGet().wins.length>1)$('msg').textContent+=' 新紀錄！'},{timeout:2000});
 ui();spinning=false;window.CZ&&CZ.onSettle({total,won,xr,free,sc:ev.sc,big:xr>=(free?30:10)&&ev.sc<3});
 if(ev.sc>=3){if(FS){FS.left+=FS_N;FS.tot+=FS_N;fsUI();setTimeout(()=>fsIntro(true),900)}else{FS={left:FS_N,tot:FS_N,n:0,won:0,bet};setTimeout(()=>fsIntro(false),900)}}
 else fsNext();
