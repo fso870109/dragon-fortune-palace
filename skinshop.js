@@ -91,7 +91,7 @@ function ensureShop(){
     '<ul class="skins" id="skins"></ul>'+
     '<div class="shmsg" id="shMsg" role="status" aria-live="polite"></div>'+
     '<div class="dact"><button type="button" id="shClose">關閉</button></div>'+
-    '<p class="note">外觀僅改變機台樣式，不影響中獎機率・只能用虛擬籌碼兌換，無法以真實金錢購買・僅供娛樂・虛擬籌碼不可兌換或轉讓・純虛擬・無兌現・外框全機台共用</p>';
+    '<p class="note">外觀僅改變機台樣式，不影響中獎機率・只能用虛擬籌碼兌換，無法以真實金錢購買・僅供娛樂・<span style="white-space:nowrap">虛擬籌碼不可兌現或轉讓</span>・純虛擬・無兌現・外框全機台共用</p>';
   D.body.appendChild(d);
 }
 ensureShop();
