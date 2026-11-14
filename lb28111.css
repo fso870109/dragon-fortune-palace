@@ -1,4 +1,4 @@
-/* v28.113 — 金殿排行榜視覺
+/* v28.114 — 金殿排行榜視覺
    僅美化大廳 #dLb；When closed, keep display:none so flex does not unhide the dialog.
    不改機率、不寫入 Firestore。 */
 #dLb.lbDlg:not([open]){
@@ -55,7 +55,7 @@
 }
 #dLb.lbDlg .lbRow{
   display:grid;
-  grid-template-columns:28px 44px minmax(0,1fr) auto;
+  grid-template-columns:40px 44px minmax(0,1fr) auto;
   column-gap:8px;
   align-items:center;
   min-height:48px;
@@ -93,24 +93,22 @@
 }
 #dLb.lbDlg .lbRank{
   position:relative;
-  width:28px;height:28px;
+  width:40px;height:40px;
   display:flex;align-items:center;justify-content:center;
   font:800 13px/1 "Noto Sans TC",sans-serif;
   color:#e9c98a;
+  justify-self:center;
 }
-#dLb.lbDlg .lbRank svg{
-  width:26px;height:26px;display:block;
+#dLb.lbDlg .lbRank .lbMedal{
+  width:38px;height:38px;
+  display:block;
+  object-fit:contain;
+  flex:0 0 auto;
 }
-#dLb.lbDlg .lbRank b{
-  position:absolute;
-  left:50%;top:58%;
-  transform:translate(-50%,-50%);
-  font:800 9px/1 "Noto Sans TC",sans-serif;
-  color:#2a1300;
-  text-shadow:0 1px 0 rgba(255,240,200,.6);
+#dLb.lbDlg .lbRank span{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;
 }
-#dLb.lbDlg .lbRow.top2 .lbRank b{color:#1a2030}
-#dLb.lbDlg .lbRow.top3 .lbRank b{color:#2a1408}
 #dLb.lbDlg .lbAv{
   width:40px;height:40px;
   border-radius:50%;
@@ -212,12 +210,14 @@
 @media (max-width:380px){
   #dLb.lbDlg{padding:14px 10px 12px}
   #dLb.lbDlg .lbRow{
-    grid-template-columns:24px 40px minmax(0,1fr) auto;
+    grid-template-columns:36px 40px minmax(0,1fr) auto;
     column-gap:6px;
     padding:5px 6px;
     min-height:46px;
   }
   #dLb.lbDlg .lbRow.top1{min-height:54px}
+  #dLb.lbDlg .lbRank{width:36px;height:36px}
+  #dLb.lbDlg .lbRank .lbMedal{width:36px;height:36px}
   #dLb.lbDlg .lbAv{width:36px;height:36px}
   #dLb.lbDlg .lbRow.top1 .lbAv{width:40px;height:40px}
   #dLb.lbDlg .lbWho strong{font-size:12px}

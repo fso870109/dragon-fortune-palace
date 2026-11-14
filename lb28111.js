@@ -1,4 +1,4 @@
-/* v28.111 — 金殿排行榜
+/* v28.114 — 金殿排行榜
    系統角色只在本機畫面合併，絕不寫入 Firestore。 */
 (function(){
   var AVQ='?v=2878';
@@ -38,8 +38,9 @@
     return '你';
   }
   function myAvatar(){
+    try{if(window.DFPfb&&typeof DFPfb.currentAvatar==='function'){var a=DFPfb.currentAvatar();if(a)return a}}catch(e){}
     try{if(window.DFPav&&typeof DFPav.current==='function'){var a=DFPav.current();if(a)return a}}catch(e){}
-    try{if(window.DFPfb&&DFPfb.profile&&DFPfb.profile.avatar)return DFPfb.profile.avatar}catch(e){}
+    try{var s=JSON.parse(localStorage.getItem('dfp_profile')||'{}');if(s&&s.avatar)return s.avatar}catch(e){}
     return 'av_a';
   }
   function myWon(){try{return (window.CZ&&CZ.st&&CZ.st.won)||0}catch(e){return 0}}
@@ -54,11 +55,19 @@
     }catch(e){return 0}
   }
 
+  var MEDQ='?v=28114';
   function medal(rank){
-    if(rank===1)return '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 9l4 4 4-7 4 7 4-4 1.5 8H6.5z" fill="#f3d789" stroke="#8a5a18" stroke-width="1.1" stroke-linejoin="round"/><circle cx="16" cy="22" r="8.2" fill="#e8c56a" stroke="#8a5a18" stroke-width="1.3"/><circle cx="16" cy="22" r="5.4" fill="#fff3c0" stroke="#b8862a" stroke-width="1"/></svg><b>1</b>';
-    if(rank===2)return '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11" fill="#d7dee8" stroke="#6a7380" stroke-width="1.4"/><circle cx="16" cy="16" r="7.5" fill="#f4f7fb" stroke="#9aa3b0" stroke-width="1"/></svg><b>2</b>';
-    if(rank===3)return '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11" fill="#d4924a" stroke="#7a3e14" stroke-width="1.4"/><circle cx="16" cy="16" r="7.5" fill="#f0c07a" stroke="#8a5218" stroke-width="1"/></svg><b>3</b>';
+    if(rank===1||rank===2||rank===3){
+      return '<img class="lbMedal" src="assets/lx/medal'+rank+'.webp'+MEDQ+'" alt="'+rank+'" width="80" height="80">';
+    }
     return '<span>'+rank+'</span>';
+  }
+  function face(av){
+    var src='';
+    try{if(window.DFPfb&&typeof DFPfb.avatarSrc==='function')src=DFPfb.avatarSrc(av)}catch(e){}
+    if(!src) src=avSrc(av);
+    var extra=/^https:/.test(src)?' referrerpolicy="no-referrer"':'';
+    return '<img src="'+esc(src)+'" alt="" width="44" height="44"'+extra+' onerror="this.onerror=null;this.src=\'assets/lx/av_a.webp'+AVQ+'\'">';
   }
   function emptySvg(){
     return '<svg viewBox="0 0 72 72" aria-hidden="true"><rect x="10" y="18" width="52" height="40" rx="6" fill="#2a1020" stroke="#d9a441" stroke-width="1.6"/><path d="M16 18c4 8 16 8 20 0 4 8 16 8 20 0" fill="none" stroke="#e8c56a" stroke-width="1.6"/><path d="M24 40h24M28 46h16" stroke="#cbb7c9" stroke-width="1.6" stroke-linecap="round"/><path d="M36 8l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z" fill="#e8c56a" stroke="#8a5a18" stroke-width="1"/></svg>';
@@ -70,9 +79,7 @@
     var badge=r.npc?'<span class="lbBadge">金殿貴賓</span>':'';
     var unit=r.unit?('<span class="lbUnit">'+esc(r.unit)+'</span>'):'';
     var av=r.av||'av_a';
-    var img=/^https:/.test(av)
-      ? '<img src="'+esc(av)+'" alt="" width="44" height="44">'
-      : '<img src="'+esc(avSrc(av))+'" alt="" width="44" height="44">';
+    var img=face(av);
     var shown=r.n;
     try{if(window.DFPname&&typeof DFPname.display==='function')shown=DFPname.display(r.n)}catch(e){}
     return '<li class="'+cls+'"'+(r.npc?' data-npc="1"':'')+'>'+
