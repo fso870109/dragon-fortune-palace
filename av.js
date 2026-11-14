@@ -1,10 +1,13 @@
-/* v20.2 layered audio-visual feedback (play-money only) */
+/* v28.116 layered AV feedback — shared game AudioContext / AM.sfxG */
 (function(){
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-let AC=null;function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume()}catch(e){}return AC}
+let AC=null;
+function ac(){try{if(window.DFPctx){const c=DFPctx();if(c)return c}if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}catch(e){return AC}}
+function sfxOut(a){try{if(window.DFPsfxOut){const d=DFPsfxOut(a);if(d)return d}}catch(e){}return a&&a.destination}
+function sVol(){try{if(typeof AM!=='undefined'&&AM&&AM.sfxG)return 1;if(window.DFPvol)return DFPvol.sfx()}catch(e){}return 1}
 function muted(){try{if(window.DFPvol)return !DFPvol.sfxOn()}catch(e){}return typeof sound!=='undefined'&&!sound}
-function tone(f,t0,d,type,vol,f2){const a=ac();if(!a||muted())return;const t=a.currentTime+t0,o=a.createOscillator(),g=a.createGain();o.type=type||'triangle';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime((vol||.07)*(window.DFPvol?DFPvol.sfx():1),t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d+.05)}
-function noise(t0,d,vol,hp){const a=ac();if(!a||muted())return;const n=a.sampleRate*d,b=a.createBuffer(1,n,a.sampleRate),c=b.getChannelData(0);for(let i=0;i<n;i++)c[i]=(Math.random()*2-1)*(1-i/n);const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();s.buffer=b;f.type='highpass';f.frequency.value=hp||2000;g.gain.value=(vol||.05)*(window.DFPvol?DFPvol.sfx():1);s.connect(f).connect(g).connect(a.destination);s.start(a.currentTime+t0)}
+function tone(f,t0,d,type,vol,f2){const a=ac();if(!a||muted())return;const t=a.currentTime+t0,o=a.createOscillator(),g=a.createGain();o.type=type||'triangle';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime((vol||.07)*sVol(),t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(sfxOut(a));o.start(t);o.stop(t+d+.05)}
+function noise(t0,d,vol,hp){const a=ac();if(!a||muted())return;const n=a.sampleRate*d,b=a.createBuffer(1,n,a.sampleRate),c=b.getChannelData(0);for(let i=0;i<n;i++)c[i]=(Math.random()*2-1)*(1-i/n);const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();s.buffer=b;f.type='highpass';f.frequency.value=hp||2000;g.gain.value=(vol||.05)*sVol();s.connect(f).connect(g).connect(sfxOut(a));s.start(a.currentTime+t0)}
 const ST=[[523,659,784,1047],[523,659,784,1047,1319,1568],[392,523,659,784,1047,1319,1568,2093]];
 function stinger(tier){const n=ST[tier];n.forEach((f,i)=>tone(f,i*.085,.5,'triangle',.07));const end=n.length*.085;[n[0]/2,n[1],n[2],n[n.length-1]].forEach(f=>tone(f,end,1.2+tier*.4,'sawtooth',.025));tone(n[0]/4,end,1.4,'sine',.12);noise(end,.6+tier*.3,.04+tier*.02,3000);if(tier>=1)for(let i=0;i<8+tier*6;i++)tone(2000+Math.random()*2500,end+.1+i*.07,.12,'sine',.03)}
 function el(id,tag){let e=document.getElementById(id);if(!e){e=document.createElement(tag||'div');e.id=id;document.body.appendChild(e)}return e}

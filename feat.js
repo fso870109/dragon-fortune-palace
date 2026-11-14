@@ -12,7 +12,8 @@ const $=i=>document.getElementById(i);
 const tone=(f,t,d,ty,v,f2)=>window.AV&&AV.tone(f,t,d,ty,v,f2);
 /* v28.59 jackpot SFX — layered WebAudio on AM.sfxG; skip cuts layers, then finale plays */
 let jpG=null;
-function jpBus(){const c=(typeof aInit==='function'&&aInit());if(!c||typeof AM==='undefined'||!AM)return null;if(!jpG||jpG.context!==c){jpG=c.createGain();jpG.gain.value=1;jpG.connect(AM.sfxG)}return c}
+/* v28.116: aInit() returns the AM mixer, not the AudioContext — use DFPctx/ac */
+function jpBus(){const c=window.DFPctx?DFPctx():((typeof aInit==='function'&&aInit()&&typeof ac!=='undefined')?ac:null);if(!c||typeof AM==='undefined'||!AM||!AM.sfxG)return null;if(c.state==='suspended')try{c.resume()}catch(e){}if(!jpG||jpG.context!==c){jpG=c.createGain();jpG.gain.value=1;jpG.connect(AM.sfxG)}return c}
 function jpCut(){const c=jpBus();if(!c||!jpG)return;try{const old=jpG;old.gain.cancelScheduledValues(c.currentTime);old.gain.setTargetAtTime(0,c.currentTime,.018);setTimeout(()=>{try{old.disconnect()}catch(e){}},90);jpG=c.createGain();jpG.gain.value=1;jpG.connect(AM.sfxG)}catch(e){}}
 function bgmDuck(on){try{if(window.CZA&&CZA.duck)CZA.duck(on?.22:1,on?.08:.32);if(on&&window.F21&&F21.bedOff)F21.bedOff()}catch(e){}}
 function jpOsc(f,t,d,ty,v,f2){const c=jpBus();if(!c||!jpG)return;const o=c.createOscillator(),fl=c.createBiquadFilter(),g=c.createGain();o.type=ty||'sawtooth';o.frequency.setValueAtTime(f,c.currentTime+t);if(f2)o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),c.currentTime+t+Math.max(.03,d));fl.type='lowpass';fl.frequency.value=4800;g.gain.setValueAtTime(0,c.currentTime+t);g.gain.linearRampToValueAtTime(v,c.currentTime+t+.01);g.gain.exponentialRampToValueAtTime(.0008,c.currentTime+t+d);o.connect(fl);fl.connect(g);g.connect(jpG);o.start(c.currentTime+t);o.stop(c.currentTime+t+d+.04)}

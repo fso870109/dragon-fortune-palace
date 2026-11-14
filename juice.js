@@ -1,11 +1,14 @@
-/* v20.0 motion & juice (shared) */
+/* v28.116 motion & juice — shared game AudioContext / AM.sfxG */
 (function(){
 const RMj=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ID=(window.CZM&&CZM.id)||(location.pathname.split('/').pop()||'').replace('.html','');
 const AMB={love:['bokeh','255,120,190'],matsuri:['ember','255,170,80'],caishen:['dust','255,215,110'],samurai:['ember','255,90,50'],pirate:['bubble','160,220,255'],neko:['dust','255,220,140'],sakura:['petal','255,185,215'],queen:['bokeh','255,90,140'],school:['petal','255,200,225'],jungle:['leaf','150,220,110']};
-let AC=null;function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume()}catch(e){}return AC}
+let AC=null;
+function ac(){try{if(window.DFPctx){const c=DFPctx();if(c)return c}if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}catch(e){return AC}}
+function sfxOut(a){try{if(window.DFPsfxOut){const d=DFPsfxOut(a);if(d)return d}}catch(e){}return a&&a.destination}
+function sVol(){try{if(typeof AM!=='undefined'&&AM&&AM.sfxG)return 1;if(window.DFPvol)return DFPvol.sfx()}catch(e){}return 1}
 function muted(){try{if(window.DFPvol)return !DFPvol.sfxOn();return typeof sound!=='undefined'&&!sound}catch(e){return false}}
-function blip(f,d,type,vol,f2){const a=ac();if(!a||muted())return;const t=a.currentTime,o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime((vol||.08)*(window.DFPvol?DFPvol.sfx():1),t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d+.02)}
+function blip(f,d,type,vol,f2){const a=ac();if(!a||muted())return;const t=a.currentTime,o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime((vol||.08)*sVol(),t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(sfxOut(a));o.start(t);o.stop(t+d+.02)}
 window.JUICE={blip};
 // 1) reel landing: thunk with rising pitch + shake on last reel when anticipation
 let landN=0;
@@ -15,7 +18,7 @@ if(_land){window.landFX=function(c){landN++;blip(140+c*22,.09,'triangle',.07,70)
 let riser=null;
 function antOn(){const rs=[...document.querySelectorAll('.reel')];rs.slice(3).forEach(r=>r.classList.add('jant'));
  const a=ac();if(!a||muted()||RMj)return;const t=a.currentTime,o=a.createOscillator(),g=a.createGain(),o2=a.createOscillator();o.type='sawtooth';o2.type='sine';o.frequency.setValueAtTime(180,t);o.frequency.exponentialRampToValueAtTime(720,t+2.2);o2.frequency.setValueAtTime(360,t);o2.frequency.exponentialRampToValueAtTime(1440,t+2.2);
- const lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(600,t);lp.frequency.linearRampToValueAtTime(3200,t+2.2);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.045*(window.DFPvol?DFPvol.sfx():1),t+1.8);g.gain.linearRampToValueAtTime(0,t+2.4);o.connect(lp);o2.connect(lp);lp.connect(g).connect(a.destination);o.start(t);o2.start(t);o.stop(t+2.5);o2.stop(t+2.5);riser={o,o2,g}}
+ const lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(600,t);lp.frequency.linearRampToValueAtTime(3200,t+2.2);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.045*sVol(),t+1.8);g.gain.linearRampToValueAtTime(0,t+2.4);o.connect(lp);o2.connect(lp);lp.connect(g).connect(sfxOut(a));o.start(t);o2.start(t);o.stop(t+2.5);o2.stop(t+2.5);riser={o,o2,g}}
 function antOff(){document.querySelectorAll('.reel.jant').forEach(r=>r.classList.remove('jant'));if(riser&&AC){try{riser.g.gain.cancelScheduledValues(AC.currentTime);riser.g.gain.setTargetAtTime(0,AC.currentTime,.05)}catch(e){}}riser=null}
 const _tc=window.teaseCheck;if(_tc){window.teaseCheck=function(res){const r=_tc.apply(this,arguments);if(r)setTimeout(antOn,0);return r}}
 const _st=window.settle;if(_st){window.settle=function(){antOff();landN=0;const r=_st.apply(this,arguments);setTimeout(lineLen,0);return r}}

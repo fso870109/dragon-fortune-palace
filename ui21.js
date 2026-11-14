@@ -1,9 +1,11 @@
-/* v21 flow / win ladder / help cards — play money only */
+/* v28.116 flow / win ladder / help — shared game AudioContext */
 (function(){
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,$=i=>document.getElementById(i);
-let AC,bus,bed=null;function ac(){try{if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();bus=AC.createGain();bus.gain.value=0;bus.connect(AC.destination)}if(AC.state==='suspended')AC.resume()}catch(e){}return AC}
+let AC,bus,bed=null;
+function ac(){try{let c=null;if(window.DFPctx)c=DFPctx();if(!c){if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();c=AC}if(c.state==='suspended')c.resume();if(!bus||bus.context!==c){bus=c.createGain();bus.gain.value=0;bus.connect(c.destination)}return c}catch(e){return AC}}
+function sVol(){try{if(typeof AM!=='undefined'&&AM&&AM.sfxG)return 1;if(window.DFPvol)return DFPvol.sfx()}catch(e){}return 1}
 const muted=()=>{try{if(window.DFPvol)return !DFPvol.sfxOn()}catch(e){}return typeof sound!=='undefined'&&!sound};
-function tone(f,t0,d,ty,v,f2,dest){const a=ac();if(!a||muted())return;const t=a.currentTime+t0,o=a.createOscillator(),g=a.createGain();o.type=ty||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime((v||.06)*(window.DFPvol?DFPvol.sfx():1),t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(dest||a.destination);o.start(t);o.stop(t+d+.05)}
+function tone(f,t0,d,ty,v,f2,dest){const a=ac();if(!a||muted())return;const t=a.currentTime+t0,o=a.createOscillator(),g=a.createGain();o.type=ty||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime((v||.06)*sVol(),t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(dest||a.destination);o.start(t);o.stop(t+d+.05)}
 /* music bed with crossfade */
 const BASS=[131,131,175,196],ARP=[523,659,784,659];let step=0;
 function bedOn(){const a=ac();if(!a)return;bus.gain.cancelScheduledValues(a.currentTime);bus.gain.setTargetAtTime(window.DFPvol?DFPvol.mus():(muted()?0:1),a.currentTime,.35);if(bed)return;step=0;bed=setInterval(()=>{if(muted())return;if(step%4==0)tone(BASS[(step/4|0)%4]/2,0,.42,'sine',.09,0,bus);tone(ARP[step%4]*((step/4|0)%4==2?1.335:1),0,.14,'square',.016,0,bus);step++},150)}
