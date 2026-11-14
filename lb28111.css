@@ -1,6 +1,10 @@
-/* v28.111 PREVIEW — 金殿排行榜視覺（尚未上線）
-   僅美化大廳 #dLb；不改機率、不寫入 Firestore。 */
-#dLb.lbDlg{
+/* v28.113 — 金殿排行榜視覺
+   僅美化大廳 #dLb；When closed, keep display:none so flex does not unhide the dialog.
+   不改機率、不寫入 Firestore。 */
+#dLb.lbDlg:not([open]){
+  display:none !important;
+}
+#dLb.lbDlg[open]{
   display:flex !important;
   flex-direction:column;
   height:calc(100dvh - 16px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
