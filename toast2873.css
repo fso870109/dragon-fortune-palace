@@ -1,4 +1,5 @@
-/* v28.82 compact 金殿 reward toast — #czToast .czt */
+/* v28.82 compact 金殿 reward toast — #czToast .czt
+   v28.115: .cztMore restyled as a slim gold-rim wine-glass pill */
 #czToast{
   z-index:12000;
   display:flex;
@@ -174,16 +175,44 @@ dialog[open] #czToast{
   10%,82%{opacity:1}
   100%{opacity:0}
 }
-#czToast .cztMore{
-  justify-content:center;text-align:center;min-height:0;padding:4px 12px;width:auto;
-  animation:none!important;
-  font:700 12px/1.2 "Noto Sans TC",sans-serif;color:#ffe08a;letter-spacing:.08em
-}
-#czToast .cztMore::before{display:none}
 @media (max-width:360px){
   #czToast .czt{padding:5px 8px 5px 6px;gap:6px}
   #czToast .cztSeal{width:30px;height:30px;background-size:30px 30px,auto}
   #czToast .cztSeal img{width:16px;height:16px}
   #czToast .cztT{font-size:12.5px}
   #czToast .cztAmt{font-size:15px}
+}
+/* v28.115: queued-message counter as a compact 金殿 pill.
+   Must not inherit the large toast corner ornaments (those read as bracket caps). */
+#czToast .czt.cztMore{
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  min-height:0;
+  width:auto;
+  max-width:calc(100vw - 24px);
+  box-sizing:border-box;
+  padding:3px 12px;
+  border-radius:999px;
+  background:
+    linear-gradient(180deg,rgba(255,236,190,.2),transparent 48%),
+    radial-gradient(120% 160% at 50% -30%,rgba(176,36,52,.4),transparent 62%),
+    linear-gradient(180deg,#3a121c 0%,#1a080c 55%,#12060a 100%);
+  border:1px solid #e8c46a;
+  box-shadow:
+    0 0 0 1px #3a1408,
+    0 0 8px rgba(217,164,65,.38),
+    inset 0 1px 0 rgba(255,236,190,.38),
+    inset 0 -1px 0 rgba(0,0,0,.45);
+  animation:none!important;
+  overflow:hidden;
+  font:700 11px/1.25 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  letter-spacing:.08em;
+  color:#fff6d0;
+  text-shadow:0 0 6px rgba(255,220,120,.4),0 1px 0 rgba(0,0,0,.65);
+}
+#czToast .czt.cztMore::before,
+#czToast .czt.cztMore::after{display:none!important;content:none}
+@media (max-width:360px){
+  #czToast .czt.cztMore{padding:3px 11px}
 }
