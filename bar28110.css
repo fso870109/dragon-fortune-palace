@@ -1,0 +1,22 @@
+/* v28.110: MAX BET was sliding off-center in the portrait bottom row.
+   Cause: each machine's *-ui.css still positions #max16 / #menuBtn with the old
+   .bar16 absolute offsets (`left/right: calc(50% - 130px)`). Those were inert
+   while casino.css forced position:static, but deck2884 sets
+   position:relative so the plaque ::after can paint, which re-activates the
+   offsets. At 360px the relative left is ~-19px (MAX BET overlaps 大廳);
+   around 460px it flips the other way. Reset insets; leave flex widths alone. */
+html body .czbar #czLobby,
+html body .czbar #max16,
+html body .czbar #menuBtn{
+  left:auto !important;
+  right:auto !important;
+  top:auto !important;
+  bottom:auto !important;
+}
+@media (max-width:620px) and (orientation:portrait){
+  html body .czbar #czLobby,
+  html body .czbar #max16,
+  html body .czbar #menuBtn{
+    width:auto !important;
+  }
+}
