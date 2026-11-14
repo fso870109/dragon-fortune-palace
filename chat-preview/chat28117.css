@@ -1,7 +1,6 @@
 /* v28.117 chat preview: lobby chat + big-win marquee */
-/* ---- marquee strip over hero bottom fade ---- */
-.lxHero.cpOn .lxDots{bottom:calc(12*var(--u) + 34px);left:calc(22*var(--u));right:auto;justify-content:flex-start}
-.cpStrip{position:absolute;left:calc(14*var(--u));right:calc(14*var(--u));bottom:calc(12*var(--u));height:28px;z-index:4;
+/* ---- marquee strip below the lobby jackpot panel ---- */
+.cpStrip{position:relative;margin:calc(8*var(--u)) calc(6*var(--u)) 0;height:28px;z-index:4;
   display:flex;align-items:center;gap:0;padding:0 0 0 30px;box-sizing:border-box;border-radius:14px;
   background:linear-gradient(180deg,rgba(74,10,18,.92),rgba(36,4,10,.94) 55%,rgba(58,8,14,.92));
   box-shadow:inset 0 0 0 1px #e8c56a,inset 0 0 0 2.5px rgba(122,74,12,.9),0 2px 8px rgba(0,0,0,.55),0 0 12px rgba(255,190,70,.22)}
