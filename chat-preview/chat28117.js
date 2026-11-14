@@ -104,12 +104,15 @@
     requestAnimationFrame(function(){var w=t.firstChild.getBoundingClientRect().width;t.style.setProperty('--cpd',Math.max(18,w/38).toFixed(1)+'s')});
   }
   function buildStrip(){
-    var hero=$('lxHero'),jp=D.querySelector('.lxJp');if(!hero||!jp||$('cpStrip'))return;
+    var hero=$('lxHero'),jp=D.querySelector('.lxJp');if(!hero||!jp||$('cpRow'))return;
     var s=D.createElement('div');s.id='cpStrip';s.className='cpStrip';
     s.innerHTML='<img class="cpHorn" src="assets/chat/ico_horn.webp'+Q+'" alt="" width="64" height="64">'+
-      '<div class="cpMq" aria-label="大獎播報"><div class="cpTrk"></div></div>'+
-      '<button type="button" class="cpBtn" id="cpOpen" aria-label="開啟金殿廣場聊天"><img src="assets/chat/ico_chat.webp'+Q+'" alt="" width="64" height="64"><span>聊天</span><i class="cpDot" hidden></i></button>';
-    jp.parentNode.insertBefore(s,jp.nextSibling);
+      '<div class="cpMq" aria-label="大獎播報"><div class="cpTrk"></div></div>';
+    var row=D.createElement('div');row.className='cpRow';row.id='cpRow';
+    var bt=D.createElement('button');bt.type='button';bt.className='cpBtn';bt.id='cpOpen';bt.setAttribute('aria-label','開啟金殿廣場聊天');
+    bt.innerHTML='<i class="cpRim"></i><img src="assets/chat/ico_chat.webp'+Q+'" alt="" width="64" height="64"><i class="cpGem"></i><i class="cpDot" hidden></i>';
+    row.appendChild(s);row.appendChild(bt);
+    jp.parentNode.insertBefore(row,jp.nextSibling);
     mqEl=s;paintMarquee();
     $('cpOpen').addEventListener('click',openChat);
   }
