@@ -1,0 +1,51 @@
+/* v28.14: theme-symbol spin strips + orbs contained inside cells */
+#hsBox .hsG,#hsBox .hsG>i,#b22Stage #hsBox .hsG>i,#hsBox.b23 .hsG>i{
+  overflow:hidden!important}
+#hsBox .hsG>i.spin{
+  position:relative!important;overflow:hidden!important;
+  background:#0a0414!important;background-image:none!important;
+  animation:none!important;filter:none!important}
+#hsBox .hsG>i.spin .hsReel{
+  display:block;position:absolute;inset:3px;border-radius:6px;overflow:hidden;
+  pointer-events:none;background:#12061e;
+  -webkit-mask:linear-gradient(#000 6%,#000 94%);mask:linear-gradient(#000 6%,#000 94%)}
+#hsBox .hsG>i.spin .hsStrip{
+  display:flex;flex-direction:column;width:100%;will-change:transform;
+  animation:hsSymReel .32s linear infinite}
+#hsBox .hsG>i.spin .hsStrip img{
+  display:block;width:100%;aspect-ratio:1/1;object-fit:contain;flex:none;
+  padding:4%;box-sizing:border-box;filter:brightness(1.05)}
+@keyframes hsSymReel{to{transform:translateY(-50%)}}
+/* contained land — never scale past cell */
+#hsBox .hsG>i.land,
+#b22Stage #hsBox .hsG>i.land,
+#b22Stage #hsBox .hsG>i.on,
+#hsBox .hsG>i.on{
+  animation:hs2814Land .38s cubic-bezier(.2,1.4,.4,1)!important}
+@keyframes hs2814Land{
+  0%{transform:scale(.72);filter:brightness(1.55)}
+  60%{transform:scale(1.04);filter:brightness(1.12)}
+  100%{transform:scale(1);filter:none}}
+#hsBox .hsG>i.miss{animation:hs2814Miss .16s ease-out}
+@keyframes hs2814Miss{0%{filter:brightness(1.6)}100%{filter:none}}
+/* kill external glows that bleed past cell */
+#hsBox .hsG>i.on,
+#b22Stage #hsBox .hsG>i.on,
+#hsBox.b23 .hsG>i.on,
+html body #hsBox .hsG>i.on{
+  box-shadow:none!important;
+  filter:none!important}
+#hsBox.b23 .hsG>i.on{filter:none!important}
+#hsBox .hsG>i.on span,#hsBox .hsG>i.on b,#hsBox .hsG>i.on small{
+  position:relative;z-index:2;pointer-events:none;
+  font-size:clamp(11px,3.2vw,14px)!important}
+#hsBox.full .hsG>i.on{animation:hs2814Land .38s cubic-bezier(.2,1.4,.4,1)!important}
+@media (prefers-reduced-motion:reduce){
+  #hsBox .hsG>i.spin .hsStrip,#hsBox .hsG>i.land,#hsBox .hsG>i.on,#hsBox .hsG>i.miss{animation:none!important}
+}
+
+/* fit orb to short side of non-square reel cells */
+html body #hsBox .hsG>i.on,html body #b22Stage #hsBox .hsG>i.on,html body #hsBox.b23 .hsG>i.on,
+html body #hsBox .hsG>i:not(.spin):not(.on),html body #b22Stage #hsBox .hsG>i:not(.spin):not(.on),html body #hsBox.b23 .hsG>i:not(.spin):not(.on){
+  background-size:auto 82%!important;background-position:center!important}
+#hsBox .hsG>i.spin .hsStrip img{width:auto;height:100%;max-width:100%;aspect-ratio:auto;margin:0 auto;padding:2%}

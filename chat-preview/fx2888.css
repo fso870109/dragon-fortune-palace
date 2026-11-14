@@ -1,0 +1,50 @@
+/* v28.88 (1) cabinet skins: tint the frame parts only — reels / bonus layers are no longer filtered then "un-filtered"
+   (the approximate inverse lost colour: 月光 made symbols grey-white) */
+body[data-skin] .inner{filter:none!important}
+body[data-skin] .board .reel,
+body[data-skin] .inner .rfx,body[data-skin] .inner .r24t,body[data-skin] .inner .r24c,body[data-skin] .inner .fxOv,
+body[data-skin] .inner #hsBox,body[data-skin] .inner #w21F,body[data-skin] .inner #w21Bloom{filter:none!important}
+body[data-skin="neon"] .inner>:not(.board):not(.rfx):not(.r24t):not(.r24c):not(.fxOv):not(#hsBox):not(#w21F):not(#w21Bloom){filter:hue-rotate(190deg) saturate(1.2)}
+body[data-skin="crystal"] .inner>:not(.board):not(.rfx):not(.r24t):not(.r24c):not(.fxOv):not(#hsBox):not(#w21F):not(#w21Bloom){filter:saturate(.25) brightness(1.15) contrast(1.05)}
+/* rectangular glow around the reel stage read as a box against the sculpted deck */
+body.cab-on[data-skin="crystal"] #cabStage,body.cab-on[data-skin="neon"] #cabStage{box-shadow:none!important}
+
+/* v28.108: remove diagonal deck shine entirely (mask-to-plaque still read as a boxy window frame).
+   Disables ui21.css .czm::before / .czbar .box.czbet::before (l21Sw 105deg sweep) on all viewports. */
+html body .czm::before,
+html body .czbar .box.czbet::before{
+  content:none!important;
+  animation:none!important;
+  background:none!important;
+  translate:none!important;
+}
+
+/* v28.88 (3) lighter reel effects */
+/* win frame ring: static gold ring + opacity pulse (was a per-frame repaint of an animated conic gradient) */
+#w21F.go,#w21F.go.t2,#w21F.go.t3{animation:w21Fi .35s ease-out forwards,w21Pulse 1.1s ease-in-out infinite .35s!important}
+#w21Bloom.t2,#w21Bloom.t3{box-shadow:0 0 0 3px #fff3b0,0 0 22px 6px rgba(255,190,60,.7),inset 0 0 24px rgba(255,214,90,.4)}
+/* non-winning cells dim with opacity instead of a filter on every cell */
+#board .cell{transition:none}
+#board.w21on:not([aria-busy=true]):has(.cell.hit) .cell:not(.hit){filter:none!important}
+#board.w21on:not([aria-busy=true]):has(.cell.hit) .cell:not(.hit) .sym{opacity:.58;transition:opacity .2s}
+/* winning cell glow: static (was an infinite box-shadow animation) */
+html body .cell.hit{animation:none!important;box-shadow:inset 0 0 0 2px rgba(255,230,150,.75),0 0 12px rgba(var(--fx-glow,var(--glow,255,200,90)),.7)}
+/* symbol dance without filter */
+@keyframes w21Char{0%,100%{transform:none}20%{transform:translateY(-3%) rotate(-2.5deg) scale(1.04)}45%{transform:translateY(0) rotate(1.5deg) scale(1.06)}70%{transform:translateY(-2%) rotate(-1deg) scale(1.03)}}
+/* hero light rays: static, no blend mode */
+#jRays{animation:none!important;mix-blend-mode:normal!important;opacity:.1!important}
+/* bonus stage rays: static */
+#b22Stage .b22rays{animation:none!important}
+/* full-window blur in entrances/exits removed (opacity/scale only) */
+@keyframes f21In{0%{opacity:0;transform:scale(1.12)}100%{opacity:1;transform:none}}
+@keyframes f21Out{100%{opacity:0;transform:scale(.94)}}
+@keyframes b22StOut{0%{opacity:1}100%{opacity:0}}
+@keyframes b22Slam{0%{scale:2.6;opacity:0}60%{scale:.93;opacity:1}80%{scale:1.04}100%{scale:1}}
+@keyframes w21Imp{0%{scale:2.2;opacity:0}55%{scale:.94;opacity:1}75%{scale:1.04}100%{scale:1;opacity:1}}
+@keyframes b22Away{to{transform:perspective(500px) rotateX(88deg) translateY(30px);opacity:0}}
+@keyframes b22Back{0%{transform:perspective(500px) rotateX(-80deg);opacity:0}100%{transform:none;opacity:1}}
+/* 寶珠: no per-frame background-size breathing / endless highlight sweep on every orb */
+html body #hsBox .hsG>i.on:not(#z):not(#y):not(#x){animation:none!important}
+html body #hsBox .hsG>i.on.land:not(#z):not(#y):not(#x){animation:hs18Land .5s cubic-bezier(.2,1.6,.4,1)!important}
+html body #hsBox .hsG>i.on:not(#z):not(#y):not(#x)::before{animation:none!important;opacity:0}
+html body #hsBox .hsG>i.on.land:not(#z):not(#y):not(#x)::before{animation:hs18Sweep .6s ease-out 1!important;opacity:1}

@@ -1,0 +1,48 @@
+/* v28.83 金殿 control-deck: painted themed plate + phoenix/lotus gold rim.
+   Overlay only — no layout/size changes so cab geometry and controls stay put. */
+@media (max-width:620px) and (orientation:portrait){
+  html body .czbar{
+    overflow:hidden;
+    background:
+      linear-gradient(180deg,rgba(14,4,8,.16),rgba(8,2,6,.30) 46%,rgba(6,2,4,.38)),
+      var(--deckbg) center / cover no-repeat !important;
+    box-shadow:
+      inset 0 0 0 2px rgba(224,179,74,.88),
+      inset 0 0 0 5px rgba(72,18,14,.62),
+      inset 0 0 0 7px rgba(224,179,74,.40),
+      inset 0 14px 28px rgba(255,214,140,.10) !important;
+  }
+  html body .czbar::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
+    background:url(assets/skins/frame-gold.webp) center / 100% 100% no-repeat;
+    -webkit-mask-image:
+      linear-gradient(#000,#000),
+      linear-gradient(#000,#000),
+      linear-gradient(#000,#000),
+      linear-gradient(#000,#000);
+    -webkit-mask-size:100% 22px,100% 20px,16px 100%,16px 100%;
+    -webkit-mask-position:top,bottom,left,right;
+    -webkit-mask-repeat:no-repeat;
+    mask-image:
+      linear-gradient(#000,#000),
+      linear-gradient(#000,#000),
+      linear-gradient(#000,#000),
+      linear-gradient(#000,#000);
+    mask-size:100% 22px,100% 20px,16px 100%,16px 100%;
+    mask-position:top,bottom,left,right;
+    mask-repeat:no-repeat;
+  }
+  html body .czbar > *{position:relative;z-index:5}
+}
+@media (orientation:landscape) and (max-height:500px){
+  html body .czbar{
+    background:
+      linear-gradient(180deg,rgba(14,4,8,.20),rgba(8,2,6,.36)),
+      var(--deckbg) center / cover no-repeat !important;
+    box-shadow:inset 0 0 0 2px rgba(224,179,74,.7) !important;
+  }
+}

@@ -1,0 +1,6 @@
+/* v28.8 splash: logo drops in from above (replaces left→right clip reveal) */
+#load .ld7g .l21logo{animation:ld8Drop 1.15s cubic-bezier(.2,.8,.2,1) both,l21Gl 3s 1.15s ease-in-out infinite!important}
+@keyframes ld8Drop{0%{opacity:0;clip-path:inset(0 0 100% 0);translate:0 -36px;filter:brightness(2.2)}60%{opacity:1}100%{opacity:1;clip-path:inset(0 0 0 0);translate:0 0}}
+#load .ld7g::before{animation:ld8Halo 1.15s ease-out both}
+@keyframes ld8Halo{0%{opacity:0;translate:0 -24px}100%{opacity:1;translate:0 0}}
+@media (prefers-reduced-motion:reduce){#load .ld7g .l21logo,#load .ld7g::before{animation:none!important}}

@@ -1,0 +1,23 @@
+/* v28.4 lobby splash: lux + trust */
+#load{gap:0!important;justify-content:center;padding:max(14px,env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));box-sizing:border-box;overflow:hidden;background:radial-gradient(ellipse 70% 45% at 50% 30%,rgba(255,196,90,.28),transparent 70%),linear-gradient(rgba(8,3,4,.78),rgba(8,3,4,.92)),url(assets/lobby/bg.webp?v=256) center/cover,#0a0405!important}
+#load::before{content:"";position:absolute;inset:-20%;pointer-events:none;background:linear-gradient(115deg,transparent 40%,rgba(255,226,150,.16) 48%,rgba(255,250,220,.28) 50%,rgba(255,226,150,.16) 52%,transparent 60%);background-size:250% 100%;animation:ld4Sw 4.5s ease-in-out infinite;mix-blend-mode:screen}
+#load::after{content:"";position:absolute;inset:8px;border:1px solid rgba(217,164,65,.55);border-radius:14px;box-shadow:inset 0 0 0 3px rgba(10,4,5,.9),inset 0 0 0 4px rgba(217,164,65,.3),inset 0 0 40px rgba(255,190,60,.12);pointer-events:none}
+@keyframes ld4Sw{0%{background-position:120% 0}60%,100%{background-position:-20% 0}}
+#load>*{position:relative;z-index:1}
+#load .l21logo{width:min(80vw,380px)!important;filter:drop-shadow(0 0 10px rgba(255,200,80,.75)) drop-shadow(0 0 28px rgba(255,170,40,.45))!important}
+#load .ld4m{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:min(92vw,400px);margin:10px 0 4px;pointer-events:none}
+#load .ld4m figure{margin:0;text-align:center}
+#load .ld4m img{display:block;width:100%;aspect-ratio:5/3;object-fit:cover;border-radius:6px;border:1.5px solid #d9a441;box-shadow:0 0 0 1px #3a2205,0 3px 10px rgba(0,0,0,.6),0 0 10px rgba(255,190,60,.35);background:#0d0510}
+#load .ld4m figcaption{margin-top:4px;font:900 11px/1.2 "TCDisp","Noto Serif TC",serif;color:#f3d38a;white-space:nowrap;letter-spacing:.02em}
+#load .ld4b{display:flex;gap:7px;justify-content:center;margin:14px 0 16px;flex-wrap:nowrap}
+#load .ld4b span{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 10px;border:1.5px solid #d9a441;border-radius:4px;background:linear-gradient(#1c0d06,#0b0503);color:#f5e3b5;font:700 12.5px "Noto Sans TC",sans-serif;letter-spacing:.06em;white-space:nowrap;box-shadow:inset 0 0 0 2px #0b0503,inset 0 0 0 3px rgba(217,164,65,.35)}
+#load .ld4b b{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:50%;background:#8a0f12;border:1.5px solid #ffd27a;color:#fff;font:900 10.5px "Noto Sans TC",sans-serif;letter-spacing:0}
+#load .ld4b i{font-style:normal;color:#d9a441}
+#load .lb{background:#1a0d06!important}#load .lb i{background:linear-gradient(90deg,#8a5a12,#ffd27a,#fff2c0)!important}
+#load button{margin-top:14px;border-radius:8px!important;padding:0 40px!important;border:2px solid #ffe08a!important;background:linear-gradient(#5a1a0c,#2a0806 60%,#140302)!important;color:#ffe9b0!important;font:900 18px "Noto Serif TC",serif!important;letter-spacing:.3em;box-shadow:0 0 0 1px #3a2205,0 0 18px rgba(255,190,60,.5)!important}
+#load small.ld4n{position:static!important;margin-top:14px;text-align:center;font:500 11.5px/1.7 "Noto Sans TC",sans-serif;color:#d8c6a0}
+#load small.ld4n b{color:#ffd27a;font-weight:700}
+@media (max-width:370px){#load .ld4b span{padding:0 7px;font-size:11.5px;gap:4px}#load .ld4m{gap:5px}#load .ld4m figcaption{font-size:10px}}
+@media (max-height:620px){#load .l21logo{width:min(64vw,300px)!important}#load .ld4b{margin:10px 0}}
+@media (prefers-reduced-motion:reduce){#load::before{animation:none;opacity:.5}}
+html.dfpRM #load::before{animation:none;opacity:.5}

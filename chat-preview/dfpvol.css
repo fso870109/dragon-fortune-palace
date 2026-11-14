@@ -1,0 +1,27 @@
+/* v28.54 音效／音樂 volume sliders — palace lacquer gold */
+.dfpVol{box-sizing:border-box;width:100%;min-width:0}
+.dfpVB{display:flex;flex-direction:column;gap:10px}
+.dfpVR{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;gap:4px 8px;align-items:center}
+.dfpVH{display:flex;align-items:baseline;justify-content:space-between;gap:8px;grid-column:1/-1}
+.dfpVL{font:700 13px "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;color:#ffe08a;letter-spacing:.08em}
+.dfpVP{font:700 13px ui-monospace,"DSEG7 Classic",Menlo,monospace;color:#fff6d0;font-variant-numeric:tabular-nums;min-width:3.25em;text-align:right}
+.dfpVR input[type=range]{grid-column:1;width:100%;min-width:0;height:28px;margin:0;accent-color:#e2b34f;background:transparent}
+.dfpVR .dfpVM{grid-column:2;min-width:52px;min-height:32px;padding:4px 10px;border-radius:16px;border:1px solid #c99a3a;background:#2a0d0d;color:#ffe8c0;font:700 12px "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dfpVR .dfpVM[aria-pressed="true"]{background:linear-gradient(180deg,#f7d36e,#b8801f);color:#3a1200;border-color:#e2b34f}
+#menu16 .dfpVol--menu{grid-column:1/-1;padding:8px 8px 10px;margin:0 0 6px;border-radius:12px;border:1px solid rgba(226,179,79,.45);background:linear-gradient(180deg,rgba(62,20,18,.96),rgba(24,8,8,.96));box-shadow:inset 0 1px 0 rgba(255,230,170,.12)}
+#setDlg .dfpVol{padding:2px 0 6px}
+#setDlg .dfpVR{border-top:1px solid rgba(226,179,79,.22);padding-top:10px}
+#setDlg .dfpVR:first-child{border-top:0;padding-top:2px}
+.audio .dfpVol{flex:1 1 100%}
+@media (max-width:360px){
+  .dfpVL{font-size:12px}
+  .dfpVP{font-size:12px}
+  .dfpVR .dfpVM{min-width:48px;padding:4px 8px}
+}
+
+#dfpVolMenu #vibBtn,#dfpVolMenu #rmBtn{
+  display:block;width:100%;margin-top:6px;min-height:36px;padding:6px 10px;
+  border-radius:12px;border:1px solid #c9a35a;background:rgba(42,12,16,.92);
+  color:#ffe8c0;font:700 12px "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  box-shadow:none;
+}

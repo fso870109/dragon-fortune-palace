@@ -1,0 +1,144 @@
+/* v28.80 in-game 選單 — 金殿 lacquer panel */
+body.menu16 .row2:not(#menu16){display:none!important}
+/* v28.84: .m16panel used to force display:grid even when 選單 was closed,
+   leaving the panel in document flow just below the cabinet. Swiping down
+   scrolled it into view. Hide unless body.menu16; lock page scroll. */
+html body:not(.menu16) #menu16{display:none!important}
+html body.menu16 #menu16.row2,
+html body.menu16 #menu16.m16panel{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:8px!important;
+  padding:12px 12px 14px!important;
+  margin:0!important;
+  width:min(360px,calc(100vw - 20px))!important;
+  max-width:360px;
+  box-sizing:border-box;
+  background:linear-gradient(180deg,#3a0a0a,#1a0404)!important;
+  border:2px solid #e2b34f!important;
+  border-radius:18px!important;
+  box-shadow:0 0 0 1px #6b4410 inset,0 0 0 4px rgba(226,179,79,.16),0 16px 44px rgba(0,0,0,.75),0 0 28px rgba(255,190,70,.16)!important;
+  z-index:90!important;
+}
+html body #menu16 .m16hd{
+  grid-column:1/-1;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  position:sticky;top:0;z-index:3;
+  margin:-4px -4px 2px;padding:4px 4px 8px;
+  background:linear-gradient(180deg,#3a0a0a,#2a0808 86%,rgba(42,8,8,0));
+  border-bottom:1px solid rgba(226,179,79,.28);
+}
+html body #menu16 .m16hd h2{
+  margin:0;padding:0 2px;
+  font-family:"KleeSub","Noto Serif TC","Noto Sans TC",serif!important;
+  font-size:18px;font-weight:700;letter-spacing:.16em;
+  color:#ffd77a!important;text-shadow:0 1px 0 #000;
+  background:none!important;-webkit-text-fill-color:#ffd77a!important;filter:none!important;
+}
+html body #menu16 .m16x{
+  flex:none;min-width:52px;min-height:32px;padding:4px 12px;
+  border-radius:16px;border:1px solid #c99a3a!important;
+  background:#2a0d0d!important;color:#ffe8c0!important;
+  font:700 13px "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif!important;
+  box-shadow:none!important;text-shadow:none!important;
+}
+html body #menu16 #dfpVolMenu,
+html body #menu16 .dfpVol--menu{
+  grid-column:1/-1;width:100%;box-sizing:border-box;
+  padding:8px 8px 10px;margin:0;
+  border-radius:12px;border:1px solid rgba(226,179,79,.45);
+  background:linear-gradient(180deg,rgba(62,20,18,.96),rgba(24,8,8,.96));
+  box-shadow:inset 0 1px 0 rgba(255,230,170,.12);
+}
+html body #menu16 .dfpVR .dfpVM{
+  min-width:52px;min-height:32px;padding:4px 10px;border-radius:16px;
+  border:1px solid #c99a3a;background:#2a0d0d;color:#ffe8c0;
+  font:700 12px "Noto Sans TC",sans-serif;box-shadow:none;
+}
+html body #menu16 .dfpVR .dfpVM[aria-pressed="true"]{
+  background:linear-gradient(180deg,#f7d36e,#b8801f);color:#3a1200;border-color:#e2b34f;
+}
+html body #menu16 #vibBtn,
+html body #menu16 #rmBtn{
+  display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;
+  width:100%;margin-top:6px;min-height:40px;padding:8px 12px!important;
+  border-radius:12px!important;border:1px solid #c9a35a!important;
+  background:rgba(42,12,16,.92)!important;color:#ffe8c0!important;
+  font:700 13px/1.2 "Noto Sans TC",sans-serif!important;
+  box-shadow:none!important;text-shadow:none!important;gap:8px;
+}
+html body #menu16 #vibBtn[aria-pressed="true"],
+html body #menu16 #rmBtn[aria-pressed="true"]{
+  border-color:#e2b34f!important;
+  background:linear-gradient(180deg,rgba(90,36,20,.96),rgba(42,12,16,.96))!important;
+}
+html body #menu16 > button#adBtn,
+html body #menu16 > button#dailyBtn,
+html body #menu16 > button#lbBtn,
+html body #menu16 > button#invBtn,
+html body #menu16 > button#payBtn{
+  position:relative;overflow:visible;
+  display:flex!important;flex-direction:column!important;
+  align-items:center;justify-content:center;gap:4px;
+  min-height:64px;width:auto;min-width:0;
+  padding:8px 6px!important;
+  border-radius:12px!important;
+  border:1px solid #c9a35a!important;
+  background:linear-gradient(180deg,rgba(62,20,18,.98),rgba(24,8,8,.98))!important;
+  color:#ffe8c0!important;
+  box-shadow:inset 0 1px 0 rgba(255,230,170,.14),0 2px 0 #140202!important;
+  text-shadow:none!important;
+  font:700 13px/1.2 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif!important;
+  letter-spacing:.04em;
+}
+html body #menu16 > button#adBtn{
+  grid-column:1/-1;flex-direction:row!important;gap:10px;
+  min-height:56px;padding:10px 14px!important;
+  border:1.5px solid #e2b34f!important;
+  background:linear-gradient(180deg,#5a1810,#2a0808)!important;
+  box-shadow:inset 0 1px 0 rgba(255,230,170,.2),0 0 0 1px rgba(107,68,16,.45),0 2px 0 #140202!important;
+  font-size:16px!important;letter-spacing:.08em;
+}
+html body #menu16 .m16ic{width:28px;height:28px;object-fit:contain;display:block;flex:none;filter:none!important;margin:0!important}
+html body #menu16 .m16svg{width:28px;height:28px;display:flex;align-items:center;justify-content:center}
+html body #menu16 .m16svg svg{width:28px;height:28px;display:block}
+html body #menu16 #adBtn .m16ic,html body #menu16 #adBtn .m16svg{width:32px;height:32px}
+html body #menu16 #adBtn .m16svg svg{width:32px;height:32px}
+html body #menu16 .m16tx{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+html body #menu16 #adBtn .m16tx{align-items:flex-start}
+html body #menu16 .m16lb{display:block;white-space:nowrap}
+html body #menu16 .m16sub{display:block;font:600 11px/1.2 "Noto Sans TC",sans-serif;color:#f0d6a8;opacity:.92;letter-spacing:0}
+html body #menu16 .badge{position:relative}
+html body #menu16 .badge.dot::after{
+  content:"";position:absolute;top:6px;right:6px;width:10px;height:10px;
+  border-radius:50%;z-index:2;
+  background:radial-gradient(circle at 35% 30%,#fff,#ff3b3b 45%,#a00);
+  box-shadow:0 0 8px #f33;
+}
+html body #menu16 #czBuyBtn,
+html body #menu16 #czBuyHS{display:none!important}
+@media (max-width:360px),(max-height:780px){
+  html body #menu16.m16panel,html body.menu16 #menu16.row2{gap:6px!important;padding:8px 10px 10px!important}
+  html body #menu16 .m16hd{margin:-2px -2px 0;padding:2px 2px 6px}
+  html body #menu16 .m16hd h2{font-size:16px}
+  html body #menu16 #dfpVolMenu,html body #menu16 .dfpVol--menu{padding:6px 8px 7px}
+  html body #menu16 .dfpVB{gap:6px}
+  html body #menu16 .dfpVR{gap:2px 8px}
+  html body #menu16 .dfpVR input[type=range]{height:24px}
+  html body #menu16 #vibBtn,html body #menu16 #rmBtn{min-height:34px;margin-top:4px;padding:5px 10px!important;font-size:12px!important}
+  html body #menu16 > button#adBtn{min-height:48px;padding:8px 12px!important;font-size:15px!important}
+  html body #menu16 > button#dailyBtn,
+  html body #menu16 > button#lbBtn,
+  html body #menu16 > button#invBtn,
+  html body #menu16 > button#payBtn{min-height:52px;font-size:12px!important;padding:6px 4px!important}
+  html body #menu16 .m16ic,html body #menu16 .m16svg,html body #menu16 .m16svg svg{width:24px;height:24px}
+  html body #menu16 #adBtn .m16ic,html body #menu16 #adBtn .m16svg,html body #menu16 #adBtn .m16svg svg{width:28px;height:28px}
+}
+
+html.czMach,html.czMach body,html:has(#menu16),html:has(#menu16) body{
+  overflow:hidden!important;
+  overscroll-behavior:none;
+  height:100%;
+  height:100dvh;
+  max-height:100dvh;
+}

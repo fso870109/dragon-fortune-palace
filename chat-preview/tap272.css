@@ -1,0 +1,4 @@
+/* v27.2 touch targets: invisible hit-area expansion (>=48px tall), no visual change */
+.top .ib::after{content:"";position:absolute;left:-1px;right:-1px;top:-11px;bottom:-11px;border-radius:12px}
+.czbar .controls #minus::after,.czbar .controls #plus::after,.czbar .controls #czAuto::after{content:"";position:absolute;inset:-6px;border-radius:50%}
+.foot .pplink{margin-top:0!important;padding:14px 14px!important}

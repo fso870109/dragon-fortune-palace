@@ -1,0 +1,18 @@
+/* v28.13 寶珠對碰: premium pits/orbs + staggered reel feel (loaded after ui21/bonus22/reel21) */
+#hsBox .hsG>i.spin .hsReel{display:block;position:absolute;inset:8%;border-radius:50%;overflow:hidden;pointer-events:none;
+ background:repeating-linear-gradient(180deg,#fff6cf 0 6px,#ffd65a 6px 12px,#c98a1c 12px 18px,#5a3200 18px 24px,#ffd65a 24px 30px);
+ background-size:100% 30px;animation:hs2813Reel .18s linear infinite;opacity:.85;mix-blend-mode:screen;
+ -webkit-mask:radial-gradient(circle,#000 60%,transparent 75%);mask:radial-gradient(circle,#000 60%,transparent 75%)}
+#hsBox .hsG>i.spin{position:relative!important;overflow:hidden!important}
+@keyframes hs2813Reel{to{background-position:0 30px}}
+#hsBox .hsG>i.miss{animation:hs2813Miss .18s ease-out}
+@keyframes hs2813Miss{0%{filter:brightness(1.8);transform:scale(.92)}100%{filter:none;transform:scale(1)}}
+#hsBox .hsG>i.land{animation:hs2813Land .42s cubic-bezier(.2,1.7,.4,1)!important}
+@keyframes hs2813Land{0%{transform:scale(1.55) translateY(-12%);filter:brightness(2.2)}55%{transform:scale(.92);filter:brightness(1.2)}100%{transform:scale(1);filter:none}}
+#hsBox.b23 .hsG>i.spin .hsReel{-webkit-mask:radial-gradient(circle,#000 55%,transparent 72%);mask:radial-gradient(circle,#000 55%,transparent 72%)}
+#hsBox .hsG>i.on span,#hsBox .hsG>i.on b{position:relative;z-index:1}
+#hsBox .hsG>i.on.col small{letter-spacing:.05em}
+@media (prefers-reduced-motion:reduce){
+ #hsBox .hsG>i.spin .hsReel,#hsBox .hsG>i.spin,html body #hsBox .hsG>i.spin{animation:none!important}
+ #hsBox .hsG>i.land,#hsBox .hsG>i.miss{animation:none!important}
+}

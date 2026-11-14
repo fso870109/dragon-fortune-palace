@@ -1,0 +1,134 @@
+/* v28.85 — spinning-state opacity fix + ergonomic −/+ stack
+   Disabled controls stay opaque above the lotus/phoenix crest.
+   Portrait: + above − on the left of PUSH; 自動 mirrors that column on the right. */
+
+/* ---------- disabled / spinning faces (all orientations) ---------- */
+html body .czbar .spin,
+html body .czbar .spin:disabled,
+html body .czbar #spinBtn,
+html body .czbar #spinBtn:disabled,
+html body .czbar .controls #minus,
+html body .czbar .controls #minus:disabled,
+html body .czbar .controls #plus,
+html body .czbar .controls #plus:disabled,
+html body .czbar #max16,
+html body .czbar #max16:disabled,
+html body .czbar #czAuto,
+html body .czbar #czAuto:disabled{
+  opacity:1 !important;
+  z-index:3 !important;
+}
+
+html body .czbar .spin:disabled,
+html body .czbar #spinBtn:disabled{
+  filter:none;
+  cursor:default;
+  color:#fff !important;
+  text-shadow:0 2px 0 #000,0 0 12px rgba(255,214,140,.85);
+  animation:deckSpinGlow 1.15s ease-in-out infinite;
+}
+html body .czbar .spin.push:disabled{
+  animation:deckSpinGlow 1.15s ease-in-out infinite,pushB .5s ease-in-out infinite alternate;
+}
+html body .czbar .spin:disabled small{
+  font-size:0 !important;
+  letter-spacing:0 !important;
+}
+html body .czbar .spin:disabled small::after{
+  content:"旋轉中";
+  display:block;
+  font:700 11px/1 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  letter-spacing:.2em;
+}
+html body.czau .czbar .spin:disabled small::after{content:"停止"}
+html body .czbar .spin:disabled::after{
+  border-color:#f0c45a;
+  opacity:.95;
+  animation:pushRing .9s ease-out infinite;
+}
+
+html body .czbar .controls #minus:disabled,
+html body .czbar .controls #plus:disabled,
+html body .czbar #max16:disabled{
+  filter:saturate(.65) brightness(.82);
+  cursor:not-allowed;
+}
+html body .czbar .controls #minus:disabled svg.pm,
+html body .czbar .controls #plus:disabled svg.pm{
+  opacity:1 !important;
+}
+
+@keyframes deckSpinGlow{
+  0%,100%{filter:drop-shadow(0 0 6px rgba(255,214,140,.4))}
+  50%{filter:drop-shadow(0 0 16px rgba(255,214,140,.95)) drop-shadow(0 0 8px rgba(255,80,140,.35))}
+}
+@media (prefers-reduced-motion:reduce){
+  html body .czbar .spin:disabled,
+  html body .czbar .spin.push:disabled,
+  html body .czbar .spin:disabled::after{animation:none}
+}
+
+/* ---------- portrait: + / − stack left, 自動 inset right ---------- */
+@media (orientation:portrait){
+  html body .czbar .controls{
+    display:grid !important;
+    grid-template-columns:1fr auto auto auto 1fr !important;
+    grid-template-rows:auto auto !important;
+    align-items:center !important;
+    justify-items:center !important;
+    column-gap:clamp(10px,3.2vw,18px) !important;
+    row-gap:6px !important;
+    gap:6px clamp(10px,3.2vw,18px) !important;
+  }
+  html body .czbar .controls > #plus{
+    grid-column:2;
+    grid-row:1;
+  }
+  html body .czbar .controls > #minus{
+    grid-column:2;
+    grid-row:2;
+  }
+  html body .czbar .controls > #spinBtn{
+    grid-column:3;
+    grid-row:1 / span 2;
+    align-self:center !important;
+  }
+  html body .czbar .controls > #czAuto{
+    grid-column:4;
+    grid-row:1 / span 2;
+    justify-self:center !important;
+    align-self:center !important;
+    margin-left:0 !important;
+  }
+  html body .czbar .controls #minus,
+  html body .czbar .controls #plus,
+  html body .czbar .controls #czAuto,
+  html body .czbar #czAuto{
+    width:max(44px,calc(var(--sp,112px) * .42)) !important;
+    height:max(44px,calc(var(--sp,112px) * .42)) !important;
+    min-width:44px !important;
+    min-height:44px !important;
+  }
+}
+
+/* landscape: stay on one row so the short bar does not overflow; keep 自動 tucked in */
+@media (orientation:landscape) and (max-height:500px){
+  html body .czbar .controls{
+    display:grid !important;
+    grid-template-columns:1fr auto auto auto auto 1fr !important;
+    grid-template-rows:auto !important;
+    align-items:center !important;
+    column-gap:clamp(6px,1.6vw,14px) !important;
+    row-gap:0 !important;
+    gap:0 clamp(6px,1.6vw,14px) !important;
+  }
+  html body .czbar .controls > #minus{grid-column:2;grid-row:1}
+  html body .czbar .controls > #spinBtn{grid-column:3;grid-row:1}
+  html body .czbar .controls > #plus{grid-column:4;grid-row:1}
+  html body .czbar .controls > #czAuto{
+    grid-column:5;
+    grid-row:1;
+    justify-self:center !important;
+    margin-left:0 !important;
+  }
+}

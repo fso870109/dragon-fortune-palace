@@ -1,0 +1,36 @@
+/* v28.7 splash: soft logo blend — vignette + warm grade + softer shadow */
+#load{
+  background:
+    radial-gradient(ellipse 58% 36% at 50% 28%,rgba(255,200,95,.42),transparent 70%),
+    radial-gradient(ellipse 48% 30% at 50% 34%,rgba(140,18,22,.38),transparent 72%),
+    radial-gradient(ellipse 120% 42% at 50% 110%,rgba(90,10,14,.55),transparent 70%),
+    linear-gradient(rgba(12,4,3,.68),rgba(8,2,3,.92)),
+    url(assets/lobby/bg.webp?v=256) center/cover,#0a0405!important;
+}
+#load .ld7g{
+  position:relative;display:flex;justify-content:center;align-items:center;
+  width:min(92vw,460px);margin:0 auto;isolation:isolate;pointer-events:none;
+  overflow:visible;
+}
+#load .ld7g::before{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:140%;height:130%;border-radius:50%;
+  background:
+    radial-gradient(ellipse 50% 46% at 50% 48%,rgba(255,210,120,.5),rgba(255,170,60,.2) 40%,rgba(120,16,18,.18) 60%,transparent 74%);
+  filter:blur(22px);z-index:0;pointer-events:none;
+}
+#load .ld7g .l21logo{
+  position:relative;z-index:1;width:min(90vw,440px)!important;height:auto;display:block;
+  filter:
+    drop-shadow(0 0 8px rgba(255,210,120,.3))
+    drop-shadow(0 0 28px rgba(255,175,70,.38))
+    drop-shadow(0 20px 40px rgba(0,0,0,.28))!important;
+}
+@media (max-height:620px){
+  #load .ld7g{width:min(78vw,360px)}
+  #load .ld7g .l21logo{width:min(76vw,340px)!important}
+  #load .ld7g::before{filter:blur(14px);width:130%;height:120%}
+}
+@media (prefers-reduced-motion:reduce){
+  #load .ld7g::before{filter:blur(12px)}
+}

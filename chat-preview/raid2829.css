@@ -1,0 +1,45 @@
+/* v28.29 金殿掠奪 */
+.rdb .ive{filter:drop-shadow(0 0 5px rgba(255,120,90,.6))}
+#dRd .rdx{margin:-4px 0 8px;text-align:center;font-size:11.5px;color:#d9c2cf}
+#dRd .rdk{display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12.5px;color:#ffe08a}#dRd .rdsh{color:#bfe6c8;font-size:11.5px}
+#dRd .rdl{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+#dRd .rdf{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;padding:7px 2px;border-radius:12px;border:1px solid rgba(217,164,65,.45);background:rgba(20,6,16,.7)}
+#dRd .rda{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;overflow:hidden;padding:2px;box-sizing:border-box;background:radial-gradient(circle at 32% 28%,#fff6d0,#e8b83a 55%,#8a5310);color:#3a0814;font-weight:700;font-size:14px;box-shadow:0 0 0 1px #6a3c06}
+#dRd .rda img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+#dRd .rdf .rdn{display:block;width:100%;min-width:0;overflow:hidden;flex:none;height:1.3em;line-height:1.3}
+#dRd .rdf .rdn b{display:block;font-size:12px;line-height:1.3;color:#f3e2c0;white-space:nowrap;text-align:center}
+#dRd .rdf .rdn.rdmq b{display:block;text-align:left;position:relative;left:0;animation:rdfMq 4.6s ease-in-out infinite}
+@keyframes rdfMq{0%,18%{left:0}50%,68%{left:calc(-1 * var(--mq,0px))}100%{left:0}}
+@media (prefers-reduced-motion:reduce){#dRd .rdf .rdn.rdmq b{animation:none;display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;text-align:center}}
+#dRd .rdr .rda{width:24px;height:24px;flex:none;font-size:11px}
+#dRd .rdf .btn{height:28px;padding:0 6px;font-size:12px;max-width:100%;white-space:nowrap}#dRd .btn:disabled{opacity:.55;filter:grayscale(.4)}
+#dRd .rdh{margin:10px 0 6px;font-size:13px;color:#ffe08a;text-align:center;letter-spacing:.08em}
+#dRd .rdi{display:flex;flex-direction:column;gap:5px}#dRd .rde{text-align:center;font-size:12px;color:#d9c2cf;margin:2px 0}
+#dRd .rdr{display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:10px;border:1px solid rgba(255,110,90,.45);background:linear-gradient(90deg,rgba(110,16,24,.75),rgba(30,6,14,.8))}
+#dRd .rdr span{font-size:11px;color:#d9c2cf;flex:none}#dRd .rdr b{flex:1;min-width:0;font-size:12.5px;color:#ffd0c0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#dRd .rdr .btn{flex:none;height:28px;padding:0 9px;font-size:12px}#dRd .rdr.got{opacity:.7}
+.rdp{position:fixed;left:50%;top:8px;z-index:10050;display:flex;align-items:center;gap:10px;width:min(92vw,380px);box-sizing:border-box;padding:9px 12px;border-radius:14px;border:1px solid #ff8a6a;background:linear-gradient(135deg,rgba(130,14,26,.96),rgba(40,6,16,.96));box-shadow:0 6px 22px rgba(0,0,0,.55),0 0 14px rgba(255,90,60,.35);color:#ffe0d0;cursor:pointer;transform:translate(-50%,-140%);transition:transform .45s cubic-bezier(.2,1.3,.4,1);pointer-events:none}
+.rdp.on{transform:translate(-50%,0);pointer-events:auto}
+.rdp .rdpi{font-size:24px;animation:rdsh .5s 2}.rdp .rdpt{flex:1;min-width:0;line-height:1.3}.rdp b{display:block;color:#ffe08a;font-size:13.5px}.rdp small{display:block;font-size:11.5px;color:#ffd0c0}
+@keyframes rdsh{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+@media (prefers-reduced-motion:reduce){.rdp{transition:none}.rdp .rdpi{animation:none}}
+
+#dRd.fb .rdx{color:#c6e6c0}
+#dRd .rdl .rde{grid-column:1/-1;margin:6px 0}
+.rdp .rdpi{width:36px;height:36px;flex:none;display:grid;place-items:center;overflow:hidden;border-radius:50%}
+.rdp .rdpi img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.rdp .rdpc{flex:none;height:30px;padding:0 10px;font-size:12px;white-space:nowrap;margin:0}
+
+.rdp .rdpt{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.rdp small{display:block;margin-top:2px}
+
+.rdp .rdps{display:block;margin-top:2px;font-size:11.5px;color:#ffd0c0;line-height:1.3}
+
+.rdp{overflow:hidden}
+.rdp .rdpc::before,.rdp .rdpc::after{content:none!important;display:none!important}
+
+/* v28.82 compact push */
+.rdp{padding:5px 10px;gap:6px;top:6px;border-radius:12px}
+.rdp b{font-size:12.5px;line-height:1.2}
+.rdp small,.rdp .rdps{font-size:11px;margin-top:0;line-height:1.25}
+.rdp .rdpi{width:26px;height:26px}
+.rdp .rdpc{height:26px;padding:0 8px;font-size:11.5px}
