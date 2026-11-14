@@ -3,6 +3,7 @@
 var IV='?v=2850';function ic(id){return '<img src="assets/lx/ev_'+id+'.webp'+IV+'" alt="" width="128" height="128">'}
 function face(f){return (f&&f.av)?'<img src="assets/lx/'+f.av+'.webp'+IV+'" alt="">':((f&&f.n)||'?').slice(0,1)}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function shownName(n){try{if(window.DFPname&&typeof DFPname.display==='function')return DFPname.display(n)}catch(e){}return n||'旅人'}
 var FR=[{id:'a',n:'阿明',av:'av_a',t:'夏祭花火常客'},{id:'b',n:'小美',av:'av_b',t:'櫻花斬愛好者'},{id:'c',n:'阿傑',av:'av_c',t:'天下布武玩家'},{id:'d',n:'佳佳',av:'av_d',t:'招財大作戰粉絲'},{id:'e',n:'老王',av:'av_e',t:'金殿老會員'}];
 var GIFT=50,BONUS=100,AVS=['av_a','av_b','av_c','av_d','av_e'];
 function dk(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}

@@ -32,6 +32,7 @@
     return 'assets/lx/'+k+'.webp'+AVQ;
   }
   function myName(){
+    try{if(window.DFPname&&typeof DFPname.get==='function'){var n=DFPname.get();if(n)return String(n).slice(0,12)}}catch(e){}
     try{if(window.DFPfb&&DFPfb.profile&&DFPfb.profile.displayName)return String(DFPfb.profile.displayName).slice(0,12)}catch(e){}
     try{var st=JSON.parse(localStorage.getItem('fs_stats')||'{}');if(st.name)return String(st.name).slice(0,12)}catch(e){}
     return '你';
@@ -72,10 +73,12 @@
     var img=/^https:/.test(av)
       ? '<img src="'+esc(av)+'" alt="" width="44" height="44">'
       : '<img src="'+esc(avSrc(av))+'" alt="" width="44" height="44">';
+    var shown=r.n;
+    try{if(window.DFPname&&typeof DFPname.display==='function')shown=DFPname.display(r.n)}catch(e){}
     return '<li class="'+cls+'"'+(r.npc?' data-npc="1"':'')+'>'+
       '<span class="lbRank">'+medal(rank)+'</span>'+
       '<span class="lbAv">'+img+'</span>'+
-      '<span class="lbWho"><strong>'+esc(r.n)+(r.me&&r.n!=='你'?'（你）':'')+'</strong>'+badge+'</span>'+
+      '<span class="lbWho"><strong>'+esc(shown)+(r.me&&shown!=='你'?'（你）':'')+'</strong>'+badge+'</span>'+
       '<span class="lbScore">'+esc(r.scoreLabel)+unit+'</span>'+
     '</li>';
   }
