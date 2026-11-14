@@ -1,0 +1,201 @@
+/* v28.109 preview — 金殿 plaque typography & inner padding.
+   Portrait: hex BET lacquer + gold inner bezel (follows plaque-bet shape),
+   gold text with dark outline and a soft gold neon glow on the values
+   (breathing mid/high tier only).
+   v3: engraved divider removed.
+   v4: CREDIT/WIN stack optically centered in the visible plaque opening
+   (below the lotus rail, above the bottom coin; >=6px visual air).
+   BET padding left as in v3.
+   Does not change layout grid, control sizes, RTP, or economy. */
+
+/* ——— gold type (all orientations) ——— */
+html body .czm small,
+html body .czbar .box.czbet small{
+  font-weight:800!important;
+  font-family:"Noto Sans TC",Arial,sans-serif!important;
+  letter-spacing:.04em!important;
+  color:#e8c56a!important;
+  -webkit-text-fill-color:#e8c56a!important;
+  -webkit-text-stroke:.4px #2a1008;
+  paint-order:stroke fill;
+  text-shadow:0 1px 0 #1a0804!important;
+}
+html body .czm b,
+html body .czbar .box.czbet b{
+  font-weight:800!important;
+  font-family:"Noto Sans TC",Arial,sans-serif!important;
+  font-variant-numeric:tabular-nums lining-nums!important;
+  letter-spacing:0!important;
+  color:#ffe9b0!important;
+  -webkit-text-fill-color:#ffe9b0!important;
+  -webkit-text-stroke:.45px #2a1008;
+  paint-order:stroke fill;
+  /* static warm-gold neon: tight core + 2 soft amber layers; dark outline kept for contrast */
+  text-shadow:
+    0 1px 0 #1a0804,
+    0 0 2px rgba(255,244,210,.75),
+    0 0 6px rgba(255,196,80,.4),
+    0 0 10px rgba(255,170,50,.2)!important;
+  padding:0!important;
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+  text-align:center;
+  display:block;
+}
+/* keep the bump flash, but in gold rather than pink/white */
+html body .czm b.l21bump,
+html body .czbar .box.czbet b.l21bump{
+  color:#fff6cf!important;
+  -webkit-text-fill-color:#fff6cf!important;
+  animation:none!important;
+  text-shadow:
+    0 1px 0 #3a1408,
+    0 0 4px rgba(255,248,220,.95),
+    0 0 10px rgba(255,210,90,.7),
+    0 0 18px rgba(255,180,50,.4)!important;
+}
+
+/* v3: no engraved divider — free that band so the stack can clear both lips */
+html body .czm small,
+html body .czbar .box.czbet small{
+  position:relative;
+  display:block;
+  padding-bottom:0!important;
+  margin-bottom:2px!important;
+}
+html body .czm small::after,
+html body .czbar .box.czbet small::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* CREDIT / WIN: even padding, stack centered, >=~8px to both box edges */
+html body .czm{
+  padding:8px 12px!important;
+  box-sizing:border-box;
+  justify-content:center!important;
+}
+
+/* ——— portrait sculpted deck ——— */
+@media (max-width:620px) and (orientation:portrait){
+  /* BET: keep the original slot width, center the stack, inset from the hex sides */
+  html body .czbar .box.czbet{
+    justify-content:center!important;
+    padding:8px 16px!important;
+    box-sizing:border-box!important;
+    flex:0 0 auto!important;
+    min-width:78px!important;
+    width:78px!important;
+  }
+  html body .czm{
+    flex:1 1 0!important;
+    min-width:0!important;
+    /* Visible opening of plaque.webp along the text column:
+       27.8% (first fully-open row under the lotus rail) to 81.4% (last
+       open row above the bottom coin). Art is box + --deck-plq-out-*.
+       Padding = that inset into the box + 6px minimum air. */
+    --plq-box-h:clamp(46px,6.4svh,58px);
+    --plq-art-h:calc(var(--plq-box-h) + var(--deck-plq-out-t) + var(--deck-plq-out-b));
+    padding:calc(var(--plq-art-h) * .278 - var(--deck-plq-out-t) + 6px)
+            12px
+            calc(var(--plq-art-h) * .186 - var(--deck-plq-out-b) + 6px) !important;
+    justify-content:center!important;
+  }
+  html body .czbar .box.czbet small{
+    font-size:clamp(9px,2.5vw,10.5px)!important;
+    line-height:1.05!important;
+    letter-spacing:.03em!important;
+    margin-bottom:0!important;
+    z-index:1;
+  }
+  html body .czbar .box.czbet b{
+    font-size:clamp(13px,3.5vw,16px)!important;
+    line-height:1.05!important;
+    z-index:1;
+  }
+
+  /* lacquer + gold inner bezel, same box as the plaque art, shows through its hole */
+  html body .czbar .box.czbet::before{
+    content:""!important;
+    position:absolute;
+    top:calc(var(--deck-bet-out-t) * -1);
+    bottom:calc(var(--deck-bet-out-b) * -1);
+    left:calc(var(--deck-bet-out-x) * -1);
+    right:calc(var(--deck-bet-out-x) * -1);
+    z-index:-2;
+    pointer-events:none;
+    animation:none!important;
+    translate:none!important;
+    opacity:1!important;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><defs><linearGradient id='lq' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%233a1520'/><stop offset='1' stop-color='%2314080c'/></linearGradient><linearGradient id='gl' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23ffe9b0'/><stop offset='.5' stop-color='%23d4a441'/><stop offset='1' stop-color='%238a5a18'/></linearGradient></defs><polygon points='29,24.5 71,24.5 85.5,52 71,81 29,81 14.5,52' fill='url(%23lq)' stroke='url(%23gl)' stroke-width='1.15' stroke-linejoin='round'/></svg>") center / 100% 100% no-repeat!important;
+  }
+
+  html body .czm small{
+    font-size:clamp(9.5px,2.5vw,11px)!important;
+    line-height:1!important;
+    margin-bottom:1px!important;
+  }
+  html body .czm b{
+    font-size:clamp(14px,4vw,18px)!important;
+    line-height:1!important;
+  }
+}
+
+/* landscape: compact gold treatment, no hex art (deck plaques are portrait-only) */
+@media (orientation:landscape) and (max-height:500px){
+  html body .czbar .box.czbet{
+    padding:3px 8px 4px!important;
+    justify-content:center!important;
+    box-sizing:border-box!important;
+  }
+  html body .czbar .box.czbet small{
+    font-size:9px!important;
+    letter-spacing:.03em!important;
+    padding-bottom:0!important;
+    margin-bottom:2px!important;
+  }
+  html body .czbar .box.czbet b{
+    font-size:13px!important;
+  }
+}
+
+/* slow neon breath on values only — mid/high tiers. Lite (html.dfpLite / data-ptier=0)
+   and reduced-motion keep the static glow, no animation. */
+@keyframes plqNeon{
+  0%,100%{
+    text-shadow:
+      0 1px 0 #1a0804,
+      0 0 2px rgba(255,244,210,.55),
+      0 0 6px rgba(255,196,80,.28),
+      0 0 10px rgba(255,170,50,.14);
+  }
+  50%{
+    text-shadow:
+      0 1px 0 #1a0804,
+      0 0 3px rgba(255,248,220,.85),
+      0 0 7px rgba(255,200,80,.45),
+      0 0 12px rgba(255,170,50,.22);
+  }
+}
+html:not(.dfpLite):not([data-ptier="0"]) body .czm b,
+html:not(.dfpLite):not([data-ptier="0"]) body .czbar .box.czbet b{
+  animation:plqNeon 3.8s ease-in-out infinite;
+}
+html.dfpLite body .czm b,
+html.dfpLite body .czbar .box.czbet b,
+html[data-ptier="0"] body .czm b,
+html[data-ptier="0"] body .czbar .box.czbet b{
+  animation:none!important;
+}
+
+@media (prefers-reduced-motion:reduce){
+  html body .czm b,
+  html body .czbar .box.czbet b{
+    animation:none!important;
+  }
+  html body .czm b.l21bump,
+  html body .czbar .box.czbet b.l21bump{
+    transform:none;
+  }
+}
