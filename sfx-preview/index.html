@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#080208">
+<meta name="apple-mobile-web-app-title" content="音效試聽">
+<title>小遊戲音效試聽・龍運金殿</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+<link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <p class="kicker">龍運金殿・試聽頁</p>
+    <h1>小遊戲音效試聽</h1>
+    <p class="lead">現行小遊戲音效偏輕。下面四種風格都更有衝擊力，請先開啟音效，再為每款小遊戲試聽，選出你要的搭配。此頁尚未套用至正式遊戲。</p>
+    <p class="legal">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>
+  </header>
+
+  <div class="dock" id="dock">
+    <button type="button" class="unlock" id="btnUnlock">開啟音效</button>
+    <button type="button" class="stop" id="btnStop" hidden>停止</button>
+    <div class="meter" id="meter" hidden aria-hidden="true"><i></i></div>
+    <p class="status" id="status">尚未開啟。請點上方按鈕，手機需先點一下才能出聲。</p>
+  </div>
+
+  <nav class="games" id="games" aria-label="小遊戲"></nav>
+
+  <section class="panel" id="panel"></section>
+
+  <section class="legend">
+    <h2>四種風格</h2>
+    <ol id="legend"></ol>
+  </section>
+
+  <footer class="foot">
+    <p>音效皆以網頁音訊即時合成，未使用第三方採樣，無版權疑慮。試聽時音量已壓縮限制，避免爆音。</p>
+    <p><a href="../">返回龍運金殿</a></p>
+  </footer>
+</div>
+<script src="preview.js"></script>
+</body>
+</html>
