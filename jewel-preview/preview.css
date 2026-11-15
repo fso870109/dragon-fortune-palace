@@ -1,0 +1,116 @@
+@font-face{font-family:"Noto Sans TC";src:local("Noto Sans CJK TC"),local("Noto Sans TC");font-weight:400 900;font-display:swap}
+:root{
+  --fg-lip:url("../assets/featgold/stage-lip.webp");
+  --velvet:#14060c;
+  --ink:#f4e2b8;
+  --muted:#c9b48a;
+  --gold:#ffe39a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#0a0408;color:var(--ink);font:400 15px/1.55 "Noto Sans TC",sans-serif}
+body{min-height:100vh}
+.wrap{max-width:1220px;margin:0 auto;padding:20px 16px 48px}
+.top{text-align:center;margin-bottom:22px}
+.kicker{margin:0 0 6px;font:700 12px/1.3 "Noto Sans TC",sans-serif;letter-spacing:.18em;color:#e0b040;text-transform:none}
+h1{margin:0 0 8px;font:900 28px/1.2 "Noto Sans TC",sans-serif;color:#fff6cf;text-wrap:balance}
+.lead{margin:0 auto 8px;max-width:40em;color:var(--muted);text-wrap:pretty}
+.legal{margin:0;font-size:13px;color:#d4b46a}
+.legend{margin:18px 0 28px;padding:16px 18px;background:linear-gradient(180deg,rgba(40,16,20,.92),rgba(16,6,10,.94));border:8px solid transparent;border-image:var(--fg-lip) 48 / 8px / 0 stretch}
+.legend h2{margin:0 0 8px;font:900 16px/1.3 "Noto Sans TC",sans-serif;color:#ffe39a}
+.legend ol{margin:0;padding-left:1.3em;color:var(--muted)}
+.legend b{color:#fff6cf;font-weight:900}
+.tiers{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px;padding:0;list-style:none}
+.tiers li{display:flex;align-items:center;gap:6px;font:700 12px/1 "Noto Sans TC",sans-serif;color:#f4e2b8}
+.tiers i{display:block;width:28px;height:25px;background-size:100% 100%;background-repeat:no-repeat;border-radius:4px}
+
+.compare{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 16px}
+.col{width:360px;flex:0 0 360px}
+.col h2{margin:0 0 8px;text-align:center;font:900 18px/1.3 "Noto Sans TC",sans-serif;color:#ffe680}
+.col .sub{margin:0 0 10px;text-align:center;font:700 12px/1.4 "Noto Sans TC",sans-serif;color:var(--muted)}
+.block{margin:0 0 16px}
+.block p.label{margin:0 0 6px;font:700 12px/1 "Noto Sans TC",sans-serif;letter-spacing:.08em;color:#e0b040}
+
+.cab{position:relative;width:360px;padding:14px 10px 12px;background:
+  radial-gradient(circle at 50% 30%,rgba(60,16,24,.5),rgba(8,2,6,.96) 70%);
+  border:10px solid transparent;border-image:var(--fg-lip) 48 / 10px / 0 stretch}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));
+  width:306px;height:168px;margin:0 auto;gap:2px;padding:2px;box-sizing:border-box}
+.grid>i{position:relative;display:grid;place-items:center;min-width:0;overflow:hidden;
+  font-style:normal;border-radius:10%;}
+.grid>i img.hsSym{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:4%;pointer-events:none}
+.grid>i span,.grid>i b,.grid>i small{position:relative;z-index:2;pointer-events:none;
+  color:#fff;text-shadow:0 0 3px #000,0 1px 2px #000,0 0 6px rgba(0,0,0,.8);
+  -webkit-text-stroke:0;paint-order:stroke fill}
+.grid>i span{font:900 13px/1 "Noto Sans TC",sans-serif;font-variant-numeric:tabular-nums}
+.grid>i b{font:900 13px/1 "Noto Sans TC",sans-serif}
+.grid>i small{display:block;font:900 9px/1 "Noto Sans TC",sans-serif;margin-bottom:2px;color:#fff3c4}
+
+/* 現行 wells + plaques */
+.cur .grid>i.sym{
+  background:#12061e;border-radius:8%;
+  box-shadow:inset 0 0 0 1.5px rgba(255,214,90,.45),inset 0 6px 10px rgba(0,0,0,.5)}
+.cur .grid>i.on{
+  background-size:100% 100%;background-position:center;background-repeat:no-repeat;border-radius:10%;
+  box-shadow:0 0 0 1px rgba(255,230,150,.35)}
+.cur .grid>i.on.amber{background-image:url("../assets/fxlite/jewel-gold.webp")}
+.cur .grid>i.on.sapphire{background-image:url("../assets/fxlite/jewel-mini.webp")}
+.cur .grid>i.on.jade{background-image:url("../assets/fxlite/jewel-minor.webp")}
+.cur .grid>i.on.ruby{background-image:url("../assets/fxlite/jewel-major.webp")}
+.cur .grid>i.on.fire{background-image:url("../assets/fxlite/jewel-col.webp")}
+.cur .grid>i.on.pearl{background-image:url("../assets/fxlite/jewel-gold-bright.webp")}
+/* 現行 inset glow (static rest of live blur) */
+.cur .grid>i.on::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  box-shadow:inset 0 0 6px 1px var(--g18,rgba(255,214,90,.55));opacity:.7}
+.cur .grid>i.on.sapphire{--g18:rgba(120,190,255,.8)}
+.cur .grid>i.on.jade{--g18:rgba(100,240,170,.8)}
+.cur .grid>i.on.ruby{--g18:rgba(255,120,190,.85)}
+.cur .grid>i.on.fire{--g18:rgba(255,170,70,.9)}
+
+/* A / B: sprite only, no live blur */
+.optA .grid>i.sym,.optB .grid>i.sym{
+  background-size:100% 100%;background-position:center;background-repeat:no-repeat;
+  border-radius:12%;box-shadow:none;filter:none}
+.optA .grid>i.sym{background-image:url("assets/well-a.webp")}
+.optB .grid>i.sym{background-image:url("assets/well-b.webp")}
+.optA .grid>i.on,.optB .grid>i.on{
+  background-size:100% 100%;background-position:center;background-repeat:no-repeat;
+  border-radius:12%;box-shadow:none;filter:none}
+.optA .grid>i.on.amber{background-image:url("assets/a-amber.webp")}
+.optA .grid>i.on.sapphire{background-image:url("assets/a-sapphire.webp")}
+.optA .grid>i.on.jade{background-image:url("assets/a-jade.webp")}
+.optA .grid>i.on.ruby{background-image:url("assets/a-ruby.webp")}
+.optA .grid>i.on.fire{background-image:url("assets/a-fire.webp")}
+.optA .grid>i.on.pearl{background-image:url("assets/a-pearl.webp")}
+.optB .grid>i.on.amber{background-image:url("assets/b-amber.webp")}
+.optB .grid>i.on.sapphire{background-image:url("assets/b-sapphire.webp")}
+.optB .grid>i.on.jade{background-image:url("assets/b-jade.webp")}
+.optB .grid>i.on.ruby{background-image:url("assets/b-ruby.webp")}
+.optB .grid>i.on.fire{background-image:url("assets/b-fire.webp")}
+.optB .grid>i.on.pearl{background-image:url("assets/b-pearl.webp")}
+
+.hud{display:flex;gap:8px;width:306px;margin:8px auto 0}
+.hud>span{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+  height:50px;padding:4px 8px;box-sizing:border-box;
+  border:10px solid transparent;border-image:var(--fg-lip) 48 / 10px / 0 stretch;
+  background:linear-gradient(180deg,#4a141c,#1a060a) padding-box;
+  font:900 14px/1 "Noto Sans TC",sans-serif;color:#f4e2b8;white-space:nowrap}
+.hud b{font-size:20px;color:#ffe680}
+
+.prize-wrap{position:relative}
+.hsEnd{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  min-width:200px;width:70%;padding:10px 14px;text-align:center;z-index:6;
+  background:linear-gradient(180deg,rgba(60,24,80,.96),rgba(20,6,30,.97));
+  border:2px solid #ffd65a;box-shadow:0 0 28px rgba(255,190,60,.75);border-radius:8px}
+.hsEnd small{display:block;font-size:13px;color:#f4d89c}
+.hsEnd b{display:block;font-size:28px;line-height:1.15;color:#ffe680;margin:2px 0 6px}
+.hsEnd button{
+  margin-top:4px;padding:8px 28px;border-radius:20px;border:0;
+  font:900 15px/1 "Noto Sans TC",sans-serif;background:linear-gradient(#ffd65a,#c98a1c);color:#3a1600}
+
+.note{margin:28px auto 0;max-width:44em;color:var(--muted);font-size:13px;text-align:center;text-wrap:pretty}
+.foot{margin-top:22px;text-align:center;color:var(--muted);font-size:13px}
+.foot a{color:#ffe39a}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
