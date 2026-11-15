@@ -103,15 +103,13 @@ function art(){if(SPR.done)return;SPR.done=1;
 window.B22={SPR,art,swoop:t=>swoop(t)};
 /* v28.124: decode gold frames + jewel art in parallel as soon as the page is up,
    so 寶珠對碰 entry does not hitch on first-use decode. Math unchanged. */
-const FGV='?v=28124';
+const FGV='?v=28125';
 const FGSRC=[
  'assets/featgold/stage-lip.webp'+FGV,
  'assets/featgold/stage-fill.webp'+FGV,
  'assets/featgold/panel.webp'+FGV,
  'assets/featgold/btn-wide.webp'+FGV,
- 'assets/featgold/rail-h.webp'+FGV,
- 'assets/featgold/hsf-chip.webp'+FGV,
- 'assets/featgold/hs-grid-sock.webp'+FGV
+ 'assets/featgold/rail-h.webp'+FGV
 ];
 function warmImg(src){return new Promise(ok=>{const i=new Image();i.decoding='async';
  i.onload=()=>{const d=i.decode?i.decode():Promise.resolve();Promise.resolve(d).then(()=>ok(i)).catch(()=>ok(i))};
@@ -120,7 +118,7 @@ let fgWarm=null;
 function yieldFrame(){return new Promise(r=>requestAnimationFrame(()=>r()))}
 function mountWarm(){if(!document.body||document.getElementById('fgWarm'))return Promise.resolve();
  const w=document.createElement('div');w.id='fgWarm';w.setAttribute('aria-hidden','true');document.body.appendChild(w);
- const cls=['fgWlip','fgWbtn','fgWpanel','fgWfill','fgWrail','fgWjp','fgWchip','fgWgrid'];
+ const cls=['fgWlip','fgWbtn','fgWpanel','fgWfill','fgWrail','fgWjp'];
  return (async()=>{for(const c of cls){await yieldFrame();const i=document.createElement('i');i.className=c;w.appendChild(i)}await yieldFrame()})()}
 function warmFeatGold(){if(!fgWarm){fgWarm=Promise.all(FGSRC.concat(['jewel-gold','jewel-mini','jewel-minor','jewel-major','jewel-col','socket','dragon'].map(artSrc)).map(warmImg)).then(async r=>{try{await mountWarm()}catch(e){}return r})}return fgWarm}
 (function(){const go=()=>{try{if(document.body){art();warmFeatGold()}}catch(e){}};
