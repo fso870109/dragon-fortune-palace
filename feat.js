@@ -1,3 +1,4 @@
+/* v28.119 feature hall SFX via FEATSX (B/C samples); math/RTP unchanged */
 /* v20.3 extra events: 旋風聚寶 / 幸運彈珠 / 三重彩金輪 / 狂熱倍數 / 購買寶珠對碰 — play money only */
 (function(){
 if(typeof CZM==='undefined')return;
@@ -14,7 +15,7 @@ const tone=(f,t,d,ty,v,f2)=>window.AV&&AV.tone(f,t,d,ty,v,f2);
 let jpG=null;
 /* v28.116: aInit() returns the AM mixer, not the AudioContext — use DFPctx/ac */
 function jpBus(){const c=window.DFPctx?DFPctx():((typeof aInit==='function'&&aInit()&&typeof ac!=='undefined')?ac:null);if(!c||typeof AM==='undefined'||!AM||!AM.sfxG)return null;if(c.state==='suspended')try{c.resume()}catch(e){}if(!jpG||jpG.context!==c){jpG=c.createGain();jpG.gain.value=1;jpG.connect(AM.sfxG)}return c}
-function jpCut(){const c=jpBus();if(!c||!jpG)return;try{const old=jpG;old.gain.cancelScheduledValues(c.currentTime);old.gain.setTargetAtTime(0,c.currentTime,.018);setTimeout(()=>{try{old.disconnect()}catch(e){}},90);jpG=c.createGain();jpG.gain.value=1;jpG.connect(AM.sfxG)}catch(e){}}
+function jpCut(){try{if(window.FEATSX&&FEATSX.cut)FEATSX.cut()}catch(e){}const c=jpBus();if(!c||!jpG)return;try{const old=jpG;old.gain.cancelScheduledValues(c.currentTime);old.gain.setTargetAtTime(0,c.currentTime,.018);setTimeout(()=>{try{old.disconnect()}catch(e){}},90);jpG=c.createGain();jpG.gain.value=1;jpG.connect(AM.sfxG)}catch(e){}}
 function bgmDuck(on){try{if(window.CZA&&CZA.duck)CZA.duck(on?.22:1,on?.08:.32);if(on&&window.F21&&F21.bedOff)F21.bedOff()}catch(e){}}
 function jpOsc(f,t,d,ty,v,f2){const c=jpBus();if(!c||!jpG)return;const o=c.createOscillator(),fl=c.createBiquadFilter(),g=c.createGain();o.type=ty||'sawtooth';o.frequency.setValueAtTime(f,c.currentTime+t);if(f2)o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),c.currentTime+t+Math.max(.03,d));fl.type='lowpass';fl.frequency.value=4800;g.gain.setValueAtTime(0,c.currentTime+t);g.gain.linearRampToValueAtTime(v,c.currentTime+t+.01);g.gain.exponentialRampToValueAtTime(.0008,c.currentTime+t+d);o.connect(fl);fl.connect(g);g.connect(jpG);o.start(c.currentTime+t);o.stop(c.currentTime+t+d+.04)}
 function jpNoise(t,d,v,opts){const c=jpBus();if(!c||!jpG)return;opts=opts||{};const n=Math.max(1,Math.ceil(c.sampleRate*d)),b=c.createBuffer(1,n,c.sampleRate),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=(Math.random()*2-1)*(1-i/n);const s=c.createBufferSource();s.buffer=b;const fl=c.createBiquadFilter();fl.type=opts.ft||'bandpass';fl.frequency.value=opts.f||1800;fl.Q.value=opts.q||.8;const g=c.createGain();g.gain.setValueAtTime(0,c.currentTime+t);g.gain.linearRampToValueAtTime(v,c.currentTime+t+.008);g.gain.exponentialRampToValueAtTime(.0008,c.currentTime+t+d);s.connect(fl);fl.connect(g);g.connect(jpG);s.start(c.currentTime+t);s.stop(c.currentTime+t+d+.02)}
@@ -30,6 +31,10 @@ function plWhoosh(){jpOsc(220,0,.42,'sawtooth',.11,70);jpOsc(520,0,.28,'triangle
 function plPeg(r){const f=640+r*110+Math.random()*70;jpOsc(f,0,.09,'triangle',.068);jpOsc(f*2.05,0,.05,'sine',.032);jpOsc(2100+r*90+Math.random()*200,0,.035,'square',.02);jpNoise(0,.045,.045,{ft:'bandpass',f:3200+r*140,q:1.15})}
 function plLand(tier){tier=tier||0;jpOsc(46,0,.58,'sine',.46+.08*tier,26);jpOsc(88,0,.38,'sine',.24,38);jpOsc(170,0,.22,'triangle',.16,70);jpNoise(0,.24,.3,{ft:'lowpass',f:460,q:.65});jpNoise(.02,.16,.12,{ft:'bandpass',f:2200,q:.9});jpOsc(780,0,.2,'triangle',.07,320);[1047,1319,1568].forEach((f,i)=>jpOsc(f,.05+i*.045,.32,'sine',.055+tier*.018));if(tier>=1)jpShimmer()}
 function plStinger(tier){tier=tier||0;if(tier>=2){jpOsc(52,0,.7,'sine',.38,32);[[392,0],[523,.05],[659,.1],[784,.15],[1047,.2]].forEach(([f,off])=>{jpOsc(f,off,.55,'triangle',.085);jpOsc(f*2,off+.03,.32,'sine',.03)})}else if(tier>=1){[523,659,784,1047].forEach((f,i)=>jpOsc(f,i*.06,.42,'triangle',.078));jpOsc(196,0,.55,'sawtooth',.055,90)}else{[523,659,784].forEach((f,i)=>jpOsc(f,i*.05,.3,'triangle',.06))}}
+let featId='';
+function fxUse(id){featId=id;try{if(window.FEATSX){FEATSX.setGame(id);FEATSX.reset(id);FEATSX.boot&&FEATSX.boot()}}catch(e){}}
+function fxPlay(m,x){try{if(window.FEATSX&&FEATSX.play(featId,m,x))return true}catch(e){}return false}
+
 const sleep=ms=>new Promise(r=>setTimeout(r,RM?Math.min(ms,80):ms));
 const KEY='czTW_'+ID;let tw;try{tw=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!tw||typeof tw.n!=='number')tw={n:0,pot:0};
 let armed=0;const Qu=[];const TK='czTK_'+ID;let tk;try{tk=JSON.parse(localStorage.getItem(TK))}catch(e){}if(!tk||typeof tk.p!=='number')tk={p:0,w:0,m:0};const saveT=()=>localStorage.setItem(TK,JSON.stringify(tk));const emitT=(k,full)=>{try{dispatchEvent(new CustomEvent('czf',{detail:{k,full:!!full,tk:Object.assign({},tk),tw:Object.assign({},tw),TW_N,armed}}))}catch(e){}};let busy=false;
@@ -89,12 +94,13 @@ function mountCard(title,opts){
   return el;
 }
 function clearBoardFX(){try{jpCut();bgmDuck(false)}catch(e){}fxKill();const c=$('twCard');if(c)c.remove();const b=$('board');if(!b)return;b.classList.remove('rfxOn','rfxSuck');b.classList.add('rfxClear');setTimeout(()=>b.classList.remove('rfxClear'),180)}
-function finish(L,w,msg,noAmt){return new Promise(res=>{try{bgmDuck(true)}catch(e){}const card=mountCard(msg,{noAmt:!!noAmt});const amt=card.querySelector('.twAmt');if(amt){amt.textContent=NF.format(Math.round(w));amt.classList.add('tick','pulse')}const sum=card.querySelector('.twSum');if(!noAmt&&sum){sum.hidden=false;sum.className='twSum twGold twShine in';sum.innerHTML=goldHTML('合計獎金')}if(!RM){fxImpact();fxStreaks();fxRain(innerWidth<=360?28:48)}try{jpShimmer();jpFanfare();if(w>0&&!noAmt)jpCoins(innerWidth<=360?8:12)}catch(e){}let done=0;const end=()=>{if(done)return;done=1;card.classList.add('out');L.classList.add('out');setTimeout(()=>{clearBoardFX();if(card.parentNode)card.remove();if(L.parentNode)L.remove();res(w)},RM?80:420)};L.onclick=end;card.addEventListener('pointerdown',end);setTimeout(end,RM?400:1800)})}
+function finish(L,w,msg,noAmt){return new Promise(res=>{try{bgmDuck(true)}catch(e){}const card=mountCard(msg,{noAmt:!!noAmt});const amt=card.querySelector('.twAmt');if(amt){amt.textContent=NF.format(Math.round(w));amt.classList.add('tick','pulse')}const sum=card.querySelector('.twSum');if(!noAmt&&sum){sum.hidden=false;sum.className='twSum twGold twShine in';sum.innerHTML=goldHTML('合計獎金')}if(!RM){fxImpact();fxStreaks();fxRain(innerWidth<=360?28:48)}try{if(!fxPlay('finale',{w:w,noAmt:!!noAmt})){jpShimmer();jpFanfare();if(w>0&&!noAmt)jpCoins(innerWidth<=360?8:12)}}catch(e){}let done=0;const end=()=>{if(done)return;done=1;card.classList.add('out');L.classList.add('out');setTimeout(()=>{clearBoardFX();if(card.parentNode)card.remove();if(L.parentNode)L.remove();res(w)},RM?80:420)};L.onclick=end;card.addEventListener('pointerdown',end);setTimeout(end,RM?400:1800)})}
 const cvs=(L,W,H)=>{const c=document.createElement('canvas'),d=Math.min(innerWidth<620?1:1.5,devicePixelRatio||1);c.width=W*d;c.height=H*d;c.style.cssText=`position:absolute;left:0;top:0;width:${W}px;height:${H}px`;L.prepend(c);const x=c.getContext('2d');x.scale(d,d);return [c,x]};
 function twUI(){const h=$('czHero');if(!h)return;let e=$('twBox');if(!e){e=document.createElement('div');e.id='twBox';e.innerHTML='<div class="tr"><i>旋</i></div><div><b>旋風聚寶</b><span></span></div>';h.appendChild(e)}
  e.style.setProperty('--p',tw.n/TW_N*100);e.querySelector('span').textContent=NF.format(Math.round(tw.pot));e.classList.toggle('hot',tw.n>=TW_N*.85)}
 function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.stringify(tw));twUI();
  const fn=async function(bet){
+  fxUse('twister');
   const L=stage('旋風聚寶'),W=L.clientWidth,H=L.clientHeight;
   L.classList.add('twStage');
   const [cv,x]=cvs(L,W,H);cv.className='twVx';
@@ -127,7 +133,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   L.classList.add('twIntro');
   fxWorld();fxImpact();fxStreaks();
   if(!RM){document.body.classList.add('twPunch');setTimeout(()=>document.body.classList.remove('twPunch'),480)}
-  try{jpSlam()}catch(e){}
+  try{if(!fxPlay('open'))jpSlam()}catch(e){}
   if(!RM){L.classList.add('twBoom');await wait(900);L.classList.remove('twBoom')}
   else await wait(80);
   slam.classList.add('out');
@@ -136,7 +142,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   const nP=W<=360?52:80;
   const P=[];for(let i=0;i<nP;i++)P.push({a:Math.random()*6.28,r:.22+Math.random()*.85,s:.55+Math.random()*1.5,k:Math.random(),sp:Math.random()*6.28,spin:.04+Math.random()*.08,loot:Math.random()<.4});
   const cx=W/2,cy=H/2,RX=W*.52,RY=H*.56,Rmax=Math.max(W,H);
-  try{if(RM)jpSlam();else if(skip<1)jpRiser(2.2)}catch(e){}
+  try{if(RM){if(!fxPlay('open'))jpSlam()}else if(skip<1){if(!fxPlay('spin'))jpRiser(2.2)}}catch(e){}
   if(!RM && skip<1){
     const t0=performance.now(),D=2400;
     await new Promise(res=>{(function fr(t){
@@ -199,11 +205,11 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
 
   phase='prize';
   if(slam&&slam.parentNode)slam.remove();
-  if(!RM&&skip<1){L.classList.add('twCollapse');fxImpact();fxStreaks();try{jpBurst()}catch(e){};await wait(340)}
+  if(!RM&&skip<1){L.classList.add('twCollapse');fxImpact();fxStreaks();try{if(!fxPlay('stop'))jpBurst()}catch(e){};await wait(340)}
   else fxImpact();
   L.classList.add('twPrize');L.classList.remove('twVortex','twIntro');
   const card=mountCard('旋風聚寶',{tier:tierTxt});
-  try{jpShimmer()}catch(e){}
+  try{if(!fxPlay('collect'))jpShimmer()}catch(e){}
   card.addEventListener('pointerdown',onSkip);
   const amtEl=card.querySelector('.twAmt'),sumEl=card.querySelector('.twSum');
   const dur=RM||skip>=2?0:980;const c0=performance.now();let lastTick=0;
@@ -213,7 +219,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
       const k=dur?Math.min(1,(t-c0)/dur):1;
       const e=1-Math.pow(1-k,3);
       if(amtEl)amtEl.textContent=NF.format(Math.round(pot*e));
-      if(t-lastTick>70){lastTick=t;try{jpTick(k)}catch(e){};if(amtEl){amtEl.classList.remove('tick');void amtEl.offsetWidth;amtEl.classList.add('tick')}fxSpark(card.querySelector('.twCardAmt')||card,2)}
+      if(t-lastTick>70){lastTick=t;try{if(!fxPlay('tick',k))jpTick(k)}catch(e){};if(amtEl){amtEl.classList.remove('tick');void amtEl.offsetWidth;amtEl.classList.add('tick')}fxSpark(card.querySelector('.twCardAmt')||card,2)}
       if(k<1)requestAnimationFrame(step);else res();
     })(c0)
   });
@@ -221,7 +227,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   fxImpact();fxStreaks();fxRain(innerWidth<=360?32:56);
   if(!RM){document.body.classList.add('twPunch');setTimeout(()=>document.body.classList.remove('twPunch'),480)}
   window.W21&&(()=>{const r=card.getBoundingClientRect();W21.burst(r.left+r.width/2,r.top+r.height/2,24,300)})();
-  try{jpFanfare();jpCoins(innerWidth<=360?8:12)}catch(e){}
+  try{if(!fxPlay('jackpot')){jpFanfare();jpCoins(innerWidth<=360?8:12)}}catch(e){}
 
   phase='outro';
   if(sumEl){sumEl.hidden=false;sumEl.className='twSum twGold twShine in';sumEl.innerHTML=goldHTML('合計獎金')}
@@ -236,7 +242,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   return pot;
  };fn.t='旋風聚寶';return fn}
 /* ---- 幸運彈珠 ---- */
-async function plinko(bet){const tot=bet*NL,R=8;const L=stage('幸運彈珠'),W=L.clientWidth,H=L.clientHeight;
+async function plinko(bet){fxUse('plinko');const tot=bet*NL,R=8;const L=stage('幸運彈珠'),W=L.clientWidth,H=L.clientHeight;
  L.classList.add('twStage','plStage');
  const FXC=(()=>{const s=getComputedStyle(document.documentElement),b=getComputedStyle(document.body);
   return{glow:(s.getPropertyValue('--fx-glow').trim()||b.getPropertyValue('--fx-glow').trim()||'255,176,48'),
@@ -288,56 +294,57 @@ async function plinko(bet){const tot=bet*NL,R=8;const L=stage('幸運彈珠'),W=
  try{bgmDuck(true)}catch(e){}
  fxWorld();fxImpact();fxStreaks();
  if(!RM){document.body.classList.add('twPunch');setTimeout(()=>document.body.classList.remove('twPunch'),480)}
- try{jpSlam()}catch(e){}
+ try{if(!fxPlay('open'))jpSlam()}catch(e){}
  loop();
  if(!RM){L.classList.add('twBoom');await sleep(900);L.classList.remove('twBoom')}else await sleep(60);
  const slam=L.querySelector('.twSlam');if(slam){slam.classList.add('out');setTimeout(()=>slam.remove(),340)}
  const rays=L.querySelector('.twRays');if(rays)rays.classList.add('plDim');
  const t0=performance.now();await new Promise(res=>{(function f(t){drop=(t-t0)/700;if(drop<1.6&&!RM)requestAnimationFrame(f);else{drop=1;res()}})(t0)});
- try{plWhoosh()}catch(e){}
+ try{if(!fxPlay('shot'))plWhoosh()}catch(e){}
  for(let r=0;r<R;r++){const ax=gx(r,path[r]),ay=gy(r)-6,bx=gx(r+1,path[r+1]),by=gy(r+1)-6;const steps=RM?3:(r>=R-2?14:10);
   for(let s=1;s<=steps;s++){const k=s/steps,ek=k*k*(3-2*k);const px=ax+(bx-ax)*ek,py=ay+(by-ay)*k-Math.sin(k*Math.PI)*8;ball=[px,py];trail.push([px,py]);if(trail.length>14)trail.shift();await sleep(RM?8:16)}
   hits.push({r:r+1,i:path[r+1],t0:performance.now()});spawn(bx,by,pN);
   const xy=toScr(bx,by+4);window.W21&&W21.burst(xy[0],xy[1],5,110);
-  try{plPeg(r)}catch(e){}}
+  try{if(!fxPlay('hit',r))plPeg(r)}catch(e){}}
  const destX=gx(R,slot),destY=SY+SH/2,[sx0,sy0]=ball||[destX,gy(R)-6];
  for(let s=1;s<=8;s++){const k=s/8;ball=[sx0+(destX-sx0)*k,sy0+(destY-sy0)*k];trail.push(ball.slice());if(trail.length>14)trail.shift();await sleep(RM?8:16)}
  hl=slot;const mult=PL[slot];const tier=mult>=100?2:mult>=25?1:0;
- try{plLand(tier)}catch(e){}
+ try{if(!fxPlay('land',tier))plLand(tier)}catch(e){}
  fxImpact();
  if(tier>=1){fxStreaks();fxRain(tier>=2?(innerWidth<=360?36:58):(innerWidth<=360?22:40))}
  if(!RM){document.body.classList.add('twShake');if(tier>=1)document.body.classList.add('twPunch');setTimeout(()=>document.body.classList.remove('twShake','twPunch'),560)}
  {const xy=toScr(destX,destY);window.W21&&W21.burst(xy[0],xy[1],tier>=2?22:16,240+tier*50)}
  const pop=document.createElement('div');pop.className='plPop'+(tier?' t'+tier:'');pop.innerHTML='<b class="twGold twShine">'+goldHTML('×'+mult)+'</b>';L.appendChild(pop);
- try{plStinger(tier)}catch(e){}
+ try{if(!fxPlay(tier>=2?'jackpot':'minor',tier))plStinger(tier)}catch(e){}
  for(let i=0;i<(RM?4:18);i++){await sleep(RM?20:30)}
  live=0;if(raf)cancelAnimationFrame(raf);
  const w=PL[slot]*tot;return finish(L,w,`落入 ×${PL[slot]}`)}
 plinko.t='幸運彈珠';
 /* ---- 三重彩金輪 ---- */
-async function wheel(bet){const tot=bet*NL,n=WH.length,L=stage('三重彩金輪'),W=L.clientWidth,H=L.clientHeight,cw=W/5,REP=7;
+async function wheel(bet){fxUse('wheel');const tot=bet*NL,n=WH.length,L=stage('三重彩金輪'),W=L.clientWidth,H=L.clientHeight,cw=W/5,REP=7;
  const lab=s=>s[1]||('×'+s[0]),cls=s=>s[1]==='大獎'?'maj':s[1]==='小獎'?'min':s[1]==='迷你'?'mini':'';const k=Math.random()*n|0;
  let tiles='';for(let r=0;r<REP;r++)WH.forEach((s,i)=>tiles+=`<i class="${cls(s)} ${i%2?'a':'b'}" style="width:${cw}px">${lab(s)}</i>`);
  let bulbs='';for(let i=0;i<20;i++)bulbs+=`<u class="${i%2?'o':''}"></u>`;
  L.insertAdjacentHTML('beforeend',`<div class="rwBul t" style="top:${H/3-7}px">${bulbs}</div><div class="rwRing" style="top:${H/3}px;height:${H/3}px"><div class="rwStrip">${tiles}</div></div><div class="rwBul b" style="top:${H*2/3-7}px">${bulbs}</div><div class="rwPtr" style="left:${2*cw}px;width:${cw}px;top:${H/3}px;height:${H/3}px"></div>`);
  const st=L.querySelector('.rwStrip'),ring=L.querySelector('.rwRing');await sleep(650);const target=(REP-2)*n+k,X=-(target-2)*cw,T=RM?0:4200;
  st.style.transition=`transform ${T}ms cubic-bezier(.12,.6,.1,1)`;await sleep(40);st.style.transform=`translateX(${X}px)`;L.classList.add('go');
- let last=-1,fc=0;const t0=performance.now();await new Promise(res=>{(function f(){const el=performance.now()-t0;if(fc++%2===0){const m=new DOMMatrix(getComputedStyle(st).transform);const a=Math.floor(-m.e/cw);if(a!==last){last=a;tone(1500-Math.min(1,el/T)*700,0,.03,'square',.03)}}if(el<T+100)requestAnimationFrame(f);else res()})()});
- L.classList.remove('go');st.children[target].classList.add('win');const s=WH[k];if(s[1]&&window.AV)AV.celebrate(s[1]==='大獎'?2:s[1]==='小獎'?1:0);else{tone(659,0,.3,'triangle',.06);tone(988,.1,.4,'triangle',.06)}
+ try{fxPlay('spin')}catch(e){}
+ let last=-1,fc=0;const t0=performance.now();await new Promise(res=>{(function f(){const el=performance.now()-t0;if(fc++%2===0){const m=new DOMMatrix(getComputedStyle(st).transform);const a=Math.floor(-m.e/cw);if(a!==last){last=a;if(!fxPlay('tick',a))tone(1500-Math.min(1,el/T)*700,0,.03,'square',.03)}}if(el<T+100)requestAnimationFrame(f);else res()})()});
+ L.classList.remove('go');st.children[target].classList.add('win');const s=WH[k];try{fxPlay('stop')}catch(e){}if(s[1]==='大獎'){if(!fxPlay('jackpot')&&window.AV)AV.celebrate(2)}else if(s[1]==='小獎'||s[1]==='迷你'){if(!fxPlay('minor')){if(window.AV)AV.celebrate(1);else{tone(659,0,.3,'triangle',.06);tone(988,.1,.4,'triangle',.06)}}}else if(!fxPlay('minor')){tone(659,0,.3,'triangle',.06);tone(988,.1,.4,'triangle',.06)}
  {const r=ring.getBoundingClientRect();window.W21&&W21.burst(r.left+r.width/2,r.top+r.height/2,16,240)}return finish(L,s[0]*tot,s[1]?`${s[1]}！ ×${s[0]}`:`× ${s[0]}`)}
 wheel.t='三重彩金輪';
 /* ---- 狂熱倍數 ---- */
 function mxUI(){const wb=$('win')&&$('win').parentElement;let e=$('mxBadge');if(!armed){if(e){e.parentElement&&e.parentElement.classList.remove('mxHost');e.remove()}return}if(!wb)return;if(!e){e=document.createElement('div');e.id='mxBadge';e.className='rmx';wb.classList.add('mxHost');wb.appendChild(e)}e.textContent='×'+armed}
-let mxR=2;async function mxShow(){const R=Math.max(2,armed||mxR);const L=stage('狂熱倍數'),W=L.clientWidth,H=L.clientHeight,cw=W/5,ch=H/3;const seq=[];for(let i=0;i<18;i++)seq.push([2,3,5][i%3]);seq.push(R,2,3);
+let mxR=2;async function mxShow(){fxUse('mult');const R=Math.max(2,armed||mxR);const L=stage('狂熱倍數'),W=L.clientWidth,H=L.clientHeight,cw=W/5,ch=H/3;const seq=[];for(let i=0;i<18;i++)seq.push([2,3,5][i%3]);seq.push(R,2,3);
  L.insertAdjacentHTML('beforeend',`<div class="rmCol" style="left:${2*cw}px;width:${cw}px"><div class="rmStrip">${seq.map(v=>`<i style="height:${ch}px">×${v}</i>`).join('')}</div></div>`);const st=L.querySelector('.rmStrip');await sleep(350);
  const T=RM?0:2000;st.style.transition=`transform ${T}ms cubic-bezier(.15,.6,.15,1)`;await sleep(40);st.style.transform=`translateY(${-(seq.length-3-1+1-1)*ch+0}px)`;
- for(let i=0;i<10;i++)tone(600+i*60,i*T/10000,.04,'square',.03);await sleep(T+100);const tile=st.children[seq.length-3];tile.classList.add('win');L.querySelector('.rmCol').classList.add('exp');tone(660,0,.15,'square',.05);tone(990,.12,.3,'square',.05);
+ if(!fxPlay('roll')){for(let i=0;i<10;i++)tone(600+i*60,i*T/10000,.04,'square',.03)}await sleep(T+100);const tile=st.children[seq.length-3];tile.classList.add('win');L.querySelector('.rmCol').classList.add('exp');if(!fxPlay('lock')){tone(660,0,.15,'square',.05);tone(990,.12,.3,'square',.05)}
  {const r=tile.getBoundingClientRect();window.W21&&W21.burst(r.left+r.width/2,r.top+r.height/2,18,240)}await sleep(500);mxUI();return finish(L,0,`下次中獎 ×${R} 加倍！`,true)}
 mxShow.t='狂熱倍數';
 /* ---- hook settle results ---- */
 let PR=null;addEventListener('load',()=>{const b=$('board');b&&new MutationObserver(()=>{if(b.getAttribute('aria-busy')==='true')PR=(typeof FS!=='undefined'&&FS)?null:{m:Math.random(),p:Math.random(),w:Math.random()}}).observe(b,{attributes:true,attributeFilter:['aria-busy']})});
 const CZo=window.CZ&&CZ.onSettle;if(CZo)CZ.onSettle=function(o){const r=CZo.apply(this,arguments);const Rr=PR||{m:Math.random(),p:Math.random(),w:Math.random()};PR=null;try{if(!o.free){const tot=o.total,bet=tot/NL;
- if(armed&&!o.free&&!(o.won>0)){$('msg')&&($('msg').textContent=`狂熱倍數 ×${armed} 保留中・下次中獎就加倍！`)}else if(armed&&o.won>0){const R=armed;armed=0;mxUI();{const ex=o.won*(R-1);bal+=ex;$('win').textContent=o.won*R;try{ui();saveLater&&saveLater()}catch(e){}$('msg').textContent=`狂熱倍數 ×${R}！本局共贏得 ${NF.format(o.won*R)} 籌碼！`;window.AV&&AV.celebrate(0)}}
+ if(armed&&!o.free&&!(o.won>0)){$('msg')&&($('msg').textContent=`狂熱倍數 ×${armed} 保留中・下次中獎就加倍！`)}else if(armed&&o.won>0){const R=armed;armed=0;mxUI();{const ex=o.won*(R-1);bal+=ex;$('win').textContent=o.won*R;try{ui();saveLater&&saveLater()}catch(e){}$('msg').textContent=`狂熱倍數 ×${R}！本局共贏得 ${NF.format(o.won*R)} 籌碼！`;if(!fxPlay('burst'))window.AV&&AV.celebrate(0)}}
  else if(Rr.m<3*(MP[ID]||0)){tk.m++;if(tk.m>=3){tk.m=0;armed=mxR=pick(MX);queue(mxShow,bet)}emitT('mult')}
  tw.n++;tw.pot+=tot*TW_R*TW_U[Math.random()*TW_U.length|0];if(tw.n>=TW_N)queue(erupt(),bet);localStorage.setItem(KEY,JSON.stringify(tw));twUI();
  if(Rr.p<5*PL_P){tk.p++;const full=tk.p>=5;if(full)tk.p=0;emitT('plinko',full);if(full)queue(plinko,bet)}if(Rr.w<12*WH_P){tk.w++;const full=tk.w>=12;if(full)tk.w=0;emitT('wheel',full);if(full)queue(wheel,bet)}saveT();emitT('tick')}}catch(e){console.error(e)}return r};
