@@ -101,12 +101,33 @@ function art(){if(SPR.done)return;SPR.done=1;
  html body #hsBox .hsJp .mini{border-image-source:${frameSVG('#6fb6ff','#1f5fb0')}!important}#hsBox .hsJp .minor{border-image-source:${frameSVG('#5be0a6','#178a5c')}!important}#hsBox .hsJp .major{border-image-source:${frameSVG('#ff7ab8','#c2185b')}!important}
  @keyframes b22Reel{to{background-position:center 256px}}`;document.body.appendChild(css)}
 window.B22={SPR,art,swoop:t=>swoop(t)};
-/* idle: warm jewel webps only (no canvas encode); inject CSS as soon as body exists */
-(function(){const go=()=>{try{if(document.body)art()}catch(e){}};
+/* v28.124: decode gold frames + jewel art in parallel as soon as the page is up,
+   so 寶珠對碰 entry does not hitch on first-use decode. Math unchanged. */
+const FGV='?v=28124';
+const FGSRC=[
+ 'assets/featgold/stage-lip.webp'+FGV,
+ 'assets/featgold/stage-fill.webp'+FGV,
+ 'assets/featgold/panel.webp'+FGV,
+ 'assets/featgold/btn-wide.webp'+FGV,
+ 'assets/featgold/rail-h.webp'+FGV,
+ 'assets/featgold/hsf-chip.webp'+FGV,
+ 'assets/featgold/hs-grid-sock.webp'+FGV
+];
+function warmImg(src){return new Promise(ok=>{const i=new Image();i.decoding='async';
+ i.onload=()=>{const d=i.decode?i.decode():Promise.resolve();Promise.resolve(d).then(()=>ok(i)).catch(()=>ok(i))};
+ i.onerror=()=>ok(null);i.src=src})}
+let fgWarm=null;
+function yieldFrame(){return new Promise(r=>requestAnimationFrame(()=>r()))}
+function mountWarm(){if(!document.body||document.getElementById('fgWarm'))return Promise.resolve();
+ const w=document.createElement('div');w.id='fgWarm';w.setAttribute('aria-hidden','true');document.body.appendChild(w);
+ const cls=['fgWlip','fgWbtn','fgWpanel','fgWfill','fgWrail','fgWjp','fgWchip','fgWgrid'];
+ return (async()=>{for(const c of cls){await yieldFrame();const i=document.createElement('i');i.className=c;w.appendChild(i)}await yieldFrame()})()}
+function warmFeatGold(){if(!fgWarm){fgWarm=Promise.all(FGSRC.concat(['jewel-gold','jewel-mini','jewel-minor','jewel-major','jewel-col','socket','dragon'].map(artSrc)).map(warmImg)).then(async r=>{try{await mountWarm()}catch(e){}return r})}return fgWarm}
+(function(){const go=()=>{try{if(document.body){art();warmFeatGold()}}catch(e){}};
  if(document.body)go();else addEventListener('DOMContentLoaded',go);
  addEventListener('load',()=>{const ri=window.requestIdleCallback||(f=>setTimeout(f,60));
   const busy=()=>(typeof spinning!=='undefined'&&spinning)||(typeof bwState!=='undefined'&&bwState)||document.documentElement.classList.contains('czDoorOn')||document.querySelector('.rfx,#hsBox,#twCard,.plPop');
-  const keys=['jewel-gold','jewel-mini','jewel-minor','jewel-major','jewel-col','socket','dragon','rays','vig','flash-sheet','coin','gem','spark','bloom','ring'];
+  const keys=['rays','vig','flash-sheet','coin','gem','spark','bloom','ring'];
   const next=()=>{if(busy()){setTimeout(next,700);return}ri(()=>{const k=keys.shift();if(k){const i=new Image();i.src=artSrc(k)}if(keys.length)next()},{timeout:2000})};
   setTimeout(next,0)});
 })();
@@ -130,8 +151,8 @@ function swoop(title){return new Promise(res=>{const d=document.createElement('d
  setTimeout(()=>{d.remove()},RM?100:1300);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),450)},RM?300:1500);setTimeout(res,RM?200:1350)})}
 /* ---------- flow overrides ---------- */
 const F=window.F21||{};const _back=F.back;
-F.pre=async function(title){art();document.body.classList.add('f21pre');const b=$('board');b&&b.classList.add('b22away');tone(300,0,.5,'sawtooth',.02,1200);
- await sleep(RM?50:380);const s=stage();document.body.classList.add('b22on');s.classList.remove('out');void s.offsetWidth;s.classList.add('show');
+F.pre=async function(title){art();try{warmFeatGold()}catch(e){}document.body.classList.add('f21pre');const b=$('board');b&&b.classList.add('b22away');tone(300,0,.5,'sawtooth',.02,1200);
+ await Promise.all([sleep(RM?50:380),Promise.race([fgWarm||Promise.resolve(),sleep(RM?50:700)])]);const s=stage();document.body.classList.add('b22on');s.classList.remove('out');void s.offsetWidth;s.classList.add('show');
  await swoop(title||'特殊事件');window.F21&&F21.bedOn&&F21.bedOn()};
 F.back=function(){const s=$('b22Stage');const w=$('czWin');
  if(s&&w&&window.W21&&W21.trail){const a=s.getBoundingClientRect(),c=w.getBoundingClientRect();for(let i=0;i<18;i++)setTimeout(()=>W21.trail(a.left+a.width/2+(Math.random()-.5)*120,a.top+a.height*.55+(Math.random()-.5)*80,c.left+c.width/2,c.top+c.height/2),i*35)}

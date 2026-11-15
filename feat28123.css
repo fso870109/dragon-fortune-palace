@@ -1,12 +1,13 @@
-/* v28.123 gold-palace chrome for the 5 feature games (frames, art, buttons).
-   Pre-rendered webp only; no new per-cell animation (jewels keeps fxlite). Math unchanged. */
+/* v28.124 gold-palace chrome for the 5 feature games (frames, art, buttons).
+   Pre-rendered webp only; no new per-cell animation (jewels keeps fxlite). Math unchanged.
+   v28.124: lighter entry (pre-decoded frames, no live filter on rays). */
 :root{
-  --fg-lip:url("assets/featgold/stage-lip.webp?v=28123");
-  --fg-btn:url("assets/featgold/btn-wide.webp?v=28123");
-  --fg-panel:url("assets/featgold/panel.webp?v=28123");
-  --fg-tile:url("assets/featgold/tile-frame.webp?v=28123");
-  --fg-rail:url("assets/featgold/rail-h.webp?v=28123");
-  --fg-fill:url("assets/deck/skins/gold/fill.webp?v=2884");
+  --fg-lip:url("assets/featgold/stage-lip.webp?v=28124");
+  --fg-btn:url("assets/featgold/btn-wide.webp?v=28124");
+  --fg-panel:url("assets/featgold/panel.webp?v=28124");
+  --fg-tile:url("assets/featgold/tile-frame.webp?v=28124");
+  --fg-rail:url("assets/featgold/rail-h.webp?v=28124");
+  --fg-fill:url("assets/featgold/stage-fill.webp?v=28124");
 }
 
 /* stage art: crimson-gold field, drop the thin CSS inset stroke */
@@ -16,9 +17,29 @@ html body #b22Stage .b22bg{
     var(--fg-fill) center / cover no-repeat !important;
   box-shadow:inset 0 0 40px rgba(255,190,60,.2) !important;
 }
+/* bake the previous sepia/hue into the gradient; a live filter on the
+   rotating 160% ray layer was stalling entry frames */
 html body #b22Stage .b22rays{
-  opacity:.42 !important;
-  filter:sepia(.5) saturate(.8) hue-rotate(-10deg);
+  opacity:1 !important;
+  filter:none !important;
+  background:repeating-conic-gradient(rgba(210,145,55,.045) 0 8deg,transparent 8deg 22deg) !important;
+}
+html body #b22Stage{
+  contain:paint;
+  transform-origin:50% 60%;
+}
+/* compositor-friendly reveal: avoid clip-path (it re-rasters the gold fill/lip every frame) */
+html body #b22Stage.show{
+  animation:fgStIn .6s cubic-bezier(.2,.8,.2,1) forwards !important;
+}
+html body #b22Stage.out{
+  animation:fgStOut .45s ease-in forwards !important;
+}
+@keyframes fgStIn{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+@keyframes fgStOut{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.96)}}
+@media (prefers-reduced-motion:reduce){
+  html body #b22Stage.show,html body #b22Stage.out{animation:none !important}
+  html body #b22Stage.show{opacity:1;transform:none}
 }
 html body #b22Stage .b22frame{
   position:absolute;inset:0;z-index:5;pointer-events:none;box-sizing:border-box;
@@ -212,3 +233,58 @@ html body #hsBox .hsF{
   html body .hsEnd button,
   html body .fxIn button{transform:none !important;filter:none !important}
 }
+
+/* off-screen GPU warm for gold frames (filled by bonus22 warmFeatGold) */
+#fgWarm{position:fixed;left:-9999px;top:0;width:360px;height:240px;overflow:hidden;pointer-events:none;opacity:.01;z-index:-1;contain:strict}
+#fgWarm .fgWlip{display:block;width:340px;height:56px;box-sizing:border-box;border:10px solid transparent;border-image:var(--fg-lip) 48 / 10px / 0 stretch;background:linear-gradient(180deg,#4a141c,#1a060a) padding-box}
+#fgWarm .fgWbtn{display:block;width:200px;height:48px;background:var(--fg-btn) center / 100% 100% no-repeat}
+#fgWarm .fgWpanel{display:block;width:280px;height:140px;background:var(--fg-panel) center / 100% 100% no-repeat}
+#fgWarm .fgWfill{display:block;width:340px;height:180px;background:var(--fg-fill) center / cover no-repeat}
+#fgWarm .fgWrail{display:block;width:340px;height:16px;background:var(--fg-rail) center / auto 100% repeat-x}
+#fgWarm .fgWjp{display:block;width:80px;height:36px;box-sizing:border-box;border:8px solid transparent;border-image:var(--fg-lip) 48 / 8px / 0 stretch;background:linear-gradient(180deg,#4a141c,#1a060a) padding-box}
+
+
+/* v28.124: in-cabinet jewels first paint — baked chip + socket grid, no 9-slice / blur shadows */
+html body #hsBox.b23{
+  contain:layout paint;
+}
+html body #hsBox.b23 .hsF>span{
+  border:0 !important;
+  border-image:none !important;
+  box-shadow:none !important;
+  background:url("assets/featgold/hsf-chip.webp?v=28124") center / 100% 100% no-repeat !important;
+  padding:14px 18px !important;
+  min-height:50px;
+  box-sizing:border-box !important;
+}
+html body #hsBox.b23.hsLast .hsF>span:first-child{
+  box-shadow:inset 0 0 0 2px #ff8a5a !important;
+}
+html body #hsBox.b23 .hsG{
+  background:url("assets/featgold/hs-grid-sock.webp?v=28124") center / 100% 100% no-repeat;
+}
+html body #hsBox.b23 .hsG>i:not(.on):not(.spin){
+  background:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  filter:none !important;
+  border:0 !important;
+}
+html body #hsBox.b23 .hsG>i.sym:not(#z){
+  background:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
+html body #hsBox.b23 .hsG>i.on:not(#z),
+html body #hsBox.b23 .hsG>i.on{
+  box-shadow:inset 0 0 0 2px #ffe39a,inset 0 0 0 3.5px #8a4a0c !important;
+  filter:none !important;
+}
+html body #hsBox.b23 .hsIn>h2,
+html body #hsBox.b23 .hsJp,
+html body #hsBox.b23 .hsTip{
+  content-visibility:hidden;
+}
+#fgWarm .fgWchip{display:block;width:168px;height:50px;background:url("assets/featgold/hsf-chip.webp?v=28124") center / 100% 100% no-repeat}
+#fgWarm .fgWgrid{display:block;width:352px;height:195px;background:url("assets/featgold/hs-grid-sock.webp?v=28124") center / 100% 100% no-repeat}
