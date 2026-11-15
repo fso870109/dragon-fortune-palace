@@ -112,8 +112,6 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   const board=$('board');if(board)board.classList.add('rfxSuck');
   const slam=L.querySelector('.twSlam');
   const tot=(typeof NL==='number'?bet*NL:bet);
-  const ratio=tot>0?pot/tot:0;
-  const tierTxt=ratio>=5?'超級大獎！':ratio>=2.5?'大獎！':'';
   const kind=(window.CZM&&CZM.id==='sakura')?'petal':(window.CZM&&CZM.id==='neko')?'coin':'spark';
   let skip=0,raf=0,phase='intro';
   const onSkip=()=>{skip++;if(phase==='intro'||phase==='vortex'||phase==='prize'){try{jpCut()}catch(e){}}};
@@ -209,7 +207,7 @@ function erupt(){const pot=tw.pot;tw={n:0,pot:0};localStorage.setItem(KEY,JSON.s
   if(!RM&&skip<1){L.classList.add('twCollapse');fxImpact();fxStreaks();try{if(!fxPlay('stop'))jpBurst()}catch(e){};await wait(340)}
   else fxImpact();
   L.classList.add('twPrize');L.classList.remove('twVortex','twIntro');
-  const card=mountCard('旋風聚寶',{tier:tierTxt});
+  const card=mountCard('旋風聚寶');
   try{if(!fxPlay('collect'))jpShimmer()}catch(e){}
   card.addEventListener('pointerdown',onSkip);
   const amtEl=card.querySelector('.twAmt'),sumEl=card.querySelector('.twSum');

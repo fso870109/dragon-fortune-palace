@@ -389,3 +389,10 @@ body.menu16 #menu16.row2{grid-template-columns:repeat(2,1fr)!important}
 #menu16 #czBuyHS .czbt b{font-size:17px!important;font-weight:900;white-space:nowrap;color:#fff}
 #menu16 #czBuyHS .czbt small{font-size:11px!important;opacity:.9;white-space:nowrap;font-weight:500}
 
+
+/* v28.122 彩金轉盤區塊按實際機率 */
+.czwleg{margin:4px 0 0;color:#e9c98a;font:700 11px/1.4 "Noto Sans TC",sans-serif;letter-spacing:.02em;text-align:center;max-width:min(78vw,420px)}
+.czwd i.czwneedle{position:absolute;left:50%;top:0;width:0;height:50%;transform-origin:50% 100%;pointer-events:none}
+.czwd i.czwneedle::before{content:"";position:absolute;left:50%;top:3%;transform:translateX(-50%);width:3px;height:46%;border-radius:2px;background:linear-gradient(#fff6cf,#d9a441 45%,#8a5a18);box-shadow:0 0 6px #ffd27a,0 0 14px #d9a441}
+.czwd b.s2{font-size:clamp(10px,2.8vw,14px)!important;background:linear-gradient(#d9a441,#8a5a18);color:#fff6cf;padding:2px 3px;border-radius:4px;border:1px solid #fff3c4;text-shadow:0 1px 1px #3a0a08}
+#payTable tr.paywild td[colspan]{text-align:left;font:700 12px/1.35 "Noto Sans TC",sans-serif;color:#ffe6b0;white-space:normal}

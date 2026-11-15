@@ -291,7 +291,7 @@ if(e.code==='Space'){if(tg==='BUTTON'&&e.target.id!=='spinBtn')return;e.preventD
 else if(!spinning&&(e.key==='+'||e.key==='='||e.code==='NumpadAdd'))$('plus').click();
 else if(!spinning&&(e.key==='-'||e.code==='NumpadSubtract'))$('minus').click();
 else if((e.key==='m'||e.key==='M')&&!e.ctrlKey&&!e.metaKey){const sb=$('soundBtn');if(sb)sb.click();else if(window.DFPvol)DFPvol.toggleS()}});
-const pt=$('payTable');[...SYM].reverse().forEach(s=>pt.insertAdjacentHTML('beforeend',s.id==='scatter'?`<tr class="payfs"><td class="pname">${symHTML(s.id,'width="34" height="34"')} 分散</td><td>總押注×6</td><td>×25</td><td>×125</td></tr><tr class="payfs"><td colspan="4">3 個以上（任意位置）＝ 10 次免費旋轉・獎金 ×2</td></tr>`:`<tr><td class="pname">${symHTML(s.id,'width="34" height="34"')} ${s.name}</td><td>×${s.pay[0]}</td><td>×${s.pay[1]}</td><td>×${s.pay[2]}</td></tr>`));
+const pt=$('payTable');[...SYM].reverse().forEach(s=>pt.insertAdjacentHTML('beforeend',s.id==='scatter'?`<tr class="payfs"><td class="pname">${symHTML(s.id,'width="34" height="34"')} 分散</td><td>總押注×6</td><td>×25</td><td>×125</td></tr><tr class="payfs"><td colspan="4">3 個以上（任意位置）＝ 10 次免費旋轉・獎金 ×2</td></tr>`:s.id==='wild'?`<tr class="paywild"><td class="pname">${symHTML(s.id,'width="34" height="34"')} ${s.name}</td><td colspan="3">只出現在第 2～4 輪，可代替分散符號以外的所有符號</td></tr>`:`<tr><td class="pname">${symHTML(s.id,'width="34" height="34"')} ${s.name}</td><td>×${s.pay[0]}</td><td>×${s.pay[1]}</td><td>×${s.pay[2]}</td></tr>`));
 render();ui();
 // ---- Daily check-in (play-money only) ----
 const DAILY=[100,150,200,300,400,500,1000];

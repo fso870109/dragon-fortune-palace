@@ -2,7 +2,7 @@
 (()=>{
 const LS=localStorage,J=(k,d)=>{try{const v=JSON.parse(LS.getItem(k));return v==null?d:v}catch(e){return d}},S=(k,v)=>{try{LS.setItem(k,JSON.stringify(v))}catch(e){}};
 const IN_M=!!window.CZM,RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const JP={seed:[500,5000,500000],name:['小獎','大獎','頭獎'],c:0.008,split:[.3,.3,.4],w:[.745,.25,.005],d:200000};/* v28.31 頭獎底注×10、輪盤頭獎權重×0.1；jp_rtp≈2.86% */
+const JP={seed:[500,5000,500000],name:['小獎','大獎','頭獎'],c:0.008,split:[.3,.3,.4],w:[.745,.25,.005],d:200000};/* v28.31 頭獎底注×10、輪盤頭獎權重×0.1；jp_rtp≈2.86%；v28.122 轉盤區塊改依 JP.w 比例，機率不變 */
 const VIP=[[1,'一般會員','#c9c3d6'],[5,'銅卡會員','#e0915a'],[10,'銀卡會員','#dfe6f2'],[20,'金卡會員','#ffd27a'],[35,'白金會員','#bff4ff'],[50,'鑽石會員','#ff9de0']];
 const MACH={love:'夜色戀曲♡',matsuri:'夏祭花火',caishen:'財神降臨'};
 const need=l=>Math.round(400*Math.pow(l,1.45));
@@ -134,17 +134,22 @@ let pend=0;
 function idle(){return typeof spinning!=='undefined'&&!spinning&&!bwState&&!FS&&!document.querySelector('dialog[open]')}
 function waitIdle(f){const k=()=>{if(idle())f();else setTimeout(k,300)};setTimeout(k,600)}
 // ===== jackpot wheel =====
-const SEG=[0,1,0,0,1,0,0,2,0,0,1,0,0,1,0,0,1,0,0,0];// 14 MINI, 5 MAJOR, 1 GRAND (visual; actual odds JP.w ≈74.5/25/0.5)
+function jpSlices(){const d=JP.w.map(x=>x*360),a=d[0]/2,b=a+d[2],c=b+d[0]/2;
+ return[{k:0,a:0,b:a},{k:2,a:a,b:b},{k:0,a:b,b:c},{k:1,a:c,b:360}]}
 function wheelEl(){let w=document.getElementById('czWheel');if(w)return w;w=document.createElement('div');w.id='czWheel';w.setAttribute('role','dialog');w.setAttribute('aria-label','彩金轉盤');
- const cols=['#3a0a2c','#8a1a5c','#d9a441'];const g=SEG.map((s,i)=>`${cols[s]} ${i*18}deg ${(i+1)*18}deg`).join(',');
- w.innerHTML=`<img class="czframe" src="assets/lobby/frame_s.webp?v=239" alt=""><div class="czwbox"><div class="czwt">彩金機會!!</div><div class="czwsub">彩金轉盤</div><div class="czwheel"><div class="czwd" style="background:conic-gradient(${g})">${SEG.map((s,i)=>`<span style="transform:rotate(${i*18+9}deg)"><b class="s${s}">${JP.name[s]}</b></span>`).join('')}</div><div class="czwhub">彩金</div><div class="czwptr"></div></div><div class="czwres" aria-live="assertive"></div><button class="czwgo">旋轉轉盤</button></div>`;
+ const cols=['#3a0a2c','#8a1a5c','#d9a441'],sl=jpSlices();
+ const g=sl.map(s=>`${cols[s.k]} ${s.a}deg ${s.b}deg`).join(',');
+ const mid=s=>(s.a+s.b)/2,labs=[];
+ sl.forEach(s=>{if(s.k===0&&s.b-s.a<80)return;labs.push(`<span class="s${s.k}" style="transform:rotate(${mid(s)}deg)"><b class="s${s.k}">${JP.name[s.k]}</b></span>`)});
+ const grand=sl.find(s=>s.k===2),needle=grand?`<i class="czwneedle" style="transform:rotate(${mid(grand)}deg)" aria-hidden="true"></i>`:'';
+ w.innerHTML=`<img class="czframe" src="assets/lobby/frame_s.webp?v=239" alt=""><div class="czwbox"><div class="czwt">彩金機會!!</div><div class="czwsub">彩金轉盤</div><div class="czwheel"><div class="czwd" style="background:conic-gradient(${g})">${needle}${labs.join('')}</div><div class="czwhub">彩金</div><div class="czwptr"></div></div><p class="czwleg">區塊按實際機率<br>頭獎 0.5%　大獎 25%　小獎 74.5%</p><div class="czwres" aria-live="assertive"></div><button class="czwgo">旋轉轉盤</button></div>`;
  document.body.appendChild(w);return w}
 function wheel(total){window.__hold=true;const w=wheelEl(),d=w.querySelector('.czwd'),btn=w.querySelector('.czwgo'),res=w.querySelector('.czwres');
  res.textContent='';d.style.transition='none';d.style.transform='rotate(0deg)';w.classList.add('on');btn.disabled=false;btn.textContent='旋轉轉盤';vib([30,40,30]);
  try{sfx.chime&&sfx.chime()}catch(e){}
  btn.onclick=()=>{btn.disabled=true;const r=Math.random();const k=r<JP.w[0]?0:r<JP.w[0]+JP.w[1]?1:2;
-  const idx=SEG.map((s,i)=>s===k?i:-1).filter(i=>i>=0);const i=idx[Math.random()*idx.length|0];
-  const rot=(RM?360:360*6)+(360-(i*18+9))+(Math.random()*10-5);
+  const cand=jpSlices().filter(s=>s.k===k),s=cand[Math.random()*cand.length|0],span=s.b-s.a,pad=Math.min(.25,span*.2),land=s.a+pad+Math.random()*Math.max(.01,span-2*pad);
+  const rot=(RM?360:360*6)+(360-land);
   requestAnimationFrame(()=>{d.style.transition=`transform ${RM?.6:4.6}s cubic-bezier(.12,.7,.1,1)`;d.style.transform=`rotate(${rot}deg)`});
   setTimeout(()=>{const amt=Math.floor(P[k]);P[k]=JP.seed[k];S('cz_jp',P);res.innerHTML=`<b>${JP.name[k]}彩金</b> ＋${amt.toLocaleString()}`;vib([80,50,80,50,200]);
    ax().jp=(ax().jp||0)+1;scanAch();feed(`${JP.name[k]}彩金 ${amt.toLocaleString()}`);if(k>=1&&IN_M)bwLog({m:CZM.id,w:amt,x:0,jp:k});
