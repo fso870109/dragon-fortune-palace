@@ -145,6 +145,22 @@ h1{margin:0 0 8px;font:900 28px/1.2 "Noto Sans TC",sans-serif;color:#fff6cf;text
 .optC2 .grid>i.on.ccol{background-image:url("assets/c2-col.webp")}
 .optC2 .grid>i.on span,.optC2 .grid>i.on b,.optC2 .grid>i.on small{display:none}
 
+/* 方案 D — 金殿 dragon pearls from the C2 prototype, glow + numerals baked */
+.optD .grid>i.sym,.optD .grid>i.on{
+  background-size:100% 100%;background-position:center;background-repeat:no-repeat;
+  border-radius:10%;box-shadow:none;filter:none}
+.optD .grid>i.sym{background-image:url("assets/well-d.webp")}
+.optD .grid>i.on.c40{background-image:url("assets/d-40.webp")}
+.optD .grid>i.on.c80{background-image:url("assets/d-80.webp")}
+.optD .grid>i.on.c120{background-image:url("assets/d-120.webp")}
+.optD .grid>i.on.mini{background-image:url("assets/d-mini.webp")}
+.optD .grid>i.on.minor{background-image:url("assets/d-minor.webp")}
+.optD .grid>i.on.major{background-image:url("assets/d-major.webp")}
+.optD .grid>i.on.grand{background-image:url("assets/d-grand.webp")}
+.optD .grid>i.on.ccol{background-image:url("assets/d-col.webp")}
+.optD .grid>i.on span,.optD .grid>i.on b,.optD .grid>i.on small{display:none}
+
+
 
 .compare-hero{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 20px;margin-bottom:36px}
 .compare-prev{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 16px;opacity:.96}
