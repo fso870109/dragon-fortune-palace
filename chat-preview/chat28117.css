@@ -86,22 +86,19 @@ html.dfpRM #dChat.cpDlg[open]{animation:none}
 .cpFoot{flex:0 0 auto;margin:6px 0 0;text-align:center;color:#b9a08a;font:600 10px/1.4 "Noto Sans TC",sans-serif}
 .cpWho .cpSys{flex:0 0 auto;font-style:normal;color:#c9ab84;font-size:9.5px;font-weight:600}
 @media (max-height:520px){#dChat.cpDlg[open]{height:calc(100dvh - 6px)}.cpHd{height:28px;margin-bottom:3px}.cpHd::before{display:none}.cpTabs{margin:5px 0 4px}.cpTabs .cpTab{height:28px}.cpTray{height:80px}.cpFoot{display:none}.cpWarn{margin-bottom:4px}}
-/* ---- round gold chat button (matches lobby + / gear controls) ---- */
+/* ---- single round gold coin button with engraved 聊 (no separate icon) ---- */
 #lx .cpBtn,.cpBtn{position:relative;flex:0 0 auto;width:42px;height:42px;margin:0;padding:0;border:0;border-radius:50%;cursor:pointer;z-index:5;-webkit-tap-highlight-color:transparent;
-  background:radial-gradient(circle closest-side at 50% 50%,#9a1a24 0,#5a0610 50%,#2a0206 70%,#1a0104 72%,transparent 73.5%),
-    conic-gradient(from 210deg,#fff4c8,#c98516,#7a4a0a,#e8b850,#fff0b0,#a8701c,#6a3a06,#e0a838,#fff4c8);
-  box-shadow:inset 0 0 0 1px #3a1a02,0 0 0 1px #5a3205,0 2px 6px rgba(0,0,0,.65),0 0 10px rgba(255,190,70,.35)}
-.cpRim{position:absolute;inset:3px;border-radius:50%;pointer-events:none;
-  background:repeating-conic-gradient(rgba(90,48,4,.75) 0 3deg,rgba(255,248,215,.55) 3deg 4.5deg,transparent 4.5deg 15deg);
-  -webkit-mask:radial-gradient(circle,transparent 15.5px,#000 16px,#000 18px,transparent 18.5px);mask:radial-gradient(circle,transparent 15.5px,#000 16px,#000 18px,transparent 18.5px)}
-.cpBtn::before{content:"";position:absolute;inset:6px;border-radius:50%;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,214,120,.75),inset 0 3px 6px rgba(0,0,0,.55),inset 0 -2px 5px rgba(255,120,60,.25)}
-.cpBtn img{position:absolute;left:50%;top:50%;width:25px;height:25px;margin:-13px 0 0 -12.5px;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(0,0,0,.7)) drop-shadow(0 0 4px rgba(255,200,90,.45))}
-.cpGem{position:absolute;left:50%;top:0;width:8px;height:8px;margin-left:-4px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle at 35% 30%,#fff 0 12%,#ff8a7a 26%,#d81e2a 55%,#5a0208 100%);box-shadow:0 0 0 1px #ffd56a,0 0 0 2px #6a3a06,0 0 6px rgba(255,60,60,.7)}
+  background:radial-gradient(circle at 38% 30%,#fff6d0 0,#ffe08a 18%,#e0a838 48%,#a8701c 76%,#6a3a06 100%);
+  box-shadow:inset 0 1px 0 #fff6d2,inset 0 -2px 3px rgba(90,40,0,.55),0 0 0 1px #5a3205,0 2px 6px rgba(0,0,0,.65),0 0 10px rgba(255,190,70,.35)}
+.cpRim{position:absolute;inset:4px;border-radius:50%;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(106,58,6,.55),inset 0 1px 1px rgba(90,40,0,.35),0 1px 0 rgba(255,246,210,.55)}
+.cpGlyph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;
+  font:900 19px/1 "TCDisp","LxSerif","Noto Serif TC",serif;color:#6a3204;
+  text-shadow:0 1px 0 rgba(255,244,200,.85),0 -1px 0 rgba(70,30,0,.45)}
 .cpBtn::after{content:"";position:absolute;inset:-4px;border-radius:50%;pointer-events:none;box-shadow:0 0 12px rgba(255,200,80,.55);opacity:.35;animation:cpGlow 2.4s ease-in-out infinite}
 @keyframes cpGlow{50%{opacity:1}}
 html.dfpRM .cpBtn::after{animation:none}
 @media (prefers-reduced-motion:reduce){.cpBtn::after{animation:none}}
-.cpBtn:active{transform:scale(.94);filter:brightness(1.08)}
+.cpBtn:active{transform:scale(.94);filter:brightness(1.06)}
 .cpDot{position:absolute;right:1px;top:3px;width:9px;height:9px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 0 1.5px #fff3c4}
-@media (max-width:370px){#lx .cpBtn,.cpBtn{width:38px;height:38px}.cpBtn img{width:22px;height:22px;margin:-11.5px 0 0 -11px}.cpRim{-webkit-mask:radial-gradient(circle,transparent 13.5px,#000 14px,#000 16px,transparent 16.5px);mask:radial-gradient(circle,transparent 13.5px,#000 14px,#000 16px,transparent 16.5px)}.cpStrip{padding-right:6px}}
+@media (max-width:370px){#lx .cpBtn,.cpBtn{width:38px;height:38px}.cpGlyph{font-size:17px}.cpStrip{padding-right:6px}}

@@ -110,7 +110,7 @@
       '<div class="cpMq" aria-label="大獎播報"><div class="cpTrk"></div></div>';
     var row=D.createElement('div');row.className='cpRow';row.id='cpRow';
     var bt=D.createElement('button');bt.type='button';bt.className='cpBtn';bt.id='cpOpen';bt.setAttribute('aria-label','開啟金殿廣場聊天');
-    bt.innerHTML='<i class="cpRim"></i><img src="assets/chat/ico_chat.webp'+Q+'" alt="" width="64" height="64"><i class="cpGem"></i><i class="cpDot" hidden></i>';
+    bt.innerHTML='<i class="cpRim"></i><b class="cpGlyph" aria-hidden="true">聊</b><i class="cpDot" hidden></i>';
     row.appendChild(s);row.appendChild(bt);
     jp.parentNode.insertBefore(row,jp.nextSibling);
     mqEl=s;paintMarquee();
@@ -182,7 +182,7 @@
   function build(){
     if(dlg)return dlg;
     dlg=D.createElement('dialog');dlg.id='dChat';dlg.className='cpDlg';
-    dlg.innerHTML='<header class="cpHd"><img src="assets/chat/ico_chat.webp'+Q+'" alt="" width="64" height="64"><h3>金殿廣場</h3><button type="button" class="cpX" aria-label="關閉" data-close><i></i></button></header>'+
+    dlg.innerHTML='<header class="cpHd"><h3>金殿廣場</h3><button type="button" class="cpX" aria-label="關閉" data-close><i></i></button></header>'+
       '<span class="cpWarn" hidden>目前離線，訊息只會顯示在你的裝置上</span>'+
       '<ul class="cpList" aria-live="polite"></ul>'+trayHtml()+
       '<p class="cpFoot">標示金殿貴賓者為系統角色・僅供娛樂・純虛擬・無兌現</p>';
