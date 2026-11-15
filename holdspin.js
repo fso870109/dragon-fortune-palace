@@ -37,8 +37,9 @@ function play(bet){return new Promise(res=>{try{if(window.FEATSX){FEATSX.setGame
  try{const br=document.getElementById('board')&&document.getElementById('board').getBoundingClientRect();if(br){o.classList.add('b23');o.style.setProperty('--bl',br.left+'px');o.style.setProperty('--bt',br.top+'px');o.style.setProperty('--bw',br.width+'px');o.style.setProperty('--bh',br.height+'px')}}catch(e){}
  o.innerHTML=`<div class="hsIn"><h2>寶珠對碰</h2><div class="hsJp">${JP.map(j=>`<div class="${j[3]}"><b>${j[0]}</b><span>${NFh.format(j[1]*total)}</span></div>`).join('')}<div class="grand"><b>巨獎</b><span>${NFh.format(GRAND*total)}</span></div></div><div class="hsG">${'<i></i>'.repeat(CELLS)}</div><div class="hsF"><span>剩餘重轉 <b id="hsL">3</b></span><span>累計 <b id="hsT">0</b></span></div><p class="hsTip">寶珠會鎖定在原位，出現新寶珠即重置為 3 次・集滿 15 格得「巨獎」</p></div>`;
  document.body.appendChild(o);
- const cells=[...o.querySelectorAll('.hsG i')];const g=Array(CELLS).fill(null);const T=()=>g.reduce((a,c)=>a+(c?c.v:0),0);requestAnimationFrame(()=>{(function fill(k){if(k>=CELLS)return;if(!g[k]&&!cells[k].innerHTML){cells[k].className='sym';cells[k].innerHTML=symImg()}requestAnimationFrame(()=>fill(k+1))})(0)});
- const put=(i,c,coll)=>{g[i]=c;const e=cells[i];e.className='on land '+(c.c||'');e.innerHTML=c.n?`<b>${c.n}</b>`:`<span>${NFh.format(c.v*total)}</span>`;if(coll){e.classList.add('col');e.innerHTML=`<small>聚寶</small><span>${NFh.format(c.v*total)}</span>`};requestAnimationFrame(()=>setTimeout(()=>e.classList.remove('land'),420))
+ const cells=[...o.querySelectorAll('.hsG i')];const g=Array(CELLS).fill(null);const T=()=>g.reduce((a,c)=>a+(c?c.v:0),0);
+ const fitNum=e=>{const s=e.querySelector('span');if(!s)return;const n=s.textContent.replace(/[^0-9]/g,'').length;s.style.fontSize=n>=7?'9px':n>=6?'10px':n>=5?'11px':n>=4?'15px':''};
+ const put=(i,c,coll)=>{g[i]=c;const e=cells[i];e.className='on land '+(c.c||'');e.innerHTML=c.n?`<b>${c.n}</b>`:`<span>${NFh.format(c.v*total)}</span>`;if(coll){e.classList.add('col');e.innerHTML=`<small>聚寶</small><span>${NFh.format(c.v*total)}</span>`};fitNum(e);requestAnimationFrame(()=>setTimeout(()=>e.classList.remove('land'),420))
   if(!hx('lock',i)){B(880+i*25,.12,'triangle',.06);B(1320+i*25,.16,'sine',.04)}document.getElementById('hsT').textContent=NFh.format(T()*total)};
  const sleep=ms=>new Promise(r=>setTimeout(r,RMh?ms/3:ms));
  (async()=>{await sleep(500);const first=(window.__hsStart&&window.__hsStart.length===START)?window.__hsStart:[...Array(CELLS).keys()].sort(()=>Math.random()-.5).slice(0,START);window.__hsStart=null;
@@ -55,7 +56,7 @@ function play(bet){return new Promise(res=>{try{if(window.FEATSX){FEATSX.setGame
    let nw=false;
    for(const i of empties){await sleep(left===1?170:105);
     if(Math.random()<Q){let c=draw();if(c.k==='c'){const s=g.reduce((a,x)=>a+(x&&!x.n?x.v:0),0);put(i,{k:'v',v:s},true);cells.forEach((e,k)=>{if(g[k]&&!g[k].n&&k!==i)e.classList.add('suck')});if(!hx('collect'))B(520,.5,'sine',.07,1560);await sleep(700);cells.forEach(e=>e.classList.remove('suck'))}else put(i,c);nw=true;await sleep(150)}
-    else{cells[i].className='sym miss';cells[i].innerHTML=symImg();if(!hx('miss'))B(180,.06,'triangle',.015);await sleep(90);cells[i].classList.remove('miss')}}
+    else{cells[i].className='miss';cells[i].innerHTML='';if(!hx('miss'))B(180,.06,'triangle',.015);await sleep(90);cells[i].className='';cells[i].innerHTML=''}}
    left=nw?3:left-1;document.getElementById('hsL').textContent=left;await sleep(nw?280:180)}
   o.classList.remove('hsLast','tense');o.classList.add('hsDone');setTimeout(()=>o.classList.remove('hsDone'),900);let won=T();const full=!g.includes(null);if(full){won+=GRAND;o.classList.add('full')}
   const W=won*total;const f=document.createElement('div');f.className='hsEnd';f.innerHTML=`<small>${full?'集滿 15 格！巨獎':'寶珠總獎金'}</small><b>${NFh.format(W)}</b><button type="button">收下</button>`;o.querySelector('.hsIn').appendChild(f);if(full)requestAnimationFrame(()=>{try{if(!hx('grand')){B(523,.4,'sine',.08);B(659,.5,'sine',.07);B(784,.7,'sine',.07)}}catch(e){}});

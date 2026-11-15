@@ -82,28 +82,30 @@ function sphere(S,cols){return cnv(S,S,(x,w)=>{const c=w/2,r=c*.92;const g=x.cre
 function frameSVG(c1,c2){return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#fff6cf'/><stop offset='.5' stop-color='${c1}'/><stop offset='1' stop-color='${c2}'/></linearGradient></defs><rect x='3' y='3' width='54' height='54' rx='9' fill='none' stroke='url(#g)' stroke-width='5'/><rect x='8' y='8' width='44' height='44' rx='6' fill='none' stroke='#fff3c4' stroke-opacity='.5' stroke-width='1'/>${[[6,6],[54,6],[6,54],[54,54]].map(([a,b])=>`<path d='M${a-5} ${b} L${a} ${b-5} L${a+5} ${b} L${a} ${b+5}Z' fill='#fff3c4' stroke='#7a4a08' stroke-width='1'/>`).join('')}</svg>`)}")`}
 const SPR={};
 /* v28.121: pre-rendered jewel webps — never encode PNG on entry */
-const ARTV='?v=28121';
+const ARTV='?v=28126';
 function artSrc(k){return 'assets/fxlite/'+k+'.webp'+ARTV}
 function art(){if(SPR.done)return;SPR.done=1;
  SPR.gold=artSrc('jewel-gold');SPR.mini=artSrc('jewel-mini');SPR.minor=artSrc('jewel-minor');SPR.major=artSrc('jewel-major');SPR.col=artSrc('jewel-col');SPR.sock=artSrc('socket');
  const css=document.createElement('style');css.id='b22art';css.textContent=`
- html body #hsBox .hsG>i,html body #b22Stage #hsBox .hsG>i,html body #hsBox.b23 .hsG>i{background:url(${SPR.sock}) center / auto 96% no-repeat!important;border:0!important;box-shadow:none!important;overflow:hidden!important}
- html body #hsBox .hsG>i.on,html body #b22Stage #hsBox .hsG>i.on,html body #hsBox.b23 .hsG>i.on{background:url(${SPR.gold}) center / auto 96% no-repeat!important;border:0!important;box-shadow:none!important;filter:none!important;overflow:hidden!important}
+ html body #hsBox .hsG>i,html body #b22Stage #hsBox .hsG>i,html body #hsBox.b23 .hsG>i{background:url(${SPR.sock}) center / 100% 100% no-repeat!important;border:0!important;box-shadow:none!important;overflow:hidden!important;border-radius:10%!important;filter:none!important}
+ html body #hsBox .hsG>i.on,html body #b22Stage #hsBox .hsG>i.on,html body #hsBox.b23 .hsG>i.on{background:url(${SPR.gold}) center / 100% 100% no-repeat!important;border:0!important;box-shadow:none!important;filter:none!important;overflow:hidden!important;animation:none!important}
  html body #hsBox .hsG>i.on.mini{background-image:url(${SPR.mini})!important}
  html body #hsBox .hsG>i.on.minor{background-image:url(${SPR.minor})!important}
  html body #hsBox .hsG>i.on.major{background-image:url(${SPR.major})!important}
  html body #hsBox .hsG>i.on.col{background-image:url(${SPR.col})!important}
  html body #hsBox .hsG>i.on{--orb:url(${SPR.gold})}html body #hsBox .hsG>i.on.mini{--orb:url(${SPR.mini})}html body #hsBox .hsG>i.on.minor{--orb:url(${SPR.minor})}html body #hsBox .hsG>i.on.major{--orb:url(${SPR.major})}html body #hsBox .hsG>i.on.col{--orb:url(${SPR.col})}
- html body #hsBox .hsG>i.spin,html body #b22Stage #hsBox .hsG>i.spin,html body #hsBox.b23 .hsG>i.spin{background:#0a0414!important;background-image:none!important;animation:none!important;border-radius:6%!important;box-shadow:inset 0 0 0 1.5px rgba(255,214,90,.45),inset 0 8px 12px rgba(0,0,0,.55),inset 0 -8px 12px rgba(0,0,0,.45)!important;filter:none!important;overflow:hidden!important}
- html body #hsBox .hsG>i.miss{background:url(${SPR.sock}) center/94% no-repeat!important;filter:none!important;opacity:.85;box-shadow:inset 0 0 0 2px rgba(255,214,90,.7)!important}
+ html body #hsBox .hsG>i.spin,html body #b22Stage #hsBox .hsG>i.spin,html body #hsBox.b23 .hsG>i.spin{background:url(${SPR.sock}) center / 100% 100% no-repeat!important;animation:none!important;border-radius:10%!important;box-shadow:none!important;filter:none!important;overflow:hidden!important}
+ html body #hsBox .hsG>i.miss{background:url(${SPR.sock}) center / 100% 100% no-repeat!important;filter:none!important;opacity:.9;box-shadow:none!important}
  html body #hsBox .hsG>i.land{filter:none!important}
+ html body #hsBox .hsG>i.on.mini b,html body #hsBox .hsG>i.on.minor b,html body #hsBox .hsG>i.on.major b,html body #hsBox .hsG>i.on.col small{display:none!important}
+ html body #hsBox .hsG>i::before,html body #hsBox .hsG>i::after,html body #hsBox.b23 .hsG>i::before,html body #hsBox.b23 .hsG>i::after{content:none!important;display:none!important;animation:none!important;box-shadow:none!important}
  html body #hsBox .hsJp div{border:10px solid transparent!important;border-image:${frameSVG('#ffd65a','#a8640c')} 14 stretch!important;background:linear-gradient(180deg,rgba(60,24,80,.9),rgba(20,6,30,.95)) padding-box!important;border-radius:0!important}
  html body #hsBox .hsJp .mini{border-image-source:${frameSVG('#6fb6ff','#1f5fb0')}!important}#hsBox .hsJp .minor{border-image-source:${frameSVG('#5be0a6','#178a5c')}!important}#hsBox .hsJp .major{border-image-source:${frameSVG('#ff7ab8','#c2185b')}!important}
  @keyframes b22Reel{to{background-position:center 256px}}`;document.body.appendChild(css)}
 window.B22={SPR,art,swoop:t=>swoop(t)};
 /* v28.124: decode gold frames + jewel art in parallel as soon as the page is up,
    so 寶珠對碰 entry does not hitch on first-use decode. Math unchanged. */
-const FGV='?v=28125';
+const FGV='?v=28126';
 const FGSRC=[
  'assets/featgold/stage-lip.webp'+FGV,
  'assets/featgold/stage-fill.webp'+FGV,

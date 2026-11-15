@@ -1,13 +1,13 @@
-/* v28.125 gold-palace chrome for the 5 feature games (frames, art, buttons).
-   Pre-rendered webp only; no new per-cell animation (jewels keeps fxlite). Math unchanged.
-   v28.125: lighter entry; jewels chrome matches v28.123 (pre-decoded frames, no live filter on rays). */
+/* v28.126 gold-palace chrome for the 5 feature games (frames, art, buttons).
+   Pre-rendered webp only; no new per-cell animation. Math unchanged.
+   v28.126: in-cabinet jewels use option D (金殿 dragon pearls + gold-framed wells). */
 :root{
-  --fg-lip:url("assets/featgold/stage-lip.webp?v=28125");
-  --fg-btn:url("assets/featgold/btn-wide.webp?v=28125");
-  --fg-panel:url("assets/featgold/panel.webp?v=28125");
-  --fg-tile:url("assets/featgold/tile-frame.webp?v=28125");
-  --fg-rail:url("assets/featgold/rail-h.webp?v=28125");
-  --fg-fill:url("assets/featgold/stage-fill.webp?v=28125");
+  --fg-lip:url("assets/featgold/stage-lip.webp?v=28126");
+  --fg-btn:url("assets/featgold/btn-wide.webp?v=28126");
+  --fg-panel:url("assets/featgold/panel.webp?v=28126");
+  --fg-tile:url("assets/featgold/tile-frame.webp?v=28126");
+  --fg-rail:url("assets/featgold/rail-h.webp?v=28126");
+  --fg-fill:url("assets/featgold/stage-fill.webp?v=28126");
 }
 
 /* stage art: crimson-gold field, drop the thin CSS inset stroke */
@@ -242,3 +242,60 @@ html body #hsBox .hsF{
 #fgWarm .fgWfill{display:block;width:340px;height:180px;background:var(--fg-fill) center / cover no-repeat}
 #fgWarm .fgWrail{display:block;width:340px;height:16px;background:var(--fg-rail) center / auto 100% repeat-x}
 #fgWarm .fgWjp{display:block;width:80px;height:36px;box-sizing:border-box;border:8px solid transparent;border-image:var(--fg-lip) 48 / 8px / 0 stretch;background:linear-gradient(180deg,#4a141c,#1a060a) padding-box}
+
+/* v28.126 option D: framed dragon-pearl orbs + dark gold wells; glow baked, no live blur */
+html body #hsBox.b23 .hsG>i,
+html body #b22Stage #hsBox .hsG>i,
+html body #hsBox .hsG>i{
+  background-size:100% 100% !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  box-shadow:none !important;
+  filter:none !important;
+  border-radius:10% !important;
+  overflow:hidden !important;
+}
+html body #hsBox.b23 .hsG>i.on,
+html body #hsBox .hsG>i.on{
+  animation:none !important;
+}
+html body #hsBox.b23 .hsG>i.on.land,
+html body #hsBox .hsG>i.on.land{
+  animation:hsDLand .4s cubic-bezier(.2,1.4,.4,1) !important;
+  filter:none !important;
+}
+@keyframes hsDLand{0%{transform:scale(.88)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+html body #hsBox.b23 .hsG>i::before,
+html body #hsBox.b23 .hsG>i::after,
+html body #hsBox .hsG>i::before,
+html body #hsBox .hsG>i::after{
+  content:none !important;display:none !important;animation:none !important;box-shadow:none !important;
+}
+/* dynamic values sit on the D pearl; jackpot labels and 聚寶 are baked into the webp */
+html body #hsBox.b23 .hsG>i.on span,
+html body #hsBox .hsG>i.on span{
+  position:relative;z-index:2;
+  max-width:66%;box-sizing:border-box;
+  overflow:hidden;white-space:nowrap;font-variant-numeric:tabular-nums;
+  font:900 clamp(15px,4.8vw,22px)/1 "Noto Sans TC",sans-serif !important;
+  color:#fff6c8 !important;
+  -webkit-text-stroke:0.16em #080400;
+  paint-order:stroke fill;
+  text-shadow:0 1px 0 #1a0a00,0 0 2px #000 !important;
+}
+html body #hsBox.b23 .hsG>i.on.col span,
+html body #hsBox .hsG>i.on.col span{
+  transform:translateY(32%);
+  font-size:clamp(14px,4.4vw,20px) !important;
+}
+html body #hsBox.b23 .hsG>i.on.mini b,
+html body #hsBox.b23 .hsG>i.on.minor b,
+html body #hsBox.b23 .hsG>i.on.major b,
+html body #hsBox .hsG>i.on.mini b,
+html body #hsBox .hsG>i.on.minor b,
+html body #hsBox .hsG>i.on.major b,
+html body #hsBox.b23 .hsG>i.on.col small,
+html body #hsBox .hsG>i.on.col small{display:none !important}
+@media (prefers-reduced-motion:reduce){
+  html body #hsBox.b23 .hsG>i.on.land,html body #hsBox .hsG>i.on.land{animation:none !important}
+}
