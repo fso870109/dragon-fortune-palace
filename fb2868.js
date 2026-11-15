@@ -7,7 +7,8 @@ import {
 } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js';
 import {
   getFirestore, connectFirestoreEmulator, doc, getDoc, setDoc, updateDoc,
-  deleteDoc, collection, getDocs, query, where, serverTimestamp, writeBatch
+  deleteDoc, collection, getDocs, query, where, serverTimestamp, writeBatch,
+  onSnapshot, orderBy, limit
 } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js';
 
 const CFG = {
@@ -190,6 +191,8 @@ const api = {
   guildsOk: false,
   raidsOk: false,
   invitesOk: false,
+  chatOk: false,
+  bigWinsOk: false,
   linkNotice: '',
   dbId: 'dragon',
   emu: false,
@@ -1123,6 +1126,90 @@ api.linkAccount = async function (which) {
   }
 };
 
+/* v28.117 chat: only fixed ids (phrases p01-p99, stickers s01-s99), never free text.
+   Each message is batched with chatState/{uid}; rules enforce 8 s cooldown and 150/day. */
+const CHAT_ID = /^[ps][0-9]{2}$/;
+let chatN = null, chatDay = '';
+api.sendChat = async function (id) {
+  guardWrite();
+  if (!api.chatOk) throw new Error('chat-offline');
+  id = String(id || '');
+  if (!CHAT_ID.test(id)) throw new Error('chat-bad-id');
+  await ensureProfile();
+  const uid = api.user.uid, day = dayId();
+  const sref = doc(db, 'chatState', uid);
+  if (chatN == null || chatDay !== day) {
+    const ss = await getDoc(sref);
+    chatN = 0;
+    if (ss.exists() && ss.data().day === day) chatN = ss.data().n | 0;
+    chatDay = day;
+  }
+  const n = chatN + 1;
+  if (n > 150) throw new Error('chat-daily-cap');
+  const b = writeBatch(db);
+  b.set(sref, { last: serverTimestamp(), day: day, n: n });
+  const mref = doc(collection(db, 'chat', day, 'msgs'));
+  b.set(mref, {
+    uid: uid,
+    name: api.profile.displayName,
+    av: api.profile.avatar,
+    k: id.charAt(0),
+    id: id,
+    at: serverTimestamp()
+  });
+  try {
+    await b.commit();
+  } catch (e) {
+    chatN = null;
+    throw e;
+  }
+  chatN = n;
+  return { id: mref.id };
+};
+/* listen only while the chat panel is open; latest 30 */
+api.watchChat = function (cb, onErr) {
+  if (!api.chatOk || !db) return function () {};
+  const q = query(collection(db, 'chat', dayId(), 'msgs'), orderBy('at', 'desc'), limit(30));
+  return onSnapshot(q, function (snap) {
+    const rows = [];
+    snap.forEach(function (d) {
+      const x = d.data({ serverTimestamps: 'estimate' });
+      let t = 0;
+      try { t = x.at && x.at.toMillis ? x.at.toMillis() : Date.now(); } catch (e) { t = Date.now(); }
+      rows.push({ mid: d.id, uid: x.uid, name: x.name, av: x.av, id: x.id, t: t, me: !!(api.user && x.uid === api.user.uid) });
+    });
+    rows.reverse();
+    cb(rows);
+  }, function (e) { if (onErr) onErr(e); });
+};
+/* big-win marquee: one row per player per day (bigWins/{day}/rows/{uid}); rules allow an update every 5 min */
+const BW_M = ['matsuri', 'samurai', 'neko', 'sakura'];
+api.postBigWin = async function (r) {
+  guardWrite();
+  if (!api.bigWinsOk) throw new Error('bigwins-offline');
+  if (!r || BW_M.indexOf(r.m) < 0) throw new Error('bw-bad');
+  await ensureProfile();
+  const w = Math.max(1, Math.min(2000000, Math.floor(Number(r.w) || 0)));
+  let x = Number(r.x) || 0; if (!isFinite(x) || x < 0) x = 0; if (x > 10000) x = 10000;
+  const jp = (r.jp | 0) === 2 ? 2 : (r.jp | 0) === 1 ? 1 : 0;
+  await setDoc(doc(db, 'bigWins', dayId(), 'rows', api.user.uid), {
+    name: api.profile.displayName,
+    av: api.profile.avatar,
+    m: r.m, w: w, x: x, jp: jp,
+    at: serverTimestamp()
+  });
+  return true;
+};
+api.listBigWins = async function () {
+  if (!api.bigWinsOk || !db) return [];
+  const snap = await getDocs(query(collection(db, 'bigWins', dayId(), 'rows'), orderBy('at', 'desc'), limit(15)));
+  return snap.docs.map(function (d) {
+    const x = d.data();
+    let t = 0; try { t = x.at.toMillis(); } catch (e) {}
+    return { uid: d.id, name: x.name, av: x.av, m: x.m, w: x.w | 0, x: Number(x.x) || 0, jp: x.jp | 0, t: t, me: !!(api.user && d.id === api.user.uid) };
+  });
+};
+
 async function probeAndInit() {
   const emu = useEmulator();
   api.emu = emu;
@@ -1188,6 +1275,18 @@ async function probeAndInit() {
     api.invitesOk = true;
   } catch (e) {
     api.invitesOk = false;
+  }
+  try {
+    await getDocs(query(collection(db, 'chat', dayId(), 'msgs'), limit(1)));
+    api.chatOk = true;
+  } catch (e) {
+    api.chatOk = false;
+  }
+  try {
+    await getDocs(query(collection(db, 'bigWins', dayId(), 'rows'), limit(1)));
+    api.bigWinsOk = true;
+  } catch (e) {
+    api.bigWinsOk = false;
   }
   await ensureProfile();
   emitAv();
