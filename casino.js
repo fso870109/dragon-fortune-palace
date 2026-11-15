@@ -119,7 +119,7 @@ function claimAllMissions(){const list=missReady();if(!list.length)return {n:0,t
 const SAMPLE=[['夜櫻美香',2860400],['Kaito★',1980300],['財神使者',1544800],['最愛煙火',1203000],['LuckyNeko',986500],['賞月兔',742000],['紅包王',530900],['Yuki_88',401200]];
 window.CZ={st,JP,VIP,MISS,ACH,MACH,need,vipOf,pools:()=>P,getBal,addChips,claimFree,freeLeft,freeAmt,claimMission,claimAllMissions,missReady,day,on:f=>ls.add(f),sample:SAMPLE,toast,vib,feed,save,ach,claimAch,claimAllAchs,scanAch,track,trackSign,trackFeat,prog:progOf,unclaimed,
  onBet(total){for(let i=0;i<3;i++)P[i]+=total*JP.c*JP.split[i];saveP();if(Math.random()<total/JP.d)pend=total},
- onSettle(o){if(window.CZAUTO&&CZAUTO.on&&(o.sc>=3||o.xr>=10||(pend&&!o.free)))CZAUTO.stop();const d=day();st.spins++;d.spin++;const x=ax();
+ onSettle(o){if(window.CZAUTO&&CZAUTO.on){if(o.sc>=3||o.xr>=10||(pend&&!o.free))CZAUTO.stop();else CZAUTO.gapUntil=Date.now()+(o.won>0?2200:1100)}const d=day();st.spins++;d.spin++;const x=ax();
   if(o.won>0){st.won+=o.won;d.won+=o.won}
   if(o.sc>=3){d.fs++;x.fs=(x.fs||0)+1}
   if(o.big){d.big++;x.big=(x.big||0)+1}
@@ -190,17 +190,18 @@ function machineUI(){const $=id=>document.getElementById(id),mach=$('machine');
  const ab=document.createElement('button');ab.id='czAuto';ab.className='czauto';ab.type='button';ab.setAttribute('aria-label','自動旋轉');ab.innerHTML='<b>自動</b><i></i>';
  document.querySelector('.czbar .controls').appendChild(ab);
  const pk=document.createElement('div');pk.id='czAutoPk';pk.hidden=true;pk.innerHTML='<p>自動旋轉次數</p>'+[10,25,50,100,'∞'].map(n=>`<button type="button" data-n="${n}">${n}</button>`).join('');document.body.appendChild(pk);
- const AU=window.CZAUTO={n:0,on:false,stop(){AU.on=false;AU.n=0;document.body.classList.remove('czau');ab.classList.remove('run');ab.lastChild.textContent=''},
+ const AU=window.CZAUTO={n:0,on:false,stop(){AU.on=false;AU.n=0;AU.gapUntil=0;document.body.classList.remove('czau');ab.classList.remove('run');ab.lastChild.textContent=''},
   start(n){AU.on=true;AU.n=n;document.body.classList.add('czau');ab.classList.add('run');lab();tick()}};
- const lab=()=>{ab.lastChild.textContent=AU.n===Infinity?'∞':AU.n};
+ const lab=()=>{ab.lastChild.textContent=(AU.n===Infinity||!AU.on)?'':AU.n};
  ab.addEventListener('click',e=>{e.stopPropagation();vib(10);if(AU.on){AU.stop();return}pk.hidden=!pk.hidden;if(!pk.hidden){const r=ab.getBoundingClientRect();pk.style.left=Math.max(6,Math.min(innerWidth-pk.offsetWidth-6,r.right-pk.offsetWidth))+'px';pk.style.top=Math.max(6,r.top-pk.offsetHeight-8)+'px'}});
  pk.addEventListener('click',e=>{const n=e.target.dataset&&e.target.dataset.n;if(!n)return;pk.hidden=true;AU.start(n==='∞'?Infinity:+n)});
  addEventListener('pointerdown',e=>{if(!pk.hidden&&!pk.contains(e.target)&&e.target!==ab)pk.hidden=true},true);
  const cv=document.createElement('div');cv.id='czAuStop';cv.setAttribute('aria-label','停止自動旋轉');document.body.appendChild(cv);const pos=()=>{const r=sp.getBoundingClientRect();Object.assign(cv.style,{left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px'})};addEventListener('resize',pos);cv.addEventListener('click',e=>{e.stopPropagation();vib(10);AU.stop()});
  const ovl=()=>['czWheel','czAtari','czMG','bw'].some(i=>{const e=document.getElementById(i);return e&&getComputedStyle(e).display!=='none'&&getComputedStyle(e).visibility!=='hidden'&&(e.classList.contains('on')||e.classList.contains('show')||e.open||e.style.display==='flex'||e.style.display==='block')});
  function tick(){if(!AU.on)return;pos();if(spinning||bwState||window.__hold||(typeof FS!=='undefined'&&FS&&FS.left>0)||ovl()){setTimeout(tick,300);return}
+  const gap=(AU.gapUntil||0)-Date.now();if(gap>0){setTimeout(tick,Math.min(300,gap));return}
   if(bal<BETS[betIdx]*NL){AU.stop();toast&&toast('籌碼不足，自動旋轉已停止');window.czChipDlg&&czChipDlg(bal<BETS[0]*NL?'low':'short');return}
-  if(AU.n<=0){AU.stop();return}AU.n--;lab();spin();setTimeout(tick,500)}
+  if(AU.n<=0){AU.stop();return}AU.n--;lab();AU.gapUntil=0;spin();setTimeout(tick,500)}
  AU.tick=tick}
  const mir=(a,b)=>{const A=$(a),B=$(b);const f=()=>{B.textContent=A.textContent};f();new MutationObserver(f).observe(A,{childList:true,characterData:true,subtree:true})};mir('bal','czCred');mir('bet','czBet');mir('win','czWin');
  const lvR=()=>{const v=vipOf(st.lv);const e=$('czLv');e.querySelector('b').textContent=`Lv.${st.lv} ${v[1]}`;e.querySelector('b').style.color=v[2];e.querySelector('u').style.width=Math.min(100,st.xp/need(st.lv)*100)+'%'};lvR();CZ.on(lvR);
