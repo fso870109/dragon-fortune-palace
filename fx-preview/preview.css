@@ -129,7 +129,7 @@ h1{margin:0 0 10px;font:900 clamp(22px,7vw,32px)/1.2 "TCDisp","LXSerif","KleeSub
 @keyframes orbT{60%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
 .stage.new .dragon{filter:none}
 .stage.new .dragon.go{animation:flyT 1.25s cubic-bezier(.4,0,.3,1) forwards;will-change:transform}
-@keyframes flyT{0%{transform:translate(-110%,30px) rotate(-6deg)}50%{transform:translate(-10%,-10px) rotate(3deg)}100%{transform:translate(110%,40px) rotate(-4deg)}}
+@keyframes flyT{0%{translate:-110% 30px;rotate:-6deg}50%{translate:-10% -10px;rotate:3deg}100%{translate:110vw 40px;rotate:-4deg}}
 .stage.new .title-slam img{display:block;width:min(94%,520px);height:auto;margin:0 auto;transform:skewX(-10deg) scale(2.6);opacity:0;will-change:transform,opacity}
 .stage.new .title-slam.go img{animation:slamT .55s cubic-bezier(.2,1.7,.4,1) both}
 @keyframes slamT{0%{transform:skewX(-10deg) scale(2.6);opacity:0}60%{transform:skewX(-10deg) scale(.93);opacity:1}80%{transform:skewX(-10deg) scale(1.04)}100%{transform:skewX(-10deg) scale(1);opacity:1}}
