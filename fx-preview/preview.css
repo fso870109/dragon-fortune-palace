@@ -1,0 +1,166 @@
+@font-face{font-family:"LXSerif";src:url(../assets/fonts/lxserif.woff2?v=28117) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"KleeSub";src:url(../assets/fonts/klee-sub.woff2?v=28117) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"TCDisp";src:url(../assets/fonts/tcdisp.woff2?v=28117) format("woff2");font-weight:900;font-display:swap}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#080208;color:#fbe9f3;
+  font-family:"Noto Sans TC","Noto Sans CJK TC","Source Han Sans TC",sans-serif;
+  overflow-x:hidden;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{min-height:100dvh;max-width:100vw;background:
+  radial-gradient(120% 70% at 50% -10%,rgba(160,40,70,.28),transparent 55%),
+  radial-gradient(80% 50% at 100% 100%,rgba(80,40,10,.22),transparent 50%),
+  #080208}
+.wrap{width:100%;max-width:520px;margin:0 auto;padding:14px 12px 36px}
+
+.top{text-align:center;padding:6px 2px 10px}
+.kicker{margin:0 0 6px;font:700 11px/1.3 "Noto Sans TC",sans-serif;letter-spacing:.18em;color:#e9c98a}
+h1{margin:0 0 10px;font:900 clamp(22px,7vw,32px)/1.2 "TCDisp","LXSerif","KleeSub",serif;
+  background:linear-gradient(#fff6d2,#f6d27a 45%,#d9a441);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:.06em;word-break:keep-all}
+.lead{margin:0 0 8px;font:400 13px/1.65 "Noto Sans TC",sans-serif;color:#f3d9c6;text-align:left}
+.legal{margin:0;font:600 11px/1.5 "Noto Sans TC",sans-serif;color:#c9a56a;letter-spacing:.04em}
+
+.dock{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin:10px -12px 14px;padding:10px 12px;background:rgba(8,2,8,.94);
+  border-bottom:1px solid rgba(217,164,65,.35)}
+.seg{display:flex;flex:1 1 auto;min-width:0;border:1px solid #d9a441;border-radius:8px;overflow:hidden}
+.seg button{flex:1;margin:0;border:0;border-radius:0;min-height:44px;font:800 15px/1 "Noto Sans TC",sans-serif;
+  color:#fff6d2;background:linear-gradient(#3a1020,#1a060c);cursor:pointer}
+.seg button.on{background:linear-gradient(#8a1a3a,#4a0a18 62%,#2a060c);color:#fff6d2}
+.acts{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.acts button{
+  appearance:none;font:800 14px/1 "Noto Sans TC",sans-serif;cursor:pointer;
+  border:1px solid #d9a441;color:#fff6d2;background:linear-gradient(#3a1020,#1a060c);
+  border-radius:8px;min-height:44px;padding:0 12px;flex:1 1 30%;min-width:0}
+.status{flex:1 1 100%;margin:0;font:600 12px/1.45 "Noto Sans TC",sans-serif;color:#e9c98a}
+
+.stage-wrap{width:100%;display:flex;justify-content:center}
+.stage{position:relative;width:100%;max-width:360px;aspect-ratio:360/640;height:auto;
+  min-height:480px;border-radius:16px;overflow:hidden;
+  border:2px solid rgba(255,214,90,.55);background:#0c0418;
+  box-shadow:0 0 0 3px #2a0f3a}
+@media (min-width:412px){
+  .stage{max-width:412px;aspect-ratio:412/720}
+}
+.world,.fx-canvas{position:absolute;inset:0;width:100%;height:100%}
+.fx-canvas{z-index:8;pointer-events:none;display:none}
+.stage.new .fx-canvas{display:block}
+
+/* shared stage layers */
+.bg{position:absolute;inset:0;z-index:0}
+.rays{position:absolute;left:50%;top:42%;width:160%;aspect-ratio:1;translate:-50% -50%;z-index:1;pointer-events:none}
+.orb{position:absolute;left:50%;top:50%;width:40vmin;height:40vmin;margin:-20vmin 0 0 -20vmin;z-index:9;pointer-events:none;opacity:0}
+.dragon{position:absolute;top:32%;left:0;width:min(150%,600px);z-index:10;pointer-events:none;will-change:transform}
+.title-slam{position:absolute;left:0;right:0;top:36%;z-index:11;pointer-events:none;text-align:center}
+.board{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;padding:8px}
+.hsIn{width:min(392px,100%);padding:10px 8px 12px;text-align:center;color:#fff}
+.hsIn h2{margin:0 0 8px;font:900 italic clamp(22px,7.2vw,28px)/1.15 "TCDisp","Noto Serif CJK TC",serif;
+  color:#ffe680;-webkit-text-stroke:1.5px #3a0800;paint-order:stroke fill;
+  text-shadow:2px 3px 0 #c23a00,4px 5px 0 #4a0a00,0 0 16px rgba(255,150,40,.8)}
+.hsJp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:10px}
+.hsJp div{min-width:0;border-radius:8px;padding:4px 2px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.4)}
+.hsJp b{display:block;font:900 12px/1.2 "Noto Sans TC",sans-serif;color:#fff}
+.hsJp span{display:block;font:800 10px/1.3 "Noto Sans TC",sans-serif;color:#ffe680;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hsJp .mini{border-color:#7fd0ff}.hsJp .minor{border-color:#8dff9a}.hsJp .major{border-color:#ff8ad0}.hsJp .grand{border-color:#ffd65a}
+.hsG{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.hsG i{aspect-ratio:1/1;border-radius:10%;display:grid;place-items:center;font-style:normal;overflow:hidden;min-width:0;position:relative;background:#12061e}
+.hsG i span,.hsG i b,.hsG i small{position:relative;z-index:2;pointer-events:none;color:#fff;
+  font:900 clamp(11px,3.2vw,14px)/1 "Noto Sans TC",sans-serif;text-shadow:0 1px 3px #000;font-variant-numeric:tabular-nums}
+.hsG i small{display:block;font-size:10px;color:#fff3c4}
+.hsF{display:flex;gap:8px;justify-content:space-between;margin-top:10px}
+.hsF>span{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;padding:7px 6px;border-radius:12px;
+  background:linear-gradient(180deg,rgba(60,24,80,.92),rgba(20,6,30,.95));border:1.5px solid #ffd65a;
+  font:900 13px/1 "Noto Sans TC",sans-serif;color:#f4e2b8;white-space:nowrap}
+.hsF b{font-size:18px;color:#ffe680;font-variant-numeric:tabular-nums}
+.hsTip{margin:8px 0 0;font:500 11px/1.4 "Noto Sans TC",sans-serif;color:rgba(255,255,255,.7)}
+.hsEnd{margin-top:10px;padding:10px 14px;border-radius:12px;position:relative;z-index:6}
+.hsEnd small{display:block;font:800 13px/1.3 "Noto Sans TC",sans-serif;color:#f4d89c}
+.hsEnd .amt{display:block;font:900 clamp(22px,7vw,32px)/1.15 "Noto Sans TC",sans-serif;color:#ffe680;font-variant-numeric:tabular-nums}
+.hsEnd button{margin-top:8px;padding:8px 28px;border-radius:20px;border:0;font:900 15px/1 "Noto Sans TC",sans-serif;background:linear-gradient(#ffd65a,#c98a1c);color:#3a1600}
+
+/* ===== OLD techniques (filters, box-shadow, live encode) ===== */
+.stage.old .bg{background:radial-gradient(120% 80% at 50% 35%,#4a1f5e 0%,#24103a 45%,#0c0418 100%);
+  box-shadow:inset 0 0 0 2px #ffd65a,inset 0 0 0 5px #2a0f3a,inset 0 0 0 6px rgba(255,214,90,.5),inset 0 0 60px rgba(255,190,60,.25)}
+.stage.old .rays{background:repeating-conic-gradient(rgba(255,214,90,.10) 0 8deg,transparent 8deg 22deg);
+  -webkit-mask:radial-gradient(circle,#000 15%,transparent 62%);mask:radial-gradient(circle,#000 15%,transparent 62%);
+  animation:b22Rot 24s linear infinite}
+@keyframes b22Rot{to{rotate:360deg}}
+.stage.old .orb{border-radius:50%;background:radial-gradient(circle,rgba(255,246,207,.95),rgba(255,214,90,.55) 35%,rgba(255,150,40,0) 70%);
+  transform:scale(.3);opacity:0}
+.stage.old.pre .orb{animation:f21Orb .95s ease-in forwards}
+@keyframes f21Orb{60%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+.stage.old .dragon{filter:drop-shadow(0 0 12px rgba(255,190,60,.8))}
+.stage.old .dragon.go{animation:b22Fly 1.25s cubic-bezier(.4,0,.3,1) forwards}
+@keyframes b22Fly{0%{translate:-110% 30px;rotate:-6deg}50%{translate:-10% -10px;rotate:3deg}100%{translate:110% 40px;rotate:-4deg}}
+.stage.old .title-slam b{display:inline-block;max-width:94%;white-space:nowrap;
+  font:900 clamp(28px,9vw,48px)/1.1 "TCDisp","Noto Serif CJK TC",serif;color:#ffe680;
+  -webkit-text-stroke:2.5px #3a0800;paint-order:stroke fill;transform:skewX(-10deg);
+  text-shadow:1px 1px 0 #f6c040,2px 2px 0 #e0a020,3px 3px 0 #c87a10,4px 4px 0 #a85a00,5px 5px 0 #844000,6px 6px 0 #5a2600,7px 7px 0 #3a1400,0 0 30px rgba(255,190,60,.95)}
+.stage.old .title-slam.go b{animation:b22Slam .55s cubic-bezier(.2,1.7,.4,1) both}
+@keyframes b22Slam{0%{scale:2.6;opacity:0;filter:blur(5px) brightness(2.4)}60%{scale:.93;opacity:1;filter:brightness(1.3)}80%{scale:1.04}100%{scale:1;filter:none}}
+.stage.old .board.in{animation:f21In .5s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes f21In{0%{opacity:0;transform:scale(1.12);filter:blur(6px)}100%{opacity:1;transform:none;filter:none}}
+.stage.old .hsG>i.sock{background-size:auto 96%;background-position:center;background-repeat:no-repeat}
+.stage.old .hsG>i.on{background-size:auto 96%;background-position:center;background-repeat:no-repeat;border:0}
+.stage.old .hsG>i.pop{animation:b22Cell .45s cubic-bezier(.2,1.6,.4,1) both}
+.stage.old .hsG>i:nth-child(5n+2){animation-delay:.05s}.stage.old .hsG>i:nth-child(5n+3){animation-delay:.1s}
+.stage.old .hsG>i:nth-child(5n+4){animation-delay:.15s}.stage.old .hsG>i:nth-child(5n){animation-delay:.2s}
+@keyframes b22Cell{0%{scale:0;rotate:-90deg;opacity:0}100%{scale:1;rotate:0deg;opacity:1}}
+.stage.old .hsG>i.on.land{animation:b22Land .45s cubic-bezier(.2,1.8,.4,1) both!important}
+@keyframes b22Land{0%{scale:.75;opacity:0;filter:brightness(1.6)}60%{scale:1.04;opacity:1}100%{scale:1;filter:none}}
+.stage.old .hsG>i.on::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  box-shadow:inset 0 0 6px 1px rgba(255,214,90,.55);animation:hs18Glow 2.8s ease-in-out infinite}
+@keyframes hs18Glow{0%,100%{opacity:.35}50%{opacity:1}}
+.stage.old.hsDone .hsG{animation:hsDoneFlash .85s ease-out}
+@keyframes hsDoneFlash{0%{box-shadow:0 0 0 3px #fff6cf,0 0 36px #ffe680}100%{box-shadow:none}}
+.stage.old .hsEnd{background:linear-gradient(180deg,rgba(60,24,80,.96),rgba(20,6,30,.97));border:2px solid #ffd65a;
+  box-shadow:0 0 28px rgba(255,190,60,.75);animation:hsPop .45s cubic-bezier(.3,1.7,.5,1)}
+@keyframes hsPop{0%{transform:scale(.2)}100%{transform:scale(1)}}
+.stage.old.full .hsG>i.on{animation:hsPop .4s,oldGlow .8s ease-in-out infinite}
+@keyframes oldGlow{50%{filter:brightness(1.35)}}
+
+/* ===== NEW techniques (transform/opacity + pre-rendered + canvas) ===== */
+.stage.new .bg{background:#0c0418 center/cover no-repeat}
+.stage.new .rays{background:center/contain no-repeat;animation:spinT 24s linear infinite;will-change:transform}
+@keyframes spinT{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.stage.new .orb{background:center/contain no-repeat;transform:scale(.3);opacity:0;will-change:transform,opacity}
+.stage.new.pre .orb{animation:orbT .95s ease-in forwards}
+@keyframes orbT{60%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+.stage.new .dragon{filter:none}
+.stage.new .dragon.go{animation:flyT 1.25s cubic-bezier(.4,0,.3,1) forwards;will-change:transform}
+@keyframes flyT{0%{transform:translate(-110%,30px) rotate(-6deg)}50%{transform:translate(-10%,-10px) rotate(3deg)}100%{transform:translate(110%,40px) rotate(-4deg)}}
+.stage.new .title-slam img{display:block;width:min(94%,520px);height:auto;margin:0 auto;transform:skewX(-10deg) scale(2.6);opacity:0;will-change:transform,opacity}
+.stage.new .title-slam.go img{animation:slamT .55s cubic-bezier(.2,1.7,.4,1) both}
+@keyframes slamT{0%{transform:skewX(-10deg) scale(2.6);opacity:0}60%{transform:skewX(-10deg) scale(.93);opacity:1}80%{transform:skewX(-10deg) scale(1.04)}100%{transform:skewX(-10deg) scale(1);opacity:1}}
+.stage.new .board.in{animation:inT .5s cubic-bezier(.2,.9,.3,1.2) both;will-change:transform,opacity}
+@keyframes inT{0%{opacity:0;transform:scale(1.12)}100%{opacity:1;transform:none}}
+.stage.new .hsG>i.sock,.stage.new .hsG>i.on{background-size:auto 96%;background-position:center;background-repeat:no-repeat;border:0}
+.stage.new .hsG>i.pop{animation:cellT .45s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes cellT{0%{transform:scale(0) rotate(-90deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+.stage.new .hsG>i.on.land{animation:landT .45s cubic-bezier(.2,1.8,.4,1) both}
+@keyframes landT{0%{transform:scale(.75);opacity:0}60%{transform:scale(1.04);opacity:1}100%{transform:scale(1);opacity:1}}
+.stage.new .hsG>i.on .glow{position:absolute;inset:0;background:center/100% 100% no-repeat;pointer-events:none;animation:glowT 2.8s ease-in-out infinite;opacity:.35}
+@keyframes glowT{0%,100%{opacity:.35}50%{opacity:1}}
+.stage.new .flash{position:absolute;left:50%;top:46%;width:256px;height:256px;margin:-128px 0 0 -128px;z-index:7;pointer-events:none;
+  background:url(assets/flash-sheet.webp) 0 0 no-repeat;background-size:2048px 256px}
+.stage.new .halo-fx{position:absolute;left:50%;top:46%;width:min(90%,420px);aspect-ratio:1;translate:-50% -50%;z-index:6;pointer-events:none;
+  background:url(assets/halo.webp) center/contain no-repeat;opacity:0}
+.stage.new.hsDone .halo-fx{animation:haloT .85s ease-out forwards}
+@keyframes haloT{0%{opacity:.9;transform:translate(-50%,-50%) scale(.7)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.35)}}
+.stage.new .hsEnd{background:rgba(20,6,30,.97);border:2px solid #ffd65a;animation:popT .45s cubic-bezier(.3,1.7,.5,1)}
+@keyframes popT{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+
+.legend{margin:16px 2px 0}
+.legend h2{margin:0 0 8px;font:800 15px/1.3 "Noto Sans TC",sans-serif;color:#ffe680}
+.legend ol{margin:0;padding-left:1.2em;font:400 13px/1.65 "Noto Sans TC",sans-serif;color:#f3d9c6}
+.legend b{color:#fff6d2}
+.foot{margin:18px 2px 0;font:500 12px/1.6 "Noto Sans TC",sans-serif;color:#c9a56a}
+.foot a{color:#ffe680}
+
+@media (prefers-reduced-motion:reduce){
+  .stage.old .rays,.stage.old .orb,.stage.old .dragon,.stage.old .title-slam b,.stage.old .board,
+  .stage.old .hsG>i,.stage.old .hsEnd,.stage.new .rays,.stage.new .orb,.stage.new .dragon,
+  .stage.new .title-slam img,.stage.new .board,.stage.new .hsG>i,.stage.new .hsEnd,.stage.new .halo-fx,.stage.new .hsG>i.on .glow{animation:none!important}
+  .stage.old .orb,.stage.new .orb,.stage.old .title-slam b,.stage.new .title-slam img{opacity:1;transform:none}
+}

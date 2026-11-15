@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#080208">
+<meta name="apple-mobile-web-app-title" content="特效預覽">
+<title>寶珠對碰特效預覽・龍運金殿</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+<link rel="stylesheet" href="preview.css?v=1">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <p class="kicker">龍運金殿・特效預覽・非正式遊戲</p>
+    <h1>寶珠對碰輕量特效</h1>
+    <p class="lead">這頁只示範「寶珠對碰」進場與跳獎的特效作法，正式遊戲尚未套用。舊版依現行 v28.120 的 DOM、filter、box-shadow 與進場當下編碼寶珠圖；新版改為單層 canvas 粒子、預先繪好的光暈與精靈表，只用位移與透明度動畫，外觀盡量接近現行畫面。</p>
+    <p class="legal">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>
+  </header>
+
+  <div class="dock">
+    <div class="seg" role="tablist" aria-label="特效版本">
+      <button type="button" id="btnOld" class="on" aria-pressed="true">舊版</button>
+      <button type="button" id="btnNew" aria-pressed="false">新版</button>
+    </div>
+    <div class="acts">
+      <button type="button" id="btnEntry">播放進場</button>
+      <button type="button" id="btnPrize">播放跳獎</button>
+      <button type="button" id="btnGrand">播放巨獎</button>
+    </div>
+    <p class="status" id="status">目前為舊版。請選版本後播放進場或跳獎。</p>
+  </div>
+
+  <div class="stage-wrap">
+    <div id="stage" class="stage old" data-mode="old">
+      <div id="world" class="world"></div>
+      <canvas id="fxCanvas" class="fx-canvas" width="412" height="740" aria-hidden="true"></canvas>
+    </div>
+  </div>
+
+  <section class="legend">
+    <h2>兩種作法</h2>
+    <ol>
+      <li><b>舊版</b>：進場會現場把寶珠畫布編成圖檔，龍形飛過與標題使用 filter，舞台光線與跳獎閃光使用 box-shadow，棋格落地使用 brightness 動畫。</li>
+      <li><b>新版</b>：寶珠、光暈、vignette、標題與閃光皆為預先輸出的 webp；粒子集中畫在一張重複使用的 canvas；動畫只改變 transform 與 opacity。</li>
+    </ol>
+  </section>
+  <footer class="foot">
+    <p>預覽圖為本遊戲既有程序繪製的寶石牌與標題，僅供比較特效負擔，不含版權素材。正式機台規則與 RTP 不變。</p>
+    <p><a href="../">返回龍運金殿</a></p>
+  </footer>
+</div>
+<script src="preview.js?v=1"></script>
+</body>
+</html>
