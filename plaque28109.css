@@ -1,12 +1,13 @@
 /* v28.109 preview — 金殿 plaque typography & inner padding.
-   Portrait: hex BET lacquer + gold inner bezel (follows plaque-bet shape),
-   gold text with dark outline and a soft gold neon glow on the values
+   Portrait: gold text with dark outline and a soft gold neon glow on the values
    (breathing mid/high tier only).
    v3: engraved divider removed.
    v4: CREDIT/WIN stack optically centered in the visible plaque opening
    (below the lotus rail, above the bottom coin; >=6px visual air).
-   BET padding left as in v3.
-   Does not change layout grid, control sizes, RTP, or economy. */
+   v28.128: BET uses a flat-top rectangular plaque with a small lotus seated
+   on the rail above the opening (option 2). Label is padded clear of all borders.
+   Hex peak and hex lacquer bezel removed. Does not change layout grid, control
+   sizes, RTP, or economy. */
 
 /* ——— gold type (all orientations) ——— */
 html body .czm small,
@@ -79,14 +80,23 @@ html body .czm{
 
 /* ——— portrait sculpted deck ——— */
 @media (max-width:620px) and (orientation:portrait){
-  /* BET: keep the original slot width, center the stack, inset from the hex sides */
+  /* BET: same 78px slot; padding matches the visible opening of the flat-top plaque
+     (same 27.8%/18.6% formula as CREDIT/WIN, with BET overflow 14/12). */
   html body .czbar .box.czbet{
+    --deck-bet-out-t:14px;
+    --deck-bet-out-b:12px;
+    --deck-bet-out-x:8px;
     justify-content:center!important;
-    padding:8px 16px!important;
     box-sizing:border-box!important;
     flex:0 0 auto!important;
     min-width:78px!important;
     width:78px!important;
+    background:linear-gradient(180deg,#3a1520,#14080c)!important;
+    border-color:transparent!important;
+    border-radius:8px!important;
+    padding:calc((clamp(46px,6.4svh,58px) + 14px + 12px) * .278 - 14px + 6px)
+            8px
+            calc((clamp(46px,6.4svh,58px) + 14px + 12px) * .186 - 12px + 6px)!important;
   }
   html body .czm{
     flex:1 1 0!important;
@@ -105,8 +115,9 @@ html body .czm{
   html body .czbar .box.czbet small{
     font-size:clamp(9px,2.5vw,10.5px)!important;
     line-height:1.05!important;
-    letter-spacing:.03em!important;
-    margin-bottom:0!important;
+    letter-spacing:.02em!important;
+    margin-bottom:1px!important;
+    position:relative;
     z-index:1;
   }
   html body .czbar .box.czbet b{
@@ -115,20 +126,12 @@ html body .czm{
     z-index:1;
   }
 
-  /* lacquer + gold inner bezel, same box as the plaque art, shows through its hole */
+  /* v28.128: no hex lacquer bezel; fill is the box background, frame is ::after */
   html body .czbar .box.czbet::before{
-    content:""!important;
-    position:absolute;
-    top:calc(var(--deck-bet-out-t) * -1);
-    bottom:calc(var(--deck-bet-out-b) * -1);
-    left:calc(var(--deck-bet-out-x) * -1);
-    right:calc(var(--deck-bet-out-x) * -1);
-    z-index:-2;
-    pointer-events:none;
+    content:none!important;
+    display:none!important;
+    background:none!important;
     animation:none!important;
-    translate:none!important;
-    opacity:1!important;
-    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><defs><linearGradient id='lq' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%233a1520'/><stop offset='1' stop-color='%2314080c'/></linearGradient><linearGradient id='gl' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23ffe9b0'/><stop offset='.5' stop-color='%23d4a441'/><stop offset='1' stop-color='%238a5a18'/></linearGradient></defs><polygon points='29,24.5 71,24.5 85.5,52 71,81 29,81 14.5,52' fill='url(%23lq)' stroke='url(%23gl)' stroke-width='1.15' stroke-linejoin='round'/></svg>") center / 100% 100% no-repeat!important;
   }
 
   html body .czm small{

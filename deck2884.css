@@ -1,4 +1,5 @@
 /* v28.84 preview — skinnable 金殿 control deck (default skin: gold).
+   v28.128: BET plaque is a flat-top rectangle with a small lotus on the rail (option 2).
    外觀商店 later: document.documentElement.dataset.deckSkin = '<id>';
    add an html[data-deck-skin="<id>"] block pointing at assets/deck/skins/<id>/.
    Overlay / paint only — no padding, gap, or control-size changes. */
@@ -9,16 +10,16 @@
   --deck-frame:url("assets/deck/skins/gold/frame.webp?v=2887");
   --deck-crest:url("assets/deck/skins/gold/crest.webp?v=2887");
   --deck-plaque:url("assets/deck/skins/gold/plaque.webp?v=2887");
-  --deck-plaque-bet:url("assets/deck/skins/gold/plaque-bet.webp?v=2887");
+  --deck-plaque-bet:url("assets/deck/skins/gold/plaque-bet.webp?v=28128");
   --deck-glow:255,214,140;
   --deck-lacquer:42,12,18;
   --deck-frame-over-top:4px;
   --deck-plq-out-t:14px;
   --deck-plq-out-b:12px;
   --deck-plq-out-x:7px;
-  --deck-bet-out-t:22px;
-  --deck-bet-out-b:14px;
-  --deck-bet-out-x:10px;
+  --deck-bet-out-t:14px;
+  --deck-bet-out-b:12px;
+  --deck-bet-out-x:8px;
 }
 html[data-deck-skin="gold"]{
   --deck-skin:gold;
@@ -26,7 +27,7 @@ html[data-deck-skin="gold"]{
   --deck-frame:url("assets/deck/skins/gold/frame.webp?v=2887");
   --deck-crest:url("assets/deck/skins/gold/crest.webp?v=2887");
   --deck-plaque:url("assets/deck/skins/gold/plaque.webp?v=2887");
-  --deck-plaque-bet:url("assets/deck/skins/gold/plaque-bet.webp?v=2887");
+  --deck-plaque-bet:url("assets/deck/skins/gold/plaque-bet.webp?v=28128");
   --deck-glow:255,214,140;
   --deck-lacquer:42,12,18;
 }
@@ -124,10 +125,10 @@ html[data-deck-skin="gold"]{
 
   html body .czbar .box.czbet{
     clip-path:none !important;
-    background:transparent !important;
+    background:linear-gradient(180deg,#3a1520,#14080c) !important;
     border-color:transparent !important;
-    border-radius:0 !important;
-    justify-content:flex-end !important;
+    border-radius:8px !important;
+    justify-content:center !important;
     padding-top:10px !important;
     padding-bottom:6px !important;
   }
