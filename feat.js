@@ -1,4 +1,5 @@
 /* v28.119 feature hall SFX via FEATSX (B/C samples); math/RTP unchanged */
+/* v28.129 plinko slots: baked plaques + HTML labels; math/RTP unchanged */
 /* v20.3 extra events: 旋風聚寶 / 幸運彈珠 / 三重彩金輪 / 狂熱倍數 / 購買寶珠對碰 — play money only */
 (function(){
 if(typeof CZM==='undefined')return;
@@ -251,8 +252,33 @@ async function plinko(bet){fxUse('plinko');const tot=bet*NL,R=8;const L=stage('�
  const SP=window.B22&&B22.SPR,PEG=SP&&SP.peg,BALL=SP&&SP.ball;
  const SH=Math.max(22,Math.min(30,H*.15)),sp=W/(R+2),gx=(r,i)=>W/2+(i-r/2)*sp,gy=r=>10+r*(H-SH-22)/R,SY=H-SH-4,SW=sp-3;
  let path=[0];for(let r=0;r<R;r++)path.push(path[r]+(Math.random()<.5?0:1));const slot=path[R];
- const slotCol=v=>v>=100?['#fff6cf','#ffd65a','#a8640c']:v>=25?['#ffd0e6','#ff6fae','#8a1048']:v>=8?['#d6fff0','#3fc69a','#0f5a46']:['#f8e0b0','#c45a28','#5a1808'];
  const trail=[],hits=[],parts=[];let hl=-1,glow=0,ball=null,drop=null,raf=0,live=1;
+ const theme=(window.CZM&&CZM.id)||'sakura';
+ const plTier=v=>v>=100?'100':v>=25?'25':v>=8?'8':'low';
+ ;['100','25','8','low'].forEach(tr=>{const im=new Image();im.src='assets/featgold/plinko/plq-'+theme+'-'+tr+'.webp?v=28129'});
+ const slots=document.createElement('div');slots.className='plSlots';slots.setAttribute('aria-hidden','true');
+ slots.style.cssText='left:0;top:'+(SY-1)+'px;width:'+W+'px;height:'+(SH+6)+'px';
+ const rail=document.createElement('div');rail.className='plRail';slots.appendChild(rail);
+ const slotEls=[];
+ PL.forEach((v,i)=>{
+  const el=document.createElement('i');el.className='plSlot';
+  el.style.left=(gx(R,i)-SW/2+0.6)+'px';el.style.width=(SW-1.2)+'px';el.style.height=SH+'px';
+  el.style.backgroundImage='url(assets/featgold/plinko/plq-'+theme+'-'+plTier(v)+'.webp?v=28129)';
+  const lab=document.createElement('b');lab.textContent='\u00d7'+v;el.appendChild(lab);slots.appendChild(el);slotEls.push(el);
+ });
+ L.appendChild(slots);
+ const fitSlots=()=>{
+  slotEls.forEach(el=>{
+   const lab=el.querySelector('b');if(!lab)return;
+   const ww=el.offsetWidth||parseFloat(el.style.width)||SW;
+   const num=parseInt(lab.textContent.replace(/\D/g,''),10);
+   const base=num>=100?ww*0.26:num>=10?ww*0.34:ww*0.42;
+   lab.style.fontSize=Math.max(7,Math.min(11,base))+'px';
+   const maxW=ww-3.5,maxH=(el.offsetHeight||SH)-4;let fs=parseFloat(lab.style.fontSize)||10;
+   for(let k=0;k<20;k++){if(lab.offsetWidth<=maxW&&lab.offsetHeight<=maxH)break;fs*=0.88;lab.style.fontSize=fs+'px'}
+  });
+ };
+ fitSlots();requestAnimationFrame(fitSlots);
  const pN=innerWidth<=360?3:6;
  function spawn(px,py,n){if(RM)return;for(let i=0;i<n;i++)parts.push({x0:px,y0:py,x1:px+(Math.random()-.5)*28,y1:py-(10+Math.random()*22),x2:px+(Math.random()-.5)*64,y2:py-(20+Math.random()*40),x3:px+(Math.random()-.5)*88,y3:py+(Math.random()-.5)*40,life:0,max:16+Math.random()*16|0,sz:1.8+Math.random()*2.8})}
  function bez(p,u){const t=u,s=1-t,ss=s*s,tt=t*t;return[ss*s*p.x0+3*ss*t*p.x1+3*s*tt*p.x2+tt*t*p.x3,ss*s*p.y0+3*ss*t*p.y1+3*s*tt*p.y2+tt*t*p.y3]}
@@ -272,10 +298,6 @@ async function plinko(bet){fxUse('plinko');const tot=bet*NL,R=8;const L=stage('�
    x.save();x.globalCompositeOperation='lighter';x.beginPath();x.arc(px,py,5+age*16,0,7);
    x.strokeStyle='rgba('+FXC.glow+','+(1-age)+')';x.lineWidth=2.4*(1-age);x.stroke();
    x.beginPath();x.arc(px,py,4+age*6,0,7);x.fillStyle='rgba('+FXC.glow+','+(.42*(1-age))+')';x.fill();x.restore()});
-  PL.forEach((v,i)=>{const sx=gx(R,i)-SW/2,c=slotCol(v);const gg=x.createLinearGradient(0,SY,0,SY+SH);gg.addColorStop(0,c[0]);gg.addColorStop(.45,c[1]);gg.addColorStop(1,c[2]);
-   x.fillStyle=gg;x.beginPath();x.roundRect(sx,SY,SW,SH,6);x.fill();x.lineWidth=i===hl?2.4:1.5;x.strokeStyle=i===hl?FXC.fx:'#5a3200';x.stroke();
-   if(i===hl){x.save();x.globalCompositeOperation='lighter';x.fillStyle='rgba('+FXC.glow+','+(.32+.28*Math.sin(glow))+')';x.beginPath();x.roundRect(sx-3,SY-3,SW+6,SH+6,8);x.fill();x.restore()}
-   x.font='900 11px "Noto Sans TC",sans-serif';x.textAlign='center';x.lineWidth=3;x.strokeStyle='rgba(40,10,0,.85)';x.strokeText('×'+v,sx+SW/2,SY+SH/2+4,SW-2);x.fillStyle='#fff';x.fillText('×'+v,sx+SW/2,SY+SH/2+4,SW-2)});
   if(parts.length){x.save();x.globalCompositeOperation='lighter';
    for(let i=parts.length-1;i>=0;i--){const p=parts[i];p.life++;const u=p.life/p.max;if(u>=1){parts.splice(i,1);continue}
     const q=bez(p,u);x.globalAlpha=(1-u)*.9;x.beginPath();x.arc(q[0],q[1],p.sz*(1-u*.35),0,7);x.fillStyle='rgba('+FXC.glow+',1)';x.fill()}
@@ -307,7 +329,7 @@ async function plinko(bet){fxUse('plinko');const tot=bet*NL,R=8;const L=stage('�
   try{if(!fxPlay('hit',r))plPeg(r)}catch(e){}}
  const destX=gx(R,slot),destY=SY+SH/2,[sx0,sy0]=ball||[destX,gy(R)-6];
  for(let s=1;s<=8;s++){const k=s/8;ball=[sx0+(destX-sx0)*k,sy0+(destY-sy0)*k];trail.push(ball.slice());if(trail.length>14)trail.shift();await sleep(RM?8:16)}
- hl=slot;const mult=PL[slot];const tier=mult>=100?2:mult>=25?1:0;
+ hl=slot;if(slotEls[slot])slotEls[slot].classList.add('on');const mult=PL[slot];const tier=mult>=100?2:mult>=25?1:0;
  try{if(!fxPlay('land',tier))plLand(tier)}catch(e){}
  fxImpact();
  if(tier>=1){fxLater(()=>{fxStreaks();fxRain(tier>=2?(innerWidth<=360?16:24):(innerWidth<=360?12:18))})}

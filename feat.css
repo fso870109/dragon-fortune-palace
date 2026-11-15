@@ -1,3 +1,4 @@
+/* v28.129 plinko slots: baked plaques + HTML labels */
 #twBox{position:absolute;right:8px;bottom:8px;z-index:6;display:flex;align-items:center;gap:6px;padding:4px 8px 4px 4px;border-radius:14px;background:rgba(10,4,20,.72);border:1px solid rgba(255,214,120,.5);pointer-events:none;max-width:46%}
 #twBox .tr{width:30px;height:30px;flex:none;border-radius:50%;background:conic-gradient(#7fe0ff calc(var(--p)*1%),rgba(255,255,255,.15) 0);display:grid;place-items:center}
 #twBox .tr i{width:22px;height:22px;border-radius:50%;background:#1a0b2a;display:grid;place-items:center;font:900 13px/1 "Noto Sans TC",sans-serif;color:#aef0ff;font-style:normal}
@@ -19,6 +20,14 @@
 .rfx.plStage{contain:paint;background:radial-gradient(circle at 50% 42%,rgba(90,24,50,.22),rgba(10,3,20,.5))}
 .rfx.plStage .twRays{opacity:.82}
 .rfx.plStage .twRays.plDim{opacity:.3}
+.rfx.plStage .plSlots{position:absolute;pointer-events:none;z-index:6}
+.rfx.plStage .plSlots .plRail{position:absolute;inset:0;background:#12060c}
+.rfx.plStage .plSlot{position:absolute;top:1px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;overflow:hidden;background-position:center;background-size:100% 100%;background-repeat:no-repeat}
+.rfx.plStage .plSlot>b{font:800 11px/1 "Noto Sans TC",sans-serif;color:#fffce8;letter-spacing:-.04em;-webkit-text-stroke:.07em #1a0800;paint-order:stroke fill;text-shadow:0 1px 0 #1a0800;white-space:nowrap}
+.rfx.plStage .plSlot.on{box-shadow:0 0 0 2px #ffd36a,0 0 12px rgba(255,211,106,.85);z-index:1}
+.rfx.plStage .plSlot.on::after{content:"";position:absolute;inset:0;background:rgba(255,214,106,.28);pointer-events:none;animation:plSlotGlow .6s ease-in-out infinite alternate}
+@keyframes plSlotGlow{from{opacity:.35}to{opacity:.85}}
+
 .plPop{position:absolute;left:50%;top:56%;translate:-50% -50%;z-index:8;pointer-events:none;text-align:center;max-width:calc(100% - 12px);filter:drop-shadow(0 0 18px rgba(var(--fx-glow,255,176,48),.95));animation:plPopIn .5s cubic-bezier(.2,1.7,.35,1) both}
 .plPop b.twGold{display:flex;justify-content:center;align-items:flex-end;font:900 clamp(34px,12vw,56px)/1 TCDisp,"Noto Serif TC",serif;letter-spacing:.04em;max-width:100%;white-space:nowrap}
 .plPop.t1 b.twGold{font-size:clamp(38px,13vw,60px)}
@@ -139,7 +148,7 @@ body.twShake.twPunch #machine{animation:twScreenShake .5s ease-out}
 @keyframes twCardOut{to{transform:scale(.82) rotateY(16deg);opacity:0;filter:blur(3px) brightness(1.5)}}
 
 @media (prefers-reduced-motion:reduce){
-  .twRays,.twPlate,.twStage.twBoom .twPlate,.twFlash,.twFountain,.twAmt.pulse,.twAmt.tick,.twSum.in,.twTier,.twSlam,.twGold>i,.twShineBar,.twFlare,.twCrown,.twPlaque,#twWorld .twWvig,#twWorld .twWbloom,#twWorld .twWflash,#twWorld .twWrings i,#twWorld .twWstreaks i,#twWorld .twWrain i,body.twShake #machine,body.twPunch #machine,.rfxRes.rfxHot,.twCard.in,.twCard.out,.rfx.twStage.twCollapse,.plPop{animation:none!important}
+  .twRays,.twPlate,.twStage.twBoom .twPlate,.twFlash,.twFountain,.twAmt.pulse,.twAmt.tick,.twSum.in,.twTier,.twSlam,.twGold>i,.twShineBar,.twFlare,.twCrown,.twPlaque,#twWorld .twWvig,#twWorld .twWbloom,#twWorld .twWflash,#twWorld .twWrings i,#twWorld .twWstreaks i,#twWorld .twWrain i,body.twShake #machine,body.twPunch #machine,.rfxRes.rfxHot,.twCard.in,.twCard.out,.rfx.twStage.twCollapse,.plPop,.rfx.plStage .plSlot.on::after{animation:none!important}
   .twRays{opacity:.3}
   .twSum,.twCard .twSum{opacity:1}
   .twGold>i{-webkit-text-fill-color:transparent}
