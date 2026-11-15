@@ -1,12 +1,12 @@
-/* 龍運金殿 小遊戲音效試聽 v2 — real CC0 recordings, layered */
+/* 龍運金殿 小遊戲音效試聽 v3 — casino / slot-hall foley + original jingles */
 (function(){
 "use strict";
 
 const STYLES = [
-  {id:"A", name:"金鑼戰鼓", desc:"真實銅鑼、戰鼓與鈸的重擊，低頻扎實，像廟會開場。"},
-  {id:"B", name:"金幣雨爆", desc:"真實金幣與籌碼灑落，再疊上鐘鈴與風鈴，贏的時候金光四濺。"},
-  {id:"C", name:"龍吼雷霆", desc:"真實雷聲、爆炸與龍吼錄音，氣勢最足、最有壓迫感。"},
-  {id:"D", name:"霓虹電子", desc:"真實彈珠台、拉霸轉輪、電子鼓與爆裂聲，節奏明亮、收尾乾脆。"}
+  {id:"A", name:"經典拉霸廳", desc:"拉霸鈴、轉輪喀啦與停輪頓點，加上投幣盤硬幣灑落與往上滾分的中獎鈴聲。"},
+  {id:"B", name:"澳門豪華廳", desc:"更亮的豪華中獎過門、大贏閃爍與金幣瀑布，再疊頭獎警鈴與輕聲喝采。"},
+  {id:"C", name:"柏青哥彈珠廳", desc:"彈珠發射、珠雨碰撞與入袋叮一聲，頭獎是快速閃爍鈴聲與大當過門。"},
+  {id:"D", name:"金殿東方廳", desc:"同樣有鈴、出鈔與滾分，大贏加鑼、頭獎加鞭炮，中獎過門帶古箏與琵琶感的上行音色。"}
 ];
 
 const GAMES = [
@@ -45,24 +45,23 @@ const GAMES = [
   ]}
 ];
 
+const V="?v=3";
 const SFX = {
-  gongBig:"sfx/gong-big.mp3?v=2", gongMid:"sfx/gong-mid.mp3?v=2", gongSweet:"sfx/gong-sweet.mp3?v=2",
-  taikoA:"sfx/taiko-a.mp3?v=2", taikoB:"sfx/taiko-b.mp3?v=2", taikoC:"sfx/taiko-c.mp3?v=2",
-  bassTom:"sfx/bass-tom.mp3?v=2", tomMid:"sfx/tom-mid.mp3?v=2", snare:"sfx/snare.mp3?v=2",
-  cymbal:"sfx/cymbal.mp3?v=2", cymbalTemple:"sfx/cymbal-temple.mp3?v=2",
-  thunder:"sfx/thunder.mp3?v=2", thunderLow:"sfx/thunder-low.mp3?v=2",
-  boom:"sfx/boom.mp3?v=2", boomFar:"sfx/boom-far.mp3?v=2", cracker:"sfx/cracker.mp3?v=2",
-  coins:"sfx/coins.mp3?v=2", coinsB:"sfx/coins-b.mp3?v=2", coin:"sfx/coin.mp3?v=2", coinB:"sfx/coin-b.mp3?v=2",
-  chips:"sfx/chips.mp3?v=2", chipsB:"sfx/chips-b.mp3?v=2",
-  bellChurch:"sfx/bell-church.mp3?v=2", bellBox:"sfx/bell-box.mp3?v=2", bellSmall:"sfx/bell-small.mp3?v=2",
-  chime:"sfx/chime.mp3?v=2", chimePend:"sfx/chime-pend.mp3?v=2", counterBell:"sfx/counter-bell.mp3?v=2",
-  whoosh:"sfx/whoosh.mp3?v=2", whooshB:"sfx/whoosh-b.mp3?v=2", whooshAir:"sfx/whoosh-air.mp3?v=2",
-  ballA:"sfx/ball-a.mp3?v=2", ballB:"sfx/ball-b.mp3?v=2", ballC:"sfx/ball-c.mp3?v=2",
-  flipper:"sfx/flipper.mp3?v=2", flipperB:"sfx/flipper-b.mp3?v=2", knocker:"sfx/knocker.mp3?v=2",
-  reel:"sfx/reel.mp3?v=2", reelStop:"sfx/reel-stop.mp3?v=2", ratchet:"sfx/ratchet.mp3?v=2", reelMech:"sfx/reel-mech.mp3?v=2",
-  roar:"sfx/roar.mp3?v=2", roarB:"sfx/roar-b.mp3?v=2", growl:"sfx/growl.mp3?v=2",
-  anvil:"sfx/anvil.mp3?v=2", gavel:"sfx/gavel.mp3?v=2", theater:"sfx/theater.mp3?v=2",
-  edrum:"sfx/edrum.mp3?v=2", chimesCluster:"sfx/chimes-cluster.mp3?v=2", bumper:"sfx/bumper.mp3?v=2"
+  aWin:"sfx/a-win.mp3"+V, aRollup:"sfx/a-rollup.mp3"+V, aJackpot:"sfx/a-jackpot.mp3"+V,
+  bFanfare:"sfx/b-fanfare.mp3"+V, bSparkle:"sfx/b-sparkle.mp3"+V, bAlarm:"sfx/b-alarm.mp3"+V,
+  cDing:"sfx/c-ding.mp3"+V, cRapid:"sfx/c-rapid.mp3"+V, cFanfare:"sfx/c-fanfare.mp3"+V,
+  dRiff:"sfx/d-riff.mp3"+V, dWin:"sfx/d-win.mp3"+V, dJackpot:"sfx/d-jackpot.mp3"+V,
+  coins:"sfx/coins.mp3"+V, coinsB:"sfx/coins-b.mp3"+V, coin:"sfx/coin.mp3"+V, coinB:"sfx/coin-b.mp3"+V,
+  chips:"sfx/chips.mp3"+V, payout:"sfx/payout.mp3"+V, tray:"sfx/tray.mp3"+V,
+  reel:"sfx/reel.mp3"+V, reelStop:"sfx/reel-stop.mp3"+V, ratchet:"sfx/ratchet.mp3"+V, reelMech:"sfx/reel-mech.mp3"+V,
+  knocker:"sfx/knocker.mp3"+V, flipper:"sfx/flipper.mp3"+V, flipperB:"sfx/flipper-b.mp3"+V, bumper:"sfx/bumper.mp3"+V,
+  ballA:"sfx/ball-a.mp3"+V, ballB:"sfx/ball-b.mp3"+V, ballC:"sfx/ball-c.mp3"+V,
+  whoosh:"sfx/whoosh.mp3"+V, whooshB:"sfx/whoosh-b.mp3"+V,
+  gongBig:"sfx/gong-big.mp3"+V, gongMid:"sfx/gong-mid.mp3"+V, gongSweet:"sfx/gong-sweet.mp3"+V,
+  cracker:"sfx/cracker.mp3"+V,
+  bellChurch:"sfx/bell-church.mp3"+V, bellBox:"sfx/bell-box.mp3"+V, bellSmall:"sfx/bell-small.mp3"+V,
+  chime:"sfx/chime.mp3"+V, chimesCluster:"sfx/chimes-cluster.mp3"+V, counterBell:"sfx/counter-bell.mp3"+V,
+  anvil:"sfx/anvil.mp3"+V, applause:"sfx/applause.mp3"+V, cheer:"sfx/cheer.mp3"+V
 };
 
 const errors=[];
@@ -76,26 +75,26 @@ function makeSoftClip(n){
   return c;
 }
 function makeIR(ctx,t,decay){
-  const n=Math.max(1,Math.ceil(ctx.sampleRate*(t||1.15)));
+  const n=Math.max(1,Math.ceil(ctx.sampleRate*(t||.85)));
   const b=ctx.createBuffer(2,n,ctx.sampleRate);
   for(let ch=0;ch<2;ch++){
     const d=b.getChannelData(ch);
-    for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n, decay||3.4);
+    for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n, decay||3.8);
   }
   return b;
 }
 function buildGraph(ctx){
   const input=ctx.createGain();input.gain.value=1;
   const dry=ctx.createGain();dry.gain.value=1;
-  const revSend=ctx.createGain();revSend.gain.value=.22;
-  const conv=ctx.createConvolver();conv.buffer=makeIR(ctx,1.2,3.3);
-  const master=ctx.createGain();master.gain.value=.78;
+  const revSend=ctx.createGain();revSend.gain.value=.12;
+  const conv=ctx.createConvolver();conv.buffer=makeIR(ctx,.9,3.8);
+  const master=ctx.createGain();master.gain.value=.76;
   const comp=ctx.createDynamicsCompressor();
-  comp.threshold.value=-18;comp.knee.value=10;comp.ratio.value=3.2;comp.attack.value=.004;comp.release.value=.14;
+  comp.threshold.value=-16;comp.knee.value=10;comp.ratio.value=3;comp.attack.value=.004;comp.release.value=.14;
   const limit=ctx.createDynamicsCompressor();
-  limit.threshold.value=-2.2;limit.knee.value=0;limit.ratio.value=18;limit.attack.value=.001;limit.release.value=.08;
+  limit.threshold.value=-3.0;limit.knee.value=0;limit.ratio.value=20;limit.attack.value=.001;limit.release.value=.08;
   const clip=ctx.createWaveShaper();clip.curve=makeSoftClip(2048);clip.oversample="2x";
-  const outGain=ctx.createGain();outGain.gain.value=.9;
+  const outGain=ctx.createGain();outGain.gain.value=.88;
   const analyser=ctx.createAnalyser();analyser.fftSize=1024;analyser.smoothingTimeConstant=.5;
   input.connect(dry);input.connect(revSend);revSend.connect(conv);
   dry.connect(master);conv.connect(master);
@@ -146,98 +145,105 @@ function sub(graph,t,v,f,f2,d){
   const c=graph.ctx,o=c.createOscillator(),g=c.createGain(),fl=c.createBiquadFilter();
   o.type="sine";o.frequency.setValueAtTime(f||58,t);o.frequency.exponentialRampToValueAtTime(Math.max(20,f2||28),t+(d||.5));
   fl.type="lowpass";fl.frequency.value=220;
-  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v||.22,t+.006);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v||.16,t+.006);
   g.gain.exponentialRampToValueAtTime(.0008,t+(d||.5));
   o.connect(fl);fl.connect(g);g.connect(graph.input);
   o.start(t);track(o,t+(d||.5)+.05);
 }
 
 const BALLS=["ballA","ballB","ballC"];
-const COINS=["coin","coinB","chips","chipsB"];
+function cascade(g,t,n,gap,gain){
+  for(let i=0;i<(n||5);i++) hit(g,BALLS[i%3],t+i*(gap||.07),{gain:(gain||.55)*(1-i*.06),rate:.95+(i%5)*.06,dur:.35});
+}
+function hopper(g,t,gain){
+  hit(g,"payout",t,{gain:gain==null?.7:gain});
+  hit(g,"tray",t,{gain:.45});
+  hit(g,"coins",t+.04,{gain:.5});
+}
 
 const PLAY={
   A:{
-    open(g,t){ hit(g,"taikoA",t,{gain:.9}); hit(g,"gongBig",t,{gain:.72,rate:.98}); hit(g,"bassTom",t,{gain:.7,rate:.92}); hit(g,"cymbalTemple",t+.02,{gain:.35}); hit(g,"anvil",t,{gain:.28,lp:1800}); sub(g,t,.28,62,26,.55); },
-    shot(g,t){ hit(g,"whooshAir",t,{gain:.7}); hit(g,"whoosh",t+.02,{gain:.55,rate:1.05}); hit(g,"gongSweet",t+.12,{gain:.28,rate:1.15,lp:4000}); },
-    hit(g,t,k){ const i=(k||0)%3; hit(g,BALLS[i],t,{gain:.85,rate:1+(i*.04)}); hit(g,"knocker",t,{gain:.28,rate:1.15+((k||0)%4)*.04}); hit(g,"snare",t,{gain:.18,rate:1.2,hp:800}); },
-    land(g,t){ hit(g,"taikoB",t,{gain:.9}); hit(g,"gongMid",t,{gain:.6}); hit(g,"theater",t,{gain:.4}); hit(g,"coin",t+.04,{gain:.45}); sub(g,t,.3,64,26,.55); },
-    jackpot(g,t){ hit(g,"gongBig",t,{gain:.8}); hit(g,"taikoA",t,{gain:.85}); hit(g,"cymbal",t,{gain:.45}); hit(g,"bellChurch",t+.04,{gain:.55}); hit(g,"coins",t+.06,{gain:.7}); hit(g,"chimesCluster",t+.1,{gain:.4}); sub(g,t,.32,52,24,.7); },
-    spin(g,t){ hit(g,"ratchet",t,{gain:.55}); hit(g,"reelMech",t,{gain:.4,rate:1.05}); hit(g,"snare",t+.15,{gain:.12,rate:1.1}); hit(g,"snare",t+.45,{gain:.1,rate:1.2}); hit(g,"snare",t+.75,{gain:.1,rate:1.3}); hit(g,"cymbalTemple",t,{gain:.18,off:.05}); },
-    stop(g,t){ hit(g,"taikoC",t,{gain:.9}); hit(g,"gongMid",t,{gain:.65}); hit(g,"anvil",t,{gain:.4}); sub(g,t,.28,70,28,.45); },
-    collect(g,t){ for(let i=0;i<7;i++){ hit(g,i%2?"counterBell":"coin",t+i*.07,{gain:.32,rate:1+i*.03,dur:.35}); } },
-    lock(g,t){ hit(g,"counterBell",t,{gain:.7}); hit(g,"gongSweet",t,{gain:.3,rate:1.2,dur:.6}); },
-    respin(g,t){ hit(g,"ratchet",t,{gain:.55}); hit(g,"whoosh",t,{gain:.4}); },
-    miss(g,t){ hit(g,"gavel",t,{gain:.55,rate:.9,lp:1600}); hit(g,"tomMid",t,{gain:.25,rate:.85,lp:800}); },
-    last(g,t){ hit(g,"taikoB",t,{gain:.55,rate:.95}); hit(g,"bellBox",t,{gain:.35}); hit(g,"theater",t,{gain:.35}); },
-    grand(g,t){ hit(g,"gongBig",t,{gain:.85}); hit(g,"taikoA",t,{gain:.9}); hit(g,"taikoC",t+.12,{gain:.55,rate:.92}); hit(g,"cymbal",t,{gain:.5}); hit(g,"bellChurch",t+.05,{gain:.6}); hit(g,"coins",t+.08,{gain:.65}); hit(g,"chimesCluster",t+.1,{gain:.45}); sub(g,t,.34,50,22,.8); },
-    minor(g,t){ hit(g,"gongSweet",t,{gain:.65}); hit(g,"coinsB",t,{gain:.55}); hit(g,"bellSmall",t,{gain:.5}); hit(g,"taikoC",t,{gain:.4,rate:1.05}); },
-    roll(g,t){ hit(g,"ratchet",t,{gain:.5}); for(let i=0;i<8;i++) hit(g,"tomMid",t+i*.1,{gain:.22,rate:.95+i*.04,dur:.2}); },
-    burst(g,t){ hit(g,"taikoA",t,{gain:.9}); hit(g,"gongMid",t,{gain:.7}); hit(g,"cymbal",t,{gain:.45}); hit(g,"coinsB",t+.05,{gain:.4}); sub(g,t,.3,60,26,.55); }
+    open(g,t){ hit(g,"knocker",t,{gain:.6}); hit(g,"aWin",t+.04,{gain:.72}); hit(g,"bellSmall",t,{gain:.28}); },
+    shot(g,t){ hit(g,"whoosh",t,{gain:.62,rate:1.08}); hit(g,"flipper",t+.1,{gain:.35,rate:1.1}); },
+    hit(g,t,k){ const i=(k||0)%3; hit(g,BALLS[i],t,{gain:.8,rate:1+(i*.05)}); hit(g,"knocker",t,{gain:.28,rate:1.12+((k||0)%4)*.04,dur:.28}); },
+    land(g,t){ hit(g,"reelStop",t,{gain:.7}); hit(g,"coin",t,{gain:.6}); hit(g,"tray",t,{gain:.4}); hit(g,"aWin",t+.05,{gain:.7}); },
+    jackpot(g,t){ hit(g,"aJackpot",t,{gain:.78}); hopper(g,t+.08,.62); hit(g,"bellBox",t,{gain:.32}); hit(g,"coinsB",t+.35,{gain:.45}); sub(g,t,.16,62,28,.5); },
+    spin(g,t){ hit(g,"reel",t,{gain:.72}); hit(g,"ratchet",t,{gain:.28,lp:4200}); },
+    stop(g,t){ hit(g,"reelStop",t,{gain:.82}); hit(g,"anvil",t,{gain:.38,lp:2200}); hit(g,"knocker",t,{gain:.4}); sub(g,t,.14,80,32,.35); },
+    collect(g,t){ hopper(g,t,.7); hit(g,"aRollup",t,{gain:.62}); hit(g,"coinsB",t+.2,{gain:.4}); },
+    lock(g,t){ hit(g,"counterBell",t,{gain:.65}); hit(g,"coinB",t,{gain:.35,rate:1.08}); },
+    respin(g,t){ hit(g,"reel",t,{gain:.6,dur:1.15}); hit(g,"whooshB",t,{gain:.3}); },
+    miss(g,t){ hit(g,"knocker",t,{gain:.4,rate:.88,lp:1800}); hit(g,"flipperB",t,{gain:.32,rate:.9}); },
+    last(g,t){ hit(g,"bellBox",t,{gain:.5}); hit(g,"knocker",t,{gain:.35,rate:.95}); },
+    grand(g,t){ hit(g,"aJackpot",t,{gain:.8}); hopper(g,t+.06,.68); hit(g,"bellChurch",t+.04,{gain:.35}); hit(g,"bellBox",t,{gain:.3}); hit(g,"coinsB",t+.4,{gain:.5}); sub(g,t,.18,52,24,.6); },
+    minor(g,t){ hit(g,"aWin",t,{gain:.72}); hit(g,"coinsB",t,{gain:.55}); hit(g,"tray",t,{gain:.35}); hit(g,"bellSmall",t,{gain:.35}); },
+    roll(g,t){ hit(g,"reel",t,{gain:.55,dur:1.2}); hit(g,"ratchet",t,{gain:.35}); for(let i=0;i<6;i++) hit(g,"knocker",t+i*.14,{gain:.2,rate:1+i*.03,dur:.16}); },
+    burst(g,t){ hit(g,"aRollup",t,{gain:.75}); hopper(g,t,.55); hit(g,"bellSmall",t,{gain:.3}); sub(g,t,.16,70,30,.45); }
   },
   B:{
-    open(g,t){ hit(g,"coins",t,{gain:.8}); hit(g,"chips",t,{gain:.5}); hit(g,"chime",t,{gain:.45}); hit(g,"bellSmall",t,{gain:.4}); hit(g,"taikoC",t,{gain:.35,lp:900}); sub(g,t,.16,70,32,.4); },
-    shot(g,t){ hit(g,"whoosh",t,{gain:.5,hp:400}); hit(g,"coinsB",t,{gain:.45}); hit(g,"coin",t+.08,{gain:.55,rate:1.1}); },
-    hit(g,t,k){ const n=COINS[(k||0)%4]; hit(g,n,t,{gain:.8,rate:.96+((k||0)%5)*.05}); hit(g,BALLS[(k||0)%3],t,{gain:.25}); },
-    land(g,t){ hit(g,"coins",t,{gain:.85}); hit(g,"coinB",t,{gain:.55}); hit(g,"bellSmall",t,{gain:.5}); hit(g,"tomMid",t,{gain:.4}); sub(g,t,.18,64,30,.45); },
-    jackpot(g,t){ hit(g,"coins",t,{gain:.9}); hit(g,"coinsB",t+.08,{gain:.7}); hit(g,"chimesCluster",t,{gain:.55}); hit(g,"bellChurch",t+.04,{gain:.5}); hit(g,"chime",t+.06,{gain:.45}); hit(g,"chipsB",t,{gain:.4}); hit(g,"gongSweet",t,{gain:.3}); sub(g,t,.22,55,26,.6); },
-    spin(g,t){ hit(g,"coinsB",t,{gain:.45}); hit(g,"reelMech",t,{gain:.3}); for(let i=0;i<8;i++) hit(g,COINS[i%4],t+i*.16,{gain:.35,rate:1+i*.03,dur:.3}); },
-    stop(g,t){ hit(g,"chime",t,{gain:.55}); hit(g,"coins",t,{gain:.7}); hit(g,"bellSmall",t,{gain:.45}); hit(g,"bassTom",t,{gain:.35}); },
-    collect(g,t){ for(let i=0;i<8;i++) hit(g,COINS[i%4],t+i*.06,{gain:.5,rate:1+i*.04,dur:.28}); },
-    lock(g,t){ hit(g,"coinB",t,{gain:.8,rate:1.08}); hit(g,"bellSmall",t,{gain:.5}); hit(g,"chimePend",t,{gain:.3,dur:.5}); },
-    respin(g,t){ hit(g,"coinsB",t,{gain:.5}); hit(g,"whooshB",t,{gain:.4}); },
-    miss(g,t){ hit(g,"coin",t,{gain:.3,rate:.8,lp:2500}); },
-    last(g,t){ hit(g,"chimePend",t,{gain:.45}); hit(g,"coinB",t,{gain:.5}); hit(g,"bellSmall",t+.05,{gain:.4}); },
-    grand(g,t){ hit(g,"coins",t,{gain:.9}); hit(g,"coinsB",t+.1,{gain:.8}); hit(g,"chimesCluster",t,{gain:.6}); hit(g,"bellChurch",t,{gain:.55}); hit(g,"chime",t+.05,{gain:.5}); hit(g,"gongSweet",t,{gain:.4}); hit(g,"chipsB",t,{gain:.45}); sub(g,t,.24,50,24,.7); },
-    minor(g,t){ hit(g,"coinsB",t,{gain:.7}); hit(g,"chime",t,{gain:.45}); hit(g,"bellSmall",t,{gain:.5}); },
-    roll(g,t){ for(let i=0;i<9;i++) hit(g,COINS[i%4],t+i*.09,{gain:.4,rate:.95+i*.04,dur:.22}); },
-    burst(g,t){ hit(g,"coins",t,{gain:.85}); hit(g,"chime",t,{gain:.5}); hit(g,"bellBox",t,{gain:.3}); hit(g,"chips",t,{gain:.45}); sub(g,t,.18,70,30,.45); }
+    open(g,t){ hit(g,"chime",t,{gain:.45}); hit(g,"bSparkle",t,{gain:.55}); hit(g,"bellSmall",t,{gain:.3}); },
+    shot(g,t){ hit(g,"whoosh",t,{gain:.5,hp:350}); hit(g,"bSparkle",t+.08,{gain:.35,dur:.6}); },
+    hit(g,t,k){ hit(g,["coin","coinB","chips"][(k||0)%3],t,{gain:.7,rate:.97+((k||0)%5)*.05}); hit(g,BALLS[(k||0)%3],t,{gain:.28}); },
+    land(g,t){ hit(g,"bSparkle",t,{gain:.7}); hit(g,"coin",t,{gain:.55}); hit(g,"chime",t,{gain:.35}); hit(g,"tray",t,{gain:.3}); },
+    jackpot(g,t){ hit(g,"bFanfare",t,{gain:.75}); hit(g,"bAlarm",t+.12,{gain:.55}); hopper(g,t+.08,.6); hit(g,"chimesCluster",t,{gain:.4}); hit(g,"cheer",t+.2,{gain:.32}); sub(g,t,.14,58,26,.5); },
+    spin(g,t){ hit(g,"reel",t,{gain:.62}); hit(g,"chime",t,{gain:.18,dur:1.2}); },
+    stop(g,t){ hit(g,"reelStop",t,{gain:.7}); hit(g,"chime",t,{gain:.45}); hit(g,"coinB",t,{gain:.4}); },
+    collect(g,t){ hopper(g,t,.65); hit(g,"bSparkle",t,{gain:.55}); hit(g,"coinsB",t+.15,{gain:.4}); },
+    lock(g,t){ hit(g,"bellSmall",t,{gain:.55}); hit(g,"bSparkle",t,{gain:.4,dur:.6}); },
+    respin(g,t){ hit(g,"reel",t,{gain:.55,dur:1.1}); hit(g,"whooshB",t,{gain:.32}); },
+    miss(g,t){ hit(g,"coin",t,{gain:.35,rate:.82,lp:2400}); hit(g,"knocker",t,{gain:.22,rate:.85}); },
+    last(g,t){ hit(g,"bellBox",t,{gain:.42}); hit(g,"chime",t,{gain:.4}); },
+    grand(g,t){ hit(g,"bFanfare",t,{gain:.78}); hit(g,"bAlarm",t+.1,{gain:.6}); hopper(g,t+.05,.65); hit(g,"chimesCluster",t,{gain:.48}); hit(g,"cheer",t+.15,{gain:.38}); hit(g,"applause",t+.2,{gain:.28}); sub(g,t,.16,50,24,.6); },
+    minor(g,t){ hit(g,"bSparkle",t,{gain:.65}); hit(g,"coinsB",t,{gain:.5}); hit(g,"bellSmall",t,{gain:.4}); },
+    roll(g,t){ hit(g,"reel",t,{gain:.5,dur:1.2}); for(let i=0;i<7;i++) hit(g,["coin","coinB","chips"][i%3],t+i*.12,{gain:.28,rate:.98+i*.03,dur:.22}); },
+    burst(g,t){ hit(g,"bFanfare",t,{gain:.72}); hopper(g,t,.5); hit(g,"bSparkle",t,{gain:.45}); hit(g,"cheer",t+.15,{gain:.25}); }
   },
   C:{
-    open(g,t){ hit(g,"roar",t,{gain:.85}); hit(g,"thunder",t,{gain:.7}); hit(g,"boom",t,{gain:.7}); hit(g,"taikoA",t,{gain:.45,lp:600}); sub(g,t,.32,48,22,.7); },
-    shot(g,t){ hit(g,"whooshAir",t,{gain:.7}); hit(g,"whoosh",t,{gain:.45}); hit(g,"growl",t,{gain:.4,dur:.6,rate:1.05}); },
-    hit(g,t,k){ hit(g,(k||0)%2?"cracker":"boomFar",t,{gain:.55,rate:.95+((k||0)%3)*.06}); hit(g,"flipper",t,{gain:.35}); hit(g,"ballA",t,{gain:.4,rate:1.1}); },
-    land(g,t){ hit(g,"thunderLow",t,{gain:.8}); hit(g,"roarB",t,{gain:.7,dur:1.4}); hit(g,"boom",t,{gain:.7}); hit(g,"taikoB",t,{gain:.5}); sub(g,t,.34,58,24,.65); },
-    jackpot(g,t){ hit(g,"roar",t,{gain:.9}); hit(g,"thunder",t,{gain:.75}); hit(g,"boom",t,{gain:.7}); hit(g,"gongBig",t,{gain:.45,lp:2500}); hit(g,"cymbal",t,{gain:.3}); hit(g,"taikoA",t,{gain:.5}); sub(g,t,.36,46,22,.85); },
-    spin(g,t){ hit(g,"growl",t,{gain:.45,rate:.92}); hit(g,"thunderLow",t,{gain:.35,off:.2}); hit(g,"whooshAir",t,{gain:.35}); hit(g,"reelMech",t,{gain:.2,lp:800}); },
-    stop(g,t){ hit(g,"thunder",t,{gain:.8}); hit(g,"boom",t,{gain:.75}); hit(g,"anvil",t,{gain:.4}); sub(g,t,.32,66,24,.55); },
-    collect(g,t){ for(let i=0;i<7;i++) hit(g,i%2?"boomFar":"theater",t+i*.08,{gain:.3,rate:.9+i*.04,dur:.28}); },
-    lock(g,t){ hit(g,"growl",t,{gain:.45,dur:.55,rate:1.1}); hit(g,"knocker",t,{gain:.4}); },
-    respin(g,t){ hit(g,"whooshAir",t,{gain:.55}); hit(g,"growl",t,{gain:.4,dur:.7}); },
-    miss(g,t){ hit(g,"boomFar",t,{gain:.4,rate:.85,lp:900}); },
-    last(g,t){ hit(g,"growl",t,{gain:.55}); hit(g,"thunder",t,{gain:.4,dur:1}); },
-    grand(g,t){ hit(g,"roar",t,{gain:.9}); hit(g,"roarB",t+.15,{gain:.5,rate:.95}); hit(g,"thunder",t,{gain:.75}); hit(g,"thunderLow",t+.08,{gain:.55}); hit(g,"boom",t,{gain:.75}); hit(g,"taikoA",t,{gain:.55}); hit(g,"gongBig",t,{gain:.4}); sub(g,t,.38,44,20,.95); },
-    minor(g,t){ hit(g,"roarB",t,{gain:.65,dur:1.3}); hit(g,"thunder",t,{gain:.5}); hit(g,"coinsB",t,{gain:.25}); },
-    roll(g,t){ hit(g,"growl",t,{gain:.4,rate:.9}); for(let i=0;i<8;i++) hit(g,"boomFar",t+i*.11,{gain:.22,rate:.9+i*.03,dur:.2}); },
-    burst(g,t){ hit(g,"roar",t,{gain:.85}); hit(g,"thunder",t,{gain:.7}); hit(g,"boom",t,{gain:.75}); hit(g,"taikoB",t,{gain:.5}); sub(g,t,.34,55,22,.7); }
+    open(g,t){ cascade(g,t,7,.06,.55); hit(g,"cRapid",t+.08,{gain:.55}); },
+    shot(g,t){ hit(g,"whoosh",t,{gain:.65,rate:1.2}); hit(g,"flipper",t+.08,{gain:.5,rate:1.15}); },
+    hit(g,t,k){ hit(g,BALLS[(k||0)%3],t,{gain:.85,rate:1+((k||0)%5)*.06}); hit(g,"bumper",t,{gain:.4,rate:1.05+((k||0)%3)*.05}); },
+    land(g,t){ hit(g,"cDing",t,{gain:.85}); hit(g,"ballA",t,{gain:.5}); hit(g,"knocker",t,{gain:.28}); },
+    jackpot(g,t){ hit(g,"cFanfare",t,{gain:.78}); hit(g,"cRapid",t+.05,{gain:.55}); cascade(g,t,10,.05,.5); hopper(g,t+.15,.5); sub(g,t,.14,70,30,.45); },
+    spin(g,t){ cascade(g,t,8,.08,.48); hit(g,"reelMech",t,{gain:.28,lp:3500}); hit(g,"cRapid",t,{gain:.3,dur:1.0}); },
+    stop(g,t){ hit(g,"knocker",t,{gain:.55}); hit(g,"cDing",t,{gain:.7}); hit(g,"ballB",t,{gain:.45}); },
+    collect(g,t){ cascade(g,t,8,.06,.5); hit(g,"coins",t,{gain:.45}); hit(g,"cRapid",t,{gain:.5}); },
+    lock(g,t){ hit(g,"cDing",t,{gain:.8}); hit(g,"ballC",t,{gain:.4}); },
+    respin(g,t){ hit(g,"whooshB",t,{gain:.45,rate:1.1}); cascade(g,t,4,.07,.45); },
+    miss(g,t){ hit(g,"flipperB",t,{gain:.42,rate:.92,lp:2200}); hit(g,"ballA",t,{gain:.28,rate:.85}); },
+    last(g,t){ hit(g,"cRapid",t,{gain:.45,dur:.7}); hit(g,"bellSmall",t,{gain:.35}); },
+    grand(g,t){ hit(g,"cFanfare",t,{gain:.8}); hit(g,"cRapid",t,{gain:.55}); cascade(g,t,12,.045,.52); hopper(g,t+.1,.55); hit(g,"cheer",t+.25,{gain:.22}); sub(g,t,.16,55,24,.55); },
+    minor(g,t){ hit(g,"cDing",t,{gain:.75}); hit(g,"coinsB",t,{gain:.5}); hit(g,"ballB",t,{gain:.35}); },
+    roll(g,t){ cascade(g,t,9,.09,.45); hit(g,"ratchet",t,{gain:.28}); },
+    burst(g,t){ hit(g,"cFanfare",t,{gain:.75}); cascade(g,t,8,.05,.5); hit(g,"coins",t,{gain:.45}); }
   },
   D:{
-    open(g,t){ hit(g,"edrum",t,{gain:.85}); hit(g,"knocker",t,{gain:.55}); hit(g,"boom",t,{gain:.55}); hit(g,"bumper",t+.02,{gain:.4}); sub(g,t,.22,80,30,.4); },
-    shot(g,t){ hit(g,"whoosh",t,{gain:.6,rate:1.15}); hit(g,"whooshB",t,{gain:.4}); hit(g,"bumper",t+.12,{gain:.45,rate:1.1}); },
-    hit(g,t,k){ const n=["knocker","bumper","flipper","edrum"][(k||0)%4]; hit(g,n,t,{gain:.75,rate:1+((k||0)%5)*.05}); hit(g,BALLS[(k||0)%3],t,{gain:.3,rate:1.15}); },
-    land(g,t){ hit(g,"reelStop",t,{gain:.7,off:.15,dur:.7}); hit(g,"edrum",t,{gain:.8}); hit(g,"boom",t,{gain:.55}); hit(g,"knocker",t,{gain:.45}); sub(g,t,.24,80,30,.45); },
-    jackpot(g,t){ hit(g,"reelStop",t,{gain:.75}); hit(g,"edrum",t,{gain:.8}); hit(g,"knocker",t,{gain:.5}); hit(g,"cracker",t,{gain:.55}); hit(g,"boom",t,{gain:.5}); hit(g,"chime",t+.08,{gain:.3}); sub(g,t,.26,70,28,.55); },
-    spin(g,t){ hit(g,"reel",t,{gain:.75}); hit(g,"ratchet",t,{gain:.25,lp:4000}); },
-    stop(g,t){ hit(g,"reelStop",t,{gain:.85}); hit(g,"knocker",t,{gain:.6}); hit(g,"edrum",t,{gain:.5}); sub(g,t,.2,90,32,.4); },
-    collect(g,t){ for(let i=0;i<8;i++) hit(g,i%2?"knocker":"flipper",t+i*.06,{gain:.45,rate:1+i*.04,dur:.22}); },
-    lock(g,t){ hit(g,"bumper",t,{gain:.7,rate:1.08}); hit(g,"knocker",t,{gain:.5}); },
-    respin(g,t){ hit(g,"reel",t,{gain:.6,dur:1.1}); hit(g,"whooshB",t,{gain:.4}); },
-    miss(g,t){ hit(g,"flipperB",t,{gain:.4,rate:.9,lp:2000}); },
-    last(g,t){ hit(g,"edrum",t,{gain:.6}); hit(g,"knocker",t,{gain:.5,rate:.92}); },
-    grand(g,t){ hit(g,"reelStop",t,{gain:.8}); hit(g,"edrum",t,{gain:.85}); hit(g,"boom",t,{gain:.65}); hit(g,"knocker",t,{gain:.55}); hit(g,"cracker",t+.05,{gain:.5}); hit(g,"chime",t+.08,{gain:.35}); hit(g,"bumper",t,{gain:.4}); sub(g,t,.28,65,26,.6); },
-    minor(g,t){ hit(g,"knocker",t,{gain:.6}); hit(g,"edrum",t,{gain:.55}); hit(g,"coin",t,{gain:.35}); },
-    roll(g,t){ hit(g,"reel",t,{gain:.55,dur:1.2}); for(let i=0;i<8;i++) hit(g,i%2?"knocker":"bumper",t+i*.1,{gain:.28,rate:1+i*.03,dur:.18}); },
-    burst(g,t){ hit(g,"edrum",t,{gain:.85}); hit(g,"boom",t,{gain:.6}); hit(g,"reelStop",t,{gain:.55}); hit(g,"knocker",t,{gain:.5}); sub(g,t,.24,75,28,.45); }
+    open(g,t){ hit(g,"gongSweet",t,{gain:.55}); hit(g,"dWin",t+.06,{gain:.7}); },
+    shot(g,t){ hit(g,"whoosh",t,{gain:.58,rate:1.1}); hit(g,"flipper",t+.1,{gain:.3}); },
+    hit(g,t,k){ hit(g,BALLS[(k||0)%3],t,{gain:.75,rate:1+((k||0)%4)*.05}); hit(g,"knocker",t,{gain:.26,rate:1.1}); },
+    land(g,t){ hit(g,"dWin",t,{gain:.72}); hit(g,"coin",t,{gain:.5}); hit(g,"reelStop",t,{gain:.4,dur:.6}); },
+    jackpot(g,t){ hit(g,"dJackpot",t,{gain:.78}); hit(g,"gongBig",t,{gain:.55}); hit(g,"cracker",t+.18,{gain:.5}); hopper(g,t+.1,.58); hit(g,"coinsB",t+.4,{gain:.4}); sub(g,t,.16,52,24,.55); },
+    spin(g,t){ hit(g,"reel",t,{gain:.68}); hit(g,"ratchet",t,{gain:.22,lp:4000}); },
+    stop(g,t){ hit(g,"reelStop",t,{gain:.78}); hit(g,"gongSweet",t,{gain:.4}); hit(g,"anvil",t,{gain:.28,lp:2000}); },
+    collect(g,t){ hopper(g,t,.65); hit(g,"dWin",t,{gain:.62}); hit(g,"coinsB",t+.12,{gain:.4}); },
+    lock(g,t){ hit(g,"counterBell",t,{gain:.55}); hit(g,"gongSweet",t,{gain:.28,rate:1.15,dur:.55}); },
+    respin(g,t){ hit(g,"reel",t,{gain:.58,dur:1.1}); hit(g,"whooshB",t,{gain:.3}); },
+    miss(g,t){ hit(g,"gongMid",t,{gain:.32,rate:.85,lp:1600,dur:.6}); hit(g,"knocker",t,{gain:.28,rate:.88}); },
+    last(g,t){ hit(g,"gongMid",t,{gain:.4}); hit(g,"bellBox",t,{gain:.38}); },
+    grand(g,t){ hit(g,"dJackpot",t,{gain:.8}); hit(g,"gongBig",t,{gain:.62}); hit(g,"cracker",t+.12,{gain:.55}); hit(g,"cracker",t+.28,{gain:.35,rate:.92}); hopper(g,t+.08,.62); hit(g,"cheer",t+.25,{gain:.22}); sub(g,t,.18,48,22,.65); },
+    minor(g,t){ hit(g,"dWin",t,{gain:.7}); hit(g,"coinsB",t,{gain:.5}); hit(g,"gongSweet",t,{gain:.3}); },
+    roll(g,t){ hit(g,"reel",t,{gain:.52,dur:1.2}); hit(g,"dRiff",t,{gain:.4,dur:1.1}); },
+    burst(g,t){ hit(g,"dJackpot",t,{gain:.7}); hit(g,"gongMid",t,{gain:.45}); hit(g,"cracker",t+.1,{gain:.4}); hopper(g,t,.5); }
   }
 };
 
 const DEMOS={
-  plinko:[["open",0],["shot",.55],["hit",.88],["hit",1.04],["hit",1.2],["hit",1.36],["hit",1.52],["land",1.78],["jackpot",2.08]],
-  twister:[["open",0],["spin",.5],["stop",2.2],["collect",2.5],["jackpot",3.15]],
-  jewels:[["lock",0],["lock",.2],["lock",.4],["respin",.75],["miss",1.12],["lock",1.32],["collect",1.65],["last",2.25],["grand",2.75]],
-  wheel:[["spin",0],["stop",1.85],["jackpot",2.15]],
-  mult:[["roll",0],["lock",1.15],["burst",1.55]]
+  plinko:[["open",0],["shot",.7],["hit",1.05],["hit",1.22],["hit",1.4],["hit",1.58],["hit",1.76],["land",2.05],["jackpot",3.05]],
+  twister:[["open",0],["spin",.6],["stop",2.35],["collect",2.75],["jackpot",3.85]],
+  jewels:[["lock",0],["lock",.24],["lock",.48],["respin",.9],["miss",1.3],["lock",1.55],["collect",1.95],["last",3.15],["grand",3.7]],
+  wheel:[["spin",0],["stop",1.95],["jackpot",2.4]],
+  mult:[["roll",0],["lock",1.25],["burst",1.75]]
 };
-const DEMO_LEN={plinko:3.6, twister:4.8, jewels:4.7, wheel:3.5, mult:2.8};
+const DEMO_LEN={plinko:5.8, twister:6.4, jewels:6.4, wheel:5.0, mult:4.2};
 
 function playMoment(graph,style,moment,when,extra){
   const pack=PLAY[style]; if(!pack||!pack[moment]) return 0;
@@ -353,51 +359,61 @@ function mark(btn,on){
 function renderGames(){
   const nav=$("games");
   nav.innerHTML=GAMES.map(g=>'<button type="button" data-game="'+g.id+'" aria-selected="'+(g.id===curGame)+'">'+g.name+"</button>").join("");
-  nav.querySelectorAll("button").forEach(b=>b.addEventListener("click",async()=>{
-    curGame=b.getAttribute("data-game"); renderGames(); renderPanel();
-    if(!unlocked) await tryUnlock();
-  }));
+  nav.querySelectorAll("button").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      curGame=btn.getAttribute("data-game");
+      nav.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected", b===btn?"true":"false"));
+      renderPanel();
+    });
+  });
+}
+function renderPanel(){
+  const game=GAMES.find(g=>g.id===curGame);
+  const panel=$("panel");
+  panel.innerHTML=STYLES.map(st=>{
+    const btns=game.moments.map(m=>'<button type="button" data-style="'+st.id+'" data-moment="'+m.id+'">'+m.label+"</button>").join("")
+      +'<button type="button" class="demo" data-style="'+st.id+'" data-moment="demo">連續示範</button>';
+    return '<article class="card"><div class="hd"><span class="badge">'+st.id+'</span><div><h2>'+st.name+'</h2><p class="desc">'+st.desc+"</p></div></div>"
+      +'<div class="moments">'+btns+"</div></article>";
+  }).join("");
+  panel.querySelectorAll("button").forEach(btn=>btn.addEventListener("click",onPlay));
 }
 function renderLegend(){
   $("legend").innerHTML=STYLES.map(s=>"<li><b>"+s.id+" "+s.name+"</b>　"+s.desc+"</li>").join("");
 }
-function renderPanel(){
-  const game=GAMES.find(g=>g.id===curGame);
-  $("panel").innerHTML=STYLES.map(s=>{
-    const btns=game.moments.map(m=>'<button type="button" data-style="'+s.id+'" data-moment="'+m.id+'">'+m.label+"</button>").join("")
-      +'<button type="button" class="demo" data-style="'+s.id+'" data-moment="demo">連續示範</button>';
-    return '<article class="card" data-style="'+s.id+'"><div class="hd"><span class="badge">'+s.id+'</span><div><h2>'+s.name+'</h2><p class="desc">'+s.desc+"</p></div></div><div class=\"moments\">"+btns+"</div></article>";
-  }).join("");
-  $("panel").querySelectorAll("button").forEach(btn=>btn.addEventListener("click",()=>onPlay(btn)));
+function pulseMeter(){
+  const el=$("meter"); if(!el) return;
+  const i=el.querySelector("i");
+  const tick=()=>{
+    if(!unlocked) return;
+    const p=meterTick();
+    if(i) i.style.width=Math.min(100, p*140)+"%";
+    meterTimer=requestAnimationFrame(tick);
+  };
+  cancelAnimationFrame(meterTimer);
+  meterTimer=requestAnimationFrame(tick);
 }
 async function tryUnlock(){
-  setStatus("正在載入真實音效…");
-  const ok=await unlock((d,n)=>setStatus("正在載入真實音效（"+d+"／"+n+"）…"));
-  unlocked=!!ok;
-  const b=$("btnUnlock"), st=$("btnStop"), mt=$("meter");
-  if(unlocked){
-    b.classList.add("on"); b.textContent="音效已開啟";
-    st.hidden=false; mt.hidden=false;
-    setStatus("音效已開啟。點時機或「連續示範」試聽。");
-    startMeter();
-  }else{
-    setStatus("無法開啟或載入音效，請再點一次，或檢查網路與靜音開關。");
+  setStatus("正在載入音效…");
+  const ok=await unlock((d,n)=>setStatus("正在載入音效 "+d+"／"+n));
+  if(!ok){setStatus("無法開啟音效，請再點一次。");return}
+  unlocked=true;
+  $("btnUnlock").classList.add("on");
+  $("btnUnlock").textContent="音效已開啟";
+  $("btnStop").hidden=false;
+  $("meter").hidden=false;
+  setStatus("音效已開啟。點時機或「連續示範」試聽。");
+  pulseMeter();
+}
+async function onPlay(ev){
+  const btn=ev.currentTarget;
+  if(!unlocked){
+    await tryUnlock();
+    if(!unlocked) return;
   }
-  return unlocked;
-}
-function startMeter(){
-  if(meterTimer) cancelAnimationFrame(meterTimer);
-  const bar=$("meter").querySelector("i");
-  const step=()=>{
-    const p=meterTick();
-    if(bar) bar.style.width=Math.min(100,Math.round(p*140))+"%";
-    meterTimer=requestAnimationFrame(step);
-  };
-  step();
-}
-async function onPlay(btn){
-  if(!unlocked){const ok=await tryUnlock(); if(!ok) return}
-  else if(live&&live.ctx.state==="suspended") await live.ctx.resume();
+  if(live&&live.ctx&&live.ctx.state==="suspended"){
+    try{await live.ctx.resume()}catch(e){noteErr(e)}
+  }
   stopLive();
   const style=btn.getAttribute("data-style");
   const moment=btn.getAttribute("data-moment");
@@ -414,7 +430,7 @@ async function onPlay(btn){
       playMoment(live,style,moment,null,extra);
       const lab=(game.moments.find(m=>m.id===moment)||{}).label||moment;
       setStatus("播放中："+game.name+"・"+st.id+" "+st.name+"・"+lab);
-      dur=(moment==="jackpot"||moment==="grand"||moment==="spin")?2.3:(moment==="open"||moment==="burst"||moment==="land"?1.6:.8);
+      dur=(moment==="jackpot"||moment==="grand"||moment==="collect")?3.1:(moment==="open"||moment==="burst"||moment==="spin"||moment==="roll"?2.1:1.0);
     }
   }catch(e){noteErr(e);setStatus("播放時發生錯誤，請再試一次。");mark(btn,false);return}
   clearTimeout(stopTimer);
