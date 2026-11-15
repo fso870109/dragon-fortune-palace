@@ -12,7 +12,7 @@ function symIds(){try{if(typeof SYM!=='undefined'&&SYM.length)return SYM.map(s=>
  const F={matsuri:['fan','lantern','sake','taiko','goldfish','kitsune','daruma','bowl','fireworks','woman','wild'],neko:['fan','coins','koi','drum','bag','koban','blackcat','orangecat','seven','goldneko','wild'],sakura:['bell','sakura','fan','lantern','samuraig','samurai','oni','castle','sevens','heroine','wild'],samurai:['scroll','fan','horse','kamon','kabuto','castle','katana','blue7','red7','hero','wild']};
  return F[TH]||F.matsuri}
 function spinHTML(){const ids=symIds().slice();for(let i=ids.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;const t=ids[i];ids[i]=ids[j];ids[j]=t}
- const picks=[];while(picks.length<8)picks.push(...ids);const row=picks.slice(0,8).map(id=>`<img src="assets/${TH}/t_${id}.webp?v=2814" alt="" draggable="false" decoding="async">`).join('');
+ const picks=ids.slice(0,4);const row=picks.map(id=>`<img src="assets/${TH}/t_${id}.webp?v=2814" alt="" draggable="false" decoding="async">`).join('');
  return `<u class="hsReel" aria-hidden="true"><b class="hsStrip">${row}${row}</b></u>`}
 function symImg(){const ids=symIds();const id=ids[Math.random()*ids.length|0];return `<img class="hsSym" src="assets/${TH}/t_${id}.webp?v=2814" alt="" draggable="false" decoding="async">`}
 function draw(){let x=Math.random()*TOT;for(const[v,w]of VAL){if(x<w)return{k:'v',v};x-=w}for(const j of JP){if(x<j[2])return{k:'j',v:j[1],n:j[0],c:j[3]};x-=j[2]}return{k:'c',v:0}}
@@ -31,21 +31,21 @@ if(_st)window.settle=function(bet,free){const r=_st.apply(this,arguments);if(!fr
  localStorage.setItem(KEY,meter);localStorage.setItem(KO,orbs.length);mUI()}return r};
 function run(bet){if(running)return;if(typeof spinning!=='undefined'&&spinning||typeof bwState!=='undefined'&&bwState||typeof FS!=='undefined'&&FS||document.getElementById('czMG')&&document.getElementById('czMG').offsetParent){setTimeout(()=>run(bet),500);return}
  running=true;pending=false;window.__hold=true;try{if(window.CZ&&CZ.track)CZ.track('hs')}catch(e){}(window.F21?F21.pre('寶珠對碰'):Promise.resolve()).then(()=>play(bet)).then(won=>{window.F21&&F21.back();running=false;window.__hold=false;
-  if(won>0){bal+=won;const w=document.getElementById('win');w.textContent=won;try{ui();saveLater&&saveLater()}catch(e){}const total=bet*NL;if(won/total>=10&&window.bigWin)setTimeout(()=>bigWin(won,total),300);document.getElementById('msg').textContent=`寶珠對碰結束，贏得 ${NFh.format(won)} 籌碼！`}
+  if(won>0){bal+=won;const w=document.getElementById('win');w.textContent=won;try{setTimeout(()=>{try{ui();saveLater&&saveLater()}catch(e){}},0)}catch(e){}const total=bet*NL;if(won/total>=10&&window.bigWin)setTimeout(()=>bigWin(won,total),300);document.getElementById('msg').textContent=`寶珠對碰結束，贏得 ${NFh.format(won)} 籌碼！`}
   try{['spinBtn','minus','plus','maxBtn','resetBtn'].forEach(i=>{const e=document.getElementById(i);if(e)e.disabled=false})}catch(e){}})}
 function play(bet){return new Promise(res=>{try{if(window.FEATSX){FEATSX.setGame('jewels');FEATSX.reset('jewels');FEATSX.boot&&FEATSX.boot()}}catch(e){}const total=bet*NL;const o=document.createElement('div');o.id='hsBox';o.setAttribute('role','dialog');o.setAttribute('aria-label','寶珠對碰');
  o.innerHTML=`<div class="hsIn"><h2>寶珠對碰</h2><div class="hsJp">${JP.map(j=>`<div class="${j[3]}"><b>${j[0]}</b><span>${NFh.format(j[1]*total)}</span></div>`).join('')}<div class="grand"><b>巨獎</b><span>${NFh.format(GRAND*total)}</span></div></div><div class="hsG">${'<i></i>'.repeat(CELLS)}</div><div class="hsF"><span>剩餘重轉 <b id="hsL">3</b></span><span>累計 <b id="hsT">0</b></span></div><p class="hsTip">寶珠會鎖定在原位，出現新寶珠即重置為 3 次・集滿 15 格得「巨獎」</p></div>`;
- document.body.appendChild(o);const cells=[...o.querySelectorAll('.hsG i')];const g=Array(CELLS).fill(null);const T=()=>g.reduce((a,c)=>a+(c?c.v:0),0);
+ document.body.appendChild(o);const cells=[...o.querySelectorAll('.hsG i')];const g=Array(CELLS).fill(null);const T=()=>g.reduce((a,c)=>a+(c?c.v:0),0);(function fill(k){if(k>=CELLS)return;if(!g[k]&&!cells[k].innerHTML){cells[k].className='sym';cells[k].innerHTML=symImg()}requestAnimationFrame(()=>fill(k+1))})(0);
  const put=(i,c,coll)=>{g[i]=c;const e=cells[i];e.className='on land '+(c.c||'');e.innerHTML=c.n?`<b>${c.n}</b>`:`<span>${NFh.format(c.v*total)}</span>`;if(coll){e.classList.add('col');e.innerHTML=`<small>聚寶</small><span>${NFh.format(c.v*total)}</span>`};requestAnimationFrame(()=>setTimeout(()=>e.classList.remove('land'),420))
   if(!hx('lock',i)){B(880+i*25,.12,'triangle',.06);B(1320+i*25,.16,'sine',.04)}document.getElementById('hsT').textContent=NFh.format(T()*total)};
  const sleep=ms=>new Promise(r=>setTimeout(r,RMh?ms/3:ms));
- (async()=>{cells.forEach((e,k)=>{if(!g[k]){e.className='sym';e.innerHTML=symImg()}});await sleep(500);const first=(window.__hsStart&&window.__hsStart.length===START)?window.__hsStart:[...Array(CELLS).keys()].sort(()=>Math.random()-.5).slice(0,START);window.__hsStart=null;
+ (async()=>{await sleep(500);const first=(window.__hsStart&&window.__hsStart.length===START)?window.__hsStart:[...Array(CELLS).keys()].sort(()=>Math.random()-.5).slice(0,START);window.__hsStart=null;
   for(const i of first){let c=draw();if(c.k==='c')c={k:'v',v:1};put(i,c);await sleep(160)}
   let left=3;await sleep(500);
   while(left>0&&g.includes(null)){document.getElementById('hsL').textContent=left;
    o.classList.toggle('hsLast',left===1);if(left===1&&!o._lastShown){o._lastShown=1;if(!hx('last')){B(392,.3,'sine',.06);B(523,.4,'sine',.05)}await sleep(220)}else if(left>1)o._lastShown=0;
    const empties=[];for(let i=0;i<CELLS;i++)if(!g[i])empties.push(i);
-   empties.forEach(i=>{cells[i].className='spin';cells[i].innerHTML=spinHTML()});
+   {const html=spinHTML();empties.forEach(i=>{cells[i].className='spin';cells[i].innerHTML=html})}
    if(!hx('respin'))B(300,.25,'sawtooth',.02,500);
    /* Fisher–Yates: 邊轉邊逐格開出（機率仍每格獨立 Q） */
    for(let i=empties.length-1;i>0;i--){const j=Math.random()*(i+1)|0;const t=empties[i];empties[i]=empties[j];empties[j]=t}
@@ -55,8 +55,8 @@ function play(bet){return new Promise(res=>{try{if(window.FEATSX){FEATSX.setGame
     if(Math.random()<Q){let c=draw();if(c.k==='c'){const s=g.reduce((a,x)=>a+(x&&!x.n?x.v:0),0);put(i,{k:'v',v:s},true);cells.forEach((e,k)=>{if(g[k]&&!g[k].n&&k!==i)e.classList.add('suck')});if(!hx('collect'))B(520,.5,'sine',.07,1560);await sleep(700);cells.forEach(e=>e.classList.remove('suck'))}else put(i,c);nw=true;await sleep(150)}
     else{cells[i].className='sym miss';cells[i].innerHTML=symImg();if(!hx('miss'))B(180,.06,'triangle',.015);await sleep(90);cells[i].classList.remove('miss')}}
    left=nw?3:left-1;document.getElementById('hsL').textContent=left;await sleep(nw?280:180)}
-  o.classList.remove('hsLast','tense');o.classList.add('hsDone');setTimeout(()=>o.classList.remove('hsDone'),900);let won=T();const full=!g.includes(null);if(full){won+=GRAND;o.classList.add('full');if(!hx('grand')){B(523,.4,'sine',.08);B(659,.5,'sine',.07);B(784,.7,'sine',.07)}}
-  const W=won*total;const f=document.createElement('div');f.className='hsEnd';f.innerHTML=`<small>${full?'集滿 15 格！巨獎':'寶珠總獎金'}</small><b>${NFh.format(W)}</b><button type="button">收下</button>`;o.querySelector('.hsIn').appendChild(f);
+  o.classList.remove('hsLast','tense');o.classList.add('hsDone');setTimeout(()=>o.classList.remove('hsDone'),900);let won=T();const full=!g.includes(null);if(full){won+=GRAND;o.classList.add('full')}
+  const W=won*total;const f=document.createElement('div');f.className='hsEnd';f.innerHTML=`<small>${full?'集滿 15 格！巨獎':'寶珠總獎金'}</small><b>${NFh.format(W)}</b><button type="button">收下</button>`;o.querySelector('.hsIn').appendChild(f);if(full)requestAnimationFrame(()=>{try{if(!hx('grand')){B(523,.4,'sine',.08);B(659,.5,'sine',.07);B(784,.7,'sine',.07)}}catch(e){}});
   const done=()=>{o.classList.add('out');setTimeout(()=>o.remove(),480);res(W)};f.querySelector('button').onclick=done;setTimeout(()=>{if(o.isConnected)done()},6000)})()})}
 window.CZHS={pending:()=>PRo!=null&&!running&&!pending&&((PRo<QO&&orbs.length+1>=START)||(meter+1>=M&&orbs.length<START)),orbs:()=>orbs.slice(),QO,emit:()=>emit(-1,false),meter:()=>meter,force:b=>run(b||((typeof BETS!=='undefined'&&typeof betIdx!=='undefined')?BETS[betIdx]:1)),P,M};
 if(document.readyState==='complete')mount();else addEventListener('load',()=>setTimeout(mount,300));
