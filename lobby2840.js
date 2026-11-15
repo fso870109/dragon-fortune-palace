@@ -159,7 +159,7 @@ sync();
 function fit(){var bb=R.querySelector('.lxBot');if(bb)R.style.setProperty('--botH',Math.ceil(bb.getBoundingClientRect().height)+'px');var h=R.querySelector('.lxTab[data-tab="home"]');if(!h||!h.classList.contains('on'))return;
  R.style.setProperty('--xh','0px');R.style.setProperty('--xg','0px');
  var nb=$('lxNav').getBoundingClientRect().top,last=$('lxCol').getBoundingClientRect().bottom+scrollY-scrollY;
- var spare=nb-last-6;if(spare<0){R.style.setProperty('--xh',Math.max(spare,-22)+'px');goS(cur,0);return}
+ var spare=nb-last-6;if(spare<0){R.style.setProperty('--xh','0px');goS(cur,0);return}
  var xh=Math.min(spare*.7,innerWidth*.42),xg=Math.min((spare-xh)/5,14);
  R.style.setProperty('--xh',Math.round(xh)+'px');R.style.setProperty('--xg',Math.max(0,Math.round(xg))+'px');goS(cur,0)}
 addEventListener('resize',fit);addEventListener('load',fit);setTimeout(fit,0);

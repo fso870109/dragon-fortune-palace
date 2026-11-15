@@ -1,3 +1,4 @@
+/* v28.131 taller lobby hero (~35% over 156*u); crop via background-position */
 /* 龍運金殿 v28.40 大廳 2.0（參考稿版面）— 只換版面與外觀，不改機率與經濟 */
 @font-face{font-family:"LxSerif";src:url(assets/fonts/lxserif.woff2?v=28117) format("woff2");font-weight:900;font-display:swap}
 html.lx{--u:calc(min(100vw,520px) / 461);--g1:#fff6d2;--g2:#f6d27a;--g3:#d9a441;--g4:#8a5a14;--red1:#6d0b12;--red2:#3a0408;--red3:#1c0204;
@@ -49,7 +50,7 @@ html.lx .wrap.lxOld{display:none!important}
 .lxTab{display:none}.lxTab.on{display:block;animation:lxIn .32s cubic-bezier(.2,.8,.2,1)}
 @keyframes lxIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 /* ---------- hero carousel ---------- */
-.lxHero{position:relative;margin:calc(4*var(--u)) calc(-8*var(--u)) 0;height:calc(168*var(--u))}
+.lxHero{position:relative;margin:calc(4*var(--u)) calc(-8*var(--u)) 0;height:calc(210*var(--u))}
 .lxSl{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent);mask-image:linear-gradient(180deg,#000 82%,transparent)}
 .lxSl::-webkit-scrollbar{display:none}
 .lxS{position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden;background:radial-gradient(ellipse at 70% 40%,#5a0a18,#1c0206 75%)}
@@ -189,7 +190,7 @@ html.lx .rdp{top:calc(116*var(--u) + env(safe-area-inset-top))}
 .lxIco{height:calc(56*var(--u));min-height:42px}
 #lx .lxI img{width:calc(31*var(--u));height:calc(31*var(--u));min-width:20px;min-height:20px}
 #lx .lxI span{font-size:max(9.5px,calc(13.5*var(--u)))}
-.lxHero{height:calc(160*var(--u))}
+.lxHero{height:calc(210*var(--u))}
 .lxS .lg{height:calc(96*var(--u))}.lxS.s-sakura .lg{height:calc(104*var(--u))}
 .lxS .rt{width:50%;right:calc(6*var(--u))}
 .lxJp{margin-top:calc(8*var(--u));padding-top:calc(20*var(--u));padding-bottom:calc(8*var(--u))}
@@ -216,12 +217,12 @@ html.lx .rdp{top:calc(116*var(--u) + env(safe-area-inset-top))}
 .lxHc .ph{filter:brightness(1.12) saturate(1.08)}
 #lx .lxGear{font-size:0!important;background:radial-gradient(circle at 40% 30%,#ffe8a8,#e0a838 45%,#8a5310 80%)!important}
 #lx .lxGear::before{content:"";width:62%;height:62%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234a1a02' d='M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3h-4l-.4 2.9a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.6 7.6 0 0 0 1.7 1L11 21h4l.4-2.9a7.6 7.6 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z' transform='translate(-1 0)'/%3E%3C/svg%3E") center/contain no-repeat}
-.lxHero{height:calc(156*var(--u))}
+.lxHero{height:calc(210*var(--u))}
 .lxJp{padding-bottom:calc(6*var(--u))}
 .lxSec{margin-top:calc(7*var(--u))}
 /* ---- round 4: tall-screen fit ---- */
 #lx{--xh:0px;--xg:0px}
-.lxHero{height:calc(156*var(--u) + var(--xh))}
+.lxHero{height:calc(210*var(--u) + var(--xh))}
 .lxS .ph{width:64%}
 .lxJp{margin-top:calc(8*var(--u) + var(--xg))}
 .lxSec{margin-top:calc(7*var(--u) + var(--xg))}

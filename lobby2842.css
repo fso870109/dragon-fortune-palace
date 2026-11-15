@@ -1,7 +1,9 @@
+/* v28.131 taller hero; per-slide object position keeps character heads in frame */
 /* v28.42 lobby round 3: full-bleed generated hero key art */
-.lxS .hk{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;background-position:0% 22%;filter:saturate(1.06)}
+.lxHero{height:calc(210*var(--u) + var(--xh))}
+.lxS .hk{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;background-position:0% 50%;filter:saturate(1.06)}
 .lxS .hk::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 46% 62% at 73% 50%,rgba(40,0,10,.55),rgba(40,0,10,.25) 60%,transparent 100%),linear-gradient(180deg,transparent 70%,rgba(20,2,4,.45))}
-.lxS.s-samurai .hk{background-position:0% 14%}.lxS.s-neko .hk{background-position:0% 20%}.lxS.s-sakura .hk{background-position:0% 4%}
+.lxS.s-matsuri .hk{background-position:0% 46%}.lxS.s-samurai .hk{background-position:0% 42%}.lxS.s-neko .hk{background-position:0% 38%}.lxS.s-sakura .hk{background-position:0% 40%}
 .lxS::before{display:none}
 .lxS .rt{z-index:1}
 /* v28.43: raid push toast was parked (translate -140%) over the function row because html.lx moved its top; hide it fully when not shown */
