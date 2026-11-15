@@ -1,0 +1,214 @@
+/* v28.123 gold-palace chrome for the 5 feature games (frames, art, buttons).
+   Pre-rendered webp only; no new per-cell animation (jewels keeps fxlite). Math unchanged. */
+:root{
+  --fg-lip:url("assets/featgold/stage-lip.webp?v=28123");
+  --fg-btn:url("assets/featgold/btn-wide.webp?v=28123");
+  --fg-panel:url("assets/featgold/panel.webp?v=28123");
+  --fg-tile:url("assets/featgold/tile-frame.webp?v=28123");
+  --fg-rail:url("assets/featgold/rail-h.webp?v=28123");
+  --fg-fill:url("assets/deck/skins/gold/fill.webp?v=2884");
+}
+
+/* stage art: crimson-gold field, drop the thin CSS inset stroke */
+html body #b22Stage .b22bg{
+  background:
+    radial-gradient(120% 80% at 50% 35%,rgba(90,20,28,.5) 0%,rgba(28,8,12,.82) 48%,rgba(10,3,6,.94) 100%),
+    var(--fg-fill) center / cover no-repeat !important;
+  box-shadow:inset 0 0 40px rgba(255,190,60,.2) !important;
+}
+html body #b22Stage .b22rays{
+  opacity:.42 !important;
+  filter:sepia(.5) saturate(.8) hue-rotate(-10deg);
+}
+html body #b22Stage .b22frame{
+  position:absolute;inset:0;z-index:5;pointer-events:none;box-sizing:border-box;
+  border:14px solid transparent;
+  border-image:var(--fg-lip) 48 / 14px / 0 stretch;
+}
+@media (max-width:400px){
+  html body #b22Stage .b22frame{border-width:12px;border-image-width:12px}
+}
+html body #b22Stage .fxOv,
+html body #b22Stage #hsBox{
+  padding:14px !important;
+  box-sizing:border-box !important;
+  max-width:100%;
+}
+html body .rfx.twStage,
+html body .rfx.plStage{
+  background:radial-gradient(circle at 50% 44%,rgba(90,22,28,.32),rgba(12,3,8,.7)) !important;
+}
+/* playfield / prize plaque above the stage overlay */
+html body.b22on .rfx{z-index:9992 !important}
+html body.b22on .twCard,
+html body .twCard{z-index:9993 !important}
+
+/* small buttons: same carved-gold + red enamel as the deck controls */
+html body .hsEnd button,
+html body .fxIn button,
+html body #hsBox .hsEnd button,
+html body #b22Stage .hsEnd button,
+html body #hsBox.b23 .hsEnd button{
+  appearance:none;-webkit-appearance:none;
+  display:inline-block;
+  margin-top:8px !important;
+  min-height:44px;min-width:132px;max-width:100%;
+  padding:8px 36px !important;
+  border:0 !important;border-radius:999px !important;
+  background:var(--fg-btn) center / 100% 100% no-repeat !important;
+  color:#ffe7a8 !important;
+  font:900 16px/1 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif !important;
+  letter-spacing:.12em;
+  text-shadow:0 1px 0 #3a0400,0 0 4px rgba(0,0,0,.85) !important;
+  box-shadow:0 3px 6px rgba(0,0,0,.45),0 0 10px rgba(255,214,140,.22) !important;
+  overflow:visible !important;
+}
+html body .hsEnd button:active,
+html body .fxIn button:active{
+  transform:scale(.96);
+  filter:brightness(1.14) saturate(1.08);
+}
+
+/* end-panel uses the gold palace plaque */
+html body .hsEnd,
+html body #hsBox .hsEnd,
+html body #b22Stage .hsEnd,
+html body #hsBox.b23 .hsEnd{
+  background:var(--fg-panel) center / 100% 100% no-repeat !important;
+  border:0 !important;border-radius:0 !important;
+  box-shadow:0 8px 20px rgba(0,0,0,.5),0 0 18px rgba(255,200,80,.35) !important;
+  padding:30px 34px 22px !important;
+  box-sizing:border-box;
+  max-width:100%;
+}
+html body .hsEnd small{color:#f4d89c !important}
+html body .hsEnd b{color:#ffe680 !important}
+html body .fxIn{
+  background:var(--fg-panel) center / 100% 100% no-repeat !important;
+  border:0 !important;border-radius:0 !important;
+  padding:30px 26px 20px !important;
+  box-shadow:0 8px 20px rgba(0,0,0,.5),0 0 18px rgba(255,200,80,.35) !important;
+  box-sizing:border-box;max-width:100%;
+}
+
+/* HUD chips: thin 9-slice gold lip, text stays inside */
+html body #hsBox .hsF>span,
+html body #b22Stage #hsBox .hsF>span,
+html body .b22hud span{
+  background:linear-gradient(180deg,#4a141c,#1a060a) padding-box !important;
+  border:10px solid transparent !important;
+  border-image:var(--fg-lip) 48 / 10px / 0 stretch !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  color:#f4e2b8 !important;
+  box-sizing:border-box;
+}
+
+/* jackpot row cells */
+html body #hsBox .hsJp div,
+html body #b22Stage #hsBox .hsJp div{
+  background:linear-gradient(180deg,#3a1018,#140408) padding-box !important;
+  border:8px solid transparent !important;
+  border-image:var(--fg-lip) 48 / 8px / 0 stretch !important;
+  border-radius:0 !important;
+  box-sizing:border-box;
+}
+
+/* on-machine meters: twister / multiplier / jewel energy */
+html body #hsMeter,
+html body #twBox{
+  background:linear-gradient(180deg,#4a141c,#1a060a) padding-box !important;
+  border:8px solid transparent !important;
+  border-image:var(--fg-lip) 48 / 8px / 0 stretch !important;
+  border-radius:2px !important;
+  color:#f4d89c !important;
+  box-sizing:border-box;
+}
+html body #twBox .tr{background:conic-gradient(#ffd65a calc(var(--p)*1%),rgba(255,255,255,.15) 0) !important}
+html body #twBox .tr i{background:#1a080c !important;color:#ffe680 !important}
+html body #twBox b{color:#f4e2b8 !important}
+html body #mxBadge,
+html body #mxBadge.rmx{
+  background:linear-gradient(180deg,#4a141c,#1a060a) padding-box !important;
+  border:8px solid transparent !important;
+  border-image:var(--fg-lip) 48 / 8px / 0 stretch !important;
+  border-radius:0 !important;
+  color:#ffe680 !important;
+  box-shadow:0 0 12px rgba(255,190,60,.45) !important;
+  animation:none !important;
+  box-sizing:border-box;
+}
+
+/* wheel strip */
+html body .rwRing{
+  background:rgba(28,8,12,.82) !important;
+  border-top:0 !important;border-bottom:0 !important;
+  box-shadow:none !important;
+}
+html body .rwRing::after{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-sizing:border-box;
+  border:10px solid transparent;border-image:var(--fg-lip) 48 / 10px 6px / 0 stretch;
+}
+html body .rwStrip i{
+  border-right:1px solid rgba(90,50,8,.7) !important;
+}
+html body .rwStrip i.a{background:radial-gradient(circle at 50% 36%,#8a2a1c,#3a0a0c 72%) !important}
+html body .rwStrip i.b{background:radial-gradient(circle at 50% 36%,#6a1c24,#1e080c 72%) !important}
+html body .rwStrip i.mini{background:radial-gradient(circle at 50% 36%,#2a6ab8,#0a1f4a 72%) !important}
+html body .rwStrip i.min{background:radial-gradient(circle at 50% 36%,#1c8a58,#06301f 72%) !important}
+html body .rwStrip i.maj{background:radial-gradient(circle at 50% 36%,#c2185b,#4a0626 72%) !important}
+html body .rwBul{
+  height:16px !important;
+  background:var(--fg-rail) center / auto 100% repeat-x;
+}
+html body .rwBul u{
+  width:8px;height:8px;
+  background:#ffd65a !important;
+  box-shadow:0 0 6px #ffd65a !important;
+  border:1px solid #5a3200;
+  box-sizing:border-box;
+}
+html body .rwBul u.o{
+  background:#e84770 !important;
+  box-shadow:0 0 6px #e84770 !important;
+}
+html body .rwPtr{
+  border:3px solid #ffd65a !important;
+  border-radius:4px !important;
+  box-shadow:0 0 12px rgba(255,214,90,.55),inset 0 0 0 1px rgba(255,240,200,.6) !important;
+  background:transparent !important;
+  box-sizing:border-box !important;
+}
+html body .rwPtr::before{border-top-color:#ffd65a !important}
+html body .rwPtr::after{border-bottom-color:#ffd65a !important}
+
+/* multiplier column: overlay frame, do not shrink JS tile geometry */
+html body .rmCol{
+  background:linear-gradient(180deg,#3a1018,#140408) !important;
+  border-left:0 !important;border-right:0 !important;
+}
+html body .rmCol::after{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-sizing:border-box;
+  border:10px solid transparent;border-image:var(--fg-lip) 48 / 10px / 0 stretch;
+}
+html body .rmCol.exp{box-shadow:0 0 20px rgba(255,214,90,.7) !important}
+html body .rmStrip i{color:#ffe680 !important;position:relative;z-index:1}
+
+/* overflow guards at 360 / 412 */
+html body #b22Stage,
+html body .rfx,
+html body #hsBox,
+html body .hsIn,
+html body .hsEnd,
+html body .fxIn,
+html body #hsBox .hsJp,
+html body #hsBox .hsG,
+html body #hsBox .hsF{
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+@media (prefers-reduced-motion:reduce){
+  html body .hsEnd button,
+  html body .fxIn button{transform:none !important;filter:none !important}
+}

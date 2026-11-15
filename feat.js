@@ -251,7 +251,7 @@ async function plinko(bet){fxUse('plinko');const tot=bet*NL,R=8;const L=stage('å
  const SP=window.B22&&B22.SPR,PEG=SP&&SP.peg,BALL=SP&&SP.ball;
  const SH=Math.max(22,Math.min(30,H*.15)),sp=W/(R+2),gx=(r,i)=>W/2+(i-r/2)*sp,gy=r=>10+r*(H-SH-22)/R,SY=H-SH-4,SW=sp-3;
  let path=[0];for(let r=0;r<R;r++)path.push(path[r]+(Math.random()<.5?0:1));const slot=path[R];
- const slotCol=v=>v>=100?['#fff6cf','#ffd65a','#a8640c']:v>=25?['#ffd0e6','#ff6fae','#8a1048']:v>=8?['#d6fff0','#3fc69a','#0f5a46']:['#e8dcff','#8a6ad6','#3a1f6e'];
+ const slotCol=v=>v>=100?['#fff6cf','#ffd65a','#a8640c']:v>=25?['#ffd0e6','#ff6fae','#8a1048']:v>=8?['#d6fff0','#3fc69a','#0f5a46']:['#f8e0b0','#c45a28','#5a1808'];
  const trail=[],hits=[],parts=[];let hl=-1,glow=0,ball=null,drop=null,raf=0,live=1;
  const pN=innerWidth<=360?3:6;
  function spawn(px,py,n){if(RM)return;for(let i=0;i<n;i++)parts.push({x0:px,y0:py,x1:px+(Math.random()-.5)*28,y1:py-(10+Math.random()*22),x2:px+(Math.random()-.5)*64,y2:py-(20+Math.random()*40),x3:px+(Math.random()-.5)*88,y3:py+(Math.random()-.5)*40,life:0,max:16+Math.random()*16|0,sz:1.8+Math.random()*2.8})}
@@ -260,7 +260,7 @@ async function plinko(bet){fxUse('plinko');const tot=bet*NL,R=8;const L=stage('å
  function draw(){
   x.clearRect(0,0,W,H);
   const g=x.createRadialGradient(W/2,H*.4,8,W/2,H*.5,Math.max(W,H)*.72);
-  g.addColorStop(0,'rgba('+FXC.glow+',.16)');g.addColorStop(.55,'rgba(18,6,28,.5)');g.addColorStop(1,'rgba(10,3,18,.72)');
+  g.addColorStop(0,'rgba('+FXC.glow+',.16)');g.addColorStop(.55,'rgba(28,8,12,.5)');g.addColorStop(1,'rgba(10,3,8,.72)');
   x.fillStyle=g;x.fillRect(0,0,W,H);
   const now=performance.now();
   for(let r=1;r<=R;r++)for(let i=0;i<=r;i++){
