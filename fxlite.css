@@ -1,0 +1,75 @@
+/* v28.121 lightweight FX toolkit — presentation only. Animated filter / box-shadow / drop-shadow removed. */
+#fxLite{position:fixed;inset:0;z-index:28;pointer-events:none;overflow:hidden}
+#fxLite .fxLvig,#fxLite .fxLbloom,#fxLite .fxLflash,#fxLite canvas,#fxLite .fxLring{position:absolute;pointer-events:none}
+#fxLite .fxLvig{inset:0;background:none;box-shadow:inset 0 0 70px 22px rgba(255,190,60,.3);opacity:0;transition:opacity .25s linear}
+#fxLite.go .fxLvig{opacity:1}
+#fxLite .fxLbloom{inset:0;background:radial-gradient(circle at 50% 42%,rgba(255,220,140,.16),transparent 58%);mix-blend-mode:screen;opacity:0;transition:opacity .25s linear}
+#fxLite.go .fxLbloom{opacity:.9}
+#fxLite .fxLflash{inset:0;background-image:url(assets/fxlite/flash-sheet.webp?v=28121);background-repeat:no-repeat;background-size:800% 100%;background-position:0 0;opacity:0}
+#fxLite .fxLring{width:72px;height:72px;margin:-36px 0 0 -36px;background:url(assets/fxlite/ring.webp?v=28121) center/contain no-repeat;opacity:0;transform:scale(.35)}
+#fxLite canvas{inset:0;width:100%;height:100%}
+html.twFx,body.twFx{overflow:hidden!important}
+
+/* feat.js world: hide DOM particle hosts; vig/bloom/flash now come from #fxLite */
+#twWorld .twWstreaks,#twWorld .twWrain,#twWorld .twWrings{display:none!important}
+#twWorld .twWflash,#twWorld .twWvig,#twWorld .twWbloom{opacity:0!important;animation:none!important;background:none!important;box-shadow:none!important}
+
+/* rays: pre-rendered webp, transform-only spin */
+.twRays,.rfx .twRays,#b22Stage .b22rays{
+  background:url(assets/fxlite/rays.webp?v=28121) center/cover no-repeat!important;
+  animation:twSpin 7.5s linear infinite;
+  mix-blend-mode:screen;
+}
+#b22Stage .b22rays{
+  -webkit-mask:radial-gradient(circle,#000 15%,transparent 62%);
+  mask:radial-gradient(circle,#000 15%,transparent 62%);
+  animation:b22Rot 24s linear infinite;
+  background-size:100% 100%!important;
+}
+.twPrize .twRays{animation-duration:6s}
+.twFlash{background:url(assets/fxlite/bloom.webp?v=28121) center/cover no-repeat;opacity:0}
+.twStage.twBoom .twFlash{animation:twFlash  .55s ease-out}
+@keyframes twFlash{0%{opacity:1}70%{opacity:.25}100%{opacity:0}}
+
+/* prize card: transform/opacity only (no animated filter) */
+@keyframes twCardIn{0%{transform:scale(.18) rotateX(18deg) rotate(-10deg);opacity:0}58%{transform:scale(1.03) rotateX(-2deg) rotate(1deg);opacity:1}100%{transform:scale(1) rotateX(0) rotate(0);opacity:1}}
+@keyframes twCardOut{to{transform:scale(.82) rotateY(16deg);opacity:0}}
+
+/* 寶珠對碰 entry: no animated filter on title / dragon / stage / board */
+@keyframes b22Slam{0%{scale:2.6;opacity:0}60%{scale:.93;opacity:1}80%{scale:1.04;opacity:1}100%{scale:1;opacity:1}}
+@keyframes b22StOut{0%{opacity:1}100%{opacity:0}}
+@keyframes b22Away{to{transform:perspective(500px) rotateX(88deg) translateY(30px);opacity:0}}
+@keyframes b22Back{0%{transform:perspective(500px) rotateX(-80deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes b22Land{0%{scale:.75;opacity:0}60%{scale:1.04;opacity:1}100%{scale:1;opacity:1}}
+@keyframes b22Spin{50%{scale:.94}}
+.b22drag{filter:none!important}
+.b22drag img,.b22drag svg{filter:none}
+
+/* hold & spin land / miss / done: transform/opacity, no animated filter or box-shadow */
+@keyframes hs18Land{0%{background-size:150% 150%;transform:scale(.92)}60%{background-size:96% 96%;transform:scale(1.04)}100%{background-size:100% 100%;transform:scale(1)}}
+@keyframes hs2814Land{0%{transform:scale(.72)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes hs2813Land{0%{transform:scale(1.55) translateY(-12%)}55%{transform:scale(.92)}100%{transform:scale(1)}}
+@keyframes hs2813Miss{0%{transform:scale(.92);opacity:.7}100%{transform:scale(1);opacity:1}}
+@keyframes hs2814Miss{0%{opacity:.75}100%{opacity:1}}
+@keyframes hsDoneFlash{0%{opacity:1}100%{opacity:1}}
+@keyframes hsLastPulse{0%,100%{opacity:1}50%{opacity:.92}}
+@keyframes hsSuck{50%{transform:scale(.8)}}
+html body #hsBox .hsG>i.land,
+html body #b22Stage #hsBox .hsG>i.land,
+html body #hsBox .hsG>i.on.land:not(#z):not(#y){filter:none!important}
+html body #hsBox .hsG>i.miss,
+html body #hsBox .hsG>i.sym.miss:not(#z){filter:none!important;opacity:.85}
+#hsBox.hsDone .hsIn,#hsBox.hsDone .hsG{filter:none!important;animation:none!important}
+#hsBox.hsLast .hsIn{animation:none!important;filter:none!important}
+
+/* static gold glyph glow is already baked via text gradient; jig stays transform-only */
+.twCardSum .twGold>i{filter:none}
+
+@media (prefers-reduced-motion:reduce){
+  #fxLite,#fxLite *{animation:none!important;transition:none!important}
+  #fxLite.go .fxLvig{opacity:.7}
+  #fxLite.go .fxLbloom{opacity:.4}
+  .twRays,#b22Stage .b22rays{animation:none!important;opacity:.3}
+}
+html.dfpLite #fxLite .fxLbloom{opacity:.45}
+html.dfpLite .twRays,#b22Stage.dfpLite .b22rays,.dfpLite .twRays{opacity:.4}
