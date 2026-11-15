@@ -105,7 +105,7 @@ function art(){if(SPR.done)return;SPR.done=1;
 window.B22={SPR,art,swoop:t=>swoop(t)};
 /* v28.124: decode gold frames + jewel art in parallel as soon as the page is up,
    so 寶珠對碰 entry does not hitch on first-use decode. Math unchanged. */
-const FGV='?v=28126';
+const FGV='?v=28127';
 const FGSRC=[
  'assets/featgold/stage-lip.webp'+FGV,
  'assets/featgold/stage-fill.webp'+FGV,
