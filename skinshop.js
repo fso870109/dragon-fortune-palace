@@ -21,16 +21,16 @@ feast:{name:'皇宮盛宴',tag:'MIYABI',copy:'雙龍盤柱、金殿華筵，皇�
 const FALLBACK=[
 {id:'gold',name:'金殿',desc:'預設・夜粉金',price:0},
 {id:'neon',name:'真夜中',desc:'深藍月光',price:2000},
-{id:'jade',name:'櫻色',desc:'櫻花粉',price:3000},
+{id:'jade',name:'花火夜祭',desc:'夜櫻花火',price:18000},
 {id:'crystal',name:'月光',desc:'銀白冷光',price:5000},
-{id:'royal',name:'小堇',desc:'紫羅蘭',price:8000},
-{id:'obsidian',name:'夕陽',desc:'夕陽橘金',price:12000},
-{id:'blossom',name:'櫻花之舞',desc:'櫻社狐燈',price:15000},
-{id:'beach',name:'夏日海灘',desc:'棕櫚浪花',price:15000},
-{id:'tsukiyo',name:'月下幻境',desc:'紫藤滿月',price:20000},
-{id:'kitsune',name:'狐之祕境',desc:'白繩狐面',price:25000},
-{id:'kabuto',name:'武將之魂',desc:'甲胄刀旗',price:30000},
-{id:'feast',name:'皇宮盛宴',desc:'雙龍金殿',price:50000}];
+{id:'royal',name:'極夜霓虹',desc:'紫金霓虹',price:24000},
+{id:'obsidian',name:'金龍祭典',desc:'金龍盤框',price:72000},
+{id:'blossom',name:'櫻花之舞',desc:'櫻社狐燈',price:36000},
+{id:'beach',name:'夏日海灘',desc:'棕櫚浪花',price:32000},
+{id:'tsukiyo',name:'月下幻境',desc:'紫藤滿月',price:48000},
+{id:'kitsune',name:'狐之祕境',desc:'白繩狐面',price:60000},
+{id:'kabuto',name:'武將之魂',desc:'甲胄刀旗',price:84000},
+{id:'feast',name:'皇宮盛宴',desc:'雙龍金殿',price:100000}];
 
 function catalog(){return (typeof SKINS!=='undefined')?SKINS:(window.__dfpSkins||(window.__dfpSkins=FALLBACK.map(k=>Object.assign({},k))))}
 const HAS_GAME_SKIN=(typeof skGet==='function');
@@ -55,7 +55,7 @@ function saveSkin(st){if(HAS_GAME_SAVE)return skSave(st);try{localStorage.setIte
 function applySkin(){if(HAS_GAME_APPLY)return skApply()}
 function onMach(){return !!window.CZM}
 function click(){try{if(window.sfx&&sfx.click)sfx.click()}catch(e){}}
-function pvUrl(id){return 'assets/skins/shop/'+PVT+'-'+(FRM[id]||id)+'.webp?v=2855'}
+function pvUrl(id){return 'assets/skins/shop/'+PVT+'-'+(FRM[id]||id)+'.webp?v=28134'}
 function pv(k){return '<div class="pv2 pvimg s-'+k.id+'" aria-hidden="true" style="background-image:url('+pvUrl(k.id)+')"></div>'}
 function msg(t,k){
   if(typeof shMsg==='function'&&onMach()){shMsg(t,k);return}

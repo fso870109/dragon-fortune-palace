@@ -1,0 +1,20 @@
+/* v28.134 — new illustrated cabinet frames; 9-slice from punched art */
+/* Overrides frame.css / frame2846.css slice + ovh for the nine shop skins. */
+body.cab-on[data-skin="obsidian"] #cabFrame{--ovh:calc(var(--frame-crown) * 1.0901)}
+body.cab-on[data-skin="obsidian"] #cabFrame::before{border-image:url(assets/skins/frame-dragon.webp?v=28134) 232 153 133 164 stretch}
+body.cab-on[data-skin="jade"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.964)}
+body.cab-on[data-skin="jade"] #cabFrame::before{border-image:url(assets/skins/frame-hanabi.webp?v=28134) 218 133 138 80 stretch}
+body.cab-on[data-skin="royal"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.7658)}
+body.cab-on[data-skin="royal"] #cabFrame::before{border-image:url(assets/skins/frame-neon.webp?v=28134) 196 141 166 145 stretch}
+body.cab-on[data-skin="blossom"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.6937)}
+body.cab-on[data-skin="blossom"] #cabFrame::before{border-image:url(assets/skins/frame-blossom.webp?v=28134) 188 162 115 192 stretch}
+body.cab-on[data-skin="kitsune"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.6126)}
+body.cab-on[data-skin="kitsune"] #cabFrame::before{border-image:url(assets/skins/frame-kitsune.webp?v=28134) 179 157 130 166 stretch}
+body.cab-on[data-skin="kabuto"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.1712)}
+body.cab-on[data-skin="kabuto"] #cabFrame::before{border-image:url(assets/skins/frame-kabuto.webp?v=28134) 130 183 122 178 stretch}
+body.cab-on[data-skin="tsukiyo"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.3784)}
+body.cab-on[data-skin="tsukiyo"] #cabFrame::before{border-image:url(assets/skins/frame-tsukiyo.webp?v=28134) 153 155 123 191 stretch}
+body.cab-on[data-skin="beach"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.3694)}
+body.cab-on[data-skin="beach"] #cabFrame::before{border-image:url(assets/skins/frame-beach.webp?v=28134) 152 164 128 171 stretch}
+body.cab-on[data-skin="feast"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.5766)}
+body.cab-on[data-skin="feast"] #cabFrame::before{border-image:url(assets/skins/frame-feast.webp?v=28134) 175 164 122 165 stretch}
