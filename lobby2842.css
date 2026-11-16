@@ -2,7 +2,7 @@
 /* v28.42 lobby round 3: full-bleed generated hero key art */
 .lxHero{height:calc(210*var(--u) + var(--xh))}
 .lxS .hk{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;background-position:0% 50%;filter:saturate(1.06)}
-.lxS .hk::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 46% 62% at 73% 50%,rgba(40,0,10,.55),rgba(40,0,10,.25) 60%,transparent 100%),linear-gradient(180deg,transparent 70%,rgba(20,2,4,.45))}
+.lxS .hk::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,transparent 42%,rgba(40,0,10,.12) 52%,rgba(40,0,10,.38) 68%,rgba(40,0,10,.55) 100%),linear-gradient(180deg,transparent 70%,rgba(20,2,4,.45))}
 .lxS.s-matsuri .hk{background-position:0% 46%}.lxS.s-samurai .hk{background-position:0% 42%}.lxS.s-neko .hk{background-position:0% 38%}.lxS.s-sakura .hk{background-position:0% 40%}
 .lxS::before{display:none}
 .lxS .rt{z-index:1}
