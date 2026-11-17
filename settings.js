@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.139',DFP_APPV='';
+var DFP_WEBV='28.140',DFP_APPV='';
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
 function vibOn(){return CAN&&g('fs_vib')!=='0'}
@@ -38,7 +38,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '#setDlg .tg:disabled{opacity:.4;cursor:default}'+
  '#setDlg .sL{display:block;margin:12px 0 4px;text-align:center;font-size:13px;color:#ffd77a}#setDlg .sL+#sgWipe{margin-top:2px;font-size:12.5px;color:#ffe9b0;text-decoration:underline;text-underline-offset:2px}'+
  '#setDlg .sN{margin:10px 0 0;text-align:center;font-size:11.5px;color:#d9b98a}'+
- '#setDlg .sV{margin:8px 0 0;text-align:center;font-size:11px;letter-spacing:.06em;color:rgba(217,185,138,.72);font-variant-numeric:tabular-nums;-webkit-user-select:none;user-select:none}'+
+ '#setDlg .sV{margin:4px 0 0;padding:12px 8px;display:block;width:100%;box-sizing:border-box;text-align:center;font-size:11px;letter-spacing:.06em;color:rgba(217,185,138,.72);font-variant-numeric:tabular-nums;-webkit-user-select:none;user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}'+
  '#setDlg .sX{display:block;width:100%;margin-top:12px;font:inherit;font-weight:800;font-size:15px;padding:10px;border-radius:24px;border:0;color:#2a0505;cursor:pointer;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f);box-shadow:0 3px 0 #6b420c}#setDlg .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}#setDlg .sRedeem{display:none;margin:8px 0 0;padding:8px 0 0;border-top:1px solid rgba(226,179,79,.22)}#setDlg .sRedeem.is-on{display:block}#setDlg .sRedeemRow{display:flex;gap:8px;align-items:stretch}#setDlg #sgCode{flex:1;min-width:0;box-sizing:border-box;width:100%;height:36px;padding:0 10px;border-radius:10px;border:1px solid rgba(226,179,79,.45);background:#2a0d0d;color:#ffeccb;font:inherit;font-size:14px}#setDlg #sgCodeGo{flex:none;padding:0 14px;border:0;border-radius:10px;font:inherit;font-weight:800;font-size:14px;color:#2a0505;cursor:pointer;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f)}#setDlg #sgCodeGo:disabled{opacity:.45;cursor:default}#setDlg #sgCodeMsg{margin:6px 0 0;text-align:center;font-size:12px;color:#ffd77a;min-height:1.2em}');
  var d=document.createElement('dialog');d.id='setDlg';d.setAttribute('aria-labelledby','setT');
  d.innerHTML='<div class="sC"><h2 id="setT">設定</h2>'+
@@ -59,15 +59,18 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  $('sgClose').onclick=function(){d.close()};
  d.addEventListener('click',function(e){if(e.target===d)d.close()});
 
- var rTaps=0,rTapAt=0,H_FC='aa4289e1fe0d33a5896a8a297b773bf576e88cf47a2ce9ec67bd7ccd52514d1f',H_CODE='080b025c8d1773fdefa79c16a7a53b57bf22393e7f8d52862a3849d5b5ffcad1';
+ var rTaps=[],rLast=0,rKind='',H_FC='e32487b0ea529d74544753e3a367d5cf53e122a21a65404cd369e4f29b3dd4cc',H_INV='386c70e2586ebd5484950189adbd774bd11fdc3a9b823b62e5eba551853dd8ee',H_CODE='080b025c8d1773fdefa79c16a7a53b57bf22393e7f8d52862a3849d5b5ffcad1';
  function normIn(c){return String(c||'').trim().replace(/\s+/g,'').toUpperCase()}
  function ownFc(){
   var c='';
   try{if(window.DFPfb&&DFPfb.profile&&DFPfb.profile.friendCode)c=DFPfb.profile.friendCode}catch(e){}
   if(!c){try{c=(JSON.parse(g('dfp_profile')||'{}')||{}).friendCode||''}catch(e){}}
-  c=normIn(c);
-  if(/^FS-/.test(c))c='DF-'+c.slice(3);
-  return c;
+  return normIn(c);
+ }
+ function ownInv(){
+  var c='';
+  try{c=(JSON.parse(g('fs_inv')||'{}')||{}).code||''}catch(e){}
+  return normIn(c);
  }
  function shaHex(s){
   if(!(crypto&&crypto.subtle&&window.TextEncoder))return Promise.resolve('');
@@ -81,8 +84,8 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
   if(!inp||!go||go.disabled)return;
   var code=normIn(inp.value);
   go.disabled=true;setMsg('');
-  Promise.all([shaHex(ownFc()),shaHex(code)]).then(function(hs){
-   if(hs[0]!==H_FC||hs[1]!==H_CODE){setMsg('序號無效');go.disabled=false;return}
+  Promise.all([shaHex(ownFc()),shaHex(ownInv()),shaHex(code)]).then(function(hs){
+   if((hs[0]!==H_FC&&hs[1]!==H_INV)||hs[2]!==H_CODE){setMsg('序號無效');go.disabled=false;return}
    if(g('dfp_r139')==='1'){setMsg('已經領過了');go.disabled=false;return}
    s('dfp_r139','1');
    try{
@@ -94,18 +97,26 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
    go.disabled=false;
   }).catch(function(){setMsg('序號無效');go.disabled=false});
  }
- $('sgVer').addEventListener('click',function(){
+ function revealCode(){
+  var box=$('sgRedeem');
+  if(!box)return;
+  box.hidden=false;box.classList.add('is-on');
+  try{$('sgCode').focus()}catch(e){}
+ }
+ function onVerTap(kind){
   var n=Date.now();
-  if(n-rTapAt>2500)rTaps=0;
-  rTapAt=n;rTaps++;
-  if(rTaps>=7){
-   rTaps=0;
-   var box=$('sgRedeem');
-   box.hidden=false;box.classList.add('is-on');
-   try{$('sgCode').focus()}catch(e){}
-  }
- });
- $('sgCodeGo').onclick=redeem;
+  if(kind==='click'&&rKind&&n-rLast<500)return;
+  if(n-rLast<40)return;
+  rLast=n;rKind=kind;
+  rTaps.push(n);
+  rTaps=rTaps.filter(function(t){return n-t<=4000});
+  if(rTaps.length>=7){rTaps=[];revealCode()}
+ }
+ var ver=$('sgVer');
+ ver.addEventListener('touchend',function(){onVerTap('touch')},{passive:true});
+ ver.addEventListener('pointerup',function(e){onVerTap((e.pointerType==='mouse')?'mouse':'pointer')});
+ ver.addEventListener('click',function(){onVerTap('click')});
+  $('sgCodeGo').onclick=redeem;
  $('sgCode').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();redeem()}});
  bb.textContent='';bb.setAttribute('aria-label','設定');bb.removeAttribute('aria-pressed');bb.setAttribute('aria-haspopup','dialog');bb.style.opacity=1;
  bb.onclick=function(){r();if(window.czPinScroll)window.czPinScroll(function(){try{d.showModal()}catch(e){d.setAttribute('open','')}});else{try{d.showModal()}catch(e){d.setAttribute('open','')}}};
