@@ -8,12 +8,44 @@ body.cab-on[data-skin="royal"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.7658)
 body.cab-on[data-skin="royal"] #cabFrame::before{border-image:url(assets/skins/frame-neon.webp?v=28134) 196 141 166 145 stretch}
 body.cab-on[data-skin="blossom"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.6937)}
 body.cab-on[data-skin="blossom"] #cabFrame::before{border-image:url(assets/skins/frame-blossom.webp?v=28134) 188 162 115 192 stretch}
-body.cab-on[data-skin="kitsune"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.6126)}
-body.cab-on[data-skin="kitsune"] #cabFrame::before{border-image:url(assets/skins/frame-kitsune.webp?v=28134) 179 157 130 166 stretch}
+body.cab-on[data-skin="kitsune"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.02);
+  container-type:inline-size;
+}
+/* v28.138: uniform-scale + clip. Source 1473x945, hole 1082x573 at (196,251). */
+body.cab-on[data-skin="kitsune"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-kitsune.webp?v=28138);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1473 / 1082 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 196 / 1082 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 251 / 1082 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
 body.cab-on[data-skin="kabuto"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.1712)}
 body.cab-on[data-skin="kabuto"] #cabFrame::before{border-image:url(assets/skins/frame-kabuto.webp?v=28134) 130 183 122 178 stretch}
-body.cab-on[data-skin="tsukiyo"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.3784)}
-body.cab-on[data-skin="tsukiyo"] #cabFrame::before{border-image:url(assets/skins/frame-tsukiyo.webp?v=28134) 153 155 123 191 stretch}
+body.cab-on[data-skin="tsukiyo"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.26);
+  container-type:inline-size;
+}
+/* v28.138: uniform-scale + clip. Source 1432x997, hole 1076x583 at (178,282). */
+body.cab-on[data-skin="tsukiyo"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-tsukiyo.webp?v=28138);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1432 / 1076 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 178 / 1076 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 282 / 1076 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
 body.cab-on[data-skin="beach"] #cabFrame{
   --ovh:calc(var(--frame-crown) * 1.08);
   container-type:inline-size;
