@@ -14,7 +14,25 @@ body.cab-on[data-skin="kabuto"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.1712
 body.cab-on[data-skin="kabuto"] #cabFrame::before{border-image:url(assets/skins/frame-kabuto.webp?v=28134) 130 183 122 178 stretch}
 body.cab-on[data-skin="tsukiyo"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.3784)}
 body.cab-on[data-skin="tsukiyo"] #cabFrame::before{border-image:url(assets/skins/frame-tsukiyo.webp?v=28134) 153 155 123 191 stretch}
-body.cab-on[data-skin="beach"] #cabFrame{--ovh:calc(var(--frame-crown) * 1.08)}
-body.cab-on[data-skin="beach"] #cabFrame::before{border-image:url(assets/skins/frame-beach.webp?v=28136) 120 154 120 159 stretch}
+body.cab-on[data-skin="beach"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.08);
+  container-type:inline-size;
+}
+/* v28.137: uniform-scale + clip (no 9-slice stretch). Source 1457x1003, hole 1135x617 at (161,277).
+   Use 100cqi (frame width) so Y position is not resolved against height.
+   Mask knocks out the padding box so no lip can enter the reel hole. */
+body.cab-on[data-skin="beach"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-beach.webp?v=28137);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1457 / 1135 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 161 / 1135 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 277 / 1135 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
 body.cab-on[data-skin="feast"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.5766)}
 body.cab-on[data-skin="feast"] #cabFrame::before{border-image:url(assets/skins/frame-feast.webp?v=28134) 175 164 122 165 stretch}
