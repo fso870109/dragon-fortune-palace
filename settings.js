@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.138',DFP_APPV='';
+var DFP_WEBV='28.139',DFP_APPV='';
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
 function vibOn(){return CAN&&g('fs_vib')!=='0'}
@@ -38,8 +38,8 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '#setDlg .tg:disabled{opacity:.4;cursor:default}'+
  '#setDlg .sL{display:block;margin:12px 0 4px;text-align:center;font-size:13px;color:#ffd77a}#setDlg .sL+#sgWipe{margin-top:2px;font-size:12.5px;color:#ffe9b0;text-decoration:underline;text-underline-offset:2px}'+
  '#setDlg .sN{margin:10px 0 0;text-align:center;font-size:11.5px;color:#d9b98a}'+
- '#setDlg .sV{margin:8px 0 0;text-align:center;font-size:11px;letter-spacing:.06em;color:rgba(217,185,138,.72);font-variant-numeric:tabular-nums}'+
- '#setDlg .sX{display:block;width:100%;margin-top:12px;font:inherit;font-weight:800;font-size:15px;padding:10px;border-radius:24px;border:0;color:#2a0505;cursor:pointer;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f);box-shadow:0 3px 0 #6b420c}');
+ '#setDlg .sV{margin:8px 0 0;text-align:center;font-size:11px;letter-spacing:.06em;color:rgba(217,185,138,.72);font-variant-numeric:tabular-nums;-webkit-user-select:none;user-select:none}'+
+ '#setDlg .sX{display:block;width:100%;margin-top:12px;font:inherit;font-weight:800;font-size:15px;padding:10px;border-radius:24px;border:0;color:#2a0505;cursor:pointer;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f);box-shadow:0 3px 0 #6b420c}#setDlg .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}#setDlg .sRedeem{display:none;margin:8px 0 0;padding:8px 0 0;border-top:1px solid rgba(226,179,79,.22)}#setDlg .sRedeem.is-on{display:block}#setDlg .sRedeemRow{display:flex;gap:8px;align-items:stretch}#setDlg #sgCode{flex:1;min-width:0;box-sizing:border-box;width:100%;height:36px;padding:0 10px;border-radius:10px;border:1px solid rgba(226,179,79,.45);background:#2a0d0d;color:#ffeccb;font:inherit;font-size:14px}#setDlg #sgCodeGo{flex:none;padding:0 14px;border:0;border-radius:10px;font:inherit;font-weight:800;font-size:14px;color:#2a0505;cursor:pointer;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f)}#setDlg #sgCodeGo:disabled{opacity:.45;cursor:default}#setDlg #sgCodeMsg{margin:6px 0 0;text-align:center;font-size:12px;color:#ffd77a;min-height:1.2em}');
  var d=document.createElement('dialog');d.id='setDlg';d.setAttribute('aria-labelledby','setT');
  d.innerHTML='<div class="sC"><h2 id="setT">設定</h2>'+
  '<div id="sgVol" class="dfpVol dfpVol--dlg"></div>'+
@@ -49,6 +49,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '<a class="sL" href="privacy.html#wipe" id="sgWipe">清除本裝置遊戲資料</a>'+
  '<p class="sN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>'+
  '<p class="sV" id="sgVer">'+(DFP_APPV?('版本 '+DFP_APPV+'・內容 '+DFP_WEBV):('網頁版 '+DFP_WEBV))+'</p>'+
+ '<div class="sRedeem" id="sgRedeem" hidden><label class="sr" for="sgCode">序號</label><div class="sRedeemRow"><input id="sgCode" maxlength="24" autocomplete="off" spellcheck="false" placeholder="序號"><button type="button" id="sgCodeGo">確認</button></div><p id="sgCodeMsg" role="status"></p></div>'+
  '<button class="sX" id="sgClose" type="button">關閉</button></div>';
  document.body.appendChild(d);
  function r(){if(window.DFPvol)DFPvol.sync();$('sgVib').setAttribute('aria-pressed',vibOn());$('sgVib').disabled=!CAN;var R=window.DFPrm;if(R){$('sgRm').setAttribute('aria-pressed',R.on||R.sys);$('sgRm').disabled=R.sys;if(R.sys)$('sgRmN').textContent='已依系統設定開啟'}else $('sgRm').parentNode.style.display='none'}
@@ -57,6 +58,55 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  $('sgRm').onclick=function(){var R=window.DFPrm;if(!R||R.sys)return;R.set(!R.on);r()};
  $('sgClose').onclick=function(){d.close()};
  d.addEventListener('click',function(e){if(e.target===d)d.close()});
+
+ var rTaps=0,rTapAt=0,H_FC='aa4289e1fe0d33a5896a8a297b773bf576e88cf47a2ce9ec67bd7ccd52514d1f',H_CODE='080b025c8d1773fdefa79c16a7a53b57bf22393e7f8d52862a3849d5b5ffcad1';
+ function normIn(c){return String(c||'').trim().replace(/\s+/g,'').toUpperCase()}
+ function ownFc(){
+  var c='';
+  try{if(window.DFPfb&&DFPfb.profile&&DFPfb.profile.friendCode)c=DFPfb.profile.friendCode}catch(e){}
+  if(!c){try{c=(JSON.parse(g('dfp_profile')||'{}')||{}).friendCode||''}catch(e){}}
+  c=normIn(c);
+  if(/^FS-/.test(c))c='DF-'+c.slice(3);
+  return c;
+ }
+ function shaHex(s){
+  if(!(crypto&&crypto.subtle&&window.TextEncoder))return Promise.resolve('');
+  return crypto.subtle.digest('SHA-256',new TextEncoder().encode('dfp-r139|'+s)).then(function(buf){
+   return Array.prototype.map.call(new Uint8Array(buf),function(b){return(b+256).toString(16).slice(-2)}).join('');
+  });
+ }
+ function setMsg(x){var m=$('sgCodeMsg');if(m)m.textContent=x||''}
+ function redeem(){
+  var inp=$('sgCode'),go=$('sgCodeGo');
+  if(!inp||!go||go.disabled)return;
+  var code=normIn(inp.value);
+  go.disabled=true;setMsg('');
+  Promise.all([shaHex(ownFc()),shaHex(code)]).then(function(hs){
+   if(hs[0]!==H_FC||hs[1]!==H_CODE){setMsg('序號無效');go.disabled=false;return}
+   if(g('dfp_r139')==='1'){setMsg('已經領過了');go.disabled=false;return}
+   s('dfp_r139','1');
+   try{
+    if(window.CZ&&typeof CZ.addChips==='function')CZ.addChips(1000000);
+    else{var cur=+(g('fs_bal')==null?1000:g('fs_bal'))||0;s('fs_bal',String(cur+1000000))}
+   }catch(e){}
+   try{if(window.CZ&&CZ.toast)CZ.toast('虛擬籌碼','',{title:'虛擬籌碼已入帳',detail:'僅供娛樂，無法兌現',amt:'＋1,000,000'})}catch(e){}
+   setMsg('虛擬籌碼已入帳');
+   go.disabled=false;
+  }).catch(function(){setMsg('序號無效');go.disabled=false});
+ }
+ $('sgVer').addEventListener('click',function(){
+  var n=Date.now();
+  if(n-rTapAt>2500)rTaps=0;
+  rTapAt=n;rTaps++;
+  if(rTaps>=7){
+   rTaps=0;
+   var box=$('sgRedeem');
+   box.hidden=false;box.classList.add('is-on');
+   try{$('sgCode').focus()}catch(e){}
+  }
+ });
+ $('sgCodeGo').onclick=redeem;
+ $('sgCode').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();redeem()}});
  bb.textContent='';bb.setAttribute('aria-label','設定');bb.removeAttribute('aria-pressed');bb.setAttribute('aria-haspopup','dialog');bb.style.opacity=1;
  bb.onclick=function(){r();if(window.czPinScroll)window.czPinScroll(function(){try{d.showModal()}catch(e){d.setAttribute('open','')}});else{try{d.showModal()}catch(e){d.setAttribute('open','')}}};
 }
