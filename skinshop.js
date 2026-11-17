@@ -55,7 +55,7 @@ function saveSkin(st){if(HAS_GAME_SAVE)return skSave(st);try{localStorage.setIte
 function applySkin(){if(HAS_GAME_APPLY)return skApply()}
 function onMach(){return !!window.CZM}
 function click(){try{if(window.sfx&&sfx.click)sfx.click()}catch(e){}}
-function pvUrl(id){return 'assets/skins/shop/'+PVT+'-'+(FRM[id]||id)+'.webp?v='+(id==='tsukiyo'||id==='kitsune'?'28138':id==='beach'?'28137':'28134')}
+function pvUrl(id){return 'assets/skins/shop/'+PVT+'-'+(FRM[id]||id)+'.webp?v='+(id==='jade'||id==='royal'?'28141':id==='tsukiyo'||id==='kitsune'?'28138':id==='beach'?'28137':'28134')}
 function pv(k){return '<div class="pv2 pvimg s-'+k.id+'" aria-hidden="true" style="background-image:url('+pvUrl(k.id)+')"></div>'}
 function msg(t,k){
   if(typeof shMsg==='function'&&onMach()){shMsg(t,k);return}

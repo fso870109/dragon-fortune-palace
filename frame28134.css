@@ -2,10 +2,42 @@
 /* Overrides frame.css / frame2846.css slice + ovh for the nine shop skins. */
 body.cab-on[data-skin="obsidian"] #cabFrame{--ovh:calc(var(--frame-crown) * 1.0901)}
 body.cab-on[data-skin="obsidian"] #cabFrame::before{border-image:url(assets/skins/frame-dragon.webp?v=28134) 232 153 133 164 stretch}
-body.cab-on[data-skin="jade"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.964)}
-body.cab-on[data-skin="jade"] #cabFrame::before{border-image:url(assets/skins/frame-hanabi.webp?v=28134) 218 133 138 80 stretch}
-body.cab-on[data-skin="royal"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.7658)}
-body.cab-on[data-skin="royal"] #cabFrame::before{border-image:url(assets/skins/frame-neon.webp?v=28134) 196 141 166 145 stretch}
+body.cab-on[data-skin="jade"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.5289);
+  container-type:inline-size;
+}
+/* v28.141: uniform-scale + clip. Source 1435x945, hole 1077x520 at (179,308). */
+body.cab-on[data-skin="jade"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-hanabi.webp?v=28141);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1435 / 1077 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 179 / 1077 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 308 / 1077 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
+body.cab-on[data-skin="royal"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.3093);
+  container-type:inline-size;
+}
+/* v28.141: uniform-scale + clip. Source 1440x999, hole 1072x535 at (184,276). */
+body.cab-on[data-skin="royal"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-neon.webp?v=28141);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1440 / 1072 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 184 / 1072 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 276 / 1072 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
 body.cab-on[data-skin="blossom"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.6937)}
 body.cab-on[data-skin="blossom"] #cabFrame::before{border-image:url(assets/skins/frame-blossom.webp?v=28134) 188 162 115 192 stretch}
 body.cab-on[data-skin="kitsune"] #cabFrame{
