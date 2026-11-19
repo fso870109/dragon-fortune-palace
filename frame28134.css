@@ -164,3 +164,39 @@ body.cab-on[data-skin="feast"] #cabFrame::before{
   -webkit-mask-composite:xor;
   mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
 }
+body.cab-on[data-skin="neon"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.2674);
+  container-type:inline-size;
+}
+/* v28.143: uniform-scale + clip. Source 1443x1058, hole 1214x616 at (114,310). */
+body.cab-on[data-skin="neon"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-midnight.webp?v=28143);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1443 / 1214 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 114 / 1214 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 310 / 1214 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
+body.cab-on[data-skin="crystal"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.0585);
+  container-type:inline-size;
+}
+/* v28.143: uniform-scale + clip. Source 1463x1060, hole 1230x620 at (117,284). */
+body.cab-on[data-skin="crystal"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-moon.webp?v=28143);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1463 / 1230 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 117 / 1230 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 284 / 1230 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
