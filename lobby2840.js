@@ -4,7 +4,7 @@
 if(!window.CZ||document.getElementById('lx'))return;
 var $=function(i){return document.getElementById(i)},D=document,LS=localStorage,SS=sessionStorage;
 var fmt=function(n){return Math.floor(n).toLocaleString('en-US')};
-var V='?v=2848';
+var V='?v=28148';
 function el(tag,cls,html){var e=D.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
 function snd(n){try{window.sfx&&window.sfx(n)}catch(e){}}
 function tap(){snd(1);try{CZ.vib(8)}catch(e){}}
@@ -39,7 +39,7 @@ R.innerHTML=
    '<button type="button" class="lxCard lxMis" id="lxMis"><img class="art" src="assets/lx/scroll.webp'+V+'" alt="" width="200" height="243"><span class="tx"><b>每日任務</b><small>完成任務領取獎勵</small><span class="lxPr"><i><u id="lxMisBar"></u><em id="lxMisN">0 / 5</em></i></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxMisB"></span></button>'+
    '<button type="button" class="lxCard lxEv" id="lxEv"><span class="tx"><b>限時活動</b><small id="lxEvN">本週活動</small><span class="lxCd"><i class="lxIcoTime" aria-hidden="true"></i><span id="lxEvT">--:--:--</span></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxEvB"></span></button>'+
   '</div>'+
-  '<a class="lxCol" id="lxCol" href="shop.html"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><img class="art" src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><span class="pf" aria-hidden="true"><i style="background-image:url(assets/sakura/p_idle.webp?v=256)"></i><i style="background-image:url(assets/samurai/p_idle.webp?v=256)"></i></span><span class="tx"><b>商城</b><small>以虛擬籌碼兌換機台外框・角色圖鑑</small></span><span class="lxGo">進入<i aria-hidden="true">›</i></span></a>'+
+  '<a class="lxCol" id="lxCol" href="shop.html"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><img class="art" src="assets/lx/shop_palace.webp'+V+'" alt="" width="420" height="295"><span class="pf" aria-hidden="true"><i style="background-image:url(assets/sakura/p_idle.webp?v=256)"></i><i style="background-image:url(assets/samurai/p_idle.webp?v=256)"></i></span><span class="tx"><b>商城</b><small>以虛擬籌碼兌換機台外框・角色圖鑑</small></span><span class="lxGo">進入<i aria-hidden="true">›</i></span></a>'+
  '</section>'+
  '<section class="lxTab" data-tab="games" aria-label="機台"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>全部機台</h2></div><div id="lxWallSlot"></div></section>'+
  '<section class="lxTab" data-tab="events" aria-label="活動"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>活動中心</h2></div><div id="lxEvSlot" class="lxStack"></div></section>'+
@@ -47,7 +47,7 @@ R.innerHTML=
  '<section class="lxTab" data-tab="me" aria-label="我的"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>我的金殿</h2></div><div id="lxMeSlot" class="lxStack"></div></section>'+
 '</main>'+
 '<div class="lxBot"><nav class="lxNav" id="lxNav" aria-label="主選單">'+
- [['home','首頁','n_home'],['games','機台','n_game'],['events','活動','n_gift'],['shop','商城','chest','shop.html'],['me','我的','n_me']].map(function(t){return t[3]?('<a href="'+t[3]+'" data-tab="'+t[0]+'"><img src="assets/lx/'+t[2]+'.webp'+V+'" alt="" width="96" height="96"><span>'+t[1]+'</span></a>'):('<button type="button" data-tab="'+t[0]+'"'+(t[0]==='home'?' class="on" aria-current="page"':'')+'><img src="assets/lx/'+t[2]+'.webp'+V+'" alt="" width="96" height="96"><span>'+t[1]+'</span><i class="nd" aria-hidden="true"></i></button>')}).join('')+
+ [['home','首頁','n_home'],['games','機台','n_game'],['events','活動','n_gift'],['shop','商城','n_shop','shop.html'],['me','我的','n_me']].map(function(t){return t[3]?('<a href="'+t[3]+'" data-tab="'+t[0]+'"><img src="assets/lx/'+t[2]+'.webp'+V+'" alt="" width="96" height="96"><span>'+t[1]+'</span></a>'):('<button type="button" data-tab="'+t[0]+'"'+(t[0]==='home'?' class="on" aria-current="page"':'')+'><img src="assets/lx/'+t[2]+'.webp'+V+'" alt="" width="96" height="96"><span>'+t[1]+'</span><i class="nd" aria-hidden="true"></i></button>')}).join('')+
 '</nav><p class="lxFoot"><b>18+</b><span>僅供娛樂・虛擬籌碼・無兌現</span></p></div>';
 var wrap=D.querySelector('.wrap');D.body.insertBefore(R,wrap?wrap.nextSibling:null);
 D.documentElement.classList.add('lx');
@@ -76,7 +76,7 @@ if(fr){proxyRow(ev,'lxFr','<img src="assets/lx/ev_friends.webp'+V+'" alt="" widt
 /* collect tab */
 var col=$('lxColSlot');
 var shopRow=el('div','lxShop');
-shopRow.innerHTML='<div class="lxShopH"><img src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><div><b>機台外觀商店</b><small id="lxSkN">尚未收藏限定外框</small></div></div>'+
+shopRow.innerHTML='<div class="lxShopH"><img src="assets/lx/shop_palace.webp'+V+'" alt="" width="420" height="295"><div><b>機台外觀商店</b><small id="lxSkN">尚未收藏限定外框</small></div></div>'+
 '<p class="lxShopP">外框全機台共用・以虛擬籌碼兌換，純裝飾不影響機率</p>'+
 '<div class="lxShopE"><div class="lxShopPv" id="lxShopPv" aria-hidden="true"></div>'+
 '<button type="button" class="lxShopGo" id="lxShopGo">進入外觀商店 ›</button></div>';

@@ -1,0 +1,101 @@
+/* 櫻花斬・夜宴庭 — cosmetic theme. Loaded only when equipped. */
+#themeAccent,#themeLanterns,#themeFx{pointer-events:none}
+/* backgrounds & portraits */
+body.theme-yan::before{
+  background:linear-gradient(rgba(0,0,0,0) 40%,rgba(0,0,0,.25)),url(assets/theme-sakura/bgp.webp) center/cover no-repeat!important}
+body.theme-yan{--czbg:url(assets/theme-sakura/bg.webp);--czbgp:url(assets/theme-sakura/bgp.webp);--cz-acc:#e08a3a;
+  --czhero:url(assets/theme-sakura/hero.webp);--czbw:url(assets/theme-sakura/p_bigwin.webp);--czbwbl:url(assets/theme-sakura/p_bigwin_bl.webp);
+  --deck-glow:255,186,130;--deck-lacquer:58,16,18}
+body.theme-yan .board{
+  background:#2a0c16 url(assets/theme-sakura/reelbg.webp) center/100% 100% no-repeat!important}
+body.theme-yan .inner{
+  background:url(assets/theme-sakura/base.webp) 0 0/100% 100% no-repeat!important}
+body.theme-yan #czHero .czhi{background-image:url(assets/theme-sakura/hero.webp)!important}
+body.theme-yan .lcd .ci,
+body.theme-yan .lcd .ci{background-image:url(assets/theme-sakura/cutin.webp)!important}
+body.theme-yan .lcd .seven{background-image:url(assets/theme-sakura/bigbonus.webp)!important}
+body.theme-yan .bw .art{background:url(assets/theme-sakura/p_bigwin.webp) 50% 28%/cover no-repeat!important}
+body.theme-yan #czAtari .ai{background-image:url(assets/theme-sakura/p_bigwin.webp)!important}
+body.theme-yan #czAtari .ab{background-image:url(assets/theme-sakura/p_bigwin_bl.webp)!important}
+body.theme-yan #czHero .czpose{background-image:var(--yan-pose,url(assets/theme-sakura/hero.webp))}
+
+/* BET / CREDIT / WIN plaque colors — typography and size untouched */
+body.theme-yan .czbar .box,
+body.theme-yan .czm,
+body.theme-yan .czbar .box.czbet,
+body.theme-yan .czbar #czLobby,
+body.theme-yan .czbar #max16,
+body.theme-yan .czbar #menuBtn{
+  filter:none}
+body.theme-yan .czm::after,
+body.theme-yan .czbar .box.czbet::after,
+body.theme-yan .czbar .box.czcredit::after,
+body.theme-yan .czbar .box.czwin::after,
+body.theme-yan .czbar #credit,
+body.theme-yan #credit,body.theme-yan #win,body.theme-yan #bet{
+  /* text color only on numerals */
+}
+body.theme-yan .czbar .box b,
+body.theme-yan .czbar .box span,
+body.theme-yan .czm b,
+body.theme-yan #credit,body.theme-yan #win,body.theme-yan #bet,
+body.theme-yan .czbar .box.czcredit,
+body.theme-yan .czbar .box.czwin,
+body.theme-yan .czbar .box.czbet .v,
+body.theme-yan .czbar .box .v{
+  color:#fff4dc!important;
+  text-shadow:0 1px 0 #5a1808,0 0 8px rgba(255,160,80,.35)!important}
+body.theme-yan .czm::after,
+body.theme-yan .czbar::before,
+body.theme-yan .czbar .controls::before{
+  filter:sepia(.28) hue-rotate(-14deg) saturate(1.2)}
+
+/* Frame accent: same border-box + xor mask as equipped frame; uniform scale; no stretch */
+body.theme-yan.cab-on #cabFrame{container-type:inline-size;overflow:visible}
+body.theme-yan.cab-on #themeAccent{
+  position:absolute;left:0;right:0;bottom:0;
+  top:calc(-1 * var(--ovh,0px));
+  box-sizing:border-box;
+  border-style:solid;border-color:transparent;
+  border-width:calc(var(--frame-crown) + var(--ovh,0px)) var(--frame-rail) var(--frame-base) var(--frame-rail);
+  pointer-events:none;z-index:6;
+  background-image:url(assets/theme-sakura/accent.webp);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  /* source 1600x900, hole 1446x654 at (78,80) — uniform scale to the current window */
+  background-size:calc(1600 / 1446 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 78 / 1446 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 80 / 1446 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
+body.theme-yan.cab-on #themeLanterns{position:absolute;inset:0;pointer-events:none;z-index:7;overflow:visible}
+body.theme-yan.cab-on #themeLanterns .ll,
+body.theme-yan.cab-on #themeLanterns .lr{
+  position:absolute;
+  top:calc(var(--frame-crown) + var(--ovh,0px) + 6px);
+  width:calc(var(--frame-rail) * 1.55);
+  max-width:42px;
+  aspect-ratio:3/5;
+  background:url(assets/theme-sakura/fx/lantern.webp) center/contain no-repeat;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.55))}
+body.theme-yan.cab-on #themeLanterns .ll{left:1px}
+body.theme-yan.cab-on #themeLanterns .lr{right:1px}
+
+/* win / big-win particles layer */
+#themeFx{position:fixed;inset:0;z-index:70;overflow:hidden;pointer-events:none}
+#themeFx .p,#themeFx .L{position:absolute;will-change:transform,opacity;top:-10%;left:0}
+#themeFx .p{background:url(assets/theme-sakura/fx/petal.webp) center/contain no-repeat}
+#themeFx .L{background:url(assets/theme-sakura/fx/lantern.webp) center/contain no-repeat;filter:drop-shadow(0 0 8px rgba(255,180,60,.65))}
+@keyframes yanFall{0%{transform:translate3d(var(--x,0),-12vh,0) rotate(0) scale(var(--s,1));opacity:0}
+  8%{opacity:1}
+  100%{transform:translate3d(calc(var(--x,0) + var(--dx,20px)),110vh,0) rotate(var(--r,220deg)) scale(var(--s,1));opacity:.15}}
+@keyframes yanFloat{0%{transform:translate3d(var(--x,0),110vh,0) scale(var(--s,1));opacity:0}
+  12%{opacity:1}
+  100%{transform:translate3d(calc(var(--x,0) + var(--dx,10px)),-16vh,0) scale(var(--s,1));opacity:0}}
+
+/* hide dock print issues */
+@media (prefers-reduced-motion:reduce){
+  #themeFx .p,#themeFx .L{animation:none!important}
+}

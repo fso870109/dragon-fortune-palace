@@ -1,5 +1,5 @@
-@font-face{font-family:"LxSerif";src:url("assets/fonts/lxserif.woff2") format("woff2");font-weight:900;font-display:swap}
-@font-face{font-family:"TCDisp";src:url("assets/fonts/tcdisp.woff2") format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"LxSerif";src:url("assets/fonts/lxserif.woff2?v=28148") format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"TCDisp";src:url("assets/fonts/tcdisp.woff2?v=28148") format("woff2");font-weight:900;font-display:swap}
 @font-face{font-family:"KleeSub";src:url("assets/fonts/klee-sub.woff2") format("woff2");font-weight:600;font-display:swap}
 
 :root{
@@ -715,3 +715,99 @@ html.confirm #page{height:100vh;overflow:hidden}
 #panel-owned .ownRow .st.on,#panel-owned .ownRow .btnOn{
   color:#e8d5a0;text-shadow:none;pointer-events:none;cursor:default;letter-spacing:.12em;
   background:rgba(48,28,12,.62);box-shadow:inset 0 0 0 1.5px #d4a84a}
+
+/* v28.148 typography scale, larger tabs, theme cards, 金殿 shop nav */
+:root{
+  --f-title:var(--lxf);
+  --f-body:var(--sans);
+  --fs-display:max(18px,calc(22*var(--u)));
+  --fs-section:max(16px,calc(18*var(--u)));
+  --fs-tab:max(14px,calc(16*var(--u)));
+  --fs-name:max(15px,calc(17*var(--u)));
+  --fs-btn:max(13px,calc(15*var(--u)));
+  --fs-body:max(13px,calc(14*var(--u)));
+  --fs-status:max(12px,calc(13.5*var(--u)));
+  --fs-badge:max(10px,calc(11*var(--u)));
+  --fs-foot:max(11px,calc(12*var(--u)));
+}
+html,body{font-family:var(--f-body)}
+.shTitle h1,.gt,.skinNote b,.soonBox h2,.galHead b,.galPlaque .who,.sec,
+.tabs a{font-family:var(--f-title)!important}
+.pageHead{min-height:calc(58*var(--u))}
+.shTitle h1{font-size:var(--fs-display)!important;line-height:1.15!important}
+.skinNote b,.soonBox h2,.galHead b,.skSec{font-size:var(--fs-section)!important;line-height:1.25!important;font-family:var(--f-title)!important}
+.skinNote p,.soonBox p,.galHead small,.foot p,.shmsg{font-family:var(--f-body)!important;font-size:var(--fs-body)!important;line-height:1.55!important}
+.foot b{font-family:var(--f-body)!important;font-size:var(--fs-status)!important;line-height:1.5!important}
+
+/* tabs: larger title + 即將推出 as its own pill */
+.tabs{grid-template-columns:repeat(4,minmax(0,1fr));padding:0 calc(4*var(--u));
+  top:max(52px,calc(58*var(--u)))}
+.tabs a{height:auto;min-height:calc(52*var(--u));padding:calc(7*var(--u)) 2px calc(6*var(--u));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  font:900 var(--fs-tab)/1.15 var(--f-title)!important;letter-spacing:.06em!important;
+  white-space:nowrap;text-align:center;color:#e8d5a0}
+.tabs a.on{color:#ffe08a}
+.tabs a em{display:inline-block;margin-top:0;padding:2px 7px;border-radius:999px;
+  font:700 var(--fs-badge)/1.2 var(--f-body)!important;font-style:normal;letter-spacing:.04em;
+  color:#f3e0b8!important;-webkit-text-fill-color:#f3e0b8;background:rgba(70,16,12,.88);
+  box-shadow:inset 0 0 0 1px #d4a84a;white-space:nowrap}
+.tabs a.soon{opacity:1}
+
+/* frame / theme card names + status */
+.skin .name,#panel-frames .skin .name,#panel-themes .themeCard .name{
+  font:900 var(--fs-name)/1.25 var(--f-title)!important;letter-spacing:.06em;white-space:normal}
+#panel-frames .skin .name{min-height:calc(28*var(--u))}
+#panel-frames .skin .sub,#panel-themes .themeCard .sub,.skin .sub,.skin .free,.skin .pr{
+  font:700 var(--fs-status)/1.35 var(--f-body)!important;color:#e8d2b0}
+#panel-frames .skin .sub{min-height:calc(28*var(--u))}
+.tier,.badgeEq{font:700 var(--fs-badge)/1.3 var(--f-body)!important;padding:2px 8px}
+.btnGold,#panel-frames .buyChip,#panel-themes .buyChip,#panel-themes .thmUse,
+#panel-frames .btnOn,#panel-themes .btnOn,
+#panel-frames .skin .act .buyChip,#panel-themes .themeCard .act .buyChip,#panel-themes .themeCard .act .thmUse,
+#panel-frames .skin .act .btnOn,#panel-themes .themeCard .act .btnOn{
+  font:900 var(--fs-btn)/1 var(--f-title)!important}
+#panel-themes .buyChip,#panel-themes .btnOn,#panel-themes .thmUse,
+#panel-themes .themeCard .act .buyChip,#panel-themes .themeCard .act .btnOn,#panel-themes .themeCard .act .thmUse{
+  display:flex;align-items:center;justify-content:center;width:100%;
+  height:calc(34*var(--u));min-height:30px;border-radius:999px;box-sizing:border-box}
+#panel-themes .btnOn,#panel-themes .themeCard .act .btnOn{
+  color:#e8d5a0;text-shadow:none;pointer-events:none;cursor:default;letter-spacing:.12em;
+  background:rgba(48,28,12,.62);box-shadow:inset 0 0 0 1.5px #d4a84a}
+#panel-themes .btnOn.soonLbl{letter-spacing:.08em;opacity:.9}
+#panel-themes .thmUse,#panel-themes .themeCard .act .thmUse{
+  color:#3a1408;background:linear-gradient(180deg,#ffe7a8,#e0b45a);
+  border:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 2px 0 #8a5a18;
+  letter-spacing:.12em;cursor:pointer}
+#panel-themes .thmUse:active{transform:translateY(1px);filter:brightness(.96)}
+
+
+#panel-owned .ownRow .tx b{font:900 var(--fs-name)/1.3 var(--f-title)!important}
+#panel-owned .ownRow .tx small{font:500 var(--fs-status)/1.4 var(--f-body)!important;color:#f3dcc0}
+#panel-owned .ownRow .st,#panel-owned .ownRow button.st,#panel-owned .ownRow .btnOn{
+  font:900 var(--fs-btn)/1 var(--f-title)!important}
+
+.lxNav span{font:700 max(11px,calc(13*var(--u)))/1.15 var(--f-body)!important}
+
+/* theme catalog */
+#shThemes,.themes{display:grid;grid-template-columns:1fr;gap:calc(12*var(--u));
+  margin:calc(14*var(--u)) calc(12*var(--u))}
+.themeCard{position:relative;display:flex;flex-direction:column;
+  border-radius:calc(14*var(--u));overflow:hidden;
+  background:linear-gradient(180deg,rgba(80,8,14,.94),rgba(22,2,4,.96)) padding-box,var(--gframe) border-box;
+  border:2px solid transparent;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.themeCard.eq{box-shadow:0 0 0 1px #ffe08a,0 0 14px rgba(255,190,60,.4)}
+.themeCard .pv{width:100%;aspect-ratio:16/7;background:#0c0608 center/cover no-repeat}
+.themeCard .pv.soonPv{aspect-ratio:16/5;background:
+  repeating-linear-gradient(135deg,rgba(80,20,16,.5) 0 10px,rgba(40,8,8,.5) 10px 20px)}
+.themeCard .meta{padding:calc(10*var(--u)) calc(12*var(--u)) calc(12*var(--u));text-align:center}
+.themeCard .desc{margin:calc(6*var(--u)) 0 0;font:500 var(--fs-body)/1.5 var(--f-body);color:#f3dcc0}
+.themeCard .act{margin-top:calc(10*var(--u))}
+.themeCard.soon{opacity:.92}
+/* Pill sits on its own line so 360 can keep 14px tab titles without squeezing 即將推出. */
+.tabs a{flex-direction:column;gap:2px}
+.tabs a em{display:block;margin-top:1px}
+@media (max-width:380px){
+  .tabs a{font-size:var(--fs-tab)!important;letter-spacing:.03em!important;white-space:normal}
+  .tabs a em{padding:2px 5px;font-size:max(10px,calc(10.5*var(--u)))!important}
+  .skin .name,#panel-frames .skin .name,.themeCard .name{letter-spacing:.03em}
+}

@@ -1,4 +1,4 @@
-/* 龍運金殿 standalone 商城 (v28.146) — 一次一張圖鑑、滿版點一下返回、外框按鈕對齊、大廳底部導覽。Unlock rules unchanged. IAP flag off. */
+/* 龍運金殿 standalone 商城 (v28.148) — 一次一張圖鑑、滿版點一下返回、外框按鈕對齊、大廳底部導覽。Unlock rules unchanged. IAP flag off. */
 (function(){
   var D=document;
   var TIER={n:'普通',r:'稀有',l:'傳說',m:'神話'};
@@ -94,6 +94,31 @@
     box.innerHTML=catalog().map(function(k){return frameCard(k,state())}).join('');
   }
 
+  function themeState(){return window.DFPtheme?DFPtheme.read():{own:[],eq:{}}}
+  function renderThemes(){
+    var box=$('shThemes'); if(!box)return;
+    if(!window.DFPtheme){box.innerHTML='';return}
+    var st=themeState();
+    var cards=DFPtheme.catalog().map(function(k){
+      var eq=k.def? !st.eq[k.mach] : st.eq[k.mach]===k.id;
+      if(k.soon){
+        return '<article class="themeCard soon" data-id="'+k.id+'">'+
+          '<div class="pv soonPv" aria-hidden="true"></div>'+
+          '<div class="meta"><div class="name gt">'+k.name+'</div>'+
+          '<div class="sub">即將推出</div>'+
+          '<div class="act"><div class="btnOn soonLbl">即將推出</div></div></div></article>';
+      }
+      var badge=eq?'<span class="badgeEq">使用中</span>':(k.free?'<span class="badgeEq">已擁有</span>':'');
+      var sub=k.def?'<div class="sub free">預設・免費</div>':'<div class="sub free">免費開放</div>';
+      var act=eq?onLbl():'<button type="button" class="thmUse" data-act="theme-use" data-id="'+k.id+'" data-mach="'+k.mach+'">使用</button>';
+      var pv=k.card?'<div class="pv" style="background-image:url('+asset(k.card)+')"></div>':'<div class="pv"></div>';
+      return '<article class="themeCard'+(eq?' eq':'')+'" data-id="'+k.id+'">'+badge+pv+
+        '<div class="meta"><div class="name gt">'+k.name+'</div>'+sub+'<p class="desc">'+k.copy+'</p>'+
+        '<div class="act">'+act+'</div></div></article>';
+    });
+    box.innerHTML=cards.join('');
+  }
+
   function renderOwned(){
     var box=$('shOwn'); if(!box)return;
     var st=state();
@@ -103,6 +128,15 @@
       var act=eq?'<span class="st on">使用中</span>':useBtn(k.id).replace('buyChip btnUse','st btnUse');
       return '<div class="ownRow" data-id="'+k.id+'"><div class="th" style="background-image:url('+pv(k.id)+')"></div><div class="tx"><b class="gt">'+k.name+'</b><small>'+how+'</small></div>'+act+'</div>';
     });
+    if(window.DFPtheme){
+      var ts=themeState();
+      DFPtheme.catalog().filter(function(k){return !k.soon && (k.def || (ts.own&&ts.own.indexOf(k.id)>=0))}).forEach(function(k){
+        var eq=k.def? !ts.eq[k.mach] : ts.eq[k.mach]===k.id;
+        var how=k.def?'機台主題・預設免費':'機台主題・免費開放';
+        var act=eq?'<span class="st on">使用中</span>':'<button type="button" class="st btnUse" data-act="theme-use" data-id="'+k.id+'" data-mach="'+k.mach+'">使用</button>';
+        rows.push('<div class="ownRow" data-id="'+k.id+'"><div class="th" style="background-image:url('+asset(k.card||'')+')"></div><div class="tx"><b class="gt">'+k.name+'</b><small>'+how+'</small></div>'+act+'</div>');
+      });
+    }
     box.innerHTML=rows.join('')||'<p class="skSec">尚無已擁有外框</p>';
   }
 
@@ -295,6 +329,14 @@
         msg('再按一次確認，以 '+fmt(k.price)+' 虛擬籌碼兌換「'+k.name+'」');
         return;
       }
+      if(kind==='theme-use'){
+        if(!window.DFPtheme)return;
+        var mach=b.getAttribute('data-mach')||'sakura';
+        DFPtheme.setEq(mach, id);
+        msg('已改用「'+(b.closest('[data-id]')&&id? (DFPtheme.catalog().filter(function(x){return x.id===id})[0]||{}).name||id : id)+'」','ok');
+        paint();
+        return;
+      }
       act(kind,id);
     });
   }
@@ -302,6 +344,7 @@
   function paint(){
     bal();
     renderFrames();
+    renderThemes();
     renderOwned();
     renderGal();
   }
