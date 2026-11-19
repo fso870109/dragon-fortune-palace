@@ -81,6 +81,7 @@ if(HAS_GAME_APPLY&&onMach()){
   fx();
 }
 
+function shopDlg(){const s=$('shop');return (s&&s.tagName==='DIALOG')?s:null}
 function ensureShop(){
   if($('shop'))return;
   const d=D.createElement('dialog');
@@ -97,7 +98,7 @@ function ensureShop(){
 ensureShop();
 
 function ensureFeat(){
-  if($('shFeat')||!$('shop')||!$('skins'))return;
+  if($('shFeat')||!shopDlg()||!$('skins'))return;
   const feat=D.createElement('div');
   feat.id='shFeat';feat.className='shfeat';
   feat.innerHTML='<div class="shfimg"><div class="pv2 pvimg" id="shFeatPv" aria-hidden="true"></div></div>'+
@@ -108,10 +109,12 @@ function ensureFeat(){
   $('skins').parentNode.insertBefore(feat, $('skins'));
 }
 function ensureNote(){
+  if(!shopDlg())return;
   let w=$('shThm');
   if(!w){
-    w=D.createElement('div');w.id='shThm';w.className='shthm';
     const feat=$('shFeat'),sk=$('skins');
+    if(!(feat||sk))return;
+    w=D.createElement('div');w.id='shThm';w.className='shthm';
     (feat||sk).parentNode.insertBefore(w, feat||sk);
   }
   w.innerHTML='<p class="shall">✦ 外框全機台通用：套用後 4 台機台都會換上同一款外框</p>';
@@ -244,7 +247,7 @@ if(onMach()&&$('shopBtn')){
     el.querySelector('span').textContent='試穿「'+k.name+'」 '+left.n+'s';
     el.querySelector('.buy').hidden=getSkin().own.includes(id);
     clearInterval(tryT);tryT=setInterval(()=>{left.n--;if(left.n<=0){end();return}el.querySelector('span').textContent='試穿「'+k.name+'」 '+left.n+'s'},1000);
-    const shop=$('shop');if(shop)shop.close();
+    const shop=shopDlg();if(shop)shop.close();
   }
   skinsEl.addEventListener('click',e=>{const b=e.target.closest('[data-act="try"]');if(b)start(b.dataset.id)});
 }
@@ -252,7 +255,7 @@ if(onMach()&&$('shopBtn')){
 /* v28.60: in-machine 換框 shortcut removed — frames change from lobby 外框商店 */
 
 function ensureX(){
-  const shop=$('shop');if(!shop)return;
+  const shop=shopDlg();if(!shop)return;
   let x=$('shX');
   if(!x){
     const wrap=D.createElement('div');wrap.className='shTop';
@@ -265,7 +268,7 @@ function ensureX(){
   }
 }
 ensureX();
-const shc=$('shClose'),shopEl=$('shop');
+const shc=$('shClose'),shopEl=shopDlg();
 if(shc){
   if(!shc.textContent.trim())shc.textContent='關閉';
   if(D.documentElement.classList.contains('lx'))shc.classList.remove('gold');
@@ -280,7 +283,7 @@ function openShop(){
   setC(null);msg('');
   sel=getSkin().eq||'gold';
   render();
-  const shop=$('shop');
+  const shop=shopDlg();
   if(shop&&shop.showModal)shop.showModal();
 }
 function bindFeatAct(){
@@ -301,6 +304,6 @@ function bindFeatAct(){
 }
 bindFeatAct();
 
-window.DFPshop={open:openShop,render:render,thumb:syncLobbyThumb};
+window.DFPshop={open:openShop,render:render,thumb:syncLobbyThumb,catalog:catalog,state:getSkin,pvUrl:pvUrl,fmtN:fmtN,chips:chips,act:lobbyAct};
 syncLobbyThumb();
 })();

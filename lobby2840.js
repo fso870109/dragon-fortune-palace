@@ -39,7 +39,7 @@ R.innerHTML=
    '<button type="button" class="lxCard lxMis" id="lxMis"><img class="art" src="assets/lx/scroll.webp'+V+'" alt="" width="200" height="243"><span class="tx"><b>每日任務</b><small>完成任務領取獎勵</small><span class="lxPr"><i><u id="lxMisBar"></u><em id="lxMisN">0 / 5</em></i></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxMisB"></span></button>'+
    '<button type="button" class="lxCard lxEv" id="lxEv"><span class="tx"><b>限時活動</b><small id="lxEvN">本週活動</small><span class="lxCd"><i class="lxIcoTime" aria-hidden="true"></i><span id="lxEvT">--:--:--</span></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxEvB"></span></button>'+
   '</div>'+
-  '<button type="button" class="lxCol" id="lxCol"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><img class="art" src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><span class="pf" aria-hidden="true"><i style="background-image:url(assets/sakura/p_idle.webp?v=256)"></i><i style="background-image:url(assets/samurai/p_idle.webp?v=256)"></i></span><span class="tx"><b>精品收藏館</b><small>收集限定機台外框・角色圖鑑</small></span><span class="lxGo">前往<i aria-hidden="true">›</i></span></button>'+
+  '<a class="lxCol" id="lxCol" href="shop.html"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><img class="art" src="assets/lx/chest.webp'+V+'" alt="" width="420" height="295"><span class="pf" aria-hidden="true"><i style="background-image:url(assets/sakura/p_idle.webp?v=256)"></i><i style="background-image:url(assets/samurai/p_idle.webp?v=256)"></i></span><span class="tx"><b>商城</b><small>以虛擬籌碼兌換機台外框・角色圖鑑</small></span><span class="lxGo">進入<i aria-hidden="true">›</i></span></a>'+
  '</section>'+
  '<section class="lxTab" data-tab="games" aria-label="機台"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>全部機台</h2></div><div id="lxWallSlot"></div></section>'+
  '<section class="lxTab" data-tab="events" aria-label="活動"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>活動中心</h2></div><div id="lxEvSlot" class="lxStack"></div></section>'+
@@ -47,7 +47,7 @@ R.innerHTML=
  '<section class="lxTab" data-tab="me" aria-label="我的"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>我的金殿</h2></div><div id="lxMeSlot" class="lxStack"></div></section>'+
 '</main>'+
 '<div class="lxBot"><nav class="lxNav" id="lxNav" aria-label="主選單">'+
- [['home','首頁','n_home'],['games','機台','n_game'],['events','活動','n_gift'],['collect','收藏','n_star'],['me','我的','n_me']].map(function(t){return '<button type="button" data-tab="'+t[0]+'"'+(t[0]==='home'?' class="on" aria-current="page"':'')+'><img src="assets/lx/'+t[2]+'.webp'+V+'" alt="" width="96" height="96"><span>'+t[1]+'</span><i class="nd" aria-hidden="true"></i></button>'}).join('')+
+ [['home','首頁','n_home'],['games','機台','n_game'],['events','活動','n_gift'],['shop','商城','chest','shop.html'],['me','我的','n_me']].map(function(t){return t[3]?('<a href="'+t[3]+'" data-tab="'+t[0]+'"><img src="assets/lx/'+t[2]+'.webp'+V+'" alt="" width="96" height="96"><span>'+t[1]+'</span></a>'):('<button type="button" data-tab="'+t[0]+'"'+(t[0]==='home'?' class="on" aria-current="page"':'')+'><img src="assets/lx/'+t[2]+'.webp'+V+'" alt="" width="96" height="96"><span>'+t[1]+'</span><i class="nd" aria-hidden="true"></i></button>')}).join('')+
 '</nav><p class="lxFoot"><b>18+</b><span>僅供娛樂・虛擬籌碼・無兌現</span></p></div>';
 var wrap=D.querySelector('.wrap');D.body.insertBefore(R,wrap?wrap.nextSibling:null);
 D.documentElement.classList.add('lx');
@@ -120,7 +120,7 @@ function tab(t,noScroll){[].forEach.call(R.querySelectorAll('.lxTab'),function(s
  try{SS.setItem('lxTab',t)}catch(e){}R.setAttribute('data-cur',t);if(!noScroll)scrollTo(0,0);if(t==='home'){goS(cur,0);setTimeout(fit,0)}sync()}
 nav.addEventListener('click',function(e){var b=e.target.closest('button[data-tab]');if(!b)return;tap();tab(b.getAttribute('data-tab'))});
 R.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b){tap();tab(b.getAttribute('data-go'))}});
-$('lxCol').onclick=function(){tap();tab('collect')};
+$('lxCol').addEventListener('click',function(){tap()});
 $('lxMe').onclick=function(e){if(e.target.closest('.lxAv')){tap();if(window.DFPav)DFPav.open();return}tap();tab('me')};
 $('lxMis').onclick=function(){var m=$('bMiss');if(m)m.click()};
 $('lxEv').onclick=function(){var w=D.querySelector('.wkc[data-wd="'+new Date().getDay()+'"]');if(w)w.click();else tab('events')};
@@ -152,7 +152,7 @@ function cd(){var n=new Date(),m=new Date(n);m.setHours(24,0,0,0);var l=Math.max
 cd();setInterval(function(){if(!D.hidden){cd()}},1000);setInterval(function(){if(!D.hidden)sync()},15000);
 D.addEventListener('close',function(){setTimeout(sync,30)},true);
 addEventListener('pageshow',function(e){if(e.persisted)sync()});
-var t0='home';try{t0=SS.getItem('lxTab')||'home'}catch(e){}tab(/^(home|games|events|collect|me)$/.test(t0)?t0:'home',1);
+var t0='home';try{t0=SS.getItem('lxTab')||'home'}catch(e){}if(t0==='collect'){location.href='shop.html';return}tab(/^(home|games|events|me)$/.test(t0)?t0:'home',1);
 sync();
 
 /* ---------- fit home to tall screens: give spare height to the hero & spacing ---------- */
