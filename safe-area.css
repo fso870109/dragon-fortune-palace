@@ -1,0 +1,54 @@
+/* v28.151 Safe-area token + min top padding for camera / punch-hole. */
+:root{
+  --dfp-sat:0px;
+  --dfp-safe-min:28px;
+  --dfp-safe-top:max(var(--dfp-safe-min), env(safe-area-inset-top, 0px), var(--dfp-sat, 0px));
+}
+
+/* Shop sticky header: paint into the cutout, sit controls below it */
+.pageHead{
+  height:auto !important;
+  min-height:0 !important;
+  padding-top:var(--dfp-safe-top) !important;
+}
+
+/* Shop toast stays just below the (now taller) header row */
+#shToast, .shToast{
+  top:calc(var(--dfp-safe-top) + 52px) !important;
+}
+@media (max-width:360px){
+  #shToast, .shToast{ top:calc(var(--dfp-safe-top) + 48px) !important; }
+}
+
+/* Lobby: #lx previously used max(4px, env()), which collapses to 4px when env() is 0 */
+#lx{
+  padding-top:var(--dfp-safe-top) !important;
+}
+html.lx .rdp{ top:calc(116*var(--u) + var(--dfp-safe-top)) !important; }
+
+/* Game cabinets: pad the body for the camera, but keep the full-viewport
+   金殿 cabinet (.cab-on / .wrap min-height:100vh) inside the remaining height
+   so 大廳 / MAX BET / 選單 stay on short viewports (incl. 360×640). */
+html.dfp-game, html.dfp-game body{ box-sizing:border-box; }
+html.dfp-game body{
+  padding-top:var(--dfp-safe-top) !important;
+  height:100dvh;
+  max-height:100dvh;
+  min-height:100dvh;
+  overflow-x:hidden;
+  overflow-y:hidden;
+}
+html.dfp-game body.cab-on .wrap{
+  margin-top:0 !important;
+  min-height:0 !important;
+  height:100%;
+  max-height:100%;
+}
+html.dfp-game body.cab-on .machine{
+  max-height:100%;
+}
+/* Non-cabinet layout (if any): absorb the extra inset out of --hero-space.
+   Original body pad floor was 6px. */
+html.dfp-game body:not(.cab-on) .wrap{
+  margin-top:calc(var(--hero-space) - var(--dfp-safe-top) + 6px) !important;
+}

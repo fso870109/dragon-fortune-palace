@@ -9,7 +9,7 @@ function mapUrl(u){
   if(!u) return u;
   const s=String(u);
   let m=s.match(/assets\/sakura\/(t_[A-Za-z0-9]+)\.webp/);
-  if(m) return SYM+m[1]+'.webp';
+  if(m) return SYM+m[1]+'.webp?v=28151';
   m=s.match(/assets\/sakura\/(p_[A-Za-z0-9]+)\.webp/);
   if(m){
     if(m[1]==='p_bigwin'||m[1]==='p_bigwin_bl') return BASE+m[1]+'.webp';

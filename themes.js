@@ -2,7 +2,7 @@
    Equip state is saved locally (like frames). Theme assets load only when equipped. */
 (function(){
 if(window.DFPtheme)return;
-var KEY='dfp_theme', V='?v=28149';
+var KEY='dfp_theme', V='?v=28151';
 var FREE=['theme_sakura'];
 var CAT=[
   {id:'sakura-default', mach:'sakura', name:'櫻花斬・月夜', copy:'預設外觀。冷紫月夜與刀光身影。', def:true, soon:false, card:'assets/sakura/card.webp?v=256'},

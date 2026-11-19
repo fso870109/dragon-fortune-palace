@@ -1,0 +1,140 @@
+/* Preview only — shop header restyled to match the lobby 金殿 top bar. */
+.pageHead{
+  display:flex;
+  align-items:center;
+  gap:calc(8*var(--u));
+  padding-left:calc(10*var(--u));
+  padding-right:calc(10*var(--u));
+  padding-bottom:calc(8*var(--u));
+  background:
+    linear-gradient(180deg,rgba(88,12,16,.98),rgba(28,4,6,.97) 70%,rgba(16,2,4,.98));
+  box-shadow:
+    0 4px 16px rgba(0,0,0,.5),
+    inset 0 -1px 0 rgba(255,220,140,.45),
+    inset 0 -3px 0 rgba(90,40,8,.55);
+  border-bottom:0;
+  position:relative;
+}
+/* gold rail + faint red ornament under the bar */
+.pageHead::after{
+  content:"";
+  position:absolute;
+  left:8%;
+  right:8%;
+  bottom:-1px;
+  height:3px;
+  border-radius:2px;
+  background:linear-gradient(90deg,transparent 0%,#c4892a 12%,#ffe29a 50%,#c4892a 88%,transparent 100%);
+  box-shadow:0 0 8px rgba(255,190,60,.35);
+  pointer-events:none;
+}
+
+/* Gold-framed back button — same family as lobby .lxPlus / gold pills */
+.back{
+  flex:none;
+  display:flex;
+  align-items:center;
+  gap:2px;
+  height:calc(34*var(--u));
+  min-height:32px;
+  padding:0 calc(10*var(--u)) 0 calc(6*var(--u));
+  border-radius:999px;
+  background:
+    linear-gradient(180deg,#fff6cf 0%,#e0a838 55%,#b07a20 100%) padding-box,
+    var(--gframe) border-box;
+  border:1.5px solid transparent;
+  box-shadow:
+    0 2px 6px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,255,230,.65);
+}
+.back b{font:900 20px/1 var(--lxf);color:#3a1200;margin-top:-2px}
+.back em{font:700 max(10px,calc(12*var(--u)))/1 var(--sans);font-style:normal;color:#3a1200;letter-spacing:.06em;white-space:nowrap}
+
+/* Center title as a gold lacquer plaque (same idea as the shop toast plaque) */
+.shTitle{
+  flex:1;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:calc(6*var(--u));
+  height:calc(36*var(--u));
+  min-height:32px;
+  padding:0 calc(10*var(--u));
+  border-radius:calc(10*var(--u));
+  background:
+    linear-gradient(180deg,rgba(90,18,16,.97),rgba(28,4,6,.98)) padding-box,
+    var(--gframe) border-box;
+  border:1.5px solid transparent;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,220,150,.28),
+    inset 0 0 0 1px rgba(80,24,8,.55);
+}
+.shTitle img.drag{
+  width:calc(26*var(--u));
+  height:calc(26*var(--u));
+  min-width:18px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 6px rgba(255,180,40,.55));
+}
+.shTitle h1, .shTitle h1.gt{
+  margin:0;
+  font:900 max(16px,calc(20*var(--u)))/1 var(--lxf) !important;
+  letter-spacing:.14em;
+  white-space:nowrap;
+  background:var(--gold);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+  filter:drop-shadow(0 2px 0 #3a0306);
+}
+/* side pearls as red/gold ornament */
+.shTitle .pearl{
+  flex:none;
+  width:calc(8*var(--u));
+  height:calc(8*var(--u));
+  min-width:6px;min-height:6px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ffe7b0,#e8b44a 45%,#8a2a1a 78%,#4a0a0c);
+  box-shadow:0 0 0 1px #7a3a10, 0 0 6px rgba(255,180,60,.45);
+}
+
+/* Chip pill — match lobby .lxMe gold frame */
+.shBal{
+  flex:none;
+  display:flex;
+  align-items:center;
+  gap:calc(4*var(--u));
+  height:calc(34*var(--u));
+  min-height:32px;
+  padding:0 calc(10*var(--u));
+  border-radius:999px;
+  background:
+    linear-gradient(180deg,rgba(60,8,12,.92),rgba(22,2,4,.92)) padding-box,
+    var(--gframe) border-box;
+  border:1.5px solid transparent;
+  box-shadow:0 2px 8px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,220,150,.25);
+}
+.shBal .coin, .shBal i.coin{
+  width:calc(16*var(--u));
+  height:calc(16*var(--u));
+  min-width:13px;min-height:13px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff6c8,#ffcc33 45%,#a86a00);
+  box-shadow:0 0 0 1px #5a3a00, 0 0 6px rgba(255,200,60,.6);
+}
+.shBal b{
+  font:700 max(12px,calc(15*var(--u)))/1 "Times New Roman",serif;
+  color:#fff3d0;
+  text-shadow:0 1px 0 #3a0306, 0 0 6px rgba(255,190,60,.55);
+  font-variant-numeric:tabular-nums;
+}
+
+@media (max-width:360px){
+  .back em{display:none}
+  .back{padding:0;width:calc(34*var(--u));justify-content:center}
+  .shTitle{padding:0 calc(6*var(--u));gap:calc(4*var(--u))}
+  .shTitle h1{letter-spacing:.08em}
+}
