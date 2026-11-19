@@ -1,7 +1,23 @@
 /* v28.134 — new illustrated cabinet frames; 9-slice from punched art */
 /* Overrides frame.css / frame2846.css slice + ovh for the nine shop skins. */
-body.cab-on[data-skin="obsidian"] #cabFrame{--ovh:calc(var(--frame-crown) * 1.0901)}
-body.cab-on[data-skin="obsidian"] #cabFrame::before{border-image:url(assets/skins/frame-dragon.webp?v=28134) 232 153 133 164 stretch}
+body.cab-on[data-skin="obsidian"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 2.0047);
+  container-type:inline-size;
+}
+/* v28.142: uniform-scale + clip. Source 1459x1041, hole 995x499 at (234,340). */
+body.cab-on[data-skin="obsidian"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-dragon.webp?v=28142);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1459 / 995 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 234 / 995 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 340 / 995 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
 body.cab-on[data-skin="jade"] #cabFrame{
   --ovh:calc(var(--frame-crown) * 1.5289);
   container-type:inline-size;
@@ -38,8 +54,24 @@ body.cab-on[data-skin="royal"] #cabFrame::before{
   -webkit-mask-composite:xor;
   mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
 }
-body.cab-on[data-skin="blossom"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.6937)}
-body.cab-on[data-skin="blossom"] #cabFrame::before{border-image:url(assets/skins/frame-blossom.webp?v=28134) 188 162 115 192 stretch}
+body.cab-on[data-skin="blossom"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.5712);
+  container-type:inline-size;
+}
+/* v28.142: uniform-scale + clip. Source 1446x1006, hole 1038x583 at (204,302). */
+body.cab-on[data-skin="blossom"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-blossom.webp?v=28142);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1446 / 1038 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 204 / 1038 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 302 / 1038 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
 body.cab-on[data-skin="kitsune"] #cabFrame{
   --ovh:calc(var(--frame-crown) * 1.02);
   container-type:inline-size;
@@ -58,8 +90,24 @@ body.cab-on[data-skin="kitsune"] #cabFrame::before{
   -webkit-mask-composite:xor;
   mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
 }
-body.cab-on[data-skin="kabuto"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.1712)}
-body.cab-on[data-skin="kabuto"] #cabFrame::before{border-image:url(assets/skins/frame-kabuto.webp?v=28134) 130 183 122 178 stretch}
+body.cab-on[data-skin="kabuto"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.4731);
+  container-type:inline-size;
+}
+/* v28.142: uniform-scale + clip. Source 1444x1040, hole 1027x573 at (208,287). */
+body.cab-on[data-skin="kabuto"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-kabuto.webp?v=28142);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1444 / 1027 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 208 / 1027 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 287 / 1027 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
 body.cab-on[data-skin="tsukiyo"] #cabFrame{
   --ovh:calc(var(--frame-crown) * 1.26);
   container-type:inline-size;
@@ -98,5 +146,21 @@ body.cab-on[data-skin="beach"] #cabFrame::before{
   -webkit-mask-composite:xor;
   mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
 }
-body.cab-on[data-skin="feast"] #cabFrame{--ovh:calc(var(--frame-crown) * 0.5766)}
-body.cab-on[data-skin="feast"] #cabFrame::before{border-image:url(assets/skins/frame-feast.webp?v=28134) 175 164 122 165 stretch}
+body.cab-on[data-skin="feast"] #cabFrame{
+  --ovh:calc(var(--frame-crown) * 1.584);
+  container-type:inline-size;
+}
+/* v28.142: uniform-scale + clip. Source 1452x961, hole 978x540 at (237,286). */
+body.cab-on[data-skin="feast"] #cabFrame::before{
+  border-image:none;
+  border-image-source:none;
+  background-image:url(assets/skins/frame-feast.webp?v=28142);
+  background-repeat:no-repeat;
+  background-origin:border-box;
+  background-clip:border-box;
+  background-size:calc(1452 / 978 * (100cqi - 2 * var(--frame-rail))) auto;
+  background-position:calc(var(--frame-rail) - 237 / 978 * (100cqi - 2 * var(--frame-rail))) calc((var(--frame-crown) + var(--ovh,0px)) - 286 / 978 * (100cqi - 2 * var(--frame-rail)));
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) padding-box exclude,linear-gradient(#fff 0 0) border-box;
+}
