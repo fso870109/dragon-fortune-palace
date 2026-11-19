@@ -448,7 +448,7 @@ html.confirm #page{height:100vh;overflow:hidden}
 /* ===== 金殿 enamel buttons + one-at-a-time 圖鑑 showcase ===== */
 /* Gold enamel chip-exchange button */
 .buyRow{width:100%;margin-top:calc(8*var(--u));padding:0}
-.btnGold,.buyChip,.ownRow button.st{
+.btnGold,#panel-frames .buyChip{
   appearance:none;-webkit-appearance:none;border:0;cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:calc(5*var(--u));
   width:100%;height:calc(34*var(--u));min-height:30px;border-radius:999px;
@@ -458,7 +458,7 @@ html.confirm #page{height:100vh;overflow:hidden}
   text-shadow:0 1px 0 rgba(255,248,220,.5)
 }
 .btnGold .coin,.buyChip .coin{width:calc(14*var(--u));height:calc(14*var(--u));min-width:12px}
-.btnGold:active,.buyChip:active:not(:disabled):not(.short),.ownRow button.st:active{
+.btnGold:active,#panel-frames .buyChip:active:not(:disabled):not(.short){
   transform:translateY(2px);
   box-shadow:inset 0 1px 0 #fff8e0,0 0 0 1px #6a3c06,0 1px 0 #5a2e08
 }
@@ -482,8 +482,8 @@ html.confirm #page{height:100vh;overflow:hidden}
   transform:translateY(2px);
   box-shadow:inset 0 1px 0 rgba(255,220,180,.35),0 0 0 1.5px #f0d070,0 1px 0 #5a0808
 }
-/* 使用中 — muted brass status, not a button */
-.btnOn,.ownRow .st.on{
+/* 使用中 — muted brass status, not a button (full-width only on 外框 cards) */
+#panel-frames .btnOn{
   display:flex;align-items:center;justify-content:center;
   width:100%;height:calc(34*var(--u));min-height:30px;border-radius:999px;
   font:700 max(11px,calc(13*var(--u)))/1 var(--lxf);letter-spacing:.12em;color:#e8d5a0;
@@ -492,7 +492,6 @@ html.confirm #page{height:100vh;overflow:hidden}
 }
 .skin .free{margin-top:calc(6*var(--u));font:700 max(10px,calc(12*var(--u)))/1.2 var(--sans);color:#c9b08a}
 .skin .pr{margin-top:4px}
-.ownRow .st{flex:none;min-width:calc(64*var(--u));width:auto;padding:0 calc(10*var(--u));height:calc(30*var(--u));min-height:28px}
 .ownRow .th{box-shadow:inset 0 0 0 1px rgba(246,210,122,.35)}
 
 /* ----- 角色圖鑑 showcase (one portrait at a time) ----- */
@@ -685,3 +684,34 @@ html.confirm #page{height:100vh;overflow:hidden}
 .lxNav a.on img,.lxNav button.on img{filter:drop-shadow(0 0 5px rgba(255,210,100,.8)) brightness(1.1)}
 .lxNav a.on span,.lxNav button.on span{color:#fff3c6}
 #galView{z-index:80}
+
+/* v28.147: 收藏已擁有 is a compact horizontal row — do not inherit 外框 full-width buttons */
+#panel-owned .ownList{display:flex;flex-direction:column;gap:calc(8*var(--u));align-items:stretch}
+#panel-owned .ownRow{display:flex;flex-direction:row;align-items:center;gap:calc(10*var(--u));
+  width:auto;max-width:100%;box-sizing:border-box;height:auto;min-height:0;overflow:hidden}
+#panel-owned .ownRow .th{flex:none;width:calc(64*var(--u));height:calc(56*var(--u));max-width:40%}
+#panel-owned .ownRow .tx{flex:1 1 auto;min-width:0;max-width:none}
+#panel-owned .ownRow .tx b,#panel-owned .ownRow .tx small{
+  display:block;white-space:normal;overflow-wrap:break-word;word-break:normal;line-height:1.3}
+#panel-owned .ownRow .st,
+#panel-owned .ownRow button.st,
+#panel-owned .ownRow .st.on,
+#panel-owned .ownRow .btnUse,
+#panel-owned .ownRow .btnOn,
+#panel-owned .ownRow .buyChip{
+  appearance:none;-webkit-appearance:none;border:0;
+  display:flex;align-items:center;justify-content:center;
+  flex:0 0 auto;width:auto;max-width:42%;min-width:calc(72*var(--u));
+  height:calc(30*var(--u));min-height:28px;margin:0;padding:0 calc(12*var(--u));
+  box-sizing:border-box;border-radius:999px;
+  font:900 max(11px,calc(13*var(--u)))/1 var(--lxf);letter-spacing:.06em}
+#panel-owned .ownRow .btnUse,#panel-owned .ownRow button.st.btnUse{
+  color:#fff8e8;text-shadow:0 1px 0 #3a0400;cursor:pointer;
+  background:linear-gradient(180deg,#e4453a,#c01820 55%,#8a0c14);
+  box-shadow:inset 0 1px 0 rgba(255,220,180,.35),0 0 0 1.5px #f0d070,0 3px 0 #5a0808,0 0 10px rgba(255,70,50,.28)}
+#panel-owned .ownRow .btnUse:active,#panel-owned .ownRow button.st.btnUse:active{
+  transform:translateY(2px);
+  box-shadow:inset 0 1px 0 rgba(255,220,180,.35),0 0 0 1.5px #f0d070,0 1px 0 #5a0808}
+#panel-owned .ownRow .st.on,#panel-owned .ownRow .btnOn{
+  color:#e8d5a0;text-shadow:none;pointer-events:none;cursor:default;letter-spacing:.12em;
+  background:rgba(48,28,12,.62);box-shadow:inset 0 0 0 1.5px #d4a84a}
