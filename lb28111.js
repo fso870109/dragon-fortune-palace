@@ -209,7 +209,8 @@
       d.addEventListener('toggle',function(){if(d.open)onOpen()});
     }
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hook);
+  window.DFPlbLocal=paintLocal;
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hook);
   else hook();
   addEventListener('load',function(){wrapLive();hook()});
 })();

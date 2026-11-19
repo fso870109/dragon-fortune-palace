@@ -115,9 +115,7 @@ function claimFree(){if(freeLeft()>0)return false;st.free=Date.now();const v=fre
 function claimMission(id,quiet){const d=day(),m=MISS.find(x=>x.id===id);if(!m||d.cl[id])return false;const v=id==='mach'?d.mach.length:d[id];if(v<m.g)return false;d.cl[id]=1;addChips(m.r);if(!quiet)toast(`任務完成「${m.t}」＋${m.r}`);save();emit();return true}
 function missReady(){const d=day();return MISS.filter(m=>{if(d.cl[m.id])return false;const v=m.id==='mach'?d.mach.length:d[m.id];return v>=m.g})}
 function claimAllMissions(){const list=missReady();if(!list.length)return {n:0,total:0};const d=day();let total=0;list.forEach(m=>{if(d.cl[m.id])return;const v=m.id==='mach'?d.mach.length:d[m.id];if(v<m.g)return;d.cl[m.id]=1;addChips(m.r);total+=m.r});if(total){toast('任務獎勵','assets/lx/i_task.webp?v=2848',{title:'任務獎勵',detail:'一次領取 '+list.length+' 項',amt:'＋'+total});save();emit()}return {n:list.length,total}}
-// sample leaderboard — fake players, clearly labelled
-const SAMPLE=[['夜櫻美香',2860400],['Kaito★',1980300],['財神使者',1544800],['最愛煙火',1203000],['LuckyNeko',986500],['賞月兔',742000],['紅包王',530900],['Yuki_88',401200]];
-window.CZ={st,JP,VIP,MISS,ACH,MACH,need,vipOf,pools:()=>P,getBal,addChips,claimFree,freeLeft,freeAmt,claimMission,claimAllMissions,missReady,day,on:f=>ls.add(f),sample:SAMPLE,toast,vib,feed,save,ach,claimAch,claimAllAchs,scanAch,track,trackSign,trackFeat,prog:progOf,unclaimed,
+window.CZ={st,JP,VIP,MISS,ACH,MACH,need,vipOf,pools:()=>P,getBal,addChips,claimFree,freeLeft,freeAmt,claimMission,claimAllMissions,missReady,day,on:f=>ls.add(f),toast,vib,feed,save,ach,claimAch,claimAllAchs,scanAch,track,trackSign,trackFeat,prog:progOf,unclaimed,
  onBet(total){for(let i=0;i<3;i++)P[i]+=total*JP.c*JP.split[i];saveP();if(Math.random()<total/JP.d)pend=total},
  onSettle(o){if(window.CZAUTO&&CZAUTO.on){if(o.sc>=3||o.xr>=10||(pend&&!o.free))CZAUTO.stop();else CZAUTO.gapUntil=Date.now()+(o.won>0?2200:1100)}const d=day();st.spins++;d.spin++;const x=ax();
   if(o.won>0){st.won+=o.won;d.won+=o.won}
