@@ -4,7 +4,7 @@
 if(!window.CZ||document.getElementById('lx'))return;
 var $=function(i){return document.getElementById(i)},D=document,LS=localStorage,SS=sessionStorage;
 var fmt=function(n){return Math.floor(n).toLocaleString('en-US')};
-var V='?v=28148';
+var V='?v=28149';
 function el(tag,cls,html){var e=D.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
 function snd(n){try{window.sfx&&window.sfx(n)}catch(e){}}
 function tap(){snd(1);try{CZ.vib(8)}catch(e){}}
@@ -152,7 +152,7 @@ function cd(){var n=new Date(),m=new Date(n);m.setHours(24,0,0,0);var l=Math.max
 cd();setInterval(function(){if(!D.hidden){cd()}},1000);setInterval(function(){if(!D.hidden)sync()},15000);
 D.addEventListener('close',function(){setTimeout(sync,30)},true);
 addEventListener('pageshow',function(e){if(e.persisted)sync()});
-var t0='home';try{t0=SS.getItem('lxTab')||'home'}catch(e){}if(t0==='collect'){location.href='shop.html';return}tab(/^(home|games|events|me)$/.test(t0)?t0:'home',1);
+var t0='home';try{t0=SS.getItem('lxTab')||'home'}catch(e){}if(t0==='collect'||t0==='shop'){try{SS.setItem('lxOpenShop','1');SS.setItem('lxTab','home')}catch(e){}t0='home'}tab(/^(home|games|events|me)$/.test(t0)?t0:'home',1);
 sync();
 
 /* ---------- fit home to tall screens: give spare height to the hero & spacing ---------- */

@@ -59,6 +59,7 @@ function pvUrl(id){return 'assets/skins/shop/'+PVT+'-'+(FRM[id]||id)+'.webp?v='+
 function pv(k){return '<div class="pv2 pvimg s-'+k.id+'" aria-hidden="true" style="background-image:url('+pvUrl(k.id)+')"></div>'}
 function msg(t,k){
   if(typeof shMsg==='function'&&onMach()){shMsg(t,k);return}
+  if(typeof window.DFPshopToast==='function'){window.DFPshopToast(t,k);return}
   const m=$('shMsg');if(!m)return;
   m.textContent=t||'';m.className='shmsg'+(k?' '+k:'');
 }
@@ -186,8 +187,8 @@ function lobbyAct(act,id){
   const st=getSkin();
   if(act==='use'){
     st.eq=k.id;saveSkin(st);applySkin();setC(null);try{window.CZ&&CZ.scanAch&&CZ.scanAch()}catch(e){}
-    click();msg('已套用「'+k.name+'」','ok');
     sel=k.id;render();
+    click();msg('已套用「'+k.name+'」','ok');
     requestAnimationFrame(function(){
       document.querySelectorAll('#shop .shOn').forEach(function(el){el.classList.add('flash')});
     });
@@ -205,8 +206,8 @@ function lobbyAct(act,id){
     pay(k.price);
     if(!st.own.includes(k.id))st.own.push(k.id);
     st.eq=k.id;saveSkin(st);applySkin();setC(null);
-    click();msg('兌換成功！已套用「'+k.name+'」','ok');
     sel=k.id;render();
+    click();msg('兌換成功！已套用「'+k.name+'」','ok');
   }
 }
 

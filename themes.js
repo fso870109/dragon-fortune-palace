@@ -2,7 +2,7 @@
    Equip state is saved locally (like frames). Theme assets load only when equipped. */
 (function(){
 if(window.DFPtheme)return;
-var KEY='dfp_theme', V='?v=28148';
+var KEY='dfp_theme', V='?v=28149';
 var FREE=['theme_sakura'];
 var CAT=[
   {id:'sakura-default', mach:'sakura', name:'櫻花斬・月夜', copy:'預設外觀。冷紫月夜與刀光身影。', def:true, soon:false, card:'assets/sakura/card.webp?v=256'},
@@ -62,10 +62,13 @@ function applyMachine(){
 
 function applyLobby(){
   var eq=equipped('sakura')==='theme_sakura';
-  if(!eq) return;
-  var url='assets/theme-sakura/card.webp'+V;
+  var on='assets/theme-sakura/card.webp'+V;
+  var off='assets/sakura/card.webp?v=256';
   document.querySelectorAll('a.card[data-id="sakura"] img, a.card[href="sakura.html"] img').forEach(function(img){
-    if(img.getAttribute('src')!==url) img.setAttribute('src', url);
+    var cur=img.getAttribute('src')||'';
+    var want=eq?on:off;
+    if(eq && cur.indexOf('theme-sakura/card')<0) img.setAttribute('src', want);
+    if(!eq && cur.indexOf('theme-sakura/card')>=0) img.setAttribute('src', want);
   });
 }
 
@@ -77,5 +80,8 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 else boot();
 addEventListener('load', applyLobby);
 
-window.DFPtheme={read:read, save:save, equipped:equipped, setEq:setEq, catalog:function(){return CAT.slice()}, apply:boot};
+addEventListener('storage', function(e){
+  if(!e.key || e.key==='dfp_theme') applyLobby();
+});
+window.DFPtheme={read:read, save:save, equipped:equipped, setEq:setEq, catalog:function(){return CAT.slice()}, apply:boot, applyLobby:applyLobby};
 })();

@@ -1,4 +1,4 @@
-/* 龍運金殿 standalone 商城 (v28.148) — 一次一張圖鑑、滿版點一下返回、外框按鈕對齊、大廳底部導覽。Unlock rules unchanged. IAP flag off. */
+/* 龍運金殿 standalone 商城 (v28.149) — iframe embed on lobby for gapless BGM; 金殿 toast. Unlock rules unchanged. IAP flag off. */
 (function(){
   var D=document;
   var TIER={n:'普通',r:'稀有',l:'傳說',m:'神話'};
@@ -19,6 +19,54 @@
 
   function $(id){return D.getElementById(id)}
   function shop(){return window.DFPshop||{}}
+  function isEmbed(){
+    try{
+      if(new URLSearchParams(location.search).get('embed')==='1') return true;
+      if(window.self!==window.top) return true;
+    }catch(e){return true}
+    return false;
+  }
+  function post(msg){
+    if(!isEmbed()) return;
+    try{ parent.postMessage(Object.assign({type:'dfp-shop'}, msg||{}), location.origin); }catch(e){}
+  }
+  var toastT=0;
+  function shopToast(t,k){
+    var host=$('shToast');
+    if(!host){
+      host=D.createElement('div');
+      host.id='shToast';
+      host.setAttribute('role','status');
+      host.setAttribute('aria-live','polite');
+      host.innerHTML='<div class="plaque"><i class="seal" aria-hidden="true"></i><span class="tx"></span></div>';
+      D.body.appendChild(host);
+    }
+    var plaque=host.querySelector('.plaque');
+    var tx=host.querySelector('.tx');
+    if(!t){
+      clearTimeout(toastT);
+      host.classList.remove('on');
+      host.classList.add('out');
+      return;
+    }
+    tx.textContent=t;
+    host.className='shToast'+(k?' '+k:'');
+    host.classList.remove('out');
+    var tabs=D.querySelector('.tabs');
+    if(tabs){
+      var r=tabs.getBoundingClientRect();
+      host.style.top=Math.round(r.bottom+10)+'px';
+    }
+    /* restart in-animation even when replacing instantly */
+    void host.offsetWidth;
+    host.classList.add('on');
+    clearTimeout(toastT);
+    toastT=setTimeout(function(){
+      host.classList.remove('on');
+      host.classList.add('out');
+    }, 1600);
+  }
+  window.DFPshopToast=shopToast;
   function asset(u){
     if(!u)return '';
     if(/^(https?:|data:|\.\.\/)/.test(u)) return u;
@@ -29,7 +77,7 @@
   function catalog(){return (shop().catalog&&shop().catalog())||[]}
   function chips(){return shop().chips?shop().chips():(window.CZ&&CZ.getBal?CZ.getBal():0)}
   function pv(id){return asset(shop().pvUrl?shop().pvUrl(id):'')}
-  function msg(t,k){var m=$('shMsg');if(!m)return;m.textContent=t||'';m.className='shmsg'+(k?' '+k:'')}
+  function msg(t,k){ shopToast(t,k); var m=$('shMsg'); if(m){ m.textContent=t||''; m.className='shmsg'+(k?' '+k:''); } }
   function foot(){
     ['shFootFrames','shFootThemes','shFootNoads','shFootOwned'].forEach(function(id){
       var e=$(id); if(e) e.innerHTML=FOOT;
@@ -48,6 +96,7 @@
       if(p) p.hidden=id!==tab;
       if(t) t.classList.toggle('on', id===tab);
     });
+    if(isEmbed()) post({cmd:'tab', tab:tab});
   }
   function epithet(id, fallback){
     return EP[id]||[fallback,fallback];
@@ -333,11 +382,14 @@
         if(!window.DFPtheme)return;
         var mach=b.getAttribute('data-mach')||'sakura';
         DFPtheme.setEq(mach, id);
-        msg('已改用「'+(b.closest('[data-id]')&&id? (DFPtheme.catalog().filter(function(x){return x.id===id})[0]||{}).name||id : id)+'」','ok');
         paint();
+        post({cmd:'state'});
+        var nm=(DFPtheme.catalog().filter(function(x){return x.id===id})[0]||{}).name||id;
+        msg('已套用「'+nm+'」','ok');
         return;
       }
       act(kind,id);
+      post({cmd:'state'});
     });
   }
 
@@ -349,11 +401,56 @@
     renderGal();
   }
 
+  function shopBack(){
+    if(gState.viewOpen){closeView();return true}
+    try{if(D.querySelector('dialog[open]')){D.querySelector('dialog[open]').close();return true}}catch(e){}
+    return false;
+  }
   function hookBack(){
     window.dfpBack=function(){
-      if(gState.viewOpen){closeView();return true}
-      try{if(D.querySelector('dialog[open]')){D.querySelector('dialog[open]').close();return true}}catch(e){}
+      if(shopBack()) return true;
+      if(isEmbed()){ post({cmd:'close', tab:'home'}); return true; }
+      location.href='index.html';
       return true;
+    };
+  }
+  function bindEmbed(){
+    if(!isEmbed()) return;
+    D.documentElement.classList.add('shop-embed');
+    D.body.classList.add('shop-embed');
+    var bk=D.querySelector('a.back');
+    if(bk && !bk.dataset.emb){
+      bk.dataset.emb='1';
+      bk.addEventListener('click', function(e){
+        e.preventDefault();
+        if(shopBack()) return;
+        post({cmd:'close', tab:'home'});
+      });
+    }
+    D.querySelectorAll('.tabs a').forEach(function(a){
+      if(a.dataset.emb) return;
+      a.dataset.emb='1';
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        var href=a.getAttribute('href')||'';
+        var tab='frames';
+        var m=href.match(/tab=([a-z]+)/);
+        if(m) tab=m[1];
+        showTab(tab);
+      });
+    });
+    D.addEventListener('click', function(e){
+      var a=e.target.closest && e.target.closest('a[href]');
+      if(!a) return;
+      var href=a.getAttribute('href')||'';
+      if(/\b(sakura|neko|samurai|matsuri)\.html/.test(href)){
+        e.preventDefault();
+        post({cmd:'go', href:href});
+      }
+    }, true);
+    window.DFPshopEmb={
+      showTab:showTab,
+      back:function(){ return shopBack(); }
     };
   }
 
@@ -373,6 +470,11 @@
       if(t==='shop'){e.preventDefault();return}
       if(/^(home|games|events|me)$/.test(t)){
         try{sessionStorage.setItem('lxTab',t)}catch(err){}
+        if(isEmbed()){
+          e.preventDefault();
+          if(shopBack()) return;
+          post({cmd:'close', tab:t});
+        }
       }
     });
   }
@@ -381,6 +483,7 @@
   bind();
   bindNav();
   hookBack();
+  bindEmbed();
   if(window.CZ&&CZ.on)CZ.on(function(){bal();});
   paint();
   fitNav();

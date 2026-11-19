@@ -1,5 +1,5 @@
-@font-face{font-family:"LxSerif";src:url("assets/fonts/lxserif.woff2?v=28148") format("woff2");font-weight:900;font-display:swap}
-@font-face{font-family:"TCDisp";src:url("assets/fonts/tcdisp.woff2?v=28148") format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"LxSerif";src:url("assets/fonts/lxserif.woff2?v=28149") format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"TCDisp";src:url("assets/fonts/tcdisp.woff2?v=28149") format("woff2");font-weight:900;font-display:swap}
 @font-face{font-family:"KleeSub";src:url("assets/fonts/klee-sub.woff2") format("woff2");font-weight:600;font-display:swap}
 
 :root{
@@ -440,7 +440,7 @@ html.confirm #page{height:100vh;overflow:hidden}
 .buyRow.chipOnly{grid-template-columns:1fr}
 .buyRow.chipOnly .lab{display:none}
 .buyRow.chipOnly .buyChip{width:100%}
-.shmsg{min-height:1.2em;margin:0 calc(12*var(--u)) calc(8*var(--u));font:700 max(12px,calc(13*var(--u)))/1.4 var(--sans);color:#ffe2a0}
+.shmsg{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);border:0}
 .shmsg.err{color:#ffb0a0}
 .shmsg.ok{color:#c8f0b0}
 
@@ -810,4 +810,67 @@ html,body{font-family:var(--f-body)}
   .tabs a{font-size:var(--fs-tab)!important;letter-spacing:.03em!important;white-space:normal}
   .tabs a em{padding:2px 5px;font-size:max(10px,calc(10.5*var(--u)))!important}
   .skin .name,#panel-frames .skin .name,.themeCard .name{letter-spacing:.03em}
+}
+
+/* v28.149 金殿 toast — overlay, no layout shift */
+#shToast, .shToast{
+  position:fixed;
+  left:50%;
+  top:calc(env(safe-area-inset-top,0px) + 58px);
+  transform:translateX(-50%);
+  z-index:40000;
+  pointer-events:none;
+  width:min(360px, calc(100vw - 24px));
+  max-width:calc(100vw - 24px);
+  display:flex;
+  justify-content:center;
+  box-sizing:border-box;
+}
+#shToast .plaque{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  max-width:100%;
+  box-sizing:border-box;
+  padding:10px 16px 10px 12px;
+  border-radius:12px;
+  color:#ffe7a8;
+  font:900 max(14px,calc(16*var(--u)))/1.35 var(--f-title, var(--lxf), "Noto Serif TC", serif);
+  letter-spacing:.06em;
+  text-align:center;
+  background:
+    linear-gradient(180deg,rgba(90,18,16,.97),rgba(28,4,6,.98)) padding-box,
+    linear-gradient(180deg,#f3d27a,#b8862a) border-box;
+  border:1.5px solid transparent;
+  box-shadow:0 6px 20px rgba(0,0,0,.55), inset 0 0 0 1px rgba(80,24,8,.7), 0 0 14px rgba(255,190,60,.22);
+  opacity:0;
+  transform:translateY(-8px);
+  transition:opacity .1s ease, transform .1s ease;
+}
+#shToast.on .plaque{opacity:1;transform:translateY(0)}
+#shToast.out .plaque{opacity:0;transform:translateY(-6px);transition:opacity .25s ease, transform .25s ease}
+#shToast .tx{min-width:0;flex:1;text-shadow:0 1px 0 rgba(40,8,0,.55)}
+#shToast .seal{
+  flex:0 0 auto;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%,#ffe9b0,#d4a84a 55%,#8a5a18);
+  box-shadow:inset 0 0 0 1.5px #7a3a10, 0 0 0 1px #f3d27a;
+  position:relative;
+}
+#shToast .seal::after{
+  content:"";
+  position:absolute;left:6px;top:5px;
+  width:8px;height:5px;
+  border:2px solid #4a1408;
+  border-top:0;border-right:0;
+  transform:rotate(-45deg);
+}
+#shToast.err .plaque{color:#ffd0a8}
+#shToast:not(.ok) .seal{display:none}
+#shToast.ok .seal{display:block}
+@media (max-width:360px){
+  #shToast{top:calc(env(safe-area-inset-top,0px) + 52px)}
+  #shToast .plaque{font-size:13.5px;padding:8px 12px 8px 10px;letter-spacing:.04em}
 }

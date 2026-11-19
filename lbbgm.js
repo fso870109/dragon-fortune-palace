@@ -1,10 +1,23 @@
-/* v28.148 shared lobby BGM for index.html + shop.html.
+/* v28.149 shared lobby BGM for index.html + standalone shop.html.
    Same track and loop as the lobby bed. Honors DFPvol on/off and volume.
-   Saves loop position in sessionStorage so lobby / shop can resume.
+   When shop.html is embedded in the lobby iframe, do not start a second bed —
+   the lobby AudioContext must keep playing without a gap.
    Autoplay: try on load; if the browser blocks, resume on first pointerdown.
    Does not change machine or lobby SFX. */
 (function(){
 if(window.DFPbgm)return;
+function isEmbed(){
+  try{
+    if(new URLSearchParams(location.search).get('embed')==='1') return true;
+    if(window.self!==window.top) return true;
+  }catch(e){ return true; }
+  return false;
+}
+if(isEmbed()){
+  var nop=function(){};
+  window.DFPbgm={start:nop,stop:nop,fade:nop,save:nop,pos:function(){return 0},leaveToMachine:nop,leaveToShopOrLobby:nop,embed:true};
+  return;
+}
 var SRC='assets/audio/bgm_lobby.mp3?v=256';
 var PRE=.3, LOOP=62.950816, GAIN=.85, KEY='dfp_lbbgm_pos';
 var ac=null, mg=null, buf=null, src=null, t0=0, off=PRE, want=false, leaving=false, loading=null, tried=false;
