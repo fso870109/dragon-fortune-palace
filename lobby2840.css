@@ -264,3 +264,24 @@ html.lx{background:#140204!important}
 /* v28.84 drawn icons in place of leftover pictographs */
 .lxIcoTime{display:inline-block;width:1em;height:1em;margin-right:.25em;vertical-align:-.12em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%23f0c45a' stroke='%236a3a08' stroke-width='1.4'/%3E%3Ccircle cx='12' cy='12' r='7' fill='%235a0810'/%3E%3Cpath d='M12 7.2V12l3.2 2' fill='none' stroke='%23f0c45a' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
 .lxPlayI{display:inline-block;width:.85em;height:.85em;margin-left:.25em;vertical-align:-.05em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5.5v13l11-6.5z' fill='%23f0c45a' stroke='%236a3a08' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+
+/* v28.150: default <a> underline / visited blue must not leak onto 金殿 chrome */
+#lx a:not(.pplink),
+#lx a:not(.pplink):link,
+#lx a:not(.pplink):visited,
+#lx a:not(.pplink):hover,
+#lx a:not(.pplink):active{
+  text-decoration:none;
+  color:inherit;
+}
+#lx .lxCol,
+#lx a.lxCol{
+  text-decoration:none;
+  color:inherit;
+}
+#lx .lxCol .tx,
+#lx .lxCol small,
+#lx .lxCol .lxGo,
+#lx .lxCol .lxGo i{
+  text-decoration:none;
+}

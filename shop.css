@@ -796,8 +796,9 @@ html,body{font-family:var(--f-body)}
   background:linear-gradient(180deg,rgba(80,8,14,.94),rgba(22,2,4,.96)) padding-box,var(--gframe) border-box;
   border:2px solid transparent;box-shadow:0 4px 12px rgba(0,0,0,.4)}
 .themeCard.eq{box-shadow:0 0 0 1px #ffe08a,0 0 14px rgba(255,190,60,.4)}
-.themeCard .pv{width:100%;aspect-ratio:16/7;background:#0c0608 center/cover no-repeat}
-.themeCard .pv.soonPv{aspect-ratio:16/5;background:
+.themeCard .pv{width:100%;aspect-ratio:auto;background:#0c0608;overflow:hidden;line-height:0}
+.themeCard .pv img{display:block;width:100%;height:auto;object-fit:cover;object-position:center 28%;vertical-align:top}
+.themeCard .pv.soonPv{aspect-ratio:16/9;background:
   repeating-linear-gradient(135deg,rgba(80,20,16,.5) 0 10px,rgba(40,8,8,.5) 10px 20px)}
 .themeCard .meta{padding:calc(10*var(--u)) calc(12*var(--u)) calc(12*var(--u));text-align:center}
 .themeCard .desc{margin:calc(6*var(--u)) 0 0;font:500 var(--fs-body)/1.5 var(--f-body);color:#f3dcc0}

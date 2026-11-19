@@ -160,7 +160,7 @@
       var badge=eq?'<span class="badgeEq">使用中</span>':(k.free?'<span class="badgeEq">已擁有</span>':'');
       var sub=k.def?'<div class="sub free">預設・免費</div>':'<div class="sub free">免費開放</div>';
       var act=eq?onLbl():'<button type="button" class="thmUse" data-act="theme-use" data-id="'+k.id+'" data-mach="'+k.mach+'">使用</button>';
-      var pv=k.card?'<div class="pv" style="background-image:url('+asset(k.card)+')"></div>':'<div class="pv"></div>';
+      var pv=k.card?'<div class="pv"><img src="'+asset(k.card)+'" alt=""></div>':'<div class="pv"></div>';
       return '<article class="themeCard'+(eq?' eq':'')+'" data-id="'+k.id+'">'+badge+pv+
         '<div class="meta"><div class="name gt">'+k.name+'</div>'+sub+'<p class="desc">'+k.copy+'</p>'+
         '<div class="act">'+act+'</div></div></article>';
