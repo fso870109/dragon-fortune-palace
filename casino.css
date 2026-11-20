@@ -200,6 +200,11 @@ dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!i
 .inner>#czEn{height:38%}
 #czEn .czbub{position:absolute;left:4%;bottom:14%;max-width:62%;padding:8px 12px 9px;border-radius:14px 14px 14px 4px;background:rgba(12,4,14,.82);border:2px solid #d9a441;color:#fff;font:600 clamp(12px,3.6vw,17px)/1.35 "KleeSub","Noto Sans TC",sans-serif;opacity:0;transform:translateY(8px) scale(.9);transition:opacity .2s,transform .25s cubic-bezier(.3,1.6,.5,1);box-shadow:0 6px 18px rgba(0,0,0,.5)}
 .inner>#czEn .czbub{font-size:clamp(11px,1.4cqw,18px);bottom:8%}
+/* v28.153: speech layer lives on #machine (z-index 6) so the crown (#cabFrame z-index 4)
+   cannot paint over the bubble. Do not raise #czHero — hero art already extends into the crown. */
+#machine>#czEn{position:absolute;left:0;right:0;top:var(--cz-hero-top,0px);height:var(--cz-hero-h,30%);z-index:6;overflow:visible;pointer-events:none}
+body.cab-on #machine>#czEn .czbub,body.cab-on #machine>#czEn .czgem{bottom:calc(var(--cz-ovh,0px) + 8px);max-height:calc(100% - var(--cz-ovh,0px) - 16px);box-sizing:border-box;overflow:hidden}
+
 #czEn .czbub b{display:block;font:700 10px/1 sans-serif;letter-spacing:1px;color:#ffd27a;margin-bottom:4px}
 #czEn .czbub.on{opacity:1;transform:none}
 #czEn .czbub[data-c="青"]{border-color:#3fa0ff;box-shadow:0 0 14px #3fa0ff}#czEn .czbub[data-c="綠"]{border-color:#3fdc7a;box-shadow:0 0 14px #3fdc7a}

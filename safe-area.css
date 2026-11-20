@@ -1,4 +1,8 @@
-/* v28.151 Safe-area token + min top padding for camera / punch-hole. */
+/* v28.151 Safe-area token + min top padding for camera / punch-hole.
+   v28.153: game cabinets no longer pad the whole body (that left a blank
+   band on no-notch phones and shrank the hero). Shop / lobby keep the
+   token as padding on the top bar. A fuller edge-to-edge approach is
+   previewed separately and is not shipped here. */
 :root{
   --dfp-sat:0px;
   --dfp-safe-min:28px;
@@ -25,30 +29,3 @@
   padding-top:var(--dfp-safe-top) !important;
 }
 html.lx .rdp{ top:calc(116*var(--u) + var(--dfp-safe-top)) !important; }
-
-/* Game cabinets: pad the body for the camera, but keep the full-viewport
-   金殿 cabinet (.cab-on / .wrap min-height:100vh) inside the remaining height
-   so 大廳 / MAX BET / 選單 stay on short viewports (incl. 360×640). */
-html.dfp-game, html.dfp-game body{ box-sizing:border-box; }
-html.dfp-game body{
-  padding-top:var(--dfp-safe-top) !important;
-  height:100dvh;
-  max-height:100dvh;
-  min-height:100dvh;
-  overflow-x:hidden;
-  overflow-y:hidden;
-}
-html.dfp-game body.cab-on .wrap{
-  margin-top:0 !important;
-  min-height:0 !important;
-  height:100%;
-  max-height:100%;
-}
-html.dfp-game body.cab-on .machine{
-  max-height:100%;
-}
-/* Non-cabinet layout (if any): absorb the extra inset out of --hero-space.
-   Original body pad floor was 6px. */
-html.dfp-game body:not(.cab-on) .wrap{
-  margin-top:calc(var(--hero-space) - var(--dfp-safe-top) + 6px) !important;
-}

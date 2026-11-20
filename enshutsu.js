@@ -12,10 +12,15 @@ const VO={yokoku:V.yokoku||['…吶，好像要來了？','這感覺…難道！
  kakutei:V.kakutei||['確定了！恭喜！！','大獎〜！']};
 const pick=a=>a[Math.random()*a.length|0];
 let layer,bub,gem,banner,lvl=-1,hideT=0;
-function host(){return (PM.matches&&document.getElementById('czHero'))||document.querySelector('#machine .inner')}
-function ensure(){const h=host();if(!h)return null;if(layer&&layer.parentNode===h)return layer;
+function host(){if(PM.matches){const m=document.getElementById('machine');if(m&&document.getElementById('czHero'))return m}return document.querySelector('#machine .inner')}
+function syncBubbleSafe(){if(!layer)return;const m=document.getElementById('machine'),hero=document.getElementById('czHero'),fr=document.getElementById('cabFrame');if(!m||!hero||layer.parentNode!==m)return;const ovh=fr?getComputedStyle(fr).getPropertyValue('--ovh').trim()||'0px':'0px';const mr=m.getBoundingClientRect(),hr=hero.getBoundingClientRect();layer.style.setProperty('--cz-ovh',ovh);layer.style.setProperty('--cz-hero-h',hr.height+'px');layer.style.setProperty('--cz-hero-top',(hr.top-mr.top)+'px')}
+function ensure(){const h=host();if(!h)return null;if(layer&&layer.parentNode===h){syncBubbleSafe();return layer}
  layer=layer||document.createElement('div');layer.id='czEn';layer.innerHTML='<div class="czbub"><b></b><span></span></div><div class="czgem"><i></i><small></small></div><div class="czban"></div><div class="czcut"></div>';
- h.appendChild(layer);bub=layer.querySelector('.czbub');gem=layer.querySelector('.czgem');banner=layer.querySelector('.czban');return layer}
+ h.appendChild(layer);bub=layer.querySelector('.czbub');gem=layer.querySelector('.czgem');banner=layer.querySelector('.czban');syncBubbleSafe();
+ if(!layer._hook){layer._hook=1;if(window.ResizeObserver){const hero=document.getElementById('czHero');if(hero){layer._obs=new ResizeObserver(syncBubbleSafe);layer._obs.observe(hero)}}
+ addEventListener('resize',syncBubbleSafe);try{PM.addEventListener('change',()=>{ensure();syncBubbleSafe()})}catch(e){}
+ if(window.MutationObserver){layer._mo=new MutationObserver(syncBubbleSafe);layer._mo.observe(document.body,{attributes:true,attributeFilter:['data-skin','class']})}}
+ return layer}
 function color(i){return i<0?'':COL[i][1]}
 function say(txt,ci,ms=2200){if(!ensure())return;bub.querySelector('b').textContent=(window.CZM.who||window.CZM.name);bub.querySelector('span').textContent=txt;
  bub.dataset.c=ci>=0?COL[ci][0]:'';bub.classList.remove('on');void bub.offsetWidth;bub.classList.add('on');clearTimeout(bub._t);bub._t=setTimeout(()=>bub.classList.remove('on'),ms)}
