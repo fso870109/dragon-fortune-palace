@@ -30,7 +30,7 @@ d.innerHTML='<h3 id="gdT">公會・'+GN+'</h3><p class="gdx" id="gdW">目前離�
 '<button type="button" class="btn hot" id="gdJoinB">加入</button></div>'+
 '<div class="gdq"><div class="gdqt"><b>本週共同任務：全會轉動</b><span id="gdN"></span></div><div class="gdbar"><i id="gdF"></i>'+GOAL.map(function(g,i){return '<em style="left:'+(g/GOAL[2]*100)+'%"></em>'}).join('')+'</div><div class="gdtr" id="gdR"></div></div>'+
 '<div class="gdtab"><button class="btn hot" data-tb="0">會員貢獻</button><button class="btn" data-tb="1">公會排行</button></div><ol class="gdl" id="gdL"></ol><p class="ivm" id="gdM" role="status"></p>'+
-'<p class="note">在任一機台轉動都會累積你的貢獻，每週一 0 點重置<br>共同任務只計轉動次數，不影響機台機率<br>虛擬籌碼僅供娛樂・純虛擬・無兌現・不可轉讓或交易</p><div class="frs"><button class="btn" id="gdP">去轉動</button><button class="btn close" id="gdX">關閉</button></div>';
+'<p class="note">在任一機台轉動都會累積你的貢獻，每週一 0 點重置<br>共同任務只計轉動次數，不影響機台機率<br>虛擬籌碼僅供娛樂・純虛擬・無兌現・不可轉讓或交易</p><div class="frs"><button class="btn" id="gdP">玩轉盤</button><button class="btn close" id="gdX">關閉</button></div>';
 document.body.appendChild(d);var tab=0,live=false,busy=0,guild=null,members=[],gBoard=[];
 function renderDemo(){var s=st(),t=total(s),me=mine(s),can=0;
  $('gdN').textContent=Math.min(t,GOAL[2])+' / '+GOAL[2]+' 轉';$('gdF').style.width=Math.min(100,t/GOAL[2]*100)+'%';

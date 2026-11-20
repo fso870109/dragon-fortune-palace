@@ -148,7 +148,7 @@
     var box=$('shThemes'); if(!box)return;
     if(!window.DFPtheme){box.innerHTML='';return}
     var st=themeState();
-    var cards=DFPtheme.catalog().map(function(k){
+    var cards=DFPtheme.catalog().filter(function(k){return !!k.card}).map(function(k){
       var eq=k.def? !st.eq[k.mach] : st.eq[k.mach]===k.id;
       if(k.soon){
         return '<article class="themeCard soon" data-id="'+k.id+'">'+
