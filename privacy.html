@@ -19,7 +19,7 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 .mail{display:inline-block;margin:0 2px;padding:0 6px;border-radius:6px;border:1px dashed rgba(226,179,79,.7);background:rgba(255,210,122,.08);color:#ffe9b0;font-weight:700}
 @media (prefers-reduced-motion:no-preference){#wipeDlg[open] .wC{animation:wIn .22s cubic-bezier(.2,.8,.3,1)}@keyframes wIn{from{opacity:0;transform:translateY(10px) scale(.96)}}}</style></head>
 <body><main>
-<header><img src="assets/lobby/logo22.webp?v=256" alt="龍運金殿" width="880" height="529"><h1>隱私權政策與使用條款</h1><div class="upd">最後更新：2026 年 11 月 14 日</div>
+<header><img src="assets/lobby/logo22.webp?v=256" alt="龍運金殿" width="880" height="529"><h1>隱私權政策與使用條款</h1><div class="upd">最後更新：2026 年 11 月 23 日</div>
 <nav><a href="#privacy">隱私權政策</a><a href="#terms">使用條款</a><a href="#data">資料刪除</a><a href="#contact">聯絡我們</a></nav></header>
 <div class="notice">僅供娛樂・虛擬籌碼・純虛擬・無兌現<br><small style="font-weight:400">本遊戲不提供真實金錢賭博，亦無法贏得真實金錢或獎品。虛擬籌碼不可兌現、不可轉讓。</small></div>
 
@@ -32,7 +32,8 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 <li><b>好友碼、公會與對戰紀錄：</b>好友碼、公會與成員、本週轉動次數、掠奪／回擊、邀請與送禮等顯示用紀錄會保存在 Firebase Firestore。別的旅人看得到你的名稱、大頭貼與公開進度，看不到你的電子郵件或虛擬籌碼餘額。</li>
 <li><b>排行榜上的系統角色：</b>榜上標示「金殿貴賓」的是系統角色，只出現在你的畫面中，不會寫入資料庫，也不是真人玩家。真人玩家的分數較高時，會排在這些角色前面。</li>
 <li><b>只存在你的裝置：</b>虛擬籌碼餘額、押注與中獎、簽到與任務、成就領取、圖鑑收集、機台外觀與音效設定等，只儲存在裝置的本機儲存空間（例如瀏覽器或 App 的 localStorage），不會存到 Firebase，也無法兌換現金、獎品或任何有價物品。Android 系統雲端備份已關閉，解除安裝後本機進度通常無法復原。</li>
-<li><b>廣告：</b>目前本遊戲未使用廣告聯播網、分析工具或追蹤型 Cookie，也不使用廣告識別碼。遊戲內的「看廣告領籌碼」目前為遊戲內模擬獎勵，不會播放或載入任何第三方廣告。若日後接入 Google AdMob 並真正播放廣告，我們會先更新本政策、商店的資料安全性表單與廣告宣告。</li>
+<li><b>廣告：</b>目前本遊戲未使用廣告聯播網或廣告識別碼。遊戲內的「看廣告領籌碼」目前為遊戲內模擬獎勵，不會播放或載入任何第三方廣告。若日後接入 Google AdMob 並真正播放廣告，我們會先更新本政策、商店的資料安全性表單與廣告宣告。</li>
+<li><b>使用統計（僅網頁版）：</b>網頁版會使用 Google Analytics（評估 ID <code>G-JQYWLGJR3F</code>）收集匿名的使用統計，例如頁面瀏覽、進入的機台、旋轉次數（會節流）與每日簽到。我們會開啟 IP 匿名化，不會把姓名、電子郵件、暱稱、籌碼餘額或其他可識別你身分的資料送到 Google Analytics。<b>Android App 版不載入、也不使用 Google Analytics。</b>你可以透過瀏覽器設定或擴充功能阻擋分析請求，遊戲仍可正常遊玩。</li>
 <li><b>無付款功能：</b>本遊戲沒有任何應用程式內購買、儲值或付款功能，也不會要求你提供付款資訊。外觀商店只能用遊戲中的虛擬籌碼兌換。</li>
 <li><b>網路連線：</b>載入與更新遊戲檔案時會連線至 GitHub Pages；使用連線功能時會連線至 Google Firebase（專案識別：dragon-gold-palace，資料庫位置在亞洲）。服務商可能依其政策記錄一般伺服器日誌（例如 IP 位址與請求時間），此部分不在本遊戲控制範圍內。傳輸過程採用加密連線（HTTPS）。</li>
 <li><b>兒童：</b>本遊戲含模擬賭博內容，適合 18 歲以上玩家，並非為兒童設計，我們也不會刻意收集兒童資料。若我們發現誤收未滿 18 歲使用者的資料，將予以刪除。</li>
@@ -72,4 +73,5 @@ function maybeWipe(){if(location.hash==='#wipe'||/[?&]wipe=1(?:&|$)/.test(locati
 if(document.readyState==='complete')maybeWipe();else addEventListener('load',maybeWipe);
 addEventListener('hashchange',maybeWipe);
 })();</script>
-<script src="back.js?v=256"></script></body></html>
+<script src="back.js?v=256"></script>
+<script src="ga.js?v=28157" defer></script></body></html>
