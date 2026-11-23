@@ -17,7 +17,7 @@ function faceAv(av,n){if(window.DFPface)return DFPface(av,n);return face({av:av,
 window.DFPface=window.DFPface||function(av,n){var ids=(window.DFPfb&&DFPfb.AVATARS)||AVS,q=(window.DFPfb&&DFPfb.AVQ)||IV;return ids.indexOf(av)>=0?'<img src="assets/lx/'+av+'.webp'+q+'" alt="">':String(n||'?').slice(0,1)};
 var live=false,friends=[],busy=0;
 var top=document.querySelector('.top'),bg=$('bBgm');if(!top)return;
-var b=document.createElement('button');b.className='ib';b.id='bFr';b.setAttribute('aria-label','好友互送');b.innerHTML='👥<span class="dot"></span>';top.insertBefore(b,bg||null);
+var b=document.createElement('button');b.className='ib';b.id='bFr';b.setAttribute('aria-label','好友互送');b.innerHTML='<span class="dot"></span>';top.insertBefore(b,bg||null);
 var d=document.createElement('dialog');d.id='dFr';d.setAttribute('aria-labelledby','frT');
 d.innerHTML='<h3 id="frT">好友互送</h3><span class="frw" id="frW">目前離線，顯示本機示範資料</span>'+
 '<div class="frme" id="frMe">'+

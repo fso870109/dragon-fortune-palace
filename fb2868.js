@@ -3,7 +3,8 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebas
 import {
   getAuth, signInAnonymously, signOut, connectAuthEmulator,
   GoogleAuthProvider,
-  linkWithPopup, linkWithRedirect, getRedirectResult, linkWithCredential, signInWithCredential
+  linkWithPopup, linkWithRedirect, getRedirectResult, linkWithCredential, signInWithCredential,
+  deleteUser, reauthenticateWithPopup, reauthenticateWithCredential
 } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js';
 import {
   getFirestore, connectFirestoreEmulator, doc, getDoc, setDoc, updateDoc,
@@ -207,7 +208,7 @@ window.DFPface = faceHtml;
 let auth, db;
 
 function guardWrite() {
-  if (!api.writesEnabled || !api.live || !api.user) {
+  if (api.deleting || !api.writesEnabled || !api.live || !api.user) {
     throw new Error('fb-writes-blocked');
   }
 }
@@ -353,6 +354,7 @@ api.listFriends = async function () {
       friendCode: row.data().friendCode || '',
       level: 1
     };
+    let gone = false;
     try {
       const p = await getDoc(doc(db, 'players', row.id));
       if (p.exists()) {
@@ -361,8 +363,15 @@ api.listFriends = async function () {
         item.avatar = d.avatar || item.avatar;
         item.friendCode = d.friendCode || item.friendCode;
         item.level = d.level || 1;
+      } else {
+        gone = true;
       }
     } catch (e) {}
+    /* v28.159: the friend deleted their account; drop our cached copy of their name and avatar */
+    if (gone) {
+      try { await deleteDoc(doc(db, 'players', api.user.uid, 'friends', row.id)); } catch (e) {}
+      continue;
+    }
     out.push(item);
   }
   return out;
@@ -823,6 +832,10 @@ api.listHits = async function () {
       if (p.exists()) {
         name = p.data().displayName || name;
         av = p.data().avatar || av;
+      } else {
+        /* attacker deleted their account: do not show the stored copy of their name or photo */
+        name = '旅人';
+        av = 'av_a';
       }
     } catch (e) {}
     av = normAvatar(av);
@@ -1208,6 +1221,199 @@ api.listBigWins = async function () {
     let t = 0; try { t = x.at.toMillis(); } catch (e) {}
     return { uid: d.id, name: x.name, av: x.av, m: x.m, w: x.w | 0, x: Number(x.x) || 0, jp: x.jp | 0, t: t, me: !!(api.user && d.id === api.user.uid) };
   });
+};
+
+/* v28.159 刪除帳號（網頁版）：依 firestore.rules v28.159。
+   順序：退出公會 → 刪除 players/{uid}（之後規則才允許刪除其他與本人有關的紀錄）→ 好友清單／收件匣／被掠奪紀錄、
+   送禮、掠奪、回擊、邀請、邀請領取、聊天、排行榜、活躍名單、大獎播報、好友碼 → 刪除 Firebase Auth 帳號 → 清除本機資料。 */
+function ymdAt(ms) {
+  const d = new Date(ms + 8 * 3600 * 1000);
+  return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate());
+}
+function mondayAt(ms) {
+  const d = new Date(ms + 8 * 3600 * 1000);
+  const back = (d.getUTCDay() + 6) % 7;
+  const m = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - back * 86400000);
+  return m.getUTCFullYear() + '-' + pad2(m.getUTCMonth() + 1) + '-' + pad2(m.getUTCDate());
+}
+function errCode(e) { return String((e && (e.code || e.message)) || e || ''); }
+function delErr(code) { const e = new Error(code); e.code = code; return e; }
+api.accountInfo = function () {
+  const u = auth && auth.currentUser;
+  if (!u) return { signedIn: false };
+  let google = false;
+  try { google = !!api.linkedProviders().google; } catch (e) {}
+  return { signedIn: true, uid: u.uid, anonymous: !!u.isAnonymous, google };
+};
+api.reauth = async function () {
+  const u = auth && auth.currentUser;
+  if (!u) throw delErr('no-user');
+  if (u.isAnonymous) return { ok: true };
+  if (isNativeApp()) {
+    const idToken = await nativeGoogleIdToken();
+    if (!idToken) throw delErr('native-google-unavailable');
+    await reauthenticateWithCredential(u, GoogleAuthProvider.credential(idToken));
+  } else {
+    await reauthenticateWithPopup(u, googleProvider());
+  }
+  api.user = auth.currentUser;
+  return { ok: true };
+};
+function clearLocal() {
+  try { localStorage.clear(); } catch (e) {}
+  try { sessionStorage.clear(); } catch (e) {}
+}
+api.deleteAccount = async function (onStep) {
+  const step = function (t) { try { onStep && onStep(t); } catch (e) {} };
+  try { await api.ready; } catch (e) {}
+  const u = auth && auth.currentUser;
+  if (!u) {
+    clearLocal();
+    return { ok: true, cloud: false };
+  }
+  if (!db || !api.live) throw delErr('offline');
+  const uid = u.uid;
+  const left = [];
+  const tryDel = async function (ref, label) {
+    try {
+      const s = await getDoc(ref);
+      if (s.exists()) await deleteDoc(ref);
+    } catch (e) { left.push(label + ':' + errCode(e)); }
+  };
+  /* 對方的好友清單／收件匣／被掠奪紀錄，以及過去日期的邀請領取紀錄，本人沒有讀取權限：直接刪除。
+     文件不存在時規則同樣回覆 permission-denied，所以這裡不把錯誤算成殘留。 */
+  const blindDel = async function (ref) {
+    try { await deleteDoc(ref); } catch (e) {}
+  };
+  api.deleting = true;
+  let p = null;
+  try {
+    const ps = await getDoc(doc(db, 'players', uid));
+    p = ps.exists() ? ps.data() : null;
+  } catch (e) { api.deleting = false; throw delErr('offline'); }
+  /* 依帳號建立日期決定要掃描的日期範圍（找不到建立日期時掃最近 120 天） */
+  const now = Date.now();
+  let since = now - 120 * 86400000;
+  try { if (p && p.createdAt && p.createdAt.toMillis) since = p.createdAt.toMillis() - 86400000; } catch (e) {}
+  const days = [], weeks = [];
+  for (let t = now; t >= since && days.length < 400; t -= 86400000) days.push(ymdAt(t));
+  for (let t = now; t >= since - 7 * 86400000 && weeks.length < 60; t -= 7 * 86400000) {
+    const w = mondayAt(t); if (weeks.indexOf(w) < 0) weeks.push(w);
+  }
+  /* 1. 公會：先退出（規則要求先刪成員再減人數）；只剩自己且是會長時刪除公會 */
+  step('guild');
+  const gid = p && p.guildId;
+  let dropGuild = '';
+  if (gid) {
+    try {
+      const gref = doc(db, 'guilds', gid);
+      const gs = await getDoc(gref);
+      await deleteDoc(doc(db, 'guilds', gid, 'members', uid));
+      if (gs.exists()) {
+        const n = (gs.data().memberCount | 0);
+        if (n > 0) await updateDoc(gref, { memberCount: n - 1 });
+        if (gs.data().leader === uid && n - 1 <= 0) dropGuild = gid;
+      }
+    } catch (e) { left.push('guild:' + errCode(e)); }
+  }
+  /* 2. 先讀出自己的好友、收件匣與被掠奪紀錄 */
+  let friends = [], hits = [], inbox = [];
+  try { friends = (await getDocs(collection(db, 'players', uid, 'friends'))).docs; } catch (e) { left.push('friends-read:' + errCode(e)); }
+  try { inbox = (await getDocs(collection(db, 'players', uid, 'inbox'))).docs; } catch (e) {}
+  try { hits = (await getDocs(collection(db, 'players', uid, 'hits'))).docs; } catch (e) {}
+  /* 3. 刪除 players/{uid} */
+  step('profile');
+  if (p) {
+    try { await deleteDoc(doc(db, 'players', uid)); } catch (e) {
+      api.deleting = false;
+      if (isPerm(e)) throw delErr('rules-not-ready');
+      throw delErr('offline');
+    }
+  }
+  if (dropGuild) {
+    for (const wk of weeks) await tryDel(doc(db, 'guildBoard', wk, 'rows', dropGuild), 'guildBoard');
+    await tryDel(doc(db, 'guilds', dropGuild), 'guild-doc');
+  }
+  /* 4. 好友：自己的清單、對方清單裡的自己、自己寄到對方收件匣的通知 */
+  step('friends');
+  for (const row of friends) {
+    try { await deleteDoc(row.ref); } catch (e) { left.push('friend:' + errCode(e)); }
+    await blindDel(doc(db, 'players', row.id, 'friends', uid));
+    await blindDel(doc(db, 'players', row.id, 'inbox', uid));
+  }
+  for (const row of inbox) {
+    try { await deleteDoc(row.ref); } catch (e) { left.push('inbox:' + errCode(e)); }
+    await blindDel(doc(db, 'players', row.id, 'friends', uid));
+  }
+  /* 5. 送禮紀錄（寄出與收到） */
+  step('gifts');
+  for (const field of ['from', 'to']) {
+    try {
+      const snap = await getDocs(query(collection(db, 'gifts'), where(field, '==', uid)));
+      for (const row of snap.docs) { try { await deleteDoc(row.ref); } catch (e) { left.push('gift:' + errCode(e)); } }
+    } catch (e) { left.push('gift-read:' + errCode(e)); }
+  }
+  /* 6. 掠奪／回擊 */
+  step('raids');
+  for (const row of hits) {
+    await tryDel(doc(db, 'counters', row.id), 'counter');
+    await tryDel(doc(db, 'raids', row.id), 'raid-in');
+    try { await deleteDoc(row.ref); } catch (e) { left.push('hit:' + errCode(e)); }
+  }
+  for (const day of days) {
+    for (let slot = 0; slot < 3; slot++) {
+      const rid = uid + '_' + slot + '_' + day;
+      try {
+        const rs = await getDoc(doc(db, 'raids', rid));
+        if (!rs.exists()) continue;
+        const to = rs.data().to;
+        if (to) await blindDel(doc(db, 'players', to, 'hits', rid));
+        await tryDel(doc(db, 'counters', rid), 'counter');
+        await deleteDoc(rs.ref);
+      } catch (e) { left.push('raid:' + errCode(e)); }
+    }
+  }
+  /* 7. 邀請：自己被邀請的紀錄、自己邀請別人的紀錄與領取紀錄 */
+  step('invites');
+  await tryDel(doc(db, 'invites', uid), 'invite-self');
+  try {
+    const snap = await getDocs(query(collection(db, 'invites'), where('inviterUid', '==', uid)));
+    for (const row of snap.docs) {
+      const d = row.data();
+      if (d.claimDay != null && d.claimSlot != null) await blindDel(doc(db, 'inviteClaims', uid + '_' + d.claimSlot + '_' + d.claimDay));
+      try { await deleteDoc(row.ref); } catch (e) { left.push('invite:' + errCode(e)); }
+    }
+  } catch (e) { left.push('invite-read:' + errCode(e)); }
+  /* 8. 聊天、活躍名單、大獎播報、排行榜、好友碼 */
+  step('boards');
+  for (const day of days) {
+    try {
+      const snap = await getDocs(query(collection(db, 'chat', day, 'msgs'), where('uid', '==', uid)));
+      for (const row of snap.docs) { try { await deleteDoc(row.ref); } catch (e) { left.push('chat:' + errCode(e)); } }
+    } catch (e) {}
+    await tryDel(doc(db, 'active', day, 'rows', uid), 'active');
+    await tryDel(doc(db, 'bigWins', day, 'rows', uid), 'bigWins');
+  }
+  for (const wk of weeks) await tryDel(doc(db, 'playerBoard', wk, 'rows', uid), 'playerBoard');
+  await tryDel(doc(db, 'chatState', uid), 'chatState');
+  const code = (p && p.friendCode) || (api.profile && api.profile.friendCode) || '';
+  if (code) await tryDel(doc(db, 'friendCodes', code), 'friendCode');
+  /* 9. Firebase Auth 帳號 */
+  step('auth');
+  let authLeft = '';
+  try {
+    await deleteUser(u);
+  } catch (e) {
+    if (/requires-recent-login/i.test(errCode(e)) && !u.isAnonymous) {
+      try { await api.reauth(); await deleteUser(auth.currentUser); } catch (x) { authLeft = errCode(x) || 'auth'; }
+    } else {
+      authLeft = errCode(e) || 'auth';
+    }
+    if (authLeft) { try { await signOut(auth); } catch (x) {} }
+  }
+  api.user = null; api.profile = null; api.live = false; api.writesEnabled = false;
+  clearLocal();
+  return { ok: !left.length && !authLeft, cloud: true, uid, left, authLeft };
 };
 
 async function probeAndInit() {

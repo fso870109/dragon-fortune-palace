@@ -1,8 +1,8 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.158',DFP_APPV='';
+var DFP_WEBV='28.159',DFP_APPV='';
 var DFP_IAP=false;
-var DFP_DEL=false; /* 刪除帳號按鈕：Firestore 刪除規則發布並測試後才改 true */
+var DFP_DEL=true; /* 刪除帳號按鈕：Firestore 刪除規則發布並測試後才改 true */
 var DFP_NOADS=false; /* 去廣告分頁：false 時隱藏（網頁與 App 共用）；廣告與付款都準備好再改 true */
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
@@ -63,7 +63,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  $('sgVib').onclick=function(){s('fs_vib',vibOn()?'0':'1');r();if(vibOn())hap(25)};
  $('sgRm').onclick=function(){var R=window.DFPrm;if(!R||R.sys)return;R.set(!R.on);r()};
  $('sgClose').onclick=function(){d.close()};
- if($('sgDel'))$('sgDel').onclick=function(){if(window.DFPdel){d.close();DFPdel.open()}else location.href='deletion.html'};
+ if($('sgDel'))$('sgDel').onclick=function(){if(window.DFPdel){d.close();DFPdel.open()}else location.href='index.html?del=1'};
  d.addEventListener('click',function(e){if(e.target===d)d.close()});
 
  var rTaps=[],rLast=0,rKind='',H_FC='e32487b0ea529d74544753e3a367d5cf53e122a21a65404cd369e4f29b3dd4cc',H_INV='386c70e2586ebd5484950189adbd774bd11fdc3a9b823b62e5eba551853dd8ee',H_CODE='080b025c8d1773fdefa79c16a7a53b57bf22393e7f8d52862a3849d5b5ffcad1';
