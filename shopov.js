@@ -15,6 +15,7 @@ function tabOf(u){
       var h=(location.hash||'');
       if(h.indexOf('#shop/')===0) t=h.slice(6);
     }
+    if(t==='noads'&&!window.DFP_NOADS) t='frames';
     return ['frames','themes','noads','owned'].indexOf(t)>=0?t:'frames';
   }catch(e){ return 'frames'; }
 }

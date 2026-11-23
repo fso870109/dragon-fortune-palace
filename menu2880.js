@@ -31,10 +31,10 @@ function enhance(){
       if(mb)mb.setAttribute('aria-expanded','false');
     });
   }
-  tile('adBtn',svg(FILM),'看廣告','領 800 籌碼');
+  tile('adBtn',svg(FILM),'免費領籌碼','稍候 18 秒領 800');
   tile('dailyBtn',img('assets/lx/i_cal.webp'),'每日簽到');
   tile('lbBtn',img('assets/lx/i_rank.webp'),'排行榜');
-  tile('invBtn',img('assets/lx/ev_packet.webp'),'邀請好友');
+  tile('invBtn',img('assets/lx/ev_gift.webp'),'邀請好友');
   tile('payBtn',svg(BOOK),'說明');
   stripBuys();
 }

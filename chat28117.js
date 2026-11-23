@@ -31,7 +31,7 @@
   /* sticker packs: shop can add {id,name,price,items}; packOwned() gates use */
   var PACKS=[
     {id:'base',name:'金殿基本組',price:0,items:[
-      {id:'s01',n:'金龍賀喜'},{id:'s02',n:'招財貓'},{id:'s03',n:'元寶滿滿'},{id:'s04',n:'紅包讚'},
+      {id:'s01',n:'金龍賀喜'},{id:'s02',n:'招財貓'},{id:'s03',n:'元寶滿滿'},{id:'s04',n:'福袋讚'},
       {id:'s05',n:'花火綻放'},{id:'s06',n:'錦鯉好運'},{id:'s07',n:'金龍抱拳'},{id:'s08',n:'晚安月兒'}
     ]}
   ];

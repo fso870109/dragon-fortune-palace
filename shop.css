@@ -875,3 +875,4 @@ html,body{font-family:var(--f-body)}
   #shToast{top:calc(env(safe-area-inset-top,0px) + 52px)}
   #shToast .plaque{font-size:13.5px;padding:8px 12px 8px 10px;letter-spacing:.04em}
 }
+.tabs a[hidden]{display:none!important}

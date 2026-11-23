@@ -12,7 +12,7 @@
   var CN='assets/lx/corner.webp';
   var LOCK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 10V8a4 4 0 0 1 8 0v2" fill="none" stroke="#4a1a02" stroke-width="2.2" stroke-linecap="round"/><rect x="6" y="10" width="12" height="10" rx="2.2" fill="#4a1a02"/><circle cx="12" cy="15" r="1.4" fill="#f6d27a"/></svg>';
   var FOOT='<b>虛擬籌碼無法以真實金錢購買，亦不可兌現、轉讓或提領。</b>'+
-    '<p>籌碼可經遊玩、每日簽到、免費領取或邀請好友取得。外框可用免費取得的虛擬籌碼兌換，純裝飾，不影響中獎機率與 RTP。</p>'+
+    '<p>籌碼可經遊玩、每日簽到、免費領取或邀請好友取得。外框可用免費取得的虛擬籌碼解鎖，純裝飾，不影響中獎機率與 RTP。</p>'+
     '<p>僅供娛樂・不提供真錢博彩。</p>';
   var AS='';
   var gState={h:0,p:0,bound:false};
@@ -88,9 +88,11 @@
     var q=new URLSearchParams(location.search);
     var tab=q.get('tab')||'frames';
     if(['frames','themes','noads','owned'].indexOf(tab)<0) tab='frames';
+    if(tab==='noads'&&!window.DFP_NOADS) tab='frames';
     return tab;
   }
   function showTab(tab){
+    if(!window.DFP_NOADS){var nt=$('tab-noads');if(nt)nt.hidden=true;if(tab==='noads')tab='frames'}
     ['frames','themes','noads','owned'].forEach(function(id){
       var p=$('panel-'+id), t=$('tab-'+id);
       if(p) p.hidden=id!==tab;
@@ -124,7 +126,7 @@
       sub='<div class="sub free">預設・免費</div>';
       act=eq?onLbl():useBtn(k.id);
     }else if(own){
-      sub='<div class="sub own">已用虛擬籌碼兌換</div>';
+      sub='<div class="sub own">已用虛擬籌碼解鎖</div>';
       act=eq?onLbl():useBtn(k.id);
     }else{
       short=chips()<k.price;
@@ -173,7 +175,7 @@
     var st=state();
     var rows=catalog().filter(function(k){return st.own&&st.own.indexOf(k.id)>=0}).map(function(k){
       var eq=st.eq===k.id;
-      var how=k.price===0?'機台外框・預設免費':'機台外框・以 '+fmt(k.price)+' 虛擬籌碼兌換';
+      var how=k.price===0?'機台外框・預設免費':'機台外框・以 '+fmt(k.price)+' 虛擬籌碼解鎖';
       var act=eq?'<span class="st on">使用中</span>':useBtn(k.id).replace('buyChip btnUse','st btnUse');
       return '<div class="ownRow" data-id="'+k.id+'"><div class="th" style="background-image:url('+pv(k.id)+')"></div><div class="tx"><b class="gt">'+k.name+'</b><small>'+how+'</small></div>'+act+'</div>';
     });
@@ -374,8 +376,8 @@
         if(chips()<k.price){msg('虛擬籌碼不足，還差 '+fmt(k.price-chips())+'（可透過遊戲、每日簽到或免費領取取得）','err');return}
         b.dataset.act='buy';
         b.classList.add('confirm');
-        b.innerHTML=coin()+'<span>確認兌換 '+fmt(k.price)+'</span>';
-        msg('再按一次確認，以 '+fmt(k.price)+' 虛擬籌碼兌換「'+k.name+'」');
+        b.innerHTML=coin()+'<span>確認解鎖 '+fmt(k.price)+'</span>';
+        msg('再按一次確認，以 '+fmt(k.price)+' 虛擬籌碼解鎖「'+k.name+'」');
         return;
       }
       if(kind==='theme-use'){

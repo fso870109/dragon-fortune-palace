@@ -17,10 +17,11 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 #wipeDlg .wW{color:#ff9d7a;font-weight:700;text-align:center}#wipeDlg .wB{display:flex;gap:10px;margin-top:12px}#wipeDlg .wB button{flex:1;padding:10px 4px;border-radius:22px;font-weight:800;cursor:pointer}
 #wipeNo{background:#2a0d0d;border:1px solid #c99a3a;color:#ffe9b0}#wipeYes{border:0!important;color:#2a0505!important;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f)!important;box-shadow:0 3px 0 #6b420c}
 .mail{display:inline-block;margin:0 2px;padding:0 6px;border-radius:6px;border:1px dashed rgba(226,179,79,.7);background:rgba(255,210,122,.08);color:#ffe9b0;font-weight:700}
-@media (prefers-reduced-motion:no-preference){#wipeDlg[open] .wC{animation:wIn .22s cubic-bezier(.2,.8,.3,1)}@keyframes wIn{from{opacity:0;transform:translateY(10px) scale(.96)}}}</style></head>
+@media (prefers-reduced-motion:no-preference){#wipeDlg[open] .wC{animation:wIn .22s cubic-bezier(.2,.8,.3,1)}@keyframes wIn{from{opacity:0;transform:translateY(10px) scale(.96)}}}.rateRow{display:flex;align-items:center;gap:10px;max-width:420px;margin:12px auto;padding:8px 10px;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid rgba(226,179,79,.38)}.rateRow img{flex:0 0 56px;width:56px;height:56px}.rateRow div{min-width:0;display:flex;flex-direction:column;gap:2px}.rateRow b{font-size:13.5px;color:#ffe3a0}.rateRow small{font-size:12px;line-height:1.45;color:#f0d5ad}</style></head>
 <body><main>
 <header><img src="assets/lobby/logo22.webp?v=256" alt="龍運金殿" width="880" height="529"><h1>隱私權政策與使用條款</h1><div class="upd">最後更新：2026 年 11 月 23 日</div>
-<nav><a href="#privacy">隱私權政策</a><a href="#terms">使用條款</a><a href="#data">資料刪除</a><a href="#contact">聯絡我們</a></nav></header>
+<nav><a href="#privacy">隱私權政策</a><a href="#terms">使用條款</a><a href="#notice">告知事項</a><a href="#data">資料刪除</a><a href="#contact">聯絡我們</a></nav></header>
+<div class="rateRow"><img src="assets/rate18.svg" width="56" height="56" alt="限制級，18 歲以上"><div><b>限制級｜牌類及益智娛樂</b><small>請注意使用時間，避免沉迷；遊戲虛擬情節請勿模仿</small><small>請勿利用本遊戲從事賭博或任何違法行為</small></div></div>
 <div class="notice">僅供娛樂・虛擬籌碼・純虛擬・無兌現<br><small style="font-weight:400">本遊戲不提供真實金錢賭博，亦無法贏得真實金錢或獎品。虛擬籌碼不可兌現、不可轉讓。</small></div>
 
 <h2 id="privacy">一、隱私權政策</h2>
@@ -32,11 +33,23 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 <li><b>好友碼、公會與對戰紀錄：</b>好友碼、公會與成員、本週轉動次數、掠奪／回擊、邀請與送禮等顯示用紀錄會保存在 Firebase Firestore。別的旅人看得到你的名稱、大頭貼與公開進度，看不到你的電子郵件或虛擬籌碼餘額。</li>
 <li><b>排行榜上的系統角色：</b>榜上標示「金殿貴賓」的是系統角色，只出現在你的畫面中，不會寫入資料庫，也不是真人玩家。真人玩家的分數較高時，會排在這些角色前面。</li>
 <li><b>只存在你的裝置：</b>虛擬籌碼餘額、押注與中獎、簽到與任務、成就領取、圖鑑收集、機台外觀與音效設定等，只儲存在裝置的本機儲存空間（例如瀏覽器或 App 的 localStorage），不會存到 Firebase，也無法兌換現金、獎品或任何有價物品。Android 系統雲端備份已關閉，解除安裝後本機進度通常無法復原。</li>
-<li><b>廣告：</b>目前本遊戲未使用廣告聯播網或廣告識別碼。遊戲內的「看廣告領籌碼」目前為遊戲內模擬獎勵，不會播放或載入任何第三方廣告。若日後接入 Google AdMob 並真正播放廣告，我們會先更新本政策、商店的資料安全性表單與廣告宣告。</li>
-<li><b>使用統計（僅網頁版）：</b>網頁版會使用 Google Analytics（評估 ID <code>G-JQYWLGJR3F</code>）收集匿名的使用統計，例如頁面瀏覽、進入的機台、旋轉次數（會節流）與每日簽到。我們會開啟 IP 匿名化，不會把姓名、電子郵件、暱稱、籌碼餘額或其他可識別你身分的資料送到 Google Analytics。<b>Android App 版不載入、也不使用 Google Analytics。</b>你可以透過瀏覽器設定或擴充功能阻擋分析請求，遊戲仍可正常遊玩。</li>
-<li><b>無付款功能：</b>本遊戲沒有任何應用程式內購買、儲值或付款功能，也不會要求你提供付款資訊。外觀商店只能用遊戲中的虛擬籌碼兌換。</li>
-<li><b>網路連線：</b>載入與更新遊戲檔案時會連線至 GitHub Pages；使用連線功能時會連線至 Google Firebase（專案識別：dragon-gold-palace，資料庫位置在亞洲）。服務商可能依其政策記錄一般伺服器日誌（例如 IP 位址與請求時間），此部分不在本遊戲控制範圍內。傳輸過程採用加密連線（HTTPS）。</li>
+<li><b>廣告：</b>目前本遊戲未使用廣告聯播網或廣告識別碼。遊戲內的「免費領籌碼」（原名「看廣告領籌碼」）目前為遊戲內模擬獎勵，不會播放或載入任何第三方廣告。若日後接入 Google AdMob 並真正播放廣告，我們會先更新本政策、商店的資料安全性表單與廣告宣告。</li>
+<li><b>使用統計（僅網頁版）：</b>網頁版會使用 Google Analytics 4（評估 ID <code>G-JQYWLGJR3F</code>）收集無法直接識別你身分的使用統計，例如頁面瀏覽、進入的機台、旋轉次數（會節流）與每日簽到。Google Analytics 會在你的瀏覽器設定 <code>_ga</code> 等 Cookie，用一組隨機產生的用戶端編號來區分不同次的造訪。Google Analytics 4 不會記錄或儲存你的 IP 位址。我們不會把姓名、電子郵件、暱稱、籌碼餘額或其他可識別你身分的資料送到 Google Analytics。統計事件資料的保存期限設定為 <b>2 個月</b>，期滿後由 Google 自動刪除。這些資料由 Google 處理，可能存放在台灣以外的地區，詳見 <a href="https://policies.google.com/technologies/partner-sites?hl=zh-TW" rel="noopener">Google 如何使用合作夥伴網站的資訊</a>。我們使用這些統計來改善遊戲；此分析資源目前沒有連結 Google Ads。<b>Android App 版不載入、也不使用 Google Analytics。</b>你可以安裝 <a href="https://tools.google.com/dlpage/gaoptout?hl=zh-TW" rel="noopener">Google Analytics 停用瀏覽器外掛程式</a>，或用瀏覽器設定阻擋 Cookie 與分析請求，遊戲仍可正常遊玩。</li>
+<li><b>無付款功能：</b>本遊戲沒有任何應用程式內購買、儲值或付款功能，也不會要求你提供付款資訊。外觀商店只能用遊戲中的虛擬籌碼解鎖。</li>
+<li><b>網路連線：</b>載入與更新遊戲檔案時會連線至 GitHub Pages；使用連線功能時會連線至 Google Firebase（專案識別：dragon-gold-palace）。依專案設定，Firestore 資料庫（dragon）位於 Google Cloud asia-east1（台灣）；Firebase Authentication 的帳號紀錄由 Google Firebase 服務處理（可能位於台灣以外）。服務商可能依其政策記錄一般伺服器日誌（例如 IP 位址與請求時間），此部分不在本遊戲控制範圍內。傳輸過程採用加密連線（HTTPS）。</li>
 <li><b>兒童：</b>本遊戲含模擬賭博內容，適合 18 歲以上玩家，並非為兒童設計，我們也不會刻意收集兒童資料。若我們發現誤收未滿 18 歲使用者的資料，將予以刪除。</li>
+</ul>
+
+<h2 id="notice">個人資料告知事項（個人資料保護法第 8 條）</h2>
+<ul>
+<li><b>蒐集者：</b>龍運金殿開發團隊（聯絡信箱 <a class="mail" href="mailto:dragonfortune.palace@gmail.com">dragonfortune.palace@gmail.com</a>）。</li>
+<li><b>蒐集目的：</b>提供遊戲的連線功能（好友、公會、排行榜、掠奪／回擊、邀請、送禮、聊天貼圖、大獎播報）、帳號找回，以及網頁版的使用統計與遊戲改善。</li>
+<li><b>個人資料類別：</b>Firebase 遊客編號（UID）、暱稱、大頭貼（內建圖或你選用的 Google 大頭貼網址）、好友碼、公會與好友關係、公開遊戲進度（等級、本週轉動次數、最高倍數）；連結 Google 時，Firebase Authentication 另會保存該 Google 帳號的識別資料與電子郵件；網頁版另有 Google Analytics 的隨機用戶端編號與使用事件。</li>
+<li><b>利用期間：</b>帳號存續期間；你申請刪除後，我們會在<b>申請刪除後 30 日內刪除</b>雲端上的資料。網頁版統計事件資料另依 Google Analytics 設定保存 2 個月。</li>
+<li><b>利用地區：</b>Firestore 資料位於 Google Cloud asia-east1（台灣）；Firebase Authentication 與 Google Analytics 由 Google 處理，可能位於台灣以外。</li>
+<li><b>利用對象與方式：</b>本開發團隊，以及依我們指示提供服務的 Google（Firebase、Google Analytics）與 GitHub Pages；以電子方式儲存與傳輸。你的暱稱、大頭貼與公開進度會顯示給其他玩家。我們不出售資料，也不提供給其他第三人行銷使用。</li>
+<li><b>你的權利：</b>你可以請求查詢或閱覽、製給複製本、補充或更正、停止蒐集處理或利用，以及刪除你的個人資料。請寄信到上方信箱，並附上你的好友碼（大廳「好友互送」可以看到）；我們會在 30 日內回覆並處理。</li>
+<li><b>不提供的影響：</b>你可以不使用連線功能、不連結 Google。不提供時仍可遊玩單機內容，只是無法使用好友、公會、排行榜等連線功能，也無法在其他裝置找回進度。</li>
 </ul>
 
 <h2 id="terms">二、使用條款</h2>
@@ -47,14 +60,14 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 <li><b>暱稱與社群行為：</b>請使用適當的顯示名稱。我們可拒絕、隱藏或重設違反規定的名稱。本遊戲沒有開放式聊天室。</li>
 <li><b>排行榜：</b>連線後的排行榜會顯示別的真實旅人的公開名稱、大頭貼與本週轉動次數，以及標示為「金殿貴賓」的系統角色。若暫時無法連線，則顯示本機榜：你自己的本機紀錄，加上標示為「金殿貴賓」的系統角色。本機榜不是其他真實玩家的排名。</li>
 <li><b>服務變更：</b>我們可能隨時更新、調整或停止本遊戲的內容與功能。虛擬籌碼與大部分進度儲存在你的裝置上，清除瀏覽器資料或解除安裝後可能無法復原。</li>
-<li><b>適度遊戲：</b>請適度娛樂，合理安排時間。若你或身邊的人有賭博成癮困擾，請尋求專業協助。</li>
+<li><b>適度遊戲：</b>請注意使用時間，避免沉迷；遊戲虛擬情節請勿模仿。請勿利用本遊戲從事賭博或任何違法行為。若你或身邊的人有賭博成癮困擾，請尋求專業協助。</li>
 </ul>
 
 <h2 id="data">三、資料刪除</h2>
 <p>本機上的虛擬籌碼與遊戲進度，你可以隨時自行刪除：清除本網站的瀏覽器資料、解除安裝 App，或直接按下方按鈕。這會重設本裝置的籌碼與進度；連線後保存的顯示名稱、大頭貼、好友碼、公會與排行榜公開資料，仍會留在這個遊客編號下，不會因為只清除本機而自動消失。</p>
-<p>若要刪除或處理雲端上的連線資料，請寫信到 <a class="mail" href="mailto:dragonfortune.palace@gmail.com">dragonfortune.palace@gmail.com</a>，並說明你的顯示名稱與好友碼（若有），我們會在合理期間內協助處理。請注意：匿名遊客編號若已遺失且未曾連結 Google，我們可能無法準確對應到你的雲端資料。</p>
+<p>若要刪除帳號與雲端上的連線資料，請寫信到 <a class="mail" href="mailto:dragonfortune.palace@gmail.com?subject=%E5%88%AA%E9%99%A4%E5%B8%B3%E8%99%9F">dragonfortune.palace@gmail.com</a>，並附上你的顯示名稱與好友碼（若有）。我們會在<b>申請刪除後 30 日內刪除</b>你的雲端資料（顯示名稱、大頭貼、好友碼、好友名單、公會成員資格、排行榜與播報紀錄），以及 Firebase 帳號。請注意：匿名遊客編號若已遺失且未曾連結 Google，我們可能無法準確對應到你的雲端資料。完整說明請見 <a href="deletion.html" style="color:#ffd27a">刪除帳號說明</a>。</p>
 <p class="wipeRow"><button id="wipe" type="button">清除本裝置的遊戲資料</button></p><p id="wipeMsg" role="status"></p>
-<dialog id="wipeDlg" aria-labelledby="wipeT"><div class="wC"><h3 id="wipeT">清除遊戲資料</h3><p>確定要清除本裝置上的所有遊戲進度嗎？</p><ul><li>虛擬籌碼將重設為 1,000</li><li>等級、簽到、任務、暱稱與角色圖鑑收集紀錄會刪除</li><li>音效、音樂與震動等設定恢復預設</li></ul><p class="wW">此動作無法復原。雲端上的公開資料不會一併刪除，如需處理請來信 <a class="mail" href="mailto:dragonfortune.palace@gmail.com">dragonfortune.palace@gmail.com</a>。</p><div class="wB"><button type="button" id="wipeNo">取消</button><button type="button" id="wipeYes">確定清除</button></div></div></dialog>
+<dialog id="wipeDlg" aria-labelledby="wipeT"><div class="wC"><h3 id="wipeT">清除遊戲資料</h3><p>確定要清除本裝置上的所有遊戲進度嗎？</p><ul><li>虛擬籌碼將重設為 1,000</li><li>等級、簽到、任務、暱稱與角色圖鑑收集紀錄會刪除</li><li>音效、音樂與震動等設定恢復預設</li></ul><p class="wW">此動作無法復原。雲端上的公開資料不會一併刪除，如需刪除請見 <a href="deletion.html" style="color:#ffd27a">刪除帳號說明</a>，或來信 <a class="mail" href="mailto:dragonfortune.palace@gmail.com">dragonfortune.palace@gmail.com</a>。</p><div class="wB"><button type="button" id="wipeNo">取消</button><button type="button" id="wipeYes">確定清除</button></div></div></dialog>
 
 <h2 id="contact">四、政策更新與聯絡</h2>
 <p>本政策若有修改，將更新於本頁並調整上方的「最後更新」日期。如有任何問題，或要行使資料相關權利，請聯絡：</p>
@@ -74,4 +87,4 @@ if(document.readyState==='complete')maybeWipe();else addEventListener('load',may
 addEventListener('hashchange',maybeWipe);
 })();</script>
 <script src="back.js?v=256"></script>
-<script src="ga.js?v=28157" defer></script></body></html>
+<script src="ga.js?v=28158" defer></script></body></html>

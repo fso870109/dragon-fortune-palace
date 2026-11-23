@@ -1,4 +1,4 @@
-/* 龍運金殿 v28.80: 籌碼不足（看廣告／簽到／好友） / 清除排行榜 — no free chip reset */
+/* 龍運金殿 v28.80: 籌碼不足（免費領籌碼／簽到／好友） / 清除排行榜 — no free chip reset */
 (function(){var D,cb;
 function css(t){var e=document.createElement('style');e.textContent=t;document.head.appendChild(e)}
 function $(id){return document.getElementById(id)}
@@ -22,7 +22,7 @@ function build(){if(D)return D;
  '#czChipDlg small{display:block;margin-top:12px;font-size:11px;color:#c9a978;letter-spacing:.04em}');
  D=document.createElement('dialog');D.id='czChipDlg';D.setAttribute('aria-labelledby','czChipT');
  D.innerHTML='<div class="cC"><h3 id="czChipT"></h3><p id="czChipP"></p><div class="cB">'+
-  '<button type="button" class="cOk" id="czChipAd">看廣告領籌碼</button>'+
+  '<button type="button" class="cOk" id="czChipAd">免費領籌碼</button>'+
   '<button type="button" class="cAlt" id="czChipDaily">每日簽到</button>'+
   '<button type="button" class="cAlt" id="czChipInv">邀請好友</button>'+
   '<button type="button" class="cOk" id="czChipOk"></button>'+
@@ -46,16 +46,16 @@ window.czChipDlg=function(mode,onOk){var d=build();if(d.open)return;cb=onOk;
   ad.hidden=true;daily.hidden=true;inv.hidden=true;
   d.querySelector('#czChipNo').textContent='取消';
  }else{
-  /* 'low', 'short', and leftover 'reset' all route to 看廣告／簽到／好友 — never a free chip refill */
+  /* 'low', 'short', and leftover 'reset' all route to 免費領籌碼／簽到／好友 — never a free chip refill */
   ok.hidden=true;ad.hidden=false;
   daily.hidden=!dailyOk();
   inv.hidden=!!short;
   if(short){
    d.querySelector('#czChipT').textContent='籌碼不足目前押注';
-   d.querySelector('#czChipP').textContent=daily.hidden?'目前的虛擬籌碼不夠這次押注，已先幫你調低。也可以看廣告領籌碼。':'目前的虛擬籌碼不夠這次押注，已先幫你調低。也可以看廣告領籌碼，或領取每日簽到。';
+   d.querySelector('#czChipP').textContent=daily.hidden?'目前的虛擬籌碼不夠這次押注，已先幫你調低。也可以免費領籌碼。':'目前的虛擬籌碼不夠這次押注，已先幫你調低。也可以免費領籌碼，或領取每日簽到。';
   }else{
    d.querySelector('#czChipT').textContent='籌碼不足';
-   d.querySelector('#czChipP').textContent=daily.hidden?'目前的虛擬籌碼不夠最低押注。可以看廣告領籌碼，或邀請好友獲得籌碼。':'目前的虛擬籌碼不夠最低押注。可以看廣告領籌碼、領取每日簽到，或邀請好友獲得籌碼。';
+   d.querySelector('#czChipP').textContent=daily.hidden?'目前的虛擬籌碼不夠最低押注。可以免費領籌碼，或邀請好友獲得籌碼。':'目前的虛擬籌碼不夠最低押注。可以免費領籌碼、領取每日簽到，或邀請好友獲得籌碼。';
   }
   d.querySelector('#czChipNo').textContent='稍後再說';
  }

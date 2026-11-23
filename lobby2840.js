@@ -39,7 +39,7 @@ R.innerHTML=
    '<button type="button" class="lxCard lxMis" id="lxMis"><img class="art" src="assets/lx/scroll.webp'+V+'" alt="" width="200" height="243"><span class="tx"><b>每日任務</b><small>完成任務領取獎勵</small><span class="lxPr"><i><u id="lxMisBar"></u><em id="lxMisN">0 / 5</em></i></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxMisB"></span></button>'+
    '<button type="button" class="lxCard lxEv" id="lxEv"><span class="tx"><b>限時活動</b><small id="lxEvN">本週活動</small><span class="lxCd"><i class="lxIcoTime" aria-hidden="true"></i><span id="lxEvT">--:--:--</span></span></span><span class="go" aria-hidden="true">›</span><span class="bdg" id="lxEvB"></span></button>'+
   '</div>'+
-  '<a class="lxCol" id="lxCol" href="shop.html"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><img class="art" src="assets/lx/shop_palace.webp'+V+'" alt="" width="420" height="295"><span class="pf" aria-hidden="true"><i style="background-image:url(assets/sakura/p_idle.webp?v=256)"></i><i style="background-image:url(assets/samurai/p_idle.webp?v=256)"></i></span><span class="tx"><b>商城</b><small>以虛擬籌碼兌換機台外框・角色圖鑑</small></span><span class="lxGo">進入<i aria-hidden="true">›</i></span></a>'+
+  '<a class="lxCol" id="lxCol" href="shop.html"><i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i><img class="art" src="assets/lx/shop_palace.webp'+V+'" alt="" width="420" height="295"><span class="pf" aria-hidden="true"><i style="background-image:url(assets/sakura/p_idle.webp?v=256)"></i><i style="background-image:url(assets/samurai/p_idle.webp?v=256)"></i></span><span class="tx"><b>商城</b><small>以虛擬籌碼解鎖機台外框・角色圖鑑</small></span><span class="lxGo">進入<i aria-hidden="true">›</i></span></a>'+
  '</section>'+
  '<section class="lxTab" data-tab="games" aria-label="機台"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>全部機台</h2></div><div id="lxWallSlot"></div></section>'+
  '<section class="lxTab" data-tab="events" aria-label="活動"><div class="lxSec"><h2><i class="lxSak" aria-hidden="true"></i>活動中心</h2></div><div id="lxEvSlot" class="lxStack"></div></section>'+
@@ -72,12 +72,12 @@ mv(D.querySelector('.mqf'),ev);mv(D.querySelector('.wk'),ev);mv($('ivB'),ev);mv(
 var fr=$('bFr');
 function proxyRow(slot,id,ico,t,s,go,target){var b=el('button','ivb lxRow');b.type='button';b.id=id;b.innerHTML='<span class="ive" aria-hidden="true">'+ico+'</span><span class="ivt"><b>'+t+'</b><small>'+s+'</small></span><span class="ivg">'+go+'</span>';
  b.onclick=function(){var x=typeof target==='function'?null:$(target);if(typeof target==='function')target();else if(x)x.click()};slot.appendChild(b);return b}
-if(fr){proxyRow(ev,'lxFr','<img src="assets/lx/ev_friends.webp'+V+'" alt="" width="128" height="128">','好友互送','每天互送紅包・全回送再加碼','前往','bFr');fr.hidden=true;D.body.appendChild(fr)}
+if(fr){proxyRow(ev,'lxFr','<img src="assets/lx/ev_friends.webp'+V+'" alt="" width="128" height="128">','好友互送','每天互送福袋・全回送有額外獎勵','前往','bFr');fr.hidden=true;D.body.appendChild(fr)}
 /* collect tab */
 var col=$('lxColSlot');
 var shopRow=el('div','lxShop');
 shopRow.innerHTML='<div class="lxShopH"><img src="assets/lx/shop_palace.webp'+V+'" alt="" width="420" height="295"><div><b>機台外觀商店</b><small id="lxSkN">尚未收藏限定外框</small></div></div>'+
-'<p class="lxShopP">外框全機台共用・以虛擬籌碼兌換，純裝飾不影響機率</p>'+
+'<p class="lxShopP">外框全機台共用・以虛擬籌碼解鎖，純裝飾不影響機率</p>'+
 '<div class="lxShopE"><div class="lxShopPv" id="lxShopPv" aria-hidden="true"></div>'+
 '<button type="button" class="lxShopGo" id="lxShopGo">進入外觀商店 ›</button></div>';
 col.appendChild(shopRow);

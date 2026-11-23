@@ -10,7 +10,7 @@
  function amount(){return last.won>0?last.won:parseAmt()}
  function shareText(){
   var n=amount(), t=theme();
-  return '我在龍運金殿・'+t+'剛開出 '+fmt(n)+' 籌碼！金碧輝煌・閃電連線｜18+・僅供娛樂・純虛擬・無兌現 '+LIVE;
+  return '我在龍運金殿・'+t+'剛開出 '+fmt(n)+' 籌碼！金碧輝煌・鴻運連發｜18+・僅供娛樂・純虛擬・無兌現 '+LIVE;
  }
  function snd(){try{window.sfx&&(sfx.click?sfx.click():sfx(1))}catch(e){}}
  function toast(m){
@@ -42,7 +42,7 @@
    x.textAlign='center';x.fillStyle='#ffe9a0';x.font='900 64px "Noto Sans TC",Impact,sans-serif';
    x.fillText(fmt(amount()),360,230);
    x.fillStyle='#e8cfa0';x.font='700 20px "Noto Sans TC",sans-serif';x.fillText('虛擬籌碼',360,268);
-   x.fillStyle='#ffd27a';x.font='700 18px "Noto Sans TC",sans-serif';x.fillText('金碧輝煌・閃電連線',360,318);
+   x.fillStyle='#ffd27a';x.font='700 18px "Noto Sans TC",sans-serif';x.fillText('金碧輝煌・鴻運連發',360,318);
    x.fillStyle='#d9c2cf';x.font='600 15px "Noto Sans TC",sans-serif';x.fillText('18+・僅供娛樂・純虛擬・無兌現',360,352);
    var blob=await new Promise(function(r){try{c.toBlob(r,'image/png')}catch(e){r(null)}});
    if(!blob)return null;

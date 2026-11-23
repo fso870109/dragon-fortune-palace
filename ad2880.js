@@ -1,4 +1,4 @@
-/* v28.80 in-house 贊助影片 (AdMob IDs reserved; SDK flag OFF until app 2.60) */
+/* v28.16x 免費領籌碼：18 秒本地倒數，不載入任何廣告（原 v28.80 in-house 贊助影片 (AdMob IDs reserved; SDK flag OFF until app 2.60) */
 (function(){
 if(window.DFPad)return;
 var REWARD=800,DURATION=18;
@@ -20,13 +20,13 @@ function build(){
   el.id='dfpAd';el.hidden=true;
   el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-labelledby','dfpAdT');
   el.innerHTML='<div class="dfpAdBox" id="dfpAdPlay">'+
-    '<div class="dfpAdHd" id="dfpAdT">贊助影片</div>'+
+    '<div class="dfpAdHd" id="dfpAdT">免費領籌碼</div>'+
     '<div class="dfpAdVid" aria-hidden="true"><div class="dfpAdGlow"></div><div class="dfpAdOrn"></div>'+
-    '<p class="dfpAdBrand">龍運金殿</p><p class="dfpAdTag">本片由金殿贊助</p>'+
+    '<p class="dfpAdBrand">龍運金殿</p><p class="dfpAdTag">稍候片刻即可領取・不播放廣告</p>'+
     '<div class="dfpAdRing"><b id="dfpAdN">18</b><small>秒</small></div></div>'+
     '<div class="dfpAdProg"><i id="dfpAdBar"></i></div>'+
-    '<p class="dfpAdHint" id="dfpAdHint">請看完贊助影片</p>'+
-    '<button type="button" class="dfpAdBtn" id="dfpAdGo" disabled>觀看中</button></div>'+
+    '<p class="dfpAdHint" id="dfpAdHint">稍候片刻即可領取</p>'+
+    '<button type="button" class="dfpAdBtn" id="dfpAdGo" disabled>稍候中</button></div>'+
     '<div class="dfpAdBox dfpAdRw" id="dfpAdRw" hidden>'+
     '<h2>獎勵到帳</h2>'+
     '<p class="dfpAdAmt">獲得 <b id="dfpAdAmt">800</b> 籌碼</p>'+
@@ -41,10 +41,10 @@ function paint(left){
   if(n)n.textContent=String(Math.max(0,Math.ceil(left)));
   if(bar)bar.style.width=Math.min(100,((dur-left)/dur)*100)+'%';
   if(left>0){
-    if(hint)hint.textContent='請看完贊助影片';
-    if(go){go.disabled=true;go.textContent='觀看中'}
+    if(hint)hint.textContent='稍候片刻即可領取';
+    if(go){go.disabled=true;go.textContent='稍候中'}
   }else{
-    if(hint)hint.textContent='觀看完成，可領取獎勵';
+    if(hint)hint.textContent='時間到，可領取獎勵';
     if(go){go.disabled=false;go.textContent='領取獎勵'}
   }
 }

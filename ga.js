@@ -37,7 +37,7 @@ try{
       s.onerror=function(){};
       (document.head||document.documentElement).appendChild(s);
       gtag('js',new Date());
-      gtag('config',MID,{anonymize_ip:true,send_page_view:true});
+      gtag('config',MID,{send_page_view:true,allow_google_signals:false,allow_ad_personalization_signals:false});
       for(var i=0;i<queued.length;i++){try{gtag('event',queued[i][0],queued[i][1]);}catch(e){}}
       queued=[];
     }catch(e){}

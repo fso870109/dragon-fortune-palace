@@ -1,7 +1,9 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.157',DFP_APPV='';
+var DFP_WEBV='28.158',DFP_APPV='';
 var DFP_IAP=false;
+var DFP_DEL=false; /* 刪除帳號按鈕：Firestore 刪除規則發布並測試後才改 true */
+var DFP_NOADS=false; /* 去廣告分頁：false 時隱藏（網頁與 App 共用）；廣告與付款都準備好再改 true */
 (function(){var LS=window.localStorage,g=function(k){try{return LS.getItem(k)}catch(e){return null}},s=function(k,v){try{LS.setItem(k,v)}catch(e){}};
 var CAN=typeof navigator!=='undefined'&&typeof navigator.vibrate==='function';
 function vibOn(){return CAN&&g('fs_vib')!=='0'}
@@ -38,6 +40,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '#setDlg .tg[aria-pressed="true"]{background:linear-gradient(180deg,#f7d36e,#b8801f)}#setDlg .tg[aria-pressed="true"]::after{transform:translateX(24px);background:radial-gradient(circle at 35% 30%,#fff8de,#ffe08a 55%,#c08a22)}'+
  '#setDlg .tg:disabled{opacity:.4;cursor:default}'+
  '#setDlg .sL{display:block;margin:12px 0 4px;text-align:center;font-size:13px;color:#ffd77a}#setDlg .sL+#sgWipe{margin-top:2px;font-size:12.5px;color:#ffe9b0;text-decoration:underline;text-underline-offset:2px}'+
+ '#setDlg .sDel{margin:6px auto 0;padding:4px 10px;background:none;border:0;font:inherit;font-size:12.5px;color:#ff9d7a;text-decoration:underline;text-underline-offset:2px;cursor:pointer}#setDlg .dfpRate{margin:12px auto 2px}'+
  '#setDlg .sN{margin:10px 0 0;text-align:center;font-size:11.5px;color:#d9b98a}'+
  '#setDlg .sV{margin:4px 0 0;padding:12px 8px;display:block;width:100%;box-sizing:border-box;text-align:center;font-size:11px;letter-spacing:.06em;color:rgba(217,185,138,.72);font-variant-numeric:tabular-nums;-webkit-user-select:none;user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}'+
  '#setDlg .sX{display:block;width:100%;margin-top:12px;font:inherit;font-weight:800;font-size:15px;padding:10px;border-radius:24px;border:0;color:#2a0505;cursor:pointer;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f);box-shadow:0 3px 0 #6b420c}#setDlg .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}#setDlg .sRedeem{display:none;margin:8px 0 0;padding:8px 0 0;border-top:1px solid rgba(226,179,79,.22)}#setDlg .sRedeem.is-on{display:block}#setDlg .sRedeemRow{display:flex;gap:8px;align-items:stretch}#setDlg #sgCode{flex:1;min-width:0;box-sizing:border-box;width:100%;height:36px;padding:0 10px;border-radius:10px;border:1px solid rgba(226,179,79,.45);background:#2a0d0d;color:#ffeccb;font:inherit;font-size:14px}#setDlg #sgCodeGo{flex:none;padding:0 14px;border:0;border-radius:10px;font:inherit;font-weight:800;font-size:14px;color:#2a0505;cursor:pointer;background:linear-gradient(180deg,#fff2bf,#f0c45a 50%,#b8801f)}#setDlg #sgCodeGo:disabled{opacity:.45;cursor:default}#setDlg #sgCodeMsg{margin:6px 0 0;text-align:center;font-size:12px;color:#ffd77a;min-height:1.2em}');
@@ -48,6 +51,8 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '<div class="sR"><span>減少動態效果<small id="sgRmN">減少閃光、震動畫面與開關門動畫，適合低階手機・省電</small></span><button class="tg" id="sgRm" type="button" aria-label="減少動態效果"></button></div>'+
  '<a class="sL" href="privacy.html">隱私權政策與使用條款・清除資料</a>'+
  '<a class="sL" href="privacy.html#wipe" id="sgWipe">清除本裝置遊戲資料</a>'+
+ (window.DFPcmp?DFPcmp.block('dfpRate--set'):'')+
+ (window.DFP_DEL?'<button class="sL sDel" id="sgDel" type="button">刪除帳號與雲端資料</button>':'<a class="sL sDel" href="deletion.html">刪除帳號說明</a>')+
  '<p class="sN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>'+
  '<p class="sV" id="sgVer">'+(DFP_APPV?('版本 '+DFP_APPV+'・內容 '+DFP_WEBV):('網頁版 '+DFP_WEBV))+'</p>'+
  '<div class="sRedeem" id="sgRedeem" hidden><label class="sr" for="sgCode">序號</label><div class="sRedeemRow"><input id="sgCode" maxlength="24" autocomplete="off" spellcheck="false" placeholder="序號"><button type="button" id="sgCodeGo">確認</button></div><p id="sgCodeMsg" role="status"></p></div>'+
@@ -58,6 +63,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  $('sgVib').onclick=function(){s('fs_vib',vibOn()?'0':'1');r();if(vibOn())hap(25)};
  $('sgRm').onclick=function(){var R=window.DFPrm;if(!R||R.sys)return;R.set(!R.on);r()};
  $('sgClose').onclick=function(){d.close()};
+ if($('sgDel'))$('sgDel').onclick=function(){if(window.DFPdel){d.close();DFPdel.open()}else location.href='deletion.html'};
  d.addEventListener('click',function(e){if(e.target===d)d.close()});
 
  var rTaps=[],rLast=0,rKind='',H_FC='e32487b0ea529d74544753e3a367d5cf53e122a21a65404cd369e4f29b3dd4cc',H_INV='386c70e2586ebd5484950189adbd774bd11fdc3a9b823b62e5eba551853dd8ee',H_CODE='080b025c8d1773fdefa79c16a7a53b57bf22393e7f8d52862a3849d5b5ffcad1';

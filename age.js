@@ -12,6 +12,7 @@ var css='html.agOn body{visibility:hidden}html.agOn #ageGate{visibility:visible}
 '#ageGate img{width:min(62vw,230px);height:auto;filter:drop-shadow(0 0 14px rgba(255,190,60,.45))}'+
 '#ageGate .ag18{display:inline-flex;align-items:center;justify-content:center;width:62px;height:62px;margin:6px auto 8px;border-radius:50%;font:900 26px/1 sans-serif;color:#2a0505;'+
 'background:radial-gradient(circle at 35% 30%,#fff6cf,#f2c75a 45%,#a8701a 100%);box-shadow:0 0 0 3px #7a4c10,0 0 18px rgba(255,200,80,.6)}'+
+'#ageGate .dfpRate{margin:8px auto 6px}#ageGate .dfpRate small{margin:0;font-size:11.5px;line-height:1.45}#ageGate .dfpRate b{font-size:13px}'+
 '#ageGate h2{margin:4px 0 8px;font-size:19px;letter-spacing:.06em;color:#ffd77a;text-shadow:0 1px 0 #000}'+
 '#ageGate p{margin:6px 0;font-size:13.5px;line-height:1.6;color:#f5dcb6}'+
 '#ageGate .agN{display:inline-block;margin:8px 0 4px;padding:5px 12px;border-radius:14px;border:1px solid #c99a3a;background:rgba(0,0,0,.35);font-size:12.5px;font-weight:700;color:#ffe3a0;letter-spacing:.04em}'+
@@ -24,7 +25,7 @@ var css='html.agOn body{visibility:hidden}html.agOn #ageGate{visibility:visible}
 '#ageGate .agNo{display:none}#ageGate.no .agYes{display:none}#ageGate.no .agNo{display:block}';
 var st=document.createElement('style');st.textContent=css;(document.head||H).appendChild(st);
 function build(){if(document.getElementById('ageGate'))return;var d=document.createElement('dialog');d.id='ageGate';d.setAttribute('role','dialog');d.setAttribute('aria-modal','true');d.setAttribute('aria-label','年齡確認');
-d.innerHTML='<div class="agC"><img src="assets/lobby/logo22.webp?v=256" alt="龍運金殿"><div class="ag18">18+</div>'+
+d.innerHTML='<div class="agC"><img src="assets/lobby/logo22.webp?v=256" alt="龍運金殿">'+(window.DFPcmp?DFPcmp.block('dfpRate--age'):'<div class="ag18">18+</div>')+''+
 '<div class="agYes"><h2>年齡確認</h2><p>本遊戲內容含模擬賭博，僅適合 <b>18 歲以上</b>玩家。</p>'+
 '<span class="agN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</span>'+
 '<p>遊戲中的籌碼皆為虛擬點數，無法儲值、兌換現金或任何獎品。在本遊戲中的表現，不代表在真實賭博中會獲勝。</p>'+

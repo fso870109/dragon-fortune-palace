@@ -53,11 +53,11 @@ const ACH=[
 ['f2','換上新框','擁有 2 款外框',150,'frame',1,2,'frame'],
 ['f6','六框在手','擁有 6 款外框',800,'frame',3,6,'frame'],
 ['f12','十二框全','集齊全部 12 款外框',2800,'frame',4,12,'frame','十二框全'],
-['gf1','收到紅包','收到好友紅包 1 次',100,'social',1,1,'gf'],
+['gf1','收到福袋','收到好友福袋 1 次',100,'social',1,1,'gf'],
 ['rd1','初試掠奪','成功掠奪 1 次',150,'social',1,1,'rd'],
 ['rv1','初次回擊','成功回擊 1 次',180,'social',1,1,'rv'],
 ['gd1','公會立功','領取公會任務獎勵 1 次',200,'social',1,1,'gd'],
-['gf10','回送十份','回送好友紅包 10 次',400,'social',2,10,'gs'],
+['gf10','回送十份','回送好友福袋 10 次',400,'social',2,10,'gs'],
 ['rv10','十次回擊','成功回擊 10 次',550,'social',2,10,'rv'],
 ['iv1','邀請一位','真實邀請 1 位新玩家',650,'social',2,1,'iv'],
 ['iv5','邀請五位','真實邀請 5 位新玩家',1100,'social',3,5,'iv'],
@@ -66,10 +66,10 @@ const ACH=[
 ['lv10','銀卡晉升','達到 Lv.10',450,'lv',2,10,'lv'],
 ['lv20','金卡加身','達到 Lv.20',1000,'lv',3,20,'lv'],
 ['lv50','鑽石殿主','達到 Lv.50',2500,'lv',4,50,'lv','鑽石殿主'],
-['wk1','主題日初領','領取 1 次主題日紅包',80,'week',1,1,'wk'],
-['wk7','主題七日','累計領取 7 次主題日紅包',350,'week',2,7,'wk'],
-['wkAll','主題日全領','七種主題日紅包都領過',900,'week',3,7,'wkd'],
-['wk365','主題全年','累計領取 365 次主題日紅包',2500,'week',4,365,'wk','主題全年']
+['wk1','主題日初領','領取 1 次主題日福袋',80,'week',1,1,'wk'],
+['wk7','主題七日','累計領取 7 次主題日福袋',350,'week',2,7,'wk'],
+['wkAll','主題日全領','七種主題日福袋都領過',900,'week',3,7,'wkd'],
+['wk365','主題全年','累計領取 365 次主題日福袋',2500,'week',4,365,'wk','主題全年']
 ].map(function(x){return {id:x[0],t:x[1],d:x[2],r:x[3],c:x[4],tier:x[5],g:x[6],k:x[7],bd:x[8]||''}});
 let st=J('cz_st',null);if(!st||typeof st!=='object')st={xp:0,lv:1,spins:0,won:0,ach:{},mach:{},free:0,feed:[]};
 st.ach=st.ach||{};st.mach=st.mach||{};st.feed=st.feed||[];st.acl=st.acl||{};st.ax=st.ax||{};if(!st._achM){Object.keys(st.ach).forEach(function(k){if(st.ach[k]&&!st.acl[k])st.acl[k]=st.ach[k]});st._achM=1}
@@ -83,8 +83,8 @@ const vipOf=l=>{let r=VIP[0];for(const v of VIP)if(l>=v[0])r=v;return r};
 const ls=new Set();function emit(){ls.forEach(f=>{try{f()}catch(e){}})}
 const vib=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
 function stripMoji(s){try{return String(s||'').replace(/[\u2600-\u27BF\u2B00-\u2BFF\uFE0E\uFE0F\u200D\u{1F000}-\u{1FAFF}]/gu,'').replace(/\s+/g,' ').trim()}catch(e){return String(s||'').replace(/[\u2600-\u27BF\u2B00-\u2BFF\uFE0F]|[\uD83C-\uDBFF][\uDC00-\uDFFF]/g,'').replace(/\s+/g,' ').trim()}}
-const TOAST_ICO={task:'assets/lx/i_task.webp?v=2848',trophy:'assets/lx/i_trophy.webp?v=2848',cal:'assets/lx/i_cal.webp?v=2848',gift:'assets/lx/i_gift.webp?v=2848',scroll:'assets/lx/scroll.webp?v=2848',guild:'assets/lx/i_guild.webp?v=2848',evGift:'assets/lx/ev_gift.webp?v=2848',evPacket:'assets/lx/ev_packet.webp?v=2848',evFriends:'assets/lx/ev_friends.webp?v=2848',evCastle:'assets/lx/ev_castle.webp?v=2848',evRaid:'assets/lx/ev_raid.webp?v=2848',evCounter:'assets/lx/ev_counter.webp?v=2848',dragon:'assets/lx/dragon.webp?v=2848'};
-function toastIco(title,ic){if(typeof ic==='string'&&ic&&ic.indexOf('.')>=0)return ic;const t=title||'';if(/圖鑑/.test(t))return TOAST_ICO.scroll;if(/任務/.test(t))return TOAST_ICO.task;if(/成就/.test(t))return TOAST_ICO.trophy;if(/簽到/.test(t))return TOAST_ICO.cal;if(/升級/.test(t))return TOAST_ICO.dragon;if(/免費/.test(t))return TOAST_ICO.gift;if(/邀請|加入獎勵|階梯/.test(t))return TOAST_ICO.evGift;if(/回擊/.test(t))return TOAST_ICO.evCounter;if(/掠奪/.test(t))return TOAST_ICO.evRaid;if(/公會/.test(t))return TOAST_ICO.evCastle;if(/好友|回送/.test(t))return TOAST_ICO.evFriends;if(/紅包|禮物/.test(t))return TOAST_ICO.evPacket;return TOAST_ICO.gift}
+const TOAST_ICO={task:'assets/lx/i_task.webp?v=2848',trophy:'assets/lx/i_trophy.webp?v=2848',cal:'assets/lx/i_cal.webp?v=2848',gift:'assets/lx/i_gift.webp?v=2848',scroll:'assets/lx/scroll.webp?v=2848',guild:'assets/lx/i_guild.webp?v=2848',evGift:'assets/lx/ev_gift.webp?v=2848',evPacket:'assets/lx/ev_gift.webp?v=2848',evFriends:'assets/lx/ev_friends.webp?v=2848',evCastle:'assets/lx/ev_castle.webp?v=2848',evRaid:'assets/lx/ev_raid.webp?v=2848',evCounter:'assets/lx/ev_counter.webp?v=2848',dragon:'assets/lx/dragon.webp?v=2848'};
+function toastIco(title,ic){if(typeof ic==='string'&&ic&&ic.indexOf('.')>=0)return ic;const t=title||'';if(/圖鑑/.test(t))return TOAST_ICO.scroll;if(/任務/.test(t))return TOAST_ICO.task;if(/成就/.test(t))return TOAST_ICO.trophy;if(/簽到/.test(t))return TOAST_ICO.cal;if(/升級/.test(t))return TOAST_ICO.dragon;if(/免費/.test(t))return TOAST_ICO.gift;if(/邀請|加入獎勵|階梯/.test(t))return TOAST_ICO.evGift;if(/回擊/.test(t))return TOAST_ICO.evCounter;if(/掠奪/.test(t))return TOAST_ICO.evRaid;if(/公會/.test(t))return TOAST_ICO.evCastle;if(/好友|回送/.test(t))return TOAST_ICO.evFriends;if(/福袋|禮物/.test(t))return TOAST_ICO.evPacket;return TOAST_ICO.gift}
 function toastHost(){let w=document.getElementById('czToast');if(!w){w=document.createElement('div');w.id='czToast';w.setAttribute('role','status');w.setAttribute('aria-live','polite')}const dlg=document.querySelector('dialog[open]'),dest=dlg||document.body;if(w.parentNode!==dest)dest.appendChild(w);return w}
 const toastQ=[];
 function toastMore(){const host=toastHost();let more=host.querySelector('.cztMore');const n=toastQ.length;if(n<=0){if(more)more.remove();return}if(!more){more=document.createElement('div');more.className='czt cztMore';more.setAttribute('role','status');host.appendChild(more)}more.textContent='另有 '+n+' 則'}

@@ -129,7 +129,7 @@ requestAnimationFrame(frame)}
 requestAnimationFrame(frame);}
 function spin(){
 if(spinning||bwState||window.__hold)return;const free=!!(FS&&FS.left>0);const bet=free?FS.bet:BETS[betIdx],total=bet*NL;
-if(!free&&bal<total){if(bal>=BETS[0]*NL){let i=betIdx;while(i>0&&BETS[i]*NL>bal)i--;betIdx=i;ui();const t='籌碼不足，押注已調整為 '+BETS[i]+'×'+NL;$('msg').textContent=t;typeof toast==='function'&&toast(t);window.czChipDlg&&czChipDlg('short')}else{$('msg').textContent=adLeft()>0?'籌碼不足！可「看廣告領籌碼」或「每日簽到」':'籌碼不足！可「每日簽到」或「邀請好友」';window.czChipDlg&&czChipDlg('low')}sfx.lose();return}
+if(!free&&bal<total){if(bal>=BETS[0]*NL){let i=betIdx;while(i>0&&BETS[i]*NL>bal)i--;betIdx=i;ui();const t='籌碼不足，押注已調整為 '+BETS[i]+'×'+NL;$('msg').textContent=t;typeof toast==='function'&&toast(t);window.czChipDlg&&czChipDlg('short')}else{$('msg').textContent=adLeft()>0?'籌碼不足！可「免費領籌碼」或「每日簽到」':'籌碼不足！可「每日簽到」或「邀請好友」';window.czChipDlg&&czChipDlg('low')}sfx.lose();return}
 BRc=null;boardR();spinning=true;if(free){FS.left--;FS.n++;fsUI()}else{bal-=total;window.CZ&&CZ.onBet(total)}ui();clearWin();$('win').textContent=0;$('msg').textContent=free?`免費次數 ${FS.n}／${FS.tot}（獎金 ×${FS_M}）`:'旋轉中…';$('board').setAttribute('aria-busy','true');
 ['spinBtn','minus','plus','maxBtn','max16','resetBtn'].forEach(i=>{const e=$(i);if(e)e.disabled=true});
 const res=(window.__force&&window.__force.shift())||rndGrid();const tease=teaseCheck(res);
@@ -175,7 +175,7 @@ FS=null;fsUI();['spinBtn','minus','plus','maxBtn','max16','resetBtn'].forEach(i=
 $('msg').textContent=`免費次數結束！共贏得 ${fmt(f.won)} 虛擬籌碼`;if(f.won>0)bigWin(f.won,f.bet*NL,{tier:['mega','免費次數結束','合計獎金'],lbl:'合計獎金'});else lcdReset()},1300)}
 function fsIntro(re){const bw=$('bw');fsUI();lcdBonusFS();
 bw.className='bw show epic fsi';$('bwTier').textContent='超級獎勵';$('bwJp').textContent=re?'謝謝你… +10次':'機會來了!! 一直在等你';
-bw.querySelector('.lbl').textContent=re?'免費次數追加':'免費次數（獎金 ×2）';$('bwAmt').textContent=(re?'+':'')+FS_N+' 回';$('bwBtn').textContent='開始！';
+bw.querySelector('.lbl').textContent=re?'免費次數追加':'免費次數（獎金 ×'+FS_M+'）';$('bwAmt').textContent=(re?'+':'')+FS_N+' 回';$('bwBtn').textContent='開始！';
 bwState={won:0,done:true,fin:true,intro:true};sfx.win(3);lastFlash=0;flash(.45);fountain();megaBorder(2.5);bw.classList.add('ready');setTimeout(()=>$('bwBtn').focus(),50);
 if(window.__fsAuto)setTimeout(bwClose,window.__fsAuto)}
 // ===== particle FX (canvas) =====
@@ -367,7 +367,7 @@ if(c===st.code)return bad('不能輸入自己的邀請碼喔');
 $('invInput').removeAttribute('aria-invalid');st.used=c;localStorage.setItem('fs_inv',JSON.stringify(st));bal+=INV_REWARD;ui();
 [587,740,880,1175].forEach((f,i)=>tone(f,.22,'triangle',.08,i*.08));
 const b=$('invRedeem').getBoundingClientRect();for(let i=0;i<(RM?12:36);i++){coinP(b.left+b.width/2,b.top,11);if(i%2)sparkP(b.left+b.width/2,b.top)}fxStart();
-$('msg').textContent=`邀請碼兌換成功！獲得 ${INV_REWARD} 虛擬籌碼`;invRender()}
+$('msg').textContent=`邀請碼使用成功！獲得 ${INV_REWARD} 虛擬籌碼`;invRender()}
 async function invCopy(){const c=invGet().code;let ok=false;try{await navigator.clipboard.writeText(c);ok=true}catch(e){}
 if(!ok){const r=document.createRange();r.selectNodeContents($('invCode'));const se=getSelection();se.removeAllRanges();se.addRange(r);try{ok=document.execCommand('copy')}catch(e){}}
 invMsg(ok?'已複製邀請碼 '+c:'請長按邀請碼手動複製',ok?'ok':'err');sfx.click()}
@@ -404,14 +404,14 @@ function shRender(){const st=skGet();$('shBal').textContent=fmt(bal);
 $('skins').innerHTML=SKINS.map(k=>{const own=st.own.includes(k.id),eq=st.eq===k.id;let btn;
 if(eq)btn=`<button disabled>使用中</button>`;
 else if(own)btn=`<button class="use" data-act="use" data-id="${k.id}">套用</button>`;
-else if(shConfirm===k.id)btn=`<button class="cf" data-act="buy" data-id="${k.id}">確認兌換？</button>`;
-else btn=`<button class="buy" data-act="ask" data-id="${k.id}" ${bal<k.price?'aria-disabled="true"':''} aria-label="以 ${fmt(k.price)} 虛擬籌碼兌換${k.name}"><span class="coin" aria-hidden="true"></span>${fmt(k.price)}</button>`;
+else if(shConfirm===k.id)btn=`<button class="cf" data-act="buy" data-id="${k.id}">確認解鎖？</button>`;
+else btn=`<button class="buy" data-act="ask" data-id="${k.id}" ${bal<k.price?'aria-disabled="true"':''} aria-label="以 ${fmt(k.price)} 虛擬籌碼解鎖${k.name}"><span class="coin" aria-hidden="true"></span>${fmt(k.price)}</button>`;
 return `<li class="skin${eq?' eq':''}">${eq?'<span class="eqtag">使用中</span>':''}<div class="pv" style="background:${k.fr}" aria-hidden="true"><div style="background:${k.in}"><i>${icon(k.sym)}</i><i>${icon('heroine')}</i><i>${icon(k.sym)}</i></div></div><b>${k.name}</b><small>${own&&!eq?'已擁有':k.desc}</small>${btn}</li>`}).join('')}
 function shAct(e){const b=e.target.closest('button[data-act]');if(!b)return;const k=SKINS.find(x=>x.id===b.dataset.id);if(!k)return;const st=skGet();
 if(b.dataset.act==='use'){st.eq=k.id;skSave(st);skApply();shConfirm=null;sfx.click();shMsg(`已套用「${k.name}」`,'ok');shRender();return}
 if(b.dataset.act==='ask'){if(spinning){shMsg('請等待本次旋轉結束','err');return}
-if(bal<k.price){shMsg(`虛擬籌碼不足，還差 ${fmt(k.price-bal)}（可透過遊戲、每日簽到或看廣告取得）`,'err');tone(200,.15,'square',.05);return}
-shConfirm=k.id;sfx.click();shMsg(`再按一次確認，以 ${fmt(k.price)} 虛擬籌碼兌換「${k.name}」`);shRender();$('skins').querySelector('.cf')?.focus();return}
+if(bal<k.price){shMsg(`虛擬籌碼不足，還差 ${fmt(k.price-bal)}（可透過遊戲、每日簽到或免費領籌碼取得）`,'err');tone(200,.15,'square',.05);return}
+shConfirm=k.id;sfx.click();shMsg(`再按一次確認，以 ${fmt(k.price)} 虛擬籌碼解鎖「${k.name}」`);shRender();$('skins').querySelector('.cf')?.focus();return}
 if(b.dataset.act==='buy'){if(spinning||bal<k.price||st.own.includes(k.id)){shConfirm=null;shRender();return}
 bal-=k.price;st.own.push(k.id);st.eq=k.id;skSave(st);ui();skApply();shConfirm=null;
 sfx.buy();

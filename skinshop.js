@@ -89,11 +89,11 @@ function ensureShop(){
   d.id='shop';d.setAttribute('aria-labelledby','shTitle');
   d.innerHTML='<div class="shTop"><button type="button" class="shX" id="shX" aria-label="關閉">✕</button></div>'+
     '<h2 id="shTitle">機台外觀商店</h2>'+
-    '<div class="shsub">用遊戲中贏得的虛擬籌碼兌換機台外觀・目前籌碼 <b id="shBal">0</b></div>'+
+    '<div class="shsub">用虛擬籌碼解鎖機台外觀・目前籌碼 <b id="shBal">0</b></div>'+
     '<ul class="skins" id="skins"></ul>'+
     '<div class="shmsg" id="shMsg" role="status" aria-live="polite"></div>'+
     '<div class="dact"><button type="button" id="shClose">關閉</button></div>'+
-    '<p class="note">外觀僅改變機台樣式，不影響中獎機率・只能用虛擬籌碼兌換，無法以真實金錢購買・僅供娛樂・<span style="white-space:nowrap">虛擬籌碼不可兌現或轉讓</span>・純虛擬・無兌現・外框全機台共用</p>';
+    '<p class="note">外觀僅改變機台樣式，不影響中獎機率・只能用虛擬籌碼解鎖，無法以真實金錢購買・僅供娛樂・<span style="white-space:nowrap">虛擬籌碼不可兌現或轉讓</span>・純虛擬・無兌現・外框全機台共用</p>';
   D.body.appendChild(d);
 }
 ensureShop();
@@ -163,9 +163,9 @@ function render(){
     else if(own){btn='<button type="button" class="use" data-act="use" data-id="'+k.id+'">套用</button>';state='已擁有'}
     else{
       state=fmtN(k.price);
-      if(getC()===k.id) btn='<button type="button" class="cf" data-act="buy" data-id="'+k.id+'">確認兌換 '+fmtN(k.price)+'？</button>';
+      if(getC()===k.id) btn='<button type="button" class="cf" data-act="buy" data-id="'+k.id+'">確認解鎖 '+fmtN(k.price)+'？</button>';
       else{
-        const buy='<button type="button" class="buy" data-act="ask" data-id="'+k.id+'" '+(balNow<k.price?'disabled':'')+' aria-label="以 '+fmtN(k.price)+' 虛擬籌碼兌換'+k.name+'">購買 · '+fmtN(k.price)+'</button>';
+        const buy='<button type="button" class="buy" data-act="ask" data-id="'+k.id+'" '+(balNow<k.price?'disabled':'')+' aria-label="以 '+fmtN(k.price)+' 虛擬籌碼解鎖'+k.name+'">購買 · '+fmtN(k.price)+'</button>';
         btn=onMach()?'<div class="b2"><button type="button" class="try" data-act="try" data-id="'+k.id+'">試穿</button>'+buy+'</div>':buy;
       }
     }
@@ -196,8 +196,8 @@ function lobbyAct(act,id){
   }
   if(act==='ask'){
     const c=chips();
-    if(c<k.price){msg('虛擬籌碼不足，還差 '+fmtN(k.price-c)+'（可透過遊戲、每日簽到或看廣告取得）','err');return}
-    setC(k.id);click();msg('再按一次確認，以 '+fmtN(k.price)+' 虛擬籌碼兌換「'+k.name+'」');
+    if(c<k.price){msg('虛擬籌碼不足，還差 '+fmtN(k.price-c)+'（可透過遊戲、每日簽到或免費領籌碼取得）','err');return}
+    setC(k.id);click();msg('再按一次確認，以 '+fmtN(k.price)+' 虛擬籌碼解鎖「'+k.name+'」');
     sel=k.id;render();return;
   }
   if(act==='buy'){
@@ -207,7 +207,7 @@ function lobbyAct(act,id){
     if(!st.own.includes(k.id))st.own.push(k.id);
     st.eq=k.id;saveSkin(st);applySkin();setC(null);
     sel=k.id;render();
-    click();msg('兌換成功！已套用「'+k.name+'」','ok');
+    click();msg('解鎖成功！已套用「'+k.name+'」','ok');
   }
 }
 

@@ -1,11 +1,11 @@
-/* 龍運金殿 v28.68: 好友每日互送虛擬籌碼（Firebase 連線；規則未發布或無設定時回退本機示範；純虛擬・無兌現・不可交易） */
+/* 龍運金殿 v28.16x: 每份固定 50、每日最多送 5 份收 5 份（雲端只記送禮紀錄，不含金額；籌碼只在本機加，不在帳號間移動）。v28.68: 好友每日互送虛擬籌碼（Firebase 連線；規則未發布或無設定時回退本機示範；純虛擬・無兌現・不可交易） */
 (function(){if(!window.CZ)return;var LS=localStorage,K='dfp_fr',KL='dfp_fr_live',$=function(i){return document.getElementById(i)};
 var IV='?v=2850';function ic(id){return '<img src="assets/lx/ev_'+id+'.webp'+IV+'" alt="" width="128" height="128">'}
 function face(f){return (f&&f.av)?'<img src="assets/lx/'+f.av+'.webp'+IV+'" alt="">':((f&&f.n)||'?').slice(0,1)}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function shownName(n){try{if(window.DFPname&&typeof DFPname.display==='function')return DFPname.display(n)}catch(e){}return n||'旅人'}
 var FR=[{id:'a',n:'阿明',av:'av_a',t:'夏祭花火常客'},{id:'b',n:'小美',av:'av_b',t:'櫻花斬愛好者'},{id:'c',n:'阿傑',av:'av_c',t:'天下布武玩家'},{id:'d',n:'佳佳',av:'av_d',t:'招財大作戰粉絲'},{id:'e',n:'老王',av:'av_e',t:'金殿老會員'}];
-var GIFT=50,BONUS=100,AVS=['av_a','av_b','av_c','av_d','av_e'];
+var GIFT=50,BONUS=100,CAP=5,AVS=['av_a','av_b','av_c','av_d','av_e'];
 function dk(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function st(){var s;try{s=JSON.parse(LS.getItem(K)||'{}')}catch(e){s={}}if(!s||s.d!==dk())s={d:dk(),got:0,sent:[],bon:0};if(!Array.isArray(s.sent))s.sent=[];return s}
 function sv(s){try{LS.setItem(K,JSON.stringify(s))}catch(e){}}
@@ -29,9 +29,9 @@ d.innerHTML='<h3 id="frT">好友互送</h3><span class="frw" id="frW">目前離�
  '<input id="frIn" maxlength="12" autocomplete="off" spellcheck="false" placeholder="輸入好友碼 DF-······">'+
  '<button type="button" class="btn hot" id="frAddB">加入</button></div>'+
 '<p class="frmsg" id="frMsg" role="status"></p>'+
-'<div class="frg" id="frG"><span class="gb" aria-hidden="true">'+ic('packet')+'</span><div class="x"><b id="frGt"></b><small id="frGs"></small></div><button class="btn hot" id="frGet">一鍵全收</button></div>'+
+'<div class="frg" id="frG"><span class="gb" aria-hidden="true">'+ic('gift')+'</span><div class="x"><b id="frGt"></b><small id="frGs"></small></div><button class="btn hot" id="frGet">一鍵全收</button></div>'+
 '<div class="frl" id="frL"></div><p class="frb" id="frB"></p>'+
-'<p class="note">每日 0 點重置・送禮免費，不扣你的籌碼<br>虛擬籌碼僅供娛樂・純虛擬・無兌現・不可轉讓或交易</p><div class="frs"><button class="btn close" id="frX">關閉</button></div>';
+'<p class="note">每份固定 '+GIFT+' 虛擬籌碼，不能自訂數量・每日最多送 '+CAP+' 份、收 '+CAP+' 份・0 點重置<br>送禮不扣你的籌碼，也不會從對方帳戶轉出<br>虛擬籌碼僅供娛樂・純虛擬・無兌現・不可轉讓或交易</p><div class="frs"><button class="btn close" id="frX">關閉</button></div>';
 document.body.appendChild(d);
 function msg(t){var e=$('frMsg');if(e)e.textContent=t||''}
 function paintMe(){
@@ -50,24 +50,24 @@ function paintMe(){
   }
 }
 function renderDemo(){var s=st(),n=FR.length;
- $('frGt').textContent=s.got?'今日禮物已領取':('好友送你 '+n+' 份紅包');
- $('frGs').innerHTML=s.got?'明天還有新的紅包喔':('每份 '+GIFT+'，共 <span class="framt">＋'+(GIFT*n)+' 虛擬籌碼</span>');
+ $('frGt').textContent=s.got?'今日禮物已領取':('好友送你 '+n+' 份福袋');
+ $('frGs').innerHTML=s.got?'明天還有新的福袋喔':('每份 '+GIFT+'，共 <span class="framt">＋'+(GIFT*n)+' 虛擬籌碼</span>');
  $('frGet').disabled=!!s.got;$('frGet').textContent=s.got?'已領取':'一鍵全收';$('frG').classList.toggle('on',!s.got);
- $('frL').innerHTML=FR.map(function(f){var done=s.sent.indexOf(f.id)>=0;return '<div class="fri"><span class="fav" aria-hidden="true">'+face(f)+'</span><div class="n"><b>'+f.n+'</b><small>'+f.t+'</small></div><button class="btn'+(done?'':' hot')+'" data-fr="'+f.id+'"'+(done?' disabled':'')+'>'+(done?'已送出':'回送紅包')+'</button></div>'}).join('');
- var c=s.sent.length;$('frB').innerHTML=(s.bon?'今日回送全滿，已獲得好友獎勵 ＋'+BONUS:'回送 '+c+' / '+n+' 位好友，全送出再得 ＋'+BONUS)+'<i><u style="width:'+(c/n*100)+'%"></u></i>';
+ $('frL').innerHTML=FR.map(function(f){var done=s.sent.indexOf(f.id)>=0;return '<div class="fri"><span class="fav" aria-hidden="true">'+face(f)+'</span><div class="n"><b>'+f.n+'</b><small>'+f.t+'</small></div><button class="btn'+(done?'':' hot')+'" data-fr="'+f.id+'"'+(done?' disabled':'')+'>'+(done?'已送出':'回送福袋')+'</button></div>'}).join('');
+ var c=s.sent.length;$('frB').innerHTML=(s.bon?'今日回送全滿，已獲得額外獎勵 ＋'+BONUS:'回送 '+c+' / '+n+' 位好友，全送出有額外獎勵 ＋'+BONUS)+'<i><u style="width:'+(c/n*100)+'%"></u></i>';
  b.classList.toggle('has',!s.got||c<n)}
 function renderLive(){var s=lst(),n=friends.length,inbox=0;
  try{/* claimed ids already in s.got */}catch(e){}
- var rec=window.__dfpRec||[];inbox=rec.filter(function(g){return s.got.indexOf(g.id)<0}).length;
- $('frGt').textContent=inbox?('好友送你 '+inbox+' 份紅包'):(s.got.length?'今日禮物已領取':'還沒有新的好友紅包');
- $('frGs').innerHTML=inbox?('每份 '+GIFT+'，共 <span class="framt">＋'+(GIFT*inbox)+' 虛擬籌碼</span>'):(n?'等好友回送紅包給你':'先用好友碼加一位好友');
+ var rec=window.__dfpRec||[];inbox=Math.min(rec.filter(function(g){return s.got.indexOf(g.id)<0}).length,Math.max(0,CAP-s.got.length));
+ $('frGt').textContent=inbox?('好友送你 '+inbox+' 份福袋'):(s.got.length>=CAP?'今日已收滿 '+CAP+' 份':(s.got.length?'今日禮物已領取':'還沒有新的好友福袋'));
+ $('frGs').innerHTML=inbox?('每份 '+GIFT+'，共 <span class="framt">＋'+(GIFT*inbox)+' 虛擬籌碼</span>'):(n?'等好友回送福袋給你':'先用好友碼加一位好友');
  $('frGet').disabled=!inbox;$('frGet').textContent=inbox?'一鍵全收':'已領取';$('frG').classList.toggle('on',!!inbox);
  if(!n)$('frL').innerHTML='<p class="fre">還沒有好友。請輸入對方的好友碼。</p>';
- else $('frL').innerHTML=friends.map(function(f){var done=s.sent.indexOf(f.uid)>=0;return '<div class="fri"><span class="fav" aria-hidden="true">'+faceAv(f.avatar,f.displayName)+'</span><div class="n"><b>'+esc(f.displayName)+'</b><small>Lv.'+(f.level||1)+' · '+esc(f.friendCode)+'</small></div><button class="btn'+(done?'':' hot')+'" data-fr="'+esc(f.uid)+'"'+(done?' disabled':'')+'>'+(done?'已送出':'回送紅包')+'</button></div>'}).join('');
- var c=s.sent.length;
- if(!n)$('frB').innerHTML='加好友之後，每日可互送紅包，全送出再得 ＋'+BONUS;
- else $('frB').innerHTML=(s.bon?'今日回送全滿，已獲得好友獎勵 ＋'+BONUS:'回送 '+c+' / '+n+' 位好友，全送出再得 ＋'+BONUS)+'<i><u style="width:'+(n?c/n*100:0)+'%"></u></i>';
- b.classList.toggle('has',!!inbox||(n>0&&c<n));
+ else $('frL').innerHTML=friends.map(function(f){var done=s.sent.indexOf(f.uid)>=0,full=!done&&s.sent.length>=CAP;return '<div class="fri"><span class="fav" aria-hidden="true">'+faceAv(f.avatar,f.displayName)+'</span><div class="n"><b>'+esc(f.displayName)+'</b><small>Lv.'+(f.level||1)+' · '+esc(f.friendCode)+'</small></div><button class="btn'+(done?'':' hot')+'" data-fr="'+esc(f.uid)+'"'+(done||full?' disabled':'')+'>'+(done?'已送出':full?'今日已滿':'回送福袋')+'</button></div>'}).join('');
+ var c=s.sent.length,goal=Math.min(n,CAP);
+ if(!n)$('frB').innerHTML='加好友之後，每日可互送福袋，全送出有額外獎勵 ＋'+BONUS;
+ else $('frB').innerHTML=(s.bon?'今日回送全滿，已獲得額外獎勵 ＋'+BONUS:'回送 '+Math.min(c,goal)+' / '+goal+' 位好友，全送出有額外獎勵 ＋'+BONUS)+'<i><u style="width:'+(goal?Math.min(1,c/goal)*100:0)+'%"></u></i>';
+ b.classList.toggle('has',!!inbox||(n>0&&c<goal));
  paintMe()}
 function render(){if(live)renderLive();else renderDemo()}
 function refreshLive(){
@@ -80,28 +80,28 @@ function refreshLive(){
   }).catch(function(){renderLive()})}
 $('frGet').onclick=function(){
   if(live){
-    if(busy)return;var s=lst(),rec=(window.__dfpRec||[]).filter(function(g){return s.got.indexOf(g.id)<0});
+    if(busy)return;var s=lst(),rec=(window.__dfpRec||[]).filter(function(g){return s.got.indexOf(g.id)<0}).slice(0,Math.max(0,CAP-s.got.length));
     if(!rec.length)return;
     var v=GIFT*rec.length;rec.forEach(function(g){s.got.push(g.id)});lsv(s);
-    CZ.addChips(v);CZ.vib(20);CZ.toast('收到好友紅包 ＋'+v,'assets/lx/ev_packet.webp'+IV);try{CZ.track&&CZ.track('gf',rec.length)}catch(e){}snd(2);renderLive();return;
+    CZ.addChips(v);CZ.vib(20);CZ.toast('收到好友福袋 ＋'+v,'assets/lx/ev_gift.webp'+IV);try{CZ.track&&CZ.track('gf',rec.length)}catch(e){}snd(2);renderLive();return;
   }
-  var s=st();if(s.got)return;s.got=1;sv(s);var v=GIFT*FR.length;CZ.addChips(v);CZ.vib(20);CZ.toast('收到好友紅包 ＋'+v,'assets/lx/ev_packet.webp'+IV);try{CZ.track&&CZ.track('gf',1)}catch(e){}snd(2);render()};
+  var s=st();if(s.got)return;s.got=1;sv(s);var v=GIFT*FR.length;CZ.addChips(v);CZ.vib(20);CZ.toast('收到好友福袋 ＋'+v,'assets/lx/ev_gift.webp'+IV);try{CZ.track&&CZ.track('gf',1)}catch(e){}snd(2);render()};
 $('frL').onclick=function(e){
   var t=e.target.closest('[data-fr]');if(!t)return;
   if(live){
-    if(busy)return;var id=t.getAttribute('data-fr'),s=lst();if(s.sent.indexOf(id)>=0)return;
+    if(busy)return;var id=t.getAttribute('data-fr'),s=lst();if(s.sent.indexOf(id)>=0)return;if(s.sent.length>=CAP){msg('今日送禮已達 '+CAP+' 次上限，明天再送');return}
     var f=friends.filter(function(x){return x.uid===id})[0];
     busy=1;t.disabled=true;
     DFPfb.sendGift(id).then(function(){
       s=lst();if(s.sent.indexOf(id)<0)s.sent.push(id);
-      if(friends.length&&s.sent.length>=friends.length&&!s.bon){s.bon=1;lsv(s);CZ.addChips(BONUS);CZ.toast('好友全回送 ＋'+BONUS,'assets/lx/ev_friends.webp'+IV);snd(2)}
-      else{lsv(s);CZ.toast('已回送紅包給 '+(f?f.displayName:'好友'),'assets/lx/ev_packet.webp'+IV);snd(1)}
+      if(friends.length&&s.sent.length>=Math.min(friends.length,CAP)&&!s.bon){s.bon=1;lsv(s);CZ.addChips(BONUS);CZ.toast('好友全回送 ＋'+BONUS,'assets/lx/ev_friends.webp'+IV);snd(2)}
+      else{lsv(s);CZ.toast('已回送福袋給 '+(f?f.displayName:'好友'),'assets/lx/ev_gift.webp'+IV);snd(1)}
       try{CZ.track&&CZ.track('gs')}catch(e){}CZ.vib(10);busy=0;renderLive();
     }).catch(function(){busy=0;msg('送禮沒有成功，請稍後再試');renderLive()});
     return;
   }
   var s=st(),id=t.getAttribute('data-fr');if(s.sent.indexOf(id)>=0)return;s.sent.push(id);var f=FR.filter(function(x){return x.id===id})[0];
-  if(s.sent.length>=FR.length&&!s.bon){s.bon=1;sv(s);CZ.addChips(BONUS);CZ.toast('好友全回送 ＋'+BONUS,'assets/lx/ev_friends.webp'+IV);snd(2)}else{sv(s);CZ.toast('已回送紅包給 '+(f?f.n:'好友'),'assets/lx/ev_packet.webp'+IV);snd(1)}try{CZ.track&&CZ.track('gs')}catch(e){}CZ.vib(10);render()};
+  if(s.sent.length>=FR.length&&!s.bon){s.bon=1;sv(s);CZ.addChips(BONUS);CZ.toast('好友全回送 ＋'+BONUS,'assets/lx/ev_friends.webp'+IV);snd(2)}else{sv(s);CZ.toast('已回送福袋給 '+(f?f.n:'好友'),'assets/lx/ev_gift.webp'+IV);snd(1)}try{CZ.track&&CZ.track('gs')}catch(e){}CZ.vib(10);render()};
 $('frAddB').onclick=function(){
   if(!live||busy)return;var code=$('frIn').value;msg('正在加入…');busy=1;
   DFPfb.addFriend(code).then(function(f){
@@ -127,7 +127,7 @@ function goLive(){
   DFPfb.ready.then(function(ok){
     if(!ok||!DFPfb.live)return;
     live=true;d.classList.add('fb');
-    $('frW').textContent='連線好友：用好友碼互相加好友，每日互送紅包';
+    $('frW').textContent='連線好友：用好友碼互相加好友，每日互送福袋';
     paintMe();refreshLive();
   }).catch(function(){});
   return true;
