@@ -15,8 +15,8 @@ body.theme-yan .lcd .ci,
 body.theme-yan .lcd .ci{background-image:url(assets/theme-sakura/cutin.webp)!important}
 body.theme-yan .lcd .seven{background-image:url(assets/theme-sakura/bigbonus.webp)!important}
 body.theme-yan .bw .art{background:url(assets/theme-sakura/p_bigwin.webp) 50% 28%/cover no-repeat!important}
-body.theme-yan #czAtari .ai{background-image:url(assets/theme-sakura/p_bigwin.webp)!important}
-body.theme-yan #czAtari .ab{background-image:url(assets/theme-sakura/p_bigwin_bl.webp)!important}
+/* v28.156: --czbw / --czbwbl already swap the art. Do not replace background-image
+   (that dropped the fade layer and forced size "auto", leaving a seam at the bottom). */
 body.theme-yan #czHero .czpose{background-image:var(--yan-pose,url(assets/theme-sakura/hero.webp))}
 
 /* BET / CREDIT / WIN plaque colors — typography and size untouched */

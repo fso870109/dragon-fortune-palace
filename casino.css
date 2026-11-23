@@ -203,7 +203,10 @@ dialog,.modal .box,.pop{max-height:calc(100dvh - 16px)!important;overflow:auto!i
 /* v28.153: speech layer lives on #machine (z-index 6) so the crown (#cabFrame z-index 4)
    cannot paint over the bubble. Do not raise #czHero — hero art already extends into the crown. */
 #machine>#czEn{position:absolute;left:0;right:0;top:var(--cz-hero-top,0px);height:var(--cz-hero-h,30%);z-index:6;overflow:visible;pointer-events:none}
-body.cab-on #machine>#czEn .czbub,body.cab-on #machine>#czEn .czgem{bottom:calc(var(--cz-ovh,0px) + 8px);max-height:calc(100% - var(--cz-ovh,0px) - 16px);box-sizing:border-box;overflow:hidden}
+body.cab-on #machine>#czEn .czbub{bottom:calc(var(--cz-ovh,0px) + 8px);max-height:calc(100% - var(--cz-ovh,0px) - 16px);box-sizing:border-box;overflow:hidden}
+/* v28.156: keep the 期待度 orb off the vertical title logo (.czhl, upper-right).
+   On WebViews that ignore max-height:svh the logo is tall enough to cover 花斬. */
+body.cab-on #machine>#czEn .czgem{right:auto;left:max(8px,env(safe-area-inset-left));top:28%;bottom:auto;max-height:none}
 
 #czEn .czbub b{display:block;font:700 10px/1 sans-serif;letter-spacing:1px;color:#ffd27a;margin-bottom:4px}
 #czEn .czbub.on{opacity:1;transform:none}
@@ -401,3 +404,8 @@ body.menu16 #menu16.row2{grid-template-columns:repeat(2,1fr)!important}
 .czwd i.czwneedle::before{content:"";position:absolute;left:50%;top:3%;transform:translateX(-50%);width:3px;height:46%;border-radius:2px;background:linear-gradient(#fff6cf,#d9a441 45%,#8a5a18);box-shadow:0 0 6px #ffd27a,0 0 14px #d9a441}
 .czwd b.s2{font-size:clamp(10px,2.8vw,14px)!important;background:linear-gradient(#d9a441,#8a5a18);color:#fff6cf;padding:2px 3px;border-radius:4px;border:1px solid #fff3c4;text-shadow:0 1px 1px #3a0a08}
 #payTable tr.paywild td[colspan]{text-align:left;font:700 12px/1.35 "Noto Sans TC",sans-serif;color:#ffe6b0;white-space:normal}
+
+/* v28.156: clip reel cells. --c is set in px (1/3 of reel height) by syncReelCells().
+   Do not use height:100%/3 here — 100% resolves against the strip, not the reel. */
+body.cab-on .board .reel{overflow:hidden!important}
+body.cab-on .board .cell{overflow:hidden;box-sizing:border-box}

@@ -32,3 +32,8 @@ html.lx .rdp::after{content:none!important;display:none!important}
 #lx .lxNav a.on{border-radius:calc(12*var(--u));margin:calc(-6*var(--u)) calc(2*var(--u)) 2px;background:radial-gradient(ellipse at 50% 30%,rgba(255,220,130,.35),transparent 70%),linear-gradient(180deg,#9a1820,#5a0810) padding-box;box-shadow:0 0 0 1.5px #f6d27a,0 0 12px rgba(255,190,60,.55),inset 0 1px 0 rgba(255,240,200,.5)}
 #lx .lxNav a.on img{filter:drop-shadow(0 0 5px rgba(255,210,100,.8)) brightness(1.1)}
 #lx .lxNav a.on span{color:#fff3c6}
+
+/* v28.156: 夏祭花火 card.webp is 16:9, the slot is 5/3. contain left a black letterbox
+   at the top of the art; cover crops the sides slightly and fills the slot. */
+#lx #wall .card img,#lxWallSlot .card img,#wall .card img{
+  object-fit:cover!important;object-position:50% 20%!important;background:#0d0510}
