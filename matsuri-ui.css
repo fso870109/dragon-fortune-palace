@@ -391,7 +391,7 @@ body::after{display:none!important}
 .inner{position:relative!important;width:var(--W);aspect-ratio:1280/720;padding:0!important;background:url(assets/matsuri/base.webp?v=256) 0 0/100% 100% no-repeat!important;container-type:inline-size;border-radius:0!important}
 .board{position:absolute!important;left:16.790%;top:38.929%;width:66.790%;height:42.842%;padding:0!important;gap:0!important;display:block!important;background:#1a081c url(assets/reelbg/bg-matsuri.webp?v=28130) center / 100% 100% no-repeat!important;box-shadow:none!important;border-radius:0!important;margin:0!important;overflow:visible!important}
 /* v28.132 inner reel frame from cabinet/lobby card art; presentation only */
-.board::before{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:url(assets/reelbg/frame-matsuri.webp?v=28135) center / 100% 100% no-repeat}
+.board::before{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:url(assets/reelbg/frame-matsuri.webp?v=28161) center / 100% 100% no-repeat}
 .reel{position:absolute!important;top:0;height:100%!important;--c:8.5597cqw!important;background:#0b0810!important;border-radius:0!important;box-shadow:none!important;margin:0!important;z-index:1}
 .reel:nth-child(1){left:0;width:19.686%}.reel:nth-child(2){left:20.240%;width:19.224%}.reel:nth-child(3){left:40.018%;width:19.501%}.reel:nth-child(4){left:60.074%;width:19.316%}.reel:nth-child(5){left:79.945%;width:20.055%}
 .cell{border:0!important;background:none}
