@@ -44,7 +44,8 @@ function ensure(){
     '<p class="avMsg" id="avMsg" role="status"></p>'+
     '<div class="avSec"><span>金殿旅人像</span></div>'+
     '<div class="avGrid" id="avGrid"></div>'+
-    '<small class="avNote">虛擬籌碼只留在這部裝置，連結 Google 不會改到籌碼與進度</small>'+
+    '<small class="avNote">連結 Google 後，虛擬籌碼與遊戲進度會自動同步到雲端，換手機或重新安裝也能接續；未連結的訪客進度只存在本裝置。僅供娛樂，無現金價值，不可兌現。</small>'+
+    '<small class="avNote avCs" id="avCs" role="status"></small>'+
     '<div class="frs"><button type="button" class="btn close" id="avX">關閉</button></div>';
   document.body.appendChild(d);
   $('avGrid').addEventListener('click',onPick);
@@ -87,11 +88,14 @@ function paint(){
   a.innerHTML=acctHtml(lk.google,now);
   a.classList.toggle('linked',!!lk.google);
   paintLobby(now);
+  csLine();
   if(window.DFPfb&&DFPfb.linkNotice){
     say(DFPfb.linkNotice);
     DFPfb.linkNotice='';
   }
 }
+function csLine(){var e=$('avCs');if(!e)return;var t='';try{t=window.DFPcs&&DFPcs.statusText?DFPcs.statusText():''}catch(x){}e.textContent=t;e.hidden=!t}
+addEventListener('dfpcs',csLine);
 function onPick(e){
   var t=e.target.closest('[data-av]');
   if(!t||busy)return;
@@ -133,8 +137,8 @@ function doLink(){
   DFPfb.linkAccount('google').then(function(r){
     busy=0;
     if(r&&r.redirect){say('正在改用頁面跳轉，請稍候');return}
-    if(r&&r.switched){say('已登入這個 Google 帳號');toast('已登入 Google')}
-    else{say('已連結 Google，旅人資料會留在同一個身分');toast('已連結 Google')}
+    if(r&&r.switched){say('已登入這個 Google 帳號，正在從雲端接續進度…');toast('已登入 Google')}
+    else{say('已連結 Google，虛擬籌碼與進度會自動同步到雲端');toast('已連結 Google')}
     paint();
     snd(2);
   }).catch(function(e){

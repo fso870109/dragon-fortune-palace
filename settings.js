@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.159',DFP_APPV='';
+var DFP_WEBV='28.160',DFP_APPV='';
 var DFP_IAP=false;
 var DFP_DEL=true; /* 刪除帳號按鈕：Firestore 刪除規則發布並測試後才改 true */
 var DFP_NOADS=false; /* 去廣告分頁：false 時隱藏（網頁與 App 共用）；廣告與付款都準備好再改 true */
@@ -53,7 +53,7 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
  '<a class="sL" href="privacy.html#wipe" id="sgWipe">清除本裝置遊戲資料</a>'+
  (window.DFPcmp?DFPcmp.block('dfpRate--set'):'')+
  (window.DFP_DEL?'<button class="sL sDel" id="sgDel" type="button">刪除帳號與雲端資料</button>':'<a class="sL sDel" href="deletion.html">刪除帳號說明</a>')+
- '<p class="sN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>'+
+ '<p class="sN sCs" id="sgCs" role="status"></p>'+'<p class="sN">僅供娛樂・虛擬籌碼・純虛擬・無兌現</p>'+
  '<p class="sV" id="sgVer">'+(DFP_APPV?('版本 '+DFP_APPV+'・內容 '+DFP_WEBV):('網頁版 '+DFP_WEBV))+'</p>'+
  '<div class="sRedeem" id="sgRedeem" hidden><label class="sr" for="sgCode">序號</label><div class="sRedeemRow"><input id="sgCode" maxlength="24" autocomplete="off" spellcheck="false" placeholder="序號"><button type="button" id="sgCodeGo">確認</button></div><p id="sgCodeMsg" role="status"></p></div>'+
  '<button class="sX" id="sgClose" type="button">關閉</button></div>';
@@ -126,8 +126,10 @@ function lobby(){var bb=$('bBgm');if(!bb||$('setDlg'))return;
   $('sgCodeGo').onclick=redeem;
  $('sgCode').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();redeem()}});
  bb.textContent='';bb.setAttribute('aria-label','設定');bb.removeAttribute('aria-pressed');bb.setAttribute('aria-haspopup','dialog');bb.style.opacity=1;
- bb.onclick=function(){r();if(window.czPinScroll)window.czPinScroll(function(){try{d.showModal()}catch(e){d.setAttribute('open','')}});else{try{d.showModal()}catch(e){d.setAttribute('open','')}}};
+ bb.onclick=function(){r();csPaint();if(window.czPinScroll)window.czPinScroll(function(){try{d.showModal()}catch(e){d.setAttribute('open','')}});else{try{d.showModal()}catch(e){d.setAttribute('open','')}}};
 }
+function csPaint(){var e=document.getElementById('sgCs');if(!e)return;var t='';try{t=window.DFPcs&&DFPcs.statusText?DFPcs.statusText():'雲端同步：登入 Google 後開啟（訪客進度只存在本裝置）'}catch(x){}e.textContent=t}
+addEventListener('dfpcs',csPaint);
 function pinScroll(fn){var y=window.scrollY||document.documentElement.scrollTop||0,x=window.scrollX||0,ret;try{ret=fn&&fn()}catch(e){window.scrollTo(x,y);throw e}var pin=function(){if((window.scrollY||0)!==y||(window.scrollX||0)!==x)window.scrollTo(x,y)};pin();if(typeof requestAnimationFrame==='function')requestAnimationFrame(function(){pin();requestAnimationFrame(pin)});setTimeout(pin,50);return ret}
 window.czPinScroll=pinScroll;
 function wrapShowModal(){var DP=window.HTMLDialogElement&&HTMLDialogElement.prototype;if(!DP||!DP.showModal||DP.showModal.__czPin)return;var orig=DP.showModal;DP.showModal=function(){var self=this,args=arguments;return pinScroll(function(){return orig.apply(self,args)})};DP.showModal.__czPin=1}

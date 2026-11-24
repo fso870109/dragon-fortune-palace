@@ -1,4 +1,5 @@
-/* 龍運金殿 v28.83: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；大頭貼與帳號連結；含公會／排行榜／掠奪／邀請） */
+/* 龍運金殿 v28.83: Firebase Auth＋Firestore（模組 SDK，不含 Analytics；大頭貼與帳號連結；含公會／排行榜／掠奪／邀請）
+   v28.160: 已登入 Google 的帳號可切換回既有 Google 帳號（網頁與 App），切換前清除臨時匿名旅人；刪除帳號一併刪除雲端存檔 saves/{uid}；雲端存檔同步在 cs28160.js */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import {
   getAuth, signInAnonymously, signOut, connectAuthEmulator,
@@ -36,8 +37,12 @@ function isNativeApp() {
 function useEmulator() {
   try {
     const q = new URLSearchParams(location.search);
-    if (q.get('fbemu') === '0') return false;
-    if (q.get('fbemu') === '1') return true;
+    if (q.get('fbemu') === '0' || q.get('fbemu') === '1') {
+      try { sessionStorage.setItem('dfp_fbemu', q.get('fbemu')); } catch (x) {}
+      return q.get('fbemu') === '1';
+    }
+    const ss = sessionStorage.getItem('dfp_fbemu');
+    if (ss === '0' || ss === '1') return ss === '1';
   } catch (e) {}
   /* Capacitor WebView origin is https://localhost — that is NOT the Firebase emulator */
   if (isNativeApp()) return false;
@@ -203,6 +208,10 @@ const api = {
   GIFT, BONUS, INVITE_REWARD, INVITE_DAILY_CAP, AVATARS, AVQ, dayId, weekKey, localSpins, faceHtml, normCode, normGuildCode, isAvatar, avatarSrc, currentAvatar
 };
 window.DFPfb = api;
+api._h = function () { return { auth, db }; };
+function csAuth(switched) {
+  try { dispatchEvent(new CustomEvent('dfpcsauth', { detail: { switched: !!switched } })); } catch (e) {}
+}
 window.DFPface = faceHtml;
 
 let auth, db;
@@ -1092,17 +1101,45 @@ async function linkGoogleNative() {
     api.user = (linked && linked.user) || api.user;
   } catch (e) {
     if (e && /credential-already-in-use/i.test(String(e.code || e.message || ''))) {
-      const signed = await signInWithCredential(auth, cred);
-      api.user = (signed && signed.user) || (auth && auth.currentUser) || api.user;
-      try { await ensureProfile(); } catch (x) {}
-      emitAv();
-      return { ok: true, native: true, switched: true };
+      const r = await switchTo(cred);
+      r.native = true;
+      return r;
     }
     throw e;
   }
+  try { await api.user.getIdToken(true); } catch (x) {}
   try { await ensureProfile(); } catch (x) {}
   emitAv();
+  csAuth(false);
   return { ok: true, native: true };
+}
+/* v28.160: Google 帳號已屬於另一個（既有）帳號時，改為登入那個帳號。
+   切換前目前身分若是臨時匿名旅人，先清除它的雲端紀錄並刪除匿名帳號；清除失敗不影響登入。 */
+async function switchTo(cred) {
+  const anon = auth && auth.currentUser;
+  if (anon && anon.isAnonymous) {
+    try { await wipeCloud(anon, null, 30); } catch (e) {}
+    api.deleting = false;
+    try { await deleteUser(anon); } catch (e) {}
+  }
+  let signed = null;
+  try {
+    signed = await signInWithCredential(auth, cred);
+  } catch (e) {
+    /* 匿名身分可能已刪除：補一個新的旅人身分，遊戲照常可玩 */
+    try {
+      if (!auth.currentUser) await signInAnonymously(auth);
+      api.user = auth.currentUser; api.profile = null;
+      await ensureProfile(); emitAv();
+    } catch (x) {}
+    throw e;
+  }
+  api.user = (signed && signed.user) || auth.currentUser;
+  api.profile = null;
+  try { await ensureProfile(); } catch (x) {}
+  emitAv();
+  csAuth(true);
+  return { ok: true, switched: true };
 }
 api.linkAccount = async function (which) {
   if (!api.live || !api.user) {
@@ -1126,9 +1163,16 @@ api.linkAccount = async function (which) {
     }
     const cred = await linkWithPopup(api.user, provider);
     api.user = (cred && cred.user) || api.user;
+    try { await api.user.getIdToken(true); } catch (x) {}
     emitAv();
+    csAuth(false);
     return { ok: true };
   } catch (e) {
+    if (e && /credential-already-in-use/i.test(String(e.code || e.message || ''))) {
+      let cred = null;
+      try { cred = GoogleAuthProvider.credentialFromError(e); } catch (x) {}
+      if (cred) return await switchTo(cred);
+    }
     if (e && e.code === 'auth/popup-blocked') {
       try { sessionStorage.setItem('dfp_link_which', key); } catch (x) {}
       await linkWithRedirect(api.user, provider);
@@ -1263,15 +1307,9 @@ function clearLocal() {
   try { localStorage.clear(); } catch (e) {}
   try { sessionStorage.clear(); } catch (e) {}
 }
-api.deleteAccount = async function (onStep) {
+/* 刪除某位玩家的雲端資料（不含 Auth 帳號）。maxDays 限制掃描日期範圍（切換帳號清除臨時旅人時用）。 */
+async function wipeCloud(u, onStep, maxDays) {
   const step = function (t) { try { onStep && onStep(t); } catch (e) {} };
-  try { await api.ready; } catch (e) {}
-  const u = auth && auth.currentUser;
-  if (!u) {
-    clearLocal();
-    return { ok: true, cloud: false };
-  }
-  if (!db || !api.live) throw delErr('offline');
   const uid = u.uid;
   const left = [];
   const tryDel = async function (ref, label) {
@@ -1293,8 +1331,9 @@ api.deleteAccount = async function (onStep) {
   } catch (e) { api.deleting = false; throw delErr('offline'); }
   /* 依帳號建立日期決定要掃描的日期範圍（找不到建立日期時掃最近 120 天） */
   const now = Date.now();
-  let since = now - 120 * 86400000;
-  try { if (p && p.createdAt && p.createdAt.toMillis) since = p.createdAt.toMillis() - 86400000; } catch (e) {}
+  let since = now - (maxDays || 120) * 86400000;
+  try { if (p && p.createdAt && p.createdAt.toMillis) since = Math.max(since, p.createdAt.toMillis() - 86400000); } catch (e) {}
+  if (!maxDays) { try { if (p && p.createdAt && p.createdAt.toMillis) since = p.createdAt.toMillis() - 86400000; } catch (e) {} }
   const days = [], weeks = [];
   for (let t = now; t >= since && days.length < 400; t -= 86400000) days.push(ymdAt(t));
   for (let t = now; t >= since - 7 * 86400000 && weeks.length < 60; t -= 7 * 86400000) {
@@ -1398,6 +1437,24 @@ api.deleteAccount = async function (onStep) {
   await tryDel(doc(db, 'chatState', uid), 'chatState');
   const code = (p && p.friendCode) || (api.profile && api.profile.friendCode) || '';
   if (code) await tryDel(doc(db, 'friendCodes', code), 'friendCode');
+  /* 10. 雲端存檔（只有本人可刪；匿名帳號沒有讀取權限，直接刪除） */
+  if (u.isAnonymous) await blindDel(doc(db, 'saves', uid));
+  else await tryDel(doc(db, 'saves', uid), 'save');
+  return { left, p };
+}
+api.deleteAccount = async function (onStep) {
+  const step = function (t) { try { onStep && onStep(t); } catch (e) {} };
+  try { await api.ready; } catch (e) {}
+  const u = auth && auth.currentUser;
+  if (!u) {
+    clearLocal();
+    return { ok: true, cloud: false };
+  }
+  if (!db || !api.live) throw delErr('offline');
+  try { if (window.DFPcs && DFPcs.stop) await DFPcs.stop(); } catch (e) {}
+  const uid = u.uid;
+  const w = await wipeCloud(u, onStep, 0);
+  const left = w.left;
   /* 9. Firebase Auth 帳號 */
   step('auth');
   let authLeft = '';
@@ -1416,6 +1473,7 @@ api.deleteAccount = async function (onStep) {
   return { ok: !left.length && !authLeft, cloud: true, uid, left, authLeft };
 };
 
+let pendingSwitch = null;
 async function probeAndInit() {
   const emu = useEmulator();
   api.emu = emu;
@@ -1428,11 +1486,15 @@ async function probeAndInit() {
   }
   try {
     try {
-      await getRedirectResult(auth);
+      const rr = await getRedirectResult(auth);
+      if (rr && rr.user) { try { await rr.user.getIdToken(true); } catch (x) {} }
     } catch (e) {
       let which = '';
       try { which = sessionStorage.getItem('dfp_link_which') || ''; } catch (x) {}
-      api.linkNotice = linkErr(e, which);
+      if (/credential-already-in-use/i.test(errCode(e))) {
+        try { pendingSwitch = GoogleAuthProvider.credentialFromError(e); } catch (x) {}
+      }
+      if (!pendingSwitch) api.linkNotice = linkErr(e, which);
     }
     try { sessionStorage.removeItem('dfp_link_which'); } catch (e) {}
     if (!auth.currentUser) await signInAnonymously(auth);
@@ -1501,6 +1563,10 @@ async function probeAndInit() {
   }
   if (api.raidsOk) {
     try { await api.heartbeat(); } catch (e) {}
+  }
+  if (pendingSwitch) {
+    const cred = pendingSwitch; pendingSwitch = null;
+    try { await switchTo(cred); api.bootSwitched = true; } catch (e) { api.linkNotice = linkErr(e, 'google'); }
   }
   return true;
 }
