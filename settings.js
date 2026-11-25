@@ -1,6 +1,6 @@
 /* 龍運金殿 settings & haptics (v241, 減少動態效果 v245): lobby 設定 sheet + 震動回饋 toggle in every theme */
 /* v259: version line in 設定 (APPV filled in by app/build.sh) */
-var DFP_WEBV='28.161',DFP_APPV='';
+var DFP_WEBV='28.162',DFP_APPV='';
 var DFP_IAP=false;
 var DFP_DEL=true; /* 刪除帳號按鈕：Firestore 刪除規則發布並測試後才改 true */
 var DFP_NOADS=false; /* 去廣告分頁：false 時隱藏（網頁與 App 共用）；廣告與付款都準備好再改 true */

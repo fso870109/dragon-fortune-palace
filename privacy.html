@@ -42,7 +42,7 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 
 <h2 id="notice">個人資料告知事項（個人資料保護法第 8 條）</h2>
 <ul>
-<li><b>蒐集者：</b>龍運金殿開發團隊（聯絡信箱 <a class="mail" href="mailto:dragonfortune.palace@gmail.com">dragonfortune.palace@gmail.com</a>）。</li>
+<li><b>蒐集者：</b>龍運金殿開發團隊（聯絡信箱 <a class="mail" href="mailto:fso870109@gmail.com">fso870109@gmail.com</a>）。</li>
 <li><b>蒐集目的：</b>提供遊戲的連線功能（好友、公會、排行榜、掠奪／回擊、邀請、送禮、聊天貼圖、大獎播報）、帳號找回、連結 Google 後的跨裝置遊戲進度同步，以及網頁版的使用統計與遊戲改善。</li>
 <li><b>個人資料類別：</b>Firebase 遊客編號（UID）、暱稱、大頭貼（內建圖或你選用的 Google 大頭貼網址）、好友碼、公會與好友關係、公開遊戲進度（等級、本週轉動次數、最高倍數）；連結 Google 時，Firebase Authentication 另會保存該 Google 帳號的識別資料與電子郵件，Firestore 另會保存你的雲端遊戲存檔（虛擬籌碼餘額與遊戲進度，僅本人可讀取）；網頁版另有 Google Analytics 的隨機用戶端編號與使用事件。</li>
 <li><b>利用期間：</b>帳號存續期間；你申請刪除後，我們會在<b>申請刪除後 30 日內刪除</b>雲端上的資料。網頁版統計事件資料另依 Google Analytics 設定保存 2 個月。</li>
@@ -65,13 +65,13 @@ button{font:inherit;padding:8px 16px;border-radius:18px;border:1px solid #d9a441
 
 <h2 id="data">三、資料刪除</h2>
 <p>本機上的虛擬籌碼與遊戲進度，你可以隨時自行刪除：清除本網站的瀏覽器資料、解除安裝 App，或直接按下方按鈕。這會重設本裝置的籌碼與進度；若已連結 Google，雲端存檔不會因此刪除，下次用同一個 Google 帳號開啟時會自動從雲端接續。連線後保存的顯示名稱、大頭貼、好友碼、公會與排行榜公開資料，仍會留在這個遊客編號下，不會因為只清除本機而自動消失。</p>
-<p>網頁版可在大廳「設定」按「刪除帳號與雲端資料」，確認後立即刪除你的雲端資料與遊戲帳號，並清除本裝置的遊戲資料。也可以寫信到 <a class="mail" href="mailto:dragonfortune.palace@gmail.com?subject=%E5%88%AA%E9%99%A4%E5%B8%B3%E8%99%9F">dragonfortune.palace@gmail.com</a>，並附上你的顯示名稱與好友碼（若有）。我們會在<b>申請刪除後 30 日內刪除</b>你的雲端資料（顯示名稱、大頭貼、好友碼、好友名單、公會成員資格、排行榜與播報紀錄、雲端遊戲存檔），以及 Firebase 帳號。請注意：匿名遊客編號若已遺失且未曾連結 Google，我們可能無法準確對應到你的雲端資料。完整說明請見 <a href="deletion.html" style="color:#ffd27a">刪除帳號說明</a>。</p>
+<p>網頁版可在大廳「設定」按「刪除帳號與雲端資料」，確認後立即刪除你的雲端資料與遊戲帳號，並清除本裝置的遊戲資料。也可以寫信到 <a class="mail" href="mailto:fso870109@gmail.com?subject=%E5%88%AA%E9%99%A4%E5%B8%B3%E8%99%9F">fso870109@gmail.com</a>，並附上你的顯示名稱與好友碼（若有）。我們會在<b>申請刪除後 30 日內刪除</b>你的雲端資料（顯示名稱、大頭貼、好友碼、好友名單、公會成員資格、排行榜與播報紀錄、雲端遊戲存檔），以及 Firebase 帳號。請注意：匿名遊客編號若已遺失且未曾連結 Google，我們可能無法準確對應到你的雲端資料。完整說明請見 <a href="deletion.html" style="color:#ffd27a">刪除帳號說明</a>。</p>
 <p class="wipeRow"><button id="wipe" type="button">清除本裝置的遊戲資料</button></p><p id="wipeMsg" role="status"></p>
-<dialog id="wipeDlg" aria-labelledby="wipeT"><div class="wC"><h3 id="wipeT">清除遊戲資料</h3><p>確定要清除本裝置上的所有遊戲進度嗎？</p><ul><li>虛擬籌碼將重設為 1,000</li><li>等級、簽到、任務、暱稱與角色圖鑑收集紀錄會刪除</li><li>音效、音樂與震動等設定恢復預設</li></ul><p class="wW">此動作無法復原。雲端上的公開資料與已連結 Google 的雲端存檔不會一併刪除（下次登入同一個 Google 帳號會自動接續），如需刪除請見 <a href="deletion.html" style="color:#ffd27a">刪除帳號說明</a>，或來信 <a class="mail" href="mailto:dragonfortune.palace@gmail.com">dragonfortune.palace@gmail.com</a>。</p><div class="wB"><button type="button" id="wipeNo">取消</button><button type="button" id="wipeYes">確定清除</button></div></div></dialog>
+<dialog id="wipeDlg" aria-labelledby="wipeT"><div class="wC"><h3 id="wipeT">清除遊戲資料</h3><p>確定要清除本裝置上的所有遊戲進度嗎？</p><ul><li>虛擬籌碼將重設為 1,000</li><li>等級、簽到、任務、暱稱與角色圖鑑收集紀錄會刪除</li><li>音效、音樂與震動等設定恢復預設</li></ul><p class="wW">此動作無法復原。雲端上的公開資料與已連結 Google 的雲端存檔不會一併刪除（下次登入同一個 Google 帳號會自動接續），如需刪除請見 <a href="deletion.html" style="color:#ffd27a">刪除帳號說明</a>，或來信 <a class="mail" href="mailto:fso870109@gmail.com">fso870109@gmail.com</a>。</p><div class="wB"><button type="button" id="wipeNo">取消</button><button type="button" id="wipeYes">確定清除</button></div></div></dialog>
 
 <h2 id="contact">四、政策更新與聯絡</h2>
 <p>本政策若有修改，將更新於本頁並調整上方的「最後更新」日期。如有任何問題，或要行使資料相關權利，請聯絡：</p>
-<p>開發者聯絡信箱：<a class="mail" href="mailto:dragonfortune.palace@gmail.com">dragonfortune.palace@gmail.com</a></p>
+<p>開發者聯絡信箱：<a class="mail" href="mailto:fso870109@gmail.com">fso870109@gmail.com</a></p>
 <p>公開網址：<br><a href="https://fso870109.github.io/dragon-fortune-palace/privacy.html" style="color:#ffd27a">https://fso870109.github.io/dragon-fortune-palace/privacy.html</a></p>
 </main>
 <a class="back" href="index.html">返回大廳</a>

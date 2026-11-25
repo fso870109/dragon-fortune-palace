@@ -10,7 +10,7 @@ var CSS='#dfpDel{border:0;padding:0;background:transparent;max-width:none;color:
 '#dfpDelNo{background:#2a0d0d;border:1px solid #c99a3a;color:#ffe9b0}#dfpDelYes{border:0;color:#2a0505;background:linear-gradient(180deg,#ffb4a0,#e0553a 55%,#9a2412);box-shadow:0 3px 0 #5a1208}'+
 '#dfpDelYes:disabled{opacity:.45;cursor:not-allowed}#dfpDelMsg{min-height:1.4em;margin:10px 0 0;text-align:center;font-size:14px;color:#ffd77a;overflow-wrap:anywhere}#dfpDelMsg.err{color:#ff9d7a}';
 var STEP={guild:'正在退出公會…',profile:'正在刪除個人檔案…',friends:'正在刪除好友資料…',gifts:'正在刪除送禮紀錄…',raids:'正在刪除掠奪紀錄…',invites:'正在刪除邀請紀錄…',boards:'正在刪除排行榜與聊天紀錄…',auth:'正在刪除帳號…'};
-var MAIL='dragonfortune.palace@gmail.com';
+var MAIL='fso870109@gmail.com';
 var d=null,busy=false;
 function $(i){return document.getElementById(i)}
 function build(){
